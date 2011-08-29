@@ -19,7 +19,7 @@ import XmlData.Links.Linklist;
 
 /**
  *
- * TODO ripensare per gestire le categorie...
+ *
  */
 public class LinksXml extends GestXml {
 
