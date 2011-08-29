@@ -58,7 +58,7 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 			FileNotFoundException, IOException {
 		/* prepara il file di output */
 		File out = new File(outDir + "/" + mng.getId() + ".tex");
-		mng.xsltConvert(new File(Common.XSL_LATEX), out);
+		mng.xsltConvert(new File(Common.getCommon().getXslLatex()), out);
 		String[][] conversione = { { "&", "\\\\&" } };
 		GenericUtil.replaceInFile(out, conversione);
 		return out;
@@ -135,10 +135,10 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 		String[][] conversione = {{"%POSIZIONI", posizioni}};
 		String[][] conversione_uno = {{"%INCLUDES", allXmlList}};
 		/* crea le posizioni usando il template */
-		GenericUtil.fillTemplate(Common.TEMPLATE_DIR + "/" + POSIZIONI +
+		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/" + POSIZIONI +
 				Common.TEMPLATE_END, outDir + "/" + POSIZIONI, conversione);
 		/* crea il file principale usando il template */
-		GenericUtil.fillTemplate(Common.TEMPLATE_DIR + "/" +
+		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/" +
 				Common.COLLEZIONE_TEX + Common.TEMPLATE_END, outDir + "/" +
 						Common.COLLEZIONE_TEX, conversione_uno);
 

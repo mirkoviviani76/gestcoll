@@ -25,7 +25,7 @@ public class History {
 			/* genera l'item da scrivere */
 			String item = GenericUtil.getDateTime() + "\t" + e + "\t" + id;
 			/* scrive l'item su file */
-			fw = new FileWriter(Common.HISTORY_LOG, true);
+			fw = new FileWriter(Common.getCommon().getHistoryLog(), true);
 			BufferedWriter bfw = new BufferedWriter(fw);
 			bfw.write(item);
 			bfw.newLine();

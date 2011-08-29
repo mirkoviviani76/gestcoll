@@ -28,10 +28,10 @@ public class BibliotecaXml extends GestXml {
      * @throws JAXBException 
      */
     public BibliotecaXml() throws JAXBException {
-        super(new File(Common.BIBLIO_XML));
+        super(new File(Common.getCommon().getBiblioXml()));
 		JAXBContext jc = JAXBContext.newInstance("XmlData.Biblioteca");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
-		biblio = (XmlData.Biblioteca.Biblioteca) unmarshaller.unmarshal(new File(Common.BIBLIO_XML));
+		biblio = (XmlData.Biblioteca.Biblioteca) unmarshaller.unmarshal(new File(Common.getCommon().getBiblioXml()));
 
     }
 

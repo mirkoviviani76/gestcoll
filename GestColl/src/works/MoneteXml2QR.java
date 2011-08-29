@@ -59,7 +59,7 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 			throws TransformerException, TransformerConfigurationException,
 			IOException {
 		File out = new File(outDir + "/" + mng.getId() + ".png");
-		 String dati = mng.xsltConvert(new File(Common.XSL_TXT));
+		 String dati = mng.xsltConvert(new File(Common.getCommon().getXslTxt()));
 		 MoneteXml2QR.encode(dati, out);
 		return out;
 	}

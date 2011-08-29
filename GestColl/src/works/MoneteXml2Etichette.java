@@ -136,7 +136,7 @@ public class MoneteXml2Etichette extends CollectionWorker {
 				{ MARKER_QRB, qrB }, { MARKER_QRC, qrC }, { MARKER_QRD, qrD } };
 
 		/* aggiorna il template */
-		GenericUtil.fillTemplate(Common.TEMPLATE_DIR + "/" + OUTFILE_ET
+		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/" + OUTFILE_ET
 				+ Common.TEMPLATE_END, outDir + "/" + OUTFILE_ET, conversione);
 
 		Message m = new Message("Etichette.tex creati", Level.INFO);

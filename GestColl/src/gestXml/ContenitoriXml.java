@@ -41,7 +41,7 @@ public class ContenitoriXml extends GestXml {
 	 * Costruttore
 	 */
 	public ContenitoriXml() {
-		super(new File(Common.CONTENITORI_XML));
+		super(new File(Common.getCommon().getContenitoriXml()));
 		armadi = new HashMap<String, Armadio>();
 		// legge i dati dall'xml
 		try {
@@ -155,7 +155,7 @@ public class ContenitoriXml extends GestXml {
 			throws FileNotFoundException {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = CollectionWorker.getFileListing(new File(
-				Common.MONETE_DIR), Common.COIN_END);
+				Common.getCommon().getMoneteDir()), Common.COIN_END);
 		ListIterator<File> iterator = files.listIterator();
 		HashMap<String, String> posizioniId = new HashMap<String, String>(
 				files.size());
@@ -192,7 +192,7 @@ public class ContenitoriXml extends GestXml {
 			IOException, TransformerException {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = CollectionWorker.getFileListing(new File(
-				Common.MONETE_DIR), Common.COIN_END);
+				Common.getCommon().getMoneteDir()), Common.COIN_END);
 		ListIterator<File> iterator = files.listIterator();
 		HashMap<String, String> posizioniId = new HashMap<String, String>(
 				files.size());

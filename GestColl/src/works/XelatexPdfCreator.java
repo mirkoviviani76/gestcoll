@@ -68,7 +68,7 @@ public class XelatexPdfCreator extends CollectionWorker {
 		String[] filesEtichette = { MoneteXml2Etichette.OUTFILE_ET };
 		/* esegue la creazione del pdf */
 		for (String f : filesEtichette) {
-			File cur = new File(Common.LATEX_DIR + "/" + f);
+			File cur = new File(Common.getCommon().getLatexDir() + "/" + f);
 			if (cur.exists()) {
 				String cmd = COMMAND_STRING + f;
 				this.execute(cmd, outDir, 2, "Genero " + f);
@@ -84,7 +84,7 @@ public class XelatexPdfCreator extends CollectionWorker {
 	private void creaCollezione(File outDir) throws IOException,
 			InterruptedException {
 		String inFile = Common.COLLEZIONE_TEX;
-		File cur = new File(Common.LATEX_DIR + "/" + inFile);
+		File cur = new File(Common.getCommon().getLatexDir() + "/" + inFile);
 		if (cur.exists()) {
 			/* esegue la conversione a pdf */
 			String cmd = COMMAND_STRING + inFile;

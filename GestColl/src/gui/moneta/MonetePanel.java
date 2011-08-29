@@ -567,7 +567,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		am.setVisible(true);
 		if (am.getReturnStatus() == AddMonetaForm.RET_OK) {
 			String id = am.getId();
-			File newDir = new File(Common.MONETE_DIR + "/" + id);
+			File newDir = new File(Common.getCommon().getMoneteDir() + "/" + id);
 			// crea dir
 			boolean success = newDir.mkdir();
 			if (success) {
@@ -584,9 +584,9 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 					};
 					// copia file template di istanza e sistema l'attributo e le
 					// immagini
-					String newXml = Common.MONETE_DIR + "/" + id + "/" + id
+					String newXml = Common.getCommon().getMoneteDir() + "/" + id + "/" + id
 							+ ".xml";
-					GenericUtil.fillTemplate(Common.XML_MONETA_VOID_INSTANCE,
+					GenericUtil.fillTemplate(Common.getCommon().getVoidMoneta(),
 							newXml, conversione);
 					// ricarica la lista
 					this.jListMonete
@@ -692,24 +692,24 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 			ArrayList<CollectionWorker> works = new ArrayList<CollectionWorker>();
 			works.add(xml2tex);
 			works.add(xml2et);
-			this.runInThread(works, new File(Common.MONETE_DIR), new File(
-					Common.LATEX_DIR), null);
+			this.runInThread(works, new File(Common.getCommon().getMoneteDir()), new File(
+					Common.getCommon().getLatexDir()), null);
 		} else if (ae.getSource() == jButtonWiki) {
 			// TODO wiki (?)
 		} else if (ae.getSource() == jBAdd) {
 			this.addMoneta();
 		} else if (ae.getSource() == jButtonTex2Pdf) {
-			this.runInThread(xpc, new File(Common.LATEX_DIR), new File(
-					Common.LATEX_DIR), null);
+			this.runInThread(xpc, new File(Common.getCommon().getLatexDir()), new File(
+					Common.getCommon().getLatexDir()), null);
 		} else if (ae.getSource() == jButtonXml2Html) {
-			this.runInThread(xml2html, new File(Common.MONETE_DIR), new File(
-					Common.HTML_DIR), null);
+			this.runInThread(xml2html, new File(Common.getCommon().getMoneteDir()), new File(
+					Common.getCommon().getHtmlDir()), null);
 		} else if (ae.getSource() == jButtonVerify) {
 			// this.runInThread(vrf, new File(Common.MONETE_DIR), new
 			// File(Common.HTML_DIR), null);
 		} else if (ae.getSource() == jButtonQR) {
-			this.runInThread(qrc, new File(Common.MONETE_DIR), new File(
-					Common.QR_DIR), null);
+			this.runInThread(qrc, new File(Common.getCommon().getMoneteDir()), new File(
+					Common.getCommon().getQrDir()), null);
 		} else if (ae.getSource() == jTBEdit) {
 			this.monetaViewer1.setEditable(this.jTBEdit.isSelected());
 			this.jBSalva.setEnabled(this.jTBEdit.isSelected());

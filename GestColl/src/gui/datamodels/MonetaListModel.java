@@ -40,7 +40,7 @@ public class MonetaListModel extends GenericListModel<MonetaXml> {
 		ListIterator iterator = null;
 		try {
 			List<File> files = CollectionWorker.getFileListing(new File(
-					Common.MONETE_DIR), Common.COIN_END);
+					Common.getCommon().getMoneteDir()), Common.COIN_END);
 			iterator = files.listIterator();
 
 		} catch (FileNotFoundException ex) {

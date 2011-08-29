@@ -28,7 +28,7 @@ public class ContattiXml extends GestXml {
 	 * Costruttore
 	 */
 	public ContattiXml() {
-		super(new File(Common.CONTATTI_XML));
+		super(new File(Common.getCommon().getContattiXml()));
 		try {
 			contatti = new ArrayList<Contatto>();
 			// legge i dati dall'xml
