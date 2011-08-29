@@ -7,6 +7,7 @@ package main;
 /**
  * Classe di utilita' per contenere le costanti comuni.
  * 
+ * FIXME modificare per leggere un file ini (property file)
  */
 public final class Common {
 
