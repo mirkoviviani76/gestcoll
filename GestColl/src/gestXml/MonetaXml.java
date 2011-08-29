@@ -475,7 +475,14 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 			this.moneta.getZecca().setSegno(value);
 			break;
 		case DATA:
-			//FIXME this.moneta.getDatiAcquisto().setData(value);
+			if (this.moneta.getDatiAcquisto() == null)
+				this.moneta.setDatiAcquisto(new DatiAcquisto());
+			try {
+				XMLGregorianCalendar cal = DatatypeFactory.newInstance().newXMLGregorianCalendar(value);
+				this.moneta.getDatiAcquisto().setData(cal);
+			} catch (DatatypeConfigurationException e1) {
+				GestLog.Error(this.getClass(), e1);
+			}
 			break;
 		default:
 					GestLog.Message(this.getClass(), "SetValue: Campo sconosciuto: "+field.toString(), true);

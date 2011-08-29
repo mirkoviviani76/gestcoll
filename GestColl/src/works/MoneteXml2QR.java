@@ -116,7 +116,7 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	 * @param out
 	 * @throws IOException
 	 * @throws WriterException
-	 *             FIXME
+	 *             FIXME manca la libreria dei qr
 	 */
 	public static void encode(String data, File out) throws IOException {
 //		 //get a byte matrix for the data

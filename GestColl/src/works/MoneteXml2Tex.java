@@ -18,6 +18,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.apache.commons.io.FileUtils;
+
+import XmlData.Moneta.DocumentoAddizionale;
+
 import main.Common;
 import main.GenericUtil;
 import main.GestLog;
@@ -111,19 +115,18 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 					" \\\\\\\\\n";
 			allXmlList = allXmlList + "\\\\include{" + id + "}\n";
 
-			//TODO verificare
-//			/* gestisce i documenti aggiuntivi linkati dalla moneta */
-//			List<DocumentoAddizionale> documenti = mng.getItemAddizionali();
-//			for (DocumentoAddizionale f : documenti) {
-//				if (f.getFilename().endsWith("tex")) {
-//					//copia il tex in outdir
-//					File xxx = new File(inDir.getPath() + "/" + mng.getId() + "/" +
-//							f.getFilename());
-//					FileUtils.copyFile(xxx, new File(outDir + "/" + xxx.getName()));
-//					String tmp = f.getFilename().replace(".tex", "");
-//					allXmlList = allXmlList + "\\\\include{" + tmp + "}\n";
-//				}
-//			}
+			/* gestisce i documenti aggiuntivi linkati dalla moneta */
+			List<DocumentoAddizionale> documenti = mng.getItemAddizionali();
+			for (DocumentoAddizionale f : documenti) {
+				if (f.getFilename().endsWith("tex")) {
+					//copia il tex in outdir
+					File xxx = new File(inDir.getPath() + "/" + mng.getId() + "/" +
+							f.getFilename());
+					FileUtils.copyFile(xxx, new File(outDir + "/" + xxx.getName()));
+					String tmp = f.getFilename().replace(".tex", "");
+					allXmlList = allXmlList + "\\\\include{" + tmp + "}\n";
+				}
+			}
 			this.setChanged();
 			this.notifyObservers(p);
 			} catch (JAXBException e) {

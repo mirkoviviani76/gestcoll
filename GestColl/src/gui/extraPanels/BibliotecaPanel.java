@@ -39,7 +39,6 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer, Cli
 
     /**
      * serve perche' NetBeans (non java!) si incasina per il MainForm 
-     * FIXME
      */
     public void loadData() {
         //sld = new ScanLibri();
