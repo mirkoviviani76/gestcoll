@@ -41,7 +41,7 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 		initComponents();
 		// carica i file xml delle monete
 		this.tuttiXmlMonete = CollectionWorker.getFileListing(
-				Common.MONETE_DIR, Common.COIN_END);
+				Common.getCommon().getMoneteDir(), Common.COIN_END);
 		// aggiunge i listener
 		this.jTFAnno.getDocument().addDocumentListener(this);
 		this.jCBDim.addActionListener(this);

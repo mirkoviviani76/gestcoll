@@ -111,7 +111,8 @@
  *                 - migliorata/aggiunta gestione messaggi e avanzamento
  * @version 31.0a  - xml letto tramite jaxb. Progetto sotto eclipse. Downgrade delle feature durante il refactoring.                
  * @version 31.1a  - Sistemato visualizzazione, vassoi, tex, html, statistiche. Sistemare modifica e salvataggio. Downgrade delle feature durante il refactoring.                
- * @version 31.2a  - Sistemata visualizzazione links (da migliorare) *
+ * @version 31.2a  - Sistemata visualizzazione links (da migliorare), proprieta' lette dal file GestColl.ini
+ * 
  * TODO migliorare contatti e links
  * TODO pagina che visualizzi sigla -> libro (magari da integrare con la scheda moneta...)
  *
@@ -143,7 +144,7 @@ public class Main {
 		LogManager mn = LogManager.getLogManager();
 		try {
 			// le proprieta' specificate prevedono logging su video e su file
-			FileInputStream fis = new FileInputStream(Common.TEMPLATE_DIR + "/"
+			FileInputStream fis = new FileInputStream(Common.getCommon().getTemplateDir() + "/"
 					+ "myLoggingProperties.properties");
 			mn.readConfiguration(fis);
 		} catch (IOException ex) {

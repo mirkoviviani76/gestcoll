@@ -1271,9 +1271,9 @@ public class MonetaViewer extends javax.swing.JPanel {
 		try {
 			String id = this.mng.getId();
 			// ottiene il nome del file da scrivere
-			String outFile = Common.MONETE_DIR + "/" + id + "/" + id + ".xml";
+			String outFile = Common.getCommon().getMoneteDir() + "/" + id + "/" + id + ".xml";
 			// ottiene il nome del file di backup
-			String oldFileRen = Common.BACKUP_DIR + "/" + id + "-"
+			String oldFileRen = Common.getCommon().getBackupDir() + "/" + id + "-"
 					+ Calendar.getInstance().getTimeInMillis() + ".xml";
 			// esegue il backup
 			FileUtils.copyFile(new File(outFile), new File(oldFileRen));

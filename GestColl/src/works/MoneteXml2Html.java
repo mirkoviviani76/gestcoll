@@ -56,7 +56,7 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 			FileNotFoundException {
 		/* prepara il file di output */
 		File ret = new File(outDir + "/" + mng.getId() + ".html");
-		mng.xsltConvert(new File(Common.XSL_HTML), ret);
+		mng.xsltConvert(new File(Common.getCommon().getXslHtml()), ret);
 		return ret;
 	}
 
@@ -86,7 +86,7 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 			String id = mng.getId();
 			/* prepara il file di output */
 			String outFile = outDir + "/" + id + ".html";
-			mng.xsltConvert(new File(Common.XSL_HTML), new File(outFile));
+			mng.xsltConvert(new File(Common.getCommon().getXslHtml()), new File(outFile));
 
 			/* scrive l'item nell'indice */
 			data = data + "<tr>" + "\n";
@@ -113,7 +113,7 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 
 		String[][] conversione = { { "%DATA", data } };
 		/* crea il file di output usando il template */
-		GenericUtil.fillTemplate(Common.TEMPLATE_DIR + "/" + OUTFILE_MONETE
+		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/" + OUTFILE_MONETE
 				+ Common.TEMPLATE_END, outDir + "/" + OUTFILE_MONETE,
 				conversione);
 
@@ -135,7 +135,7 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	 */
 	private void copyIndex(File destDir) throws IOException {
 		if (!(new File(destDir + "/" + "index.html")).exists()) {
-			FileUtils.copyFile(new File(Common.TEMPLATE_DIR + "/"
+			FileUtils.copyFile(new File(Common.getCommon().getTemplateDir() + "/"
 					+ "index.html.template"), new File(destDir + "/"
 					+ "index.html"));
 		}

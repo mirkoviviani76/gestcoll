@@ -18,11 +18,11 @@ public class GestLog {
 	 * @param ex
 	 */
 	@SuppressWarnings("rawtypes")
-	public static void Error(Class source, Exception ex) {
-		JOptionPane.showMessageDialog(null, source.getName()+": "+ex.getMessage(), Common.APPNAME,
+	public static void Error(Class source, Exception e) {
+		JOptionPane.showMessageDialog(null, source.getName()+": "+e.getMessage(), Common.APPNAME,
 				JOptionPane.ERROR_MESSAGE);
 		Logger.getLogger(source.getName()).logp(Level.SEVERE, source.getName(),
-				null, null, ex);
+				null, null, e);
 	}
 
 	/**

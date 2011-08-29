@@ -90,7 +90,7 @@ public class BibliotecaViewer extends javax.swing.JPanel {
 		this.jTPDati.setText(dati);
 		// compone l'url completo
 		if (!url.equals("")) {
-			filename = new File(Common.BIBLIOTECA_DIR + "/" + url);
+			filename = new File(Common.getCommon().getBibliotecaDir() + "/" + url);
 		} else {
 			filename = null;
 		}

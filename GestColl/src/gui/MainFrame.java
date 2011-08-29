@@ -83,7 +83,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 
 	private void gestRemoveAll() throws HeadlessException {
 		try {
-			String[] ddd = { Common.HTML_DIR, Common.LATEX_DIR, Common.QR_DIR };
+			String[] ddd = { Common.getCommon().getHtmlDir(), Common.getCommon().getLatexDir(), Common.getCommon().getQrDir() };
 			int count = CollectionWorker.removeAll(ddd);
 			setMessage(new Message(String.format("Rimossi %d oggetti.", count),
 					Level.INFO));
@@ -95,7 +95,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	}
 
 	private void gestRemoveTemp() throws HeadlessException {
-		String[] ddd = { Common.HTML_DIR, Common.LATEX_DIR };
+		String[] ddd = { Common.getCommon().getHtmlDir(), Common.getCommon().getLatexDir() };
 		int count = 0;
 		try {
 			count = CollectionWorker.removeTemp(ddd);
@@ -150,7 +150,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 
 	private void gestStorico() {
 		HistoryViewer hw = new HistoryViewer(this, true);
-		hw.showFile(new File(Common.HISTORY_LOG));
+		hw.showFile(new File(Common.getCommon().getHistoryLog()));
 		hw.setVisible(true);
 	}
 

@@ -7,7 +7,6 @@ package gestXml;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -31,13 +30,13 @@ public class LinksXml extends GestXml {
 	 * Costruttore
 	 */
     public LinksXml() {
-    	super(new File(Common.LINKS_XML));
+    	super(new File(Common.getCommon().getLinksXml()));
     	links = new ArrayList<gestXml.data.Link>();
     	JAXBContext jc;
     	try {
     		jc = JAXBContext.newInstance("XmlData.Links");
     		Unmarshaller unmarshaller = jc.createUnmarshaller();
-    		xmllinks = (XmlData.Links.Links) unmarshaller.unmarshal(new File(Common.LINKS_XML));
+    		xmllinks = (XmlData.Links.Links) unmarshaller.unmarshal(new File(Common.getCommon().getLinksXml()));
     		
     		List<Linklist> listacat = xmllinks.getCategoria();
     		for (Linklist categoria : listacat)

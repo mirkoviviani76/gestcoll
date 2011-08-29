@@ -205,7 +205,7 @@ public class DocumentoForm extends javax.swing.JDialog {
 			// String selectedFile = fd.getDirectory()+"/"+fd.getFile();
 			File selectedFile = new File(fd.getDirectory());
 			URI file = selectedFile.toURI();
-			File globalDir = new File(Common.BASE_DIR);
+			File globalDir = new File(Common.getCommon().getBaseDir());
 			URI global = globalDir.getCanonicalFile().toURI();
 			this.jTFUrl.setText("../../" + global.relativize(file).toString());
 			this.jTFFile.setText(fd.getFile());
