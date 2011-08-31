@@ -31,7 +31,7 @@ public final class Common {
 	/** Nome dell'applicazione */
 	public static final String APPNAME = "GestColl";
 	/** versione del progetto */
-	public static final String VERSION = "31.2alfa";
+	public static final String VERSION = "31.3alfa";
 	
 	// Read properties file.
 	private Properties properties;

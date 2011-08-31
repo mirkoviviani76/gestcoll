@@ -112,7 +112,9 @@
  * @version 31.0a  - xml letto tramite jaxb. Progetto sotto eclipse. Downgrade delle feature durante il refactoring.                
  * @version 31.1a  - Sistemato visualizzazione, vassoi, tex, html, statistiche. Sistemare modifica e salvataggio. Downgrade delle feature durante il refactoring.                
  * @version 31.2a  - Sistemata visualizzazione links (da migliorare), proprieta' lette dal file GestColl.ini
- * 
+ * @version 31.3a  - Sistemata visualizzazione immagini con possiblita' di ruotare e scalare
+ *
+ *  
  * TODO migliorare contatti e links
  * TODO pagina che visualizzi sigla -> libro (magari da integrare con la scheda moneta...)
  *
