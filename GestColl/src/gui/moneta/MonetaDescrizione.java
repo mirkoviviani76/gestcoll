@@ -56,7 +56,7 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 	
 	  /**
      * Aggiunge il listener per le modifiche ai testi
-     * TODO da aggiungere gestione immagine
+     * 
      * @param myDocumentListener
      */
     void addDocumentListener(XmlDocumentChangeListener myDocumentListener) {

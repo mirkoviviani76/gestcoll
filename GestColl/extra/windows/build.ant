@@ -7,12 +7,12 @@
 	<property name="libDir" value="${jarDir}/GestColl_lib" />
 	
     <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+	
 	<target name="compile">
 		<javac srcdir="../../src"></javac>
 	</target>
 	
 	<target name="create_run_jar">
-		<!-- <antcall target="compile"></antcall> -->
         <jar destfile="${jarDir}/GestColl.jar">
             <manifest>
                 <attribute name="Main-Class" value="main.Main"/>
