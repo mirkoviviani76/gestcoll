@@ -44,7 +44,8 @@ public class GenericCellRenderer<E> extends DefaultListCellRenderer {
 				index, isSelected, hasFocus);
 		@SuppressWarnings("unchecked")
 		E mng = (E) value;
-		label.setText(mng.toString());
+		//tratta il testo come html
+		label.setText("<html>"+mng.toString()+"</html>");
 		// se E implementa Tooltipper, ottiene il tooltip
 		if (mng instanceof Tooltipper) {
 			label.setToolTipText(((Tooltipper) mng).toTooltip());
