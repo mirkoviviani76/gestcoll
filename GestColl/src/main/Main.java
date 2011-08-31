@@ -1,10 +1,8 @@
 /**
- *
  *  
  * TODO migliorare contatti e links
  * TODO pagina che visualizzi sigla -> libro (magari da integrare con la scheda moneta...)
  *
- * TODO Progetto: aggiungere cartella "scripts" per ant linux e java
  */
 package main;
 
