@@ -5,7 +5,12 @@
 
 package gestXml;
 
+import gestXml.data.Catalogo;
+import gestXml.data.Libro;
+import gestXml.data.Pubblicazione;
+
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -48,5 +53,47 @@ public class BibliotecaXml extends GestXml {
     public List<XmlData.Biblioteca.Librotype> getLibri() {
         return this.biblio.getLibri().getLibro();
     }
+    
+    /**
+     * carica i dati
+     * @return la lista di pubblicazioni
+     */
+    public List<Pubblicazione> getItems() {
+    	List<XmlData.Biblioteca.Catalogo> cataloghi = this.getCataloghi();
+    	List<XmlData.Biblioteca.Librotype> libri = this.getLibri();
+    	List<Pubblicazione> ret = new ArrayList<Pubblicazione>();
+    	/* cicla su tutti i libri nell'xml */
+    	for (XmlData.Biblioteca.Librotype l : libri)
+    	{
+    		/* costruisce il dato pubblicazione */
+    		Libro libro = new Libro();
+    		libro.setTitolo(l.getTitolo());
+    		if (l.getSupporti() != null)
+    			libro.setSupporti(l.getSupporti().getSupporto());
+    		if (l.getAutori() != null)
+    			libro.setAutori(l.getAutori().getAutore());
+    		libro.setFilename(l.getFilename());
+    		libro.setId(l.getId());
+    		ret.add(libro);
+    	}
+    	/* cicla su tutti i cataloghi nell'xml */
+    	for (XmlData.Biblioteca.Catalogo c : cataloghi)
+    	{
+    		/* costruisce il dato pubblicazione */
+    		Catalogo catalogo = new Catalogo();
+    		if (c.getArgomenti() != null)
+    			catalogo.setArgomenti(c.getArgomenti().getArgomento());
+    		if (c.getAutori() != null)
+    			catalogo.setAutori(c.getAutori().getAutore());
+    		catalogo.setData(c.getData());
+    		catalogo.setFilename(c.getFilename());
+    		catalogo.setNumero(c.getNumero());
+    		if (c.getSupporti() != null)
+    			catalogo.setSupporti(c.getSupporti().getSupporto());
+    		ret.add(catalogo);
+    	}
+    	return ret;
+    	
+	}
     
   }

@@ -145,8 +145,6 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 		for (String nome : nomi)
 			s = s + nome + ", ";
 		s = s + "\n";
-
-		// TODO generare gli altri elementi della stringa dati
 		return s;
 	}
 
