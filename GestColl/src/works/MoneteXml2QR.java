@@ -25,6 +25,12 @@ import main.Progress;
 
 import org.xml.sax.SAXException;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+
 /**
  * Gestisce la creazione di un codice QR per ogni moneta.
  * 
@@ -55,9 +61,7 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	 * @throws WriterException
 	 */
 	@Override
-	public File convert(MonetaXml mng, File outDir)
-			throws TransformerException, TransformerConfigurationException,
-			IOException {
+	public File convert(MonetaXml mng, File outDir) throws TransformerConfigurationException, TransformerException, WriterException, IOException {
 		File out = new File(outDir + "/" + mng.getId() + ".png");
 		 String dati = mng.xsltConvert(new File(Common.getCommon().getXslTxt()));
 		 MoneteXml2QR.encode(dati, out);
@@ -99,6 +103,8 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 				i++;
 			} catch (JAXBException e) {
 				GestLog.Error(this.getClass(), e);
+			} catch (WriterException e) {
+				GestLog.Error(this.getClass(), e);
 			}
 		}
 
@@ -110,19 +116,17 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	}
 
 	/**
-	 * genera un codice qr contenente i dati data
-	 * 
+	 * genera un codice qr contenente la stringa data
 	 * @param data
 	 * @param out
-	 * @throws IOException
 	 * @throws WriterException
-	 *             FIXME manca la libreria dei qr
+	 * @throws IOException
 	 */
-	public static void encode(String data, File out) throws IOException {
-//		 //get a byte matrix for the data
-//		 Writer writer = new QRCodeWriter();
-//		 BitMatrix matrix = writer.encode(data, BarcodeFormat.QR_CODE, 500,
-//		 500);
-//		 MatrixToImageWriter.writeToFile(matrix, "png", out);
+	public static void encode(String data, File out) throws WriterException, IOException {
+		 //get a byte matrix for the data
+		 QRCodeWriter writer = new QRCodeWriter();
+		 BitMatrix matrix = writer.encode(data, BarcodeFormat.QR_CODE, 500,
+		 500);
+		 MatrixToImageWriter.writeToFile(matrix, "png", out);
 	}
 }
