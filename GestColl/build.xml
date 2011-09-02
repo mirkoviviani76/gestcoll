@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project 
+  name="GestColl"
+  default="package" >
+
+  <property
+    name="src.dir"
+    location="src" />
+
+  <property 
+    name="class.dir"
+    location="build/classes" />
+
+  <property
+	    name="jar.dir"
+	    location="build/jar" />
+
+  <property 
+	    name="lib.dir"
+		location="${jar.dir}/GestColl_lib" />
+
+  <property 
+  	    name="externallib.dir"
+  		location="${jar.dir}/GestColl_lib" />
+	
+	
+  <path id="gestcoll-classpath-id">
+	    <pathelement location="../libraries"/>
+  </path>
+
+	
+  <target name="init">
+    <mkdir dir="${class.dir}" />
+    <mkdir dir="${jar.dir}" />
+  	<mkdir dir="${lib.dir}" />
+  </target>
+
+  <target name="clean">
+    <delete dir="${class.dir}" />
+  	<delete dir="${lib.dir}" />
+    <delete dir="${jar.dir}" />
+  </target>
+  
+  <target name="compile" depends="init" >
+  	
+  	<javac 
+      destdir="${class.dir}" 
+      debug="on" 
+      optimize="on" 
+      includeAntRuntime="false"
+      includeJavaRuntime="true" >
+      <src path="${src.dir}"/>
+  	  <classpath refid="gestcoll-classpath-id"/>
+  		
+    </javac>
+  </target>
+  
+  <target name="package" depends="compile">
+    <jar destfile="${jar.dir}/GestColl.jar">
+        <manifest>
+            <attribute name="Main-Class" value="main.Main"/>
+        	<attribute name="Class-Path" value=". ${lib.dir}/javax.persistence_2.0.3.v201010191057.jar ${lib.dir}/eclipselink.jar ${lib.dir}/javax.mail_1.4.0.v201005080615.jar ${lib.dir}/javax.xml.stream_1.0.1.v201004272200.jar ${lib.dir}/com.sun.xml.bind_2.2.0.v201004141950.jar ${lib.dir}/javax.activation_1.1.0.v201005080500.jar ${lib.dir}/com.sun.tools.xjc_2.2.0.jar ${lib.dir}/javax.xml.bind_2.2.0.v201005080402.jar ${lib.dir}/commons-cli-1.2.jar ${lib.dir}/commons-io-2.0.jar ${lib.dir}/commons-logging-1.1.1.jar ${lib.dir}/jcalendar-1.3.3.jar ${lib.dir}/jfreechart-1.0.13.jar ${lib.dir}/jfreechart-1.0.13-swt.jar ${lib.dir}/pdfbox-1.3.1.jar ${lib.dir}/swtgraphics2d.jar ${lib.dir}/jcommon-1.0.16.jar"/>
+            <attribute name="SplashScreen-Image" value="img/splash.png"/>
+        </manifest>
+        <fileset dir="${src.dir}"/>
+    </jar>
+    <copy file="../libraries/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/jpa/javax.persistence_2.0.3.v201010191057.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/eclipselink.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/moxy/javax.mail_1.4.0.v201005080615.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/moxy/javax.xml.stream_1.0.1.v201004272200.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/moxy/com.sun.xml.bind_2.2.0.v201004141950.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/moxy/javax.activation_1.1.0.v201005080500.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/moxy/com.sun.tools.xjc_2.2.0.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/moxy/javax.xml.bind_2.2.0.v201005080402.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/commons-cli-1.2.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/commons-io-2.0.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/commons-logging-1.1.1.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/jcalendar-1.3.3.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/jfreechart-1.0.13.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/jfreechart-1.0.13-swt.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/pdfbox-1.3.1.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/swtgraphics2d.jar" todir="${lib.dir}"/>
+    <copy file="../libraries/jcommon-1.0.16.jar" todir="${lib.dir}"/>
+	<copy file="../libraries/QRCreator.jar" todir="${lib.dir}"/>
+  	<copy file="../libraries/QRcore.jar" todir="${lib.dir}"/>
+    
+  </target>    
+  
+  
+</project>
