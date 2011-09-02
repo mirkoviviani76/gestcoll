@@ -39,13 +39,13 @@
 
   <target name="clean">
   	<echo level="info">Clean in corso</echo>
-    <delete dir="${class.dir}" />
-  	<delete dir="${lib.dir}" />
-    <delete dir="${jar.dir}" />
+    <delete dir="${class.dir}" quiet="true"/>
+  	<delete dir="${lib.dir}" quiet="true" />
+    <delete dir="${jar.dir}" quiet="true" />
   </target>
   
   <target name="compile" depends="init" >
-  	<echo level="info">Compilazione in corso</echo>
+  	<echo level="info">Compilazione in corso: ${src.dir} -> ${class.dir} </echo>
   	<javac 
       destdir="${class.dir}" 
       debug="on" 
@@ -56,9 +56,10 @@
 	  	  <classpath refid="gestcoll-classpath-id"/>
     </javac>
   </target>
-  
+  	
+ 
   <target name="package" depends="compile">
-  	<echo level="info">Packaging in corso</echo>
+  	<echo level="info">Packaging in corso di ${jar.dir}/GestColl.jar</echo>
     <jar destfile="${jar.dir}/GestColl.jar" duplicate="fail">
         <manifest>
             <attribute name="Main-Class" value="main.Main"/>
@@ -88,6 +89,9 @@
   	<copy file="${externallib.dir}/QRcore.jar" todir="${lib.dir}"/>
     
   </target>    
-  
+
+  <target name="documentation">
+	<javadoc sourcepath="${src.dir}" destdir="build/javadoc" />
+  </target>
   
 </project>

@@ -46,9 +46,11 @@ public final class Common {
 		{
 			try {
 				properties = new Properties();
-				properties.load(new FileInputStream("GestColl.ini"));
+				properties.load(new FileInputStream(Common.INI_FILE));
 			} catch (IOException e) {
 				GestLog.Error(this.getClass(), e);
+				//esce dal sistema
+				System.exit(-1);
 			}
 		}
 	}
@@ -64,10 +66,14 @@ public final class Common {
     }
 
     
-	
+    /**
+     * Nome del file di ini
+     */
+    public static final String INI_FILE = "GestColl.ini";
+    	
 	
 	/**
-     *
+     * nome del file tex per generare il pdf con la collezione
      */
 	public static final String COLLEZIONE_TEX = "Collezione.tex";
 	/**
@@ -96,75 +102,142 @@ public final class Common {
 	public static final String DATE_XML_FORMAT = "yyyy-MM-dd";
 
 
-
-	public String getTemplateDir() {
-		return this.properties.getProperty("TEMPLATE_DIR");
-	}
-
+	/**
+	 * Ottiene il nome del file di history
+	 * @return il nome del file
+	 */
 	public String getHistoryLog() {
 		return this.properties.getProperty("HISTORY_LOG");
 	}
 
+	/**
+	 * Ottiene il nome del file xsd verso html
+	 * @return il file
+	 */
 	public String getXslHtml() {
 		return this.properties.getProperty("XSL_HTML");
 	}
 
+	/**
+	 * Ottiene il nome del file xsd verso txt
+	 * @return il file
+	 */
 	public String getXslTxt() {
 		return this.properties.getProperty("XSL_TXT");
 	}
 
+	/**
+	 * Ottiene il nome del file xsd verso tex
+	 * @return il file
+	 */
 	public String getXslLatex() {
 		return this.properties.getProperty("XSL_LATEX");
 	}
 
+	/**
+	 * Ottiene la dir dei template
+	 * @return la dir
+	 */
+	public String getTemplateDir() {
+		return this.properties.getProperty("TEMPLATE_DIR");
+	}
+
+	/**
+	 * Ottiene la dir delle monete
+	 * @return la dir
+	 */
 	public String getMoneteDir() {
 		return this.properties.getProperty("MONETE_DIR");
 	}
 
-	public String getLatexDir() {
+	/**
+	 * Ottiene la dir di latex
+	 * @return la dir
+	 */
+    public String getLatexDir() {
 		return this.properties.getProperty("MONETE_DIR");
 	}
 
+	/**
+	 * Ottiene la dir di base
+	 * @return la dir
+	 */
 	public String getBaseDir() {
 		return this.properties.getProperty("BASE_DIR");
 	}
 
-	public String getBiblioXml() {
-		return this.properties.getProperty("BIBLIO_XML");
-	}
-
-	public String getContattiXml() {
-		return this.properties.getProperty("CONTATTI_XML");
-	}
-
-	public String getLinksXml() {
-		return this.properties.getProperty("LINKS_XML");
-	}
-
-	public String getContenitoriXml() {
-		return this.properties.getProperty("CONTENITORI_XML");
-	}
-
+	/**
+	 * Ottiene la dir di qr
+	 * @return la dir
+	 */
 	public String getQrDir() {
 		return this.properties.getProperty("QR_DIR");
 	}
 
-	public String getHtmlDir() {
-		return this.properties.getProperty("HTML_DIR");
-	}
-
-	public String getVoidMoneta() {
-		return this.properties.getProperty("XML_MONETA_VOID_INSTANCE");
-	}
-
+	/**
+	 * Ottiene la dir della biblioteca
+	 * @return la dir
+	 */
 	public String getBibliotecaDir() {
 		return this.properties.getProperty("BIBLIOTECA_DIR");	
 		}
 	
+	/**
+	 * Ottiene la dir di backup
+	 * @return la dir
+	 */
 	public String getBackupDir() {
 		return this.properties.getProperty("BACKUP_DIR");
 	}
 	
+	/**
+	 * Ottiene la dir di html
+	 * @return la dir
+	 */
+	public String getHtmlDir() {
+		return this.properties.getProperty("HTML_DIR");
+	}
+
+	/**
+	 * Ottiene il nome del file della biblioteca
+	 * @return il nome
+	 */
+    public String getBiblioXml() {
+		return this.properties.getProperty("BIBLIO_XML");
+	}
+
+	/**
+	 * Ottiene il nome del file dei contatti
+	 * @return il nome
+	 */
+    public String getContattiXml() {
+		return this.properties.getProperty("CONTATTI_XML");
+	}
+
+	/**
+	 * Ottiene il nome del file dei link
+	 * @return il nome
+	 */
+    public String getLinksXml() {
+		return this.properties.getProperty("LINKS_XML");
+	}
+
+	/**
+	 * Ottiene il nome del file dei contenitori
+	 * @return il nome
+	 */
+    public String getContenitoriXml() {
+		return this.properties.getProperty("CONTENITORI_XML");
+	}
+
+	/**
+	 * Ottiene il nome del template xml di moneta
+	 * @return il nome
+	 */
+	public String getVoidMoneta() {
+		return this.properties.getProperty("XML_MONETA_VOID_INSTANCE");
+	}
+
 	
 	
 

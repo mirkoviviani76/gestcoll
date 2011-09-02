@@ -8,6 +8,7 @@ Sistemata visualizzazione immagini con possiblita' di ruotare e scalare
 Sistemata biblioteca
 Introdotto documento di versione (il presente HISTORY.txt)
 Modificata GenericCellRenderer: ora il testo e' trattato come html
+Introdotto il builder ant build.xml
 31.2a
 Sistemata visualizzazione links (da migliorare)
 Proprieta' lette dal file GestColl.ini
