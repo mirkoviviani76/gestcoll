@@ -1,6 +1,5 @@
 /**
  *  
- * TODO migliorare contatti e links
  * TODO pagina che visualizzi sigla -> libro (magari da integrare con la scheda moneta...)
  *
  */
@@ -30,7 +29,7 @@ public class Main {
 		LogManager mn = LogManager.getLogManager();
 		try {
 			// le proprieta' specificate prevedono logging su video e su file
-			FileInputStream fis = new FileInputStream(Common.getCommon().getTemplateDir() + "/"
+			FileInputStream fis = new FileInputStream(Common.getCommon().getDataDir() + "/"
 					+ "myLoggingProperties.properties");
 			mn.readConfiguration(fis);
 		} catch (IOException ex) {

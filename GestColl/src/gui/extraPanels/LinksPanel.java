@@ -7,90 +7,90 @@ package gui.extraPanels;
 
 import gestXml.LinksXml;
 import gestXml.data.Link;
-import gui.datamodels.GenericListModel;
 
+import java.awt.Cursor;
 import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.JTree;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 import main.GestLog;
 
 /**
+ * gestione pannello links
+ * @author intecs
  *
- * TODO migliorare la visualizzazione dei link, introducendo magari una visualizzazione ad albero
  */
 public class LinksPanel extends javax.swing.JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private int lastSearchedIndex;
-	private String lastSearchedText;
 
+	private DefaultMutableTreeNode rootNode;
+	private DefaultTreeModel treeModel;
+	
+	
 	/** Creates new form LinksPanel */
 	public LinksPanel() {
 		initComponents();
-		this.lastSearchedIndex = 0;
-		this.lastSearchedText = "";
-
 	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 */
-	@SuppressWarnings({ "serial" })
-	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 		java.awt.GridBagConstraints gridBagConstraints;
 
 		jPanel1 = new javax.swing.JPanel();
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jLLinks = new javax.swing.JList();
 		jToolBar1 = new javax.swing.JToolBar();
 		jBAggiungi = new javax.swing.JButton();
-		jBCerca = new javax.swing.JButton();
-		jTextField1 = new javax.swing.JTextField();
 
 		setLayout(new java.awt.GridBagLayout());
 
-		jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1,
-				javax.swing.BoxLayout.LINE_AXIS));
-
-		jLLinks.setFont(new java.awt.Font("Dialog", 0, 11));
-		jLLinks.setModel(new javax.swing.AbstractListModel() {
-			String[] strings = { "a" };
-
-			@Override
-			public int getSize() {
-				return strings.length;
-			}
-
-			@Override
-			public Object getElementAt(int i) {
-				return strings[i];
-			}
-		});
-		jLLinks.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jLLinks.setCellRenderer(new gui.datamodels.GenericCellRenderer<Link>());
-		jLLinks.addMouseListener(new java.awt.event.MouseAdapter() {
-			@Override
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jLLinksMouseClicked(evt);
-			}
-		});
-		jScrollPane1.setViewportView(jLLinks);
-
-		jPanel1.add(jScrollPane1);
-
 		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.weightx = 1.0;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-		gridBagConstraints.ipadx = 386;
-		gridBagConstraints.ipady = 203;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.weightx = 1.0;
 		gridBagConstraints.weighty = 1.0;
 		add(jPanel1, gridBagConstraints);
+		jPanel1.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		scrollPane = new JScrollPane();
+		jPanel1.add(scrollPane);
+		
+		tree = new JTree();
+		scrollPane.setViewportView(tree);
+		tree.setSize(new Dimension(1, 1));
+		
+		textPane = new JTextPane();
+		textPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		textPane.setEditable(false);
+		textPane.setContentType("text/html");
+		textPane.addHyperlinkListener(new HyperlinkListener() {
+			
+			@Override
+			public void hyperlinkUpdate(HyperlinkEvent e) {
+				followLink(e);
+			}
+		});
+		
+		jPanel1.add(textPane);
+		
 
 		jToolBar1.setFloatable(false);
 		jToolBar1.setRollover(true);
@@ -109,19 +109,6 @@ public class LinksPanel extends javax.swing.JPanel {
 		});
 		jToolBar1.add(jBAggiungi);
 
-		jBCerca.setText("Cerca");
-		jBCerca.setFocusable(false);
-		jBCerca.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-		jBCerca.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		jBCerca.addMouseListener(new java.awt.event.MouseAdapter() {
-			@Override
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				jBCercaMouseClicked(evt);
-			}
-		});
-		jToolBar1.add(jBCerca);
-		jToolBar1.add(jTextField1);
-
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -130,62 +117,99 @@ public class LinksPanel extends javax.swing.JPanel {
 		gridBagConstraints.ipady = 10;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		add(jToolBar1, gridBagConstraints);
-	}// </editor-fold>//GEN-END:initComponents
-
-	private void jLLinksMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLLinksMouseClicked
-		if (evt.getClickCount() == 2) {
-			try {
-				Link c = (Link) this.jLLinks.getSelectedValue();
-				Desktop.getDesktop().browse(c.url.toURI());
-			} catch (IOException ex) {
-				GestLog.Error(LinksPanel.class, ex);
-			} catch (URISyntaxException ex) {
-				GestLog.Error(LinksPanel.class, ex);
+		tree.addTreeSelectionListener(new TreeSelectionListener() {
+			
+			@Override
+			public void valueChanged(TreeSelectionEvent e) {
+				getSelectedNode(e);
 			}
-		}
-	}// GEN-LAST:event_jLLinksMouseClicked
+		});
+	}
+
+	/**
+	 * segue il link cliccato sul text panel
+	 * @param e
+	 */
+	protected void followLink(HyperlinkEvent event) {
+		if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+			if (Desktop.isDesktopSupported()) {
+				// apre il browser
+				try {
+					Desktop.getDesktop().browse(event.getURL().toURI());
+				} catch (IOException e) {
+					GestLog.Error(this.getClass(), e);
+				} catch (URISyntaxException e) {
+					GestLog.Error(this.getClass(), e);
+				}
+			}
+		}		
+	}
+
+	protected void getSelectedNode(TreeSelectionEvent e) {
+		//Returns the last path element of the selection.
+		//This method is useful only when the selection model allows a single selection.
+		DefaultMutableTreeNode node = (DefaultMutableTreeNode)
+				tree.getLastSelectedPathComponent();
+
+		if (node == null)
+			//Nothing is selected.	
+			return;
+
+		Object nodeInfo = node.getUserObject();
+		if (node.isLeaf()) {
+			Link currLink = (Link)nodeInfo;
+			this.textPane.setText(currLink.toHtml());
+		} else {
+			this.textPane.setText(""); 
+		}	
+	}
 
 	private void jBAggiungiMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBAggiungiMouseClicked
 		// TODO aggiungere gestione aggiungi Link
 	}// GEN-LAST:event_jBAggiungiMouseClicked
 
-	private void jBCercaMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBCercaMouseClicked
-		@SuppressWarnings("unchecked")
-		GenericListModel<Link> lm = (GenericListModel<Link>) (this.jLLinks
-				.getModel());
-		String testoDaCercare = this.jTextField1.getText();
-
-		/* cerca dall'inizio in caso di una nuova ricerca */
-		if (!testoDaCercare.equals(this.lastSearchedText)) {
-			this.lastSearchedIndex = 0;
-			this.lastSearchedText = testoDaCercare;
-		}
-		int risultato = lm.search(testoDaCercare, this.lastSearchedIndex);
-		// continua a cercare dall'indice trovato
-		this.lastSearchedIndex = risultato + 1;
-
-		if (risultato != -1) {
-			this.jLLinks.setSelectedIndex(risultato);
-			this.jLLinks.ensureIndexIsVisible(risultato);
-		}
-	}// GEN-LAST:event_jBCercaMouseClicked
-		// Variables declaration - do not modify//GEN-BEGIN:variables
 
 	private javax.swing.JButton jBAggiungi;
-	private javax.swing.JButton jBCerca;
-	private javax.swing.JList jLLinks;
 	private javax.swing.JPanel jPanel1;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTextField jTextField1;
 	private javax.swing.JToolBar jToolBar1;
+	private JTree tree;
+	private JScrollPane scrollPane;
+	private JTextPane textPane;
 
 	// End of variables declaration//GEN-END:variables
 
 	/**
-     * 
+     * carica i dati nella vista
      */
 	public void loadData() {
+		//legge l'xml
 		LinksXml links = new LinksXml();
-		this.jLLinks.setModel(new GenericListModel<Link>(links.getLinks()));
+		//mappa per ottenere i nodi
+		Map<String, DefaultMutableTreeNode> nodiCategorie = new HashMap<String, DefaultMutableTreeNode>();
+		
+		
+		rootNode = new DefaultMutableTreeNode("Links");
+		treeModel = new DefaultTreeModel(rootNode);
+		 
+		/* cicla su tutti i link */
+		List<Link> lista = links.getLinks();
+		for (Link l : lista)
+		{
+			/* gestisce le categorie */
+			DefaultMutableTreeNode target;
+			if (!nodiCategorie.containsKey(l.categoria))
+			{
+				DefaultMutableTreeNode c = new DefaultMutableTreeNode(l.categoria);
+				rootNode.add(c);
+				nodiCategorie.put(l.categoria, c);
+				target = c;
+			} else {
+				target = nodiCategorie.get(l.categoria);
+			}
+			//aggiunge il link all'albero
+			DefaultMutableTreeNode currItem = new DefaultMutableTreeNode(l);
+			target.add(currItem);
+		}
+		this.tree.setModel(treeModel);
 	}
 }

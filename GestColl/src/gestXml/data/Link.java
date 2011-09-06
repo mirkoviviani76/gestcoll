@@ -48,7 +48,7 @@ public class Link implements Comparable<Link> {
 
 	@Override
 	public String toString() {
-		return categoria + "." + nome + " -> " + "<a href=\""+url.toString()+"\">" + url.toString() + "</a>"+ " (" + note + ")";
+		return nome;
 	}
 
 	@Override
@@ -57,5 +57,11 @@ public class Link implements Comparable<Link> {
 		String n2 = o.categoria + o.nome;
 		return (n1.compareTo(n2));
 	}
+
+	public String toHtml() {
+		String ret;
+		ret = "<html><a href=\""+this.url+"\">"+this.nome+"</a> <br>"+this.note+"</html>";
+		return ret;
+		}
 
 }

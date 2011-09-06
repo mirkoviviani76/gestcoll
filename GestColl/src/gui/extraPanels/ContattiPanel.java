@@ -10,6 +10,7 @@ import gestXml.data.Contatto;
 import gui.datamodels.GenericListModel;
 
 import java.awt.Desktop;
+import java.awt.Font;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -50,20 +51,7 @@ public class ContattiPanel extends javax.swing.JPanel {
 
 		jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1,
 				javax.swing.BoxLayout.LINE_AXIS));
-
-		jLContatti.setModel(new javax.swing.AbstractListModel() {
-			String[] strings = { "a" };
-
-			@Override
-			public int getSize() {
-				return strings.length;
-			}
-
-			@Override
-			public Object getElementAt(int i) {
-				return strings[i];
-			}
-		});
+		jLContatti.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		jLContatti
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jLContatti
