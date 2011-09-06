@@ -15,7 +15,7 @@ public class Catalogo extends Pubblicazione {
     private String numero;
 
     /**
-     *
+     * costruttore
      */
     public Catalogo() {
         numero = "";
@@ -23,8 +23,8 @@ public class Catalogo extends Pubblicazione {
     }
 
     /**
-     *
-     * @return
+     * controlla la validita'
+     * @return l'esito del controllo
      */
     @Override
     public boolean isValid()
@@ -37,7 +37,7 @@ public class Catalogo extends Pubblicazione {
 
 
     /**
-     *
+     * setta il numero
      * @param numero
      */
     public void setNumero(String numero) {
@@ -47,16 +47,12 @@ public class Catalogo extends Pubblicazione {
 
     /**
      *
-     * @return
+     * @return il numero
      */
     public String getNumero() {
         return numero;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toHtmlString() {
         return "<h1>CATALOGO</h1>"

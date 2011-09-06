@@ -14,7 +14,7 @@ public class Articolo extends Pubblicazione {
     private String provenienza;
 
     /**
-     * 
+     * costruttore 
      */
     public Articolo() {
         super();
@@ -23,14 +23,14 @@ public class Articolo extends Pubblicazione {
 
     /**
      *
-     * @return
+     * @return la provenienza
      */
     public String getProvenienza() {
         return provenienza;
     }
 
     /**
-     *
+     * setta la provenienza
      * @param provenienza
      */
     public void setProvenienza(String provenienza) {
@@ -46,10 +46,6 @@ public class Articolo extends Pubblicazione {
         return ret;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toHtmlString() {
         return "<h1>ARTICOLO</h1>"

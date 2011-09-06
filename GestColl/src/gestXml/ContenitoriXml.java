@@ -30,7 +30,7 @@ import org.xml.sax.SAXException;
 import works.CollectionWorker;
 
 /**
- *
+ * Gestisce i contenitori, utilzzando i dati di un xml
  * 
  */
 public class ContenitoriXml extends GestXml {
@@ -51,6 +51,14 @@ public class ContenitoriXml extends GestXml {
 		}
 	}
 
+	/**
+	 * aggiunge un vassoio ad un contenitore
+	 * @param contenitore il contenitore
+	 * @param curVass il vassoio
+	 * @param r numero righe
+	 * @param c numero colonne
+	 * @param dim dimensione
+	 */
 	private void addVass(Contenitore contenitore, String curVass, String r,
 			String c, String dim) {
 		int vass = Integer.parseInt(curVass);
@@ -77,7 +85,7 @@ public class ContenitoriXml extends GestXml {
 	}
 
 	/**
-	 * 
+	 * legge il file xml
 	 * @throws JAXBException
 	 */
 	private void readXml() throws JAXBException {
@@ -128,17 +136,17 @@ public class ContenitoriXml extends GestXml {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 * @return
+	 * ottiene l'armadio
+	 * @param id l'id
+	 * @return l'armadio
 	 */
 	public Armadio getArmadio(String id) {
 		return armadi.get(id);
 	}
 
 	/**
-	 * 
-	 * @return
+	 * ottiene l'armadio di default (SRI)
+	 * @return l'armadio
 	 */
 	public Armadio getArmadio() {
 		return armadi.get("SRI");
@@ -184,12 +192,10 @@ public class ContenitoriXml extends GestXml {
 	 * posizione nel formato armadio-contenitore-vassoio-riga-colonna
 	 * 
 	 * @return la mappa costruita come sopra
-	 * @throws SAXException
-	 * @throws IOException
-	 * @throws TransformerException
+	 * @throws FileNotFoundException
+	 * @throws TransformerException 
 	 */
-	public HashMap<String, String> getMapIdPosizioni() throws SAXException,
-			IOException, TransformerException {
+	public HashMap<String, String> getMapIdPosizioni() throws FileNotFoundException, TransformerException {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = CollectionWorker.getFileListing(new File(
 				Common.getCommon().getMoneteDir()), Common.COIN_END);
@@ -212,12 +218,11 @@ public class ContenitoriXml extends GestXml {
 	}
 
 	/**
-	 * 
-	 * @param mng
-	 * @return
-	 * @throws TransformerException
+	 * ottiene la posizione come stringa
+	 * @param mng l'oggetto moneta
+	 * @return la posizione
 	 */
-	public String getPosAsString(MonetaXml mng) throws TransformerException {
+	public String getPosAsString(MonetaXml mng) {
 		String cont = mng.getPosizione().getContenitore().toString();
 		String vass = mng.getPosizione().getVassoio().toString();
 		String riga = mng.getPosizione().getRiga().toString();
