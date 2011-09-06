@@ -19,10 +19,12 @@ import javax.xml.bind.JAXBException;
 
 import main.GestLog;
 import main.Progress;
+import java.awt.Font;
 
 /**
+ * Gestione pannello biblioteca
+ * @author intecs
  *
- * TODO da migliorare
  */
 public class BibliotecaPanel extends javax.swing.JPanel implements Observer, ClipboardOwner {
 
@@ -68,6 +70,7 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer, Cli
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jLBiblioteca = new javax.swing.JList();
+        jLBiblioteca.setFont(new Font("Tahoma", Font.PLAIN, 11));
         bibliotecaViewer1 = new gui.extraPanels.BibliotecaViewer();
 
         jToolBar1.setFloatable(false);
@@ -99,6 +102,7 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer, Cli
         jSplitPane1.setRightComponent(bibliotecaViewer1);
 
         jPanel1.add(jSplitPane1);
+        jSplitPane1.setDividerLocation(250);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

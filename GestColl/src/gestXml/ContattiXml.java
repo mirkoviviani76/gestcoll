@@ -5,16 +5,17 @@
 
 package gestXml;
 
-import gestXml.data.Contatto;
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
-import javax.xml.transform.TransformerException;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import main.Common;
 import main.GestLog;
+import XmlData.Contatti.Contatti;
 
 /**
  *
@@ -22,57 +23,40 @@ import main.GestLog;
  */
 public class ContattiXml extends GestXml {
 
-	private ArrayList<Contatto> contatti;
+	private Contatti contatti;
 
 	/**
-	 * Costruttore
+	 * Costruttore.
 	 */
 	public ContattiXml() {
 		super(new File(Common.getCommon().getContattiXml()));
 		try {
-			contatti = new ArrayList<Contatto>();
-			// legge i dati dall'xml
-			readXml();
-			// ordina i dati
-			Collections.sort(contatti);
-		} catch (TransformerException ex) {
-			GestLog.Error(ContattiXml.class, ex);
+			JAXBContext jc = JAXBContext.newInstance("XmlData.Contatti");
+		Unmarshaller unmarshaller = jc.createUnmarshaller();
+		contatti = (Contatti) unmarshaller.unmarshal(new File(Common.getCommon().getContattiXml()));
+		} catch (JAXBException e) {
+			GestLog.Error(this.getClass(), e);
 		}
 	}
 
+	/**
+	 * costruisce l'elenco dei contatti
+	 * @return l'elenco
+	 */
+	public List<gestXml.data.Contatto> getContatti()
+	{
+		List<gestXml.data.Contatto> ret = new ArrayList<gestXml.data.Contatto>();
+		List<XmlData.Contatti.Contatto> lista = contatti.getContatto();
+		for (XmlData.Contatti.Contatto c : lista)
+		{
+			String nome = c.getNome();
+			String email = c.getEmail();
+			String note = c.getNote();
+			gestXml.data.Contatto curr = new gestXml.data.Contatto(nome, email, note);
+			ret.add(curr);
+		}
+		return ret;
+	}
 	
-	/**
-	 * @return
-	 */
-	public ArrayList<Contatto> getContatti() {
-		return contatti;
-	}
-
-	/**
-	 * @throws TransformerException
-	 *             FIXME
-	 */
-	private void readXml() throws TransformerException {
-		// int contaContatti = 1;
-		// String nome = "A";
-		// //cicla su tutti gli armadi
-		// while (!nome.equals("")) {
-		// //ottiene l'id dell'armadio corrente
-		// String xpath = "/contatti/contatto[" + contaContatti + "]";
-		// String xpathNome = xpath + "/nome";
-		// String xpathEmail = xpath + "/email";
-		// String xpathNote = xpath + "/note";
-		// nome = this.getNodesAsString(xpathNome);
-		// if (!nome.equals(""))
-		// {
-		// String email = this.getNodesAsString(xpathEmail);
-		// String note = this.getNodesAsString(xpathNote);
-		// Contatto c = new Contatto(nome, email, note);
-		// contaContatti = contaContatti + 1;
-		// //aggiunge il contenitore
-		// this.contatti.add(c);
-		// }
-		// }
-	}
 
 }

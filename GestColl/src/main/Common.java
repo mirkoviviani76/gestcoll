@@ -31,7 +31,7 @@ public final class Common {
 	/** Nome dell'applicazione */
 	public static final String APPNAME = "GestColl";
 	/** versione del progetto */
-	public static final String VERSION = "31.3alfa";
+	public static final String VERSION = "31.4";
 	
 	// Read properties file.
 	private Properties properties;
@@ -181,6 +181,15 @@ public final class Common {
 	public String getBibliotecaDir() {
 		return this.properties.getProperty("BIBLIOTECA_DIR");	
 		}
+	
+	/**
+	 * ottiene la dir dei dati
+	 * @return la dir
+	 */
+	public String getDataDir() {
+		return this.properties.getProperty("DATA_DIR");
+	}
+	
 	
 	/**
 	 * Ottiene la dir di backup

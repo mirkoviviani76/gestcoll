@@ -74,6 +74,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		JOptionPane.showMessageDialog(this, String.format("%s\nVersione: %s",
 				Common.APPNAME, Common.VERSION), Common.APPNAME,
 				JOptionPane.INFORMATION_MESSAGE);
+		GestLog.Error(this.getClass(), "test", "TEST");
 	}
 
 	private void gestExit() {
@@ -111,7 +112,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	private void gestSelectLibri() {
 		this.libriPanel1.setVisible(true);
 		this.monetePanel1.setVisible(false);
-		// this.contattiPanel1.setVisible(false);
+		this.contattiPanel1.setVisible(false);
 		this.linksPanel1.setVisible(false);
 		this.statistichePanel1.setVisible(false);
 	}
@@ -119,7 +120,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	private void gestSelectMonete() {
 		this.libriPanel1.setVisible(false);
 		this.monetePanel1.setVisible(true);
-		// this.contattiPanel1.setVisible(false);
+		this.contattiPanel1.setVisible(false);
 		this.linksPanel1.setVisible(false);
 		this.statistichePanel1.setVisible(false);
 	}
@@ -127,7 +128,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	private void gestContatti() {
 		this.libriPanel1.setVisible(false);
 		this.monetePanel1.setVisible(false);
-		// this.contattiPanel1.setVisible(true);
+		this.contattiPanel1.setVisible(true);
 		this.linksPanel1.setVisible(false);
 		this.statistichePanel1.setVisible(false);
 	}
@@ -135,7 +136,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	private void gestLinks() {
 		this.libriPanel1.setVisible(false);
 		this.monetePanel1.setVisible(false);
-		// this.contattiPanel1.setVisible(false);
+		this.contattiPanel1.setVisible(false);
 		this.linksPanel1.setVisible(true);
 		this.statistichePanel1.setVisible(false);
 	}
@@ -143,7 +144,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	private void gestSelectStatistiche() {
 		this.libriPanel1.setVisible(false);
 		this.monetePanel1.setVisible(false);
-		// this.contattiPanel1.setVisible(false);
+		this.contattiPanel1.setVisible(false);
 		this.linksPanel1.setVisible(false);
 		this.statistichePanel1.setVisible(true);
 	}
@@ -422,7 +423,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		Splash.getInstance().splashProgress("Load links eseguito");
 
 		Splash.getInstance().splashProgress("Load contatti...");
-		// this.contattiPanel1.loadData();
+		this.contattiPanel1.loadData();
 		Splash.getInstance().splashProgress("Load contatti eseguito.");
 	}
 
