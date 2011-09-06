@@ -16,7 +16,6 @@ import gui.moneta.forms.LetteraturaForm;
 import gui.moneta.forms.NotaForm;
 import gui.moneta.forms.ZecchiereForm;
 
-import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

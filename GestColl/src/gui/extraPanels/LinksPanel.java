@@ -9,7 +9,6 @@ import gestXml.LinksXml;
 import gestXml.data.Link;
 
 import java.awt.Cursor;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.IOException;
@@ -122,7 +121,7 @@ public class LinksPanel extends javax.swing.JPanel {
 			
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
-				getSelectedNode(e);
+				gestSelectedNode(e);
 			}
 		});
 	}
@@ -143,9 +142,11 @@ public class LinksPanel extends javax.swing.JPanel {
 		}		
 	}
 
-	protected void getSelectedNode(TreeSelectionEvent e) {
-		//Returns the last path element of the selection.
-		//This method is useful only when the selection model allows a single selection.
+	/**
+	 * gestisce la selezione di un nodo link
+	 * @param e l'evento
+	 */
+	protected void gestSelectedNode(TreeSelectionEvent e) {
 		DefaultMutableTreeNode node = (DefaultMutableTreeNode)
 				tree.getLastSelectedPathComponent();
 
