@@ -26,16 +26,16 @@ import org.jfree.data.general.PieDataset;
 import works.Statistiche;
 
 /**
- * 
+ * Gestisce la visualizzazione delle statistiche e dei grafici
  * @author intecs
  */
 public final class StatistichePanel extends javax.swing.JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
+	private javax.swing.JTabbedPane jTabbedPane1;
+	private javax.swing.JToolBar jToolBar1;
+	
 	/** Creates new form StatistichePanel */
 	public StatistichePanel() {
 		initComponents();
@@ -58,9 +58,12 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	}
 
 	/**
-	 * Creates a panel for the demo (used by SuperDemo.java).
-	 * 
-	 * @return A panel.
+	 * Ottiene un pannello con un barchart
+	 * @param title titolo
+	 * @param xlabel titolo asse x
+	 * @param ylabel titolo asse y
+	 * @param dataset dati
+	 * @return il pannello
 	 */
 	public JPanel createMyBarChart(String title, String xlabel, String ylabel,
 			CategoryDataset dataset) {
@@ -80,9 +83,10 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	}
 
 	/**
-	 * Creates a panel for the demo (used by SuperDemo.java).
-	 * 
-	 * @return A panel.
+	 * Ottiene un pannello con un 3D piechart
+	 * @param title titolo
+	 * @param dataset dati
+	 * @return il pannello
 	 */
 	public JPanel createMy3DPieChart(String title, PieDataset dataset) {
 		JFreeChart chart = ChartFactory.createPieChart3D(title, // title
@@ -97,6 +101,10 @@ public final class StatistichePanel extends javax.swing.JPanel {
 		return panel;
 	}
 
+	/**
+	 * Ottiene i dati relativi alle monete per dimensione
+	 * @return i dati
+	 */
 	private CategoryDataset GetDatasetCoinBySize() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		TreeMap<Double, Integer> valori = Statistiche.coinBySize();
@@ -106,6 +114,10 @@ public final class StatistichePanel extends javax.swing.JPanel {
 		return dataset;
 	}
 
+	/**
+	 * Ottiene i dati relativi alle monete per anno
+	 * @return i dati
+	 */
 	private CategoryDataset GetDatasetCoinByYear() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		TreeMap<String, Integer> valori = Statistiche.coinByYear();
@@ -115,6 +127,10 @@ public final class StatistichePanel extends javax.swing.JPanel {
 		return dataset;
 	}
 
+	/**
+	 * Ottiene i dati relativi alle monete per metallo
+	 * @return i dati
+	 */
 	private CategoryDataset GetDatasetCoinByMetal() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		TreeMap<String, Integer> valori = Statistiche.coinByMetal();
@@ -124,6 +140,10 @@ public final class StatistichePanel extends javax.swing.JPanel {
 		return dataset;
 	}
 
+	/**
+	 * Ottiene i dati relativi alle monete per metallo
+	 * @return i dati
+	 */
 	private PieDataset GetPieDatasetCoinByMetal() {
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		TreeMap<String, Integer> valori = Statistiche.coinByMetal();
@@ -134,11 +154,8 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	}
 
 	/**
-	 * This method is called from within the constructor to initialize the form.
+	 * inizializza i componenti grafici
 	 */
-
-	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
 		jToolBar1 = new javax.swing.JToolBar();
@@ -168,10 +185,6 @@ public final class StatistichePanel extends javax.swing.JPanel {
 								.addComponent(jTabbedPane1,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										269, Short.MAX_VALUE)));
-	}// </editor-fold>//GEN-END:initComponents
+	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JTabbedPane jTabbedPane1;
-	private javax.swing.JToolBar jToolBar1;
-	// End of variables declaration//GEN-END:variables
 }
