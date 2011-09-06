@@ -35,6 +35,7 @@ import javax.xml.transform.TransformerException;
 
 import main.Common;
 import main.Common.Lato;
+import main.GenericUtil;
 import main.GestLog;
 import main.History;
 import main.Message;
@@ -1245,14 +1246,11 @@ public class MonetaViewer extends javax.swing.JPanel {
 		String uri = String.format(
 				"http://www.google.it/#sclient=psy&&q=%s&fp=1", search);
 		try {
-			if (Desktop.isDesktopSupported()) {
-				// apre il browser
-				Desktop.getDesktop().browse(new URI(uri));
-			}
-		} catch (IOException ex) {
-			GestLog.Error(this.getClass(), ex);
-		} catch (URISyntaxException ex) {
-			GestLog.Error(this.getClass(), ex);
+			GenericUtil.openBrowser(new URI(uri));
+		} catch (URISyntaxException e) {
+			GestLog.Error(this.getClass(), e);
+		} catch (IOException e) {
+			GestLog.Error(this.getClass(), e);
 		}
 	}
 

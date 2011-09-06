@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * 
+ * Gestisce la history, memorizzando su file gli eventi.
  * @author intecs
  */
 public class History {
@@ -19,6 +19,11 @@ public class History {
 	public static final String MODIFY = "MODIFY";
 	public static final String DELETE = "DELETE";
 
+	/**
+	 * aggiunge un evento alla history
+	 * @param e
+	 * @param id
+	 */
 	public static void addEvent(String e, String id) {
 		FileWriter fw = null;
 		try {

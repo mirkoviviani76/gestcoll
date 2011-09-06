@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -12,7 +13,6 @@ import javax.swing.SwingConstants;
 /**
  * Splash screen con una progress bar con stringhe
  * 
- * @author furetto76
  */
 public class Splash {
 
@@ -81,7 +81,7 @@ public class Splash {
 	/**
 	 * Ottiene l'istanza di Splash
 	 * 
-	 * @return
+	 * @return l'istanza Splash
 	 */
 	public static synchronized Splash getInstance() {
 		if (istanza == null) {
@@ -93,8 +93,7 @@ public class Splash {
 	/**
 	 * Incrementa la barra di progresso e visualizza un messaggio
 	 * 
-	 * @param str
-	 *            il messaggio
+	 * @param str il messaggio
 	 */
 	public void splashProgress(String str) {
 		if (splash != null && splash.isVisible()) {
