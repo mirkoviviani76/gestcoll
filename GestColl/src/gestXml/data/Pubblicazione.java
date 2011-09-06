@@ -67,25 +67,25 @@ public class Pubblicazione {
         id = "";
     }
 
-    /**
-     *
-     * @return
-     */
+	/**
+	 * 
+	 * @return i supporti
+	 */
     public List<String> getSupporti() {
         return supporti;
     }
 
     /**
      *
-     * @return
+     * @return gli argomenti
      */
     public List<String> getArgomenti() {
         return argomenti;
     }
 
     /**
-     *
-     * @param list
+     * cambia gli argomenti
+     * @param list lista degli argomenti
      */
     public void setArgomenti(List<String> list) {
         this.argomenti = list;
@@ -93,15 +93,15 @@ public class Pubblicazione {
 
     /**
      *
-     * @return
+     * @return la data
      */
     public String getData() {
         return data;
     }
 
     /**
-     *
-     * @param data
+     * setta la data
+     * @param data la data
      */
     public void setData(String data) {
         this.data = data;
@@ -109,15 +109,15 @@ public class Pubblicazione {
 
     /**
      *
-     * @return
+     * @return il filename
      */
     public String getFilename() {
         return filename;
     }
 
     /**
-     *
-     * @param filename
+     * setta il filename
+     * @param filename il filename
      */
     public void setFilename(String filename) {
         this.filename = filename;
@@ -125,15 +125,15 @@ public class Pubblicazione {
 
     /**
      *
-     * @return
+     * @return la lista degli autori
      */
     public List<String> getAutori() {
         return autori;
     }
 
     /**
-     *
-     * @param autori
+     * setta gli autori
+     * @param autori lista degli autori
      */
     public void setAutori(List<String> autori) {
         this.autori = autori;
@@ -141,59 +141,63 @@ public class Pubblicazione {
 
     /**
      *
-     * @return
+     * @return l'id
      */
     public String getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
+     * setta l'id
+     * @param id l'id
      */
     public void setId(String id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
+     * 
+     * @return il titolo
      */
     public String getTitolo() {
         return titolo;
     }
 
     /**
-     *
-     * @param titolo
+     * setta il titolo
+     * @param titolo 
      */
     public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
 
     /**
-     *
-     * @param list
+     * setta i supporti
+     * @param list la lista
      */
     public void setSupporti(List<String> list) {
         this.supporti = list;
     }
 
     /**
-     *
-     * @return
+     * controlla se ha un url
+     * @return l'esito del controllo
      */
     public boolean hasElectronicForm() {
         return this.getSupporti().contains(Pubblicazione.SUPPORTO_ELETTRONICO);
     }
 
+    /**
+     * controlla se e' posseduto
+     * @return l'esito del controllo
+     */
     public boolean posseduto() {
         return !this.getSupporti().contains(Pubblicazione.SUPPORTO_MANCANTE);
     }
 
     /**
-     *
-     * @return
+     * converte in xml
+     * @return la stringa
      */
     public String toXmlString() {
         String _autori = "";
@@ -232,8 +236,8 @@ public class Pubblicazione {
     }
 
     /**
-     *
-     * @return
+     * converte in html
+     * @return la stringa
      */
     public String toHtmlString() {
 
@@ -274,7 +278,7 @@ public class Pubblicazione {
 
     /**
      * una pubblicazione non ha nessun campo obbligatorio, quindi e' sempre valida
-     * @return
+     * @return l'esito del controllo
      */
     public boolean isValid() {
         return true;

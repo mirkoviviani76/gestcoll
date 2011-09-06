@@ -12,7 +12,7 @@ public class Documento extends Pubblicazione {
     private String descrizione;
 
     /**
-     *
+     * costruttore
      */
     public Documento() {
         super();
@@ -20,15 +20,15 @@ public class Documento extends Pubblicazione {
     }
 
     /**
-     *
-     * @return
+     * 
+     * @return la descrizione
      */
     public String getDescrizione() {
         return descrizione;
     }
 
     /**
-     *
+     * setta la descrizione
      * @param descrizione
      */
     public void setDescrizione(String descrizione) {
@@ -44,10 +44,6 @@ public class Documento extends Pubblicazione {
         return ret;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toHtmlString() {
         return "<h1>DOCUMENTO</h1>"

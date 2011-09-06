@@ -117,10 +117,6 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 
 
 
-	/**
-	 * 
-	 * @return
-	 */
 	@Override
 	public String toString() {
 		String s = "";
@@ -132,7 +128,7 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	/**
 	 * Ottiene una stringa di dati completi.
 	 * 
-	 * @return
+	 * @return la stringa
 	 */
 	public String toFullText() {
 		String s = "";
@@ -151,10 +147,11 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	/**
 	 * fornisce una relazione d'ordine. Gli id contenenti X vanno prima
 	 * nell'ambito del loro secolo. Ordina prima in base all'anno, e poi in base
-	 * al progressivo
+	 * al progressivo.
+	 * Fornisce anche un'ordinamento per paese.
 	 * 
-	 * @param t
-	 * @return
+	 * @param t l'oggetto moneta
+	 * @return l'ordinamento
 	 */
 	@Override
 	public int compareTo(MonetaXml t) {
@@ -214,34 +211,66 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 		this.path = path;
 	}
 
+	/**
+	 * ottiene l'id
+	 * @return l'id
+	 */
 	public String getId() {
 		return this.moneta.getId();
 	}
 
+	/**
+	 * ottiene il nominale
+	 * @return il nominale
+	 */
 	public Nominale getNominale() {
 		return this.moneta.getNominale();
 	}
 
+	/**
+	 * 
+	 * @return il paese
+	 */
 	public String getPaese() {
 		return this.moneta.getPaese();
 	}
 
+	/**
+	 * 
+	 * @return l'anno
+	 */
 	public String getAnno() {
 		return this.moneta.getAnno();
 	}
 
+	/**
+	 * 
+	 * @return le autorita
+	 */
 	public Autorita getAutorita() {
 		return this.moneta.getAutorita();
 	}
 
+	/**
+	 * 
+	 * @return la zecca
+	 */
 	public Zecca getZecca() {
 		return this.moneta.getZecca();
 	}
 
+	/**
+	 * 
+	 * @return la posizione
+	 */
 	public Posizione getPosizione() {
 		return this.moneta.getPosizione();
 	}
 
+	/**
+	 * 
+	 * @return le note
+	 */
 	public List<String> getNote() {
 		List<String> ret = null;
 		if (this.moneta.getNote() != null)
@@ -249,10 +278,18 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @return i documenti
+	 */
 	public List<DocumentoAddizionale> getItemAddizionali() {
 		return this.moneta.getItemAddizionali().getDocumento();
 	}
 
+	/**
+	 * 
+	 * @return la letteratura
+	 */
 	public List<Libro> getLetteratura() {
 		List<Libro> ret = null;
 		if (this.moneta.getLetteratura() != null)
@@ -260,6 +297,10 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @return gli zecchieri
+	 */
 	public List<Zecchiere> getZecchieri() {
 		List<Zecchiere> ret = null;
 		if (this.moneta.getZecchieri() != null)
@@ -267,27 +308,51 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @return il diametro
+	 */
 	public Misura getDiametro() {
 		return this.moneta.getDatiFisici().getDiametro();
 	}
 
+	/**
+	 * 
+	 * @return il peso
+	 */
 	public Misura getPeso() {
 		return this.moneta.getDatiFisici().getPeso();
 	}
 
+	/**
+	 * 
+	 * @return il metallo
+	 */
 	public String getMetallo() {
 		return this.moneta.getDatiFisici().getMetallo();
 	}
 
+	/**
+	 * 
+	 * @return la forma
+	 */
 	public String getForma() {
 		return this.moneta.getDatiFisici().getForma();
 	}
 
+	/**
+	 * 
+	 * @return il luogo
+	 */
 	public String getLuogo() {
 
 		return this.moneta.getDatiAcquisto().getLuogo();
 	}
 
+	/**
+	 * 
+	 * @return la data
+	 */
 	public String getData() {
 		String ret = "";
 		if (this.moneta.getDatiAcquisto() != null
@@ -296,6 +361,10 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @return il prezzo
+	 */
 	public Misura getPrezzo() {
 		Misura ret = new Misura();
 		if (this.moneta.getDatiAcquisto() != null)
@@ -303,6 +372,11 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 		return ret;
 	}
 
+	/**
+	 * 
+	 * @param lato il lato
+	 * @return la descrizione del lato
+	 */
 	public String getDescrizione(Lato lato) {
 		String s = "";
 		if (lato == Common.Lato.DRITTO
@@ -321,6 +395,11 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 
 	}
 
+	/**
+	 * 
+	 * @param lato il lato
+	 * @return le legende del lato
+	 */
 	public List<Legenda> getLegende(Lato lato) {
 		List<Legenda> s = null;
 		if (lato == Common.Lato.DRITTO
@@ -339,6 +418,11 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 
 	}
 
+	/**
+	 * 
+	 * @param lato  il lato
+	 * @return il file immagine del lato
+	 */
 	public String getFileImmagine(Lato lato) {
 		String s = "";
 		if (lato == Common.Lato.DRITTO
@@ -359,7 +443,7 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	
 	/**
 	 * Ottiene la data dell'ultima revisione come stringa
-	 * @return
+	 * @return la data
 	 */
 	public String getRevisione()
 	{
@@ -370,7 +454,7 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	}
 
 	/**
-	 * @return the moneta
+	 * @return l'oggetto moneta
 	 */
 	public XmlData.Moneta.Moneta getJaxbObject() {
 		return moneta;

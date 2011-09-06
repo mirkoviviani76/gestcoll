@@ -14,7 +14,7 @@ public class Libro extends Pubblicazione {
     private String volume;
 
     /**
-     *
+     * costruttore
      */
     public Libro() {
         super();
@@ -24,14 +24,14 @@ public class Libro extends Pubblicazione {
 
     /**
      *
-     * @return
+     * @return l'isbn
      */
     public String getIsbn() {
         return isbn;
     }
 
     /**
-     *
+     * setta l'isbn
      * @param isbn
      */
     public void setIsbn(String isbn) {
@@ -40,14 +40,14 @@ public class Libro extends Pubblicazione {
 
     /**
      *
-     * @return
+     * @return il volume
      */
     public String getVolume() {
         return volume;
     }
 
     /**
-     *
+     * setta il volume
      * @param volume
      */
     public void setVolume(String volume) {
@@ -55,10 +55,6 @@ public class Libro extends Pubblicazione {
     }
 
     
-    /**
-     *
-     * @return
-     */
     @Override
     public String toHtmlString() {
         return "<h1>LIBRO</h1>"

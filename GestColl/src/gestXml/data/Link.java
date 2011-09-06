@@ -20,20 +20,27 @@ public class Link implements Comparable<Link> {
 	
 	
 	/**
-     *
+     * il nome
      */
 	public String nome;
 	/**
-     *
+     * l'url
      */
 	public URL url;
 	/**
-     *
+     * le note
      */
 	public String note;
 
 	
 
+    /**
+     * costruttore
+     * @param categoria la categoria
+     * @param nome il nome
+     * @param url l'url
+     * @param note le note
+     */
 	public Link(String categoria, String nome, String url, String note) {
 		super();
 		this.categoria = categoria;

@@ -55,8 +55,8 @@ public class LinksXml extends GestXml {
 
 
 	/**
-	 * 
-	 * @return
+	 * ottiene l'array di links 
+	 * @return la lista
 	 */
 	public ArrayList<gestXml.data.Link> getLinks() {
 		return this.links;
