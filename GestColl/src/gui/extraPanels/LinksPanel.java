@@ -28,6 +28,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import main.GenericUtil;
 import main.GestLog;
 
 /**
@@ -132,15 +133,12 @@ public class LinksPanel extends javax.swing.JPanel {
 	 */
 	protected void followLink(HyperlinkEvent event) {
 		if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-			if (Desktop.isDesktopSupported()) {
-				// apre il browser
-				try {
-					Desktop.getDesktop().browse(event.getURL().toURI());
-				} catch (IOException e) {
-					GestLog.Error(this.getClass(), e);
-				} catch (URISyntaxException e) {
-					GestLog.Error(this.getClass(), e);
-				}
+			try {
+				GenericUtil.openBrowser(event.getURL().toURI());
+			} catch (URISyntaxException e) {
+				GestLog.Error(this.getClass(), e);
+			} catch (IOException e) {
+				GestLog.Error(this.getClass(), e);
 			}
 		}		
 	}

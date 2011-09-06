@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- * Classe per gestire gli errori nella gui
+ * Classe per gestire i messaggi di errore o di log
  * 
  */
 public class GestLog {
@@ -14,8 +14,8 @@ public class GestLog {
 	/**
 	 * gestisce un errore, mostrando un message box e effettuando il log
 	 * 
-	 * @param source
-	 * @param ex
+	 * @param source la classe dove si e' verificato l'errore
+	 * @param ex l'eccezione
 	 */
 	@SuppressWarnings("rawtypes")
 	public static void Error(Class source, Exception e) {
@@ -28,9 +28,9 @@ public class GestLog {
 	/**
 	 * gestisce un errore, mostrando un message box e effettuando il log
 	 * 
-	 * @param source
-	 * @param method
-	 * @param ex
+	 * @param source la classe dove si e' verificato l'errore
+	 * @param method il metodo dove si e' verificato l'errore
+	 * @param ex l'eccezione
 	 */
 	@SuppressWarnings("rawtypes")
 	public static void Error(Class source, String method, String ex) {
@@ -40,6 +40,13 @@ public class GestLog {
 				method, ex);
 	}
 
+	/**
+	 * gestisce un warning, mostrando un message box e effettuando il log
+	 * 
+	 * @param source la classe dove si e' verificato l'errore
+	 * @param method il metodo dove si e' verificato l'errore
+	 * @param ex l'eccezione
+	 */
 	@SuppressWarnings("rawtypes")
 	public static void Warning(Class source, String method, String ex) {
 		JOptionPane.showMessageDialog(null, ex, Common.APPNAME,
@@ -51,12 +58,9 @@ public class GestLog {
 	/**
 	 * Gestisce un messaggio di informazione
 	 * 
-	 * @param source
-	 *            la classe sorgente
-	 * @param message
-	 *            il messaggio
-	 * @param showMessageBox
-	 *            indica se visualizzare o meno un message box
+	 * @param source la classe sorgente
+	 * @param message il messaggio
+	 * @param showMessageBox indica se visualizzare o meno un message box
 	 */
 	@SuppressWarnings("rawtypes")
 	public static void Message(Class source, String message,

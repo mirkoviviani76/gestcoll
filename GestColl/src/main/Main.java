@@ -14,18 +14,16 @@ import java.util.logging.LogManager;
 
 /**
  *
- * 
+ * La classe Main, che contiene l'entry point di GestColl. 
  */
 public class Main {
 
 	/**
-	 * 
-	 * @param args
+	 * l'entry point di GestColl
+	 * @param args gli argomenti passati da riga di comando
 	 */
 	public static void main(String[] args) {
-		// create Options object
-
-		/* setta un log manager (non sarebbe necessario, ma cosi' legge da file */
+		/* setta il log manager (non sarebbe necessario, ma cosi' legge da file */
 		LogManager mn = LogManager.getLogManager();
 		try {
 			// le proprieta' specificate prevedono logging su video e su file
@@ -33,26 +31,23 @@ public class Main {
 					+ "myLoggingProperties.properties");
 			mn.readConfiguration(fis);
 		} catch (IOException ex) {
-			System.err.println("ERRORE:" + ex.getMessage());
+			//NB: non posso scrivere su log, perche' si e' verificato un errore durante il setup del log
+			System.err.println("ERRORE: " + ex.getMessage());
 		} catch (SecurityException ex) {
-			System.err.println("ERRORE:" + ex.getMessage());
+			//NB: non posso scrivere su log, perche' si e' verificato un errore durante il setup del log
+			System.err.println("ERRORE: " + ex.getMessage());
 		}
 
 		/* invoca la gui */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				try {
 					MainFrame mf = new MainFrame();
 					// massimizza
 					mf.setExtendedState(mf.getExtendedState()
 							| Frame.MAXIMIZED_BOTH);
+					//rende visibile
 					mf.setVisible(true);
-				} catch (NullPointerException ex) {
-					GestLog.Error(Main.class, ex);
-				} catch (IllegalStateException ex) {
-					GestLog.Error(Main.class, ex);
-				}
 			}
 		});
 	}

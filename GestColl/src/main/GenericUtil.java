@@ -5,6 +5,7 @@
 
 package main;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -113,14 +116,38 @@ public final class GenericUtil {
 		}
 	}
 
+	/**
+	 * ottiene la data e il tempo
+	 * @param format il formato
+	 * @return la data
+	 */
 	public static String getDateTime(String format) {
 		Calendar calendar = new GregorianCalendar();
 		SimpleDateFormat ff = new SimpleDateFormat(format);
 		return ff.format(calendar.getTime());
 	}
 
+	/**
+	 * ottiene la data e l'ora attuali
+	 * @return la data e l'ora
+	 */
 	public static String getDateTime() {
 		return getDateTime("dd-MM-yyyy HH:mm:ss");
 	}
+
+	/**
+	 * apre il browser esterno
+	 * @param uri la pagina da mostrare
+	 * @throws IOException 
+	 */
+	public static void openBrowser(URI uri) throws IOException
+	{
+		if (Desktop.isDesktopSupported()) {
+			// apre il browser
+				Desktop.getDesktop().browse(uri);
+		}
+	}
+
+	
 
 }
