@@ -68,14 +68,24 @@ public class GestXml {
 	 {
 		try {
 			JAXBContext jc = JAXBContext.newInstance(jaxbContext);
+		FileOutputStream fos = new FileOutputStream(out);
+
 		//Crea il marshaller
 		Marshaller m = jc.createMarshaller();
 		//richiede un output formattato
 		m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
+		m.setProperty( Marshaller.JAXB_ENCODING, "UTF-8");
+		
 		//Esegue il marshalling dell'oggetto nel file.
-		m.marshal(myJAXBObject, new File(out));
+		m.marshal(myJAXBObject, fos);
+		
+		fos.close();
 		} catch (JAXBException e) {
 			throw new XmlException("writeXml()", e);
+		} catch (FileNotFoundException e) {
+			throw new XmlException("writeXml() file not found", e);
+		} catch (IOException e) {
+			throw new XmlException("writeXml() error writing file ", e);		
 		}
 		
 	}
