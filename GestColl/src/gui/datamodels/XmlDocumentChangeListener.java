@@ -28,9 +28,9 @@ public class XmlDocumentChangeListener implements DocumentListener, PropertyChan
     private MonetaXml mng;
 
     /**
-     *
+     * 
      * @param _mng
-     * @param field
+     * @param _field
      */
     public XmlDocumentChangeListener(MonetaXml _mng, Fields _field) {
         this.field = _field;
@@ -39,8 +39,8 @@ public class XmlDocumentChangeListener implements DocumentListener, PropertyChan
 
 
     /**
-     * Gestisce la modifica, cambiando il documento DOM
-     * @param change
+     * Gestisce la modifica, cambiando il valore
+     * @param value
      */
     public void gestChange(String value) {
     	mng.setValue(this.field, value);

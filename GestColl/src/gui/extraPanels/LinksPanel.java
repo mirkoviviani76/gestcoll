@@ -5,6 +5,7 @@
 
 package gui.extraPanels;
 
+import exceptions.XmlException;
 import gestXml.LinksXml;
 import gestXml.data.Link;
 
@@ -178,37 +179,43 @@ public class LinksPanel extends javax.swing.JPanel {
 	// End of variables declaration//GEN-END:variables
 
 	/**
-     * carica i dati nella vista
-     */
+	 * carica i dati nella vista
+	 */
 	public void loadData() {
 		//legge l'xml
-		LinksXml links = new LinksXml();
-		//mappa per ottenere i nodi
-		Map<String, DefaultMutableTreeNode> nodiCategorie = new HashMap<String, DefaultMutableTreeNode>();
-		
-		
-		rootNode = new DefaultMutableTreeNode("Links");
-		treeModel = new DefaultTreeModel(rootNode);
-		 
-		/* cicla su tutti i link */
-		List<Link> lista = links.getLinks();
-		for (Link l : lista)
-		{
-			/* gestisce le categorie */
-			DefaultMutableTreeNode target;
-			if (!nodiCategorie.containsKey(l.categoria))
+		LinksXml links;
+		try {
+			links = new LinksXml();
+			//mappa per ottenere i nodi
+			Map<String, DefaultMutableTreeNode> nodiCategorie = new HashMap<String, DefaultMutableTreeNode>();
+
+
+			rootNode = new DefaultMutableTreeNode("Links");
+			treeModel = new DefaultTreeModel(rootNode);
+
+			/* cicla su tutti i link */
+			List<Link> lista = links.getLinks();
+			for (Link l : lista)
 			{
-				DefaultMutableTreeNode c = new DefaultMutableTreeNode(l.categoria);
-				rootNode.add(c);
-				nodiCategorie.put(l.categoria, c);
-				target = c;
-			} else {
-				target = nodiCategorie.get(l.categoria);
+				/* gestisce le categorie */
+				DefaultMutableTreeNode target;
+				if (!nodiCategorie.containsKey(l.categoria))
+				{
+					DefaultMutableTreeNode c = new DefaultMutableTreeNode(l.categoria);
+					rootNode.add(c);
+					nodiCategorie.put(l.categoria, c);
+					target = c;
+				} else {
+					target = nodiCategorie.get(l.categoria);
+				}
+				//aggiunge il link all'albero
+				DefaultMutableTreeNode currItem = new DefaultMutableTreeNode(l);
+				target.add(currItem);
 			}
-			//aggiunge il link all'albero
-			DefaultMutableTreeNode currItem = new DefaultMutableTreeNode(l);
-			target.add(currItem);
+			this.tree.setModel(treeModel);
+		} catch (XmlException e) {
+			GestLog.Error(this.getClass(), e);
 		}
-		this.tree.setModel(treeModel);
+
 	}
 }

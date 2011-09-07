@@ -5,7 +5,6 @@
 package gestXml;
 
 import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -20,9 +19,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import main.Common;
 import main.Common.Lato;
 import main.GestLog;
-
-import org.xml.sax.SAXException;
-
 import XmlData.Moneta.Autorita;
 import XmlData.Moneta.DatiAcquisto;
 import XmlData.Moneta.DatiArtistici;
@@ -36,6 +32,7 @@ import XmlData.Moneta.Nominale;
 import XmlData.Moneta.Posizione;
 import XmlData.Moneta.Zecca;
 import XmlData.Moneta.Zecchiere;
+import exceptions.XmlException;
 
 /**
  * Classe per gestire il file xml di una moneta.
@@ -80,21 +77,21 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	private String path;
 
 	/**
-	 * Costruttore
-	 * 
+	 * Il file della moneta
 	 * @param _xmlFile
-	 *            il file xml della moneta
-	 * @throws JAXBException
-	 * @throws SAXException
-	 * @throws IOException
+	 * @throws XmlException 
 	 */
-	public MonetaXml(File _xmlFile) throws JAXBException {
+	public MonetaXml(File _xmlFile) throws XmlException {
 		super(_xmlFile);
 		this.path = _xmlFile.getParent();
 		ordering = Ordering.BY_ID;
-		JAXBContext jc = JAXBContext.newInstance("XmlData.Moneta");
+		try {
+			JAXBContext jc = JAXBContext.newInstance("XmlData.Moneta");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		moneta = (XmlData.Moneta.Moneta) unmarshaller.unmarshal(_xmlFile);
+		} catch (JAXBException e) {
+			throw new XmlException("MonetaXml()", e);
+		}
 	}
 
 	
@@ -567,8 +564,8 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 			}
 			break;
 		default:
-					GestLog.Message(this.getClass(), "SetValue: Campo sconosciuto: "+field.toString(), true);
-					break;
+			GestLog.Message(this.getClass(), "SetValue: Campo sconosciuto: "+field.toString(), true);
+			break;
 		}
 		//modifica la data dell'ultima revisione
 		GregorianCalendar now = new GregorianCalendar();

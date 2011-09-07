@@ -5,6 +5,7 @@
 
 package works;
 
+import exceptions.XsltException;
 import gestXml.MonetaXml;
 
 import java.io.File;
@@ -46,14 +47,11 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	 * @param mng
 	 * @param outDir
 	 * @return
-	 * @throws TransformerException
-	 * @throws TransformerConfigurationException
-	 * @throws FileNotFoundException
+	 * @throws XsltException 
 	 */
 	@Override
-	public File convert(MonetaXml mng, File outDir)
-			throws TransformerException, TransformerConfigurationException,
-			FileNotFoundException {
+	public File convert(MonetaXml mng, File outDir) throws XsltException
+ {
 		/* prepara il file di output */
 		File ret = new File(outDir + "/" + mng.getId() + ".html");
 		mng.xsltConvert(new File(Common.getCommon().getXslHtml()), ret);

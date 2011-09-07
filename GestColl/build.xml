@@ -91,7 +91,9 @@
   </target>    
 
   <target name="documentation">
-	<javadoc sourcepath="${src.dir}" destdir="build/javadoc" />
+	<javadoc sourcepath="${src.dir}" destdir="build/javadoc">
+		<fileset dir="${externallib.dir}"></fileset>
+	</javadoc>
   </target>
   
 </project>

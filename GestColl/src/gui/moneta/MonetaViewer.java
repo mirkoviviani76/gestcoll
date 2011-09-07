@@ -5,6 +5,7 @@
 
 package gui.moneta;
 
+import exceptions.XmlException;
 import gestXml.MonetaXml;
 import gui.MainFrame;
 import gui.datamodels.GenericCellRenderer;
@@ -17,7 +18,6 @@ import gui.moneta.forms.NotaForm;
 import gui.moneta.forms.ZecchiereForm;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -28,8 +28,6 @@ import java.util.Calendar;
 import java.util.logging.Level;
 
 import javax.swing.JTextField;
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import main.Common;
@@ -98,8 +96,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		this.jTFId.setText(id);
 		this.jTFAnno.setText(mng.getAnno());
 		this.jTFPaese.setText(mng.getPaese());
-		this.jTFNominale.setMisura(mng.getNominale().getValore(), mng
-				.getNominale().getValuta());
+		this.jTFNominale.setMisura(mng.getNominale());
 		this.jLAutorita.removeAll();
 		this.jLAutorita.setListData(mng.getAutorita().getNome().toArray());
 		this.jTFZecca.setZecca(mng.getZecca());
@@ -179,16 +176,11 @@ public class MonetaViewer extends javax.swing.JPanel {
 		 this.monetaDescrizioneDritto.addDocumentListener(this.chDescrizione_d);
 		 this.monetaDescrizioneRovescio.addDocumentListener(this.chDescrizione_r);
 		 this.monetaDescrizioneTaglio.addDocumentListener(this.chDescrizione_t);
-		 this.jTFPeso.addDocumentListenerForValue(this.chPeso_v);
-		 this.jTFPeso.addDocumentListenerForUnit(this.chPeso_m);
-		 this.jTFDiametro.addDocumentListenerForValue(this.chDiametro_v);
-		 this.jTFDiametro.addDocumentListenerForUnit(this.chDiametro_m);
-		 this.jTFPrezzo.addDocumentListenerForValue(this.chPrezzo_v);
-		 this.jTFPrezzo.addDocumentListenerForUnit(this.chPrezzo_m);
-		 this.jTFNominale.addDocumentListenerForValue(this.chValore);
-		 this.jTFNominale.addDocumentListenerForUnit(this.chValuta);
-		 this.jTFZecca.addDocumentListenerForNome(this.chZecca_n);
-		 this.jTFZecca.addDocumentListenerForSegno(this.chZecca_s);
+		 this.jTFPeso.addDocumentListener(this.chPeso_v, this.chPeso_m);
+		 this.jTFDiametro.addDocumentListener(this.chDiametro_v, this.chDiametro_m);
+		 this.jTFPrezzo.addDocumentListener(this.chPrezzo_v, this.chPrezzo_m);
+		 this.jTFNominale.addDocumentListener(this.chValore, this.chValuta);
+		 this.jTFZecca.addDocumentListener(this.chZecca_n, this.chZecca_s);
 		 this.jDateChooser1.addPropertyChangeListener(this.chData);
 
 	}
@@ -205,16 +197,11 @@ public class MonetaViewer extends javax.swing.JPanel {
 		 this.monetaDescrizioneDritto.removeDocumentListener(this.chDescrizione_d);
 		 this.monetaDescrizioneRovescio.removeDocumentListener(this.chDescrizione_r);
 		 this.monetaDescrizioneTaglio.removeDocumentListener(this.chDescrizione_t);
-		 this.jTFPeso.removeDocumentListenerForValue(this.chPeso_v);
-		 this.jTFPeso.removeDocumentListenerForUnit(this.chPeso_m);
-		 this.jTFDiametro.removeDocumentListenerForValue(this.chDiametro_v);
-		 this.jTFDiametro.removeDocumentListenerForUnit(this.chDiametro_m);
-		 this.jTFPrezzo.removeDocumentListenerForValue(this.chPrezzo_v);
-		 this.jTFPrezzo.removeDocumentListenerForUnit(this.chPrezzo_m);
-		 this.jTFNominale.removeDocumentListenerForValue(this.chValore);
-		 this.jTFNominale.removeDocumentListenerForUnit(this.chValuta);
-		 this.jTFZecca.removeDocumentListenerForNome(this.chZecca_n);
-		 this.jTFZecca.removeDocumentListenerForSegno(this.chZecca_s);
+		 this.jTFPeso.removeDocumentListener(this.chPeso_v, this.chPeso_m);
+		 this.jTFDiametro.removeDocumentListener(this.chDiametro_v, this.chDiametro_m);
+		 this.jTFPrezzo.removeDocumentListener(this.chPrezzo_v, this.chPrezzo_m);
+		 this.jTFNominale.removeDocumentListener(this.chValore, this.chValuta);
+		 this.jTFZecca.removeDocumentListener(this.chZecca_n, this.chZecca_s);
 		 this.jDateChooser1.removePropertyChangeListener(this.chData);
 	}
 
@@ -1256,13 +1243,10 @@ public class MonetaViewer extends javax.swing.JPanel {
 	/**
 	 * Salva i dati nell'xml. Esegue una copia nella cartella di backup come
 	 * <id>-<millis>.xml
+	 * @throws XmlException 
 	 * 
-	 * @throws TransformerException
-	 * @throws ParserConfigurationException
-	 * @throws FileNotFoundException
 	 */
-	public void salvaDati() throws TransformerException, FileNotFoundException,
-			ParserConfigurationException {
+	public void salvaDati() throws XmlException  {
 		try {
 			String id = this.mng.getId();
 			// ottiene il nome del file da scrivere
@@ -1273,11 +1257,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 			// esegue il backup
 			FileUtils.copyFile(new File(outFile), new File(oldFileRen));
 			// salva il file
-			try {
-				this.mng.writeXml(this.mng.getJaxbObject(), "XmlData.Moneta", outFile);
-			} catch (JAXBException e) {
-				GestLog.Error(this.getClass(), e);
-			}
+			this.mng.writeXml(this.mng.getJaxbObject(), "XmlData.Moneta", outFile);
 			// Log
 			History.addEvent(History.MODIFY, id);
 			String msg = String.format(

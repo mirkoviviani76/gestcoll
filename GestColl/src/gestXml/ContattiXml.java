@@ -13,6 +13,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import exceptions.XmlException;
+
 import main.Common;
 import main.GestLog;
 import XmlData.Contatti.Contatti;
@@ -27,15 +29,16 @@ public class ContattiXml extends GestXml {
 
 	/**
 	 * Costruttore.
+	 * @throws XmlException 
 	 */
-	public ContattiXml() {
+	public ContattiXml() throws XmlException {
 		super(new File(Common.getCommon().getContattiXml()));
 		try {
 			JAXBContext jc = JAXBContext.newInstance("XmlData.Contatti");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		contatti = (Contatti) unmarshaller.unmarshal(new File(Common.getCommon().getContattiXml()));
 		} catch (JAXBException e) {
-			GestLog.Error(this.getClass(), e);
+			throw new XmlException("ContattiXml", e);
 		}
 	}
 

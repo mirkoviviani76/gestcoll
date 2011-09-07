@@ -4,8 +4,6 @@
  */
 package works;
 
-import gestXml.MonetaXml;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,19 +12,17 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
+import main.Common;
+import main.GenericUtil;
+import main.Message;
+import main.Progress;
 
 import org.apache.commons.io.FileUtils;
 
 import XmlData.Moneta.DocumentoAddizionale;
-
-import main.Common;
-import main.GenericUtil;
-import main.GestLog;
-import main.Message;
-import main.Progress;
+import exceptions.XmlException;
+import exceptions.XsltException;
+import gestXml.MonetaXml;
 
 /**
  * Gestisce la conversione da xml a tex e pdf
@@ -51,15 +47,12 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 	 * @param mng
 	 * @param outDir
 	 * @return
-	 * @throws TransformerException
-	 * @throws TransformerConfigurationException
-	 * @throws FileNotFoundException
-	 * @throws IOException
+	 * @throws XsltException 
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
 	@Override
-	public File convert(MonetaXml mng, File outDir)
-			throws TransformerException, TransformerConfigurationException,
-			FileNotFoundException, IOException {
+	public File convert(MonetaXml mng, File outDir) throws XsltException, FileNotFoundException, IOException  {
 		/* prepara il file di output */
 		File out = new File(outDir + "/" + mng.getId() + ".tex");
 		mng.xsltConvert(new File(Common.getCommon().getXslLatex()), out);
@@ -74,12 +67,12 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 	 * @param inDir
 	 * @param outDir
 	 * @param params
+	 * @throws XmlException 
 	 * @throws IOException 
-	 * @throws TransformerException 
-	 * @throws TransformerConfigurationException 
+	 * @throws XsltException 
 	 */
 	@Override
-	public Object[] doWork(File inDir, File outDir, Object[] params) throws TransformerConfigurationException, TransformerException, IOException {
+	public Object[] doWork(File inDir, File outDir, Object[] params) throws XmlException, XsltException, IOException  {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = getFileListing(inDir, Common.COIN_END);
 		Collections.sort(files);
@@ -94,8 +87,7 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
 			MonetaXml mng;
-			try {
-				mng = new MonetaXml((File) (iterator.next()));
+			mng = new MonetaXml((File) (iterator.next()));
 			String id = mng.getId();
 			Progress p = new Progress(i, size, "Tex");
 
@@ -129,9 +121,6 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 			}
 			this.setChanged();
 			this.notifyObservers(p);
-			} catch (JAXBException e) {
-				GestLog.Error(this.getClass(), e);
-			}
 			i++;
 
 		}

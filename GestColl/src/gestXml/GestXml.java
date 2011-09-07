@@ -32,6 +32,9 @@ import javax.xml.validation.Validator;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import exceptions.XmlException;
+import exceptions.XsltException;
+
 /**
  * Classe per la gestione di un generico file xml. Fornisce alcuni metodi basi
  * per l'apertura, la lettura, la scrittura e l'estrazione di dati.
@@ -58,17 +61,22 @@ public class GestXml {
 	 * @param myJAXBObject l'oggetto jaxb
 	 * @param jaxbContext il contesto
 	 * @param out il file out
+	 * @throws XmlException 
 	 * @throws JAXBException
 	 */
-	public void writeXml(Object myJAXBObject, String jaxbContext, String out) throws JAXBException
+	public void writeXml(Object myJAXBObject, String jaxbContext, String out) throws XmlException
 	 {
-		JAXBContext jc = JAXBContext.newInstance(jaxbContext);
+		try {
+			JAXBContext jc = JAXBContext.newInstance(jaxbContext);
 		//Crea il marshaller
 		Marshaller m = jc.createMarshaller();
 		//richiede un output formattato
 		m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
 		//Esegue il marshalling dell'oggetto nel file.
 		m.marshal(myJAXBObject, new File(out));
+		} catch (JAXBException e) {
+			throw new XmlException("writeXml()", e);
+		}
 		
 	}
 
@@ -77,15 +85,23 @@ public class GestXml {
 	 * 
 	 * @param xslt il foglio xslt utilizzato per la conversione
 	 * @param outFile il file di output generato
-	 * @throws TransformerException 
-	 * @throws FileNotFoundException 
+	 * @throws XsltException 
 	 */
-	public void xsltConvert(File xslt, File outFile) throws FileNotFoundException, TransformerException {
+	public void xsltConvert(File xslt, File outFile) throws XsltException {
 		TransformerFactory tFactory = TransformerFactory.newInstance();
-		Transformer transformer = tFactory
-				.newTransformer(new StreamSource(xslt));
-		transformer.transform(new StreamSource(this.xmlFile), new StreamResult(
-				new FileOutputStream(outFile)));
+		
+		try {
+			Transformer transformer = tFactory
+					.newTransformer(new StreamSource(xslt));
+			transformer.transform(new StreamSource(this.xmlFile), new StreamResult(
+					new FileOutputStream(outFile)));
+		} catch (TransformerConfigurationException e) {
+			throw new XsltException("xsltConvert(): transform failed. ", e);
+		} catch (TransformerException e) {
+			throw new XsltException("xsltConvert(): transform failed. ", e);
+		} catch (FileNotFoundException e) {
+			throw new XsltException("xsltConvert(): outputfile not found . ", e);
+		}
 	}
 
 	/**
@@ -93,15 +109,22 @@ public class GestXml {
 	 * 
 	 * @param xslt il foglio xslt utilizzato per la conversione
 	 * @return la stringa con la conversione effettuata
-	 * @throws TransformerException 
+	 * @throws XsltException 
 	 */
-	public String xsltConvert(File xslt) throws TransformerException {
+	public String xsltConvert(File xslt) throws XsltException {
 		StringWriter strWriter = new StringWriter();
 		TransformerFactory tFactory = TransformerFactory.newInstance();
-		Transformer transformer = tFactory
-				.newTransformer(new StreamSource(xslt));
-		transformer.transform(new StreamSource(this.xmlFile), new StreamResult(
-				strWriter));
+		Transformer transformer;
+		try {
+			transformer = tFactory
+					.newTransformer(new StreamSource(xslt));
+			transformer.transform(new StreamSource(this.xmlFile), new StreamResult(
+					strWriter));
+		} catch (TransformerConfigurationException e) {
+			throw new XsltException("xsltConvert()", e);
+		} catch (TransformerException e) {
+			throw new XsltException("xsltConvert()", e);
+		}
 		return strWriter.toString();
 	}
 

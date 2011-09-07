@@ -5,6 +5,7 @@
 
 package gui.datamodels;
 
+import exceptions.XmlException;
 import gestXml.MonetaXml;
 
 import java.io.File;
@@ -12,8 +13,6 @@ import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
-
-import javax.xml.bind.JAXBException;
 
 import main.Common;
 import main.GestLog;
@@ -31,9 +30,10 @@ public class MonetaListModel extends GenericListModel<MonetaXml> {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * @throws XmlException 
      *
      */
-	public MonetaListModel(MonetaXml.Ordering ordering) {
+	public MonetaListModel(MonetaXml.Ordering ordering) throws XmlException {
 		super();
 		/* ottiene l'elenco di tutte le monete */
 		@SuppressWarnings("rawtypes")
@@ -53,13 +53,9 @@ public class MonetaListModel extends GenericListModel<MonetaXml> {
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
 			MonetaXml mng;
-			try {
-				mng = new MonetaXml((File) (iterator.next()));
-				mng.setOrdering(ordering);
-				contenuto.add(mng);
-			} catch (JAXBException e) {
-				GestLog.Error(this.getClass(), e);
-			}
+			mng = new MonetaXml((File) (iterator.next()));
+			mng.setOrdering(ordering);
+			contenuto.add(mng);
 		}
 		Collections.sort(contenuto);
 

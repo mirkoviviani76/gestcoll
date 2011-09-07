@@ -25,7 +25,7 @@ public class GenericListModel<E> extends DefaultListModel {
 	protected ArrayList<E> contenuto;
 
 	/**
-     *
+     * Costruttore
      */
 	public GenericListModel() {
 		contenuto = new ArrayList<E>();
@@ -69,7 +69,7 @@ public class GenericListModel<E> extends DefaultListModel {
 
 	/**
 	 * 
-	 * @return
+	 * @return il numero di oggetti
 	 */
 	@Override
 	public int getSize() {
@@ -79,7 +79,7 @@ public class GenericListModel<E> extends DefaultListModel {
 	/**
 	 * 
 	 * @param index
-	 * @return
+	 * @return l'oggetto di indice specificato
 	 */
 	@Override
 	public Object getElementAt(int index) {

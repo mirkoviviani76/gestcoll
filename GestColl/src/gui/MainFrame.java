@@ -5,6 +5,7 @@
 
 package gui;
 
+import exceptions.XmlException;
 import gui.extraPanels.HistoryViewer;
 
 import java.awt.Color;
@@ -36,8 +37,9 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/** Creates new form MainFrame */
-	public MainFrame() {
+	/** Creates new form MainFrame 
+	 * @throws XmlException */
+	public MainFrame() throws XmlException {
 		Splash.getInstance().splashProgress("Start...");
 		// inizializza i componenti grafici
 		initComponents();
@@ -206,11 +208,12 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
+	 * @throws XmlException 
 	 */
 
 	// <editor-fold defaultstate="collapsed"
 	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+	private void initComponents() throws XmlException {
 
 		jToolBar1 = new javax.swing.JToolBar();
 		jBGestMonete = new javax.swing.JButton();
@@ -407,7 +410,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 
 	// End of variables declaration//GEN-END:variables
 
-	private void loadAllData() {
+	private void loadAllData() throws XmlException {
 		// serve la chiamata se no netbeans si incasina...
 
 		Splash.getInstance().splashProgress("Load monete...");

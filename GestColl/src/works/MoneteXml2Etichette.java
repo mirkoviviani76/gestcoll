@@ -5,28 +5,20 @@
 
 package works;
 
-import gestXml.ContenitoriXml;
-import gestXml.MonetaXml;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.transform.TransformerException;
-
 import main.Common;
 import main.GenericUtil;
-import main.GestLog;
 import main.Message;
 import main.Progress;
-
-import org.xml.sax.SAXException;
-
 import XmlData.Moneta.Zecca;
+import exceptions.XmlException;
+import gestXml.ContenitoriXml;
+import gestXml.MonetaXml;
 
 /**
  * Gestisce la conversione da xml a etichette
@@ -62,16 +54,11 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	 * @param inDir
 	 * @param outDir
 	 * @param params
-	 * @throws TransformerException
-	 * @throws FileNotFoundException
-	 * @throws SAXException
-	 * @throws IOException
-	 * @throws InterruptedException
+	 * @throws XmlException 
+	 * @throws IOException 
 	 */
 	@Override
-	public Object[] doWork(File inDir, File outDir, Object[] params)
-			throws TransformerException, FileNotFoundException, SAXException,
-			IOException, InterruptedException {
+	public Object[] doWork(File inDir, File outDir, Object[] params) throws XmlException, IOException {
 		String etichetteA = "";
 		String etichetteB = "";
 		String etichetteC = "";
@@ -90,38 +77,34 @@ public class MoneteXml2Etichette extends CollectionWorker {
 		while (iterator.hasNext()) {
 			Progress notify = new Progress(i, files.size(), "Etichette");
 			MonetaXml mng;
-			try {
-				mng = new MonetaXml((iterator.next()));
-				/* prepara il file di output */
-				String id = mng.getId();
-				/* ottiene la dimensione della casella */
-				String dimensione = getDim(mng);
-				/* ottiene l'etichetta singola */
-				String etichetta = getEtichetta(mng, dimensione, id);
+			mng = new MonetaXml((iterator.next()));
+			/* prepara il file di output */
+			String id = mng.getId();
+			/* ottiene la dimensione della casella */
+			String dimensione = getDim(mng);
+			/* ottiene l'etichetta singola */
+			String etichetta = getEtichetta(mng, dimensione, id);
 
-				/* aggiorna l'elenco globale di etichette e codici qr */
-				if (dimensione.equals("A")) {
-					etichetteA = etichetteA + etichetta + "\n";
-					qrA = qrA + "\\\\qrA{" + id + "}" + "\n";
-					contatore[0]++;
-				}
-				if (dimensione.equals("B")) {
-					etichetteB = etichetteB + etichetta + "\n";
-					qrB = qrB + "\\\\qrB{" + id + "}" + "\n";
-					contatore[1]++;
-				}
-				if (dimensione.equals("C")) {
-					etichetteC = etichetteC + etichetta + "\n";
-					qrC = qrC + "\\\\qrC{" + id + "}" + "\n";
-					contatore[2]++;
-				}
-				if (dimensione.equals("D")) {
-					etichetteD = etichetteD + etichetta + "\n";
-					qrD = qrD + "\\\\qrD{" + id + "}" + "\n";
-					contatore[3]++;
-				}
-			} catch (JAXBException e) {
-				GestLog.Error(this.getClass(), e);
+			/* aggiorna l'elenco globale di etichette e codici qr */
+			if (dimensione.equals("A")) {
+				etichetteA = etichetteA + etichetta + "\n";
+				qrA = qrA + "\\\\qrA{" + id + "}" + "\n";
+				contatore[0]++;
+			}
+			if (dimensione.equals("B")) {
+				etichetteB = etichetteB + etichetta + "\n";
+				qrB = qrB + "\\\\qrB{" + id + "}" + "\n";
+				contatore[1]++;
+			}
+			if (dimensione.equals("C")) {
+				etichetteC = etichetteC + etichetta + "\n";
+				qrC = qrC + "\\\\qrC{" + id + "}" + "\n";
+				contatore[2]++;
+			}
+			if (dimensione.equals("D")) {
+				etichetteD = etichetteD + etichetta + "\n";
+				qrD = qrD + "\\\\qrD{" + id + "}" + "\n";
+				contatore[3]++;
 			}
 
 			this.setChanged();
@@ -153,9 +136,9 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	 * @param xml
 	 *            il file della moneta
 	 * @return la dimensione espressa come stringa A,B,C,D
-	 * @throws TransformerException
+	 * @throws XmlException 
 	 */
-	private String getDim(MonetaXml xml) throws TransformerException {
+	private String getDim(MonetaXml xml) throws XmlException {
 		ContenitoriXml collezione = new ContenitoriXml();
 		int cont = xml.getPosizione().getContenitore().intValue();
 		int vass = xml.getPosizione().getVassoio().intValue();
@@ -173,10 +156,9 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	 * @param id
 	 *            l'id della moneta
 	 * @return
-	 * @throws TransformerException
+	 * 
 	 */
-	private String getEtichetta(MonetaXml xml, String dimensione, String id)
-			throws TransformerException {
+	private String getEtichetta(MonetaXml xml, String dimensione, String id) {
 		String out = "";
 		String autorita = "";
 		

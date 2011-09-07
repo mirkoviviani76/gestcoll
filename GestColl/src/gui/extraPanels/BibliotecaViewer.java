@@ -30,9 +30,6 @@ public class BibliotecaViewer extends javax.swing.JPanel {
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 */
-
-	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 		java.awt.GridBagConstraints gridBagConstraints;
 
@@ -66,9 +63,9 @@ public class BibliotecaViewer extends javax.swing.JPanel {
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
 		add(jBApriCartella, gridBagConstraints);
-	}// </editor-fold>//GEN-END:initComponents
+	}
 
-	private void jBApriCartellaMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBApriCartellaMouseClicked
+	private void jBApriCartellaMouseClicked(java.awt.event.MouseEvent evt) {
 		// apre la cartella
 		try {
 			File cartella = new File(filename.getCanonicalFile().getParent());
@@ -77,7 +74,7 @@ public class BibliotecaViewer extends javax.swing.JPanel {
 		} catch (IOException ex) {
 			GestLog.Error(BibliotecaViewer.class, ex);
 		}
-	}// GEN-LAST:event_jBApriCartellaMouseClicked
+	}
 
 	/**
 	 * 

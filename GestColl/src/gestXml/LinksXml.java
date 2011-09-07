@@ -13,6 +13,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import exceptions.XmlException;
+
 import main.Common;
 import main.GestLog;
 import XmlData.Links.Linklist;
@@ -28,13 +30,13 @@ public class LinksXml extends GestXml {
 	
 	/**
 	 * Costruttore
+	 * @throws XmlException 
 	 */
-    public LinksXml() {
+    public LinksXml() throws XmlException {
     	super(new File(Common.getCommon().getLinksXml()));
     	links = new ArrayList<gestXml.data.Link>();
-    	JAXBContext jc;
     	try {
-    		jc = JAXBContext.newInstance("XmlData.Links");
+    		JAXBContext jc = JAXBContext.newInstance("XmlData.Links");
     		Unmarshaller unmarshaller = jc.createUnmarshaller();
     		xmllinks = (XmlData.Links.Links) unmarshaller.unmarshal(new File(Common.getCommon().getLinksXml()));
     		
@@ -48,7 +50,7 @@ public class LinksXml extends GestXml {
 
     		}
     	} catch (JAXBException e) {
-    		GestLog.Error(this.getClass(), e);
+    		throw new XmlException("LinksXml()", e);
     	}
 
 	}

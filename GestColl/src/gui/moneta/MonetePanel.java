@@ -4,6 +4,7 @@
  */
 package gui.moneta;
 
+import exceptions.XmlException;
 import gestXml.ContenitoriXml;
 import gestXml.MonetaXml;
 import gestXml.data.Armadio;
@@ -80,8 +81,9 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	private final static String ORDER_BY_ID = "Ordina per ID";
 	private final static String ORDER_BY_PAESE = "Ordina per Paese";
 
-	/** Creates new form MonetePanel */
-	public MonetePanel() {
+	/** Creates new form MonetePanel 
+	 * @throws XmlException */
+	public MonetePanel() throws XmlException {
 		initComponents();
 
 		/* aggiunge il radio group al popup menu (l'ide non lo fa) */
@@ -104,7 +106,11 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 
 						@Override
 						public void actionPerformed(ActionEvent evt) {
-							jPopupMenuRadioButtonsActionEventListener(evt);
+							try {
+								jPopupMenuRadioButtonsActionEventListener(evt);
+							} catch (XmlException e) {
+								GestLog.Error(this.getClass(), e);
+							}
 						}
 					});
 		}
@@ -118,8 +124,9 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 
 	/**
 	 * Sistema i vari "workers"
+	 * @throws XmlException 
 	 */
-	public void setupWorks() {
+	public void setupWorks() throws XmlException {
 		pm = new ProgressMonitor(this, null, null, 0, 100);
 		// vrf = new Verify("Verifica", "Verifica XML con XSD");
 		// vrf.addObserver(this);
@@ -139,7 +146,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		disegnaVassoi();
 	}
 
-	private void jPopupMenuRadioButtonsActionEventListener(ActionEvent evt) {
+	private void jPopupMenuRadioButtonsActionEventListener(ActionEvent evt) throws XmlException {
 		/* cicla su tutti i radio buttons */
 		for (int i = 0; i < this.popupRadio.length; i++) {
 			/* cerca il radio button attivo che ha causato il cambio */
@@ -247,11 +254,12 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
+	 * @throws XmlException 
 	 */
 
 	// <editor-fold defaultstate="collapsed"
 	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+	private void initComponents() throws XmlException {
 
 		jPopupMenu1 = new javax.swing.JPopupMenu();
 		jToolBar1 = new javax.swing.JToolBar();
@@ -460,8 +468,9 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	 * Esegue il sorting della lista per paese o per id
 	 * 
 	 * @param sortByPaese
+	 * @throws XmlException 
 	 */
-	private void sortListMonete(MonetaXml.Ordering ordering) {
+	private void sortListMonete(MonetaXml.Ordering ordering) throws XmlException {
 		MonetaXml sel = (MonetaXml) this.jListMonete.getSelectedValue();
 		MonetaListModel mlm = new MonetaListModel(ordering);
 		this.jListMonete.setModel(mlm);
@@ -559,8 +568,9 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	 * Aggiunge una moneta, creando una directory e un file xml pronto per
 	 * l'editing
 	 * TODO Generare la posizione (elenco nella gui?).
+	 * @throws XmlException 
 	 */
-	private void addMoneta() {
+	private void addMoneta() throws XmlException {
 		AddMonetaForm am = new AddMonetaForm(null, true);
 		am.setVisible(true);
 		if (am.getReturnStatus() == AddMonetaForm.RET_OK) {
@@ -605,11 +615,12 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	}
 
 	/**
+	 * @throws XmlException 
 	 * @throws SAXException
 	 * @throws IOException
 	 * @throws TransformerException
 	 */
-	public void disegnaVassoi() {
+	public void disegnaVassoi() throws XmlException {
 		ContenitoriXml disp = new ContenitoriXml();
 		JTabbedPane vassoiContainer = new JTabbedPane();
 		this.jTabbedPane1.add("Vassoi", vassoiContainer);
@@ -695,7 +706,11 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		} else if (ae.getSource() == jButtonWiki) {
 			// TODO wiki (?)
 		} else if (ae.getSource() == jBAdd) {
-			this.addMoneta();
+			try {
+				this.addMoneta();
+			} catch (XmlException e) {
+				GestLog.Error(this.getClass(), e);
+			}
 		} else if (ae.getSource() == jButtonTex2Pdf) {
 			this.runInThread(xpc, new File(Common.getCommon().getLatexDir()), new File(
 					Common.getCommon().getLatexDir()), null);
@@ -722,19 +737,15 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		} else if (ae.getSource() == jBSalva) {
 			try {
 				this.monetaViewer1.salvaDati();
-				// disabilita il pulsante salva
-				this.jBSalva.setEnabled(false);
-				// disabilita il pulsante edit
-				this.jTBEdit.setSelected(false);
-				// disabilita l'editing della moneta
-				this.monetaViewer1.setEditable(false);
-			} catch (TransformerException ex) {
-				GestLog.Error(MonetePanel.class, ex);
-			} catch (FileNotFoundException ex) {
-				GestLog.Error(MonetePanel.class, ex);
-			} catch (ParserConfigurationException ex) {
-				GestLog.Error(MonetePanel.class, ex);
+			} catch (XmlException e) {
+				GestLog.Error(this.getClass(), e);
 			}
+			// disabilita il pulsante salva
+			this.jBSalva.setEnabled(false);
+			// disabilita il pulsante edit
+			this.jTBEdit.setSelected(false);
+			// disabilita l'editing della moneta
+			this.monetaViewer1.setEditable(false);
 		} else if (ae.getSource() == jBCerca) {
 			MonetaListModel lm = (MonetaListModel) (this.jListMonete.getModel());
 			String testoDaCercare = this.jTextField1.getText();

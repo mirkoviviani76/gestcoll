@@ -27,7 +27,7 @@ public class MisuraControl extends javax.swing.JPanel {
 
 	/**
 	 * 
-	 * @return
+	 * @return il valore
 	 */
 	public String getValore() {
 		return this.jTFValore.getText();
@@ -35,14 +35,14 @@ public class MisuraControl extends javax.swing.JPanel {
 
 	/**
 	 * 
-	 * @return
+	 * @return l'unita'
 	 */
 	public String getUnita() {
 		return this.jTFUnita.getText();
 	}
 
 	/**
-	 * 
+	 * setta il valore
 	 * @param v
 	 */
 	public void setValore(String v) {
@@ -50,7 +50,7 @@ public class MisuraControl extends javax.swing.JPanel {
 	}
 
 	/**
-	 * 
+	 * setta l'unita'
 	 * @param u
 	 */
 	public void setUnita(String u) {
@@ -58,25 +58,35 @@ public class MisuraControl extends javax.swing.JPanel {
 	}
 
 	/**
-	 * 
-	 * @param v
-	 * @param u
+	 * setta la misura con un nominale
+	 * @param nominale
 	 */
-	public void setMisura(String v, String u) {
-		this.setUnita(u);
-		this.setValore(v);
+	public void setMisura(Nominale nominale) {
+		this.setUnita(nominale.getValuta());
+		this.setValore(nominale.getValore());
 	}
 
 	/**
-	 * 
-	 * @param misura
+	 * setta la misura con un'altra misura
+	 * @param m
 	 */
-	public void setMisura(String[] misura) {
-		this.setMisura(misura[0], misura[1]);
-	}
+	public void setMisura(Misura m) {
 
+		String val = "";
+		String un = "";
+		if (m != null) {
+			if (m.getValore() != null)
+				val = m.getValore().toPlainString();
+			if (m.getUnita() != null)
+				un = m.getUnita();
+		}
+		this.setUnita(un);
+		this.setValore(val);
+	}
+	
+	
 	/**
-	 * 
+	 * setta l'editabilita' del campo 
 	 * @param flag
 	 */
 	public void setEditable(boolean flag) {
@@ -84,42 +94,31 @@ public class MisuraControl extends javax.swing.JPanel {
 		this.jTFValore.setEditable(flag);
 	}
 
-	  /**
-     * Aggiunge il listener per le modifiche ai testi
-     * @param myDocumentListener
+    /**
+     * aggiunge il listener per le modifiche
+     * @param myDocumentListenerForValue
+     * @param myDocumentListenerForUnit
      */
-    void addDocumentListenerForUnit(XmlDocumentChangeListener myDocumentListener) {
-        this.jTFUnita.getDocument().addDocumentListener(myDocumentListener);
+	void addDocumentListener(XmlDocumentChangeListener myDocumentListenerForValue,
+    		XmlDocumentChangeListener myDocumentListenerForUnit) {
+        this.jTFValore.getDocument().addDocumentListener(myDocumentListenerForValue);
+        this.jTFUnita.getDocument().addDocumentListener(myDocumentListenerForUnit);
     }
 
     /**
-     * Aggiunge il listener per le modifiche ai testi
-     * @param myDocumentListener
+     * rimuove il listener per le modifiche
+     * @param myDocumentListenerForValue
+     * @param myDocumentListenerForUnit
      */
-    void addDocumentListenerForValue(XmlDocumentChangeListener myDocumentListener) {
-        this.jTFValore.getDocument().addDocumentListener(myDocumentListener);
+	void removeDocumentListener(XmlDocumentChangeListener myDocumentListenerForValue,
+    		XmlDocumentChangeListener myDocumentListenerForUnit) {
+        this.jTFValore.getDocument().removeDocumentListener(myDocumentListenerForValue);
+        this.jTFUnita.getDocument().removeDocumentListener(myDocumentListenerForUnit);
     }
-
-   void removeDocumentListenerForUnit(XmlDocumentChangeListener myDocumentListener) {
-        this.jTFUnita.getDocument().removeDocumentListener(myDocumentListener);
-    }
-
-    /**
-     * Aggiunge il listener per le modifiche ai testi
-     * @param myDocumentListener
-     */
-    void removeDocumentListenerForValue(XmlDocumentChangeListener myDocumentListener) {
-        this.jTFValore.getDocument().removeDocumentListener(myDocumentListener);
-    }
-
-
-
+    
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 */
-
-	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 		java.awt.GridBagConstraints gridBagConstraints;
 
@@ -135,28 +134,10 @@ public class MisuraControl extends javax.swing.JPanel {
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 		gridBagConstraints.weightx = 0.25;
 		add(jTFUnita, gridBagConstraints);
-	}// </editor-fold>//GEN-END:initComponents
+	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JTextField jTFUnita;
 	private javax.swing.JTextField jTFValore;
 
-	// End of variables declaration//GEN-END:variables
-	public void setMisura(Nominale nominale) {
-		this.setMisura(nominale.getValore(), nominale.getValuta());
-	}
-
-	public void setMisura(Misura m) {
-
-		String val = "";
-		String un = "";
-		if (m != null) {
-			if (m.getValore() != null)
-				val = m.getValore().toPlainString();
-			if (m.getUnita() != null)
-				un = m.getUnita();
-		}
-		this.setMisura(val, un);
-	}
 
 }

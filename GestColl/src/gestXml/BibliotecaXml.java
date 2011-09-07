@@ -5,6 +5,7 @@
 
 package gestXml;
 
+import exceptions.XmlException;
 import gestXml.data.Catalogo;
 import gestXml.data.Libro;
 import gestXml.data.Pubblicazione;
@@ -30,13 +31,17 @@ public class BibliotecaXml extends GestXml {
 
     /**
      * Costruttore
-     * @throws JAXBException 
+     * @throws XmlException 
      */
-    public BibliotecaXml() throws JAXBException {
+    public BibliotecaXml() throws XmlException {
         super(new File(Common.getCommon().getBiblioXml()));
-		JAXBContext jc = JAXBContext.newInstance("XmlData.Biblioteca");
+		try {
+			JAXBContext jc = JAXBContext.newInstance("XmlData.Biblioteca");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		biblio = (XmlData.Biblioteca.Biblioteca) unmarshaller.unmarshal(new File(Common.getCommon().getBiblioXml()));
+		} catch (JAXBException e) {
+			throw new XmlException("BibliotecaXml", e);
+		}
 
     }
 
