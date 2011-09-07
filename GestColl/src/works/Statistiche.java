@@ -5,19 +5,15 @@
 
 package works;
 
-import exceptions.XmlException;
-import gestXml.MonetaXml;
-
 import java.io.File;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.TreeMap;
 
-import javax.xml.bind.JAXBException;
-
 import main.Common;
-import main.GestLog;
 import XmlData.Moneta.Misura;
+import exceptions.XmlException;
+import gestXml.MonetaXml;
 
 /**
  * Gestisce la pagina delle statistiche
