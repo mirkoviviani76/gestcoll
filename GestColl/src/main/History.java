@@ -11,16 +11,18 @@ import java.io.IOException;
 
 /**
  * Gestisce la history, memorizzando su file gli eventi.
+ * 
  * @author intecs
  */
 public class History {
 
 	public static final String ADD = "ADD";
-	public static final String MODIFY = "MODIFY";
 	public static final String DELETE = "DELETE";
+	public static final String MODIFY = "MODIFY";
 
 	/**
 	 * aggiunge un evento alla history
+	 * 
 	 * @param e
 	 * @param id
 	 */

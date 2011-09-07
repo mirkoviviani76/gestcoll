@@ -41,37 +41,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "letteratura", propOrder = { "libro", "asta" })
 public class Letteratura {
 
-	protected List<Libro> libro;
 	protected List<Asta> asta;
-
-	/**
-	 * Gets the value of the libro property.
-	 * 
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the libro property.
-	 * 
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getLibro().add(newItem);
-	 * </pre>
-	 * 
-	 * 
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link Libro }
-	 * 
-	 * 
-	 */
-	public List<Libro> getLibro() {
-		if (libro == null) {
-			libro = new ArrayList<Libro>();
-		}
-		return this.libro;
-	}
+	protected List<Libro> libro;
 
 	/**
 	 * Gets the value of the asta property.
@@ -100,6 +71,35 @@ public class Letteratura {
 			asta = new ArrayList<Asta>();
 		}
 		return this.asta;
+	}
+
+	/**
+	 * Gets the value of the libro property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the libro property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getLibro().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link Libro }
+	 * 
+	 * 
+	 */
+	public List<Libro> getLibro() {
+		if (libro == null) {
+			libro = new ArrayList<Libro>();
+		}
+		return this.libro;
 	}
 
 }

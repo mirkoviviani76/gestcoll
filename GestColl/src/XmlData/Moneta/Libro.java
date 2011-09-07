@@ -44,30 +44,9 @@ import javax.xml.bind.annotation.XmlType;
 public class Libro {
 
 	@XmlElement(required = true)
-	protected String sigla;
-	@XmlElement(required = true)
 	protected String numero;
-
-	/**
-	 * Gets the value of the sigla property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getSigla() {
-		return sigla;
-	}
-
-	/**
-	 * Sets the value of the sigla property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setSigla(String value) {
-		this.sigla = value;
-	}
+	@XmlElement(required = true)
+	protected String sigla;
 
 	/**
 	 * Gets the value of the numero property.
@@ -77,6 +56,16 @@ public class Libro {
 	 */
 	public String getNumero() {
 		return numero;
+	}
+
+	/**
+	 * Gets the value of the sigla property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSigla() {
+		return sigla;
 	}
 
 	/**
@@ -90,7 +79,20 @@ public class Libro {
 		this.numero = value;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Sets the value of the sigla property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setSigla(String value) {
+		this.sigla = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -98,7 +100,5 @@ public class Libro {
 		return (sigla != null ? "" + sigla + " " : "")
 				+ (numero != null ? "" + numero : "") + "";
 	}
-	
-	
 
 }

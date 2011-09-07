@@ -12,11 +12,11 @@ public class Contatto implements Comparable<Contatto> {
 	/**
      *
      */
-	public String nome;
+	public String email;
 	/**
      *
      */
-	public String email;
+	public String nome;
 	/**
      *
      */
@@ -35,13 +35,13 @@ public class Contatto implements Comparable<Contatto> {
 	}
 
 	@Override
-	public String toString() {
-		return nome + ": " + email + " " + note;
+	public int compareTo(Contatto o) {
+		return this.nome.compareTo(o.nome);
 	}
 
 	@Override
-	public int compareTo(Contatto o) {
-		return this.nome.compareTo(o.nome);
+	public String toString() {
+		return nome + ": " + email + " " + note;
 	}
 
 }

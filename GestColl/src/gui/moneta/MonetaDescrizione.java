@@ -29,10 +29,35 @@ import XmlData.Moneta.Legenda;
 @SuppressWarnings("serial")
 public class MonetaDescrizione extends javax.swing.JPanel {
 
-	private String origImgFilename;
-	private Common.Lato lato;
 	private boolean isEditingMode;
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton jButton1;
+	private javax.swing.JLabel jImmagine;
+	private javax.swing.JLabel jLabel2;
+
+	private javax.swing.JLabel jLabel3;
+
+	private javax.swing.JList jLLegende;
+
+	private javax.swing.JScrollPane jScrollPane1;
+
+	private javax.swing.JScrollPane jScrollPane2;
+
+	private javax.swing.JTextArea jTADescrizione;
+
+	private Common.Lato lato;
+
 	MonetaXml mng;
+
+	private String origImgFilename;
+
+	/** costruttore fittizio per gui creator */
+	public MonetaDescrizione() {
+		initComponents();
+		origImgFilename = "";
+		lato = null;
+		mng = null;
+	}
 
 	/**
 	 * Creates new form MonetaDescrizione
@@ -45,28 +70,25 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 		lato = _lato;
 		isEditingMode = false;
 	}
-
-	/** costruttore fittizio per gui creator */
-	public MonetaDescrizione() {
-		initComponents();
-		origImgFilename = "";
-		lato = null;
-		mng = null;
+	/**
+	 * Aggiunge il listener per le modifiche ai testi
+	 * 
+	 * @param myDocumentListener
+	 */
+	void addDocumentListener(XmlDocumentChangeListener myDocumentListener) {
+		this.jTADescrizione.getDocument().addDocumentListener(
+				myDocumentListener);
 	}
-	
-	  /**
-     * Aggiunge il listener per le modifiche ai testi
-     * 
-     * @param myDocumentListener
-     */
-    void addDocumentListener(XmlDocumentChangeListener myDocumentListener) {
-        this.jTADescrizione.getDocument().addDocumentListener(myDocumentListener);
-    }
-
-    void removeDocumentListener(XmlDocumentChangeListener myDocumentListener) {
-        this.jTADescrizione.getDocument().removeDocumentListener(myDocumentListener);
-    }	
-
+	/**
+	 * 
+	 * @param mng
+	 */
+	public void fillData(MonetaXml mng) {
+		this.mng = mng;
+		this.setDescrizione(mng.getDescrizione(this.lato));
+		this.setLegenda(mng.getLegende(this.lato));
+		this.setImg(mng.getFileImmagine(this.lato));
+	}
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 */
@@ -133,6 +155,7 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 		jButton1.setPreferredSize(new java.awt.Dimension(25, 25));
 
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jBAddLegendaActionPerformed(evt);
 			}
@@ -221,7 +244,19 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 										javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addContainerGap()));
 	}// </editor-fold>//GEN-END:initComponents
+	private void jBAddLegendaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBAddLegendaActionPerformed
+		LegendaForm zf = new LegendaForm(null, true);
+		zf.setVisible(true);
+		// valuta ritorno con tasto "ok/modifica" premuto
+		if (zf.getReturnStatus() == LegendaForm.RET_OK) {
+			// ottiene i nuovi dati della nota dal form
+			Legenda nuovaLegenda = zf.getData();
+			mng.getLegende(lato).add(nuovaLegenda);
+			this.jLLegende.setModel(new GenericListModel<Legenda>(mng
+					.getLegende(lato)));
+		}
 
+	}// GEN-LAST:event_jBAddLegendaActionPerformed
 	/**
 	 * gestisce il clic sull'immagine. Apre una finestra con l'immagine
 	 * ingrandita
@@ -237,7 +272,6 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 			miv.setVisible(true);
 		}
 	}// GEN-LAST:event_jImmagineMouseClicked
-
 	private void jLLegendeMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLLegendeMouseClicked
 		if (this.isEditingMode) {
 			/* apre il dialog */
@@ -282,21 +316,6 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 			l = null;
 		}
 	}// GEN-LAST:event_jLLegendeMouseClicked
-
-
-	private void jBAddLegendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddLegendaActionPerformed
-		LegendaForm zf = new LegendaForm(null, true);
-		zf.setVisible(true);
-		//valuta ritorno con tasto "ok/modifica" premuto
-		if (zf.getReturnStatus() == LegendaForm.RET_OK) {
-			//ottiene i nuovi dati della nota dal form
-			Legenda nuovaLegenda = zf.getData();
-			mng.getLegende(lato).add(nuovaLegenda);
-			this.jLLegende.setModel(new GenericListModel<Legenda>(mng.getLegende(lato)));
-		}
-
-	}//GEN-LAST:event_jBAddLegendaActionPerformed
-
 	private void jTADescrizioneMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jTADescrizioneMouseClicked
 		if (this.isEditingMode) {
 			/* apre il dialog */
@@ -311,17 +330,12 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 		}
 	}// GEN-LAST:event_jTADescrizioneMouseClicked
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton jButton1;
-	private javax.swing.JLabel jImmagine;
-	private javax.swing.JList jLLegende;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JScrollPane jScrollPane2;
-	private javax.swing.JTextArea jTADescrizione;
-
 	// End of variables declaration//GEN-END:variables
+
+	void removeDocumentListener(XmlDocumentChangeListener myDocumentListener) {
+		this.jTADescrizione.getDocument().removeDocumentListener(
+				myDocumentListener);
+	}
 
 	/**
 	 * carica la descrizione nella text area
@@ -329,8 +343,9 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 	 * @param text
 	 */
 	public void setDescrizione(String text) {
-		if (text != null)
+		if (text != null) {
 			this.jTADescrizione.setText(text);
+		}
 	}
 
 	/**
@@ -342,15 +357,6 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 		// this.jTADescrizione.setEditable(flag);
 		this.jButton1.setVisible(flag);
 		this.isEditingMode = flag;
-	}
-
-	/**
-	 * Sistema il modello caricando i dati
-	 * 
-	 * @param list
-	 */
-	public void setLegenda(List<Legenda> list) {
-		this.jLLegende.setModel(new GenericListModel<Legenda>(list));
 	}
 
 	/**
@@ -375,15 +381,12 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 	}
 
 	/**
+	 * Sistema il modello caricando i dati
 	 * 
-	 * @param mng
+	 * @param list
 	 */
-	public void fillData(MonetaXml mng) {
-		this.mng = mng;
-		this.setDescrizione(mng.getDescrizione(this.lato));
-		this.setLegenda(mng.getLegende(this.lato));
-		this.setImg(mng.getFileImmagine(this.lato));
+	public void setLegenda(List<Legenda> list) {
+		this.jLLegende.setModel(new GenericListModel<Legenda>(list));
 	}
-
 
 }

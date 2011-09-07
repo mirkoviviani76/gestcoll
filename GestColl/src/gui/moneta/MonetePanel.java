@@ -58,29 +58,52 @@ import gui.moneta.forms.AddMonetaForm;
  */
 public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		ActionListener {
-	// Task myTask;p
 
-	/**
-	 * 
-	 */
+	private final static String ORDER_BY_ID = "Ordina per ID";
+	private final static String ORDER_BY_PAESE = "Ordina per Paese";
 	private static final long serialVersionUID = 1L;
+	private javax.swing.JButton jBAdd;
+	private javax.swing.JButton jBCerca;
+	private javax.swing.JButton jBSalva;
+	private javax.swing.JButton jBToClipboard;
+	private javax.swing.JButton jButtonQR;
+	private javax.swing.JButton jButtonTex2Pdf;
+	private javax.swing.JButton jButtonVerify;
+	private javax.swing.JButton jButtonWiki;
+	private javax.swing.JButton jButtonXml2Html;
+	private javax.swing.JButton jButtonXml2Tex;
+	private javax.swing.JList jListMonete;
+	private javax.swing.JPopupMenu jPopupMenu1;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JScrollPane jScrollPane2;
+	private javax.swing.JToolBar.Separator jSeparator1;
+	private javax.swing.JToolBar.Separator jSeparator2;
+	private javax.swing.JToolBar.Separator jSeparator3;
+	private javax.swing.JToolBar.Separator jSeparator4;
+	private javax.swing.JSplitPane jSplitPane1;
+	private javax.swing.JTabbedPane jTabbedPane1;
+	private javax.swing.JToggleButton jTBEdit;
+	private javax.swing.JTextField jTextField1;
+	private javax.swing.JToolBar jToolBar1;
+	private int lastSearchedIndex;
+	private String lastSearchedText;
+	private gui.moneta.MonetaViewer monetaViewer1;
 	private ProgressMonitor pm;
+	private ButtonGroup popupGroup1;
+	private JRadioButtonMenuItem popupRadio[];
+	private MoneteXml2QR qrc;
 	private Thread thread;
-	// private Verify vrf;
 	private MoneteXml2Etichette xml2et;
 	private MoneteXml2Html xml2html;
 	private MoneteXml2Tex xml2tex;
-	private MoneteXml2QR qrc;
 	private XelatexPdfCreator xpc;
-	private int lastSearchedIndex;
-	private String lastSearchedText;
-	private ButtonGroup popupGroup1;
-	private JRadioButtonMenuItem popupRadio[];
-	private final static String ORDER_BY_ID = "Ordina per ID";
-	private final static String ORDER_BY_PAESE = "Ordina per Paese";
-
-	/** Creates new form MonetePanel 
-	 * @throws XmlException */
+	// private Verify vrf;
+	
+	/**
+	 * Creates new form MonetePanel
+	 * 
+	 * @throws XmlException
+	 */
 	public MonetePanel() throws XmlException {
 		initComponents();
 
@@ -121,41 +144,83 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	}
 
 	/**
-	 * Sistema i vari "workers"
-	 * @throws XmlException 
+	 * 
+	 * @param ae
 	 */
-	public void setupWorks() throws XmlException {
-		pm = new ProgressMonitor(this, null, null, 0, 100);
-		// vrf = new Verify("Verifica", "Verifica XML con XSD");
-		// vrf.addObserver(this);
-		xml2et = new MoneteXml2Etichette("XML -> Etichette",
-				"Generazione di Etichette*.pdf");
-		xml2et.addObserver(this);
-		xml2html = new MoneteXml2Html("XML -> HTML",
-				"Conversione da Xml a Html");
-		xml2html.addObserver(this);
-		xml2tex = new MoneteXml2Tex("XML -> TEX",
-				"Generazione di Collezione.pdf");
-		xml2tex.addObserver(this);
-		qrc = new MoneteXml2QR("XML -> QR", "Generazione codici QR");
-		qrc.addObserver(this);
-		xpc = new XelatexPdfCreator("TEX -> PDF", "Crea i file pdf dai tex");
-		xpc.addObserver(this);
-		disegnaVassoi();
-	}
-
-	private void jPopupMenuRadioButtonsActionEventListener(ActionEvent evt) throws XmlException {
-		/* cicla su tutti i radio buttons */
-		for (int i = 0; i < this.popupRadio.length; i++) {
-			/* cerca il radio button attivo che ha causato il cambio */
-			if ((evt.getSource() == this.popupRadio[i])
-					&& (this.popupRadio[i].isSelected())) {
-				if (i == 0) {
-					this.sortListMonete(MonetaXml.Ordering.BY_ID);
-				} else {
-					this.sortListMonete(MonetaXml.Ordering.BY_PAESE);
-				}
+	@Override
+	public void actionPerformed(ActionEvent ae) {
+		if (ae.getSource() == jButtonXml2Tex) {
+			ArrayList<CollectionWorker> works = new ArrayList<CollectionWorker>();
+			works.add(xml2tex);
+			works.add(xml2et);
+			this.runInThread(works,
+					new File(Common.getCommon().getMoneteDir()), new File(
+							Common.getCommon().getLatexDir()), null);
+		} else if (ae.getSource() == jButtonWiki) {
+			// TODO wiki (?)
+		} else if (ae.getSource() == jBAdd) {
+			try {
+				this.addMoneta();
+			} catch (XmlException e) {
+				GestLog.Error(this.getClass(), e);
 			}
+		} else if (ae.getSource() == jButtonTex2Pdf) {
+			this.runInThread(xpc, new File(Common.getCommon().getLatexDir()),
+					new File(Common.getCommon().getLatexDir()), null);
+		} else if (ae.getSource() == jButtonXml2Html) {
+			this.runInThread(xml2html, new File(Common.getCommon()
+					.getMoneteDir()),
+					new File(Common.getCommon().getHtmlDir()), null);
+		} else if (ae.getSource() == jButtonVerify) {
+			// this.runInThread(vrf, new File(Common.MONETE_DIR), new
+			// File(Common.HTML_DIR), null);
+		} else if (ae.getSource() == jButtonQR) {
+			this.runInThread(qrc, new File(Common.getCommon().getMoneteDir()),
+					new File(Common.getCommon().getQrDir()), null);
+		} else if (ae.getSource() == jTBEdit) {
+			this.monetaViewer1.setEditable(this.jTBEdit.isSelected());
+			this.jBSalva.setEnabled(this.jTBEdit.isSelected());
+		} else if (ae.getSource() == jBToClipboard) {
+			MonetaXml mng = (MonetaXml) this.jListMonete.getSelectedValue();
+			String testo = mng.toFullText();
+			StringSelection stringSelection = new StringSelection(testo);
+			// copia negli appunti
+			Clipboard clipboard = Toolkit.getDefaultToolkit()
+					.getSystemClipboard();
+			clipboard.setContents(stringSelection, null);
+		} else if (ae.getSource() == jBSalva) {
+			try {
+				this.monetaViewer1.salvaDati();
+			} catch (XmlException e) {
+				GestLog.Error(this.getClass(), e);
+			}
+			// disabilita il pulsante salva
+			this.jBSalva.setEnabled(false);
+			// disabilita il pulsante edit
+			this.jTBEdit.setSelected(false);
+			// disabilita l'editing della moneta
+			this.monetaViewer1.setEditable(false);
+		} else if (ae.getSource() == jBCerca) {
+			MonetaListModel lm = (MonetaListModel) (this.jListMonete.getModel());
+			String testoDaCercare = this.jTextField1.getText();
+
+			/* cerca dall'inizio in caso di una nuova ricerca */
+			if (!testoDaCercare.equals(this.lastSearchedText)) {
+				this.lastSearchedIndex = 0;
+				this.lastSearchedText = testoDaCercare;
+			}
+			int risultato = lm.search(testoDaCercare, this.lastSearchedIndex);
+			// continua a cercare dall'indice trovato
+			this.lastSearchedIndex = risultato + 1;
+
+			if (risultato != -1) {
+				this.jListMonete.setSelectedIndex(risultato);
+				this.jListMonete.ensureIndexIsVisible(risultato);
+			}
+		} else {
+			// azione non gestita
+			GestLog.Error(MonetePanel.class, "ActionListener", "Unhandled: "
+					+ ae.getActionCommand());
 		}
 	}
 
@@ -211,48 +276,135 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	}
 
 	/**
-	 * Esegue il CollectionWorker in un thread separato per non bloccare l'EDT.
+	 * Aggiunge una moneta, creando una directory e un file xml pronto per
+	 * l'editing TODO Generare la posizione (elenco nella gui?).
 	 * 
-	 * @param cw
-	 * @param startDir
-	 * @param outDir
-	 * @param params
+	 * @throws XmlException
 	 */
-	public void runInThread(final ArrayList<CollectionWorker> arrayCw,
-			final File startDir, final File outDir, final Object[] params) {
-		thread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				for (CollectionWorker cw : arrayCw) {
-					try {
-						cw.doWork(startDir, outDir, params);
-					} catch (Exception ex) {
-						GestLog.Error(MonetePanel.class, ex);
-					}
+	private void addMoneta() throws XmlException {
+		AddMonetaForm am = new AddMonetaForm(null, true);
+		am.setVisible(true);
+		if (am.getReturnStatus() == AddMonetaForm.RET_OK) {
+			String id = am.getId();
+			File newDir = new File(Common.getCommon().getMoneteDir() + "/" + id);
+			// crea dir
+			boolean success = newDir.mkdir();
+			if (success) {
+				try {
+					String imgD = id + "-D.jpg";
+					String imgR = id + "-R.jpg";
+					// sistema un po' di dati per le conversioni
+					String[][] conversione = { { "%ID", id },
+							{ "%IMG_D", imgD }, { "%IMG_R", imgR },
+							{ "%CONTENITORE", "6" }, { "%VASSOIO", "0" },
+							{ "%RIGA", "0" }, { "%COLONNA", "0" } };
+					// copia file template di istanza e sistema l'attributo e le
+					// immagini
+					String newXml = Common.getCommon().getMoneteDir() + "/"
+							+ id + "/" + id + ".xml";
+					GenericUtil.fillTemplate(
+							Common.getCommon().getVoidMoneta(), newXml,
+							conversione);
+					// ricarica la lista
+					this.jListMonete
+							.setModel(new gui.datamodels.MonetaListModel(
+									MonetaXml.Ordering.BY_ID));
+					// messaggio di conferma
+					History.addEvent(History.ADD, id);
+					String msg = "AGGIUNTA con successo: " + id;
+					MainFrame.setMessage(new Message(msg, Level.INFO));
+				} catch (IOException ex) {
+					System.out.println("ERRORE");
+					GestLog.Error(MonetePanel.class, ex);
 				}
+			} else {
+				GestLog.Error(MonetePanel.class, "addMoneta",
+						"Impossibile creare directory " + id);
 			}
-		});
-		thread.start();
+		}
 	}
 
 	/**
-	 * Esegue il CollectionWorker in un thread separato per non bloccare l'EDT.
-	 * 
-	 * @param cw
-	 * @param startDir
-	 * @param outDir
-	 * @param params
+	 * @throws XmlException
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws TransformerException
 	 */
-	public void runInThread(final CollectionWorker cw, final File startDir,
-			final File outDir, final Object[] params) {
-		ArrayList<CollectionWorker> works = new ArrayList<CollectionWorker>();
-		works.add(cw);
-		this.runInThread(works, startDir, outDir, params);
+	public void disegnaVassoi() throws XmlException {
+		ContenitoriXml disp = new ContenitoriXml();
+		JTabbedPane vassoiContainer = new JTabbedPane();
+		this.jTabbedPane1.add("Vassoi", vassoiContainer);
+		HashMap<String, String> posizioni;
+		try {
+			posizioni = disp.getMapPosizioniId();
+			Armadio a = disp.getArmadio("SRI");
+			List<Integer> contenitori = new ArrayList<Integer>(
+					a.armadio.keySet());
+			/* ordina i contenitori */
+			Collections.sort(contenitori);
+			/* cicla su tutti i contenitori */
+			for (int cont : contenitori) {
+				Contenitore c = a.armadio.get(cont);
+				/* ordina i vassoi */
+				List<Integer> vassoi = new ArrayList<Integer>(
+						c.contenitore.keySet());
+				Collections.sort(vassoi);
+				/* cicla su tutti i vassoi */
+				for (int vass : vassoi) {
+					Vassoio v = c.contenitore.get(vass);
+					// disegna il vassoio
+					VassoioPanel curVassPanel = new VassoioPanel(
+							this.jListMonete);
+					// estrae i dati per il vassoio corrente
+					String[][] s = this.displayVassoio(a, c, v, posizioni);
+					// riempie la tabella
+					curVassPanel.riempieDati(v.righe, v.colonne, s);
+					// aggiunge la tab
+					String nomeTab = String.format("%d/%d", cont, vass);
+					vassoiContainer.add(nomeTab, curVassPanel);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			GestLog.Error(this.getClass(), e);
+		}
+
+	}
+
+	/**
+	 * stampa a video il contenuto di un vassoio
+	 * 
+	 * @param a
+	 * @param c
+	 * @param v
+	 * @param posizioni
+	 * @return
+	 */
+	public String[][] displayVassoio(Armadio a, Contenitore c, Vassoio v,
+			HashMap<String, String> posizioni) {
+		String[][] matrice = new String[v.righe][v.colonne];
+		for (int i = 1; i <= v.righe; i++) {
+			for (int j = 1; j <= v.colonne; j++) {
+				// costruisce la presunta chiave
+				String pos = a.nome + "-" + c.id + "-" + v.id + "-" + i + "-"
+						+ j;
+				// le righe sono invertite
+				if (posizioni.containsKey(pos)) {
+					// se la chiave esiste, scrive il valore
+					matrice[v.righe - i][j - 1] = posizioni.get(pos);
+				} else {
+					// se la chiave non esite stampa un po' di puntini
+					matrice[v.righe - i][j - 1] = "";
+				}
+			}
+		}
+		return matrice;
+
 	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
-	 * @throws XmlException 
+	 * 
+	 * @throws XmlException
 	 */
 
 	// <editor-fold defaultstate="collapsed"
@@ -387,7 +539,8 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jScrollPane1.setMinimumSize(new java.awt.Dimension(200, 24));
 
 		jListMonete.setFont(new java.awt.Font("Tahoma", 0, 10));
-		jListMonete.setModel(new gui.datamodels.MonetaListModel(MonetaXml.Ordering.BY_ID));
+		jListMonete.setModel(new gui.datamodels.MonetaListModel(
+				MonetaXml.Ordering.BY_ID));
 		jListMonete
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jListMonete
@@ -462,13 +615,97 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		}
 	}// GEN-LAST:event_jListMoneteValueChanged
 
+	private void jPopupMenuRadioButtonsActionEventListener(ActionEvent evt)
+			throws XmlException {
+		/* cicla su tutti i radio buttons */
+		for (int i = 0; i < this.popupRadio.length; i++) {
+			/* cerca il radio button attivo che ha causato il cambio */
+			if ((evt.getSource() == this.popupRadio[i])
+					&& (this.popupRadio[i].isSelected())) {
+				if (i == 0) {
+					this.sortListMonete(MonetaXml.Ordering.BY_ID);
+				} else {
+					this.sortListMonete(MonetaXml.Ordering.BY_PAESE);
+				}
+			}
+		}
+	}
+
+	// End of variables declaration//GEN-END:variables
+
+	/**
+	 * Esegue il CollectionWorker in un thread separato per non bloccare l'EDT.
+	 * 
+	 * @param cw
+	 * @param startDir
+	 * @param outDir
+	 * @param params
+	 */
+	public void runInThread(final ArrayList<CollectionWorker> arrayCw,
+			final File startDir, final File outDir, final Object[] params) {
+		thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				for (CollectionWorker cw : arrayCw) {
+					try {
+						cw.doWork(startDir, outDir, params);
+					} catch (Exception ex) {
+						GestLog.Error(MonetePanel.class, ex);
+					}
+				}
+			}
+		});
+		thread.start();
+	}
+
+	/**
+	 * Esegue il CollectionWorker in un thread separato per non bloccare l'EDT.
+	 * 
+	 * @param cw
+	 * @param startDir
+	 * @param outDir
+	 * @param params
+	 */
+	public void runInThread(final CollectionWorker cw, final File startDir,
+			final File outDir, final Object[] params) {
+		ArrayList<CollectionWorker> works = new ArrayList<CollectionWorker>();
+		works.add(cw);
+		this.runInThread(works, startDir, outDir, params);
+	}
+
+	/**
+	 * Sistema i vari "workers"
+	 * 
+	 * @throws XmlException
+	 */
+	public void setupWorks() throws XmlException {
+		pm = new ProgressMonitor(this, null, null, 0, 100);
+		// vrf = new Verify("Verifica", "Verifica XML con XSD");
+		// vrf.addObserver(this);
+		xml2et = new MoneteXml2Etichette("XML -> Etichette",
+				"Generazione di Etichette*.pdf");
+		xml2et.addObserver(this);
+		xml2html = new MoneteXml2Html("XML -> HTML",
+				"Conversione da Xml a Html");
+		xml2html.addObserver(this);
+		xml2tex = new MoneteXml2Tex("XML -> TEX",
+				"Generazione di Collezione.pdf");
+		xml2tex.addObserver(this);
+		qrc = new MoneteXml2QR("XML -> QR", "Generazione codici QR");
+		qrc.addObserver(this);
+		xpc = new XelatexPdfCreator("TEX -> PDF", "Crea i file pdf dai tex");
+		xpc.addObserver(this);
+		disegnaVassoi();
+	}
+
 	/**
 	 * Esegue il sorting della lista per paese o per id
 	 * 
 	 * @param sortByPaese
-	 * @throws XmlException 
+	 * @throws XmlException
 	 */
-	private void sortListMonete(MonetaXml.Ordering ordering) throws XmlException {
+	private void sortListMonete(MonetaXml.Ordering ordering)
+			throws XmlException {
 		MonetaXml sel = (MonetaXml) this.jListMonete.getSelectedValue();
 		MonetaListModel mlm = new MonetaListModel(ordering);
 		this.jListMonete.setModel(mlm);
@@ -490,49 +727,6 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		this.jListMonete.setSelectedIndex(index);
 		this.jListMonete.ensureIndexIsVisible(index);
 	}
-
-	/**
-	 * Gestore click su pulsante jToggleButtonSort
-	 * 
-	 * @param evt
-	 */
-	/**
-	 * Gestore cambiamento checked del menu "SortByPaese"
-	 * 
-	 * @param evt
-	 */
-	/**
-	 * Gestore click sul menu popup del
-	 * 
-	 * @param evt
-	 */
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton jBAdd;
-	private javax.swing.JButton jBCerca;
-	private javax.swing.JButton jBSalva;
-	private javax.swing.JButton jBToClipboard;
-	private javax.swing.JButton jButtonQR;
-	private javax.swing.JButton jButtonTex2Pdf;
-	private javax.swing.JButton jButtonVerify;
-	private javax.swing.JButton jButtonWiki;
-	private javax.swing.JButton jButtonXml2Html;
-	private javax.swing.JButton jButtonXml2Tex;
-	private javax.swing.JList jListMonete;
-	private javax.swing.JPopupMenu jPopupMenu1;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JScrollPane jScrollPane2;
-	private javax.swing.JToolBar.Separator jSeparator1;
-	private javax.swing.JToolBar.Separator jSeparator2;
-	private javax.swing.JToolBar.Separator jSeparator3;
-	private javax.swing.JToolBar.Separator jSeparator4;
-	private javax.swing.JSplitPane jSplitPane1;
-	private javax.swing.JToggleButton jTBEdit;
-	private javax.swing.JTabbedPane jTabbedPane1;
-	private javax.swing.JTextField jTextField1;
-	private javax.swing.JToolBar jToolBar1;
-	private gui.moneta.MonetaViewer monetaViewer1;
-
-	// End of variables declaration//GEN-END:variables
 
 	/**
 	 * Implementa l'interfaccia Observer
@@ -559,212 +753,6 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		} else {
 			GestLog.Error(MonetePanel.class, "update",
 					"Tipo di argomento non gestito.");
-		}
-	}
-
-	/**
-	 * Aggiunge una moneta, creando una directory e un file xml pronto per
-	 * l'editing
-	 * TODO Generare la posizione (elenco nella gui?).
-	 * @throws XmlException 
-	 */
-	private void addMoneta() throws XmlException {
-		AddMonetaForm am = new AddMonetaForm(null, true);
-		am.setVisible(true);
-		if (am.getReturnStatus() == AddMonetaForm.RET_OK) {
-			String id = am.getId();
-			File newDir = new File(Common.getCommon().getMoneteDir() + "/" + id);
-			// crea dir
-			boolean success = newDir.mkdir();
-			if (success) {
-				try {
-					String imgD = id + "-D.jpg";
-					String imgR = id + "-R.jpg";
-					// sistema un po' di dati per le conversioni
-					String[][] conversione = { { "%ID", id },
-							{ "%IMG_D", imgD }, { "%IMG_R", imgR }, 
-							{"%CONTENITORE", "6"},
-							{"%VASSOIO", "0"},
-							{"%RIGA", "0"},
-							{"%COLONNA", "0"}
-					};
-					// copia file template di istanza e sistema l'attributo e le
-					// immagini
-					String newXml = Common.getCommon().getMoneteDir() + "/" + id + "/" + id
-							+ ".xml";
-					GenericUtil.fillTemplate(Common.getCommon().getVoidMoneta(),
-							newXml, conversione);
-					// ricarica la lista
-					this.jListMonete
-							.setModel(new gui.datamodels.MonetaListModel(MonetaXml.Ordering.BY_ID));
-					// messaggio di conferma
-					History.addEvent(History.ADD, id);
-					String msg = "AGGIUNTA con successo: " + id;
-					MainFrame.setMessage(new Message(msg, Level.INFO));
-				} catch (IOException ex) {
-					System.out.println("ERRORE");
-					GestLog.Error(MonetePanel.class, ex);
-				}
-			} else {
-				GestLog.Error(MonetePanel.class, "addMoneta",
-						"Impossibile creare directory " + id);
-			}
-		}
-	}
-
-	/**
-	 * @throws XmlException 
-	 * @throws SAXException
-	 * @throws IOException
-	 * @throws TransformerException
-	 */
-	public void disegnaVassoi() throws XmlException {
-		ContenitoriXml disp = new ContenitoriXml();
-		JTabbedPane vassoiContainer = new JTabbedPane();
-		this.jTabbedPane1.add("Vassoi", vassoiContainer);
-		HashMap<String, String> posizioni;
-		try {
-			posizioni = disp.getMapPosizioniId();
-			Armadio a = disp.getArmadio("SRI");
-			List<Integer> contenitori = new ArrayList<Integer>(
-					a.armadio.keySet());
-			/* ordina i contenitori */
-			Collections.sort(contenitori);
-			/* cicla su tutti i contenitori */
-			for (int cont : contenitori) {
-				Contenitore c = a.armadio.get(cont);
-				/* ordina i vassoi */
-				List<Integer> vassoi = new ArrayList<Integer>(
-						c.contenitore.keySet());
-				Collections.sort(vassoi);
-				/* cicla su tutti i vassoi */
-				for (int vass : vassoi) {
-					Vassoio v = c.contenitore.get(vass);
-					// disegna il vassoio
-					VassoioPanel curVassPanel = new VassoioPanel(
-							this.jListMonete);
-					// estrae i dati per il vassoio corrente
-					String[][] s = this.displayVassoio(a, c, v, posizioni);
-					// riempie la tabella
-					curVassPanel.riempieDati(v.righe, v.colonne, s);
-					// aggiunge la tab
-					String nomeTab = String.format("%d/%d", cont, vass);
-					vassoiContainer.add(nomeTab, curVassPanel);
-				}
-			}
-		} catch (FileNotFoundException e) {
-			GestLog.Error(this.getClass(), e);
-		}
-
-	}
-
-	/**
-	 * stampa a video il contenuto di un vassoio
-	 * 
-	 * @param a
-	 * @param c
-	 * @param v
-	 * @param posizioni
-	 * @return
-	 */
-	public String[][] displayVassoio(Armadio a, Contenitore c, Vassoio v,
-			HashMap<String, String> posizioni) {
-		String[][] matrice = new String[v.righe][v.colonne];
-		for (int i = 1; i <= v.righe; i++) {
-			for (int j = 1; j <= v.colonne; j++) {
-				// costruisce la presunta chiave
-				String pos = a.nome + "-" + c.id + "-" + v.id + "-" + i + "-"
-						+ j;
-				// le righe sono invertite
-				if (posizioni.containsKey(pos)) {
-					// se la chiave esiste, scrive il valore
-					matrice[v.righe - i][j - 1] = posizioni.get(pos);
-				} else {
-					// se la chiave non esite stampa un po' di puntini
-					matrice[v.righe - i][j - 1] = "";
-				}
-			}
-		}
-		return matrice;
-
-	}
-
-	/**
-	 * 
-	 * @param ae
-	 */
-	@Override
-	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == jButtonXml2Tex) {
-			ArrayList<CollectionWorker> works = new ArrayList<CollectionWorker>();
-			works.add(xml2tex);
-			works.add(xml2et);
-			this.runInThread(works, new File(Common.getCommon().getMoneteDir()), new File(
-					Common.getCommon().getLatexDir()), null);
-		} else if (ae.getSource() == jButtonWiki) {
-			// TODO wiki (?)
-		} else if (ae.getSource() == jBAdd) {
-			try {
-				this.addMoneta();
-			} catch (XmlException e) {
-				GestLog.Error(this.getClass(), e);
-			}
-		} else if (ae.getSource() == jButtonTex2Pdf) {
-			this.runInThread(xpc, new File(Common.getCommon().getLatexDir()), new File(
-					Common.getCommon().getLatexDir()), null);
-		} else if (ae.getSource() == jButtonXml2Html) {
-			this.runInThread(xml2html, new File(Common.getCommon().getMoneteDir()), new File(
-					Common.getCommon().getHtmlDir()), null);
-		} else if (ae.getSource() == jButtonVerify) {
-			// this.runInThread(vrf, new File(Common.MONETE_DIR), new
-			// File(Common.HTML_DIR), null);
-		} else if (ae.getSource() == jButtonQR) {
-			this.runInThread(qrc, new File(Common.getCommon().getMoneteDir()), new File(
-					Common.getCommon().getQrDir()), null);
-		} else if (ae.getSource() == jTBEdit) {
-			this.monetaViewer1.setEditable(this.jTBEdit.isSelected());
-			this.jBSalva.setEnabled(this.jTBEdit.isSelected());
-		} else if (ae.getSource() == jBToClipboard) {
-			MonetaXml mng = (MonetaXml) this.jListMonete.getSelectedValue();
-			String testo = mng.toFullText();
-			StringSelection stringSelection = new StringSelection(testo);
-			// copia negli appunti
-			Clipboard clipboard = Toolkit.getDefaultToolkit()
-					.getSystemClipboard();
-			clipboard.setContents(stringSelection, null);
-		} else if (ae.getSource() == jBSalva) {
-			try {
-				this.monetaViewer1.salvaDati();
-			} catch (XmlException e) {
-				GestLog.Error(this.getClass(), e);
-			}
-			// disabilita il pulsante salva
-			this.jBSalva.setEnabled(false);
-			// disabilita il pulsante edit
-			this.jTBEdit.setSelected(false);
-			// disabilita l'editing della moneta
-			this.monetaViewer1.setEditable(false);
-		} else if (ae.getSource() == jBCerca) {
-			MonetaListModel lm = (MonetaListModel) (this.jListMonete.getModel());
-			String testoDaCercare = this.jTextField1.getText();
-
-			/* cerca dall'inizio in caso di una nuova ricerca */
-			if (!testoDaCercare.equals(this.lastSearchedText)) {
-				this.lastSearchedIndex = 0;
-				this.lastSearchedText = testoDaCercare;
-			}
-			int risultato = lm.search(testoDaCercare, this.lastSearchedIndex);
-			// continua a cercare dall'indice trovato
-			this.lastSearchedIndex = risultato + 1;
-
-			if (risultato != -1) {
-				this.jListMonete.setSelectedIndex(risultato);
-				this.jListMonete.ensureIndexIsVisible(risultato);
-			}
-		} else {
-			// azione non gestita
-			GestLog.Error(MonetePanel.class, "ActionListener", "Unhandled: "
-					+ ae.getActionCommand());
 		}
 	}
 }

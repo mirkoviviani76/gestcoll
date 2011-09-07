@@ -43,10 +43,20 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "contenitore", propOrder = { "vassoio" })
 public class Contenitore {
 
-	@XmlElement(required = true)
-	protected List<Vassoio> vassoio;
 	@XmlAttribute(name = "id")
 	protected String id;
+	@XmlElement(required = true)
+	protected List<Vassoio> vassoio;
+
+	/**
+	 * Gets the value of the id property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getId() {
+		return id;
+	}
 
 	/**
 	 * Gets the value of the vassoio property.
@@ -75,16 +85,6 @@ public class Contenitore {
 			vassoio = new ArrayList<Vassoio>();
 		}
 		return this.vassoio;
-	}
-
-	/**
-	 * Gets the value of the id property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getId() {
-		return id;
 	}
 
 	/**

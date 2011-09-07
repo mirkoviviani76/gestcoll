@@ -5,7 +5,6 @@
 // Generated on: 2011.09.06 at 10:39:28 AM CEST 
 //
 
-
 package XmlData.Contatti;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,13 +12,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * Tipo che definisce un contatto
  * 
- * <p>Java class for contatto complex type.
+ * <p>
+ * Java class for contatto complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="contatto">
@@ -43,83 +44,74 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Contatto {
 
-    @XmlElement(required = true)
-    protected String nome;
-    @XmlElement(required = true)
-    protected String email;
-    @XmlElement(required = true)
-    protected String note;
+	@XmlElement(required = true)
+	protected String email;
+	@XmlElement(required = true)
+	protected String nome;
+	@XmlElement(required = true)
+	protected String note;
 
-    /**
-     * Gets the value of the nome property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getNome() {
-        return nome;
-    }
+	/**
+	 * Gets the value of the email property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getEmail() {
+		return email;
+	}
 
-    /**
-     * Sets the value of the nome property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNome(String value) {
-        this.nome = value;
-    }
+	/**
+	 * Gets the value of the nome property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getNome() {
+		return nome;
+	}
 
-    /**
-     * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getEmail() {
-        return email;
-    }
+	/**
+	 * Gets the value of the note property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getNote() {
+		return note;
+	}
 
-    /**
-     * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setEmail(String value) {
-        this.email = value;
-    }
+	/**
+	 * Sets the value of the email property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setEmail(String value) {
+		this.email = value;
+	}
 
-    /**
-     * Gets the value of the note property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getNote() {
-        return note;
-    }
+	/**
+	 * Sets the value of the nome property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setNome(String value) {
+		this.nome = value;
+	}
 
-    /**
-     * Sets the value of the note property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNote(String value) {
-        this.note = value;
-    }
+	/**
+	 * Sets the value of the note property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setNote(String value) {
+		this.note = value;
+	}
 
 }

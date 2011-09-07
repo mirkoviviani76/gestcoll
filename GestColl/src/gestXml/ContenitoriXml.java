@@ -35,7 +35,8 @@ public class ContenitoriXml extends GestXml {
 
 	/**
 	 * Costruttore
-	 * @throws XmlException 
+	 * 
+	 * @throws XmlException
 	 */
 	public ContenitoriXml() throws XmlException {
 		super(new File(Common.getCommon().getContenitoriXml()));
@@ -46,11 +47,17 @@ public class ContenitoriXml extends GestXml {
 
 	/**
 	 * aggiunge un vassoio ad un contenitore
-	 * @param contenitore il contenitore
-	 * @param curVass il vassoio
-	 * @param r numero righe
-	 * @param c numero colonne
-	 * @param dim dimensione
+	 * 
+	 * @param contenitore
+	 *            il contenitore
+	 * @param curVass
+	 *            il vassoio
+	 * @param r
+	 *            numero righe
+	 * @param c
+	 *            numero colonne
+	 * @param dim
+	 *            dimensione
 	 */
 	private void addVass(Contenitore contenitore, String curVass, String r,
 			String c, String dim) {
@@ -78,72 +85,8 @@ public class ContenitoriXml extends GestXml {
 	}
 
 	/**
-	 * legge il file xml
-	 * @throws XmlException 
-	 */
-	private void readXml() throws XmlException {
-		try {
-			JAXBContext jc = JAXBContext.newInstance("XmlData.Contenitori");
-		Unmarshaller unmarshaller = jc.createUnmarshaller();
-		XmlData.Contenitori.Contenitori contenitori = (XmlData.Contenitori.Contenitori) unmarshaller
-				.unmarshal(this.xmlFile);
-
-		int contaArmadi = 1;
-		int contaCont = 1;
-		int contaVass = 1;
-		// cicla su tutti gli armadi
-		List<XmlData.Contenitori.Armadio> armadi = contenitori.getArmadio();
-		for (XmlData.Contenitori.Armadio curArmadioItem : armadi) {
-			// ottiene l'id dell'armadio corrente
-			String curArmadio = curArmadioItem.getId();
-			if (!curArmadio.equals("")) {
-				Armadio a = new Armadio(curArmadio);
-				// cicla su tutti i contenitori
-				List<XmlData.Contenitori.Contenitore> curcontenitori = curArmadioItem
-						.getContenitore();
-				for (XmlData.Contenitori.Contenitore curCont : curcontenitori) {
-					// ottiene l'id del contenitore corrente
-					int cont = Integer.parseInt(curCont.getId());
-					Contenitore c = new Contenitore(cont);
-					// cicla su tutti i vassoi
-					List<XmlData.Contenitori.Vassoio> curVassoi = curCont
-							.getVassoio();
-					for (XmlData.Contenitori.Vassoio curVass : curVassoi) {
-						// estrae i dati del vassoio corrente
-						String righe = curVass.getRighe().toString();
-						String cols = curVass.getColonne().toString();
-						String dim = curVass.getDimensione();
-						contaVass = contaVass + 1;
-						// aggiunge il vassoio
-						this.addVass(c, curVass.getId(), righe, cols, dim);
-					}
-					contaCont = contaCont + 1;
-					// aggiunge il contenitore
-					a.add(c);
-
-				}
-				contaArmadi = contaArmadi + 1;
-				// aggiunge l'armadio
-				this.armadi.put(curArmadio, a);
-			}
-		}
-		} catch (JAXBException e) {
-			throw new XmlException("readXml()", e);
-		}
-		
-	}
-
-	/**
-	 * ottiene l'armadio
-	 * @param id l'id
-	 * @return l'armadio
-	 */
-	public Armadio getArmadio(String id) {
-		return armadi.get(id);
-	}
-
-	/**
 	 * ottiene l'armadio di default (SRI)
+	 * 
 	 * @return l'armadio
 	 */
 	public Armadio getArmadio() {
@@ -151,33 +94,14 @@ public class ContenitoriXml extends GestXml {
 	}
 
 	/**
-	 * Ritorna una mappa la cui chiave e' la posizione nel formato
-	 * armadio-contenitore-vassoio-riga-colonna e il valore e' l'id della moneta
+	 * ottiene l'armadio
 	 * 
-	 * @return la mappa costruita come sopra
-	 * @throws FileNotFoundException
-	 * @throws XmlException 
+	 * @param id
+	 *            l'id
+	 * @return l'armadio
 	 */
-	public HashMap<String, String> getMapPosizioniId() throws FileNotFoundException, XmlException {
-		/* ottiene l'elenco di tutte le monete */
-		List<File> files = CollectionWorker.getFileListing(new File(
-				Common.getCommon().getMoneteDir()), Common.COIN_END);
-		ListIterator<File> iterator = files.listIterator();
-		HashMap<String, String> posizioniId = new HashMap<String, String>(
-				files.size());
-
-		/* cicla su tutte le monete */
-		while (iterator.hasNext()) {
-            MonetaXml mng = new MonetaXml((iterator.next()));
-			String cont = mng.getPosizione().getContenitore().toString();
-			String vass = mng.getPosizione().getVassoio().toString();
-			String riga = mng.getPosizione().getRiga().toString();
-			String col = mng.getPosizione().getColonna().toString();
-			String pos = this.getArmadio().nome + "-" + cont + "-" + vass
-					+ "-" + riga + "-" + col;
-			posizioniId.put(pos, mng.getId());
-		}
-		return posizioniId;
+	public Armadio getArmadio(String id) {
+		return armadi.get(id);
 	}
 
 	/**
@@ -186,13 +110,14 @@ public class ContenitoriXml extends GestXml {
 	 * 
 	 * @return la mappa costruita come sopra
 	 * @throws FileNotFoundException
-	 * @throws TransformerException 
-	 * @throws XmlException 
+	 * @throws TransformerException
+	 * @throws XmlException
 	 */
-	public HashMap<String, String> getMapIdPosizioni() throws FileNotFoundException, TransformerException, XmlException {
+	public HashMap<String, String> getMapIdPosizioni()
+			throws FileNotFoundException, TransformerException, XmlException {
 		/* ottiene l'elenco di tutte le monete */
-		List<File> files = CollectionWorker.getFileListing(new File(
-				Common.getCommon().getMoneteDir()), Common.COIN_END);
+		List<File> files = CollectionWorker.getFileListing(new File(Common
+				.getCommon().getMoneteDir()), Common.COIN_END);
 		ListIterator<File> iterator = files.listIterator();
 		HashMap<String, String> posizioniId = new HashMap<String, String>(
 				files.size());
@@ -207,8 +132,41 @@ public class ContenitoriXml extends GestXml {
 	}
 
 	/**
+	 * Ritorna una mappa la cui chiave e' la posizione nel formato
+	 * armadio-contenitore-vassoio-riga-colonna e il valore e' l'id della moneta
+	 * 
+	 * @return la mappa costruita come sopra
+	 * @throws FileNotFoundException
+	 * @throws XmlException
+	 */
+	public HashMap<String, String> getMapPosizioniId()
+			throws FileNotFoundException, XmlException {
+		/* ottiene l'elenco di tutte le monete */
+		List<File> files = CollectionWorker.getFileListing(new File(Common
+				.getCommon().getMoneteDir()), Common.COIN_END);
+		ListIterator<File> iterator = files.listIterator();
+		HashMap<String, String> posizioniId = new HashMap<String, String>(
+				files.size());
+
+		/* cicla su tutte le monete */
+		while (iterator.hasNext()) {
+			MonetaXml mng = new MonetaXml((iterator.next()));
+			String cont = mng.getPosizione().getContenitore().toString();
+			String vass = mng.getPosizione().getVassoio().toString();
+			String riga = mng.getPosizione().getRiga().toString();
+			String col = mng.getPosizione().getColonna().toString();
+			String pos = this.getArmadio().nome + "-" + cont + "-" + vass + "-"
+					+ riga + "-" + col;
+			posizioniId.put(pos, mng.getId());
+		}
+		return posizioniId;
+	}
+
+	/**
 	 * ottiene la posizione come stringa
-	 * @param mng l'oggetto moneta
+	 * 
+	 * @param mng
+	 *            l'oggetto moneta
 	 * @return la posizione
 	 */
 	public String getPosAsString(MonetaXml mng) {
@@ -219,6 +177,63 @@ public class ContenitoriXml extends GestXml {
 		String pos = this.getArmadio().nome + "-" + cont + "-" + vass + "-"
 				+ riga + "-" + col;
 		return pos;
+	}
+
+	/**
+	 * legge il file xml
+	 * 
+	 * @throws XmlException
+	 */
+	private void readXml() throws XmlException {
+		try {
+			JAXBContext jc = JAXBContext.newInstance("XmlData.Contenitori");
+			Unmarshaller unmarshaller = jc.createUnmarshaller();
+			XmlData.Contenitori.Contenitori contenitori = (XmlData.Contenitori.Contenitori) unmarshaller
+					.unmarshal(this.xmlFile);
+
+			int contaArmadi = 1;
+			int contaCont = 1;
+			int contaVass = 1;
+			// cicla su tutti gli armadi
+			List<XmlData.Contenitori.Armadio> armadi = contenitori.getArmadio();
+			for (XmlData.Contenitori.Armadio curArmadioItem : armadi) {
+				// ottiene l'id dell'armadio corrente
+				String curArmadio = curArmadioItem.getId();
+				if (!curArmadio.equals("")) {
+					Armadio a = new Armadio(curArmadio);
+					// cicla su tutti i contenitori
+					List<XmlData.Contenitori.Contenitore> curcontenitori = curArmadioItem
+							.getContenitore();
+					for (XmlData.Contenitori.Contenitore curCont : curcontenitori) {
+						// ottiene l'id del contenitore corrente
+						int cont = Integer.parseInt(curCont.getId());
+						Contenitore c = new Contenitore(cont);
+						// cicla su tutti i vassoi
+						List<XmlData.Contenitori.Vassoio> curVassoi = curCont
+								.getVassoio();
+						for (XmlData.Contenitori.Vassoio curVass : curVassoi) {
+							// estrae i dati del vassoio corrente
+							String righe = curVass.getRighe().toString();
+							String cols = curVass.getColonne().toString();
+							String dim = curVass.getDimensione();
+							contaVass = contaVass + 1;
+							// aggiunge il vassoio
+							this.addVass(c, curVass.getId(), righe, cols, dim);
+						}
+						contaCont = contaCont + 1;
+						// aggiunge il contenitore
+						a.add(c);
+
+					}
+					contaArmadi = contaArmadi + 1;
+					// aggiunge l'armadio
+					this.armadi.put(curArmadio, a);
+				}
+			}
+		} catch (JAXBException e) {
+			throw new XmlException("readXml()", e);
+		}
+
 	}
 
 }

@@ -26,38 +26,53 @@ public final class DescrizioneForm extends javax.swing.JDialog {
 	/** A return status code - returned if OK button has been pressed */
 	public static final int RET_OK = 1;
 
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton cancelButton;
+
+	private gui.moneta.forms.EditButtonsPanel editButtonsPanel1;
+
+	private javax.swing.JLabel jLImg;
+
+	private javax.swing.JPanel jPanel1;
+
+	private javax.swing.JPanel jPanel2;
+
+	private javax.swing.JPanel jPanel3;
+
+	private javax.swing.JScrollPane jScrollPane1;
+
+	private javax.swing.JTextArea jTADescrizione;
+
+	private javax.swing.JButton okButton;
+	// End of variables declaration//GEN-END:variables
+
+	private int returnStatus = RET_CANCEL;
+
 	/** Creates new form DescrizioneForm */
 	public DescrizioneForm(java.awt.Frame parent, boolean modal) {
 		super(parent, modal);
 		initComponents();
 		this.editButtonsPanel1.setupEditButtons(this.jTADescrizione);
 	}
-
+	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+		doClose(RET_CANCEL);
+	}// GEN-LAST:event_cancelButtonActionPerformed
+	/** Closes the dialog */
+	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+		doClose(RET_CANCEL);
+	}// GEN-LAST:event_closeDialog
+	private void doClose(int retStatus) {
+		returnStatus = retStatus;
+		setVisible(false);
+		dispose();
+	}
+	public String getData() {
+		return this.jTADescrizione.getText();
+	}
 	/** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
 	public int getReturnStatus() {
 		return returnStatus;
 	}
-
-	public void setData(String s) {
-		this.jTADescrizione.setText(s);
-	}
-
-	public void setImg(String filename) {
-		this.jLImg.setIcon(null);
-		/* i null servono per accelerare il garbage collection (verificare) */
-		Image imgD = null;
-		ImageIcon imgD_little = null;
-		imgD = new ImageIcon(filename).getImage();
-		// si da priorita' alla velocita'
-		imgD_little = new ImageIcon(imgD.getScaledInstance(400, 400,
-				Image.SCALE_FAST));
-		this.jLImg.setIcon(imgD_little);
-	}
-
-	public String getData() {
-		return this.jTADescrizione.getText();
-	}
-
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 */
@@ -220,37 +235,22 @@ public final class DescrizioneForm extends javax.swing.JDialog {
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
-
-	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
-		doClose(RET_CANCEL);
-	}// GEN-LAST:event_closeDialog
-
-	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
-		doClose(RET_CANCEL);
-	}// GEN-LAST:event_cancelButtonActionPerformed
-
 	private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 		doClose(RET_OK);
 	}// GEN-LAST:event_okButtonActionPerformed
-
-	private void doClose(int retStatus) {
-		returnStatus = retStatus;
-		setVisible(false);
-		dispose();
+	public void setData(String s) {
+		this.jTADescrizione.setText(s);
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton cancelButton;
-	private gui.moneta.forms.EditButtonsPanel editButtonsPanel1;
-	private javax.swing.JLabel jLImg;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JPanel jPanel2;
-	private javax.swing.JPanel jPanel3;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTextArea jTADescrizione;
-	private javax.swing.JButton okButton;
-	// End of variables declaration//GEN-END:variables
-
-	private int returnStatus = RET_CANCEL;
+	public void setImg(String filename) {
+		this.jLImg.setIcon(null);
+		/* i null servono per accelerare il garbage collection (verificare) */
+		Image imgD = null;
+		ImageIcon imgD_little = null;
+		imgD = new ImageIcon(filename).getImage();
+		// si da priorita' alla velocita'
+		imgD_little = new ImageIcon(imgD.getScaledInstance(400, 400,
+				Image.SCALE_FAST));
+		this.jLImg.setIcon(imgD_little);
+	}
 }

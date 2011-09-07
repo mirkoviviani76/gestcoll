@@ -15,20 +15,32 @@ import javax.swing.SwingConstants;
  */
 public class Splash {
 
-	private Graphics2D bottomGraph;
-	private Graphics2D labelGraph;
-	private Graphics2D nameGraph;
-	private JProgressBar jPBProgress;
-	private JLabel jLVersion;
-	private JLabel jLAppName;
-	private SplashScreen splash;
-
 	private static Splash istanza = null;
-
 	/**
 	 * identifica il numero di "azioni" per lo splash screen
 	 */
 	private static final int TASKS = 10;
+	/**
+	 * Ottiene l'istanza di Splash
+	 * 
+	 * @return l'istanza Splash
+	 */
+	public static synchronized Splash getInstance() {
+		if (istanza == null) {
+			istanza = new Splash();
+		}
+		return istanza;
+	}
+	private Graphics2D bottomGraph;
+	private JLabel jLAppName;
+	private JLabel jLVersion;
+	private JProgressBar jPBProgress;
+
+	private Graphics2D labelGraph;
+
+	private Graphics2D nameGraph;
+
+	private SplashScreen splash;
 
 	/** Creates new form Splash */
 	private Splash() {
@@ -78,21 +90,10 @@ public class Splash {
 	}
 
 	/**
-	 * Ottiene l'istanza di Splash
-	 * 
-	 * @return l'istanza Splash
-	 */
-	public static synchronized Splash getInstance() {
-		if (istanza == null) {
-			istanza = new Splash();
-		}
-		return istanza;
-	}
-
-	/**
 	 * Incrementa la barra di progresso e visualizza un messaggio
 	 * 
-	 * @param str il messaggio
+	 * @param str
+	 *            il messaggio
 	 */
 	public void splashProgress(String str) {
 		if (splash != null && splash.isVisible()) {

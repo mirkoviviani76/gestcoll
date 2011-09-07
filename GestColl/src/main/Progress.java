@@ -17,9 +17,12 @@ public class Progress {
 	/**
 	 * Costruttore
 	 * 
-	 * @param c il valore corrente
-	 * @param m valore massimo
-	 * @param msg il messaggio
+	 * @param c
+	 *            il valore corrente
+	 * @param m
+	 *            valore massimo
+	 * @param msg
+	 *            il messaggio
 	 */
 	public Progress(int c, int m, String msg) {
 		this.cur = c;
@@ -29,6 +32,7 @@ public class Progress {
 
 	/**
 	 * Ottiene il valore corrente
+	 * 
 	 * @return il valore
 	 */
 	public int getCurrent() {
@@ -37,6 +41,7 @@ public class Progress {
 
 	/**
 	 * Ottiene il valore massimo
+	 * 
 	 * @return il valore
 	 */
 	public int getMax() {
@@ -45,6 +50,7 @@ public class Progress {
 
 	/**
 	 * ottiene il messaggio
+	 * 
 	 * @return il messaggio
 	 */
 	public String getMsg() {

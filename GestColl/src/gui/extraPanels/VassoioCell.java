@@ -19,6 +19,12 @@ public class VassoioCell extends javax.swing.JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JScrollPane jScrollPane1;
+
+	private javax.swing.JTextPane jTextPane1;
+	// End of variables declaration//GEN-END:variables
+
 	/** Creates new form VassoioCell */
 	public VassoioCell() {
 		initComponents();
@@ -30,15 +36,6 @@ public class VassoioCell extends javax.swing.JPanel {
 	 */
 	public void evidenzia(Color c) {
 		this.jTextPane1.setBackground(c);
-	}
-
-	/**
-	 * scrive il testo html
-	 * 
-	 * @param s
-	 */
-	public void setText(String s) {
-		this.jTextPane1.setText(s);
 	}
 
 	/**
@@ -68,10 +65,13 @@ public class VassoioCell extends javax.swing.JPanel {
 		gridBagConstraints.weighty = 1.0;
 		add(jScrollPane1, gridBagConstraints);
 	}// </editor-fold>//GEN-END:initComponents
-
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTextPane jTextPane1;
-	// End of variables declaration//GEN-END:variables
+	/**
+	 * scrive il testo html
+	 * 
+	 * @param s
+	 */
+	public void setText(String s) {
+		this.jTextPane1.setText(s);
+	}
 
 }

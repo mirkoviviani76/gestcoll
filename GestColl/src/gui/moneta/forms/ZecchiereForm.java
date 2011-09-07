@@ -17,6 +17,27 @@ public class ZecchiereForm extends javax.swing.JDialog {
 	/** A return status code - returned if OK button has been pressed */
 	public static final int RET_OK = 1;
 
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton cancelButton;
+
+	private javax.swing.JComboBox jCBRuolo;
+
+	private javax.swing.JLabel jLabel1;
+
+	private javax.swing.JLabel jLabel2;
+
+	private javax.swing.JLabel jLabel3;
+
+	private javax.swing.JPanel jPanel1;
+
+	private javax.swing.JTextField jTFNome;
+
+	private javax.swing.JTextField jTFSigla;
+
+	private javax.swing.JButton okButton;
+	// End of variables declaration//GEN-END:variables
+
+	private int returnStatus = RET_CANCEL;
 	/**
 	 * Creates new form ZecchiereForm
 	 * 
@@ -27,12 +48,37 @@ public class ZecchiereForm extends javax.swing.JDialog {
 		super(parent, modal);
 		initComponents();
 	}
-
+	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+		doClose(RET_CANCEL);
+	}// GEN-LAST:event_cancelButtonActionPerformed
+	/** Closes the dialog */
+	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+		doClose(RET_CANCEL);
+	}// GEN-LAST:event_closeDialog
+	private void doClose(int retStatus) {
+		returnStatus = retStatus;
+		setVisible(false);
+		dispose();
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public Zecchiere getData() {
+		String[] ret = new String[3];
+		ret[0] = this.jTFNome.getText();
+		ret[1] = this.jTFSigla.getText();
+		ret[2] = (String) this.jCBRuolo.getSelectedItem();
+		Zecchiere z = new Zecchiere();
+		z.setNome(ret[0]);
+		z.setSegno(ret[1]);
+		z.setRuolo(ret[2]);
+		return z;
+	}
 	/** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
 	public int getReturnStatus() {
 		return returnStatus;
 	}
-
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 */
@@ -170,25 +216,9 @@ public class ZecchiereForm extends javax.swing.JDialog {
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
-
 	private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 		doClose(RET_OK);
 	}// GEN-LAST:event_okButtonActionPerformed
-
-	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
-		doClose(RET_CANCEL);
-	}// GEN-LAST:event_cancelButtonActionPerformed
-
-	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
-		doClose(RET_CANCEL);
-	}// GEN-LAST:event_closeDialog
-
-	private void doClose(int retStatus) {
-		returnStatus = retStatus;
-		setVisible(false);
-		dispose();
-	}
 
 	/**
 	 * 
@@ -199,34 +229,4 @@ public class ZecchiereForm extends javax.swing.JDialog {
 		this.jTFSigla.setText(zecchiere.getSegno());
 		this.jCBRuolo.setSelectedItem(zecchiere.getRuolo());
 	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Zecchiere getData() {
-		String[] ret = new String[3];
-		ret[0] = this.jTFNome.getText();
-		ret[1] = this.jTFSigla.getText();
-		ret[2] = (String) this.jCBRuolo.getSelectedItem();
-		Zecchiere z = new Zecchiere();
-		z.setNome(ret[0]);
-		z.setSegno(ret[1]);
-		z.setRuolo(ret[2]);
-		return z;
-	}
-
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton cancelButton;
-	private javax.swing.JComboBox jCBRuolo;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JTextField jTFNome;
-	private javax.swing.JTextField jTFSigla;
-	private javax.swing.JButton okButton;
-	// End of variables declaration//GEN-END:variables
-
-	private int returnStatus = RET_CANCEL;
 }

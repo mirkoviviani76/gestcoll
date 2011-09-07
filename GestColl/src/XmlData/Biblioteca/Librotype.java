@@ -5,7 +5,6 @@
 // Generated on: 2011.08.29 at 01:40:30 PM CEST 
 //
 
-
 package XmlData.Biblioteca;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,13 +12,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * Tipo che definisce una pubblicazione
  * 
- * <p>Java class for librotype complex type.
+ * <p>
+ * Java class for librotype complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="librotype">
@@ -45,132 +46,117 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Librotype {
 
-    @XmlElement(required = true)
-    protected String id;
-    protected Autori autori;
-    @XmlElement(required = true)
-    protected String titolo;
-    protected Supporti supporti;
-    protected String filename;
+	protected Autori autori;
+	protected String filename;
+	@XmlElement(required = true)
+	protected String id;
+	protected Supporti supporti;
+	@XmlElement(required = true)
+	protected String titolo;
 
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getId() {
-        return id;
-    }
+	/**
+	 * Gets the value of the autori property.
+	 * 
+	 * @return possible object is {@link Autori }
+	 * 
+	 */
+	public Autori getAutori() {
+		return autori;
+	}
 
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setId(String value) {
-        this.id = value;
-    }
+	/**
+	 * Gets the value of the filename property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getFilename() {
+		return filename;
+	}
 
-    /**
-     * Gets the value of the autori property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Autori }
-     *     
-     */
-    public Autori getAutori() {
-        return autori;
-    }
+	/**
+	 * Gets the value of the id property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getId() {
+		return id;
+	}
 
-    /**
-     * Sets the value of the autori property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Autori }
-     *     
-     */
-    public void setAutori(Autori value) {
-        this.autori = value;
-    }
+	/**
+	 * Gets the value of the supporti property.
+	 * 
+	 * @return possible object is {@link Supporti }
+	 * 
+	 */
+	public Supporti getSupporti() {
+		return supporti;
+	}
 
-    /**
-     * Gets the value of the titolo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTitolo() {
-        return titolo;
-    }
+	/**
+	 * Gets the value of the titolo property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getTitolo() {
+		return titolo;
+	}
 
-    /**
-     * Sets the value of the titolo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTitolo(String value) {
-        this.titolo = value;
-    }
+	/**
+	 * Sets the value of the autori property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Autori }
+	 * 
+	 */
+	public void setAutori(Autori value) {
+		this.autori = value;
+	}
 
-    /**
-     * Gets the value of the supporti property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Supporti }
-     *     
-     */
-    public Supporti getSupporti() {
-        return supporti;
-    }
+	/**
+	 * Sets the value of the filename property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setFilename(String value) {
+		this.filename = value;
+	}
 
-    /**
-     * Sets the value of the supporti property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Supporti }
-     *     
-     */
-    public void setSupporti(Supporti value) {
-        this.supporti = value;
-    }
+	/**
+	 * Sets the value of the id property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setId(String value) {
+		this.id = value;
+	}
 
-    /**
-     * Gets the value of the filename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFilename() {
-        return filename;
-    }
+	/**
+	 * Sets the value of the supporti property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Supporti }
+	 * 
+	 */
+	public void setSupporti(Supporti value) {
+		this.supporti = value;
+	}
 
-    /**
-     * Sets the value of the filename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFilename(String value) {
-        this.filename = value;
-    }
+	/**
+	 * Sets the value of the titolo property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setTitolo(String value) {
+		this.titolo = value;
+	}
 
 }

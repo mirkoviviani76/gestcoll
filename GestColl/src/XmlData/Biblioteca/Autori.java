@@ -5,7 +5,6 @@
 // Generated on: 2011.08.29 at 01:40:30 PM CEST 
 //
 
-
 package XmlData.Biblioteca;
 
 import java.util.ArrayList;
@@ -14,11 +13,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for autori complex type.
+ * <p>
+ * Java class for autori complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="autori">
@@ -35,40 +36,38 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "autori", propOrder = {
-    "autore"
-})
+@XmlType(name = "autori", propOrder = { "autore" })
 public class Autori {
 
-    protected List<String> autore;
+	protected List<String> autore;
 
-    /**
-     * Gets the value of the autore property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the autore property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getAutore().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link String }
-     * 
-     * 
-     */
-    public List<String> getAutore() {
-        if (autore == null) {
-            autore = new ArrayList<String>();
-        }
-        return this.autore;
-    }
+	/**
+	 * Gets the value of the autore property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the autore property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getAutore().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link String }
+	 * 
+	 * 
+	 */
+	public List<String> getAutore() {
+		if (autore == null) {
+			autore = new ArrayList<String>();
+		}
+		return this.autore;
+	}
 
 }

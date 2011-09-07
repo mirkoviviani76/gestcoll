@@ -41,10 +41,20 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlType(name = "datiAcquisto", propOrder = { "luogo", "data", "prezzo" })
 public class DatiAcquisto {
 
-	protected String luogo;
 	@XmlSchemaType(name = "date")
 	protected XMLGregorianCalendar data;
+	protected String luogo;
 	protected Misura prezzo;
+
+	/**
+	 * Gets the value of the data property.
+	 * 
+	 * @return possible object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public XMLGregorianCalendar getData() {
+		return data;
+	}
 
 	/**
 	 * Gets the value of the luogo property.
@@ -57,24 +67,13 @@ public class DatiAcquisto {
 	}
 
 	/**
-	 * Sets the value of the luogo property.
+	 * Gets the value of the prezzo property.
 	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setLuogo(String value) {
-		this.luogo = value;
-	}
-
-	/**
-	 * Gets the value of the data property.
-	 * 
-	 * @return possible object is {@link XMLGregorianCalendar }
+	 * @return possible object is {@link Misura }
 	 * 
 	 */
-	public XMLGregorianCalendar getData() {
-		return data;
+	public Misura getPrezzo() {
+		return prezzo;
 	}
 
 	/**
@@ -89,13 +88,14 @@ public class DatiAcquisto {
 	}
 
 	/**
-	 * Gets the value of the prezzo property.
+	 * Sets the value of the luogo property.
 	 * 
-	 * @return possible object is {@link Misura }
+	 * @param value
+	 *            allowed object is {@link String }
 	 * 
 	 */
-	public Misura getPrezzo() {
-		return prezzo;
+	public void setLuogo(String value) {
+		this.luogo = value;
 	}
 
 	/**

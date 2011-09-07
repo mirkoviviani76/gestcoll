@@ -5,7 +5,6 @@
 // Generated on: 2011.08.26 at 05:21:40 PM CEST 
 //
 
-
 package XmlData.Links;
 
 import java.util.ArrayList;
@@ -16,11 +15,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -37,42 +38,40 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "categoria"
-})
+@XmlType(name = "", propOrder = { "categoria" })
 @XmlRootElement(name = "links")
 public class Links {
 
-    @XmlElement(required = true)
-    protected List<Linklist> categoria;
+	@XmlElement(required = true)
+	protected List<Linklist> categoria;
 
-    /**
-     * Gets the value of the categoria property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the categoria property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCategoria().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Linklist }
-     * 
-     * 
-     */
-    public List<Linklist> getCategoria() {
-        if (categoria == null) {
-            categoria = new ArrayList<Linklist>();
-        }
-        return this.categoria;
-    }
+	/**
+	 * Gets the value of the categoria property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the categoria property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getCategoria().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link Linklist }
+	 * 
+	 * 
+	 */
+	public List<Linklist> getCategoria() {
+		if (categoria == null) {
+			categoria = new ArrayList<Linklist>();
+		}
+		return this.categoria;
+	}
 
 }

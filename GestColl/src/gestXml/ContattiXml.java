@@ -27,14 +27,16 @@ public class ContattiXml extends GestXml {
 
 	/**
 	 * Costruttore.
-	 * @throws XmlException 
+	 * 
+	 * @throws XmlException
 	 */
 	public ContattiXml() throws XmlException {
 		super(new File(Common.getCommon().getContattiXml()));
 		try {
 			JAXBContext jc = JAXBContext.newInstance("XmlData.Contatti");
-		Unmarshaller unmarshaller = jc.createUnmarshaller();
-		contatti = (Contatti) unmarshaller.unmarshal(new File(Common.getCommon().getContattiXml()));
+			Unmarshaller unmarshaller = jc.createUnmarshaller();
+			contatti = (Contatti) unmarshaller.unmarshal(new File(Common
+					.getCommon().getContattiXml()));
 		} catch (JAXBException e) {
 			throw new XmlException("ContattiXml", e);
 		}
@@ -42,22 +44,21 @@ public class ContattiXml extends GestXml {
 
 	/**
 	 * costruisce l'elenco dei contatti
+	 * 
 	 * @return l'elenco
 	 */
-	public List<gestXml.data.Contatto> getContatti()
-	{
+	public List<gestXml.data.Contatto> getContatti() {
 		List<gestXml.data.Contatto> ret = new ArrayList<gestXml.data.Contatto>();
 		List<XmlData.Contatti.Contatto> lista = contatti.getContatto();
-		for (XmlData.Contatti.Contatto c : lista)
-		{
+		for (XmlData.Contatti.Contatto c : lista) {
 			String nome = c.getNome();
 			String email = c.getEmail();
 			String note = c.getNote();
-			gestXml.data.Contatto curr = new gestXml.data.Contatto(nome, email, note);
+			gestXml.data.Contatto curr = new gestXml.data.Contatto(nome, email,
+					note);
 			ret.add(curr);
 		}
 		return ret;
 	}
-	
 
 }

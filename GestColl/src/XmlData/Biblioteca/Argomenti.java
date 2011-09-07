@@ -5,7 +5,6 @@
 // Generated on: 2011.08.29 at 01:40:30 PM CEST 
 //
 
-
 package XmlData.Biblioteca;
 
 import java.util.ArrayList;
@@ -14,11 +13,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for argomenti complex type.
+ * <p>
+ * Java class for argomenti complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="argomenti">
@@ -35,40 +36,38 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "argomenti", propOrder = {
-    "argomento"
-})
+@XmlType(name = "argomenti", propOrder = { "argomento" })
 public class Argomenti {
 
-    protected List<String> argomento;
+	protected List<String> argomento;
 
-    /**
-     * Gets the value of the argomento property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the argomento property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getArgomento().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link String }
-     * 
-     * 
-     */
-    public List<String> getArgomento() {
-        if (argomento == null) {
-            argomento = new ArrayList<String>();
-        }
-        return this.argomento;
-    }
+	/**
+	 * Gets the value of the argomento property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the argomento property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getArgomento().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link String }
+	 * 
+	 * 
+	 */
+	public List<String> getArgomento() {
+		if (argomento == null) {
+			argomento = new ArrayList<String>();
+		}
+		return this.argomento;
+	}
 
 }

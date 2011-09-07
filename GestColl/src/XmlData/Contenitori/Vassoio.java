@@ -45,34 +45,13 @@ import javax.xml.bind.annotation.XmlType;
 public class Vassoio {
 
 	@XmlElement(required = true)
-	protected BigInteger righe;
-	@XmlElement(required = true)
 	protected BigInteger colonne;
 	@XmlElement(required = true)
 	protected String dimensione;
 	@XmlAttribute(name = "id")
 	protected String id;
-
-	/**
-	 * Gets the value of the righe property.
-	 * 
-	 * @return possible object is {@link BigInteger }
-	 * 
-	 */
-	public BigInteger getRighe() {
-		return righe;
-	}
-
-	/**
-	 * Sets the value of the righe property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link BigInteger }
-	 * 
-	 */
-	public void setRighe(BigInteger value) {
-		this.righe = value;
-	}
+	@XmlElement(required = true)
+	protected BigInteger righe;
 
 	/**
 	 * Gets the value of the colonne property.
@@ -82,6 +61,36 @@ public class Vassoio {
 	 */
 	public BigInteger getColonne() {
 		return colonne;
+	}
+
+	/**
+	 * Gets the value of the dimensione property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getDimensione() {
+		return dimensione;
+	}
+
+	/**
+	 * Gets the value of the id property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * Gets the value of the righe property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getRighe() {
+		return righe;
 	}
 
 	/**
@@ -96,16 +105,6 @@ public class Vassoio {
 	}
 
 	/**
-	 * Gets the value of the dimensione property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getDimensione() {
-		return dimensione;
-	}
-
-	/**
 	 * Sets the value of the dimensione property.
 	 * 
 	 * @param value
@@ -117,16 +116,6 @@ public class Vassoio {
 	}
 
 	/**
-	 * Gets the value of the id property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
 	 * Sets the value of the id property.
 	 * 
 	 * @param value
@@ -135,6 +124,17 @@ public class Vassoio {
 	 */
 	public void setId(String value) {
 		this.id = value;
+	}
+
+	/**
+	 * Sets the value of the righe property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setRighe(BigInteger value) {
+		this.righe = value;
 	}
 
 }

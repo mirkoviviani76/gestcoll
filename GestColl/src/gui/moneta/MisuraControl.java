@@ -20,17 +20,28 @@ public class MisuraControl extends javax.swing.JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private javax.swing.JTextField jTFUnita;
+
+	private javax.swing.JTextField jTFValore;
+
 	/** Creates new form MisuraControl */
 	public MisuraControl() {
 		initComponents();
 	}
 
 	/**
+	 * aggiunge il listener per le modifiche
 	 * 
-	 * @return il valore
+	 * @param myDocumentListenerForValue
+	 * @param myDocumentListenerForUnit
 	 */
-	public String getValore() {
-		return this.jTFValore.getText();
+	void addDocumentListener(
+			XmlDocumentChangeListener myDocumentListenerForValue,
+			XmlDocumentChangeListener myDocumentListenerForUnit) {
+		this.jTFValore.getDocument().addDocumentListener(
+				myDocumentListenerForValue);
+		this.jTFUnita.getDocument().addDocumentListener(
+				myDocumentListenerForUnit);
 	}
 
 	/**
@@ -42,80 +53,13 @@ public class MisuraControl extends javax.swing.JPanel {
 	}
 
 	/**
-	 * setta il valore
-	 * @param v
+	 * 
+	 * @return il valore
 	 */
-	public void setValore(String v) {
-		this.jTFValore.setText(v);
+	public String getValore() {
+		return this.jTFValore.getText();
 	}
 
-	/**
-	 * setta l'unita'
-	 * @param u
-	 */
-	public void setUnita(String u) {
-		this.jTFUnita.setText(u);
-	}
-
-	/**
-	 * setta la misura con un nominale
-	 * @param nominale
-	 */
-	public void setMisura(Nominale nominale) {
-		this.setUnita(nominale.getValuta());
-		this.setValore(nominale.getValore());
-	}
-
-	/**
-	 * setta la misura con un'altra misura
-	 * @param m
-	 */
-	public void setMisura(Misura m) {
-
-		String val = "";
-		String un = "";
-		if (m != null) {
-			if (m.getValore() != null)
-				val = m.getValore().toPlainString();
-			if (m.getUnita() != null)
-				un = m.getUnita();
-		}
-		this.setUnita(un);
-		this.setValore(val);
-	}
-	
-	
-	/**
-	 * setta l'editabilita' del campo 
-	 * @param flag
-	 */
-	public void setEditable(boolean flag) {
-		this.jTFUnita.setEditable(flag);
-		this.jTFValore.setEditable(flag);
-	}
-
-    /**
-     * aggiunge il listener per le modifiche
-     * @param myDocumentListenerForValue
-     * @param myDocumentListenerForUnit
-     */
-	void addDocumentListener(XmlDocumentChangeListener myDocumentListenerForValue,
-    		XmlDocumentChangeListener myDocumentListenerForUnit) {
-        this.jTFValore.getDocument().addDocumentListener(myDocumentListenerForValue);
-        this.jTFUnita.getDocument().addDocumentListener(myDocumentListenerForUnit);
-    }
-
-    /**
-     * rimuove il listener per le modifiche
-     * @param myDocumentListenerForValue
-     * @param myDocumentListenerForUnit
-     */
-	void removeDocumentListener(XmlDocumentChangeListener myDocumentListenerForValue,
-    		XmlDocumentChangeListener myDocumentListenerForUnit) {
-        this.jTFValore.getDocument().removeDocumentListener(myDocumentListenerForValue);
-        this.jTFUnita.getDocument().removeDocumentListener(myDocumentListenerForUnit);
-    }
-    
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 */
@@ -136,8 +80,77 @@ public class MisuraControl extends javax.swing.JPanel {
 		add(jTFUnita, gridBagConstraints);
 	}
 
-	private javax.swing.JTextField jTFUnita;
-	private javax.swing.JTextField jTFValore;
+	/**
+	 * rimuove il listener per le modifiche
+	 * 
+	 * @param myDocumentListenerForValue
+	 * @param myDocumentListenerForUnit
+	 */
+	void removeDocumentListener(
+			XmlDocumentChangeListener myDocumentListenerForValue,
+			XmlDocumentChangeListener myDocumentListenerForUnit) {
+		this.jTFValore.getDocument().removeDocumentListener(
+				myDocumentListenerForValue);
+		this.jTFUnita.getDocument().removeDocumentListener(
+				myDocumentListenerForUnit);
+	}
 
+	/**
+	 * setta l'editabilita' del campo
+	 * 
+	 * @param flag
+	 */
+	public void setEditable(boolean flag) {
+		this.jTFUnita.setEditable(flag);
+		this.jTFValore.setEditable(flag);
+	}
+
+	/**
+	 * setta la misura con un'altra misura
+	 * 
+	 * @param m
+	 */
+	public void setMisura(Misura m) {
+
+		String val = "";
+		String un = "";
+		if (m != null) {
+			if (m.getValore() != null) {
+				val = m.getValore().toPlainString();
+			}
+			if (m.getUnita() != null) {
+				un = m.getUnita();
+			}
+		}
+		this.setUnita(un);
+		this.setValore(val);
+	}
+
+	/**
+	 * setta la misura con un nominale
+	 * 
+	 * @param nominale
+	 */
+	public void setMisura(Nominale nominale) {
+		this.setUnita(nominale.getValuta());
+		this.setValore(nominale.getValore());
+	}
+
+	/**
+	 * setta l'unita'
+	 * 
+	 * @param u
+	 */
+	public void setUnita(String u) {
+		this.jTFUnita.setText(u);
+	}
+	/**
+	 * setta il valore
+	 * 
+	 * @param v
+	 */
+	public void setValore(String v) {
+		this.jTFValore.setText(v);
+	}
 
 }

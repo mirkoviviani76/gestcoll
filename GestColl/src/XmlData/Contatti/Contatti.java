@@ -5,7 +5,6 @@
 // Generated on: 2011.09.06 at 10:39:28 AM CEST 
 //
 
-
 package XmlData.Contatti;
 
 import java.util.ArrayList;
@@ -16,11 +15,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -37,42 +38,40 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "contatto"
-})
+@XmlType(name = "", propOrder = { "contatto" })
 @XmlRootElement(name = "contatti")
 public class Contatti {
 
-    @XmlElement(required = true)
-    protected List<Contatto> contatto;
+	@XmlElement(required = true)
+	protected List<Contatto> contatto;
 
-    /**
-     * Gets the value of the contatto property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contatto property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getContatto().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Contatto }
-     * 
-     * 
-     */
-    public List<Contatto> getContatto() {
-        if (contatto == null) {
-            contatto = new ArrayList<Contatto>();
-        }
-        return this.contatto;
-    }
+	/**
+	 * Gets the value of the contatto property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the contatto property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getContatto().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link Contatto }
+	 * 
+	 * 
+	 */
+	public List<Contatto> getContatto() {
+		if (contatto == null) {
+			contatto = new ArrayList<Contatto>();
+		}
+		return this.contatto;
+	}
 
 }

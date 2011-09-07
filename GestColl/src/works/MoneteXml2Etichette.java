@@ -26,10 +26,6 @@ import gestXml.MonetaXml;
  */
 public class MoneteXml2Etichette extends CollectionWorker {
 
-	/**
-     *
-     */
-	public static final String OUTFILE_ET = "etichette.tex";
 	private static final String MARKER_ETA = "%ETICHETTEA";
 	private static final String MARKER_ETB = "%ETICHETTEB";
 	private static final String MARKER_ETC = "%ETICHETTEC";
@@ -38,6 +34,10 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	private static final String MARKER_QRB = "%QRB";
 	private static final String MARKER_QRC = "%QRC";
 	private static final String MARKER_QRD = "%QRD";
+	/**
+     *
+     */
+	public static final String OUTFILE_ET = "etichette.tex";
 
 	/**
 	 * 
@@ -54,11 +54,12 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	 * @param inDir
 	 * @param outDir
 	 * @param params
-	 * @throws XmlException 
-	 * @throws IOException 
+	 * @throws XmlException
+	 * @throws IOException
 	 */
 	@Override
-	public Object[] doWork(File inDir, File outDir, Object[] params) throws XmlException, IOException {
+	public Object[] doWork(File inDir, File outDir, Object[] params)
+			throws XmlException, IOException {
 		String etichetteA = "";
 		String etichetteB = "";
 		String etichetteC = "";
@@ -119,8 +120,9 @@ public class MoneteXml2Etichette extends CollectionWorker {
 				{ MARKER_QRB, qrB }, { MARKER_QRC, qrC }, { MARKER_QRD, qrD } };
 
 		/* aggiorna il template */
-		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/" + OUTFILE_ET
-				+ Common.TEMPLATE_END, outDir + "/" + OUTFILE_ET, conversione);
+		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/"
+				+ OUTFILE_ET + Common.TEMPLATE_END, outDir + "/" + OUTFILE_ET,
+				conversione);
 
 		Message m = new Message("Etichette.tex creati", Level.INFO);
 		this.setChanged();
@@ -136,7 +138,7 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	 * @param xml
 	 *            il file della moneta
 	 * @return la dimensione espressa come stringa A,B,C,D
-	 * @throws XmlException 
+	 * @throws XmlException
 	 */
 	private String getDim(MonetaXml xml) throws XmlException {
 		ContenitoriXml collezione = new ContenitoriXml();
@@ -161,7 +163,7 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	private String getEtichetta(MonetaXml xml, String dimensione, String id) {
 		String out = "";
 		String autorita = "";
-		
+
 		String paese = xml.getPaese();
 		if (xml.getAutorita() != null && xml.getAutorita().getNome() != null) {
 			for (String nome : xml.getAutorita().getNome()) {
@@ -170,13 +172,13 @@ public class MoneteXml2Etichette extends CollectionWorker {
 		}
 		Zecca valZecca = xml.getZecca();
 		String zecca = "";
-		if (valZecca != null)
-		{
+		if (valZecca != null) {
 			zecca = valZecca.toString();
 		}
 		// serve almeno uno spazio per il latex
-		if (autorita.equals(""))
+		if (autorita.equals("")) {
 			autorita = " ";
+		}
 
 		if (!zecca.equals(" ") && !autorita.equals(" ")) {
 			zecca = "\\\\\\\\" + zecca;

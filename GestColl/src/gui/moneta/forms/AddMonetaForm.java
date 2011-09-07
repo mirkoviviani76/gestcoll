@@ -28,6 +28,30 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 	/** A return status code - returned if OK button has been pressed */
 	public static final int RET_OK = 1;
 
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton cancelButton;
+
+	private javax.swing.JComboBox jCBDim;
+
+	private javax.swing.JLabel jLabel1;
+
+	private javax.swing.JLabel jLabel2;
+
+	private javax.swing.JLabel jLabel3;
+
+	private javax.swing.JLabel jLabel4;
+
+	private javax.swing.JPanel jPanel1;
+
+	private javax.swing.JTextField jTFAnno;
+
+	private javax.swing.JTextField jTFId;
+
+	private javax.swing.JTextField jTFProgressivo;
+
+	private javax.swing.JButton okButton;
+	// End of variables declaration//GEN-END:variables
+	private int returnStatus = RET_CANCEL;
 	private List<File> tuttiXmlMonete;
 
 	/**
@@ -40,13 +64,57 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 		super(parent, modal);
 		initComponents();
 		// carica i file xml delle monete
-		this.tuttiXmlMonete = CollectionWorker.getFileListing(
-				Common.getCommon().getMoneteDir(), Common.COIN_END);
+		this.tuttiXmlMonete = CollectionWorker.getFileListing(Common
+				.getCommon().getMoneteDir(), Common.COIN_END);
 		// aggiunge i listener
 		this.jTFAnno.getDocument().addDocumentListener(this);
 		this.jCBDim.addActionListener(this);
 		// effettua un primo aggiornamento
 		this.updateData();
+	}
+
+	/**
+	 * 
+	 * @param ae
+	 */
+	@Override
+	public void actionPerformed(ActionEvent ae) {
+		if (ae.getSource() == this.jCBDim) {
+			this.updateData();
+		}
+	}
+
+	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+		doClose(RET_CANCEL);
+	}// GEN-LAST:event_cancelButtonActionPerformed
+
+	/**
+	 * 
+	 * @param de
+	 */
+	@Override
+	public void changedUpdate(DocumentEvent de) {
+		this.updateData();
+	}
+
+	/** Closes the dialog */
+	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+		doClose(RET_CANCEL);
+	}// GEN-LAST:event_closeDialog
+
+	private void doClose(int retStatus) {
+		returnStatus = retStatus;
+		setVisible(false);
+		dispose();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getId() {
+		return this.jTFAnno.getText() + "-" + this.jCBDim.getSelectedItem()
+				+ "-" + this.jTFProgressivo.getText();
 	}
 
 	/**
@@ -220,32 +288,26 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
+	/**
+	 * 
+	 * @param de
+	 */
+	@Override
+	public void insertUpdate(DocumentEvent de) {
+		this.updateData();
+	}
+
 	private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 		doClose(RET_OK);
 	}// GEN-LAST:event_okButtonActionPerformed
 
-	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
-		doClose(RET_CANCEL);
-	}// GEN-LAST:event_cancelButtonActionPerformed
-
-	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
-		doClose(RET_CANCEL);
-	}// GEN-LAST:event_closeDialog
-
-	private void doClose(int retStatus) {
-		returnStatus = retStatus;
-		setVisible(false);
-		dispose();
-	}
-
 	/**
 	 * 
-	 * @return
+	 * @param de
 	 */
-	public String getId() {
-		return this.jTFAnno.getText() + "-" + this.jCBDim.getSelectedItem()
-				+ "-" + this.jTFProgressivo.getText();
+	@Override
+	public void removeUpdate(DocumentEvent de) {
+		this.updateData();
 	}
 
 	/**
@@ -271,59 +333,5 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 		this.jTFProgressivo.setText(strcounter);
 		// genera l'ID corrente
 		this.jTFId.setText(this.getId());
-	}
-
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton cancelButton;
-	private javax.swing.JComboBox jCBDim;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JTextField jTFAnno;
-	private javax.swing.JTextField jTFId;
-	private javax.swing.JTextField jTFProgressivo;
-	private javax.swing.JButton okButton;
-	// End of variables declaration//GEN-END:variables
-
-	private int returnStatus = RET_CANCEL;
-
-	/**
-	 * 
-	 * @param de
-	 */
-	@Override
-	public void insertUpdate(DocumentEvent de) {
-		this.updateData();
-	}
-
-	/**
-	 * 
-	 * @param de
-	 */
-	@Override
-	public void removeUpdate(DocumentEvent de) {
-		this.updateData();
-	}
-
-	/**
-	 * 
-	 * @param de
-	 */
-	@Override
-	public void changedUpdate(DocumentEvent de) {
-		this.updateData();
-	}
-
-	/**
-	 * 
-	 * @param ae
-	 */
-	@Override
-	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == this.jCBDim) {
-			this.updateData();
-		}
 	}
 }

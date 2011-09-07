@@ -56,6 +56,16 @@ public class Zecca {
 	}
 
 	/**
+	 * Gets the value of the segno property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSegno() {
+		return segno;
+	}
+
+	/**
 	 * Sets the value of the nome property.
 	 * 
 	 * @param value
@@ -64,16 +74,6 @@ public class Zecca {
 	 */
 	public void setNome(String value) {
 		this.nome = value;
-	}
-
-	/**
-	 * Gets the value of the segno property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getSegno() {
-		return segno;
 	}
 
 	/**

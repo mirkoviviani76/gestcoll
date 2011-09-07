@@ -5,10 +5,10 @@ package exceptions;
 
 /**
  * @author intecs
- *
+ * 
  */
 public class XmlException extends GenericException {
-	
+
 	/**
 	 * 
 	 */
@@ -23,27 +23,32 @@ public class XmlException extends GenericException {
 
 	/**
 	 * Costruttore
-	 * @param arg0 il messaggio
+	 * 
+	 * @param arg0
+	 *            il messaggio
 	 */
 	public XmlException(String arg0) {
 		super(arg0);
 	}
 
 	/**
-	 * @param cause la causa
-	 */
-	public XmlException(Throwable cause) {
-		super(cause);
-	}
-
-	/**
 	 * Costruttore
-	 * @param message il messaggio
-	 * @param cause la causa
+	 * 
+	 * @param message
+	 *            il messaggio
+	 * @param cause
+	 *            la causa
 	 */
 	public XmlException(String message, Throwable cause) {
 		super(message, cause);
 	}
-	
+
+	/**
+	 * @param cause
+	 *            la causa
+	 */
+	public XmlException(Throwable cause) {
+		super(cause);
+	}
 
 }

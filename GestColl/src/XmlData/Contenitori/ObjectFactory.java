@@ -32,14 +32,6 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link Vassoio }
-	 * 
-	 */
-	public Vassoio createVassoio() {
-		return new Vassoio();
-	}
-
-	/**
 	 * Create an instance of {@link Armadio }
 	 * 
 	 */
@@ -61,6 +53,14 @@ public class ObjectFactory {
 	 */
 	public Contenitori createContenitori() {
 		return new Contenitori();
+	}
+
+	/**
+	 * Create an instance of {@link Vassoio }
+	 * 
+	 */
+	public Vassoio createVassoio() {
+		return new Vassoio();
 	}
 
 }

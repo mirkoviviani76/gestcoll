@@ -18,9 +18,28 @@ public class ZeccaControl extends javax.swing.JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private javax.swing.JTextField jTFNome;
+
+	private javax.swing.JTextField jTFSegno;
+
 	/** Creates new form ZeccaControl */
 	public ZeccaControl() {
 		initComponents();
+	}
+
+	/**
+	 * aggiunge il listener per le modifiche ai testi
+	 * 
+	 * @param myDocumentListenerForName
+	 * @param myDocumentListenerForSign
+	 */
+	void addDocumentListener(
+			XmlDocumentChangeListener myDocumentListenerForName,
+			XmlDocumentChangeListener myDocumentListenerForSign) {
+		this.jTFNome.getDocument().addDocumentListener(
+				myDocumentListenerForName);
+		this.jTFSegno.getDocument().addDocumentListener(
+				myDocumentListenerForSign);
 	}
 
 	/**
@@ -38,68 +57,6 @@ public class ZeccaControl extends javax.swing.JPanel {
 	public String getSegno() {
 		return this.jTFSegno.getText();
 	}
-
-	/**
-	 * 
-	 * @param v
-	 */
-	public void setNome(String v) {
-		this.jTFNome.setText(v);
-	}
-
-	/**
-	 * 
-	 * @param u
-	 */
-	public void setSegno(String u) {
-		this.jTFSegno.setText(u);
-	}
-
-	/**
-	 * 
-	 * @param zecca
-	 */
-	public void setZecca(XmlData.Moneta.Zecca zecca) {
-		if (zecca == null)
-			return;
-		if (zecca.getNome() != null)
-			this.setNome(zecca.getNome());
-		if (zecca.getSegno() != null)
-			this.setSegno(zecca.getSegno());
-	}
-
-	/**
-	 * 
-	 * @param flag
-	 */
-	public void setEditable(boolean flag) {
-		this.jTFNome.setEditable(flag);
-		this.jTFSegno.setEditable(flag);
-	}
-	
-	
-    /**
-     * aggiunge il listener per le modifiche ai testi
-     * @param myDocumentListenerForName
-     * @param myDocumentListenerForSign
-     */
-	void addDocumentListener(XmlDocumentChangeListener myDocumentListenerForName,
-    		XmlDocumentChangeListener myDocumentListenerForSign) {
-        this.jTFNome.getDocument().addDocumentListener(myDocumentListenerForName);
-        this.jTFSegno.getDocument().addDocumentListener(myDocumentListenerForSign);
-    }
-
-    /**
-     * rimuove il listener per le modifiche ai testi
-     * @param myDocumentListenerForName
-     * @param myDocumentListenerForSign
-     */
-    void removeDocumentListener(XmlDocumentChangeListener myDocumentListenerForName,
-    		XmlDocumentChangeListener myDocumentListenerForSign) {
-        this.jTFNome.getDocument().removeDocumentListener(myDocumentListenerForName);
-        this.jTFSegno.getDocument().removeDocumentListener(myDocumentListenerForSign);
-    }
-
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -121,7 +78,58 @@ public class ZeccaControl extends javax.swing.JPanel {
 		add(jTFSegno, gridBagConstraints);
 	}
 
-	private javax.swing.JTextField jTFNome;
-	private javax.swing.JTextField jTFSegno;
+	/**
+	 * rimuove il listener per le modifiche ai testi
+	 * 
+	 * @param myDocumentListenerForName
+	 * @param myDocumentListenerForSign
+	 */
+	void removeDocumentListener(
+			XmlDocumentChangeListener myDocumentListenerForName,
+			XmlDocumentChangeListener myDocumentListenerForSign) {
+		this.jTFNome.getDocument().removeDocumentListener(
+				myDocumentListenerForName);
+		this.jTFSegno.getDocument().removeDocumentListener(
+				myDocumentListenerForSign);
+	}
+
+	/**
+	 * 
+	 * @param flag
+	 */
+	public void setEditable(boolean flag) {
+		this.jTFNome.setEditable(flag);
+		this.jTFSegno.setEditable(flag);
+	}
+
+	/**
+	 * 
+	 * @param v
+	 */
+	public void setNome(String v) {
+		this.jTFNome.setText(v);
+	}
+
+	/**
+	 * 
+	 * @param u
+	 */
+	public void setSegno(String u) {
+		this.jTFSegno.setText(u);
+	}
+	/**
+	 * 
+	 * @param zecca
+	 */
+	public void setZecca(XmlData.Moneta.Zecca zecca) {
+		if (zecca == null)
+			return;
+		if (zecca.getNome() != null) {
+			this.setNome(zecca.getNome());
+		}
+		if (zecca.getSegno() != null) {
+			this.setSegno(zecca.getSegno());
+		}
+	}
 
 }

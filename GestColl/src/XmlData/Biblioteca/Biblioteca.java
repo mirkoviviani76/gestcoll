@@ -5,7 +5,6 @@
 // Generated on: 2011.08.29 at 01:40:30 PM CEST 
 //
 
-
 package XmlData.Biblioteca;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -14,11 +13,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -42,56 +43,50 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "biblioteca")
 public class Biblioteca {
 
-    @XmlElement(required = true)
-    protected Libri libri;
-    protected Cataloghi cataloghi;
+	protected Cataloghi cataloghi;
+	@XmlElement(required = true)
+	protected Libri libri;
 
-    /**
-     * Gets the value of the libri property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Libri }
-     *     
-     */
-    public Libri getLibri() {
-        return libri;
-    }
+	/**
+	 * Gets the value of the cataloghi property.
+	 * 
+	 * @return possible object is {@link Cataloghi }
+	 * 
+	 */
+	public Cataloghi getCataloghi() {
+		return cataloghi;
+	}
 
-    /**
-     * Sets the value of the libri property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Libri }
-     *     
-     */
-    public void setLibri(Libri value) {
-        this.libri = value;
-    }
+	/**
+	 * Gets the value of the libri property.
+	 * 
+	 * @return possible object is {@link Libri }
+	 * 
+	 */
+	public Libri getLibri() {
+		return libri;
+	}
 
-    /**
-     * Gets the value of the cataloghi property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Cataloghi }
-     *     
-     */
-    public Cataloghi getCataloghi() {
-        return cataloghi;
-    }
+	/**
+	 * Sets the value of the cataloghi property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Cataloghi }
+	 * 
+	 */
+	public void setCataloghi(Cataloghi value) {
+		this.cataloghi = value;
+	}
 
-    /**
-     * Sets the value of the cataloghi property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Cataloghi }
-     *     
-     */
-    public void setCataloghi(Cataloghi value) {
-        this.cataloghi = value;
-    }
+	/**
+	 * Sets the value of the libri property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Libri }
+	 * 
+	 */
+	public void setLibri(Libri value) {
+		this.libri = value;
+	}
 
 }

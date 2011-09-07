@@ -52,31 +52,134 @@ public class MonetaViewer extends javax.swing.JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private MonetaXml mng;
-	private boolean isEditingMode;
-	private XmlDocumentChangeListener chPaese;
 	private XmlDocumentChangeListener chAnno;
-	private XmlDocumentChangeListener chLuogo;
-	private XmlDocumentChangeListener chMetallo;
-	private XmlDocumentChangeListener chForma;
+	private XmlDocumentChangeListener chData;
 	private XmlDocumentChangeListener chDescrizione_d;
 	private XmlDocumentChangeListener chDescrizione_r;
 	private XmlDocumentChangeListener chDescrizione_t;
-	private XmlDocumentChangeListener chPeso_v;
-	private XmlDocumentChangeListener chPeso_m;
-	private XmlDocumentChangeListener chDiametro_v;
 	private XmlDocumentChangeListener chDiametro_m;
-	private XmlDocumentChangeListener chPrezzo_v;
+	private XmlDocumentChangeListener chDiametro_v;
+	private XmlDocumentChangeListener chForma;
+	private XmlDocumentChangeListener chLuogo;
+	private XmlDocumentChangeListener chMetallo;
+	private XmlDocumentChangeListener chPaese;
+	private XmlDocumentChangeListener chPeso_m;
+	private XmlDocumentChangeListener chPeso_v;
 	private XmlDocumentChangeListener chPrezzo_m;
+	private XmlDocumentChangeListener chPrezzo_v;
 	private XmlDocumentChangeListener chValore;
 	private XmlDocumentChangeListener chValuta;
 	private XmlDocumentChangeListener chZecca_n;
 	private XmlDocumentChangeListener chZecca_s;
-	private XmlDocumentChangeListener chData;
+	private boolean isEditingMode;
+	private javax.swing.JButton jBAddAutorita;
 
+	private javax.swing.JButton jBAddDoc;
+
+	private javax.swing.JButton jBAddLetteratura;
+
+	private javax.swing.JButton jBAddNote;
+
+	private javax.swing.JButton jBAddZecchiere;
+
+	private com.toedter.calendar.JDateChooser jDateChooser1;
+
+	private javax.swing.JLabel jLabel1;
+
+	private javax.swing.JLabel jLabel10;
+
+	private javax.swing.JLabel jLabel11;
+
+	private javax.swing.JLabel jLabel12;
+
+	private javax.swing.JLabel jLabel13;
+
+	private javax.swing.JLabel jLabel15;
+
+	private javax.swing.JLabel jLabel16;
+
+	private javax.swing.JLabel jLabel17;
+
+	private javax.swing.JLabel jLabel2;
+
+	private javax.swing.JLabel jLabel3;
+
+	private javax.swing.JLabel jLabel4;
+
+	private javax.swing.JLabel jLabel5;
+
+	private javax.swing.JLabel jLabel6;
+
+	private javax.swing.JLabel jLabel9;
+
+	private javax.swing.JLabel jLabelAutorita;
+	private javax.swing.JLabel jLabelLetteratura;
+	private javax.swing.JLabel jLabelZecca;
+	private javax.swing.JLabel jLabelZecchiere;
+	private javax.swing.JList jLAutorita;
+	private javax.swing.JList jLDocumenti;
+	private javax.swing.JList jLLetteratura;
+	private javax.swing.JList jLNote;
+	private javax.swing.JList jLZecchiere;
+	private javax.swing.JPanel jPanel1;
+	private javax.swing.JPanel jPanel2;
+	private javax.swing.JPanel jPanel3;
+	private javax.swing.JPanel jPanel4;
+	private javax.swing.JPanel jPanel5;
+	private javax.swing.JPanel jPanelDritto;
+	private javax.swing.JPanel jPanelRovescio;
+	private javax.swing.JPanel jPanelTaglio;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JScrollPane jScrollPane2;
+	private javax.swing.JScrollPane jScrollPane3;
+	private javax.swing.JScrollPane jScrollPane4;
+	private javax.swing.JScrollPane jScrollPane7;
+	private javax.swing.JTextField jTFAnno;
+	private gui.moneta.MisuraControl jTFDiametro;
+	private javax.swing.JTextField jTFForma;
+	private javax.swing.JTextField jTFId;
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JTextField JTFLuogo;
+	private javax.swing.JTextField jTFMetallo;
+	private gui.moneta.MisuraControl jTFNominale;
+	private javax.swing.JTextField jTFPaese;
+	private gui.moneta.MisuraControl jTFPeso;
+	public javax.swing.JTextField jTFPosizione;
+	private gui.moneta.MisuraControl jTFPrezzo;
+	private gui.moneta.ZeccaControl jTFZecca;
+	private MonetaXml mng;
+	private gui.moneta.MonetaDescrizione monetaDescrizioneDritto;
+	private gui.moneta.MonetaDescrizione monetaDescrizioneRovescio;
+	private gui.moneta.MonetaDescrizione monetaDescrizioneTaglio;
+
+	// End of variables declaration//GEN-END:variables
 	/** Creates new form MonetaViewer */
 	public MonetaViewer() {
 		initComponents();
+	}
+
+	/**
+	 * Listener per i cambi nel testo e nella data. I cambi nelle liste sono
+	 * gestiti a parte.
+	 */
+	public void addDocumentListener() {
+		this.jTFPaese.getDocument().addDocumentListener(this.chPaese);
+		this.jTFAnno.getDocument().addDocumentListener(this.chAnno);
+		this.JTFLuogo.getDocument().addDocumentListener(this.chLuogo);
+		this.jTFMetallo.getDocument().addDocumentListener(this.chMetallo);
+		this.jTFForma.getDocument().addDocumentListener(this.chForma);
+		this.monetaDescrizioneDritto.addDocumentListener(this.chDescrizione_d);
+		this.monetaDescrizioneRovescio
+				.addDocumentListener(this.chDescrizione_r);
+		this.monetaDescrizioneTaglio.addDocumentListener(this.chDescrizione_t);
+		this.jTFPeso.addDocumentListener(this.chPeso_v, this.chPeso_m);
+		this.jTFDiametro.addDocumentListener(this.chDiametro_v,
+				this.chDiametro_m);
+		this.jTFPrezzo.addDocumentListener(this.chPrezzo_v, this.chPrezzo_m);
+		this.jTFNominale.addDocumentListener(this.chValore, this.chValuta);
+		this.jTFZecca.addDocumentListener(this.chZecca_n, this.chZecca_s);
+		this.jDateChooser1.addPropertyChangeListener(this.chData);
+
 	}
 
 	/**
@@ -144,15 +247,22 @@ public class MonetaViewer extends javax.swing.JPanel {
 		chLuogo = new XmlDocumentChangeListener(mng, MonetaXml.Fields.LUOGO);
 		chMetallo = new XmlDocumentChangeListener(mng, MonetaXml.Fields.METALLO);
 		chForma = new XmlDocumentChangeListener(mng, MonetaXml.Fields.FORMA);
-		chDescrizione_d = new XmlDocumentChangeListener(mng, MonetaXml.Fields.DESCRIZIONE_D);
-		chDescrizione_r = new XmlDocumentChangeListener(mng, MonetaXml.Fields.DESCRIZIONE_R);
-		chDescrizione_t = new XmlDocumentChangeListener(mng, MonetaXml.Fields.DESCRIZIONE_T);
+		chDescrizione_d = new XmlDocumentChangeListener(mng,
+				MonetaXml.Fields.DESCRIZIONE_D);
+		chDescrizione_r = new XmlDocumentChangeListener(mng,
+				MonetaXml.Fields.DESCRIZIONE_R);
+		chDescrizione_t = new XmlDocumentChangeListener(mng,
+				MonetaXml.Fields.DESCRIZIONE_T);
 		chPeso_v = new XmlDocumentChangeListener(mng, MonetaXml.Fields.PESO_V);
 		chPeso_m = new XmlDocumentChangeListener(mng, MonetaXml.Fields.PESO_M);
-		chDiametro_v = new XmlDocumentChangeListener(mng,MonetaXml.Fields.DIAMETRO_V);
-		chDiametro_m = new XmlDocumentChangeListener(mng, MonetaXml.Fields.DIAMETRO_M);
-		chPrezzo_v = new XmlDocumentChangeListener(mng, MonetaXml.Fields.PREZZO_V);
-		chPrezzo_m = new XmlDocumentChangeListener(mng, MonetaXml.Fields.PREZZO_M);
+		chDiametro_v = new XmlDocumentChangeListener(mng,
+				MonetaXml.Fields.DIAMETRO_V);
+		chDiametro_m = new XmlDocumentChangeListener(mng,
+				MonetaXml.Fields.DIAMETRO_M);
+		chPrezzo_v = new XmlDocumentChangeListener(mng,
+				MonetaXml.Fields.PREZZO_V);
+		chPrezzo_m = new XmlDocumentChangeListener(mng,
+				MonetaXml.Fields.PREZZO_M);
 		chValore = new XmlDocumentChangeListener(mng, MonetaXml.Fields.VALORE);
 		chValuta = new XmlDocumentChangeListener(mng, MonetaXml.Fields.VALUTA);
 		chZecca_n = new XmlDocumentChangeListener(mng, MonetaXml.Fields.ZECCA_N);
@@ -161,48 +271,6 @@ public class MonetaViewer extends javax.swing.JPanel {
 
 		this.addDocumentListener();
 
-	}
-
-	/**
-	 * Listener per i cambi nel testo e nella data. I cambi nelle liste sono
-	 * gestiti a parte.
-	 */
-	public void addDocumentListener() {
-		 this.jTFPaese.getDocument().addDocumentListener(this.chPaese);
-		 this.jTFAnno.getDocument().addDocumentListener(this.chAnno);
-		 this.JTFLuogo.getDocument().addDocumentListener(this.chLuogo);
-		 this.jTFMetallo.getDocument().addDocumentListener(this.chMetallo);
-		 this.jTFForma.getDocument().addDocumentListener(this.chForma);
-		 this.monetaDescrizioneDritto.addDocumentListener(this.chDescrizione_d);
-		 this.monetaDescrizioneRovescio.addDocumentListener(this.chDescrizione_r);
-		 this.monetaDescrizioneTaglio.addDocumentListener(this.chDescrizione_t);
-		 this.jTFPeso.addDocumentListener(this.chPeso_v, this.chPeso_m);
-		 this.jTFDiametro.addDocumentListener(this.chDiametro_v, this.chDiametro_m);
-		 this.jTFPrezzo.addDocumentListener(this.chPrezzo_v, this.chPrezzo_m);
-		 this.jTFNominale.addDocumentListener(this.chValore, this.chValuta);
-		 this.jTFZecca.addDocumentListener(this.chZecca_n, this.chZecca_s);
-		 this.jDateChooser1.addPropertyChangeListener(this.chData);
-
-	}
-
-	/**
-     *
-     */
-	public void removeDocumentListener() {
-		 this.jTFPaese.getDocument().removeDocumentListener(this.chPaese);
-		 this.jTFAnno.getDocument().removeDocumentListener(this.chAnno);
-		 this.JTFLuogo.getDocument().removeDocumentListener(this.chLuogo);
-		 this.jTFMetallo.getDocument().removeDocumentListener(this.chMetallo);
-		 this.jTFForma.getDocument().removeDocumentListener(this.chForma);
-		 this.monetaDescrizioneDritto.removeDocumentListener(this.chDescrizione_d);
-		 this.monetaDescrizioneRovescio.removeDocumentListener(this.chDescrizione_r);
-		 this.monetaDescrizioneTaglio.removeDocumentListener(this.chDescrizione_t);
-		 this.jTFPeso.removeDocumentListener(this.chPeso_v, this.chPeso_m);
-		 this.jTFDiametro.removeDocumentListener(this.chDiametro_v, this.chDiametro_m);
-		 this.jTFPrezzo.removeDocumentListener(this.chPrezzo_v, this.chPrezzo_m);
-		 this.jTFNominale.removeDocumentListener(this.chValore, this.chValuta);
-		 this.jTFZecca.removeDocumentListener(this.chZecca_n, this.chZecca_s);
-		 this.jDateChooser1.removePropertyChangeListener(this.chData);
 	}
 
 	/**
@@ -968,84 +1036,151 @@ public class MonetaViewer extends javax.swing.JPanel {
 										javax.swing.GroupLayout.PREFERRED_SIZE)));
 	}// </editor-fold>//GEN-END:initComponents
 
+	private void jBAddAutoritaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBAddAutoritaActionPerformed
+		AutoritaForm nf = new AutoritaForm(null, true);
+		nf.setEditable(isEditingMode);
+		nf.setVisible(true);
+		// valuta ritorno con tasto "ok/modifica" premuto
+		if (nf.getReturnStatus() == AutoritaForm.RET_OK) {
+			// ottiene i nuovi dati della nota dal form
+			String nuovaAutorita = nf.getData();
+			mng.getAutorita().getNome().add(nuovaAutorita);
+			// carica i nuovi valori
+			this.jLAutorita.setListData(mng.getAutorita().getNome().toArray());
+		}
+
+	}// GEN-LAST:event_jBAddAutoritaActionPerformed
+
+	private void jBAddDocActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBAddDocActionPerformed
+		DocumentoForm zf = new DocumentoForm(null, true);
+		zf.setVisible(true);
+		// valuta ritorno con tasto "ok/modifica" premuto
+		if (zf.getReturnStatus() == DocumentoForm.RET_OK) {
+			// ottiene i nuovi dati della nota dal form
+			XmlData.Moneta.DocumentoAddizionale nuovoDoc = zf.getData();
+			mng.getItemAddizionali().add(nuovoDoc);
+			this.jLDocumenti
+					.setModel(new GenericListModel<XmlData.Moneta.DocumentoAddizionale>(
+							mng.getItemAddizionali()));
+		}
+
+	}// GEN-LAST:event_jBAddDocActionPerformed
+
+	private void jBAddLetteraturaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBAddLetteraturaActionPerformed
+		LetteraturaForm zf = new LetteraturaForm(null, true);
+		zf.setVisible(true);
+		// valuta ritorno con tasto "ok/modifica" premuto
+		if (zf.getReturnStatus() == LetteraturaForm.RET_OK) {
+			// ottiene i nuovi dati della nota dal form
+			XmlData.Moneta.Libro nuovoLibro = zf.getData();
+			mng.getLetteratura().add(nuovoLibro);
+			this.jLLetteratura
+					.setModel(new GenericListModel<XmlData.Moneta.Libro>(mng
+							.getLetteratura()));
+		}
+	}// GEN-LAST:event_jBAddLetteraturaActionPerformed
+
+	private void jBAddNoteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBAddNoteActionPerformed
+		NotaForm nf = new NotaForm(null, true);
+		nf.setEditable(isEditingMode);
+		nf.setVisible(true);
+		// valuta ritorno con tasto "ok/modifica" premuto
+		if (nf.getReturnStatus() == NotaForm.RET_OK) {
+			// ottiene i nuovi dati della nota dal form
+			String nuovaNota = nf.getData();
+			mng.getNote().add(nuovaNota);
+			// carica i nuovi valori
+			this.jLNote.setModel(new GenericListModel<String>(mng.getNote()));
+		}
+	}// GEN-LAST:event_jBAddNoteActionPerformed
+
+	private void jBAddZecchiereActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBAddZecchiereActionPerformed
+		ZecchiereForm zf = new ZecchiereForm(null, true);
+		zf.setVisible(true);
+		// valuta ritorno con tasto "ok/modifica" premuto
+		if (zf.getReturnStatus() == ZecchiereForm.RET_OK) {
+			// ottiene i nuovi dati della nota dal form
+			Zecchiere nuovoZecchiere = zf.getData();
+			mng.getZecchieri().add(nuovoZecchiere);
+			// carica i nuovi valori
+			this.jLZecchiere.setModel(new GenericListModel<Zecchiere>(mng
+					.getZecchieri()));
+		}
+
+	}// GEN-LAST:event_jBAddZecchiereActionPerformed
+
 	private void jLAutoritaMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLAutoritaMouseClicked
-		 if (this.isEditingMode && !evt.isPopupTrigger()) {
-		 /* apre il dialog */
-		 String autorita = (String) (jLAutorita.getSelectedValue());
-		 //attiva la finestra di modifica (deve essere modale)
-		 AutoritaForm nf = new AutoritaForm(null, true);
-		 nf.setEditable(isEditingMode);
-		 nf.setNome(autorita);
-		 nf.setVisible(true);
+		if (this.isEditingMode && !evt.isPopupTrigger()) {
+			/* apre il dialog */
+			String autorita = (String) (jLAutorita.getSelectedValue());
+			// attiva la finestra di modifica (deve essere modale)
+			AutoritaForm nf = new AutoritaForm(null, true);
+			nf.setEditable(isEditingMode);
+			nf.setNome(autorita);
+			nf.setVisible(true);
 
-		 //valuta ritorno con tasto "ok/modifica" premuto
-		 if (nf.getReturnStatus() == AutoritaForm.RET_OK) {
-			 //ottiene i nuovi dati dell'autorita
-			 String nuovaAutorita = nf.getData();
-			 //salva nel DOM
-			 mng.modifyAutorita(autorita, nuovaAutorita);
-			 //carica i nuovi valori
-			 this.jLAutorita.setListData(mng.getAutorita().getNome().toArray());
+			// valuta ritorno con tasto "ok/modifica" premuto
+			if (nf.getReturnStatus() == AutoritaForm.RET_OK) {
+				// ottiene i nuovi dati dell'autorita
+				String nuovaAutorita = nf.getData();
+				// salva nel DOM
+				mng.modifyAutorita(autorita, nuovaAutorita);
+				// carica i nuovi valori
+				this.jLAutorita.setListData(mng.getAutorita().getNome()
+						.toArray());
 
-		 }
-		 } else if (!evt.isPopupTrigger()) {
-			 //genera una stringa per cercare l'autorita concatenandola con il Paese
-			 String s = (String) (jLAutorita.getSelectedValue() + " " +
-					 jTFPaese.getText());
-			 this.openBrowser(s);
-		 }
+			}
+		} else if (!evt.isPopupTrigger()) {
+			// genera una stringa per cercare l'autorita concatenandola con il
+			// Paese
+			String s = (jLAutorita.getSelectedValue() + " " + jTFPaese
+					.getText());
+			this.openBrowser(s);
+		}
 
 	}// GEN-LAST:event_jLAutoritaMouseClicked
 
-	private void jTFPaeseActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTFPaeseActionPerformed
-	}// GEN-LAST:event_jTFPaeseActionPerformed
-
-	/**
-	 * Gestisce il click su uno zecchiere per permetterne la modifica in
-	 * editmode
-	 * 
-	 * @param evt
-	 */
-	private void jLZecchiereMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLZecchiereMouseClicked
+	private void jLDocumentiMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLDocumentiMouseClicked
 		if (this.isEditingMode && !evt.isPopupTrigger()) {
-			Zecchiere zecchiere = (Zecchiere) (jLZecchiere.getSelectedValue());
-			//attiva la finestra di modifica (deve essere modale)
-			ZecchiereForm zf = new ZecchiereForm(null, true);
-			//riempie i campi
-			zf.setData(zecchiere);
-			zf.setVisible(true);
-			//valuta ritorno con tasto "ok/modifica" premuto
-			if (zf.getReturnStatus() == ZecchiereForm.RET_OK) {
-				//ottiene i nuovi dati dello zecchiere
-				Zecchiere nuovoZecchiere = zf.getData();
-				//salva nel DOM
-				mng.modifyZecchiere(zecchiere, nuovoZecchiere);
-				//carica i nuovi valori
-				this.jLZecchiere.setModel(new
-						GenericListModel<Zecchiere>(mng.getZecchieri()));
+			XmlData.Moneta.DocumentoAddizionale doc = (XmlData.Moneta.DocumentoAddizionale) (jLDocumenti
+					.getSelectedValue());
+			// attiva la finestra di modifica (deve essere modale)
+			DocumentoForm df = new DocumentoForm(null, true);
+			df.setData(doc);
+			df.setVisible(true);
+
+			if (df.getReturnStatus() == DocumentoForm.RET_OK) {
+				// ottiene i nuovi dati del documento
+				XmlData.Moneta.DocumentoAddizionale nuovoDoc = df.getData();
+				// salva nel DOM
+				mng.modifyDocumento(doc, nuovoDoc);
+				// carica i nuovi valori
+				this.jLDocumenti
+						.setModel(new GenericListModel<XmlData.Moneta.DocumentoAddizionale>(
+								mng.getItemAddizionali()));
 			}
 		}
-	}// GEN-LAST:event_jLZecchiereMouseClicked
+	}// GEN-LAST:event_jLDocumentiMouseClicked
 
 	private void jLLetteraturaMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLLetteraturaMouseClicked
 		if (this.isEditingMode && !evt.isPopupTrigger()) {
-			XmlData.Moneta.Libro libro = (XmlData.Moneta.Libro)
-					(jLLetteratura.getSelectedValue());
-			//attiva la finestra di modifica (deve essere modale)
+			XmlData.Moneta.Libro libro = (XmlData.Moneta.Libro) (jLLetteratura
+					.getSelectedValue());
+			// attiva la finestra di modifica (deve essere modale)
 			LetteraturaForm zf = new LetteraturaForm(null, true);
-			//riempie i campi
+			// riempie i campi
 			zf.setData(libro);
 			zf.setVisible(true);
-			//valuta ritorno con tasto "ok/modifica" premuto
+			// valuta ritorno con tasto "ok/modifica" premuto
 			if (zf.getReturnStatus() == LetteraturaForm.RET_OK) {
 				XmlData.Moneta.Libro nuovoLibro = null;
-				//ottiene i nuovi dati del libro
+				// ottiene i nuovi dati del libro
 				nuovoLibro = zf.getData();
-				//salva nel DOM
+				// salva nel DOM
 				mng.modifyLibro(libro, nuovoLibro);
-				//carica i nuovi valori
-				this.jLLetteratura.setModel(new
-						GenericListModel<Libro>(mng.getLetteratura()));
+				// carica i nuovi valori
+				this.jLLetteratura.setModel(new GenericListModel<Libro>(mng
+						.getLetteratura()));
 			}
 		}
 	}// GEN-LAST:event_jLLetteraturaMouseClicked
@@ -1054,20 +1189,21 @@ public class MonetaViewer extends javax.swing.JPanel {
 		if (this.isEditingMode && !evt.isPopupTrigger()) {
 			/* apre il dialog */
 			String nota = (String) (jLNote.getSelectedValue());
-			//attiva la finestra di modifica (deve essere modale)
+			// attiva la finestra di modifica (deve essere modale)
 			NotaForm nf = new NotaForm(null, true);
 			nf.setEditable(isEditingMode);
 			nf.setNota(nota);
 			nf.setVisible(true);
 
-			//valuta ritorno con tasto "ok/modifica" premuto
+			// valuta ritorno con tasto "ok/modifica" premuto
 			if (nf.getReturnStatus() == NotaForm.RET_OK) {
-				//ottiene i nuovi dati della nota
-				 String nuovaNota = nf.getData();
-				//salva nel DOM
+				// ottiene i nuovi dati della nota
+				String nuovaNota = nf.getData();
+				// salva nel DOM
 				mng.modifyNota(nota, nuovaNota);
-				//carica i nuovi valori
-				this.jLNote.setModel(new GenericListModel<String>(mng.getNote()));
+				// carica i nuovi valori
+				this.jLNote
+						.setModel(new GenericListModel<String>(mng.getNote()));
 			}
 		} else if (!evt.isPopupTrigger()) {
 			/* mostra semplicemente la nota */
@@ -1079,97 +1215,115 @@ public class MonetaViewer extends javax.swing.JPanel {
 
 	}// GEN-LAST:event_jLNoteMouseClicked
 
-	private void jBAddNoteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBAddNoteActionPerformed
-		NotaForm nf = new NotaForm(null, true);
-		nf.setEditable(isEditingMode);
-		nf.setVisible(true);
-		//valuta ritorno con tasto "ok/modifica" premuto
-		if (nf.getReturnStatus() == NotaForm.RET_OK) {
-				//ottiene i nuovi dati della nota dal form
-				String nuovaNota = nf.getData();
-				mng.getNote().add(nuovaNota);
-				//carica i nuovi valori
-				this.jLNote.setModel(new GenericListModel<String>(mng.getNote()));
-		}
-	}// GEN-LAST:event_jBAddNoteActionPerformed
-
-	private void jBAddZecchiereActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBAddZecchiereActionPerformed
-		ZecchiereForm zf = new ZecchiereForm(null, true);
-		zf.setVisible(true);
-		//valuta ritorno con tasto "ok/modifica" premuto
-		if (zf.getReturnStatus() == ZecchiereForm.RET_OK) {
-				//ottiene i nuovi dati della nota dal form
-				Zecchiere nuovoZecchiere = zf.getData();
-				mng.getZecchieri().add(nuovoZecchiere);
-				//carica i nuovi valori
-				this.jLZecchiere.setModel(new
-						GenericListModel<Zecchiere>(mng.getZecchieri()));
-		}
-
-	}// GEN-LAST:event_jBAddZecchiereActionPerformed
-
-	private void jBAddLetteraturaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBAddLetteraturaActionPerformed
-		LetteraturaForm zf = new LetteraturaForm(null, true);
-		zf.setVisible(true);
-		//valuta ritorno con tasto "ok/modifica" premuto
-		if (zf.getReturnStatus() == LetteraturaForm.RET_OK) {
-				//ottiene i nuovi dati della nota dal form
-				XmlData.Moneta.Libro nuovoLibro = zf.getData();
-				mng.getLetteratura().add(nuovoLibro);
-				this.jLLetteratura.setModel(new
-						GenericListModel<XmlData.Moneta.Libro>(mng.getLetteratura()));
-		}
-	}// GEN-LAST:event_jBAddLetteraturaActionPerformed
-
-	private void jBAddAutoritaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBAddAutoritaActionPerformed
-		AutoritaForm nf = new AutoritaForm(null, true);
-		nf.setEditable(isEditingMode);
-		nf.setVisible(true);
-		//valuta ritorno con tasto "ok/modifica" premuto
-		if (nf.getReturnStatus() == AutoritaForm.RET_OK) {
-				//ottiene i nuovi dati della nota dal form
-				String nuovaAutorita = nf.getData();
-				mng.getAutorita().getNome().add(nuovaAutorita);
-				//carica i nuovi valori
-				this.jLAutorita.setListData(mng.getAutorita().getNome().toArray());
-		}
-
-	}// GEN-LAST:event_jBAddAutoritaActionPerformed
-
-	private void jLDocumentiMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLDocumentiMouseClicked
+	/**
+	 * Gestisce il click su uno zecchiere per permetterne la modifica in
+	 * editmode
+	 * 
+	 * @param evt
+	 */
+	private void jLZecchiereMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLZecchiereMouseClicked
 		if (this.isEditingMode && !evt.isPopupTrigger()) {
-			XmlData.Moneta.DocumentoAddizionale doc = (XmlData.Moneta.DocumentoAddizionale)
-					(jLDocumenti.getSelectedValue());
-			//attiva la finestra di modifica (deve essere modale)
-			DocumentoForm df = new DocumentoForm(null, true);
-			df.setData(doc);
-			df.setVisible(true);
-
-			if (df.getReturnStatus() == DocumentoForm.RET_OK) {
-				//ottiene i nuovi dati del documento
-				XmlData.Moneta.DocumentoAddizionale nuovoDoc = df.getData();
-				//salva nel DOM
-				mng.modifyDocumento(doc, nuovoDoc);
-				//carica i nuovi valori
-				this.jLDocumenti.setModel(new
-						GenericListModel<XmlData.Moneta.DocumentoAddizionale>(mng.getItemAddizionali()));
+			Zecchiere zecchiere = (Zecchiere) (jLZecchiere.getSelectedValue());
+			// attiva la finestra di modifica (deve essere modale)
+			ZecchiereForm zf = new ZecchiereForm(null, true);
+			// riempie i campi
+			zf.setData(zecchiere);
+			zf.setVisible(true);
+			// valuta ritorno con tasto "ok/modifica" premuto
+			if (zf.getReturnStatus() == ZecchiereForm.RET_OK) {
+				// ottiene i nuovi dati dello zecchiere
+				Zecchiere nuovoZecchiere = zf.getData();
+				// salva nel DOM
+				mng.modifyZecchiere(zecchiere, nuovoZecchiere);
+				// carica i nuovi valori
+				this.jLZecchiere.setModel(new GenericListModel<Zecchiere>(mng
+						.getZecchieri()));
 			}
 		}
-	}// GEN-LAST:event_jLDocumentiMouseClicked
+	}// GEN-LAST:event_jLZecchiereMouseClicked
 
-	private void jBAddDocActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jBAddDocActionPerformed
-		DocumentoForm zf = new DocumentoForm(null, true);
-		zf.setVisible(true);
-		//valuta ritorno con tasto "ok/modifica" premuto
-		if (zf.getReturnStatus() == DocumentoForm.RET_OK) {
-				//ottiene i nuovi dati della nota dal form
-				XmlData.Moneta.DocumentoAddizionale nuovoDoc = zf.getData();
-				mng.getItemAddizionali().add(nuovoDoc);
-				this.jLDocumenti.setModel(new
-						GenericListModel<XmlData.Moneta.DocumentoAddizionale>(mng.getItemAddizionali()));
+	private void jTFPaeseActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTFPaeseActionPerformed
+	}// GEN-LAST:event_jTFPaeseActionPerformed
+
+	/**
+	 * gestisce il click su un item
+	 * 
+	 * @param evt
+	 */
+	/**
+	 * apre il browser di default per cercare una stringa con google
+	 * 
+	 * @param itemToSearch
+	 */
+	private void openBrowser(String itemToSearch) {
+		String search = itemToSearch.replace(" ", "+");
+		// ottiene l'uri per la ricerca con google
+		String uri = String.format(
+				"http://www.google.it/#sclient=psy&&q=%s&fp=1", search);
+		try {
+			GenericUtil.openBrowser(new URI(uri));
+		} catch (URISyntaxException e) {
+			GestLog.Error(this.getClass(), e);
+		} catch (IOException e) {
+			GestLog.Error(this.getClass(), e);
 		}
+	}
 
-	}// GEN-LAST:event_jBAddDocActionPerformed
+	/**
+     *
+     */
+	public void removeDocumentListener() {
+		this.jTFPaese.getDocument().removeDocumentListener(this.chPaese);
+		this.jTFAnno.getDocument().removeDocumentListener(this.chAnno);
+		this.JTFLuogo.getDocument().removeDocumentListener(this.chLuogo);
+		this.jTFMetallo.getDocument().removeDocumentListener(this.chMetallo);
+		this.jTFForma.getDocument().removeDocumentListener(this.chForma);
+		this.monetaDescrizioneDritto
+				.removeDocumentListener(this.chDescrizione_d);
+		this.monetaDescrizioneRovescio
+				.removeDocumentListener(this.chDescrizione_r);
+		this.monetaDescrizioneTaglio
+				.removeDocumentListener(this.chDescrizione_t);
+		this.jTFPeso.removeDocumentListener(this.chPeso_v, this.chPeso_m);
+		this.jTFDiametro.removeDocumentListener(this.chDiametro_v,
+				this.chDiametro_m);
+		this.jTFPrezzo.removeDocumentListener(this.chPrezzo_v, this.chPrezzo_m);
+		this.jTFNominale.removeDocumentListener(this.chValore, this.chValuta);
+		this.jTFZecca.removeDocumentListener(this.chZecca_n, this.chZecca_s);
+		this.jDateChooser1.removePropertyChangeListener(this.chData);
+	}
+
+	/**
+	 * Salva i dati nell'xml. Esegue una copia nella cartella di backup come
+	 * <id>-<millis>.xml
+	 * 
+	 * @throws XmlException
+	 * 
+	 */
+	public void salvaDati() throws XmlException {
+		try {
+			String id = this.mng.getId();
+			// ottiene il nome del file da scrivere
+			String outFile = Common.getCommon().getMoneteDir() + "/" + id + "/"
+					+ id + ".xml";
+			// ottiene il nome del file di backup
+			String oldFileRen = Common.getCommon().getBackupDir() + "/" + id
+					+ "-" + Calendar.getInstance().getTimeInMillis() + ".xml";
+			// esegue il backup
+			FileUtils.copyFile(new File(outFile), new File(oldFileRen));
+			// salva il file
+			this.mng.writeXml(this.mng.getJaxbObject(), "XmlData.Moneta",
+					outFile);
+			// Log
+			History.addEvent(History.MODIFY, id);
+			String msg = String.format(
+					"Salvato %s. Il file vecchio e' stato salvato in %s",
+					outFile, oldFileRen);
+			MainFrame.setMessage(new Message(msg, Level.INFO));
+		} catch (IOException ex) {
+			GestLog.Error(MonetaViewer.class, ex);
+		}
+	}
 
 	/**
 	 * gestore del clic su posizione
@@ -1215,117 +1369,4 @@ public class MonetaViewer extends javax.swing.JPanel {
 		this.jBAddDoc.setVisible(flag);
 
 	}
-
-	/**
-	 * gestisce il click su un item
-	 * 
-	 * @param evt
-	 */
-	/**
-	 * apre il browser di default per cercare una stringa con google
-	 * 
-	 * @param itemToSearch
-	 */
-	private void openBrowser(String itemToSearch) {
-		String search = itemToSearch.replace(" ", "+");
-		// ottiene l'uri per la ricerca con google
-		String uri = String.format(
-				"http://www.google.it/#sclient=psy&&q=%s&fp=1", search);
-		try {
-			GenericUtil.openBrowser(new URI(uri));
-		} catch (URISyntaxException e) {
-			GestLog.Error(this.getClass(), e);
-		} catch (IOException e) {
-			GestLog.Error(this.getClass(), e);
-		}
-	}
-
-	/**
-	 * Salva i dati nell'xml. Esegue una copia nella cartella di backup come
-	 * <id>-<millis>.xml
-	 * @throws XmlException 
-	 * 
-	 */
-	public void salvaDati() throws XmlException  {
-		try {
-			String id = this.mng.getId();
-			// ottiene il nome del file da scrivere
-			String outFile = Common.getCommon().getMoneteDir() + "/" + id + "/" + id + ".xml";
-			// ottiene il nome del file di backup
-			String oldFileRen = Common.getCommon().getBackupDir() + "/" + id + "-"
-					+ Calendar.getInstance().getTimeInMillis() + ".xml";
-			// esegue il backup
-			FileUtils.copyFile(new File(outFile), new File(oldFileRen));
-			// salva il file
-			this.mng.writeXml(this.mng.getJaxbObject(), "XmlData.Moneta", outFile);
-			// Log
-			History.addEvent(History.MODIFY, id);
-			String msg = String.format(
-					"Salvato %s. Il file vecchio e' stato salvato in %s",
-					outFile, oldFileRen);
-			MainFrame.setMessage(new Message(msg, Level.INFO));
-		} catch (IOException ex) {
-			GestLog.Error(MonetaViewer.class, ex);
-		}
-	}
-
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JTextField JTFLuogo;
-	private javax.swing.JButton jBAddAutorita;
-	private javax.swing.JButton jBAddDoc;
-	private javax.swing.JButton jBAddLetteratura;
-	private javax.swing.JButton jBAddNote;
-	private javax.swing.JButton jBAddZecchiere;
-	private com.toedter.calendar.JDateChooser jDateChooser1;
-	private javax.swing.JList jLAutorita;
-	private javax.swing.JList jLDocumenti;
-	private javax.swing.JList jLLetteratura;
-	private javax.swing.JList jLNote;
-	private javax.swing.JList jLZecchiere;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel10;
-	private javax.swing.JLabel jLabel11;
-	private javax.swing.JLabel jLabel12;
-	private javax.swing.JLabel jLabel13;
-	private javax.swing.JLabel jLabel15;
-	private javax.swing.JLabel jLabel16;
-	private javax.swing.JLabel jLabel17;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	private javax.swing.JLabel jLabel5;
-	private javax.swing.JLabel jLabel6;
-	private javax.swing.JLabel jLabel9;
-	private javax.swing.JLabel jLabelAutorita;
-	private javax.swing.JLabel jLabelLetteratura;
-	private javax.swing.JLabel jLabelZecca;
-	private javax.swing.JLabel jLabelZecchiere;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JPanel jPanel2;
-	private javax.swing.JPanel jPanel3;
-	private javax.swing.JPanel jPanel4;
-	private javax.swing.JPanel jPanel5;
-	private javax.swing.JPanel jPanelDritto;
-	private javax.swing.JPanel jPanelRovescio;
-	private javax.swing.JPanel jPanelTaglio;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JScrollPane jScrollPane2;
-	private javax.swing.JScrollPane jScrollPane3;
-	private javax.swing.JScrollPane jScrollPane4;
-	private javax.swing.JScrollPane jScrollPane7;
-	private javax.swing.JTextField jTFAnno;
-	private gui.moneta.MisuraControl jTFDiametro;
-	private javax.swing.JTextField jTFForma;
-	private javax.swing.JTextField jTFId;
-	private javax.swing.JTextField jTFMetallo;
-	private gui.moneta.MisuraControl jTFNominale;
-	private javax.swing.JTextField jTFPaese;
-	private gui.moneta.MisuraControl jTFPeso;
-	public javax.swing.JTextField jTFPosizione;
-	private gui.moneta.MisuraControl jTFPrezzo;
-	private gui.moneta.ZeccaControl jTFZecca;
-	private gui.moneta.MonetaDescrizione monetaDescrizioneDritto;
-	private gui.moneta.MonetaDescrizione monetaDescrizioneRovescio;
-	private gui.moneta.MonetaDescrizione monetaDescrizioneTaglio;
-	// End of variables declaration//GEN-END:variables
 }
