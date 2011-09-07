@@ -44,8 +44,8 @@ import javax.xml.bind.annotation.XmlType;
 public class Zecchiere {
 
 	protected String nome;
-	protected String segno;
 	protected String ruolo;
+	protected String segno;
 
 	/**
 	 * Gets the value of the nome property.
@@ -55,6 +55,26 @@ public class Zecchiere {
 	 */
 	public String getNome() {
 		return nome;
+	}
+
+	/**
+	 * Gets the value of the ruolo property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getRuolo() {
+		return ruolo;
+	}
+
+	/**
+	 * Gets the value of the segno property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getSegno() {
+		return segno;
 	}
 
 	/**
@@ -69,13 +89,14 @@ public class Zecchiere {
 	}
 
 	/**
-	 * Gets the value of the segno property.
+	 * Sets the value of the ruolo property.
 	 * 
-	 * @return possible object is {@link String }
+	 * @param value
+	 *            allowed object is {@link String }
 	 * 
 	 */
-	public String getSegno() {
-		return segno;
+	public void setRuolo(String value) {
+		this.ruolo = value;
 	}
 
 	/**
@@ -89,28 +110,9 @@ public class Zecchiere {
 		this.segno = value;
 	}
 
-	/**
-	 * Gets the value of the ruolo property.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getRuolo() {
-		return ruolo;
-	}
-
-	/**
-	 * Sets the value of the ruolo property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setRuolo(String value) {
-		this.ruolo = value;
-	}
-
-	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -119,13 +121,5 @@ public class Zecchiere {
 				+ (segno != null ? " [" + segno + "] " : "")
 				+ (ruolo != null ? " " + ruolo : "") + "";
 	}
-
-	
-	
-	
-	
-	
-	
-	
 
 }

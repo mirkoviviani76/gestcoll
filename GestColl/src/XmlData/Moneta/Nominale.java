@@ -42,30 +42,9 @@ import javax.xml.bind.annotation.XmlType;
 public class Nominale {
 
 	@XmlElement(required = true)
-	protected String valuta;
-	@XmlElement(required = true)
 	protected String valore;
-
-	/**
-	 * Gets the value of the valuta property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getValuta() {
-		return valuta;
-	}
-
-	/**
-	 * Sets the value of the valuta property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setValuta(String value) {
-		this.valuta = value;
-	}
+	@XmlElement(required = true)
+	protected String valuta;
 
 	/**
 	 * Gets the value of the valore property.
@@ -78,6 +57,16 @@ public class Nominale {
 	}
 
 	/**
+	 * Gets the value of the valuta property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getValuta() {
+		return valuta;
+	}
+
+	/**
 	 * Sets the value of the valore property.
 	 * 
 	 * @param value
@@ -86,6 +75,17 @@ public class Nominale {
 	 */
 	public void setValore(String value) {
 		this.valore = value;
+	}
+
+	/**
+	 * Sets the value of the valuta property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setValuta(String value) {
+		this.valuta = value;
 	}
 
 }

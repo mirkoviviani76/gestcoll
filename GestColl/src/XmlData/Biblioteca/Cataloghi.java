@@ -5,7 +5,6 @@
 // Generated on: 2011.08.29 at 01:40:30 PM CEST 
 //
 
-
 package XmlData.Biblioteca;
 
 import java.util.ArrayList;
@@ -14,11 +13,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for cataloghi complex type.
+ * <p>
+ * Java class for cataloghi complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="cataloghi">
@@ -35,40 +36,38 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "cataloghi", propOrder = {
-    "catalogo"
-})
+@XmlType(name = "cataloghi", propOrder = { "catalogo" })
 public class Cataloghi {
 
-    protected List<Catalogo> catalogo;
+	protected List<Catalogo> catalogo;
 
-    /**
-     * Gets the value of the catalogo property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the catalogo property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCatalogo().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Catalogo }
-     * 
-     * 
-     */
-    public List<Catalogo> getCatalogo() {
-        if (catalogo == null) {
-            catalogo = new ArrayList<Catalogo>();
-        }
-        return this.catalogo;
-    }
+	/**
+	 * Gets the value of the catalogo property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the catalogo property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getCatalogo().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link Catalogo }
+	 * 
+	 * 
+	 */
+	public List<Catalogo> getCatalogo() {
+		if (catalogo == null) {
+			catalogo = new ArrayList<Catalogo>();
+		}
+		return this.catalogo;
+	}
 
 }

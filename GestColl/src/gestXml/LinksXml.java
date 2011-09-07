@@ -24,38 +24,41 @@ import exceptions.XmlException;
 public class LinksXml extends GestXml {
 
 	private ArrayList<gestXml.data.Link> links;
-    private XmlData.Links.Links xmllinks;
-	
+	private XmlData.Links.Links xmllinks;
+
 	/**
 	 * Costruttore
-	 * @throws XmlException 
+	 * 
+	 * @throws XmlException
 	 */
-    public LinksXml() throws XmlException {
-    	super(new File(Common.getCommon().getLinksXml()));
-    	links = new ArrayList<gestXml.data.Link>();
-    	try {
-    		JAXBContext jc = JAXBContext.newInstance("XmlData.Links");
-    		Unmarshaller unmarshaller = jc.createUnmarshaller();
-    		xmllinks = (XmlData.Links.Links) unmarshaller.unmarshal(new File(Common.getCommon().getLinksXml()));
-    		
-    		List<Linklist> listacat = xmllinks.getCategoria();
-    		for (Linklist categoria : listacat)
-    		{
-    			for (XmlData.Links.Link l : categoria.getLink()) {
-    				gestXml.data.Link curLink = new gestXml.data.Link(categoria.getId(), l.getNome(), l.getUrl(), l.getNote());
-    				this.links.add(curLink);
-    			}
+	public LinksXml() throws XmlException {
+		super(new File(Common.getCommon().getLinksXml()));
+		links = new ArrayList<gestXml.data.Link>();
+		try {
+			JAXBContext jc = JAXBContext.newInstance("XmlData.Links");
+			Unmarshaller unmarshaller = jc.createUnmarshaller();
+			xmllinks = (XmlData.Links.Links) unmarshaller.unmarshal(new File(
+					Common.getCommon().getLinksXml()));
 
-    		}
-    	} catch (JAXBException e) {
-    		throw new XmlException("LinksXml()", e);
-    	}
+			List<Linklist> listacat = xmllinks.getCategoria();
+			for (Linklist categoria : listacat) {
+				for (XmlData.Links.Link l : categoria.getLink()) {
+					gestXml.data.Link curLink = new gestXml.data.Link(
+							categoria.getId(), l.getNome(), l.getUrl(),
+							l.getNote());
+					this.links.add(curLink);
+				}
+
+			}
+		} catch (JAXBException e) {
+			throw new XmlException("LinksXml()", e);
+		}
 
 	}
 
-
 	/**
-	 * ottiene l'array di links 
+	 * ottiene l'array di links
+	 * 
 	 * @return la lista
 	 */
 	public ArrayList<gestXml.data.Link> getLinks() {

@@ -48,8 +48,8 @@ public class Descrizioni {
 
 	@XmlElement(required = true)
 	protected String descrizione;
-	protected List<Legenda> legenda;
 	protected String fileImmagine;
+	protected List<Legenda> legenda;
 
 	/**
 	 * Gets the value of the descrizione property.
@@ -62,14 +62,13 @@ public class Descrizioni {
 	}
 
 	/**
-	 * Sets the value of the descrizione property.
+	 * Gets the value of the fileImmagine property.
 	 * 
-	 * @param value
-	 *            allowed object is {@link String }
+	 * @return possible object is {@link String }
 	 * 
 	 */
-	public void setDescrizione(String value) {
-		this.descrizione = value;
+	public String getFileImmagine() {
+		return fileImmagine;
 	}
 
 	/**
@@ -102,13 +101,14 @@ public class Descrizioni {
 	}
 
 	/**
-	 * Gets the value of the fileImmagine property.
+	 * Sets the value of the descrizione property.
 	 * 
-	 * @return possible object is {@link String }
+	 * @param value
+	 *            allowed object is {@link String }
 	 * 
 	 */
-	public String getFileImmagine() {
-		return fileImmagine;
+	public void setDescrizione(String value) {
+		this.descrizione = value;
 	}
 
 	/**

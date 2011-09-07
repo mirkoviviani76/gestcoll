@@ -8,23 +8,27 @@ package main;
 import java.util.logging.Level;
 
 /**
- * Rappresenta un messaggio, costituito da un testo e da un livello di severita'.
+ * Rappresenta un messaggio, costituito da un testo e da un livello di
+ * severita'.
  * 
  */
 public class Message {
 	/**
-     * il messaggio
-     */
-	private String message;
-	/**
-     * il livello
-     */
+	 * il livello
+	 */
 	private Level level;
+	/**
+	 * il messaggio
+	 */
+	private String message;
 
 	/**
 	 * Costruttore
-	 * @param s il messaggio
-	 * @param l il livello
+	 * 
+	 * @param s
+	 *            il messaggio
+	 * @param l
+	 *            il livello
 	 */
 	public Message(String s, Level l) {
 		message = s;
@@ -33,6 +37,7 @@ public class Message {
 
 	/**
 	 * controlla se il livello e' SEVERE
+	 * 
 	 * @return se il livello e' SEVERE
 	 */
 	public boolean isSevere() {

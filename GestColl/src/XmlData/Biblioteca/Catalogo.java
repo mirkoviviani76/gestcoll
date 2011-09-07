@@ -5,7 +5,6 @@
 // Generated on: 2011.08.29 at 01:40:30 PM CEST 
 //
 
-
 package XmlData.Biblioteca;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,13 +12,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
  * Tipo che definisce una pubblicazione
  * 
- * <p>Java class for catalogo complex type.
+ * <p>
+ * Java class for catalogo complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="catalogo">
@@ -46,157 +47,139 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Catalogo {
 
-    @XmlElement(required = true)
-    protected Autori autori;
-    @XmlElement(required = true)
-    protected String numero;
-    protected String data;
-    protected String filename;
-    protected Supporti supporti;
-    protected Argomenti argomenti;
+	protected Argomenti argomenti;
+	@XmlElement(required = true)
+	protected Autori autori;
+	protected String data;
+	protected String filename;
+	@XmlElement(required = true)
+	protected String numero;
+	protected Supporti supporti;
 
-    /**
-     * Gets the value of the autori property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Autori }
-     *     
-     */
-    public Autori getAutori() {
-        return autori;
-    }
+	/**
+	 * Gets the value of the argomenti property.
+	 * 
+	 * @return possible object is {@link Argomenti }
+	 * 
+	 */
+	public Argomenti getArgomenti() {
+		return argomenti;
+	}
 
-    /**
-     * Sets the value of the autori property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Autori }
-     *     
-     */
-    public void setAutori(Autori value) {
-        this.autori = value;
-    }
+	/**
+	 * Gets the value of the autori property.
+	 * 
+	 * @return possible object is {@link Autori }
+	 * 
+	 */
+	public Autori getAutori() {
+		return autori;
+	}
 
-    /**
-     * Gets the value of the numero property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getNumero() {
-        return numero;
-    }
+	/**
+	 * Gets the value of the data property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getData() {
+		return data;
+	}
 
-    /**
-     * Sets the value of the numero property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNumero(String value) {
-        this.numero = value;
-    }
+	/**
+	 * Gets the value of the filename property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getFilename() {
+		return filename;
+	}
 
-    /**
-     * Gets the value of the data property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getData() {
-        return data;
-    }
+	/**
+	 * Gets the value of the numero property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getNumero() {
+		return numero;
+	}
 
-    /**
-     * Sets the value of the data property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setData(String value) {
-        this.data = value;
-    }
+	/**
+	 * Gets the value of the supporti property.
+	 * 
+	 * @return possible object is {@link Supporti }
+	 * 
+	 */
+	public Supporti getSupporti() {
+		return supporti;
+	}
 
-    /**
-     * Gets the value of the filename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFilename() {
-        return filename;
-    }
+	/**
+	 * Sets the value of the argomenti property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Argomenti }
+	 * 
+	 */
+	public void setArgomenti(Argomenti value) {
+		this.argomenti = value;
+	}
 
-    /**
-     * Sets the value of the filename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFilename(String value) {
-        this.filename = value;
-    }
+	/**
+	 * Sets the value of the autori property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Autori }
+	 * 
+	 */
+	public void setAutori(Autori value) {
+		this.autori = value;
+	}
 
-    /**
-     * Gets the value of the supporti property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Supporti }
-     *     
-     */
-    public Supporti getSupporti() {
-        return supporti;
-    }
+	/**
+	 * Sets the value of the data property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setData(String value) {
+		this.data = value;
+	}
 
-    /**
-     * Sets the value of the supporti property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Supporti }
-     *     
-     */
-    public void setSupporti(Supporti value) {
-        this.supporti = value;
-    }
+	/**
+	 * Sets the value of the filename property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setFilename(String value) {
+		this.filename = value;
+	}
 
-    /**
-     * Gets the value of the argomenti property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Argomenti }
-     *     
-     */
-    public Argomenti getArgomenti() {
-        return argomenti;
-    }
+	/**
+	 * Sets the value of the numero property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setNumero(String value) {
+		this.numero = value;
+	}
 
-    /**
-     * Sets the value of the argomenti property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Argomenti }
-     *     
-     */
-    public void setArgomenti(Argomenti value) {
-        this.argomenti = value;
-    }
+	/**
+	 * Sets the value of the supporti property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Supporti }
+	 * 
+	 */
+	public void setSupporti(Supporti value) {
+		this.supporti = value;
+	}
 
 }

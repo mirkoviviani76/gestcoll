@@ -4,25 +4,25 @@
  */
 package gestXml.data;
 
- /**
+/**
  * identifica la dimensione delle caselle
  */
 public enum DimensioneCaselle {
 
-    /**
+	/**
      *
      */
-    A,
-    /**
+	A,
+	/**
      *
      */
-    B,
-    /**
+	B,
+	/**
      *
      */
-    C,
-    /**
+	C,
+	/**
      *
      */
-    D
+	D
 };

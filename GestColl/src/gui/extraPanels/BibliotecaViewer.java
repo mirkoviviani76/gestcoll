@@ -21,10 +21,30 @@ public class BibliotecaViewer extends javax.swing.JPanel {
 
 	private File filename;
 
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton jBApriCartella;
+
+	private javax.swing.JScrollPane jScrollPane1;
+
+	private javax.swing.JTextPane jTPDati;
+
+	// End of variables declaration//GEN-END:variables
+
 	/** Creates new form BibliotecaViewer */
 	public BibliotecaViewer() {
 		initComponents();
 		filename = null;
+	}
+
+	private void enableApriCartella() {
+		// se esiste l'url, abilita il pulsante
+		boolean flag = false;
+		if (filename != null) {
+			if (filename.exists()) {
+				flag = true;
+			}
+		}
+		this.jBApriCartella.setEnabled(flag);
 	}
 
 	/**
@@ -85,27 +105,11 @@ public class BibliotecaViewer extends javax.swing.JPanel {
 		this.jTPDati.setText(dati);
 		// compone l'url completo
 		if (url != null && !url.equals("")) {
-			filename = new File(Common.getCommon().getBibliotecaDir() + "/" + url);
+			filename = new File(Common.getCommon().getBibliotecaDir() + "/"
+					+ url);
 		} else {
 			filename = null;
 		}
 		enableApriCartella();
 	}
-
-	private void enableApriCartella() {
-		// se esiste l'url, abilita il pulsante
-		boolean flag = false;
-		if (filename != null) {
-			if (filename.exists()) {
-				flag = true;
-			}
-		}
-		this.jBApriCartella.setEnabled(flag);
-	}
-
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton jBApriCartella;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTextPane jTPDati;
-	// End of variables declaration//GEN-END:variables
 }

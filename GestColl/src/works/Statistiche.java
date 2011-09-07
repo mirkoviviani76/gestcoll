@@ -18,38 +18,19 @@ import gestXml.MonetaXml;
 /**
  * Gestisce la pagina delle statistiche
  * 
- * TODO aggiungere elenchi, ad esempio la lista di tutte le autorita, le zecche, gli zecchieri...
+ * TODO aggiungere elenchi, ad esempio la lista di tutte le autorita, le zecche,
+ * gli zecchieri...
+ * 
  * @author intecs
  */
 public class Statistiche {
-
-	public static TreeMap<String, Integer> coinByYear() throws XmlException {
-		TreeMap<String, Integer> valori = new TreeMap<String, Integer>();
-		/* ottiene l'elenco di tutte le monete */
-		List<File> files;
-		files = CollectionWorker.getFileListing(Common.getCommon().getMoneteDir(),
-				Common.COIN_END);
-		ListIterator<File> iterator = files.listIterator();
-
-		/* cicla su tutte le monete */
-		while (iterator.hasNext()) {
-			MonetaXml mng = new MonetaXml((iterator.next()));
-			String anno = mng.getAnno();
-			if (valori.containsKey(anno)) {
-				valori.put(anno, valori.get(anno) + 1);
-			} else {
-				valori.put(anno, 1);
-			}
-		}
-		return valori;
-	}
 
 	public static TreeMap<String, Integer> coinByMetal() throws XmlException {
 		TreeMap<String, Integer> valori = new TreeMap<String, Integer>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
-		files = CollectionWorker.getFileListing(Common.getCommon().getMoneteDir(),
-				Common.COIN_END);
+		files = CollectionWorker.getFileListing(Common.getCommon()
+				.getMoneteDir(), Common.COIN_END);
 		ListIterator<File> iterator = files.listIterator();
 
 		/* cicla su tutte le monete */
@@ -69,8 +50,8 @@ public class Statistiche {
 		TreeMap<Double, Integer> valori = new TreeMap<Double, Integer>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
-		files = CollectionWorker.getFileListing(Common.getCommon().getMoneteDir(),
-				Common.COIN_END);
+		files = CollectionWorker.getFileListing(Common.getCommon()
+				.getMoneteDir(), Common.COIN_END);
 		ListIterator<File> iterator = files.listIterator();
 
 		/* cicla su tutte le monete */
@@ -86,6 +67,27 @@ public class Statistiche {
 		}
 		return valori;
 
+	}
+
+	public static TreeMap<String, Integer> coinByYear() throws XmlException {
+		TreeMap<String, Integer> valori = new TreeMap<String, Integer>();
+		/* ottiene l'elenco di tutte le monete */
+		List<File> files;
+		files = CollectionWorker.getFileListing(Common.getCommon()
+				.getMoneteDir(), Common.COIN_END);
+		ListIterator<File> iterator = files.listIterator();
+
+		/* cicla su tutte le monete */
+		while (iterator.hasNext()) {
+			MonetaXml mng = new MonetaXml((iterator.next()));
+			String anno = mng.getAnno();
+			if (valori.containsKey(anno)) {
+				valori.put(anno, valori.get(anno) + 1);
+			} else {
+				valori.put(anno, 1);
+			}
+		}
+		return valori;
 	}
 
 }

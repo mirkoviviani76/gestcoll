@@ -60,50 +60,39 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlRootElement(name = "moneta")
 public class Moneta {
 
-	@XmlElement(required = true)
-	protected String paese;
-	protected Autorita autorita;
 	protected String anno;
+	protected Autorita autorita;
 	@XmlElement(required = true)
-	protected Nominale nominale;
-	protected Zecca zecca;
-	protected Zecchieri zecchieri;
+	protected DatiAcquisto datiAcquisto;
 	@XmlElement(required = true)
 	protected DatiArtistici datiArtistici;
 	@XmlElement(required = true)
 	protected DatiFisici datiFisici;
-	@XmlElement(required = true)
-	protected DatiAcquisto datiAcquisto;
-	protected Posizione posizione;
 	protected String grado;
-	protected Note note;
-	protected Letteratura letteratura;
+	@XmlAttribute(name = "id", required = true)
+	protected String id;
 	protected DocumentiAggiuntivi itemAddizionali;
+	protected Letteratura letteratura;
+	@XmlElement(required = true)
+	protected Nominale nominale;
+	protected Note note;
+	@XmlElement(required = true)
+	protected String paese;
+	protected Posizione posizione;
 	@XmlElement(required = true)
 	@XmlSchemaType(name = "date")
 	protected XMLGregorianCalendar revisione;
-	@XmlAttribute(name = "id", required = true)
-	protected String id;
+	protected Zecca zecca;
+	protected Zecchieri zecchieri;
 
 	/**
-	 * Gets the value of the paese property.
+	 * Gets the value of the anno property.
 	 * 
 	 * @return possible object is {@link String }
 	 * 
 	 */
-	public String getPaese() {
-		return paese;
-	}
-
-	/**
-	 * Sets the value of the paese property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setPaese(String value) {
-		this.paese = value;
+	public String getAnno() {
+		return anno;
 	}
 
 	/**
@@ -117,24 +106,143 @@ public class Moneta {
 	}
 
 	/**
-	 * Sets the value of the autorita property.
+	 * Gets the value of the datiAcquisto property.
 	 * 
-	 * @param value
-	 *            allowed object is {@link Autorita }
+	 * @return possible object is {@link DatiAcquisto }
 	 * 
 	 */
-	public void setAutorita(Autorita value) {
-		this.autorita = value;
+	public DatiAcquisto getDatiAcquisto() {
+		return datiAcquisto;
 	}
 
 	/**
-	 * Gets the value of the anno property.
+	 * Gets the value of the datiArtistici property.
+	 * 
+	 * @return possible object is {@link DatiArtistici }
+	 * 
+	 */
+	public DatiArtistici getDatiArtistici() {
+		return datiArtistici;
+	}
+
+	/**
+	 * Gets the value of the datiFisici property.
+	 * 
+	 * @return possible object is {@link DatiFisici }
+	 * 
+	 */
+	public DatiFisici getDatiFisici() {
+		return datiFisici;
+	}
+
+	/**
+	 * Gets the value of the grado property.
 	 * 
 	 * @return possible object is {@link String }
 	 * 
 	 */
-	public String getAnno() {
-		return anno;
+	public String getGrado() {
+		return grado;
+	}
+
+	/**
+	 * Gets the value of the id property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * Gets the value of the itemAddizionali property.
+	 * 
+	 * @return possible object is {@link DocumentiAggiuntivi }
+	 * 
+	 */
+	public DocumentiAggiuntivi getItemAddizionali() {
+		return itemAddizionali;
+	}
+
+	/**
+	 * Gets the value of the letteratura property.
+	 * 
+	 * @return possible object is {@link Letteratura }
+	 * 
+	 */
+	public Letteratura getLetteratura() {
+		return letteratura;
+	}
+
+	/**
+	 * Gets the value of the nominale property.
+	 * 
+	 * @return possible object is {@link Nominale }
+	 * 
+	 */
+	public Nominale getNominale() {
+		return nominale;
+	}
+
+	/**
+	 * Gets the value of the note property.
+	 * 
+	 * @return possible object is {@link Note }
+	 * 
+	 */
+	public Note getNote() {
+		return note;
+	}
+
+	/**
+	 * Gets the value of the paese property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getPaese() {
+		return paese;
+	}
+
+	/**
+	 * Gets the value of the posizione property.
+	 * 
+	 * @return possible object is {@link Posizione }
+	 * 
+	 */
+	public Posizione getPosizione() {
+		return posizione;
+	}
+
+	/**
+	 * Gets the value of the revisione property.
+	 * 
+	 * @return possible object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public XMLGregorianCalendar getRevisione() {
+		return revisione;
+	}
+
+	/**
+	 * Gets the value of the zecca property.
+	 * 
+	 * @return possible object is {@link Zecca }
+	 * 
+	 */
+	public Zecca getZecca() {
+		return zecca;
+	}
+
+	/**
+	 * Gets the value of the zecchieri property.
+	 * 
+	 * @return possible object is {@link Zecchieri }
+	 * 
+	 */
+	public Zecchieri getZecchieri() {
+		return zecchieri;
 	}
 
 	/**
@@ -149,118 +257,14 @@ public class Moneta {
 	}
 
 	/**
-	 * Gets the value of the nominale property.
-	 * 
-	 * @return possible object is {@link Nominale }
-	 * 
-	 */
-	public Nominale getNominale() {
-		return nominale;
-	}
-
-	/**
-	 * Sets the value of the nominale property.
+	 * Sets the value of the autorita property.
 	 * 
 	 * @param value
-	 *            allowed object is {@link Nominale }
+	 *            allowed object is {@link Autorita }
 	 * 
 	 */
-	public void setNominale(Nominale value) {
-		this.nominale = value;
-	}
-
-	/**
-	 * Gets the value of the zecca property.
-	 * 
-	 * @return possible object is {@link Zecca }
-	 * 
-	 */
-	public Zecca getZecca() {
-		return zecca;
-	}
-
-	/**
-	 * Sets the value of the zecca property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Zecca }
-	 * 
-	 */
-	public void setZecca(Zecca value) {
-		this.zecca = value;
-	}
-
-	/**
-	 * Gets the value of the zecchieri property.
-	 * 
-	 * @return possible object is {@link Zecchieri }
-	 * 
-	 */
-	public Zecchieri getZecchieri() {
-		return zecchieri;
-	}
-
-	/**
-	 * Sets the value of the zecchieri property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Zecchieri }
-	 * 
-	 */
-	public void setZecchieri(Zecchieri value) {
-		this.zecchieri = value;
-	}
-
-	/**
-	 * Gets the value of the datiArtistici property.
-	 * 
-	 * @return possible object is {@link DatiArtistici }
-	 * 
-	 */
-	public DatiArtistici getDatiArtistici() {
-		return datiArtistici;
-	}
-
-	/**
-	 * Sets the value of the datiArtistici property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link DatiArtistici }
-	 * 
-	 */
-	public void setDatiArtistici(DatiArtistici value) {
-		this.datiArtistici = value;
-	}
-
-	/**
-	 * Gets the value of the datiFisici property.
-	 * 
-	 * @return possible object is {@link DatiFisici }
-	 * 
-	 */
-	public DatiFisici getDatiFisici() {
-		return datiFisici;
-	}
-
-	/**
-	 * Sets the value of the datiFisici property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link DatiFisici }
-	 * 
-	 */
-	public void setDatiFisici(DatiFisici value) {
-		this.datiFisici = value;
-	}
-
-	/**
-	 * Gets the value of the datiAcquisto property.
-	 * 
-	 * @return possible object is {@link DatiAcquisto }
-	 * 
-	 */
-	public DatiAcquisto getDatiAcquisto() {
-		return datiAcquisto;
+	public void setAutorita(Autorita value) {
+		this.autorita = value;
 	}
 
 	/**
@@ -275,34 +279,25 @@ public class Moneta {
 	}
 
 	/**
-	 * Gets the value of the posizione property.
-	 * 
-	 * @return possible object is {@link Posizione }
-	 * 
-	 */
-	public Posizione getPosizione() {
-		return posizione;
-	}
-
-	/**
-	 * Sets the value of the posizione property.
+	 * Sets the value of the datiArtistici property.
 	 * 
 	 * @param value
-	 *            allowed object is {@link Posizione }
+	 *            allowed object is {@link DatiArtistici }
 	 * 
 	 */
-	public void setPosizione(Posizione value) {
-		this.posizione = value;
+	public void setDatiArtistici(DatiArtistici value) {
+		this.datiArtistici = value;
 	}
 
 	/**
-	 * Gets the value of the grado property.
+	 * Sets the value of the datiFisici property.
 	 * 
-	 * @return possible object is {@link String }
+	 * @param value
+	 *            allowed object is {@link DatiFisici }
 	 * 
 	 */
-	public String getGrado() {
-		return grado;
+	public void setDatiFisici(DatiFisici value) {
+		this.datiFisici = value;
 	}
 
 	/**
@@ -317,55 +312,14 @@ public class Moneta {
 	}
 
 	/**
-	 * Gets the value of the note property.
-	 * 
-	 * @return possible object is {@link Note }
-	 * 
-	 */
-	public Note getNote() {
-		return note;
-	}
-
-	/**
-	 * Sets the value of the note property.
+	 * Sets the value of the id property.
 	 * 
 	 * @param value
-	 *            allowed object is {@link Note }
+	 *            allowed object is {@link String }
 	 * 
 	 */
-	public void setNote(Note value) {
-		this.note = value;
-	}
-
-	/**
-	 * Gets the value of the letteratura property.
-	 * 
-	 * @return possible object is {@link Letteratura }
-	 * 
-	 */
-	public Letteratura getLetteratura() {
-		return letteratura;
-	}
-
-	/**
-	 * Sets the value of the letteratura property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Letteratura }
-	 * 
-	 */
-	public void setLetteratura(Letteratura value) {
-		this.letteratura = value;
-	}
-
-	/**
-	 * Gets the value of the itemAddizionali property.
-	 * 
-	 * @return possible object is {@link DocumentiAggiuntivi }
-	 * 
-	 */
-	public DocumentiAggiuntivi getItemAddizionali() {
-		return itemAddizionali;
+	public void setId(String value) {
+		this.id = value;
 	}
 
 	/**
@@ -380,13 +334,58 @@ public class Moneta {
 	}
 
 	/**
-	 * Gets the value of the revisione property.
+	 * Sets the value of the letteratura property.
 	 * 
-	 * @return possible object is {@link XMLGregorianCalendar }
+	 * @param value
+	 *            allowed object is {@link Letteratura }
 	 * 
 	 */
-	public XMLGregorianCalendar getRevisione() {
-		return revisione;
+	public void setLetteratura(Letteratura value) {
+		this.letteratura = value;
+	}
+
+	/**
+	 * Sets the value of the nominale property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Nominale }
+	 * 
+	 */
+	public void setNominale(Nominale value) {
+		this.nominale = value;
+	}
+
+	/**
+	 * Sets the value of the note property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Note }
+	 * 
+	 */
+	public void setNote(Note value) {
+		this.note = value;
+	}
+
+	/**
+	 * Sets the value of the paese property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setPaese(String value) {
+		this.paese = value;
+	}
+
+	/**
+	 * Sets the value of the posizione property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Posizione }
+	 * 
+	 */
+	public void setPosizione(Posizione value) {
+		this.posizione = value;
 	}
 
 	/**
@@ -401,24 +400,25 @@ public class Moneta {
 	}
 
 	/**
-	 * Gets the value of the id property.
+	 * Sets the value of the zecca property.
 	 * 
-	 * @return possible object is {@link String }
+	 * @param value
+	 *            allowed object is {@link Zecca }
 	 * 
 	 */
-	public String getId() {
-		return id;
+	public void setZecca(Zecca value) {
+		this.zecca = value;
 	}
 
 	/**
-	 * Sets the value of the id property.
+	 * Sets the value of the zecchieri property.
 	 * 
 	 * @param value
-	 *            allowed object is {@link String }
+	 *            allowed object is {@link Zecchieri }
 	 * 
 	 */
-	public void setId(String value) {
-		this.id = value;
+	public void setZecchieri(Zecchieri value) {
+		this.zecchieri = value;
 	}
 
 }

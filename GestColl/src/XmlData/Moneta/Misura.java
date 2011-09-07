@@ -59,6 +59,16 @@ public class Misura {
 	}
 
 	/**
+	 * Gets the value of the valore property.
+	 * 
+	 * @return possible object is {@link BigDecimal }
+	 * 
+	 */
+	public BigDecimal getValore() {
+		return valore;
+	}
+
+	/**
 	 * Sets the value of the unita property.
 	 * 
 	 * @param value
@@ -67,16 +77,6 @@ public class Misura {
 	 */
 	public void setUnita(String value) {
 		this.unita = value;
-	}
-
-	/**
-	 * Gets the value of the valore property.
-	 * 
-	 * @return possible object is {@link BigDecimal }
-	 * 
-	 */
-	public BigDecimal getValore() {
-		return valore;
 	}
 
 	/**

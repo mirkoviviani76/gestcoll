@@ -33,20 +33,72 @@ import main.GestLog;
 
 /**
  * gestione pannello links
+ * 
  * @author intecs
- *
+ * 
  */
 public class LinksPanel extends javax.swing.JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	private javax.swing.JButton jBAggiungi;
+	private javax.swing.JPanel jPanel1;
+
+	private javax.swing.JToolBar jToolBar1;
+
 	private DefaultMutableTreeNode rootNode;
+
+	private JScrollPane scrollPane;
+
+	private JTextPane textPane;
+
+	private JTree tree;
+
 	private DefaultTreeModel treeModel;
-	
-	
+
 	/** Creates new form LinksPanel */
 	public LinksPanel() {
 		initComponents();
+	}
+
+	/**
+	 * segue il link cliccato sul text panel
+	 * 
+	 * @param e
+	 */
+	protected void followLink(HyperlinkEvent event) {
+		if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+			try {
+				GenericUtil.openBrowser(event.getURL().toURI());
+			} catch (URISyntaxException e) {
+				GestLog.Error(this.getClass(), e);
+			} catch (IOException e) {
+				GestLog.Error(this.getClass(), e);
+			}
+		}
+	}
+
+	/**
+	 * gestisce la selezione di un nodo link
+	 * 
+	 * @param e
+	 *            l'evento
+	 */
+	protected void gestSelectedNode(TreeSelectionEvent e) {
+		DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree
+				.getLastSelectedPathComponent();
+
+		if (node == null)
+			// Nothing is selected.
+			return;
+
+		Object nodeInfo = node.getUserObject();
+		if (node.isLeaf()) {
+			Link currLink = (Link) nodeInfo;
+			this.textPane.setText(currLink.toHtml());
+		} else {
+			this.textPane.setText("");
+		}
 	}
 
 	/**
@@ -70,28 +122,27 @@ public class LinksPanel extends javax.swing.JPanel {
 		gridBagConstraints.weighty = 1.0;
 		add(jPanel1, gridBagConstraints);
 		jPanel1.setLayout(new GridLayout(0, 2, 0, 0));
-		
+
 		scrollPane = new JScrollPane();
 		jPanel1.add(scrollPane);
-		
+
 		tree = new JTree();
 		scrollPane.setViewportView(tree);
 		tree.setSize(new Dimension(1, 1));
-		
+
 		textPane = new JTextPane();
 		textPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		textPane.setEditable(false);
 		textPane.setContentType("text/html");
 		textPane.addHyperlinkListener(new HyperlinkListener() {
-			
+
 			@Override
 			public void hyperlinkUpdate(HyperlinkEvent e) {
 				followLink(e);
 			}
 		});
-		
+
 		jPanel1.add(textPane);
-		
 
 		jToolBar1.setFloatable(false);
 		jToolBar1.setRollover(true);
@@ -119,7 +170,7 @@ public class LinksPanel extends javax.swing.JPanel {
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		add(jToolBar1, gridBagConstraints);
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(TreeSelectionEvent e) {
 				gestSelectedNode(e);
@@ -127,54 +178,9 @@ public class LinksPanel extends javax.swing.JPanel {
 		});
 	}
 
-	/**
-	 * segue il link cliccato sul text panel
-	 * @param e
-	 */
-	protected void followLink(HyperlinkEvent event) {
-		if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-			try {
-				GenericUtil.openBrowser(event.getURL().toURI());
-			} catch (URISyntaxException e) {
-				GestLog.Error(this.getClass(), e);
-			} catch (IOException e) {
-				GestLog.Error(this.getClass(), e);
-			}
-		}		
-	}
-
-	/**
-	 * gestisce la selezione di un nodo link
-	 * @param e l'evento
-	 */
-	protected void gestSelectedNode(TreeSelectionEvent e) {
-		DefaultMutableTreeNode node = (DefaultMutableTreeNode)
-				tree.getLastSelectedPathComponent();
-
-		if (node == null)
-			//Nothing is selected.	
-			return;
-
-		Object nodeInfo = node.getUserObject();
-		if (node.isLeaf()) {
-			Link currLink = (Link)nodeInfo;
-			this.textPane.setText(currLink.toHtml());
-		} else {
-			this.textPane.setText(""); 
-		}	
-	}
-
 	private void jBAggiungiMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBAggiungiMouseClicked
 		// TODO aggiungere gestione aggiungi Link
 	}// GEN-LAST:event_jBAggiungiMouseClicked
-
-
-	private javax.swing.JButton jBAggiungi;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JToolBar jToolBar1;
-	private JTree tree;
-	private JScrollPane scrollPane;
-	private JTextPane textPane;
 
 	// End of variables declaration//GEN-END:variables
 
@@ -182,33 +188,31 @@ public class LinksPanel extends javax.swing.JPanel {
 	 * carica i dati nella vista
 	 */
 	public void loadData() {
-		//legge l'xml
+		// legge l'xml
 		LinksXml links;
 		try {
 			links = new LinksXml();
-			//mappa per ottenere i nodi
+			// mappa per ottenere i nodi
 			Map<String, DefaultMutableTreeNode> nodiCategorie = new HashMap<String, DefaultMutableTreeNode>();
-
 
 			rootNode = new DefaultMutableTreeNode("Links");
 			treeModel = new DefaultTreeModel(rootNode);
 
 			/* cicla su tutti i link */
 			List<Link> lista = links.getLinks();
-			for (Link l : lista)
-			{
+			for (Link l : lista) {
 				/* gestisce le categorie */
 				DefaultMutableTreeNode target;
-				if (!nodiCategorie.containsKey(l.categoria))
-				{
-					DefaultMutableTreeNode c = new DefaultMutableTreeNode(l.categoria);
+				if (!nodiCategorie.containsKey(l.categoria)) {
+					DefaultMutableTreeNode c = new DefaultMutableTreeNode(
+							l.categoria);
 					rootNode.add(c);
 					nodiCategorie.put(l.categoria, c);
 					target = c;
 				} else {
 					target = nodiCategorie.get(l.categoria);
 				}
-				//aggiunge il link all'albero
+				// aggiunge il link all'albero
 				DefaultMutableTreeNode currItem = new DefaultMutableTreeNode(l);
 				target.add(currItem);
 			}

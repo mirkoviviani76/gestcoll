@@ -57,6 +57,26 @@ public class DatiArtistici {
 	}
 
 	/**
+	 * Gets the value of the rovescio property.
+	 * 
+	 * @return possible object is {@link Descrizioni }
+	 * 
+	 */
+	public Descrizioni getRovescio() {
+		return rovescio;
+	}
+
+	/**
+	 * Gets the value of the taglio property.
+	 * 
+	 * @return possible object is {@link Descrizioni }
+	 * 
+	 */
+	public Descrizioni getTaglio() {
+		return taglio;
+	}
+
+	/**
 	 * Sets the value of the dritto property.
 	 * 
 	 * @param value
@@ -68,16 +88,6 @@ public class DatiArtistici {
 	}
 
 	/**
-	 * Gets the value of the rovescio property.
-	 * 
-	 * @return possible object is {@link Descrizioni }
-	 * 
-	 */
-	public Descrizioni getRovescio() {
-		return rovescio;
-	}
-
-	/**
 	 * Sets the value of the rovescio property.
 	 * 
 	 * @param value
@@ -86,16 +96,6 @@ public class DatiArtistici {
 	 */
 	public void setRovescio(Descrizioni value) {
 		this.rovescio = value;
-	}
-
-	/**
-	 * Gets the value of the taglio property.
-	 * 
-	 * @return possible object is {@link Descrizioni }
-	 * 
-	 */
-	public Descrizioni getTaglio() {
-		return taglio;
 	}
 
 	/**

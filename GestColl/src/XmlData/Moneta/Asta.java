@@ -50,18 +50,28 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class Asta {
 
 	@XmlElement(required = true)
-	protected String casa;
+	protected Misura aggiudicazione;
 	@XmlElement(required = true)
-	protected String idAsta;
+	protected String casa;
 	@XmlElement(required = true)
 	@XmlSchemaType(name = "date")
 	protected XMLGregorianCalendar data;
 	@XmlElement(required = true)
+	protected String idAsta;
+	@XmlElement(required = true)
 	protected String lotto;
 	@XmlElement(required = true)
 	protected Misura stima;
-	@XmlElement(required = true)
-	protected Misura aggiudicazione;
+
+	/**
+	 * Gets the value of the aggiudicazione property.
+	 * 
+	 * @return possible object is {@link Misura }
+	 * 
+	 */
+	public Misura getAggiudicazione() {
+		return aggiudicazione;
+	}
 
 	/**
 	 * Gets the value of the casa property.
@@ -71,6 +81,57 @@ public class Asta {
 	 */
 	public String getCasa() {
 		return casa;
+	}
+
+	/**
+	 * Gets the value of the data property.
+	 * 
+	 * @return possible object is {@link XMLGregorianCalendar }
+	 * 
+	 */
+	public XMLGregorianCalendar getData() {
+		return data;
+	}
+
+	/**
+	 * Gets the value of the idAsta property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getIdAsta() {
+		return idAsta;
+	}
+
+	/**
+	 * Gets the value of the lotto property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getLotto() {
+		return lotto;
+	}
+
+	/**
+	 * Gets the value of the stima property.
+	 * 
+	 * @return possible object is {@link Misura }
+	 * 
+	 */
+	public Misura getStima() {
+		return stima;
+	}
+
+	/**
+	 * Sets the value of the aggiudicazione property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Misura }
+	 * 
+	 */
+	public void setAggiudicazione(Misura value) {
+		this.aggiudicazione = value;
 	}
 
 	/**
@@ -85,13 +146,14 @@ public class Asta {
 	}
 
 	/**
-	 * Gets the value of the idAsta property.
+	 * Sets the value of the data property.
 	 * 
-	 * @return possible object is {@link String }
+	 * @param value
+	 *            allowed object is {@link XMLGregorianCalendar }
 	 * 
 	 */
-	public String getIdAsta() {
-		return idAsta;
+	public void setData(XMLGregorianCalendar value) {
+		this.data = value;
 	}
 
 	/**
@@ -106,37 +168,6 @@ public class Asta {
 	}
 
 	/**
-	 * Gets the value of the data property.
-	 * 
-	 * @return possible object is {@link XMLGregorianCalendar }
-	 * 
-	 */
-	public XMLGregorianCalendar getData() {
-		return data;
-	}
-
-	/**
-	 * Sets the value of the data property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link XMLGregorianCalendar }
-	 * 
-	 */
-	public void setData(XMLGregorianCalendar value) {
-		this.data = value;
-	}
-
-	/**
-	 * Gets the value of the lotto property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getLotto() {
-		return lotto;
-	}
-
-	/**
 	 * Sets the value of the lotto property.
 	 * 
 	 * @param value
@@ -148,16 +179,6 @@ public class Asta {
 	}
 
 	/**
-	 * Gets the value of the stima property.
-	 * 
-	 * @return possible object is {@link Misura }
-	 * 
-	 */
-	public Misura getStima() {
-		return stima;
-	}
-
-	/**
 	 * Sets the value of the stima property.
 	 * 
 	 * @param value
@@ -166,27 +187,6 @@ public class Asta {
 	 */
 	public void setStima(Misura value) {
 		this.stima = value;
-	}
-
-	/**
-	 * Gets the value of the aggiudicazione property.
-	 * 
-	 * @return possible object is {@link Misura }
-	 * 
-	 */
-	public Misura getAggiudicazione() {
-		return aggiudicazione;
-	}
-
-	/**
-	 * Sets the value of the aggiudicazione property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Misura }
-	 * 
-	 */
-	public void setAggiudicazione(Misura value) {
-		this.aggiudicazione = value;
 	}
 
 }

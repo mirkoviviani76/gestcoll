@@ -45,30 +45,9 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Legenda implements Tooltipper {
 
+	protected String scioglimento;
 	@XmlElement(required = true)
 	protected String testo;
-	protected String scioglimento;
-
-	/**
-	 * Gets the value of the testo property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getTesto() {
-		return testo;
-	}
-
-	/**
-	 * Sets the value of the testo property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setTesto(String value) {
-		this.testo = value;
-	}
 
 	/**
 	 * Gets the value of the scioglimento property.
@@ -78,6 +57,16 @@ public class Legenda implements Tooltipper {
 	 */
 	public String getScioglimento() {
 		return scioglimento;
+	}
+
+	/**
+	 * Gets the value of the testo property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getTesto() {
+		return testo;
 	}
 
 	/**
@@ -91,7 +80,20 @@ public class Legenda implements Tooltipper {
 		this.scioglimento = value;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Sets the value of the testo property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setTesto(String value) {
+		this.testo = value;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -103,7 +105,5 @@ public class Legenda implements Tooltipper {
 	public String toTooltip() {
 		return this.getScioglimento();
 	}
-	
- 
 
 }

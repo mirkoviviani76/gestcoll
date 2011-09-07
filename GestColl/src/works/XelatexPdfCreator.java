@@ -35,23 +35,18 @@ public class XelatexPdfCreator extends CollectionWorker {
 		super(name, descr);
 	}
 
-	@Override
-	public Object[] doWork(File inDir, File outDir, Object[] extraParam)
-			throws Exception {
-		try {
-			// genera etichette pdf
-			creaEtichette(outDir);
-		} catch (FileNotFoundException ex) {
-			GestLog.Error(XelatexPdfCreator.class, ex);
-		}
-
-		try {
-			// genera collezione pdf
-			creaCollezione(outDir);
-		} catch (FileNotFoundException ex) {
-			GestLog.Error(XelatexPdfCreator.class, ex);
-		}
-		return null;
+	private void creaCollezione(File outDir) throws IOException,
+			InterruptedException {
+		String inFile = Common.COLLEZIONE_TEX;
+		File cur = new File(Common.getCommon().getLatexDir() + "/" + inFile);
+		if (cur.exists()) {
+			/* esegue la conversione a pdf */
+			String cmd = COMMAND_STRING + inFile;
+			this.execute(cmd, outDir, 3, "Genero " + inFile);
+		} else
+			throw new FileNotFoundException();
+		/* pulizia */
+		deleteFiles(outDir, Common.INUTILI);
 	}
 
 	/**
@@ -72,28 +67,31 @@ public class XelatexPdfCreator extends CollectionWorker {
 			if (cur.exists()) {
 				String cmd = COMMAND_STRING + f;
 				this.execute(cmd, outDir, 2, "Genero " + f);
-			} else {
+			} else
 				throw new FileNotFoundException();
-			}
 		}
 
 		/* pulizia */
 		deleteFiles(outDir, Common.INUTILI);
 	}
 
-	private void creaCollezione(File outDir) throws IOException,
-			InterruptedException {
-		String inFile = Common.COLLEZIONE_TEX;
-		File cur = new File(Common.getCommon().getLatexDir() + "/" + inFile);
-		if (cur.exists()) {
-			/* esegue la conversione a pdf */
-			String cmd = COMMAND_STRING + inFile;
-			this.execute(cmd, outDir, 3, "Genero " + inFile);
-		} else {
-			throw new FileNotFoundException();
+	@Override
+	public Object[] doWork(File inDir, File outDir, Object[] extraParam)
+			throws Exception {
+		try {
+			// genera etichette pdf
+			creaEtichette(outDir);
+		} catch (FileNotFoundException ex) {
+			GestLog.Error(XelatexPdfCreator.class, ex);
 		}
-		/* pulizia */
-		deleteFiles(outDir, Common.INUTILI);
+
+		try {
+			// genera collezione pdf
+			creaCollezione(outDir);
+		} catch (FileNotFoundException ex) {
+			GestLog.Error(XelatexPdfCreator.class, ex);
+		}
+		return null;
 	}
 
 	/**

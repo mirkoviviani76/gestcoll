@@ -45,11 +45,21 @@ import javax.xml.bind.annotation.XmlType;
 public class DocumentoAddizionale {
 
 	@XmlElement(required = true)
+	protected String descrizione;
+	@XmlElement(required = true)
 	protected String filename;
 	@XmlElement(required = true)
 	protected String url;
-	@XmlElement(required = true)
-	protected String descrizione;
+
+	/**
+	 * Gets the value of the descrizione property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getDescrizione() {
+		return descrizione;
+	}
 
 	/**
 	 * Gets the value of the filename property.
@@ -59,6 +69,27 @@ public class DocumentoAddizionale {
 	 */
 	public String getFilename() {
 		return filename;
+	}
+
+	/**
+	 * Gets the value of the url property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getUrl() {
+		return url;
+	}
+
+	/**
+	 * Sets the value of the descrizione property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setDescrizione(String value) {
+		this.descrizione = value;
 	}
 
 	/**
@@ -73,16 +104,6 @@ public class DocumentoAddizionale {
 	}
 
 	/**
-	 * Gets the value of the url property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getUrl() {
-		return url;
-	}
-
-	/**
 	 * Sets the value of the url property.
 	 * 
 	 * @param value
@@ -93,37 +114,14 @@ public class DocumentoAddizionale {
 		this.url = value;
 	}
 
-	/**
-	 * Gets the value of the descrizione property.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	/**
-	 * Sets the value of the descrizione property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setDescrizione(String value) {
-		this.descrizione = value;
-	}
-
-	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return ""
-				+ (descrizione != null ? "" + descrizione : "")
-				+ "";
+		return "" + (descrizione != null ? "" + descrizione : "") + "";
 	}
-	
-	
 
 }

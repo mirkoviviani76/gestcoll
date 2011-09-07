@@ -24,6 +24,20 @@ import main.GestLog;
  */
 @SuppressWarnings("serial")
 public class ContattiPanel extends javax.swing.JPanel {
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton jBAggiungi;
+	private javax.swing.JButton jBCerca;
+
+	private javax.swing.JList jLContatti;
+
+	private javax.swing.JPanel jPanel1;
+
+	private javax.swing.JScrollPane jScrollPane1;
+
+	private javax.swing.JTextField jTextField1;
+
+	private javax.swing.JToolBar jToolBar1;
+
 	private int lastSearchedIndex;
 	private String lastSearchedText;
 
@@ -119,25 +133,8 @@ public class ContattiPanel extends javax.swing.JPanel {
 	}
 
 	/**
-	 * click sul contatto
-	 * @param evt
-	 */
-	private void jLContattiMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLContattiMouseClicked
-		if (evt.getClickCount() == 2) {
-			try {
-				Contatto c = (Contatto) this.jLContatti.getSelectedValue();
-				Desktop.getDesktop().mail(new URI("mailto:" + c.email));
-				System.out.println("SELEZIONATO per email+ " + c);
-			} catch (IOException ex) {
-				GestLog.Error(ContattiPanel.class, ex);
-			} catch (URISyntaxException ex) {
-				GestLog.Error(ContattiPanel.class, ex);
-			}
-		}
-	}
-
-	/**
 	 * click sul pulsante aggiungi contatto
+	 * 
 	 * @param evt
 	 */
 	private void jBAggiungiMouseClicked(java.awt.event.MouseEvent evt) {
@@ -165,14 +162,24 @@ public class ContattiPanel extends javax.swing.JPanel {
 		}
 	}// GEN-LAST:event_jBCercaMouseClicked
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton jBAggiungi;
-	private javax.swing.JButton jBCerca;
-	private javax.swing.JList jLContatti;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTextField jTextField1;
-	private javax.swing.JToolBar jToolBar1;
+	/**
+	 * click sul contatto
+	 * 
+	 * @param evt
+	 */
+	private void jLContattiMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLContattiMouseClicked
+		if (evt.getClickCount() == 2) {
+			try {
+				Contatto c = (Contatto) this.jLContatti.getSelectedValue();
+				Desktop.getDesktop().mail(new URI("mailto:" + c.email));
+				System.out.println("SELEZIONATO per email+ " + c);
+			} catch (IOException ex) {
+				GestLog.Error(ContattiPanel.class, ex);
+			} catch (URISyntaxException ex) {
+				GestLog.Error(ContattiPanel.class, ex);
+			}
+		}
+	}
 
 	// End of variables declaration//GEN-END:variables
 

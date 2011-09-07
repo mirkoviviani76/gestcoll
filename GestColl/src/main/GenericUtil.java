@@ -35,63 +35,6 @@ public final class GenericUtil {
 	private static final String UTF8 = "UTF-8";
 
 	/**
-	 * Legge tutto il file in una stringa UTF-8
-	 * 
-	 * @param inout
-	 * @return
-	 */
-	static private String readAll(File inout)
-			throws UnsupportedEncodingException, FileNotFoundException,
-			IOException {
-		String oldtext = "";
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				new FileInputStream(inout), GenericUtil.UTF8));
-		String line = "";
-		while ((line = reader.readLine()) != null) {
-			oldtext += line + "\n";
-		}
-		reader.close();
-		return oldtext;
-	}
-
-	/**
-	 * Scrive il testo text sul file inout (charset UTF-8)
-	 * 
-	 * @param inout
-	 * @param text
-	 */
-	static private void writeAll(File inout, String text)
-			throws FileNotFoundException, UnsupportedEncodingException,
-			IOException {
-		FileOutputStream fw = new FileOutputStream(inout);
-		OutputStreamWriter osw = new OutputStreamWriter(fw, GenericUtil.UTF8);
-		BufferedWriter bw = null;
-		bw = new BufferedWriter(osw);
-		bw.write(text);
-		bw.close();
-		osw.close();
-		fw.close();
-	}
-
-	/**
-	 * 
-	 * @param inout
-	 * @param conversione
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
-	static public void replaceInFile(File inout, String[][] conversione)
-			throws FileNotFoundException, IOException {
-		String newtext = GenericUtil.readAll(inout);
-		for (String[] sostituzione : conversione) {
-			// esegue la sostituzione
-			newtext = newtext.replaceAll(sostituzione[0], sostituzione[1]);
-		}
-		// scrive il testo
-		GenericUtil.writeAll(inout, newtext);
-	}
-
-	/**
 	 * Riempie un template. Copia il file template in outFile e effettua le
 	 * modifiche.
 	 * 
@@ -116,8 +59,19 @@ public final class GenericUtil {
 	}
 
 	/**
+	 * ottiene la data e l'ora attuali
+	 * 
+	 * @return la data e l'ora
+	 */
+	public static String getDateTime() {
+		return getDateTime("dd-MM-yyyy HH:mm:ss");
+	}
+
+	/**
 	 * ottiene la data e il tempo
-	 * @param format il formato
+	 * 
+	 * @param format
+	 *            il formato
 	 * @return la data
 	 */
 	public static String getDateTime(String format) {
@@ -127,26 +81,74 @@ public final class GenericUtil {
 	}
 
 	/**
-	 * ottiene la data e l'ora attuali
-	 * @return la data e l'ora
-	 */
-	public static String getDateTime() {
-		return getDateTime("dd-MM-yyyy HH:mm:ss");
-	}
-
-	/**
 	 * apre il browser esterno
-	 * @param uri la pagina da mostrare
-	 * @throws IOException 
+	 * 
+	 * @param uri
+	 *            la pagina da mostrare
+	 * @throws IOException
 	 */
-	public static void openBrowser(URI uri) throws IOException
-	{
+	public static void openBrowser(URI uri) throws IOException {
 		if (Desktop.isDesktopSupported()) {
 			// apre il browser
-				Desktop.getDesktop().browse(uri);
+			Desktop.getDesktop().browse(uri);
 		}
 	}
 
-	
+	/**
+	 * Legge tutto il file in una stringa UTF-8
+	 * 
+	 * @param inout
+	 * @return
+	 */
+	static private String readAll(File inout)
+			throws UnsupportedEncodingException, FileNotFoundException,
+			IOException {
+		String oldtext = "";
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				new FileInputStream(inout), GenericUtil.UTF8));
+		String line = "";
+		while ((line = reader.readLine()) != null) {
+			oldtext += line + "\n";
+		}
+		reader.close();
+		return oldtext;
+	}
+
+	/**
+	 * 
+	 * @param inout
+	 * @param conversione
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	static public void replaceInFile(File inout, String[][] conversione)
+			throws FileNotFoundException, IOException {
+		String newtext = GenericUtil.readAll(inout);
+		for (String[] sostituzione : conversione) {
+			// esegue la sostituzione
+			newtext = newtext.replaceAll(sostituzione[0], sostituzione[1]);
+		}
+		// scrive il testo
+		GenericUtil.writeAll(inout, newtext);
+	}
+
+	/**
+	 * Scrive il testo text sul file inout (charset UTF-8)
+	 * 
+	 * @param inout
+	 * @param text
+	 */
+	static private void writeAll(File inout, String text)
+			throws FileNotFoundException, UnsupportedEncodingException,
+			IOException {
+		FileOutputStream fw = new FileOutputStream(inout);
+		OutputStreamWriter osw = new OutputStreamWriter(fw, GenericUtil.UTF8);
+		BufferedWriter bw = null;
+		bw = new BufferedWriter(osw);
+		bw.write(text);
+		bw.close();
+		osw.close();
+		fw.close();
+	}
 
 }

@@ -30,6 +30,7 @@ import exceptions.XmlException;
 
 /**
  * Gestisce la visualizzazione delle statistiche e dei grafici
+ * 
  * @author intecs
  */
 public final class StatistichePanel extends javax.swing.JPanel {
@@ -38,23 +39,23 @@ public final class StatistichePanel extends javax.swing.JPanel {
 
 	private javax.swing.JTabbedPane jTabbedPane1;
 	private javax.swing.JToolBar jToolBar1;
-	
+
 	/** Creates new form StatistichePanel */
 	public StatistichePanel() {
 		initComponents();
 		try {
 			this.jTabbedPane1.addTab(
 					"Dimensione",
-					createMyBarChart("Monete per dimensione", "dim", "nr. monete",
-							GetDatasetCoinBySize()));
+					createMyBarChart("Monete per dimensione", "dim",
+							"nr. monete", GetDatasetCoinBySize()));
 			this.jTabbedPane1.addTab(
 					"Anno",
 					createMyBarChart("Monete per anno", "anno", "nr. monete",
 							GetDatasetCoinByYear()));
 			this.jTabbedPane1.addTab(
 					"Metallo",
-					createMyBarChart("Monete per metallo", "anno", "nr. monete",
-							GetDatasetCoinByMetal()));
+					createMyBarChart("Monete per metallo", "anno",
+							"nr. monete", GetDatasetCoinByMetal()));
 			this.jTabbedPane1.addTab(
 					"Metallo2",
 					createMy3DPieChart("Monete per metallo",
@@ -65,11 +66,38 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	}
 
 	/**
+	 * Ottiene un pannello con un 3D piechart
+	 * 
+	 * @param title
+	 *            titolo
+	 * @param dataset
+	 *            dati
+	 * @return il pannello
+	 */
+	public JPanel createMy3DPieChart(String title, PieDataset dataset) {
+		JFreeChart chart = ChartFactory.createPieChart3D(title, // title
+				dataset, // PieDataset
+				true, // create legend?
+				true, // generate tooltips?
+				false // generate URLs?
+				);
+		ChartPanel panel = new ChartPanel(chart);
+		panel.setFillZoomRectangle(true);
+		panel.setMouseWheelEnabled(true);
+		return panel;
+	}
+
+	/**
 	 * Ottiene un pannello con un barchart
-	 * @param title titolo
-	 * @param xlabel titolo asse x
-	 * @param ylabel titolo asse y
-	 * @param dataset dati
+	 * 
+	 * @param title
+	 *            titolo
+	 * @param xlabel
+	 *            titolo asse x
+	 * @param ylabel
+	 *            titolo asse y
+	 * @param dataset
+	 *            dati
 	 * @return il pannello
 	 */
 	public JPanel createMyBarChart(String title, String xlabel, String ylabel,
@@ -90,28 +118,25 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	}
 
 	/**
-	 * Ottiene un pannello con un 3D piechart
-	 * @param title titolo
-	 * @param dataset dati
-	 * @return il pannello
+	 * Ottiene i dati relativi alle monete per metallo
+	 * 
+	 * @return i dati
+	 * @throws XmlException
 	 */
-	public JPanel createMy3DPieChart(String title, PieDataset dataset) {
-		JFreeChart chart = ChartFactory.createPieChart3D(title, // title
-				dataset, // PieDataset
-				true, // create legend?
-				true, // generate tooltips?
-				false // generate URLs?
-				);
-		ChartPanel panel = new ChartPanel(chart);
-		panel.setFillZoomRectangle(true);
-		panel.setMouseWheelEnabled(true);
-		return panel;
+	private CategoryDataset GetDatasetCoinByMetal() throws XmlException {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		TreeMap<String, Integer> valori = Statistiche.coinByMetal();
+		for (String key : valori.keySet()) {
+			dataset.addValue(valori.get(key), key, "metallo");
+		}
+		return dataset;
 	}
 
 	/**
 	 * Ottiene i dati relativi alle monete per dimensione
+	 * 
 	 * @return i dati
-	 * @throws XmlException 
+	 * @throws XmlException
 	 */
 	private CategoryDataset GetDatasetCoinBySize() throws XmlException {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -124,8 +149,9 @@ public final class StatistichePanel extends javax.swing.JPanel {
 
 	/**
 	 * Ottiene i dati relativi alle monete per anno
+	 * 
 	 * @return i dati
-	 * @throws XmlException 
+	 * @throws XmlException
 	 */
 	private CategoryDataset GetDatasetCoinByYear() throws XmlException {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -138,22 +164,9 @@ public final class StatistichePanel extends javax.swing.JPanel {
 
 	/**
 	 * Ottiene i dati relativi alle monete per metallo
+	 * 
 	 * @return i dati
-	 * @throws XmlException 
-	 */
-	private CategoryDataset GetDatasetCoinByMetal() throws XmlException {
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		TreeMap<String, Integer> valori = Statistiche.coinByMetal();
-		for (String key : valori.keySet()) {
-			dataset.addValue(valori.get(key), key, "metallo");
-		}
-		return dataset;
-	}
-
-	/**
-	 * Ottiene i dati relativi alle monete per metallo
-	 * @return i dati
-	 * @throws XmlException 
+	 * @throws XmlException
 	 */
 	private PieDataset GetPieDatasetCoinByMetal() throws XmlException {
 		DefaultPieDataset dataset = new DefaultPieDataset();

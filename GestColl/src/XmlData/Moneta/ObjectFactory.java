@@ -32,11 +32,19 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link DatiFisici }
+	 * Create an instance of {@link Asta }
 	 * 
 	 */
-	public DatiFisici createDatiFisici() {
-		return new DatiFisici();
+	public Asta createAsta() {
+		return new Asta();
+	}
+
+	/**
+	 * Create an instance of {@link Autorita }
+	 * 
+	 */
+	public Autorita createAutorita() {
+		return new Autorita();
 	}
 
 	/**
@@ -45,6 +53,46 @@ public class ObjectFactory {
 	 */
 	public DatiAcquisto createDatiAcquisto() {
 		return new DatiAcquisto();
+	}
+
+	/**
+	 * Create an instance of {@link DatiArtistici }
+	 * 
+	 */
+	public DatiArtistici createDatiArtistici() {
+		return new DatiArtistici();
+	}
+
+	/**
+	 * Create an instance of {@link DatiFisici }
+	 * 
+	 */
+	public DatiFisici createDatiFisici() {
+		return new DatiFisici();
+	}
+
+	/**
+	 * Create an instance of {@link Descrizioni }
+	 * 
+	 */
+	public Descrizioni createDescrizioni() {
+		return new Descrizioni();
+	}
+
+	/**
+	 * Create an instance of {@link DocumentiAggiuntivi }
+	 * 
+	 */
+	public DocumentiAggiuntivi createDocumentiAggiuntivi() {
+		return new DocumentiAggiuntivi();
+	}
+
+	/**
+	 * Create an instance of {@link DocumentoAddizionale }
+	 * 
+	 */
+	public DocumentoAddizionale createDocumentoAddizionale() {
+		return new DocumentoAddizionale();
 	}
 
 	/**
@@ -64,46 +112,6 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link Posizione }
-	 * 
-	 */
-	public Posizione createPosizione() {
-		return new Posizione();
-	}
-
-	/**
-	 * Create an instance of {@link Asta }
-	 * 
-	 */
-	public Asta createAsta() {
-		return new Asta();
-	}
-
-	/**
-	 * Create an instance of {@link DatiArtistici }
-	 * 
-	 */
-	public DatiArtistici createDatiArtistici() {
-		return new DatiArtistici();
-	}
-
-	/**
-	 * Create an instance of {@link Zecchiere }
-	 * 
-	 */
-	public Zecchiere createZecchiere() {
-		return new Zecchiere();
-	}
-
-	/**
-	 * Create an instance of {@link Zecca }
-	 * 
-	 */
-	public Zecca createZecca() {
-		return new Zecca();
-	}
-
-	/**
 	 * Create an instance of {@link Libro }
 	 * 
 	 */
@@ -120,22 +128,6 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link Nominale }
-	 * 
-	 */
-	public Nominale createNominale() {
-		return new Nominale();
-	}
-
-	/**
-	 * Create an instance of {@link Zecchieri }
-	 * 
-	 */
-	public Zecchieri createZecchieri() {
-		return new Zecchieri();
-	}
-
-	/**
 	 * Create an instance of {@link Moneta }
 	 * 
 	 */
@@ -144,35 +136,11 @@ public class ObjectFactory {
 	}
 
 	/**
-	 * Create an instance of {@link Autorita }
+	 * Create an instance of {@link Nominale }
 	 * 
 	 */
-	public Autorita createAutorita() {
-		return new Autorita();
-	}
-
-	/**
-	 * Create an instance of {@link DocumentoAddizionale }
-	 * 
-	 */
-	public DocumentoAddizionale createDocumentoAddizionale() {
-		return new DocumentoAddizionale();
-	}
-
-	/**
-	 * Create an instance of {@link DocumentiAggiuntivi }
-	 * 
-	 */
-	public DocumentiAggiuntivi createDocumentiAggiuntivi() {
-		return new DocumentiAggiuntivi();
-	}
-
-	/**
-	 * Create an instance of {@link Descrizioni }
-	 * 
-	 */
-	public Descrizioni createDescrizioni() {
-		return new Descrizioni();
+	public Nominale createNominale() {
+		return new Nominale();
 	}
 
 	/**
@@ -181,6 +149,38 @@ public class ObjectFactory {
 	 */
 	public Note createNote() {
 		return new Note();
+	}
+
+	/**
+	 * Create an instance of {@link Posizione }
+	 * 
+	 */
+	public Posizione createPosizione() {
+		return new Posizione();
+	}
+
+	/**
+	 * Create an instance of {@link Zecca }
+	 * 
+	 */
+	public Zecca createZecca() {
+		return new Zecca();
+	}
+
+	/**
+	 * Create an instance of {@link Zecchiere }
+	 * 
+	 */
+	public Zecchiere createZecchiere() {
+		return new Zecchiere();
+	}
+
+	/**
+	 * Create an instance of {@link Zecchieri }
+	 * 
+	 */
+	public Zecchieri createZecchieri() {
+		return new Zecchieri();
 	}
 
 }

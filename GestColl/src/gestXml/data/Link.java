@@ -17,30 +17,31 @@ import main.GestLog;
 public class Link implements Comparable<Link> {
 	public String categoria;
 
-	
-	
 	/**
-     * il nome
-     */
+	 * il nome
+	 */
 	public String nome;
 	/**
-     * l'url
-     */
-	public URL url;
-	/**
-     * le note
-     */
+	 * le note
+	 */
 	public String note;
+	/**
+	 * l'url
+	 */
+	public URL url;
 
-	
-
-    /**
-     * costruttore
-     * @param categoria la categoria
-     * @param nome il nome
-     * @param url l'url
-     * @param note le note
-     */
+	/**
+	 * costruttore
+	 * 
+	 * @param categoria
+	 *            la categoria
+	 * @param nome
+	 *            il nome
+	 * @param url
+	 *            l'url
+	 * @param note
+	 *            le note
+	 */
 	public Link(String categoria, String nome, String url, String note) {
 		super();
 		this.categoria = categoria;
@@ -54,11 +55,6 @@ public class Link implements Comparable<Link> {
 	}
 
 	@Override
-	public String toString() {
-		return nome;
-	}
-
-	@Override
 	public int compareTo(Link o) {
 		String n1 = this.categoria + this.nome;
 		String n2 = o.categoria + o.nome;
@@ -67,8 +63,14 @@ public class Link implements Comparable<Link> {
 
 	public String toHtml() {
 		String ret;
-		ret = "<html><a href=\""+this.url+"\">"+this.nome+"</a> <br>"+this.note+"</html>";
+		ret = "<html><a href=\"" + this.url + "\">" + this.nome + "</a> <br>"
+				+ this.note + "</html>";
 		return ret;
-		}
+	}
+
+	@Override
+	public String toString() {
+		return nome;
+	}
 
 }

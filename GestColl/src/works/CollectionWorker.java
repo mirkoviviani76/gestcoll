@@ -22,17 +22,6 @@ import org.apache.commons.io.FileUtils;
  * 
  */
 public abstract class CollectionWorker extends Observable {
-	private String name;
-	private String description;
-
-	/**
-     *
-     */
-	public static final String[] INUTILI = { "aux", "toc", "log", "out" };
-	/**
-     *
-     */
-	public static final String[] TMP = { "tex" };
 	/**
      *
      */
@@ -40,65 +29,45 @@ public abstract class CollectionWorker extends Observable {
 	/**
      *
      */
+	public static final String[] INUTILI = { "aux", "toc", "log", "out" };
+
+	/**
+     *
+     */
 	public static final String TEMPLATE_END = ".template";
+	/**
+     *
+     */
+	public static final String[] TMP = { "tex" };
 
 	/**
+	 * Cancella tutti i file con le estensioni contenute in pattern a partire
+	 * dalla directory specificata in startPath
 	 * 
-	 * @param name
-	 */
-	public CollectionWorker(String name) {
-		this.name = name;
-		this.description = "";
-	}
-
-	/**
-	 * 
-	 * @param name
-	 * @param description
-	 */
-	public CollectionWorker(String name, String description) {
-		this.name = name;
-		this.description = description;
-	}
-
-	/**
-	 * Rimuove i file inutili e temporanei
-	 * 
-	 * @param dirs
-	 *            le directory in cui effettuare la cancellazione
-	 * @return
+	 * @param startPath
+	 *            la directory dalla quale cancellare ricorsivamente i files
+	 * @param pattern
+	 *            un array di estensioni
+	 * @return true nel caso siano stati cancellati tutti i files, false
+	 *         altrimenti.
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static int removeTemp(String[] dirs) throws FileNotFoundException,
-			IOException {
+	static public synchronized int deleteFiles(File startPath, String[] pattern)
+			throws FileNotFoundException, IOException {
+		List<File> daEliminare = getFileListing(startPath, pattern);
 		int count = 0;
-		/* cicla su tutte le directory specificate */
-		for (String d : dirs) {
-			count = count + deleteFiles(new File(d), INUTILI);
-			count = count + deleteFiles(new File(d), TMP);
+		for (File f : daEliminare) {
+			if (f.delete()) {
+				count++;
+			}
 		}
-		return count;
-	}
+		if (count != daEliminare.size()) {
+			String msg = "Non ho potuto cancellare tutti gli oggetti: " + count
+					+ "/" + daEliminare.size();
+			GestLog.Warning(CollectionWorker.class, "deleteFiles", msg);
+		}
 
-	/**
-	 * Rimuove i file inutili, temporanei e gli output (html e pdf)
-	 * 
-	 * @param dirs
-	 *            le directory in cui effettuare la cancellazione
-	 * @return
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 */
-	public static int removeAll(String[] dirs) throws FileNotFoundException,
-			IOException {
-		int count = 0;
-		/* cicla su tutte le directory specificate */
-		for (String d : dirs) {
-			count = count + deleteFiles(new File(d), INUTILI);
-			count = count + deleteFiles(new File(d), TMP);
-			count = count + deleteFiles(new File(d), ALL);
-		}
 		return count;
 	}
 
@@ -145,50 +114,67 @@ public abstract class CollectionWorker extends Observable {
 	}
 
 	/**
-	 * Cancella tutti i file con le estensioni contenute in pattern a partire
-	 * dalla directory specificata in startPath
+	 * Rimuove i file inutili, temporanei e gli output (html e pdf)
 	 * 
-	 * @param startPath
-	 *            la directory dalla quale cancellare ricorsivamente i files
-	 * @param pattern
-	 *            un array di estensioni
-	 * @return true nel caso siano stati cancellati tutti i files, false
-	 *         altrimenti.
+	 * @param dirs
+	 *            le directory in cui effettuare la cancellazione
+	 * @return
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	static public synchronized int deleteFiles(File startPath, String[] pattern)
-			throws FileNotFoundException, IOException {
-		List<File> daEliminare = getFileListing(startPath, pattern);
+	public static int removeAll(String[] dirs) throws FileNotFoundException,
+			IOException {
 		int count = 0;
-		for (File f : daEliminare) {
-			if (f.delete()) {
-				count++;
-			}
+		/* cicla su tutte le directory specificate */
+		for (String d : dirs) {
+			count = count + deleteFiles(new File(d), INUTILI);
+			count = count + deleteFiles(new File(d), TMP);
+			count = count + deleteFiles(new File(d), ALL);
 		}
-		if (count != daEliminare.size()) {
-			String msg = "Non ho potuto cancellare tutti gli oggetti: " + count
-					+ "/" + daEliminare.size();
-			GestLog.Warning(CollectionWorker.class, "deleteFiles", msg);
-		}
-
 		return count;
 	}
-	
-	
 
 	/**
-	 * @return the name
+	 * Rimuove i file inutili e temporanei
+	 * 
+	 * @param dirs
+	 *            le directory in cui effettuare la cancellazione
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
 	 */
-	public String getName() {
-		return name;
+	public static int removeTemp(String[] dirs) throws FileNotFoundException,
+			IOException {
+		int count = 0;
+		/* cicla su tutte le directory specificate */
+		for (String d : dirs) {
+			count = count + deleteFiles(new File(d), INUTILI);
+			count = count + deleteFiles(new File(d), TMP);
+		}
+		return count;
+	}
+
+	private String description;
+
+	private String name;
+
+	/**
+	 * 
+	 * @param name
+	 */
+	public CollectionWorker(String name) {
+		this.name = name;
+		this.description = "";
 	}
 
 	/**
-	 * @return the description
+	 * 
+	 * @param name
+	 * @param description
 	 */
-	public String getDescription() {
-		return description;
+	public CollectionWorker(String name, String description) {
+		this.name = name;
+		this.description = description;
 	}
 
 	/**
@@ -202,5 +188,19 @@ public abstract class CollectionWorker extends Observable {
 	 */
 	public abstract Object[] doWork(File inDir, File outDir, Object[] extraParam)
 			throws Exception;
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
 
 }

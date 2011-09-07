@@ -52,7 +52,8 @@ public class VassoioCellRenderer extends DefaultTableCellRenderer {
 		// se e' un posto occupato, mostra i dati
 		if (!id.equals("")) {
 			// estrae i dati dall'xml
-			String filename = Common.getCommon().getMoneteDir() + "/" + id + "/" + id + ".xml";
+			String filename = Common.getCommon().getMoneteDir() + "/" + id
+					+ "/" + id + ".xml";
 			MonetaXml mng;
 			try {
 				mng = new MonetaXml(new File(filename));

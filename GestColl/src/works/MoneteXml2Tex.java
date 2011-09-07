@@ -47,12 +47,13 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 	 * @param mng
 	 * @param outDir
 	 * @return
-	 * @throws XsltException 
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
+	 * @throws XsltException
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
 	@Override
-	public File convert(MonetaXml mng, File outDir) throws XsltException, FileNotFoundException, IOException  {
+	public File convert(MonetaXml mng, File outDir) throws XsltException,
+			FileNotFoundException, IOException {
 		/* prepara il file di output */
 		File out = new File(outDir + "/" + mng.getId() + ".tex");
 		mng.xsltConvert(new File(Common.getCommon().getXslLatex()), out);
@@ -67,12 +68,13 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 	 * @param inDir
 	 * @param outDir
 	 * @param params
-	 * @throws XmlException 
-	 * @throws IOException 
-	 * @throws XsltException 
+	 * @throws XmlException
+	 * @throws IOException
+	 * @throws XsltException
 	 */
 	@Override
-	public Object[] doWork(File inDir, File outDir, Object[] params) throws XmlException, XsltException, IOException  {
+	public Object[] doWork(File inDir, File outDir, Object[] params)
+			throws XmlException, XsltException, IOException {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = getFileListing(inDir, Common.COIN_END);
 		Collections.sort(files);
@@ -87,34 +89,36 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
 			MonetaXml mng;
-			mng = new MonetaXml((File) (iterator.next()));
+			mng = new MonetaXml((iterator.next()));
 			String id = mng.getId();
 			Progress p = new Progress(i, size, "Tex");
 
-			//converte il file xls in tex
+			// converte il file xls in tex
 			this.convert(mng, outDir);
 
 			/* prepara il file di posizioni */
 			String paese = mng.getPaese();
-			String valuta = mng.getNominale().getValore() + " " + mng.getNominale().getValuta();
+			String valuta = mng.getNominale().getValore() + " "
+					+ mng.getNominale().getValuta();
 			String cont = mng.getPosizione().getContenitore().toString();
 			String vass = mng.getPosizione().getVassoio().toString();
 			String r = mng.getPosizione().getRiga().toString();
 			String c = mng.getPosizione().getColonna().toString();
 
-			posizioni = posizioni + "\\\\hline\n" + id + " & " + paese + " " +
-					valuta + " & " + cont + " & " + vass + " & " + r + " & " + c +
-					" \\\\\\\\\n";
+			posizioni = posizioni + "\\\\hline\n" + id + " & " + paese + " "
+					+ valuta + " & " + cont + " & " + vass + " & " + r + " & "
+					+ c + " \\\\\\\\\n";
 			allXmlList = allXmlList + "\\\\include{" + id + "}\n";
 
 			/* gestisce i documenti aggiuntivi linkati dalla moneta */
 			List<DocumentoAddizionale> documenti = mng.getItemAddizionali();
 			for (DocumentoAddizionale f : documenti) {
 				if (f.getFilename().endsWith("tex")) {
-					//copia il tex in outdir
-					File xxx = new File(inDir.getPath() + "/" + mng.getId() + "/" +
-							f.getFilename());
-					FileUtils.copyFile(xxx, new File(outDir + "/" + xxx.getName()));
+					// copia il tex in outdir
+					File xxx = new File(inDir.getPath() + "/" + mng.getId()
+							+ "/" + f.getFilename());
+					FileUtils.copyFile(xxx,
+							new File(outDir + "/" + xxx.getName()));
 					String tmp = f.getFilename().replace(".tex", "");
 					allXmlList = allXmlList + "\\\\include{" + tmp + "}\n";
 				}
@@ -124,15 +128,16 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 			i++;
 
 		}
-		String[][] conversione = {{"%POSIZIONI", posizioni}};
-		String[][] conversione_uno = {{"%INCLUDES", allXmlList}};
+		String[][] conversione = { { "%POSIZIONI", posizioni } };
+		String[][] conversione_uno = { { "%INCLUDES", allXmlList } };
 		/* crea le posizioni usando il template */
-		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/" + POSIZIONI +
-				Common.TEMPLATE_END, outDir + "/" + POSIZIONI, conversione);
+		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/"
+				+ POSIZIONI + Common.TEMPLATE_END, outDir + "/" + POSIZIONI,
+				conversione);
 		/* crea il file principale usando il template */
-		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/" +
-				Common.COLLEZIONE_TEX + Common.TEMPLATE_END, outDir + "/" +
-						Common.COLLEZIONE_TEX, conversione_uno);
+		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/"
+				+ Common.COLLEZIONE_TEX + Common.TEMPLATE_END, outDir + "/"
+				+ Common.COLLEZIONE_TEX, conversione_uno);
 
 		Message m = new Message("Tex creati", Level.INFO);
 		this.setChanged();

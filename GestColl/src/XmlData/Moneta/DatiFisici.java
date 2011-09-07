@@ -44,34 +44,13 @@ import javax.xml.bind.annotation.XmlType;
 public class DatiFisici {
 
 	@XmlElement(required = true)
-	protected Misura peso;
-	@XmlElement(required = true)
 	protected Misura diametro;
 	@XmlElement(required = true)
 	protected String forma;
 	@XmlElement(required = true)
 	protected String metallo;
-
-	/**
-	 * Gets the value of the peso property.
-	 * 
-	 * @return possible object is {@link Misura }
-	 * 
-	 */
-	public Misura getPeso() {
-		return peso;
-	}
-
-	/**
-	 * Sets the value of the peso property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Misura }
-	 * 
-	 */
-	public void setPeso(Misura value) {
-		this.peso = value;
-	}
+	@XmlElement(required = true)
+	protected Misura peso;
 
 	/**
 	 * Gets the value of the diametro property.
@@ -81,6 +60,36 @@ public class DatiFisici {
 	 */
 	public Misura getDiametro() {
 		return diametro;
+	}
+
+	/**
+	 * Gets the value of the forma property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getForma() {
+		return forma;
+	}
+
+	/**
+	 * Gets the value of the metallo property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getMetallo() {
+		return metallo;
+	}
+
+	/**
+	 * Gets the value of the peso property.
+	 * 
+	 * @return possible object is {@link Misura }
+	 * 
+	 */
+	public Misura getPeso() {
+		return peso;
 	}
 
 	/**
@@ -95,16 +104,6 @@ public class DatiFisici {
 	}
 
 	/**
-	 * Gets the value of the forma property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getForma() {
-		return forma;
-	}
-
-	/**
 	 * Sets the value of the forma property.
 	 * 
 	 * @param value
@@ -116,16 +115,6 @@ public class DatiFisici {
 	}
 
 	/**
-	 * Gets the value of the metallo property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getMetallo() {
-		return metallo;
-	}
-
-	/**
 	 * Sets the value of the metallo property.
 	 * 
 	 * @param value
@@ -134,6 +123,17 @@ public class DatiFisici {
 	 */
 	public void setMetallo(String value) {
 		this.metallo = value;
+	}
+
+	/**
+	 * Sets the value of the peso property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link Misura }
+	 * 
+	 */
+	public void setPeso(Misura value) {
+		this.peso = value;
 	}
 
 }

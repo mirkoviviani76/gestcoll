@@ -44,15 +44,28 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	 * @param mng
 	 * @param outDir
 	 * @return
-	 * @throws XsltException 
+	 * @throws XsltException
 	 */
 	@Override
-	public File convert(MonetaXml mng, File outDir) throws XsltException
- {
+	public File convert(MonetaXml mng, File outDir) throws XsltException {
 		/* prepara il file di output */
 		File ret = new File(outDir + "/" + mng.getId() + ".html");
 		mng.xsltConvert(new File(Common.getCommon().getXslHtml()), ret);
 		return ret;
+	}
+
+	/**
+	 * copia il file index.html nella directory html
+	 * 
+	 * @param destDir
+	 * @throws IOException
+	 */
+	private void copyIndex(File destDir) throws IOException {
+		if (!(new File(destDir + "/" + "index.html")).exists()) {
+			FileUtils.copyFile(new File(Common.getCommon().getTemplateDir()
+					+ "/" + "index.html.template"), new File(destDir + "/"
+					+ "index.html"));
+		}
 	}
 
 	/**
@@ -81,7 +94,8 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 			String id = mng.getId();
 			/* prepara il file di output */
 			String outFile = outDir + "/" + id + ".html";
-			mng.xsltConvert(new File(Common.getCommon().getXslHtml()), new File(outFile));
+			mng.xsltConvert(new File(Common.getCommon().getXslHtml()),
+					new File(outFile));
 
 			/* scrive l'item nell'indice */
 			data = data + "<tr>" + "\n";
@@ -108,9 +122,9 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 
 		String[][] conversione = { { "%DATA", data } };
 		/* crea il file di output usando il template */
-		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/" + OUTFILE_MONETE
-				+ Common.TEMPLATE_END, outDir + "/" + OUTFILE_MONETE,
-				conversione);
+		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/"
+				+ OUTFILE_MONETE + Common.TEMPLATE_END, outDir + "/"
+				+ OUTFILE_MONETE, conversione);
 
 		/* copia il file index.html */
 		this.copyIndex(outDir);
@@ -120,20 +134,6 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 		this.notifyObservers(m);
 
 		return null;
-	}
-
-	/**
-	 * copia il file index.html nella directory html
-	 * 
-	 * @param destDir
-	 * @throws IOException
-	 */
-	private void copyIndex(File destDir) throws IOException {
-		if (!(new File(destDir + "/" + "index.html")).exists()) {
-			FileUtils.copyFile(new File(Common.getCommon().getTemplateDir() + "/"
-					+ "index.html.template"), new File(destDir + "/"
-					+ "index.html"));
-		}
 	}
 
 }

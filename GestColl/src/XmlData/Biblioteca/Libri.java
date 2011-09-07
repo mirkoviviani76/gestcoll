@@ -5,7 +5,6 @@
 // Generated on: 2011.08.29 at 01:40:30 PM CEST 
 //
 
-
 package XmlData.Biblioteca;
 
 import java.util.ArrayList;
@@ -14,11 +13,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for libri complex type.
+ * <p>
+ * Java class for libri complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="libri">
@@ -35,40 +36,39 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "libri", propOrder = {
-    "libro"
-})
+@XmlType(name = "libri", propOrder = { "libro" })
 public class Libri {
 
-    protected List<Librotype> libro;
+	protected List<Librotype> libro;
 
-    /**
-     * Gets the value of the libro property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the libro property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLibro().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Librotype }
-     * 
-     * 
-     */
-    public List<Librotype> getLibro() {
-        if (libro == null) {
-            libro = new ArrayList<Librotype>();
-        }
-        return this.libro;
-    }
+	/**
+	 * Gets the value of the libro property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the libro property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getLibro().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link Librotype }
+	 * 
+	 * 
+	 */
+	public List<Librotype> getLibro() {
+		if (libro == null) {
+			libro = new ArrayList<Librotype>();
+		}
+		return this.libro;
+	}
 
 }

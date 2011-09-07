@@ -30,25 +30,24 @@ public class MonetaListModel extends GenericListModel<MonetaXml> {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @throws XmlException 
-     *
-     */
+	 * @throws XmlException
+	 * 
+	 */
 	public MonetaListModel(MonetaXml.Ordering ordering) throws XmlException {
 		super();
 		/* ottiene l'elenco di tutte le monete */
 		@SuppressWarnings("rawtypes")
 		ListIterator iterator = null;
 		try {
-			List<File> files = CollectionWorker.getFileListing(new File(
-					Common.getCommon().getMoneteDir()), Common.COIN_END);
+			List<File> files = CollectionWorker.getFileListing(new File(Common
+					.getCommon().getMoneteDir()), Common.COIN_END);
 			iterator = files.listIterator();
 
 		} catch (FileNotFoundException ex) {
 			GestLog.Error(MonetaListModel.class, ex);
 		}
-		if (iterator == null) {
+		if (iterator == null)
 			return;
-		}
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {

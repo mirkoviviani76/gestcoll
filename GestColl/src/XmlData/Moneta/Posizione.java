@@ -46,13 +46,23 @@ import javax.xml.bind.annotation.XmlType;
 public class Posizione {
 
 	@XmlElement(required = true)
-	protected BigInteger contenitore;
+	protected BigInteger colonna;
 	@XmlElement(required = true)
-	protected BigInteger vassoio;
+	protected BigInteger contenitore;
 	@XmlElement(required = true)
 	protected BigInteger riga;
 	@XmlElement(required = true)
-	protected BigInteger colonna;
+	protected BigInteger vassoio;
+
+	/**
+	 * Gets the value of the colonna property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getColonna() {
+		return colonna;
+	}
 
 	/**
 	 * Gets the value of the contenitore property.
@@ -62,6 +72,37 @@ public class Posizione {
 	 */
 	public BigInteger getContenitore() {
 		return contenitore;
+	}
+
+	/**
+	 * Gets the value of the riga property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getRiga() {
+		return riga;
+	}
+
+	/**
+	 * Gets the value of the vassoio property.
+	 * 
+	 * @return possible object is {@link BigInteger }
+	 * 
+	 */
+	public BigInteger getVassoio() {
+		return vassoio;
+	}
+
+	/**
+	 * Sets the value of the colonna property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link BigInteger }
+	 * 
+	 */
+	public void setColonna(BigInteger value) {
+		this.colonna = value;
 	}
 
 	/**
@@ -76,37 +117,6 @@ public class Posizione {
 	}
 
 	/**
-	 * Gets the value of the vassoio property.
-	 * 
-	 * @return possible object is {@link BigInteger }
-	 * 
-	 */
-	public BigInteger getVassoio() {
-		return vassoio;
-	}
-
-	/**
-	 * Sets the value of the vassoio property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link BigInteger }
-	 * 
-	 */
-	public void setVassoio(BigInteger value) {
-		this.vassoio = value;
-	}
-
-	/**
-	 * Gets the value of the riga property.
-	 * 
-	 * @return possible object is {@link BigInteger }
-	 * 
-	 */
-	public BigInteger getRiga() {
-		return riga;
-	}
-
-	/**
 	 * Sets the value of the riga property.
 	 * 
 	 * @param value
@@ -118,24 +128,14 @@ public class Posizione {
 	}
 
 	/**
-	 * Gets the value of the colonna property.
-	 * 
-	 * @return possible object is {@link BigInteger }
-	 * 
-	 */
-	public BigInteger getColonna() {
-		return colonna;
-	}
-
-	/**
-	 * Sets the value of the colonna property.
+	 * Sets the value of the vassoio property.
 	 * 
 	 * @param value
 	 *            allowed object is {@link BigInteger }
 	 * 
 	 */
-	public void setColonna(BigInteger value) {
-		this.colonna = value;
+	public void setVassoio(BigInteger value) {
+		this.vassoio = value;
 	}
 
 }

@@ -25,8 +25,8 @@ public class GenericListModel<E> extends DefaultListModel {
 	protected ArrayList<E> contenuto;
 
 	/**
-     * Costruttore
-     */
+	 * Costruttore
+	 */
 	public GenericListModel() {
 		contenuto = new ArrayList<E>();
 	}
@@ -39,32 +39,23 @@ public class GenericListModel<E> extends DefaultListModel {
 		contenuto = new ArrayList<E>();
 		if (list == null)
 			return;
-		for (E l : list)
+		for (E l : list) {
 			contenuto.add(l);
+		}
 	}
 
 	/**
-	 * cerca il testo text nell'elenco e ritorna l'indice dell'elemento
 	 * 
-	 * @param text
-	 * @param fromIndex
-	 * @return -1 se text non e' stato trovato. L'indice altrimenti.
+	 * @param index
+	 * @return l'oggetto di indice specificato
 	 */
-	public int search(String text, int fromIndex) {
-		int retVal = -1;
-		/* se l'indice e' troppo grande, ricomincia a cerca dall'inizio */
-		if (fromIndex > this.contenuto.size())
-			fromIndex = 0;
-
-		for (int i = fromIndex; i < this.contenuto.size(); i++) {
-			@SuppressWarnings("unchecked")
-			E curVal = (E) this.getElementAt(i);
-			if (curVal.toString().contains(text)) {
-				retVal = i;
-				break;
-			}
+	@Override
+	public Object getElementAt(int index) {
+		Object ret = null;
+		if (index < contenuto.size()) {
+			ret = contenuto.get(index);
 		}
-		return retVal;
+		return ret;
 	}
 
 	/**
@@ -77,15 +68,27 @@ public class GenericListModel<E> extends DefaultListModel {
 	}
 
 	/**
+	 * cerca il testo text nell'elenco e ritorna l'indice dell'elemento
 	 * 
-	 * @param index
-	 * @return l'oggetto di indice specificato
+	 * @param text
+	 * @param fromIndex
+	 * @return -1 se text non e' stato trovato. L'indice altrimenti.
 	 */
-	@Override
-	public Object getElementAt(int index) {
-		Object ret = null;
-		if (index < contenuto.size())
-			ret = contenuto.get(index);
-		return ret;
+	public int search(String text, int fromIndex) {
+		int retVal = -1;
+		/* se l'indice e' troppo grande, ricomincia a cerca dall'inizio */
+		if (fromIndex > this.contenuto.size()) {
+			fromIndex = 0;
+		}
+
+		for (int i = fromIndex; i < this.contenuto.size(); i++) {
+			@SuppressWarnings("unchecked")
+			E curVal = (E) this.getElementAt(i);
+			if (curVal.toString().contains(text)) {
+				retVal = i;
+				break;
+			}
+		}
+		return retVal;
 	}
 }

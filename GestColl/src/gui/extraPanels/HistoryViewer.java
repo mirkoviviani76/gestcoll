@@ -23,12 +23,22 @@ import main.GestLog;
  * @author intecs
  */
 public class HistoryViewer extends javax.swing.JDialog {
+	/** A return status code - returned if OK button has been pressed */
+	public static final int RET_OK = 1;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	/** A return status code - returned if OK button has been pressed */
-	public static final int RET_OK = 1;
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JScrollPane jScrollPane1;
+
+	private javax.swing.JTextPane jTextPane1;
+
+	private javax.swing.JButton okButton;
+	// End of variables declaration//GEN-END:variables
+
+	private int returnStatus = RET_OK;
 
 	/** Creates new form HistoryViewer */
 	public HistoryViewer(java.awt.Frame parent, boolean modal) {
@@ -36,28 +46,21 @@ public class HistoryViewer extends javax.swing.JDialog {
 		initComponents();
 	}
 
-	public void showFile(File f) {
-		try {
-			BufferedReader bis = new BufferedReader(new FileReader(f));
-			String allFile = "";
-			String temp = "";
-			while ((temp = bis.readLine()) != null) {
-				allFile = allFile + temp + "\n";
-			}
-			this.jTextPane1.setText(allFile);
-			this.setTitle(f.getName());
-			// dispose all the resources after using them.
-			bis.close();
-		} catch (IOException ex) {
-			GestLog.Error(HistoryViewer.class, ex);
-		}
+	/** Closes the dialog */
+	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
+		doClose(RET_OK);
+	}// GEN-LAST:event_closeDialog
+
+	private void doClose(int retStatus) {
+		returnStatus = retStatus;
+		setVisible(false);
+		dispose();
 	}
 
 	/** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
 	public int getReturnStatus() {
 		return returnStatus;
 	}
-
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 */
@@ -119,27 +122,24 @@ public class HistoryViewer extends javax.swing.JDialog {
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
-
 	private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 		doClose(RET_OK);
 	}// GEN-LAST:event_okButtonActionPerformed
 
-	/** Closes the dialog */
-	private void closeDialog(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_closeDialog
-		doClose(RET_OK);
-	}// GEN-LAST:event_closeDialog
-
-	private void doClose(int retStatus) {
-		returnStatus = retStatus;
-		setVisible(false);
-		dispose();
+	public void showFile(File f) {
+		try {
+			BufferedReader bis = new BufferedReader(new FileReader(f));
+			String allFile = "";
+			String temp = "";
+			while ((temp = bis.readLine()) != null) {
+				allFile = allFile + temp + "\n";
+			}
+			this.jTextPane1.setText(allFile);
+			this.setTitle(f.getName());
+			// dispose all the resources after using them.
+			bis.close();
+		} catch (IOException ex) {
+			GestLog.Error(HistoryViewer.class, ex);
+		}
 	}
-
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTextPane jTextPane1;
-	private javax.swing.JButton okButton;
-	// End of variables declaration//GEN-END:variables
-
-	private int returnStatus = RET_OK;
 }

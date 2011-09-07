@@ -32,13 +32,73 @@ import works.CollectionWorker;
  */
 public class MainFrame extends javax.swing.JFrame implements ActionListener {
 
+	private static javax.swing.JTextArea jTFMessages;
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/** Creates new form MainFrame 
-	 * @throws XmlException */
+	/**
+	 * 
+	 * @param m
+	 */
+	public static void setMessage(Message m) {
+		Color foreground = Color.BLUE;
+		if (m.isSevere()) {
+			foreground = Color.RED;
+		}
+		jTFMessages.setForeground(foreground);
+		String ora = GenericUtil.getDateTime("HH:mm:ss");
+		jTFMessages.setText(ora + "\t" + m.toString());
+	}
+
+	private gui.extraPanels.ContattiPanel contattiPanel1;
+
+	private javax.swing.JButton jBGestContatti;
+
+	private javax.swing.JButton jBGestLibri;
+
+	private javax.swing.JButton jBGestLinks;
+
+	private javax.swing.JButton jBGestMonete;
+
+	private javax.swing.JButton jBStatistiche;
+
+	private javax.swing.JLabel jLabel1;
+
+	private javax.swing.JMenu jMenu1;
+
+	private javax.swing.JMenu jMenu3;
+
+	private javax.swing.JMenuItem jMIAbout;
+
+	private javax.swing.JMenuItem jMIDelAll;
+
+	private javax.swing.JMenuItem jMIDelTemp;
+
+	private javax.swing.JMenuItem jMIExit;
+
+	private javax.swing.JMenuItem jMIShowStorico;
+	private javax.swing.JMenuBar jMRimuoviTemp;
+	private javax.swing.JMenu jMStrumenti;
+	private javax.swing.JPanel jPanel1;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JToolBar.Separator jSeparator1;
+	private javax.swing.JToolBar.Separator jSeparator2;
+	private javax.swing.JToolBar.Separator jSeparator3;
+	private javax.swing.JPopupMenu.Separator jSeparator4;
+	private javax.swing.JToolBar jToolBar1;
+	private gui.extraPanels.BibliotecaPanel libriPanel1;
+	private gui.extraPanels.LinksPanel linksPanel1;
+	private gui.moneta.MonetePanel monetePanel1;
+	private gui.extraPanels.StatistichePanel statistichePanel1;
+
+	/**
+	 * Creates new form MainFrame
+	 * 
+	 * @throws XmlException
+	 */
 	public MainFrame() throws XmlException {
 		Splash.getInstance().splashProgress("Start...");
 		// inizializza i componenti grafici
@@ -53,108 +113,6 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		Splash.getInstance().splashProgress("Fine...");
 		// mostra il pannello delle monete
 		this.gestSelectMonete();
-	}
-
-	private void addActionListener() {
-		/*
-		 * sistema i listener (il mouseclic non basta: si possono scegliere
-		 * anche con la tastiera)
-		 */
-		this.jBGestLibri.addActionListener(this);
-		this.jBGestMonete.addActionListener(this);
-		this.jMIAbout.addActionListener(this);
-		this.jMIExit.addActionListener(this);
-		this.jBGestContatti.addActionListener(this);
-		this.jBGestLinks.addActionListener(this);
-		this.jMIDelAll.addActionListener(this);
-		this.jMIDelTemp.addActionListener(this);
-		this.jMIShowStorico.addActionListener(this);
-		this.jBStatistiche.addActionListener(this);
-	}
-
-	private void gestAbout() throws HeadlessException {
-		JOptionPane.showMessageDialog(this, String.format("%s\nVersione: %s",
-				Common.APPNAME, Common.VERSION), Common.APPNAME,
-				JOptionPane.INFORMATION_MESSAGE);
-		GestLog.Error(this.getClass(), "test", "TEST");
-	}
-
-	private void gestExit() {
-		// esce
-		System.exit(0);
-	}
-
-	private void gestRemoveAll() throws HeadlessException {
-		try {
-			String[] ddd = { Common.getCommon().getHtmlDir(), Common.getCommon().getLatexDir(), Common.getCommon().getQrDir() };
-			int count = CollectionWorker.removeAll(ddd);
-			setMessage(new Message(String.format("Rimossi %d oggetti.", count),
-					Level.INFO));
-		} catch (FileNotFoundException ex) {
-			GestLog.Error(MainFrame.class, ex);
-		} catch (IOException ex) {
-			GestLog.Error(MainFrame.class, ex);
-		}
-	}
-
-	private void gestRemoveTemp() throws HeadlessException {
-		String[] ddd = { Common.getCommon().getHtmlDir(), Common.getCommon().getLatexDir() };
-		int count = 0;
-		try {
-			count = CollectionWorker.removeTemp(ddd);
-		} catch (FileNotFoundException ex) {
-			GestLog.Error(MainFrame.class, ex);
-		} catch (IOException ex) {
-			GestLog.Error(MainFrame.class, ex);
-		}
-		setMessage(new Message(String.format("Rimossi %d oggetti.", count),
-				Level.INFO));
-	}
-
-	private void gestSelectLibri() {
-		this.libriPanel1.setVisible(true);
-		this.monetePanel1.setVisible(false);
-		this.contattiPanel1.setVisible(false);
-		this.linksPanel1.setVisible(false);
-		this.statistichePanel1.setVisible(false);
-	}
-
-	private void gestSelectMonete() {
-		this.libriPanel1.setVisible(false);
-		this.monetePanel1.setVisible(true);
-		this.contattiPanel1.setVisible(false);
-		this.linksPanel1.setVisible(false);
-		this.statistichePanel1.setVisible(false);
-	}
-
-	private void gestContatti() {
-		this.libriPanel1.setVisible(false);
-		this.monetePanel1.setVisible(false);
-		this.contattiPanel1.setVisible(true);
-		this.linksPanel1.setVisible(false);
-		this.statistichePanel1.setVisible(false);
-	}
-
-	private void gestLinks() {
-		this.libriPanel1.setVisible(false);
-		this.monetePanel1.setVisible(false);
-		this.contattiPanel1.setVisible(false);
-		this.linksPanel1.setVisible(true);
-		this.statistichePanel1.setVisible(false);
-	}
-
-	private void gestSelectStatistiche() {
-		this.libriPanel1.setVisible(false);
-		this.monetePanel1.setVisible(false);
-		this.contattiPanel1.setVisible(false);
-		this.linksPanel1.setVisible(false);
-		this.statistichePanel1.setVisible(true);
-	}
-
-	private void gestStorico() {
-		HistoryViewer hw = new HistoryViewer(this, true);
-		hw.showFile(new File(Common.getCommon().getHistoryLog()));
-		hw.setVisible(true);
 	}
 
 	/**
@@ -192,23 +150,115 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		}
 	}
 
-	/**
-	 * 
-	 * @param m
-	 */
-	public static void setMessage(Message m) {
-		Color foreground = Color.BLUE;
-		if (m.isSevere()) {
-			foreground = Color.RED;
+	private void addActionListener() {
+		/*
+		 * sistema i listener (il mouseclic non basta: si possono scegliere
+		 * anche con la tastiera)
+		 */
+		this.jBGestLibri.addActionListener(this);
+		this.jBGestMonete.addActionListener(this);
+		this.jMIAbout.addActionListener(this);
+		this.jMIExit.addActionListener(this);
+		this.jBGestContatti.addActionListener(this);
+		this.jBGestLinks.addActionListener(this);
+		this.jMIDelAll.addActionListener(this);
+		this.jMIDelTemp.addActionListener(this);
+		this.jMIShowStorico.addActionListener(this);
+		this.jBStatistiche.addActionListener(this);
+	}
+
+	private void gestAbout() throws HeadlessException {
+		JOptionPane.showMessageDialog(this, String.format("%s\nVersione: %s",
+				Common.APPNAME, Common.VERSION), Common.APPNAME,
+				JOptionPane.INFORMATION_MESSAGE);
+		GestLog.Error(this.getClass(), "test", "TEST");
+	}
+
+	private void gestContatti() {
+		this.libriPanel1.setVisible(false);
+		this.monetePanel1.setVisible(false);
+		this.contattiPanel1.setVisible(true);
+		this.linksPanel1.setVisible(false);
+		this.statistichePanel1.setVisible(false);
+	}
+
+	private void gestExit() {
+		// esce
+		System.exit(0);
+	}
+
+	private void gestLinks() {
+		this.libriPanel1.setVisible(false);
+		this.monetePanel1.setVisible(false);
+		this.contattiPanel1.setVisible(false);
+		this.linksPanel1.setVisible(true);
+		this.statistichePanel1.setVisible(false);
+	}
+
+	private void gestRemoveAll() throws HeadlessException {
+		try {
+			String[] ddd = { Common.getCommon().getHtmlDir(),
+					Common.getCommon().getLatexDir(),
+					Common.getCommon().getQrDir() };
+			int count = CollectionWorker.removeAll(ddd);
+			setMessage(new Message(String.format("Rimossi %d oggetti.", count),
+					Level.INFO));
+		} catch (FileNotFoundException ex) {
+			GestLog.Error(MainFrame.class, ex);
+		} catch (IOException ex) {
+			GestLog.Error(MainFrame.class, ex);
 		}
-		jTFMessages.setForeground(foreground);
-		String ora = GenericUtil.getDateTime("HH:mm:ss");
-		jTFMessages.setText(ora + "\t" + m.toString());
+	}
+
+	private void gestRemoveTemp() throws HeadlessException {
+		String[] ddd = { Common.getCommon().getHtmlDir(),
+				Common.getCommon().getLatexDir() };
+		int count = 0;
+		try {
+			count = CollectionWorker.removeTemp(ddd);
+		} catch (FileNotFoundException ex) {
+			GestLog.Error(MainFrame.class, ex);
+		} catch (IOException ex) {
+			GestLog.Error(MainFrame.class, ex);
+		}
+		setMessage(new Message(String.format("Rimossi %d oggetti.", count),
+				Level.INFO));
+	}
+
+	private void gestSelectLibri() {
+		this.libriPanel1.setVisible(true);
+		this.monetePanel1.setVisible(false);
+		this.contattiPanel1.setVisible(false);
+		this.linksPanel1.setVisible(false);
+		this.statistichePanel1.setVisible(false);
+	}
+
+	private void gestSelectMonete() {
+		this.libriPanel1.setVisible(false);
+		this.monetePanel1.setVisible(true);
+		this.contattiPanel1.setVisible(false);
+		this.linksPanel1.setVisible(false);
+		this.statistichePanel1.setVisible(false);
+	}
+
+	private void gestSelectStatistiche() {
+		this.libriPanel1.setVisible(false);
+		this.monetePanel1.setVisible(false);
+		this.contattiPanel1.setVisible(false);
+		this.linksPanel1.setVisible(false);
+		this.statistichePanel1.setVisible(true);
+	}
+
+	private void gestStorico() {
+		HistoryViewer hw = new HistoryViewer(this, true);
+		hw.showFile(new File(Common.getCommon().getHistoryLog()));
+		hw.setVisible(true);
 	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
-	 * @throws XmlException 
+	 * 
+	 * @throws XmlException
 	 */
 
 	// <editor-fold defaultstate="collapsed"
@@ -378,35 +428,6 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 		// Variables declaration - do not modify//GEN-BEGIN:variables
-
-	private gui.extraPanels.ContattiPanel contattiPanel1;
-	private javax.swing.JButton jBGestContatti;
-	private javax.swing.JButton jBGestLibri;
-	private javax.swing.JButton jBGestLinks;
-	private javax.swing.JButton jBGestMonete;
-	private javax.swing.JButton jBStatistiche;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JMenuItem jMIAbout;
-	private javax.swing.JMenuItem jMIDelAll;
-	private javax.swing.JMenuItem jMIDelTemp;
-	private javax.swing.JMenuItem jMIExit;
-	private javax.swing.JMenuItem jMIShowStorico;
-	private javax.swing.JMenuBar jMRimuoviTemp;
-	private javax.swing.JMenu jMStrumenti;
-	private javax.swing.JMenu jMenu1;
-	private javax.swing.JMenu jMenu3;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JToolBar.Separator jSeparator1;
-	private javax.swing.JToolBar.Separator jSeparator2;
-	private javax.swing.JToolBar.Separator jSeparator3;
-	private javax.swing.JPopupMenu.Separator jSeparator4;
-	private static javax.swing.JTextArea jTFMessages;
-	private javax.swing.JToolBar jToolBar1;
-	private gui.extraPanels.BibliotecaPanel libriPanel1;
-	private gui.extraPanels.LinksPanel linksPanel1;
-	private gui.moneta.MonetePanel monetePanel1;
-	private gui.extraPanels.StatistichePanel statistichePanel1;
 
 	// End of variables declaration//GEN-END:variables
 

@@ -21,11 +21,14 @@ public class VassoioPanel extends javax.swing.JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTable jTable1;
-	private JList elencoMonete;
-	private int righe;
 	@SuppressWarnings("unused")
 	private int colonne;
+	private JList elencoMonete;
+	private javax.swing.JScrollPane jScrollPane2;
+	// End of variables declaration//GEN-END:variables
+	private JTable jTable1;
+
+	private int righe;
 
 	/** Creates new form VassoioPanel */
 	public VassoioPanel() {
@@ -44,6 +47,53 @@ public class VassoioPanel extends javax.swing.JPanel {
 		this.elencoMonete = elencoMonete;
 
 	}
+
+	/**
+	 * ottiene l'indice della moneta "id" nell'elenco
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public int getIndexOf(String id) {
+		boolean found = false;
+		int i = 0;
+		for (i = 0; i < elencoMonete.getModel().getSize(); i++) {
+			MonetaXml cur = (MonetaXml) (elencoMonete.getModel()
+					.getElementAt(i));
+
+			if (cur.getId().equals(id)) {
+				found = true;
+				break;
+			}
+
+		}
+		if (!found) {
+			i = -1;
+		}
+		return i;
+	}
+
+	/**
+	 * This method is called from within the constructor to initialize the form.
+	 */
+
+	// <editor-fold defaultstate="collapsed"
+	// desc="Generated Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
+		java.awt.GridBagConstraints gridBagConstraints;
+
+		jScrollPane2 = new javax.swing.JScrollPane();
+
+		setLayout(new java.awt.GridBagLayout());
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		add(jScrollPane2, gridBagConstraints);
+	}// </editor-fold>//GEN-END:initComponents
+		// Variables declaration - do not modify//GEN-BEGIN:variables
 
 	/**
 	 * Aggiunge la tabella alla vista e la riempie con i dati. Sistema anche i
@@ -107,54 +157,4 @@ public class VassoioPanel extends javax.swing.JPanel {
 		// this.jTable1.changeSelection(3, 1, true, true);
 		this.jTable1.changeSelection(this.righe - row, col - 1, true, false);
 	}
-
-	/**
-	 * ottiene l'indice della moneta "id" nell'elenco
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public int getIndexOf(String id) {
-		boolean found = false;
-		int i = 0;
-		for (i = 0; i < elencoMonete.getModel().getSize(); i++) {
-			MonetaXml cur = (MonetaXml) (elencoMonete.getModel()
-					.getElementAt(i));
-
-			if (cur.getId().equals(id)) {
-				found = true;
-				break;
-			}
-
-		}
-		if (!found) {
-			i = -1;
-		}
-		return i;
-	}
-
-	/**
-	 * This method is called from within the constructor to initialize the form.
-	 */
-
-	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
-		java.awt.GridBagConstraints gridBagConstraints;
-
-		jScrollPane2 = new javax.swing.JScrollPane();
-
-		setLayout(new java.awt.GridBagLayout());
-		gridBagConstraints = new java.awt.GridBagConstraints();
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 0;
-		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-		gridBagConstraints.weightx = 1.0;
-		gridBagConstraints.weighty = 1.0;
-		add(jScrollPane2, gridBagConstraints);
-	}// </editor-fold>//GEN-END:initComponents
-		// Variables declaration - do not modify//GEN-BEGIN:variables
-
-	private javax.swing.JScrollPane jScrollPane2;
-	// End of variables declaration//GEN-END:variables
 }
