@@ -10,6 +10,11 @@ package exceptions;
 public class XsltException extends GenericException {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Costruttore
 	 */
 	public XsltException() {
