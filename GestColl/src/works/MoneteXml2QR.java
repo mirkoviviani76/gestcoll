@@ -5,8 +5,6 @@
 
 package works;
 
-import gestXml.MonetaXml;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,22 +12,19 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-
 import main.Common;
-import main.GestLog;
 import main.Message;
 import main.Progress;
-
-import org.xml.sax.SAXException;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+
+import exceptions.XmlException;
+import exceptions.XsltException;
+import gestXml.MonetaXml;
 
 /**
  * Gestisce la creazione di un codice QR per ogni moneta.
@@ -55,13 +50,12 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	 * @param mng
 	 * @param outDir
 	 * @return
-	 * @throws TransformerException
-	 * @throws TransformerConfigurationException
-	 * @throws IOException
-	 * @throws WriterException
+	 * @throws XsltException 
+	 * @throws IOException 
+	 * @throws WriterException 
 	 */
 	@Override
-	public File convert(MonetaXml mng, File outDir) throws TransformerConfigurationException, TransformerException, WriterException, IOException {
+	public File convert(MonetaXml mng, File outDir) throws XsltException, WriterException, IOException {
 		File out = new File(outDir + "/" + mng.getId() + ".png");
 		 String dati = mng.xsltConvert(new File(Common.getCommon().getXslTxt()));
 		 MoneteXml2QR.encode(dati, out);
@@ -75,16 +69,13 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	 * @param inDir
 	 * @param outDir
 	 * @param params
-	 * @throws FileNotFoundException
-	 * @throws SAXException
-	 * @throws TransformerException
-	 * @throws IOException
-	 * @throws WriterException
+	 * @throws XmlException 
+	 * @throws IOException 
+	 * @throws WriterException 
+	 * @throws XsltException 
 	 */
 	@Override
-	public Object[] doWork(File inDir, File outDir, Object[] params)
-			throws FileNotFoundException, SAXException, TransformerException,
-			IOException {
+	public Object[] doWork(File inDir, File outDir, Object[] params) throws XmlException, XsltException, WriterException, IOException  {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = getFileListing(inDir, Common.COIN_END);
 		ListIterator<File> iterator = files.listIterator();
@@ -94,18 +85,12 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
 			MonetaXml mng;
-			try {
-				mng = new MonetaXml((iterator.next()));
-				convert(mng, outDir);
-				Progress p = new Progress(i, count, "QR");
-				this.setChanged();
-				this.notifyObservers(p);
-				i++;
-			} catch (JAXBException e) {
-				GestLog.Error(this.getClass(), e);
-			} catch (WriterException e) {
-				GestLog.Error(this.getClass(), e);
-			}
+			mng = new MonetaXml((iterator.next()));
+			convert(mng, outDir);
+			Progress p = new Progress(i, count, "QR");
+			this.setChanged();
+			this.notifyObservers(p);
+			i++;
 		}
 
 		Message m = new Message("QR creati", Level.INFO);

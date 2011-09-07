@@ -5,6 +5,7 @@
 
 package gestXml;
 
+import exceptions.XmlException;
 import gestXml.data.Armadio;
 import gestXml.data.Contenitore;
 import gestXml.data.DimensioneCaselle;
@@ -12,7 +13,6 @@ import gestXml.data.Vassoio;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -24,9 +24,6 @@ import javax.xml.transform.TransformerException;
 
 import main.Common;
 import main.GestLog;
-
-import org.xml.sax.SAXException;
-
 import works.CollectionWorker;
 
 /**
@@ -39,16 +36,13 @@ public class ContenitoriXml extends GestXml {
 
 	/**
 	 * Costruttore
+	 * @throws XmlException 
 	 */
-	public ContenitoriXml() {
+	public ContenitoriXml() throws XmlException {
 		super(new File(Common.getCommon().getContenitoriXml()));
 		armadi = new HashMap<String, Armadio>();
 		// legge i dati dall'xml
-		try {
-			readXml();
-		} catch (JAXBException e) {
-			GestLog.Error(this.getClass(), e);
-		}
+		readXml();
 	}
 
 	/**
@@ -86,10 +80,11 @@ public class ContenitoriXml extends GestXml {
 
 	/**
 	 * legge il file xml
-	 * @throws JAXBException
+	 * @throws XmlException 
 	 */
-	private void readXml() throws JAXBException {
-		JAXBContext jc = JAXBContext.newInstance("XmlData.Contenitori");
+	private void readXml() throws XmlException {
+		try {
+			JAXBContext jc = JAXBContext.newInstance("XmlData.Contenitori");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		XmlData.Contenitori.Contenitori contenitori = (XmlData.Contenitori.Contenitori) unmarshaller
 				.unmarshal(this.xmlFile);
@@ -133,6 +128,10 @@ public class ContenitoriXml extends GestXml {
 				this.armadi.put(curArmadio, a);
 			}
 		}
+		} catch (JAXBException e) {
+			throw new XmlException("readXml()", e);
+		}
+		
 	}
 
 	/**
@@ -158,9 +157,9 @@ public class ContenitoriXml extends GestXml {
 	 * 
 	 * @return la mappa costruita come sopra
 	 * @throws FileNotFoundException
+	 * @throws XmlException 
 	 */
-	public HashMap<String, String> getMapPosizioniId()
-			throws FileNotFoundException {
+	public HashMap<String, String> getMapPosizioniId() throws FileNotFoundException, XmlException {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = CollectionWorker.getFileListing(new File(
 				Common.getCommon().getMoneteDir()), Common.COIN_END);
@@ -170,19 +169,14 @@ public class ContenitoriXml extends GestXml {
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng;
-			try {
-				mng = new MonetaXml((iterator.next()));
-				String cont = mng.getPosizione().getContenitore().toString();
-				String vass = mng.getPosizione().getVassoio().toString();
-				String riga = mng.getPosizione().getRiga().toString();
-				String col = mng.getPosizione().getColonna().toString();
-				String pos = this.getArmadio().nome + "-" + cont + "-" + vass
-						+ "-" + riga + "-" + col;
-				posizioniId.put(pos, mng.getId());
-			} catch (JAXBException e) {
-				GestLog.Error(this.getClass(), e);
-			}
+            MonetaXml mng = new MonetaXml((iterator.next()));
+			String cont = mng.getPosizione().getContenitore().toString();
+			String vass = mng.getPosizione().getVassoio().toString();
+			String riga = mng.getPosizione().getRiga().toString();
+			String col = mng.getPosizione().getColonna().toString();
+			String pos = this.getArmadio().nome + "-" + cont + "-" + vass
+					+ "-" + riga + "-" + col;
+			posizioniId.put(pos, mng.getId());
 		}
 		return posizioniId;
 	}
@@ -194,8 +188,9 @@ public class ContenitoriXml extends GestXml {
 	 * @return la mappa costruita come sopra
 	 * @throws FileNotFoundException
 	 * @throws TransformerException 
+	 * @throws XmlException 
 	 */
-	public HashMap<String, String> getMapIdPosizioni() throws FileNotFoundException, TransformerException {
+	public HashMap<String, String> getMapIdPosizioni() throws FileNotFoundException, TransformerException, XmlException {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = CollectionWorker.getFileListing(new File(
 				Common.getCommon().getMoneteDir()), Common.COIN_END);
@@ -205,14 +200,9 @@ public class ContenitoriXml extends GestXml {
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng;
-			try {
-				mng = new MonetaXml((iterator.next()));
-				String pos = getPosAsString(mng);
-				posizioniId.put(mng.getId(), pos);
-			} catch (JAXBException e) {
-				GestLog.Error(this.getClass(), e);
-			}
+			MonetaXml mng = new MonetaXml((iterator.next()));
+			String pos = getPosAsString(mng);
+			posizioniId.put(mng.getId(), pos);
 		}
 		return posizioniId;
 	}

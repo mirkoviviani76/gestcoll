@@ -18,8 +18,6 @@ import javax.swing.JList;
  * 
  * @param <E>
  */
-// public class GenericCellRenderer<E extends Tooltipper> extends
-// DefaultListCellRenderer {
 public class GenericCellRenderer<E> extends DefaultListCellRenderer {
 
 	/**
@@ -34,7 +32,7 @@ public class GenericCellRenderer<E> extends DefaultListCellRenderer {
 	 * @param index
 	 * @param isSelected
 	 * @param hasFocus
-	 * @return
+	 * @return il componente
 	 */
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value,

@@ -5,6 +5,7 @@
 
 package works;
 
+import exceptions.XmlException;
 import gestXml.MonetaXml;
 
 import java.io.File;
@@ -19,12 +20,14 @@ import main.GestLog;
 import XmlData.Moneta.Misura;
 
 /**
+ * Gestisce la pagina delle statistiche
  * 
+ * TODO aggiungere elenchi, ad esempio la lista di tutte le autorita, le zecche, gli zecchieri...
  * @author intecs
  */
 public class Statistiche {
 
-	public static TreeMap<String, Integer> coinByYear() {
+	public static TreeMap<String, Integer> coinByYear() throws XmlException {
 		TreeMap<String, Integer> valori = new TreeMap<String, Integer>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
@@ -34,22 +37,18 @@ public class Statistiche {
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			try {
-				MonetaXml mng = new MonetaXml((iterator.next()));
-				String anno = mng.getAnno();
-				if (valori.containsKey(anno)) {
-					valori.put(anno, valori.get(anno) + 1);
-				} else {
-					valori.put(anno, 1);
-				}
-			} catch (JAXBException e) {
-				GestLog.Error(Statistiche.class, e);
+			MonetaXml mng = new MonetaXml((iterator.next()));
+			String anno = mng.getAnno();
+			if (valori.containsKey(anno)) {
+				valori.put(anno, valori.get(anno) + 1);
+			} else {
+				valori.put(anno, 1);
 			}
 		}
 		return valori;
 	}
 
-	public static TreeMap<String, Integer> coinByMetal() {
+	public static TreeMap<String, Integer> coinByMetal() throws XmlException {
 		TreeMap<String, Integer> valori = new TreeMap<String, Integer>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
@@ -59,22 +58,18 @@ public class Statistiche {
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			try {
-				MonetaXml mng = new MonetaXml((iterator.next()));
-				String metallo = mng.getMetallo();
-				if (valori.containsKey(metallo)) {
-					valori.put(metallo, valori.get(metallo) + 1);
-				} else {
-					valori.put(metallo, 1);
-				}
-			} catch (JAXBException ex) {
-				GestLog.Error(Statistiche.class, ex);
+			MonetaXml mng = new MonetaXml((iterator.next()));
+			String metallo = mng.getMetallo();
+			if (valori.containsKey(metallo)) {
+				valori.put(metallo, valori.get(metallo) + 1);
+			} else {
+				valori.put(metallo, 1);
 			}
 		}
 		return valori;
 	}
 
-	public static TreeMap<Double, Integer> coinBySize() {
+	public static TreeMap<Double, Integer> coinBySize() throws XmlException {
 		TreeMap<Double, Integer> valori = new TreeMap<Double, Integer>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
@@ -84,17 +79,13 @@ public class Statistiche {
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			try {
-				MonetaXml mng = new MonetaXml((iterator.next()));
-				Misura diam = mng.getDiametro();
-				double d = Double.parseDouble(diam.getValore().toPlainString());
-				if (valori.containsKey(d)) {
-					valori.put(d, valori.get(d) + 1);
-				} else {
-					valori.put(d, 1);
-				}
-			} catch (JAXBException ex) {
-				GestLog.Error(Statistiche.class, ex);
+			MonetaXml mng = new MonetaXml((iterator.next()));
+			Misura diam = mng.getDiametro();
+			double d = Double.parseDouble(diam.getValore().toPlainString());
+			if (valori.containsKey(d)) {
+				valori.put(d, valori.get(d) + 1);
+			} else {
+				valori.put(d, 1);
 			}
 		}
 		return valori;

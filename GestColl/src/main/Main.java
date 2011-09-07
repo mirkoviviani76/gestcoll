@@ -5,6 +5,7 @@
  */
 package main;
 
+import exceptions.XmlException;
 import gui.MainFrame;
 
 import java.awt.Frame;
@@ -42,12 +43,17 @@ public class Main {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-					MainFrame mf = new MainFrame();
-					// massimizza
-					mf.setExtendedState(mf.getExtendedState()
-							| Frame.MAXIMIZED_BOTH);
-					//rende visibile
-					mf.setVisible(true);
+					
+					try {
+						MainFrame mf = new MainFrame();
+						// massimizza
+						mf.setExtendedState(mf.getExtendedState()
+								| Frame.MAXIMIZED_BOTH);
+						//rende visibile
+						mf.setVisible(true);
+					} catch (XmlException e) {
+						GestLog.Error(this.getClass(), e);
+					}
 			}
 		});
 	}

@@ -5,6 +5,7 @@
 
 package gui.datamodels;
 
+import exceptions.XmlException;
 import gestXml.MonetaXml;
 import gui.extraPanels.VassoioCell;
 
@@ -60,7 +61,7 @@ public class VassoioCellRenderer extends DefaultTableCellRenderer {
 						+ mng.getNominale().getValore() + " "
 						+ mng.getNominale().getValuta() + " (" + mng.getAnno()
 						+ ")";
-			} catch (JAXBException e) {
+			} catch (XmlException e) {
 				GestLog.Error(this.getClass(), e);
 			}
 		}

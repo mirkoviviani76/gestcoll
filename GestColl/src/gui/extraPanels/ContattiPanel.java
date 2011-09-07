@@ -5,6 +5,7 @@
 
 package gui.extraPanels;
 
+import exceptions.XmlException;
 import gestXml.ContattiXml;
 import gestXml.data.Contatto;
 import gui.datamodels.GenericListModel;
@@ -37,8 +38,6 @@ public class ContattiPanel extends javax.swing.JPanel {
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 */
-	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
 		jPanel1 = new javax.swing.JPanel();
@@ -117,8 +116,12 @@ public class ContattiPanel extends javax.swing.JPanel {
 								.addComponent(jPanel1,
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										162, Short.MAX_VALUE)));
-	}// </editor-fold>//GEN-END:initComponents
+	}
 
+	/**
+	 * click sul contatto
+	 * @param evt
+	 */
 	private void jLContattiMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLContattiMouseClicked
 		if (evt.getClickCount() == 2) {
 			try {
@@ -131,11 +134,15 @@ public class ContattiPanel extends javax.swing.JPanel {
 				GestLog.Error(ContattiPanel.class, ex);
 			}
 		}
-	}// GEN-LAST:event_jLContattiMouseClicked
+	}
 
-	private void jBAggiungiMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBAggiungiMouseClicked
+	/**
+	 * click sul pulsante aggiungi contatto
+	 * @param evt
+	 */
+	private void jBAggiungiMouseClicked(java.awt.event.MouseEvent evt) {
 		// TODO aggiungere gestione aggiungi Contatto
-	}// GEN-LAST:event_jBAggiungiMouseClicked
+	}
 
 	private void jBCercaMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBCercaMouseClicked
 		@SuppressWarnings("unchecked")
@@ -173,9 +180,14 @@ public class ContattiPanel extends javax.swing.JPanel {
      * 
      */
 	public void loadData() {
-		ContattiXml contatti = new ContattiXml();
-		this.jLContatti.setModel(new GenericListModel<Contatto>(contatti
-				.getContatti()));
+		ContattiXml contatti;
+		try {
+			contatti = new ContattiXml();
+			this.jLContatti.setModel(new GenericListModel<Contatto>(contatti
+					.getContatti()));
+		} catch (XmlException e) {
+			GestLog.Error(this.getClass(), e);
+		}
 	}
 
 }

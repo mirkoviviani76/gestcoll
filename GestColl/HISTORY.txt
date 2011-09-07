@@ -3,6 +3,8 @@ xx : incrementato con l'aggiunta di nuove funzionalita' (major) (+10 in caso di 
 yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
 
+31.5
+modificata gestione delle eccezioni
 31.4
 versionamento alfa elminato
 Aggiunta visualizzazione contatti

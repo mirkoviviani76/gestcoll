@@ -77,46 +77,33 @@ public class ZeccaControl extends javax.swing.JPanel {
 		this.jTFSegno.setEditable(flag);
 	}
 	
-	  /**
-     * Aggiunge il listener per le modifiche ai testi
-     * @param myDocumentListener
-     */
-    void addDocumentListenerForNome(XmlDocumentChangeListener myDocumentListener) {
-        this.jTFNome.getDocument().addDocumentListener(myDocumentListener);
-    }
-
-    /**
-     * Aggiunge il listener per le modifiche ai testi
-     * @param myDocumentListener
-     */
-    void addDocumentListenerForSegno(XmlDocumentChangeListener myDocumentListener) {
-        this.jTFSegno.getDocument().addDocumentListener(myDocumentListener);
-    }
-
-
-    /**
-     * Aggiunge il listener per le modifiche ai testi
-     * @param myDocumentListener
-     */
-    void removeDocumentListenerForNome(XmlDocumentChangeListener myDocumentListener) {
-        this.jTFNome.getDocument().removeDocumentListener(myDocumentListener);
-    }
-
-    /**
-     * Aggiunge il listener per le modifiche ai testi
-     * @param myDocumentListener
-     */
-    void removeDocumentListenerForSegno(XmlDocumentChangeListener myDocumentListener) {
-        this.jTFSegno.getDocument().removeDocumentListener(myDocumentListener);
-    }
 	
+    /**
+     * aggiunge il listener per le modifiche ai testi
+     * @param myDocumentListenerForName
+     * @param myDocumentListenerForSign
+     */
+	void addDocumentListener(XmlDocumentChangeListener myDocumentListenerForName,
+    		XmlDocumentChangeListener myDocumentListenerForSign) {
+        this.jTFNome.getDocument().addDocumentListener(myDocumentListenerForName);
+        this.jTFSegno.getDocument().addDocumentListener(myDocumentListenerForSign);
+    }
+
+    /**
+     * rimuove il listener per le modifiche ai testi
+     * @param myDocumentListenerForName
+     * @param myDocumentListenerForSign
+     */
+    void removeDocumentListener(XmlDocumentChangeListener myDocumentListenerForName,
+    		XmlDocumentChangeListener myDocumentListenerForSign) {
+        this.jTFNome.getDocument().removeDocumentListener(myDocumentListenerForName);
+        this.jTFSegno.getDocument().removeDocumentListener(myDocumentListenerForSign);
+    }
+
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 */
-
-	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 		java.awt.GridBagConstraints gridBagConstraints;
 
@@ -132,11 +119,9 @@ public class ZeccaControl extends javax.swing.JPanel {
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 		gridBagConstraints.weightx = 0.25;
 		add(jTFSegno, gridBagConstraints);
-	}// </editor-fold>//GEN-END:initComponents
+	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JTextField jTFNome;
 	private javax.swing.JTextField jTFSegno;
-	// End of variables declaration//GEN-END:variables
 
 }

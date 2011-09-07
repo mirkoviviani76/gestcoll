@@ -5,6 +5,7 @@
 
 package gui.extraPanels;
 
+import exceptions.XmlException;
 import gestXml.BibliotecaXml;
 import gestXml.data.Pubblicazione;
 
@@ -48,11 +49,11 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer, Cli
         pm = new ProgressMonitor(this, "", "", 0, 100);
         //sld.addObserver(this);
         if (this.biblioteca == null) {
-            try {
-				biblioteca = new BibliotecaXml();
-			} catch (JAXBException e) {
-				GestLog.Error(this.getClass(), e);
-			}
+				try {
+					biblioteca = new BibliotecaXml();
+				} catch (XmlException e) {
+					GestLog.Error(this.getClass(), e);
+				}
             //setta il modello
             this.jLBiblioteca.setModel(new gui.datamodels.GenericListModel<Pubblicazione>(this.biblioteca.getItems()));
         }

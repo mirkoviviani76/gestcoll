@@ -79,7 +79,7 @@ public class ZecchiereForm extends javax.swing.JDialog {
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
 		jCBRuolo.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
-				"", "MÃ¼nzmeister", "MÃ¼nzwardein", "MÃ¼nzschneider" }));
+				"", "Münzmeister", "Münzwardein", "Münzschneider" }));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 2;
