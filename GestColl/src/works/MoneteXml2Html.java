@@ -5,9 +5,6 @@
 
 package works;
 
-import exceptions.XsltException;
-import gestXml.MonetaXml;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,15 +12,15 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
 
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-
 import main.Common;
 import main.GenericUtil;
 import main.Message;
 import main.Progress;
 
 import org.apache.commons.io.FileUtils;
+
+import exceptions.XsltException;
+import gestXml.MonetaXml;
 
 /**
  * Gestisce la conversione da xml a html
