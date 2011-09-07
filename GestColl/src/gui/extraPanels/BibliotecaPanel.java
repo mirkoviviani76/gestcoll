@@ -9,6 +9,7 @@ import exceptions.XmlException;
 import gestXml.BibliotecaXml;
 import gestXml.data.Pubblicazione;
 
+import java.awt.Font;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.Transferable;
@@ -16,11 +17,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.ProgressMonitor;
-import javax.xml.bind.JAXBException;
 
 import main.GestLog;
 import main.Progress;
-import java.awt.Font;
 
 /**
  * Gestione pannello biblioteca
