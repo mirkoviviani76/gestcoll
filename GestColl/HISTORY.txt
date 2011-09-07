@@ -5,6 +5,7 @@ zz : incrementato per aggiustamenti progressivi
 
 31.5
 modificata gestione delle eccezioni
+risolto bug non ancora individuato riguardo il salvataggio utf-8
 31.4
 versionamento alfa elminato
 Aggiunta visualizzazione contatti
