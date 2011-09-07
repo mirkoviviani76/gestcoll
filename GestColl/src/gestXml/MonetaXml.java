@@ -5,6 +5,10 @@
 package gestXml;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -88,9 +92,16 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 		try {
 			JAXBContext jc = JAXBContext.newInstance("XmlData.Moneta");
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
-		moneta = (XmlData.Moneta.Moneta) unmarshaller.unmarshal(_xmlFile);
+		moneta = (XmlData.Moneta.Moneta) unmarshaller.unmarshal(
+				new InputStreamReader(new FileInputStream(_xmlFile), "UTF-8"));
 		} catch (JAXBException e) {
-			throw new XmlException("MonetaXml()", e);
+			throw new XmlException("MonetaXml(): JAXB exception reading " + _xmlFile, e);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
