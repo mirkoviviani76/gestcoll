@@ -4,17 +4,6 @@
  */
 package gui.moneta;
 
-import exceptions.XmlException;
-import gestXml.ContenitoriXml;
-import gestXml.MonetaXml;
-import gestXml.data.Armadio;
-import gestXml.data.Contenitore;
-import gestXml.data.Vassoio;
-import gui.MainFrame;
-import gui.datamodels.MonetaListModel;
-import gui.extraPanels.VassoioPanel;
-import gui.moneta.forms.AddMonetaForm;
-
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -36,7 +25,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.ProgressMonitor;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import main.Common;
@@ -54,6 +42,16 @@ import works.MoneteXml2Html;
 import works.MoneteXml2QR;
 import works.MoneteXml2Tex;
 import works.XelatexPdfCreator;
+import exceptions.XmlException;
+import gestXml.ContenitoriXml;
+import gestXml.MonetaXml;
+import gestXml.data.Armadio;
+import gestXml.data.Contenitore;
+import gestXml.data.Vassoio;
+import gui.MainFrame;
+import gui.datamodels.MonetaListModel;
+import gui.extraPanels.VassoioPanel;
+import gui.moneta.forms.AddMonetaForm;
 
 /**
  * 

@@ -15,7 +15,6 @@ import java.io.File;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.xml.bind.JAXBException;
 
 import main.Common;
 import main.GestLog;
