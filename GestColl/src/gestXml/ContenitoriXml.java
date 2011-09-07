@@ -23,7 +23,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.TransformerException;
 
 import main.Common;
-import main.GestLog;
 import works.CollectionWorker;
 
 /**

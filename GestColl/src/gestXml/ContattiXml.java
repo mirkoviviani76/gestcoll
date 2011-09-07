@@ -13,11 +13,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import exceptions.XmlException;
-
 import main.Common;
-import main.GestLog;
 import XmlData.Contatti.Contatti;
+import exceptions.XmlException;
 
 /**
  *
