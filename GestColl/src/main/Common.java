@@ -14,6 +14,12 @@ import java.util.Properties;
  */
 public final class Common {
 
+	/** Nome dell'applicazione */
+	public static final String APPNAME = "GestColl";
+	/** versione del progetto */
+	public static final String VERSION = "31.6";
+	
+	
 	/**
 	 * identifica il verso della moneta
 	 */
@@ -31,8 +37,8 @@ public final class Common {
 	 */
 	public static final String[] ALL = { "html", "pdf", "png" };
 
-	/** Nome dell'applicazione */
-	public static final String APPNAME = "GestColl";
+
+	
 	/**
 	 * estensione scheda
 	 */
@@ -67,8 +73,6 @@ public final class Common {
 	 * estensioni file temporanei
 	 */
 	public static final String[] TMP = { "tex" };
-	/** versione del progetto */
-	public static final String VERSION = "31.4";
 
 	/**
 	 * Metodo della classe impiegato per accedere al Singleton

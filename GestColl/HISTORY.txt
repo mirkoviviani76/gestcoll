@@ -3,6 +3,8 @@ xx : incrementato con l'aggiunta di nuove funzionalita' (major) (+10 in caso di 
 yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
 31.6
+implementata l'aggiunta di un contatto
+eliminata dipendenza da un paio di librerie (3Mb guadagnati)
 sistemati commenti
 sistemato codice
 corretto bug che impediva la modifica di una legenda

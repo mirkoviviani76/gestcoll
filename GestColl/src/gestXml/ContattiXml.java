@@ -16,6 +16,7 @@ import javax.xml.bind.Unmarshaller;
 import main.Common;
 import XmlData.Contatti.Contatti;
 import exceptions.XmlException;
+import gestXml.data.Contatto;
 
 /**
  *
@@ -43,6 +44,14 @@ public class ContattiXml extends GestXml {
 	}
 
 	/**
+	 * @return l'oggetto moneta
+	 */
+	public XmlData.Contatti.Contatti getJaxbObject() {
+		return contatti;
+	}
+	
+
+	/**
 	 * costruisce l'elenco dei contatti
 	 * 
 	 * @return l'elenco
@@ -59,6 +68,18 @@ public class ContattiXml extends GestXml {
 			ret.add(curr);
 		}
 		return ret;
+	}
+
+	/**
+	 * aggiunge un contatto
+	 * @param nuovo
+	 */
+	public void add(Contatto nuovo) {
+		XmlData.Contatti.Contatto c = new XmlData.Contatti.Contatto();
+		c.setNome(nuovo.nome);
+		c.setEmail(nuovo.email);
+		c.setNote(nuovo.note);
+		this.contatti.getContatto().add(c);
 	}
 
 }

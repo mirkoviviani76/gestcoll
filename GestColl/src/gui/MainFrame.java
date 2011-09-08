@@ -261,8 +261,6 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	 * @throws XmlException
 	 */
 
-	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() throws XmlException {
 
 		jToolBar1 = new javax.swing.JToolBar();
@@ -426,13 +424,9 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 										341, Short.MAX_VALUE)));
 
 		pack();
-	}// </editor-fold>//GEN-END:initComponents
-		// Variables declaration - do not modify//GEN-BEGIN:variables
-
-	// End of variables declaration//GEN-END:variables
+	}
 
 	private void loadAllData() throws XmlException {
-		// serve la chiamata se no netbeans si incasina...
 
 		Splash.getInstance().splashProgress("Load monete...");
 		this.monetePanel1.setupWorks();
