@@ -3,7 +3,7 @@
  * -
  */
 
-package gui.extraPanels;
+package gui.extraPanels.contatti;
 
 import exceptions.XmlException;
 import gestXml.ContattiXml;
@@ -19,7 +19,7 @@ import java.net.URISyntaxException;
 import main.GestLog;
 
 /**
- *
+ * Gestione pannello contatti
  * 
  */
 @SuppressWarnings("serial")

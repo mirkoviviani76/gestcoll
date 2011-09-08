@@ -8,7 +8,7 @@
  *
  * Created on 18-feb-2011, 11.49.52
  */
-package gui.extraPanels;
+package gui.extraPanels.statistiche;
 
 import java.util.TreeMap;
 

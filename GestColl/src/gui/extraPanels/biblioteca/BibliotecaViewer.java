@@ -3,7 +3,7 @@
  * -
  */
 
-package gui.extraPanels;
+package gui.extraPanels.biblioteca;
 
 import java.awt.Desktop;
 import java.io.File;
