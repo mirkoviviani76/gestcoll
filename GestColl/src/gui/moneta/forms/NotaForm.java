@@ -62,7 +62,7 @@ public class NotaForm extends javax.swing.JDialog {
 	}
 	/**
 	 * 
-	 * @return
+	 * @return la nota (come stringa)
 	 */
 	public String getData() {
 		return this.jTFNota.getText();

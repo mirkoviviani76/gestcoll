@@ -157,7 +157,7 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	 *            la dimensione della casella
 	 * @param id
 	 *            l'id della moneta
-	 * @return
+	 * @return l'etichetta come stringa
 	 * 
 	 */
 	private String getEtichetta(MonetaXml xml, String dimensione, String id) {

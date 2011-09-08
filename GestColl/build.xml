@@ -90,10 +90,22 @@
     
   </target>    
 
-  <target name="documentation">
-	<javadoc sourcepath="${src.dir}" destdir="build/javadoc">
-		<fileset dir="${externallib.dir}"></fileset>
-	</javadoc>
-  </target>
+    
+    <target name="documentation">
+    	<path id="doc-classpath">
+    	      <fileset id="libFiles" dir="${externallib.dir}">
+    	        <include name="**/**/*.jar"/>
+    	      	<include name="**/*.jar"/>
+    	      	<include name="*.jar"/>
+    	       </fileset>
+    	</path>	
+
+    	<javadoc 
+		sourcepath="${src.dir}"
+		destdir="build/javadoc" 
+		classpathref="doc-classpath"
+		private="true"
+		/>
+    </target>
   
 </project>

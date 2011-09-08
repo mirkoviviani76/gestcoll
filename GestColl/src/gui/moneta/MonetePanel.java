@@ -371,13 +371,13 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	}
 
 	/**
-	 * stampa a video il contenuto di un vassoio
+	 * ottiene il contenuto di un vassoio
 	 * 
-	 * @param a
-	 * @param c
-	 * @param v
-	 * @param posizioni
-	 * @return
+	 * @param a l'armadio
+	 * @param c il contenitore
+	 * @param v il vassoio
+	 * @param posizioni le posizioni
+	 * @return la rappresentazione tabellare del vassoio 
 	 */
 	public String[][] displayVassoio(Armadio a, Contenitore c, Vassoio v,
 			HashMap<String, String> posizioni) {
@@ -636,10 +636,10 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	/**
 	 * Esegue il CollectionWorker in un thread separato per non bloccare l'EDT.
 	 * 
-	 * @param cw
-	 * @param startDir
-	 * @param outDir
-	 * @param params
+	 * @param arrayCw elenco di collection worker
+	 * @param startDir la directory di partenza
+	 * @param outDir la directory di output
+	 * @param params i parametri
 	 */
 	public void runInThread(final ArrayList<CollectionWorker> arrayCw,
 			final File startDir, final File outDir, final Object[] params) {
@@ -701,7 +701,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	/**
 	 * Esegue il sorting della lista per paese o per id
 	 * 
-	 * @param sortByPaese
+	 * @param ordering l'ordinamento scelto
 	 * @throws XmlException
 	 */
 	private void sortListMonete(MonetaXml.Ordering ordering)

@@ -62,7 +62,7 @@ public class ZecchiereForm extends javax.swing.JDialog {
 	}
 	/**
 	 * 
-	 * @return
+	 * @return lo zecchiere
 	 */
 	public Zecchiere getData() {
 		String[] ret = new String[3];

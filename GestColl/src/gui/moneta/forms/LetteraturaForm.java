@@ -62,7 +62,7 @@ public class LetteraturaForm extends javax.swing.JDialog {
 	}
 	/**
 	 * 
-	 * @return
+	 * @return il libro
 	 */
 	public XmlData.Moneta.Libro getData() {
 		XmlData.Moneta.Libro ret = new XmlData.Moneta.Libro();

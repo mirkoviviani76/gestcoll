@@ -44,7 +44,7 @@ public class ZeccaControl extends javax.swing.JPanel {
 
 	/**
 	 * 
-	 * @return
+	 * @return il nome
 	 */
 	public String getNome() {
 		return this.jTFNome.getText();
@@ -52,7 +52,7 @@ public class ZeccaControl extends javax.swing.JPanel {
 
 	/**
 	 * 
-	 * @return
+	 * @return il segno
 	 */
 	public String getSegno() {
 		return this.jTFSegno.getText();

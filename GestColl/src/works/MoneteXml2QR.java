@@ -61,10 +61,10 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	}
 
 	/**
-	 * 
+	 * converte una moneta in codice qr
 	 * @param mng
 	 * @param outDir
-	 * @return
+	 * @return il file con l'immagine qr
 	 * @throws XsltException
 	 * @throws IOException
 	 * @throws WriterException

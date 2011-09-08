@@ -52,7 +52,7 @@ public class VassoioPanel extends javax.swing.JPanel {
 	 * ottiene l'indice della moneta "id" nell'elenco
 	 * 
 	 * @param id
-	 * @return
+	 * @return l'indice
 	 */
 	public int getIndexOf(String id) {
 		boolean found = false;

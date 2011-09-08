@@ -98,7 +98,7 @@ public final class GenericUtil {
 	 * Legge tutto il file in una stringa UTF-8
 	 * 
 	 * @param inout
-	 * @return
+	 * @return la stringa 
 	 */
 	static private String readAll(File inout)
 			throws UnsupportedEncodingException, FileNotFoundException,

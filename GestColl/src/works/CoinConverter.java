@@ -19,7 +19,7 @@ public interface CoinConverter {
 	 * 
 	 * @param in
 	 * @param outDir
-	 * @return
+	 * @return il File convertito
 	 * @throws Exception
 	 */
 	public File convert(MonetaXml in, File outDir) throws Exception;

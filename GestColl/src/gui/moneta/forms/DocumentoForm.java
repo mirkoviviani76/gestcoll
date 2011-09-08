@@ -70,7 +70,7 @@ public class DocumentoForm extends javax.swing.JDialog {
 	}
 	/**
 	 * 
-	 * @return
+	 * @return il documento addizionale
 	 */
 	public XmlData.Moneta.DocumentoAddizionale getData() {
 		XmlData.Moneta.DocumentoAddizionale ret = new XmlData.Moneta.DocumentoAddizionale();

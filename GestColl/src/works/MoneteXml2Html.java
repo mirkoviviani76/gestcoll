@@ -40,10 +40,10 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	}
 
 	/**
-	 * 
+	 * converte una moneta in html
 	 * @param mng
 	 * @param outDir
-	 * @return
+	 * @return il file convertito
 	 * @throws XsltException
 	 */
 	@Override
@@ -74,6 +74,7 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	 * @param inDir
 	 * @param outDir
 	 * @param params
+	 * @return null
 	 * @throws FileNotFoundException
 	 * @throws Exception
 	 */
