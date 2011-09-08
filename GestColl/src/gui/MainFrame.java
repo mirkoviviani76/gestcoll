@@ -427,7 +427,6 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	}
 
 	private void loadAllData() throws XmlException {
-
 		Splash.getInstance().splashProgress("Load monete...");
 		this.monetePanel1.setupWorks();
 		Splash.getInstance().splashProgress("Load monete eseguito");

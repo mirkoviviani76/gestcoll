@@ -16,6 +16,7 @@ import java.util.ListIterator;
 
 import main.Common;
 import main.GestLog;
+import main.Splash;
 import works.CollectionWorker;
 
 /**
@@ -51,9 +52,13 @@ public class MonetaListModel extends GenericListModel<MonetaXml> {
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng;
-			mng = new MonetaXml((File) (iterator.next()));
+			//carica una moneta
+			MonetaXml mng = new MonetaXml((File) (iterator.next()));
+			//mostra lo splash (se necessario)
+			Splash.getInstance().splashProgress(mng.getId());
+			//sistema l'ordinamento
 			mng.setOrdering(ordering);
+			//aggiunge alla lista
 			contenuto.add(mng);
 		}
 		Collections.sort(contenuto);
