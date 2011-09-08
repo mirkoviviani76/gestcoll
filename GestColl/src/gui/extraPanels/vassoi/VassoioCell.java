@@ -3,7 +3,7 @@
  * -
  */
 
-package gui.extraPanels;
+package gui.extraPanels.vassoi;
 
 import java.awt.Color;
 

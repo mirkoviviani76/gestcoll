@@ -6,7 +6,7 @@
 package gui;
 
 import exceptions.XmlException;
-import gui.extraPanels.HistoryViewer;
+import gui.extraPanels.history.HistoryViewer;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
@@ -53,7 +53,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jTFMessages.setText(ora + "\t" + m.toString());
 	}
 
-	private gui.extraPanels.ContattiPanel contattiPanel1;
+	private gui.extraPanels.contatti.ContattiPanel contattiPanel1;
 
 	private javax.swing.JButton jBGestContatti;
 
@@ -89,10 +89,10 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	private javax.swing.JToolBar.Separator jSeparator3;
 	private javax.swing.JPopupMenu.Separator jSeparator4;
 	private javax.swing.JToolBar jToolBar1;
-	private gui.extraPanels.BibliotecaPanel libriPanel1;
-	private gui.extraPanels.LinksPanel linksPanel1;
+	private gui.extraPanels.biblioteca.BibliotecaPanel libriPanel1;
+	private gui.extraPanels.links.LinksPanel linksPanel1;
 	private gui.moneta.MonetePanel monetePanel1;
-	private gui.extraPanels.StatistichePanel statistichePanel1;
+	private gui.extraPanels.statistiche.StatistichePanel statistichePanel1;
 
 	/**
 	 * Creates new form MainFrame
@@ -279,10 +279,10 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jTFMessages = new javax.swing.JTextArea();
 		jPanel1 = new javax.swing.JPanel();
 		monetePanel1 = new gui.moneta.MonetePanel();
-		libriPanel1 = new gui.extraPanels.BibliotecaPanel();
-		contattiPanel1 = new gui.extraPanels.ContattiPanel();
-		linksPanel1 = new gui.extraPanels.LinksPanel();
-		statistichePanel1 = new gui.extraPanels.StatistichePanel();
+		libriPanel1 = new gui.extraPanels.biblioteca.BibliotecaPanel();
+		contattiPanel1 = new gui.extraPanels.contatti.ContattiPanel();
+		linksPanel1 = new gui.extraPanels.links.LinksPanel();
+		statistichePanel1 = new gui.extraPanels.statistiche.StatistichePanel();
 		jMRimuoviTemp = new javax.swing.JMenuBar();
 		jMenu1 = new javax.swing.JMenu();
 		jMIExit = new javax.swing.JMenuItem();

@@ -7,7 +7,7 @@ package gui.datamodels;
 
 import exceptions.XmlException;
 import gestXml.MonetaXml;
-import gui.extraPanels.VassoioCell;
+import gui.extraPanels.vassoi.VassoioCell;
 
 import java.awt.Color;
 import java.awt.Component;

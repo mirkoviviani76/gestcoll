@@ -3,7 +3,7 @@
  * -
  */
 
-package gui.extraPanels;
+package gui.extraPanels.biblioteca;
 
 import exceptions.XmlException;
 import gestXml.BibliotecaXml;
@@ -36,7 +36,7 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer,
 	private static final long serialVersionUID = 1L;
 	private BibliotecaXml biblioteca;
 	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private gui.extraPanels.BibliotecaViewer bibliotecaViewer1;
+	private gui.extraPanels.biblioteca.BibliotecaViewer bibliotecaViewer1;
 
 	private javax.swing.JList jLBiblioteca;
 
@@ -68,7 +68,7 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer,
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jLBiblioteca = new javax.swing.JList();
 		jLBiblioteca.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		bibliotecaViewer1 = new gui.extraPanels.BibliotecaViewer();
+		bibliotecaViewer1 = new gui.extraPanels.biblioteca.BibliotecaViewer();
 
 		jToolBar1.setFloatable(false);
 		jToolBar1.setRollover(true);

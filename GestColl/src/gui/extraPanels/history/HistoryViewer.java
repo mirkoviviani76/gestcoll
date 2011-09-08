@@ -9,7 +9,7 @@
  * Created on 16-mar-2011, 10.17.02
  */
 
-package gui.extraPanels;
+package gui.extraPanels.history;
 
 import java.io.BufferedReader;
 import java.io.File;

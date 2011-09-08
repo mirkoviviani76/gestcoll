@@ -3,7 +3,7 @@
  * -
  */
 
-package gui.extraPanels;
+package gui.extraPanels.links;
 
 import exceptions.XmlException;
 import gestXml.LinksXml;

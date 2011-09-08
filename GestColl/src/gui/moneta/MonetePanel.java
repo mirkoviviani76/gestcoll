@@ -50,7 +50,7 @@ import gestXml.data.Contenitore;
 import gestXml.data.Vassoio;
 import gui.MainFrame;
 import gui.datamodels.MonetaListModel;
-import gui.extraPanels.VassoioPanel;
+import gui.extraPanels.vassoi.VassoioPanel;
 import gui.moneta.forms.AddMonetaForm;
 
 /**
