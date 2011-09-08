@@ -110,7 +110,7 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 
 	/**
 	 * 
-	 * @return
+	 * @return l'id calcolato della nuova moneta
 	 */
 	public String getId() {
 		return this.jTFAnno.getText() + "-" + this.jCBDim.getSelectedItem()

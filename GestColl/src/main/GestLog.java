@@ -16,7 +16,7 @@ public class GestLog {
 	 * 
 	 * @param source
 	 *            la classe dove si e' verificato l'errore
-	 * @param ex
+	 * @param e
 	 *            l'eccezione
 	 */
 	@SuppressWarnings("rawtypes")

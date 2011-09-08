@@ -43,10 +43,10 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 	}
 
 	/**
-	 * 
+	 * converte la moneta in tex
 	 * @param mng
 	 * @param outDir
-	 * @return
+	 * @return il file
 	 * @throws XsltException
 	 * @throws IOException
 	 * @throws FileNotFoundException

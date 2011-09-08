@@ -56,7 +56,7 @@ public class AutoritaForm extends javax.swing.JDialog {
 
 	/**
 	 * 
-	 * @return
+	 * @return la rappresentazione come stringa (il nome)
 	 */
 	public String getData() {
 		return this.jTFNome.getText();

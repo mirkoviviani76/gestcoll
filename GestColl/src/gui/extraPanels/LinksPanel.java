@@ -64,7 +64,7 @@ public class LinksPanel extends javax.swing.JPanel {
 	/**
 	 * segue il link cliccato sul text panel
 	 * 
-	 * @param e
+	 * @param event l'evento
 	 */
 	protected void followLink(HyperlinkEvent event) {
 		if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {

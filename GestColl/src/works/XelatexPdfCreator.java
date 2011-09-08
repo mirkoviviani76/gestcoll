@@ -52,7 +52,6 @@ public class XelatexPdfCreator extends CollectionWorker {
 	/**
 	 * genera i pdf delle etichette
 	 * 
-	 * @param inDir
 	 * @param outDir
 	 * @throws IOException
 	 * @throws InterruptedException

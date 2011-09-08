@@ -67,7 +67,7 @@ public final class LegendaForm extends javax.swing.JDialog {
 	}
 	/**
 	 * 
-	 * @return
+	 * @return la legenda
 	 */
 	public XmlData.Moneta.Legenda getData() {
 		String[] ret = new String[2];

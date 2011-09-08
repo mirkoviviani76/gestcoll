@@ -23,20 +23,20 @@ import org.apache.commons.io.FileUtils;
  */
 public abstract class CollectionWorker extends Observable {
 	/**
-     *
+     * elenco delle estensioni dei file importanti
      */
 	public static final String[] ALL = { "html", "pdf", "png" };
 	/**
-     *
+     * elenco delle estensioni dei file da cancellare
      */
 	public static final String[] INUTILI = { "aux", "toc", "log", "out" };
 
 	/**
-     *
+     * nome dell'estensione dei template
      */
 	public static final String TEMPLATE_END = ".template";
 	/**
-     *
+     * elenco delle estensioni dei file temporanei
      */
 	public static final String[] TMP = { "tex" };
 
@@ -97,10 +97,10 @@ public abstract class CollectionWorker extends Observable {
 	}
 
 	/**
-	 * 
-	 * @param aStartingDir
-	 * @param pattern
-	 * @return
+	 * Ottiene la lista dei file con un determinato pattern a partire da una dir
+	 * @param aStartingDir la directory di partenza
+	 * @param pattern il pattern dei file
+	 * @return la lista dei file
 	 */
 	static public List<File> getFileListing(String aStartingDir,
 			String[] pattern) {
@@ -118,7 +118,7 @@ public abstract class CollectionWorker extends Observable {
 	 * 
 	 * @param dirs
 	 *            le directory in cui effettuare la cancellazione
-	 * @return
+	 * @return il numero di file eliminati
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
@@ -139,7 +139,7 @@ public abstract class CollectionWorker extends Observable {
 	 * 
 	 * @param dirs
 	 *            le directory in cui effettuare la cancellazione
-	 * @return
+	 * @return il numero di file eliminati
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
@@ -159,7 +159,7 @@ public abstract class CollectionWorker extends Observable {
 	private String name;
 
 	/**
-	 * 
+	 * Costruttore
 	 * @param name
 	 */
 	public CollectionWorker(String name) {
@@ -168,7 +168,7 @@ public abstract class CollectionWorker extends Observable {
 	}
 
 	/**
-	 * 
+	 * Costruttore
 	 * @param name
 	 * @param description
 	 */
@@ -183,7 +183,7 @@ public abstract class CollectionWorker extends Observable {
 	 * @param inDir
 	 * @param outDir
 	 * @param extraParam
-	 * @return
+	 * @return un elenco di risultati del lavoro
 	 * @throws Exception
 	 */
 	public abstract Object[] doWork(File inDir, File outDir, Object[] extraParam)
