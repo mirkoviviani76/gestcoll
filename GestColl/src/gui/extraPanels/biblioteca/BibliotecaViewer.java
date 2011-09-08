@@ -89,7 +89,7 @@ public class BibliotecaViewer extends javax.swing.JPanel {
 		// apre la cartella
 		try {
 			File cartella = new File(filename.getCanonicalFile().getParent());
-			// TODO sembra che su xp non funzioni.... provare su linux
+			// su xp non funziona....
 			Desktop.getDesktop().open(cartella);
 		} catch (IOException ex) {
 			GestLog.Error(BibliotecaViewer.class, ex);

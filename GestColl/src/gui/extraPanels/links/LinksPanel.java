@@ -178,12 +178,14 @@ public class LinksPanel extends javax.swing.JPanel {
 		});
 	}
 
+	/**
+	 * gestore click sul pulsnte aggiungi
+	 * @param evt
+	 */
 	private void jBAggiungiMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBAggiungiMouseClicked
 		// TODO aggiungere gestione aggiungi Link
-	}// GEN-LAST:event_jBAggiungiMouseClicked
-
-	// End of variables declaration//GEN-END:variables
-
+	}
+	
 	/**
 	 * carica i dati nella vista
 	 */

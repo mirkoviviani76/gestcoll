@@ -8,6 +8,7 @@ package gui.extraPanels.contatti;
 import exceptions.XmlException;
 import gestXml.ContattiXml;
 import gestXml.data.Contatto;
+import gui.MainFrame;
 import gui.datamodels.GenericListModel;
 
 import java.awt.Desktop;
@@ -15,12 +16,17 @@ import java.awt.Font;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.logging.Level;
 
+import main.Common;
 import main.GestLog;
+import main.History;
+import main.Message;
+import XmlData.Moneta.Zecchiere;
 
 /**
  * Gestione pannello contatti
- * 
+ * TODO aggiungere la possibilita' di eliminare un contatto 
  */
 @SuppressWarnings("serial")
 public class ContattiPanel extends javax.swing.JPanel {
@@ -40,13 +46,17 @@ public class ContattiPanel extends javax.swing.JPanel {
 
 	private int lastSearchedIndex;
 	private String lastSearchedText;
+	
+	private ContattiXml contatti;
 
-	/** Creates new form ContattiPanel */
-	public ContattiPanel() {
+	/** Creates new form ContattiPanel 
+	 * @throws XmlException */
+	public ContattiPanel() throws XmlException {
 		initComponents();
 		this.jLContatti.setModel(new GenericListModel<Contatto>());
 		this.lastSearchedIndex = 0;
 		this.lastSearchedText = "";
+		contatti = new ContattiXml(); 
 	}
 
 	/**
@@ -138,7 +148,30 @@ public class ContattiPanel extends javax.swing.JPanel {
 	 * @param evt
 	 */
 	private void jBAggiungiMouseClicked(java.awt.event.MouseEvent evt) {
-		// TODO aggiungere gestione aggiungi Contatto
+		/* apre il dialog */
+		NuovoContattoDialog dialog = new NuovoContattoDialog(null, true);
+		dialog.setVisible(true);
+		// valuta ritorno con tasto "ok/modifica" premuto
+		if (dialog.getReturnStatus() == NuovoContattoDialog.RET_OK) {
+			// ottiene i nuovi dati della nota dal form
+			Contatto nuovo = dialog.getData();
+			this.contatti.add(nuovo);
+			// salva il file
+			try {
+				this.contatti.writeXml(this.contatti.getJaxbObject(), "XmlData.Contatti",
+						Common.getCommon().getContattiXml());
+				// carica i nuovi valori
+				this.jLContatti.setModel(new GenericListModel<Contatto>(contatti.getContatti()));
+			} catch (XmlException e) {
+				GestLog.Error(this.getClass(), e);
+			}
+			/* logga in vario modo */
+			History.addEvent(History.MODIFY, Common.getCommon().getContattiXml());
+			String msg = "MODIFICATO con successo: " + Common.getCommon().getContattiXml();
+			MainFrame.setMessage(new Message(msg, Level.INFO));
+		}
+		
+		
 	}
 
 	private void jBCercaMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBCercaMouseClicked
@@ -184,17 +217,10 @@ public class ContattiPanel extends javax.swing.JPanel {
 	// End of variables declaration//GEN-END:variables
 
 	/**
-     * 
+     * carica i dati 
      */
 	public void loadData() {
-		ContattiXml contatti;
-		try {
-			contatti = new ContattiXml();
-			this.jLContatti.setModel(new GenericListModel<Contatto>(contatti
-					.getContatti()));
-		} catch (XmlException e) {
-			GestLog.Error(this.getClass(), e);
-		}
+		this.jLContatti.setModel(new GenericListModel<Contatto>(contatti.getContatti()));
 	}
 
 }

@@ -78,11 +78,11 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 			throw new XmlException("MonetaXml(): JAXB exception reading "
 					+ _xmlFile, e);
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new XmlException("MonetaXml(): Encoding error reading "
+					+ _xmlFile, e);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new XmlException("MonetaXml(): File not found "
+					+ _xmlFile, e);
 		}
 	}
 
