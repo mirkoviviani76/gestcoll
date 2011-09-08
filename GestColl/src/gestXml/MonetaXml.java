@@ -486,6 +486,19 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 		List<Zecchiere> lista = this.getZecchieri();
 		this.modify(lista, zecchiere, nuovoZecchiere);
 	}
+	
+
+	/**
+	 * modifica la legenda
+	 * @param lato
+	 * @param legenda il vecchio valore
+	 * @param nuovaLegenda il nuovo valore
+	 */
+	public void modifyLegenda(Lato lato, Legenda legenda, Legenda nuovaLegenda) {
+		List<Legenda> lista = this.getLegende(lato);
+		this.modify(lista, legenda, nuovaLegenda);
+	}
+	
 
 	/**
 	 * @param ordering
@@ -688,4 +701,5 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 		return tooltip;
 	}
 
+	
 }
