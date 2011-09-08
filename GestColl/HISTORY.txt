@@ -2,7 +2,10 @@ Metodologia versionamento (xx.yy.zz)
 xx : incrementato con l'aggiunta di nuove funzionalita' (major) (+10 in caso di super funzionalita')
 yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
-
+31.6
+sistemati commenti
+sistemato codice
+corretto bug che impediva la modifica di una legenda
 31.5
 modificata gestione delle eccezioni
 risolto bug non ancora individuato riguardo il salvataggio utf-8
