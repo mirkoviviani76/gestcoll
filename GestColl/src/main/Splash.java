@@ -1,13 +1,20 @@
 package main;
 
+import gui.datamodels.MonetaListModel;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.SplashScreen;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
+
+import works.CollectionWorker;
 
 /**
  * Splash screen con una progress bar con stringhe
@@ -75,8 +82,19 @@ public class Splash {
 					SwingConstants.CENTER);
 			jLVersion.setSize(width, versionSize);
 
+			int countMonete = 0;
+			try {
+				/* ottiene il numero di monete */
+				List<File> files = CollectionWorker.getFileListing(new File(Common
+						.getCommon().getMoneteDir()), Common.COIN_END);
+				countMonete = files.size();
+			} catch (FileNotFoundException ex) {
+				GestLog.Error(MonetaListModel.class, ex);
+			}
+						
+			
 			/* crea e inizializza la barra */
-			jPBProgress = new JProgressBar(0, Splash.TASKS);
+			jPBProgress = new JProgressBar(0, Splash.TASKS + countMonete);
 			jPBProgress.setStringPainted(true);
 			jPBProgress.setSize(width, 30);
 
