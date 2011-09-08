@@ -284,25 +284,14 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 
 			// valuta ritorno con tasto "ok/modifica" premuto
 			if (nf.getReturnStatus() == LegendaForm.RET_OK) {
-				// try {
-				// Legenda nuovaLegenda = null;
-				// //ottiene i nuovi dati del libro
-				// nuovaLegenda = nf.getData();
-				// //cerca il nodo
-				// Node nodo = this.mng.searchNodeLegenda(legenda, this.lato);
-				// if (nodo != null) {
-				// //salva nel DOM
-				// mng.setLegenda(nuovaLegenda, nodo);
-				// //carica i nuovi valori
-				// ArrayList<Legenda> leg = mng.getLegenda(this.lato);
-				// this.jLLegende.setModel(new GenericListModel<Legenda>(leg));
-				// } else {
-				// GestLog.Error(MonetaDescrizione.class,
-				// "jLLegendeMouseClicked", "nodo NON trovato");
-				// }
-				// } catch (TransformerException ex) {
-				// GestLog.Error(MonetaDescrizione.class, ex);
-				// }
+				Legenda nuovaLegenda = null;
+				//ottiene i nuovi dati del libro
+				nuovaLegenda = nf.getData();
+				// salva nel DOM
+				mng.modifyLegenda(this.lato, legenda, nuovaLegenda);
+				// carica i nuovi valori
+				this.jLLegende.setListData(mng.getLegende(lato).toArray());
+
 			}
 		} else {
 			/* mostra semplicemente la legenda */
