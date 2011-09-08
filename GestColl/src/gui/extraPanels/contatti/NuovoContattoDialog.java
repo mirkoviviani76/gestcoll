@@ -133,7 +133,14 @@ public class NuovoContattoDialog extends javax.swing.JDialog {
 			}
 		});
 		panel.add(cancelbutton);
-		initComponents();
+		setTitle("Aggiungi Contatto");
+		addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent evt) {
+				closeDialog(evt);
+			}
+		});
+
 	}
 	
 	private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
@@ -165,25 +172,8 @@ public class NuovoContattoDialog extends javax.swing.JDialog {
 	public int getReturnStatus() {
 		return returnStatus;
 	}
-	/**
-	 * This method is called from within the constructor to initialize the form.
-	 */
-
-	// <editor-fold defaultstate="collapsed"
-	// desc="Generated Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
-		java.awt.GridBagConstraints gridBagConstraints;
-
-		setTitle("Aggiungi Contatto");
-		addWindowListener(new java.awt.event.WindowAdapter() {
-			@Override
-			public void windowClosing(java.awt.event.WindowEvent evt) {
-				closeDialog(evt);
-			}
-		});
 
 
-	}// </editor-fold>//GEN-END:initComponents
 	private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 		doClose(RET_OK);
 	}// GEN-LAST:event_okButtonActionPerformed
