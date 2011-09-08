@@ -4,7 +4,7 @@ yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
 31.6
 implementata l'aggiunta di un contatto
-eliminata dipendenza da un paio di librerie (3Mb guadagnati)
+eliminata dipendenza dalla libreria pdfbox-1.3.1.jar (3Mb guadagnati)
 sistemati commenti
 sistemato codice
 corretto bug che impediva la modifica di una legenda
