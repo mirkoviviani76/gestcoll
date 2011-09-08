@@ -22,7 +22,6 @@ import main.Common;
 import main.GestLog;
 import main.History;
 import main.Message;
-import XmlData.Moneta.Zecchiere;
 
 /**
  * Gestione pannello contatti
