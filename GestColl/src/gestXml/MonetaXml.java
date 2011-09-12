@@ -99,7 +99,6 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	public int compareTo(MonetaXml t) {
 		int ret = 0;
 
-		// TODO aggiungere l'ordinamento per "ultima revisione"
 		if (this.getOrdering() == Ordering.BY_ID) {
 			String id1 = "";
 			String id2 = "";
