@@ -1,6 +1,6 @@
 /**
  *  
- * TODO pagina che visualizzi sigla -> libro (magari da integrare con la scheda moneta...)
+ * 
  *
  */
 package main;

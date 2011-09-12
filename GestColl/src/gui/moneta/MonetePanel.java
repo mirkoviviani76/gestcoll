@@ -277,7 +277,8 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 
 	/**
 	 * Aggiunge una moneta, creando una directory e un file xml pronto per
-	 * l'editing TODO Generare la posizione (elenco nella gui?).
+	 * l'editing 
+	 * 
 	 * 
 	 * @throws XmlException
 	 */

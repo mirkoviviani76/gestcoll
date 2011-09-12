@@ -18,9 +18,6 @@ import gestXml.MonetaXml;
 /**
  * Gestisce la pagina delle statistiche
  * 
- * TODO aggiungere elenchi, ad esempio la lista di tutte le autorita, le zecche,
- * gli zecchieri...
- * 
  * @author intecs
  */
 public class Statistiche {
