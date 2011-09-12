@@ -22,6 +22,7 @@ import java.util.Observer;
 import java.util.logging.Level;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.ProgressMonitor;
@@ -143,10 +144,6 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		this.lastSearchedText = "";
 	}
 
-	/**
-	 * 
-	 * @param ae
-	 */
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == jButtonXml2Tex) {
@@ -157,7 +154,9 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 					new File(Common.getCommon().getMoneteDir()), new File(
 							Common.getCommon().getLatexDir()), null);
 		} else if (ae.getSource() == jButtonWiki) {
-			// TODO wiki (?)
+			//mostra un messaggio
+			JOptionPane.showMessageDialog(null, "TODO: wiki", Common.APPNAME,
+					JOptionPane.INFORMATION_MESSAGE);
 		} else if (ae.getSource() == jBAdd) {
 			try {
 				this.addMoneta();
@@ -278,8 +277,6 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	/**
 	 * Aggiunge una moneta, creando una directory e un file xml pronto per
 	 * l'editing 
-	 * 
-	 * 
 	 * @throws XmlException
 	 */
 	private void addMoneta() throws XmlException {
