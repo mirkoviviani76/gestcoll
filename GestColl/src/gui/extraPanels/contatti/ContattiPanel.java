@@ -25,6 +25,8 @@ import main.Message;
 
 /**
  * Gestione pannello contatti
+ * @author intecs
+ *
  */
 @SuppressWarnings("serial")
 public class ContattiPanel extends javax.swing.JPanel {

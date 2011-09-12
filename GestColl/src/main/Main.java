@@ -1,8 +1,3 @@
-/**
- *  
- * 
- *
- */
 package main;
 
 import exceptions.XmlException;
