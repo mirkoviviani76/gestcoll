@@ -114,11 +114,6 @@ public class DocumentoAddizionale {
 		this.url = value;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "" + (descrizione != null ? "" + descrizione : "") + "";
