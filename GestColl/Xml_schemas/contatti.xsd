@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified" 
+targetNamespace="http://www.contatti.org"
+        xmlns="http://www.contatti.org">
+	<xs:annotation>
+		<xs:documentation>Contatti</xs:documentation>
+		<xs:appinfo>v.0.1</xs:appinfo>
+	</xs:annotation>
+
+	<xs:complexType name="contatto">
+		<xs:annotation>
+			<xs:documentation>Tipo che definisce un contatto</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element minOccurs="1" name="nome" type="xs:string"/>
+			<xs:element minOccurs="1" name="email" type="xs:string"/>
+			<xs:element minOccurs="1" name="note" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:element name="contatti">
+		<xs:annotation>
+			<xs:documentation>Descrizione di un elenco di contatti</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="1" name="contatto" type="contatto"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+
+
