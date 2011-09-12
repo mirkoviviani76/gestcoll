@@ -6,6 +6,7 @@
 package gestXml;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import javax.xml.bind.Unmarshaller;
 import main.Common;
 import XmlData.Links.Linklist;
 import exceptions.XmlException;
+import gestXml.data.Contatto;
+import gestXml.data.Link;
 
 /**
  *
@@ -63,6 +66,32 @@ public class LinksXml extends GestXml {
 	 */
 	public ArrayList<gestXml.data.Link> getLinks() {
 		return this.links;
+	}
+	
+	
+	/**
+	 * aggiunge un contatto
+	 * @param nuovo
+	 * @throws XmlException 
+	 */
+	public void add(Link nuovo) throws XmlException {
+		XmlData.Links.Link c = new XmlData.Links.Link();
+		c.setNome(nuovo.nome);
+		c.setUrl(nuovo.url.toString());
+		c.setNote(nuovo.note);
+		/* cerca la categoria "giusta" e aggiunge il link */
+		List<Linklist> tutti = this.xmllinks.getCategoria();
+		for (Linklist curr : tutti) {
+			if (curr.getId().equals(nuovo.categoria)) {
+				curr.getLink().add(c);
+				break;
+			}
+		}
+		
+	}
+
+	public Object getJaxbObject() {
+		return this.xmllinks;
 	}
 
 }
