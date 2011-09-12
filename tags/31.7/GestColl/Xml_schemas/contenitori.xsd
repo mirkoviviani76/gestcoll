@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" 
+targetNamespace="http://www.contenitori.org"
+        xmlns:cont="http://www.contenitori.org"
+>
+
+	<xs:annotation>
+		<xs:documentation>Descrizione Contenitori</xs:documentation>
+		<xs:appinfo>v.0.1</xs:appinfo>
+	</xs:annotation>
+	
+	<xs:complexType name="vassoio">
+	<xs:sequence>
+		<xs:element maxOccurs="1" minOccurs="1" name="righe" type="xs:integer"/>
+		<xs:element maxOccurs="1" minOccurs="1" name="colonne" type="xs:integer"/>
+		<xs:element maxOccurs="1" minOccurs="1" name="dimensione" type="xs:string"/>
+	</xs:sequence>
+		<xs:attribute name="id" type="xs:string" />
+	</xs:complexType>
+
+	 <xs:complexType name="contenitore">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="1" name="vassoio" type="cont:vassoio"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" />
+	</xs:complexType>
+
+	 <xs:complexType name="armadio">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="1" name="contenitore" type="cont:contenitore"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" />
+	</xs:complexType>
+
+	<xs:element name="contenitori" >
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="armadio" type="cont:armadio" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+
+
+

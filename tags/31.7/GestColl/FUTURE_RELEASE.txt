@@ -1,0 +1,15 @@
+- wiki?
+
+- pagina che visualizzi sigla -> libro (magari da integrare con la scheda moneta...)
+
+- suggerire una posizione in caso di aggiunta nuova moneta
+
+- aggiunta di elenchi nella statistica (es. lista delle autorita...)
+
+- ordinamento per ultima revisione
+
+- modificare lo schema moneta per aggiungere collezioni e sottocollezioni
+<ambiti>
+	<ambito>SRI</ambito>
+	<ambito>Guerra dei trenta anni</ambito>
+</ambiti>

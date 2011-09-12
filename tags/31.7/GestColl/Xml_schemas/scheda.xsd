@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" >
+	<xs:annotation>
+		<xs:documentation>Descrizione Moneta</xs:documentation>
+		<xs:appinfo>v.1.7</xs:appinfo>
+	</xs:annotation>
+
+	<xs:complexType name="autorita">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="nome" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="zecca">
+		<xs:annotation>
+			<xs:documentation>Tipo che definisce una zecca</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element minOccurs="0" name="nome" type="xs:string"/>
+			<xs:element minOccurs="0" name="segno" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="zecchiere">
+		<xs:annotation>
+			<xs:documentation>Tipo che definisce uno zecchiere</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element minOccurs="0" name="nome" type="xs:string"/>
+			<xs:element minOccurs="0" name="segno" type="xs:string"/>
+			<xs:element minOccurs="0" name="ruolo" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="legenda">
+		<xs:annotation>
+			<xs:documentation>Tipo che definisce una legenda</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="testo" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="scioglimento" type="xs:string" minOccurs="0" maxOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="descrizioni">
+		<xs:annotation>
+			<xs:documentation>Tipo che definisce una descrizione</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="descrizione" minOccurs="1" maxOccurs="1" type="xs:string"/>
+			<xs:element name="legenda" minOccurs="0" maxOccurs="unbounded" type="legenda"/>
+			<xs:element name="fileImmagine" type="xs:string" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="misura">
+		<xs:annotation>
+			<xs:documentation>Tipo che definisce una unita di misura e un valore (numerico)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="unita" type="xs:string"/>
+			<xs:element name="valore" type="xs:decimal"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="nominale">
+		<xs:annotation>
+			<xs:documentation>Tipo che definisce un nominale</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="valuta" type="xs:string"/>
+			<xs:element name="valore" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="libro">
+		<xs:annotation>
+			<xs:documentation>Tipo che definisce un libro</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="sigla" type="xs:string"/>
+			<xs:element name="numero" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="asta">
+		<xs:annotation>
+			<xs:documentation>Tipo che definisce un passaggio in asta</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="casa" type="xs:string"/>
+			<xs:element name="idAsta" type="xs:string"/>
+			<xs:element name="data" type="xs:date"/>
+			<xs:element name="lotto" type="xs:string"/>
+			<xs:element name="stima" type="misura"/>
+			<xs:element name="aggiudicazione" type="misura"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="documentoAddizionale">
+		<xs:annotation>
+			<xs:documentation>Tipo che definisce un file addizionale</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="filename" type="xs:string"/>
+			<xs:element name="url" type="xs:string"/>
+			<xs:element name="descrizione" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+
+	 <xs:complexType name="documentiAggiuntivi">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="documento" type="documentoAddizionale"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	 <xs:complexType name="letteratura">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="libro" type="libro"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="asta" type="asta"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	 <xs:complexType name="note">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="nota" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="posizione">
+		 <xs:all>
+			 <xs:element name="contenitore" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			 <xs:element name="vassoio" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			 <xs:element name="riga" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+			 <xs:element name="colonna" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="datiAcquisto" >
+		<xs:sequence>
+			<xs:element name="luogo" minOccurs="0" type="xs:string"/>
+			<xs:element name="data" minOccurs="0" type="xs:date"/>
+			<xs:element name="prezzo" minOccurs="0" type="misura"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="datiFisici">
+		<xs:all>
+			<xs:element name="peso" type="misura"/>
+			<xs:element name="diametro" type="misura"/>
+			<xs:element name="forma" type="xs:string"/>
+			<xs:element name="metallo" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:complexType name="datiArtistici">
+		<xs:sequence>
+			<xs:element name="dritto" type="descrizioni" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="rovescio" type="descrizioni" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="taglio" type="descrizioni" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="zecchieri" >
+		<xs:sequence>
+			<xs:element name="zecchiere" type="zecchiere" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:element name="moneta">
+		<xs:annotation>
+			<xs:documentation>Descrizione di una moneta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="paese" type="xs:string" minOccurs="1"/>
+				<xs:element name="autorita" type="autorita" minOccurs="0"/>
+				<xs:element name="anno" type="xs:string" minOccurs="0"/>
+				<xs:element name="nominale" type="nominale"/>
+				<xs:element name="zecca" type="zecca" minOccurs="0"/>
+				<xs:element name="zecchieri" type="zecchieri" minOccurs="0" maxOccurs="1" />
+				<xs:element name="datiArtistici" type="datiArtistici" />
+				<xs:element name="datiFisici" type="datiFisici" />
+				<xs:element name="datiAcquisto" type="datiAcquisto" minOccurs="1" maxOccurs="1" />
+				<xs:element name="posizione" type="posizione" minOccurs="0" maxOccurs="1" />
+				<xs:element name="grado" type="xs:string" minOccurs="0" maxOccurs="1"/>
+				<xs:element name="note" type="note" minOccurs="0" maxOccurs="1" />
+				<xs:element name="letteratura" type="letteratura" minOccurs="0" maxOccurs="1" />
+				<xs:element name="itemAddizionali" type="documentiAggiuntivi" minOccurs="0" maxOccurs="1" />
+				<xs:element name="revisione" type="xs:date" minOccurs="1" maxOccurs="1" />
+			</xs:all>
+			<xs:attribute name="id" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+
+
+

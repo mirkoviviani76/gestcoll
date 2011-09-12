@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+elementFormDefault="qualified" 
+targetNamespace="http://www.links.org"
+        xmlns="http://www.links.org">
+	<xs:annotation>
+		<xs:documentation>Links</xs:documentation>
+		<xs:appinfo>v.0.1</xs:appinfo>
+	</xs:annotation>
+
+	<xs:complexType name="link">
+		<xs:annotation>
+			<xs:documentation>Tipo che definisce un link</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element minOccurs="0" name="nome" type="xs:string"/>
+			<xs:element minOccurs="1" name="url" type="xs:string"/>
+			<xs:element minOccurs="0" name="note" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:complexType name="linklist">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="link" type="link"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:element name="links">
+		<xs:annotation>
+			<xs:documentation>Descrizione di un elenco di link</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="1" name="categoria" type="linklist"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+
+

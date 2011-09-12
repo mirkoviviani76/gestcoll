@@ -1,0 +1,199 @@
+Metodologia versionamento (xx.yy.zz)
+xx : incrementato con l'aggiunta di nuove funzionalita' (major) (+10 in caso di super funzionalita')
+yy : incrementato per miglioramenti (minor)
+zz : incrementato per aggiustamenti progressivi
+31.7
+implementata l'aggiunta di un link
+31.6
+implementata l'aggiunta di un contatto
+eliminata dipendenza dalla libreria pdfbox-1.3.1.jar (3Mb guadagnati)
+sistemati commenti
+sistemato codice
+corretto bug che impediva la modifica di una legenda
+31.5
+modificata gestione delle eccezioni
+risolto bug non ancora individuato riguardo il salvataggio utf-8
+31.4
+versionamento alfa elminato
+Aggiunta visualizzazione contatti
+Sistemato pannello link: ora sono visualizzati ad albero e i link si aprono nel browser
+31.3a
+Sistemata visualizzazione immagini con possiblita' di ruotare e scalare
+Sistemata biblioteca
+Introdotto documento di versione (il presente HISTORY.txt)
+Modificata GenericCellRenderer: ora il testo e' trattato come html
+Introdotto il builder ant build.xml
+31.2a
+Sistemata visualizzazione links (da migliorare)
+Proprieta' lette dal file GestColl.ini
+31.1a
+Sistemato visualizzazione, vassoi, tex, html, statistiche. 
+Sistemate modifica e salvataggio. Downgrade delle feature durante il refactoring.                
+31.0a
+xml letto tramite jaxb.
+Progetto sotto eclipse. 
+Downgrade delle feature durante il refactoring.                
+30.4 
+in edit, la descrizione mostra anche l'immagine della moneta. 
+migliorata/aggiunta gestione messaggi e avanzamento
+30.3.1 
+sistemato bug in thread etichette e tex (in questo caso un unico thread con due funzioni)
+30.3 
+aggiunta EditButtonPanel per inserimento caratteri Unicode in Descrizione e Legenda.
+30.2.1 
+risolto bug in visualizzazione data.
+30.2.0 
+aggiunta visualizzazione history.
+30.1 
+aggiunti grafici
+aggiunta classe History
+aggiunta messaggi di info al MainForm.
+30.0 
+introdotte statistiche (solo bozza)
+23.5 
+form per edit della descrizione con pulsanti di aiuto per caratteri strani.
+23.4 
+l'elenco delle monete si puo' ordinare anche per paese
+23.3.1 
+modifiche minori
+23.3 
+aggiunto pulsante "->Clip" per copiare il testo completo dei dati monetali nella clipboard.
+23.2.2 
+lo splash mostra ora anche la versione
+il nome dell'applicazione nello splash e' ora a codice
+23.2.1 
+piccoli miglioramenti
+23.2 
+introdotta dir di backup per le monete modificate, template per i template e data per gli ausiliari xml
+corretto bug in caso di data non presente
+23.1 
+migliorata struttura cellrenderer e listmodel
+ridotto il numero di package
+introdotta classe Legenda
+introdotta ricerca "cerca il prossimo" automatico
+23.0 
+inserita ricerca (embrionale) per links e contatti
+inserita ricerca (embrionale) per monete
+22.1 
+migliorata gestione "scansione libri" per distinguere fra libri e cataloghi
+Unificati la maggior parte dei ListModel in una classe template GenericListModel
+Unificati la maggior parte dei CellRenderer in una classe template GenericCellRenderer
+22.0 
+aggiunta scansione libri non presenti in biblioteca.xml
+semplificata tipologia item di biblioteca
+titolo nella lista biblioteca ridotto per comodita' di vista
+21.0.2 
+bug risolto in gestione etichette (autorita deve essere valorizzata almeno con uno spazio)
+Aggiunto scorrimento automatico all'indice della moneta in caso di doppio click sul vassoio.
+Aggiunto pulsante alla biblioteca per files disponibili (non funziona sotto windows)
+Riorganizzato progetto raggruppando i datamodels in un package
+21.0.1 
+migliorata gui: i pulsanti rimuovi sono ora nel menu Strumenti e altre modifiche minori.
+21.0.0 
+gestione contatti e link (visualizzazione e clic)
+20.4.1 
+migliorato splashscreen
+20.4 
+aggiunto splashscreen (modifica manifest.xml e le proprieta' del progetto)
+20.3 
+i contenitori sono configurati da xml (contenitori.xml)
+20.2 
+aggiunta gestore clic alla posizione
+20.1 
+aggiunta gestore clic nei vassoi
+20.0.3 
+migliorata gestione classi contenitori
+20.0.2 
+migliorata table modello
+20.0.1 
+vassoi visualizzati a tabella
+20.0 
+gestione posizione e vassoi (visualizzazione)
+10.3.0 
+miglioramento visualizzazione biblioteca
+10.2.3 
+visualizzazione xml libreria item articoli
+10.2.2 
+visualizzazione xml libreria item documenti
+10.2.1 
+visualizzazione xml libreria item libri
+10.2.0 
+visualizzazione xml libreria cataloghi
+10.1.3 
+lettura xml libreria item articoli
+10.1.2 
+lettura xml libreria item documenti
+10.1.1 
+lettura xml libreria item libri
+10.1.0 
+lettura xml libreria cataloghi
+10.0.1 
+eliminazione Libri2Html
+10.0.0 
+creazione xml "biblioteca" per libri, documenti, aste
+9.1 
+riorganizzata la classe Message per prendere anche un livello, utilizzato per mostrare il messaggio in diversi colori.
+9.0 
+inserimento di un textfield in alto a destra per contenere i testi dei messagebox... cliccandoci sopra si apre il messagebox.
+8.1 
+creazione xml nuova moneta. Ordinamento della lista monete ora effettuata per anno e per progressivo.
+8.0 
+suggerimento id per nuova moneta.
+7.1 
+gestione Documenti (aggiunta, modifica)
+7.0 
+gestione Documenti (visualizzazione)
+6.4 
+MonetaXml deriva ora da GestXml, che racchiude le operazione generiche sull'xml
+6.3 
+aggiunta gerarchia di nodi (libro, zecchiere, nota, autorita, legenda)
+6.2 
+aggiunta miglioramenti MonetaDescrizione, aggiunti pulsanti "+", sistemate actionlistener, migliorata gui, enum lato appartiene ora a common.
+6.1 
+aggiunta nodi singoli non esistenti (es. aggiunta ruolo zecchiere, aggiunta anno)
+5.7.1 
+modifica e salvataggio Note
+5.6.3 
+incapsulamento dati letteratura in classi
+5.6.2 
+incapsulamento dati zecchiere in classi
+5.6.1 
+incapsulamento dati zecca in classi
+5.5.2 
+salvataggio letteratura in DOM
+5.5.1 
+gestione dialogo per modifica letteratura
+5.4.2 
+salvataggio zecchiere in DOM
+5.4.1 
+gestione dialogo per modifica zecchiere
+5.3 
+modifica zecca e data
+5.2 
+salvataggio file con backup
+5.1Beta
+sistemata Gui. Aggiunta gestione "misure" (peso, nominale...) anche per xml.
+5.0Beta
+inizio implementazione salvataggio modifiche in xml
+4.0 
+sistemata gui.
+3.4 
+sistemata gui, aggiunta gestione note e letteratura (mancano aste)
+3.3 
+migliorata gestione legende, sistemata gestione zecca e zecchiere.
+3.2 
+inseriti getter per MonetaXml, gestione della ricerca su google per autorita, gestione data.
+3.1 
+migliorie alla GUI, alla gestione delle monete, all'uso dei template.
+3.0 
+Implementazione GUI.
+2.0 
+aggiunta funzionalita' di creazione QR.
+1.2 
+monete.html, libri.html e aste.html generati da template.
+1.1 
+modellizzazione delle classi.
+1.0 
+prima emissione, codice convertito a partire da ruby.
+
+
