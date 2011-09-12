@@ -6,7 +6,6 @@
 package gestXml;
 
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import javax.xml.bind.Unmarshaller;
 import main.Common;
 import XmlData.Links.Linklist;
 import exceptions.XmlException;
-import gestXml.data.Contatto;
 import gestXml.data.Link;
 
 /**
