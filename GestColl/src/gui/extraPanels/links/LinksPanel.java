@@ -7,11 +7,8 @@ package gui.extraPanels.links;
 
 import exceptions.XmlException;
 import gestXml.LinksXml;
-import gestXml.data.Contatto;
 import gestXml.data.Link;
 import gui.MainFrame;
-import gui.datamodels.GenericListModel;
-import gui.extraPanels.contatti.NuovoContattoDialog;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
