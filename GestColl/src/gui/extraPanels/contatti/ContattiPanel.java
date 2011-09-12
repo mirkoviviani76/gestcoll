@@ -25,7 +25,6 @@ import main.Message;
 
 /**
  * Gestione pannello contatti
- * TODO aggiungere la possibilita' di eliminare un contatto 
  */
 @SuppressWarnings("serial")
 public class ContattiPanel extends javax.swing.JPanel {
