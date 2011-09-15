@@ -47,23 +47,23 @@ public final class StatistichePanel extends javax.swing.JPanel {
 			this.jTabbedPane1.addTab(
 					"Dimensione",
 					createMyBarChart("Monete per dimensione", "dim",
-							"nr. monete", GetDatasetCoinBySize()));
+							"nr. monete", getDatasetCoinBySize()));
 			this.jTabbedPane1.addTab(
 					"Anno",
 					createMyBarChart("Monete per anno", "anno", "nr. monete",
-							GetDatasetCoinByYear()));
+							getDatasetCoinByYear()));
 			this.jTabbedPane1.addTab(
 					"Metallo",
 					createMyBarChart("Monete per metallo", "anno",
-							"nr. monete", GetDatasetCoinByMetal()));
+							"nr. monete", getDatasetCoinByMetal()));
 			this.jTabbedPane1.addTab(
 					"Metallo2",
 					createMy3DPieChart("Monete per metallo",
-							GetPieDatasetCoinByMetal()));
+							getPieDatasetCoinByMetal()));
 			this.jTabbedPane1.addTab(
 					"Nominale",
 					createMy3DPieChart("Monete per nominale",
-							GetPieDatasetCoinByNominal()));
+							getPieDatasetCoinByNominal()));
 		} catch (XmlException e) {
 			GestLog.Error(this.getClass(), e);
 		}
@@ -128,7 +128,7 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	 * @return i dati
 	 * @throws XmlException
 	 */
-	private CategoryDataset GetDatasetCoinByMetal() throws XmlException {
+	private CategoryDataset getDatasetCoinByMetal() throws XmlException {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		TreeMap<String, Integer> valori = Statistiche.coinByMetal();
 		for (String key : valori.keySet()) {
@@ -143,7 +143,7 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	 * @return i dati
 	 * @throws XmlException
 	 */
-	private CategoryDataset GetDatasetCoinBySize() throws XmlException {
+	private CategoryDataset getDatasetCoinBySize() throws XmlException {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		TreeMap<Double, Integer> valori = Statistiche.coinBySize();
 		for (Double key : valori.keySet()) {
@@ -158,7 +158,7 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	 * @return i dati
 	 * @throws XmlException
 	 */
-	private CategoryDataset GetDatasetCoinByYear() throws XmlException {
+	private CategoryDataset getDatasetCoinByYear() throws XmlException {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		TreeMap<String, Integer> valori = Statistiche.coinByYear();
 		for (String key : valori.keySet()) {
@@ -173,7 +173,7 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	 * @return i dati
 	 * @throws XmlException
 	 */
-	private PieDataset GetPieDatasetCoinByMetal() throws XmlException {
+	private PieDataset getPieDatasetCoinByMetal() throws XmlException {
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		TreeMap<String, Integer> valori = Statistiche.coinByMetal();
 		for (String key : valori.keySet()) {
@@ -182,7 +182,7 @@ public final class StatistichePanel extends javax.swing.JPanel {
 		return dataset;
 	}
 	
-	private PieDataset GetPieDatasetCoinByNominal() throws XmlException {
+	private PieDataset getPieDatasetCoinByNominal() throws XmlException {
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		TreeMap<String, Integer> valori = Statistiche.coinByNominal();
 		for (String key : valori.keySet()) {
