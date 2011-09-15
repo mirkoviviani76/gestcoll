@@ -38,6 +38,10 @@ public class BibliotecaXml extends GestXml {
 		try {
 			JAXBContext jc = JAXBContext.newInstance("XmlData.Biblioteca");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
+			/* posso fare il cast perche' le classi contengono @XmlRootElement se
+			 * altrimenti si doveva fare JAXBElement<tipo> elem = (JAXBElement<tipo>)unmarshaller.unmarshal(xml)
+			 * biblio = elem.getValue();
+			 */
 			biblio = (XmlData.Biblioteca.Biblioteca) unmarshaller
 					.unmarshal(xml);
 		} catch (JAXBException e) {
