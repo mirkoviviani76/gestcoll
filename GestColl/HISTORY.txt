@@ -2,6 +2,8 @@ Metodologia versionamento (xx.yy.zz)
 xx : incrementato con l'aggiunta di nuove funzionalita' (major) (+10 in caso di super funzionalita')
 yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
+37.8
+modificati xsd e xml biblioteca, contatti, contenitori, links con i namespace
 31.7
 implementata l'aggiunta di un link
 31.6

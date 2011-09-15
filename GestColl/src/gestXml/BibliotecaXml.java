@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
@@ -35,13 +36,14 @@ public class BibliotecaXml extends GestXml {
 	 */
 	public BibliotecaXml() throws XmlException {
 		super(new File(Common.getCommon().getBiblioXml()));
+		File xml = new File(Common.getCommon().getBiblioXml());
 		try {
 			JAXBContext jc = JAXBContext.newInstance("XmlData.Biblioteca");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			biblio = (XmlData.Biblioteca.Biblioteca) unmarshaller
-					.unmarshal(new File(Common.getCommon().getBiblioXml()));
+					.unmarshal(xml);
 		} catch (JAXBException e) {
-			throw new XmlException("BibliotecaXml", e);
+			throw new XmlException("BibliotecaXml(), file: "+xml.getAbsolutePath(), e);
 		}
 
 	}
