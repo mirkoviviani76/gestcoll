@@ -60,10 +60,15 @@ public final class StatistichePanel extends javax.swing.JPanel {
 					"Metallo2",
 					createMy3DPieChart("Monete per metallo",
 							GetPieDatasetCoinByMetal()));
+			this.jTabbedPane1.addTab(
+					"Nominale",
+					createMy3DPieChart("Monete per nominale",
+							GetPieDatasetCoinByNominal()));
 		} catch (XmlException e) {
 			GestLog.Error(this.getClass(), e);
 		}
 	}
+
 
 	/**
 	 * Ottiene un pannello con un 3D piechart
@@ -176,6 +181,16 @@ public final class StatistichePanel extends javax.swing.JPanel {
 		}
 		return dataset;
 	}
+	
+	private PieDataset GetPieDatasetCoinByNominal() throws XmlException {
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		TreeMap<String, Integer> valori = Statistiche.coinByNominal();
+		for (String key : valori.keySet()) {
+			dataset.setValue(key, valori.get(key));
+		}
+		return dataset;
+	}
+	
 
 	/**
 	 * inizializza i componenti grafici
@@ -211,4 +226,5 @@ public final class StatistichePanel extends javax.swing.JPanel {
 										269, Short.MAX_VALUE)));
 	}
 
+	
 }
