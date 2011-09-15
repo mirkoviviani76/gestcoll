@@ -62,6 +62,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 
 	private final static String ORDER_BY_ID = "Ordina per ID";
 	private final static String ORDER_BY_PAESE = "Ordina per Paese";
+	private final static String ORDER_BY_REVISIONE = "Ordina per Revisione";
 	private static final long serialVersionUID = 1L;
 	private javax.swing.JButton jBAdd;
 	private javax.swing.JButton jBCerca;
@@ -110,7 +111,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 
 		/* aggiunge il radio group al popup menu (l'ide non lo fa) */
 		String popupRadioItems[] = { MonetePanel.ORDER_BY_ID,
-				MonetePanel.ORDER_BY_PAESE };
+				MonetePanel.ORDER_BY_PAESE, MonetePanel.ORDER_BY_REVISIONE };
 		popupRadio = new JRadioButtonMenuItem[popupRadioItems.length];
 		popupGroup1 = new ButtonGroup();
 
@@ -620,10 +621,16 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 			/* cerca il radio button attivo che ha causato il cambio */
 			if ((evt.getSource() == this.popupRadio[i])
 					&& (this.popupRadio[i].isSelected())) {
-				if (i == 0) {
+				switch (i) {
+				case 0:
 					this.sortListMonete(MonetaXml.Ordering.BY_ID);
-				} else {
+					break;
+				case 1:
 					this.sortListMonete(MonetaXml.Ordering.BY_PAESE);
+					break;
+				case 2:
+					this.sortListMonete(MonetaXml.Ordering.BY_REVISION);
+					break;
 				}
 			}
 		}
