@@ -50,7 +50,7 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	}
 
 	public static enum Ordering {
-		BY_ID, BY_PAESE
+		BY_ID, BY_PAESE, BY_REVISION
 	}
 
 	private XmlData.Moneta.Moneta moneta;
@@ -122,8 +122,13 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 			paese1 = this.moneta.getPaese();
 			paese2 = t.moneta.getPaese();
 			ret = paese1.compareTo(paese2);
-
+		} else if (this.getOrdering() == Ordering.BY_REVISION) {
+			XMLGregorianCalendar c1 = this.moneta.getRevisione();
+			XMLGregorianCalendar c2 = t.moneta.getRevisione();
+			//le monete con la revisione piu' vecchia vengono prima
+			ret = c1.compare(c2);
 		}
+		
 		return ret;
 	}
 
@@ -695,8 +700,10 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	public String toTooltip() {
 		String tooltip = "";
 		// imgD = mng.getImg(MonetaXml.lato.DRITTO);
-		tooltip = this.moneta.getNominale().getValore() + " "
-				+ this.moneta.getNominale().getValuta();
+		tooltip = String
+				.format("%s %s revisione %s", this.moneta.getNominale().getValore(), 
+						this.moneta.getNominale().getValuta(),
+						this.moneta.getRevisione());
 		return tooltip;
 	}
 

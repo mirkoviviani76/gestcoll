@@ -188,6 +188,10 @@ public class ContenitoriXml extends GestXml {
 		try {
 			JAXBContext jc = JAXBContext.newInstance("XmlData.Contenitori");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
+			/* posso fare il cast perche' le classi contengono @XmlRootElement se
+			 * altrimenti si doveva fare JAXBElement<tipo> elem = (JAXBElement<tipo>)unmarshaller.unmarshal(xml)
+			 * contenitori = elem.getValue();
+			 */
 			XmlData.Contenitori.Contenitori contenitori = (XmlData.Contenitori.Contenitori) unmarshaller
 					.unmarshal(this.xmlFile);
 

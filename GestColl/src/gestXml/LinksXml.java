@@ -38,6 +38,10 @@ public class LinksXml extends GestXml {
 		try {
 			JAXBContext jc = JAXBContext.newInstance("XmlData.Links");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
+			/* posso fare il cast perche' le classi contengono @XmlRootElement se
+			 * altrimenti si doveva fare JAXBElement<tipo> elem = (JAXBElement<tipo>)unmarshaller.unmarshal(xml)
+			 * xmllinks = elem.getValue();
+			 */
 			xmllinks = (XmlData.Links.Links) unmarshaller.unmarshal(new File(
 					Common.getCommon().getLinksXml()));
 

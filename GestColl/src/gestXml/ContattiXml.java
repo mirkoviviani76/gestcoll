@@ -36,6 +36,10 @@ public class ContattiXml extends GestXml {
 		try {
 			JAXBContext jc = JAXBContext.newInstance("XmlData.Contatti");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
+			/* posso fare il cast perche' le classi contengono @XmlRootElement se
+			 * altrimenti si doveva fare JAXBElement<tipo> elem = (JAXBElement<tipo>)unmarshaller.unmarshal(xml)
+			 * contatti = elem.getValue();
+			 */
 			contatti = (Contatti) unmarshaller.unmarshal(new File(Common
 					.getCommon().getContattiXml()));
 		} catch (JAXBException e) {
