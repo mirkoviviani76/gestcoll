@@ -5,21 +5,19 @@
 
 package gestXml;
 
-import exceptions.XmlException;
-import gestXml.data.Catalogo;
-import gestXml.data.Libro;
-import gestXml.data.Pubblicazione;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import main.Common;
+import exceptions.XmlException;
+import gestXml.data.Catalogo;
+import gestXml.data.Libro;
+import gestXml.data.Pubblicazione;
 
 /**
  *
