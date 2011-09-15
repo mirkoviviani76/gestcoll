@@ -4,6 +4,7 @@ yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
 37.8
 modificati xsd e xml biblioteca, contatti, contenitori, links con i namespace
+implementato ordinamento per revisione
 31.7
 implementata l'aggiunta di un link
 31.6
