@@ -4,7 +4,7 @@
 
 - suggerire una posizione in caso di aggiunta nuova moneta
 
-- aggiunta di elenchi nella statistica (es. lista delle autorita...)
+- aggiunta di elenchi nella statistica (es. lista dei nominali, delle autorita...)
 
 - modificare lo schema moneta per aggiungere collezioni e sottocollezioni
 <ambiti>
@@ -13,3 +13,7 @@
 </ambiti>
 
 - sistemare lo schema moneta con i namespace giusti (comporta la modifica a TUTTI gli xml)
+
+- la configurazione potrebbe essere in un file xml, così ce ne sarebbe uno che contiene
+  varie configurazioni possibili (es. pc-ufficio, pc-casa, pc-casa-windows....)
+  -- come si sceglie la configurazione? da linea di comando?

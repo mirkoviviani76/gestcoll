@@ -87,4 +87,26 @@ public class Statistiche {
 		return valori;
 	}
 
+	public static TreeMap<String, Integer> coinByNominal() throws XmlException {
+		TreeMap<String, Integer> valori = new TreeMap<String, Integer>();
+		/* ottiene l'elenco di tutte le monete */
+		List<File> files;
+		files = CollectionWorker.getFileListing(Common.getCommon()
+				.getMoneteDir(), Common.COIN_END);
+		ListIterator<File> iterator = files.listIterator();
+
+		/* cicla su tutte le monete */
+		while (iterator.hasNext()) {
+			MonetaXml mng = new MonetaXml((iterator.next()));
+			String chiave = mng.getNominale().getValore()+" "+mng.getNominale().getValuta();
+			if (valori.containsKey(chiave)) {
+				valori.put(chiave, valori.get(chiave) + 1);
+			} else {
+				valori.put(chiave, 1);
+			}
+		}
+		return valori;
+
+	}
+	
 }
