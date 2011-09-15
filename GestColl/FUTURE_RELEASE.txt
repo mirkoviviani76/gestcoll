@@ -13,3 +13,5 @@
 	<ambito>SRI</ambito>
 	<ambito>Guerra dei trenta anni</ambito>
 </ambiti>
+
+- sistemare lo schema moneta con i namespace giusti (comporta la modifica a TUTTI gli xml)

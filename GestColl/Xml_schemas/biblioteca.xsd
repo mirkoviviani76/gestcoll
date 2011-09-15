@@ -1,81 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" 
-targetNamespace="http://www.biblioteca.org"
-xmlns="http://www.biblioteca.org">
-	<xs:annotation>
-		<xs:documentation>Biblioteca</xs:documentation>
-		<xs:appinfo>v.0.1</xs:appinfo>
-	</xs:annotation>
+<xsd:schema 
+targetNamespace="http://gestColl/biblioteca" elementFormDefault="qualified" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:tns="http://gestColl/biblioteca">
 
-	<xs:complexType name="autori">
-		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="0" name="autore" type="xs:string"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:annotation>
+		<xsd:documentation>Biblioteca</xsd:documentation>
+		<xsd:appinfo>v.0.1</xsd:appinfo>
+	</xsd:annotation>
 
-	<xs:complexType name="supporti">
-		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="0" name="supporto" type="xs:string"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:complexType name="autori">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="autore" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
 
-	<xs:complexType name="argomenti">
-		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="0" name="argomento" type="xs:string"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:complexType name="supporti">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="supporto" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="argomenti">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="argomento" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
 	
-	<xs:complexType name="librotype">
-		<xs:annotation>
-			<xs:documentation>Tipo che definisce una pubblicazione</xs:documentation>
-		</xs:annotation>
-		<xs:all>
-			<xs:element minOccurs="1" name="id" type="xs:string"/>
-			<xs:element minOccurs="0" name="autori" type="autori"/>
-			<xs:element minOccurs="1" name="titolo" type="xs:string"/>
-			<xs:element minOccurs="0" name="supporti" type="supporti"/>
-			<xs:element minOccurs="0" name="filename" type="xs:string"/>
-		</xs:all>
-	</xs:complexType>
+	<xsd:complexType name="librotype">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce una pubblicazione</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element minOccurs="1" name="id" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="autori" type="tns:autori"/>
+			<xsd:element minOccurs="1" name="titolo" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="supporti" type="tns:supporti"/>
+			<xsd:element minOccurs="0" name="filename" type="xsd:string"/>
+		</xsd:all>
+	</xsd:complexType>
 	
-	<xs:complexType name="libri">
-		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="0" name="libro" type="librotype"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:complexType name="libri">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="libro" type="tns:librotype"/>
+		</xsd:sequence>
+	</xsd:complexType>
 	
-	<xs:complexType name="cataloghi">
-		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="0" name="catalogo" type="catalogo"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:complexType name="cataloghi">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="catalogo" type="tns:catalogo"/>
+		</xsd:sequence>
+	</xsd:complexType>
 
-	<xs:complexType name="catalogo">
-		<xs:annotation>
-			<xs:documentation>Tipo che definisce una pubblicazione</xs:documentation>
-		</xs:annotation>
-		<xs:all>
-			<xs:element minOccurs="1" name="autori" type="autori"/>
-			<xs:element minOccurs="1" name="numero" type="xs:string"/>
-			<xs:element minOccurs="0" name="data" type="xs:string"/>
-			<xs:element minOccurs="0" name="filename" type="xs:string"/>
-			<xs:element minOccurs="0" name="supporti" type="supporti"/>
-			<xs:element minOccurs="0" name="argomenti" type="argomenti"/>
-		</xs:all>
-	</xs:complexType>
+	<xsd:complexType name="catalogo">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce una pubblicazione</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element minOccurs="1" name="autori" type="tns:autori"/>
+			<xsd:element minOccurs="1" name="numero" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="data" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="filename" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="supporti" type="tns:supporti"/>
+			<xsd:element minOccurs="0" name="argomenti" type="tns:argomenti"/>
+		</xsd:all>
+	</xsd:complexType>
 
 
-	<xs:element name="biblioteca">
-		<xs:annotation>
-			<xs:documentation>Descrizione di una biblioteca</xs:documentation>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:all>
-				<xs:element maxOccurs="1" minOccurs="1" name="libri" type="libri"/>
-				<xs:element maxOccurs="1" minOccurs="0" name="cataloghi" type="cataloghi"/>
-			</xs:all>
-		</xs:complexType>
-	</xs:element>
-</xs:schema>
+	<xsd:element name="biblioteca">
+		<xsd:annotation>
+			<xsd:documentation>Descrizione di una biblioteca</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element maxOccurs="1" minOccurs="1" name="libri" type="tns:libri"/>
+				<xsd:element maxOccurs="1" minOccurs="0" name="cataloghi" type="tns:cataloghi"/>
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
 
 
