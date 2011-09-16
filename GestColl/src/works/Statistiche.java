@@ -22,8 +22,8 @@ import gestXml.MonetaXml;
  */
 public class Statistiche {
 
-	public static TreeMap<String, Integer> coinByMetal() throws XmlException {
-		TreeMap<String, Integer> valori = new TreeMap<String, Integer>();
+	public static TreeMap<String, Number> coinByMetal() throws XmlException {
+		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
 		files = CollectionWorker.getFileListing(Common.getCommon()
@@ -35,7 +35,8 @@ public class Statistiche {
 			MonetaXml mng = new MonetaXml((iterator.next()));
 			String metallo = mng.getMetallo();
 			if (valori.containsKey(metallo)) {
-				valori.put(metallo, valori.get(metallo) + 1);
+				int v = valori.get(metallo).intValue() + 1;
+				valori.put(metallo, v);
 			} else {
 				valori.put(metallo, 1);
 			}
@@ -43,8 +44,8 @@ public class Statistiche {
 		return valori;
 	}
 
-	public static TreeMap<Double, Integer> coinBySize() throws XmlException {
-		TreeMap<Double, Integer> valori = new TreeMap<Double, Integer>();
+	public static TreeMap<String, Number> coinBySize() throws XmlException {
+		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
 		files = CollectionWorker.getFileListing(Common.getCommon()
@@ -55,9 +56,10 @@ public class Statistiche {
 		while (iterator.hasNext()) {
 			MonetaXml mng = new MonetaXml((iterator.next()));
 			Misura diam = mng.getDiametro();
-			double d = Double.parseDouble(diam.getValore().toPlainString());
+			String d = diam.getValore().toPlainString();
 			if (valori.containsKey(d)) {
-				valori.put(d, valori.get(d) + 1);
+				int v = valori.get(d).intValue() + 1;
+				valori.put(d, v);
 			} else {
 				valori.put(d, 1);
 			}
@@ -66,8 +68,8 @@ public class Statistiche {
 
 	}
 
-	public static TreeMap<String, Integer> coinByYear() throws XmlException {
-		TreeMap<String, Integer> valori = new TreeMap<String, Integer>();
+	public static TreeMap<String, Number> coinByYear() throws XmlException {
+		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
 		files = CollectionWorker.getFileListing(Common.getCommon()
@@ -79,7 +81,7 @@ public class Statistiche {
 			MonetaXml mng = new MonetaXml((iterator.next()));
 			String anno = mng.getAnno();
 			if (valori.containsKey(anno)) {
-				valori.put(anno, valori.get(anno) + 1);
+				valori.put(anno, valori.get(anno).intValue() + 1);
 			} else {
 				valori.put(anno, 1);
 			}
@@ -87,8 +89,8 @@ public class Statistiche {
 		return valori;
 	}
 
-	public static TreeMap<String, Integer> coinByNominal() throws XmlException {
-		TreeMap<String, Integer> valori = new TreeMap<String, Integer>();
+	public static TreeMap<String, Number> coinByNominal() throws XmlException {
+		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
 		files = CollectionWorker.getFileListing(Common.getCommon()
@@ -100,7 +102,7 @@ public class Statistiche {
 			MonetaXml mng = new MonetaXml((iterator.next()));
 			String chiave = mng.getNominale().getValore()+" "+mng.getNominale().getValuta();
 			if (valori.containsKey(chiave)) {
-				valori.put(chiave, valori.get(chiave) + 1);
+				valori.put(chiave, valori.get(chiave).intValue() + 1);
 			} else {
 				valori.put(chiave, 1);
 			}
