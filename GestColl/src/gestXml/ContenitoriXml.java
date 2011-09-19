@@ -116,8 +116,7 @@ public class ContenitoriXml extends GestXml {
 	public HashMap<String, String> getMapIdPosizioni()
 			throws FileNotFoundException, TransformerException, XmlException {
 		/* ottiene l'elenco di tutte le monete */
-		List<File> files = CollectionWorker.getFileListing(new File(Common
-				.getCommon().getMoneteDir()), Common.COIN_END);
+		List<File> files = CollectionWorker.getCoinsFileListing();
 		ListIterator<File> iterator = files.listIterator();
 		HashMap<String, String> posizioniId = new HashMap<String, String>(
 				files.size());
@@ -142,8 +141,7 @@ public class ContenitoriXml extends GestXml {
 	public HashMap<String, String> getMapPosizioniId()
 			throws FileNotFoundException, XmlException {
 		/* ottiene l'elenco di tutte le monete */
-		List<File> files = CollectionWorker.getFileListing(new File(Common
-				.getCommon().getMoneteDir()), Common.COIN_END);
+		List<File> files = CollectionWorker.getCoinsFileListing();
 		ListIterator<File> iterator = files.listIterator();
 		HashMap<String, String> posizioniId = new HashMap<String, String>(
 				files.size());

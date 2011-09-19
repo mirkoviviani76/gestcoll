@@ -83,14 +83,9 @@ public class Splash {
 			jLVersion.setSize(width, versionSize);
 
 			int countMonete = 0;
-			try {
-				/* ottiene il numero di monete */
-				List<File> files = CollectionWorker.getFileListing(new File(Common
-						.getCommon().getMoneteDir()), Common.COIN_END);
-				countMonete = files.size();
-			} catch (FileNotFoundException ex) {
-				GestLog.Error(MonetaListModel.class, ex);
-			}
+			/* ottiene il numero di monete */
+			List<File> files = CollectionWorker.getCoinsFileListing();
+			countMonete = files.size();
 						
 			
 			/* crea e inizializza la barra */
