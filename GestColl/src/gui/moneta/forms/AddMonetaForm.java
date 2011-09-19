@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import main.Common;
 import works.CollectionWorker;
 
 /**
