@@ -1,13 +1,10 @@
 package main;
 
-import gui.datamodels.MonetaListModel;
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.SplashScreen;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import javax.swing.JLabel;
