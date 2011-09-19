@@ -39,14 +39,9 @@ public class MonetaListModel extends GenericListModel<MonetaXml> {
 		/* ottiene l'elenco di tutte le monete */
 		@SuppressWarnings("rawtypes")
 		ListIterator iterator = null;
-		try {
-			List<File> files = CollectionWorker.getFileListing(new File(Common
-					.getCommon().getMoneteDir()), Common.COIN_END);
-			iterator = files.listIterator();
+		List<File> files = CollectionWorker.getCoinsFileListing();
+		iterator = files.listIterator();
 
-		} catch (FileNotFoundException ex) {
-			GestLog.Error(MonetaListModel.class, ex);
-		}
 		if (iterator == null)
 			return;
 

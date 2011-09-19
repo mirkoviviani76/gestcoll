@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
+import main.Common;
 import main.GestLog;
 
 import org.apache.commons.io.FileUtils;
@@ -95,6 +96,23 @@ public abstract class CollectionWorker extends Observable {
 		}
 		return res;
 	}
+	
+	/**
+	 * Ottiene l'elenco di tutti i file di monete
+	 * @return la lista o lista nulla nel caso di errore
+	 */
+	static public List<File> getCoinsFileListing() {
+		List<File> ret = null;
+		try {
+			ret = CollectionWorker.getFileListing(
+					new File(Common.getCommon().getMoneteDir()), Common.COIN_END);
+		} catch (FileNotFoundException e) {
+			GestLog.Error(CollectionWorker.class, e);
+		}
+		return ret;
+	}
+			
+
 
 	/**
 	 * Ottiene la lista dei file con un determinato pattern a partire da una dir

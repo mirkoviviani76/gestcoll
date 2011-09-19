@@ -26,8 +26,7 @@ public class Statistiche {
 		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
-		files = CollectionWorker.getFileListing(Common.getCommon()
-				.getMoneteDir(), Common.COIN_END);
+		files = CollectionWorker.getCoinsFileListing();
 		ListIterator<File> iterator = files.listIterator();
 
 		/* cicla su tutte le monete */
@@ -48,8 +47,7 @@ public class Statistiche {
 		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
-		files = CollectionWorker.getFileListing(Common.getCommon()
-				.getMoneteDir(), Common.COIN_END);
+		files = CollectionWorker.getCoinsFileListing();
 		ListIterator<File> iterator = files.listIterator();
 
 		/* cicla su tutte le monete */
@@ -72,8 +70,7 @@ public class Statistiche {
 		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
-		files = CollectionWorker.getFileListing(Common.getCommon()
-				.getMoneteDir(), Common.COIN_END);
+		files = CollectionWorker.getCoinsFileListing();
 		ListIterator<File> iterator = files.listIterator();
 
 		/* cicla su tutte le monete */
@@ -93,8 +90,7 @@ public class Statistiche {
 		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files;
-		files = CollectionWorker.getFileListing(Common.getCommon()
-				.getMoneteDir(), Common.COIN_END);
+		files = CollectionWorker.getCoinsFileListing();
 		ListIterator<File> iterator = files.listIterator();
 
 		/* cicla su tutte le monete */
