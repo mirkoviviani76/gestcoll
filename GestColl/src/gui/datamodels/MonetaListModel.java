@@ -9,13 +9,10 @@ import exceptions.XmlException;
 import gestXml.MonetaXml;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
-import main.Common;
-import main.GestLog;
 import main.Splash;
 import works.CollectionWorker;
 
