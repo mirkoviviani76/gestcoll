@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.TreeMap;
 
-import main.Common;
 import XmlData.Moneta.Misura;
 import exceptions.XmlException;
 import gestXml.MonetaXml;
