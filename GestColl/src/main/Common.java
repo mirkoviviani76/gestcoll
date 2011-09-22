@@ -7,9 +7,6 @@ package main;
 import gestXml.GestXml;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -160,7 +157,7 @@ public final class Common extends GestXml {
 	 * @return la dir
 	 */
 	public String getBackupDir() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getDirs().getBackupDir();
 		return null;
 	}
@@ -171,7 +168,7 @@ public final class Common extends GestXml {
 	 * @return la dir
 	 */
 	public String getBaseDir() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getDirs().getBaseDir();
 		return null;
 	}
@@ -182,7 +179,7 @@ public final class Common extends GestXml {
 	 * @return la dir
 	 */
 	public String getBibliotecaDir() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getDirs().getBibliotecaDir();
 		return null;
 	}
@@ -193,7 +190,7 @@ public final class Common extends GestXml {
 	 * @return il nome
 	 */
 	public String getBiblioXml() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getData().getBiblioXml();
 		return null;
 
@@ -205,7 +202,7 @@ public final class Common extends GestXml {
 	 * @return il nome
 	 */
 	public String getContattiXml() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getData().getContattiXml();
 		return null;
 	}
@@ -216,7 +213,7 @@ public final class Common extends GestXml {
 	 * @return il nome
 	 */
 	public String getContenitoriXml() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getData().getContenitoriXml();
 		return null;
 	}
@@ -227,7 +224,7 @@ public final class Common extends GestXml {
 	 * @return il nome del file
 	 */
 	public String getHistoryLog() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getLogs().getHistoryLog();
 		return null;
 	}
@@ -238,7 +235,7 @@ public final class Common extends GestXml {
 	 * @return la dir
 	 */
 	public String getHtmlDir() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getDirs().getHtmlDir();
 		return null;
 	}
@@ -249,7 +246,7 @@ public final class Common extends GestXml {
 	 * @return la dir
 	 */
 	public String getLatexDir() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getDirs().getLatexDir();
 		return null;
 	}
@@ -260,7 +257,7 @@ public final class Common extends GestXml {
 	 * @return il nome
 	 */
 	public String getLinksXml() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getData().getLinksXml();
 		return null;
 
@@ -272,14 +269,14 @@ public final class Common extends GestXml {
 	 * @return la dir
 	 */
 	public String getMoneteDir() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getDirs().getMoneteDir();
 		return null;
 
 	}
 	
 	public String getLogProperty() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getLogs().getLogProperty();
 		return null;
  
@@ -291,7 +288,7 @@ public final class Common extends GestXml {
 	 * @return la dir
 	 */
 	public String getQrDir() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getDirs().getQrDir();
 		return null;
 	}
@@ -302,7 +299,7 @@ public final class Common extends GestXml {
 	 * @return il nome
 	 */
 	public String getVoidMoneta() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getTemplates().getXmlMonetaVoidInstance();
 		return null;
 	}
@@ -313,7 +310,7 @@ public final class Common extends GestXml {
 	 * @return il file
 	 */
 	public String getXslHtml() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getTransformations().getXslHtml();
 		return null;
 	}
@@ -324,7 +321,7 @@ public final class Common extends GestXml {
 	 * @return il file
 	 */
 	public String getXslLatex() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getTransformations().getXslLatex();
 		return null;
 	}
@@ -335,14 +332,14 @@ public final class Common extends GestXml {
 	 * @return il file
 	 */
 	public String getXslTxt() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getTransformations().getXslTxt();
 		return null;
 
 	}
 
 	public String getTemplateDir() {
-		if (this.currentConfig != null)
+		if (this.isValidConfig())
 			return this.currentConfig.getDirs().getTemplateDir();
 		return null;
 	}
