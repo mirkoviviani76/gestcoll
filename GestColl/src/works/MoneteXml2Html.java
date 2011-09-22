@@ -83,6 +83,9 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 			throws FileNotFoundException, Exception {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = getFileListing(inDir, Common.COIN_END);
+		//crea la dir se non esiste
+		createPath(outDir);
+
 		ListIterator<File> iterator = files.listIterator();
 
 		String data = "";

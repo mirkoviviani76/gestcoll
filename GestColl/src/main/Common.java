@@ -99,7 +99,14 @@ public final class Common extends GestXml {
 	private XmlData.Configurations.Configurations configs;
 	private XmlData.Configurations.Configuration currentConfig;
 	
-	
+
+	/**
+	 * controlla se la configurazione scelta esiste nell'xml
+	 * @return true se ok, false altrimenti.
+	 */
+	public boolean isValidConfig() {
+		return (currentConfig == null ? false : true); 
+	}
 
 	/**
 	 * ottiene l'id della configurazione corrente

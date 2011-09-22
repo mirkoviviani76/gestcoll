@@ -25,7 +25,12 @@ public class Main {
 			System.err.println("Occorre specificare una configurazione presente in configurations.xml");
 			System.exit(-1);
 		}
-		Common.getCommon().setCurrentConfigId(args[0]);
+		String config = args[0];
+		Common.getCommon().setCurrentConfigId(config);
+		if (!Common.getCommon().isValidConfig()) {
+			System.err.println("Occorre specificare una configurazione presente in configurations.xml");
+			System.exit(-1);
+		}
 		/* setta il log manager (non sarebbe necessario, ma cosi' legge da file */
 		LogManager mn = LogManager.getLogManager();
 		try {

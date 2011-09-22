@@ -78,6 +78,9 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = getFileListing(inDir, Common.COIN_END);
 		Collections.sort(files);
+		//crea la dir se non esiste
+		createPath(outDir);
+
 
 		ListIterator<File> iterator = files.listIterator();
 

@@ -95,6 +95,9 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 			throws XmlException, XsltException, WriterException, IOException {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = getFileListing(inDir, Common.COIN_END);
+		//crea la dir se non esiste
+		createPath(outDir);
+		
 		ListIterator<File> iterator = files.listIterator();
 		int count = files.size();
 

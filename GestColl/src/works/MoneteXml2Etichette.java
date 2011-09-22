@@ -72,6 +72,9 @@ public class MoneteXml2Etichette extends CollectionWorker {
 
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = getFileListing(inDir, Common.COIN_END);
+		//crea la dir se non esiste
+		createPath(outDir);
+
 		ListIterator<File> iterator = files.listIterator();
 		int i = 1;
 		/* cicla su tutte le monete */
