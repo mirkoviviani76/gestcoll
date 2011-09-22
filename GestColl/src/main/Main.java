@@ -21,12 +21,16 @@ public class Main {
 	 *            gli argomenti passati da riga di comando
 	 */
 	public static void main(String[] args) {
+		if (args.length != 1) {
+			System.err.println("Occorre specificare una configurazione presente in configurations.xml");
+			System.exit(-1);
+		}
+		Common.getCommon().setCurrentConfigId(args[0]);
 		/* setta il log manager (non sarebbe necessario, ma cosi' legge da file */
 		LogManager mn = LogManager.getLogManager();
 		try {
 			// le proprieta' specificate prevedono logging su video e su file
-			FileInputStream fis = new FileInputStream(Common.getCommon()
-					.getDataDir() + "/" + "myLoggingProperties.properties");
+			FileInputStream fis = new FileInputStream(Common.getCommon().getLogProperty());
 			mn.readConfiguration(fis);
 		} catch (IOException ex) {
 			// NB: non posso scrivere su log, perche' si e' verificato un errore

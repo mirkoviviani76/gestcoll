@@ -151,6 +151,8 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 			ArrayList<CollectionWorker> works = new ArrayList<CollectionWorker>();
 			works.add(xml2tex);
 			works.add(xml2et);
+			System.out.println(Common.getCommon().getMoneteDir());
+			System.out.println(Common.getCommon().getLatexDir());
 			this.runInThread(works,
 					new File(Common.getCommon().getMoneteDir()), new File(
 							Common.getCommon().getLatexDir()), null);

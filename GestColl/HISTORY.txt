@@ -2,6 +2,8 @@ Metodologia versionamento (xx.yy.zz)
 xx : incrementato con l'aggiunta di nuove funzionalita' (major) (+10 in caso di super funzionalita')
 yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
+31.9
+il file di configurazione e' un xml, contenente configurazioni multiple. La configurazione va speficata da riga di comando.
 31.8.1
 aggiunta funzione per ottenere l'elenco dei file di monete 
 31.8

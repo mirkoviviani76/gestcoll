@@ -4,20 +4,29 @@
  */
 package main;
 
+import gestXml.GestXml;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 /**
  * Classe di utilita' per contenere le costanti comuni e gestire il file di ini.
  * 
  */
-public final class Common {
+public final class Common extends GestXml {
 
 	/** Nome dell'applicazione */
 	public static final String APPNAME = "GestColl";
 	/** versione del progetto */
-	public static final String VERSION = "31.8.1";
+	public static final String VERSION = "31.9";
+	
+	private String currentConfigId;
 	
 	
 	/**
@@ -57,7 +66,7 @@ public final class Common {
 	/**
 	 * Nome del file di ini
 	 */
-	public static final String INI_FILE = "GestColl.ini";
+	public static final String INI_FILE = "configurations.xml";
 
 	/**
 	 * estensioni file inutili/temporanei
@@ -85,24 +94,56 @@ public final class Common {
 		}
 		return istanza;
 	}
-
-	// Read properties file.
-	private Properties properties;
+	
+	
+	private XmlData.Configurations.Configurations configs;
+	private XmlData.Configurations.Configuration currentConfig;
+	
+	
 
 	/**
-	 * Legge il file ini GestColl.ini, posto nella directory del jar
+	 * ottiene l'id della configurazione corrente
+	 * @return l'id della configurazione
+	 */
+	public String getCurrentConfigId() {
+		return currentConfigId;
+	}
+
+	/**
+	 * indica la configurazione da utilizzare
+	 * @param currentConfigId la configurazione
+	 */
+	public void setCurrentConfigId(String currentConfigId) {
+		this.currentConfigId = currentConfigId;
+		this.currentConfig = null;
+		/* cerca la configurazione con l'id corretto */
+		for (XmlData.Configurations.Configuration config : this.configs.getConfiguration()) {
+			if (config.getId().equals(currentConfigId)) {
+				this.currentConfig = config;
+				break;
+			}
+		}
+			
+	}
+
+	/**
+	 * Legge il file xml configurations.xml, posto nella directory del jar
 	 */
 	private Common() {
-		super();
-		if (this.properties == null) {
-			try {
-				properties = new Properties();
-				properties.load(new FileInputStream(Common.INI_FILE));
-			} catch (IOException e) {
-				GestLog.Error(this.getClass(), e);
-				// esce dal sistema
-				System.exit(-1);
-			}
+		super(new File(Common.INI_FILE));
+		try {
+			this.currentConfigId = "";
+			JAXBContext jc = JAXBContext.newInstance("XmlData.Configurations");
+			Unmarshaller unmarshaller = jc.createUnmarshaller();
+			/* posso fare il cast perche' le classi contengono @XmlRootElement se
+			 * altrimenti si doveva fare JAXBElement<tipo> elem = (JAXBElement<tipo>)unmarshaller.unmarshal(xml)
+			 * xmllinks = elem.getValue();
+			 */
+			configs = (XmlData.Configurations.Configurations) unmarshaller.unmarshal(new File(Common.INI_FILE));
+		} catch (JAXBException e) {
+			GestLog.Error(this.getClass(), e);
+			// esce dal sistema
+			System.exit(-1);
 		}
 	}
 
@@ -112,7 +153,9 @@ public final class Common {
 	 * @return la dir
 	 */
 	public String getBackupDir() {
-		return this.properties.getProperty("BACKUP_DIR");
+		if (this.currentConfig != null)
+			return this.currentConfig.getDirs().getBackupDir();
+		return null;
 	}
 
 	/**
@@ -121,7 +164,9 @@ public final class Common {
 	 * @return la dir
 	 */
 	public String getBaseDir() {
-		return this.properties.getProperty("BASE_DIR");
+		if (this.currentConfig != null)
+			return this.currentConfig.getDirs().getBaseDir();
+		return null;
 	}
 
 	/**
@@ -130,7 +175,9 @@ public final class Common {
 	 * @return la dir
 	 */
 	public String getBibliotecaDir() {
-		return this.properties.getProperty("BIBLIOTECA_DIR");
+		if (this.currentConfig != null)
+			return this.currentConfig.getDirs().getBibliotecaDir();
+		return null;
 	}
 
 	/**
@@ -139,7 +186,10 @@ public final class Common {
 	 * @return il nome
 	 */
 	public String getBiblioXml() {
-		return this.properties.getProperty("BIBLIO_XML");
+		if (this.currentConfig != null)
+			return this.currentConfig.getData().getBiblioXml();
+		return null;
+
 	}
 
 	/**
@@ -148,7 +198,9 @@ public final class Common {
 	 * @return il nome
 	 */
 	public String getContattiXml() {
-		return this.properties.getProperty("CONTATTI_XML");
+		if (this.currentConfig != null)
+			return this.currentConfig.getData().getContattiXml();
+		return null;
 	}
 
 	/**
@@ -157,16 +209,9 @@ public final class Common {
 	 * @return il nome
 	 */
 	public String getContenitoriXml() {
-		return this.properties.getProperty("CONTENITORI_XML");
-	}
-
-	/**
-	 * ottiene la dir dei dati
-	 * 
-	 * @return la dir
-	 */
-	public String getDataDir() {
-		return this.properties.getProperty("DATA_DIR");
+		if (this.currentConfig != null)
+			return this.currentConfig.getData().getContenitoriXml();
+		return null;
 	}
 
 	/**
@@ -175,7 +220,9 @@ public final class Common {
 	 * @return il nome del file
 	 */
 	public String getHistoryLog() {
-		return this.properties.getProperty("HISTORY_LOG");
+		if (this.currentConfig != null)
+			return this.currentConfig.getLogs().getHistoryLog();
+		return null;
 	}
 
 	/**
@@ -184,7 +231,9 @@ public final class Common {
 	 * @return la dir
 	 */
 	public String getHtmlDir() {
-		return this.properties.getProperty("HTML_DIR");
+		if (this.currentConfig != null)
+			return this.currentConfig.getDirs().getHtmlDir();
+		return null;
 	}
 
 	/**
@@ -193,7 +242,9 @@ public final class Common {
 	 * @return la dir
 	 */
 	public String getLatexDir() {
-		return this.properties.getProperty("MONETE_DIR");
+		if (this.currentConfig != null)
+			return this.currentConfig.getDirs().getLatexDir();
+		return null;
 	}
 
 	/**
@@ -202,7 +253,10 @@ public final class Common {
 	 * @return il nome
 	 */
 	public String getLinksXml() {
-		return this.properties.getProperty("LINKS_XML");
+		if (this.currentConfig != null)
+			return this.currentConfig.getData().getLinksXml();
+		return null;
+
 	}
 
 	/**
@@ -211,7 +265,17 @@ public final class Common {
 	 * @return la dir
 	 */
 	public String getMoneteDir() {
-		return this.properties.getProperty("MONETE_DIR");
+		if (this.currentConfig != null)
+			return this.currentConfig.getDirs().getMoneteDir();
+		return null;
+
+	}
+	
+	public String getLogProperty() {
+		if (this.currentConfig != null)
+			return this.currentConfig.getLogs().getLogProperty();
+		return null;
+ 
 	}
 
 	/**
@@ -220,16 +284,9 @@ public final class Common {
 	 * @return la dir
 	 */
 	public String getQrDir() {
-		return this.properties.getProperty("QR_DIR");
-	}
-
-	/**
-	 * Ottiene la dir dei template
-	 * 
-	 * @return la dir
-	 */
-	public String getTemplateDir() {
-		return this.properties.getProperty("TEMPLATE_DIR");
+		if (this.currentConfig != null)
+			return this.currentConfig.getDirs().getQrDir();
+		return null;
 	}
 
 	/**
@@ -238,7 +295,9 @@ public final class Common {
 	 * @return il nome
 	 */
 	public String getVoidMoneta() {
-		return this.properties.getProperty("XML_MONETA_VOID_INSTANCE");
+		if (this.currentConfig != null)
+			return this.currentConfig.getTemplates().getXmlMonetaVoidInstance();
+		return null;
 	}
 
 	/**
@@ -247,7 +306,9 @@ public final class Common {
 	 * @return il file
 	 */
 	public String getXslHtml() {
-		return this.properties.getProperty("XSL_HTML");
+		if (this.currentConfig != null)
+			return this.currentConfig.getTransformations().getXslHtml();
+		return null;
 	}
 
 	/**
@@ -256,7 +317,9 @@ public final class Common {
 	 * @return il file
 	 */
 	public String getXslLatex() {
-		return this.properties.getProperty("XSL_LATEX");
+		if (this.currentConfig != null)
+			return this.currentConfig.getTransformations().getXslLatex();
+		return null;
 	}
 
 	/**
@@ -265,7 +328,16 @@ public final class Common {
 	 * @return il file
 	 */
 	public String getXslTxt() {
-		return this.properties.getProperty("XSL_TXT");
+		if (this.currentConfig != null)
+			return this.currentConfig.getTransformations().getXslTxt();
+		return null;
+
+	}
+
+	public String getTemplateDir() {
+		if (this.currentConfig != null)
+			return this.currentConfig.getDirs().getTemplateDir();
+		return null;
 	}
 
 }

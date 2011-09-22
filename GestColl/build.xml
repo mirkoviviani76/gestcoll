@@ -85,6 +85,8 @@
     <copy file="${externallib.dir}/jcommon-1.0.16.jar" todir="${lib.dir}"/>
 	<copy file="${externallib.dir}/QRCreator.jar" todir="${lib.dir}"/>
   	<copy file="${externallib.dir}/QRcore.jar" todir="${lib.dir}"/>
+  	
+  	<copy file="extra/configurations.xml" todir="${jar.dir}"/>
     
   </target>    
 

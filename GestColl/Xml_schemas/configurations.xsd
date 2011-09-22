@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+targetNamespace="http://gestColl/configurations" elementFormDefault="qualified" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:tns="http://gestColl/configurations">
+
+	<xsd:annotation>
+		<xsd:documentation>Configurazioni</xsd:documentation>
+		<xsd:appinfo>v.0.1</xsd:appinfo>
+	</xsd:annotation>
+
+	<xsd:complexType name="dirs">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce un elenco di dirs</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element minOccurs="1" maxOccurs="1" name="base_dir" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="monete_dir" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="backup_dir" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="template_dir" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="biblioteca_dir" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="html_dir" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="latex_dir" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="qr_dir" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="transformations">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce un elenco di trasformazioni xsl</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element minOccurs="1" maxOccurs="1" name="xsl_latex" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="xsl_html" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="xsl_txt" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="templates">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce un elenco di template</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element minOccurs="1" maxOccurs="1" name="xml_moneta_void_instance" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="data">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce un elenco di dati</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element minOccurs="1" maxOccurs="1" name="contenitori_xml" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="contatti_xml" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="links_xml" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="biblio_xml" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="logs">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce un elenco di logs</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element minOccurs="1" maxOccurs="1" name="history_log" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="log_property" type="xsd:string" />
+		</xsd:all>
+	</xsd:complexType>
+
+	
+	<xsd:complexType name="configuration">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="dirs" type="tns:dirs"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="transformations" type="tns:transformations"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="templates" type="tns:templates"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="data" type="tns:data"/>
+			<xsd:element maxOccurs="1" minOccurs="1" name="logs" type="tns:logs"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string" use="required" />
+	</xsd:complexType>
+	
+
+
+	<xsd:element name="configurations">
+		<xsd:annotation>
+			<xsd:documentation>Configurazioni per GestColl</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="unbounded" minOccurs="1" name="configuration" type="tns:configuration"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
+
+
