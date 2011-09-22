@@ -14,9 +14,7 @@
 	<ambito>Guerra dei trenta anni</ambito>
 </ambiti>
 
-- check delle directory di report: se non ci sono, vanno create.
 - check dei files necessari: se non ci sono segnalare l'errore.
-- l'xsl di html non funziona
 
 - sistemare lo schema moneta con i namespace giusti (comporta la modifica a TUTTI gli xml)
 

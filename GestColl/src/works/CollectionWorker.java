@@ -71,6 +71,15 @@ public abstract class CollectionWorker extends Observable {
 
 		return count;
 	}
+	
+	/**
+	 * Crea un path, costruendo l'albero se non esiste
+	 * @param path il path
+	 * @throws IOException 
+	 */
+	static public synchronized void createPath(File path) throws IOException {
+		FileUtils.forceMkdir(path);
+	}
 
 	/**
 	 * Recursively walk a directory tree and return a List of all Files found;
