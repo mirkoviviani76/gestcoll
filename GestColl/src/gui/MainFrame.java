@@ -299,7 +299,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jToolBar1.setRollover(true);
 
 		jBGestMonete.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/img/CoinIcon.png"))); // NOI18N
+				"/Resources/img/CoinIcon.png"))); // NOI18N
 		jBGestMonete.setMnemonic('M');
 		jBGestMonete.setText("Monete"); // NOI18N
 		jBGestMonete.setToolTipText("Gestione monete");
@@ -307,7 +307,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jToolBar1.add(jBGestMonete);
 
 		jBGestLibri.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/img/BookIcon.png"))); // NOI18N
+				"/Resources/img/BookIcon.png"))); // NOI18N
 		jBGestLibri.setMnemonic('B');
 		jBGestLibri.setText("Biblioteca"); // NOI18N
 		jBGestLibri.setFocusable(false);
@@ -315,7 +315,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jToolBar1.add(jBGestLibri);
 
 		jBGestContatti.setIcon(new javax.swing.ImageIcon(getClass()
-				.getResource("/img/Mail.png"))); // NOI18N
+				.getResource("/Resources/img/Mail.png"))); // NOI18N
 		jBGestContatti.setText("Contatti");
 		jBGestContatti.setFocusable(false);
 		jBGestContatti.setMaximumSize(new java.awt.Dimension(85, 37));
@@ -324,7 +324,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jToolBar1.add(jBGestContatti);
 
 		jBGestLinks.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/img/internet.png"))); // NOI18N
+				"/Resources/img/internet.png"))); // NOI18N
 		jBGestLinks.setText("Link");
 		jBGestLinks.setFocusable(false);
 		jBGestLinks.setMaximumSize(new java.awt.Dimension(85, 37));
@@ -333,7 +333,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jToolBar1.add(jBGestLinks);
 
 		jBStatistiche.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/img/statistiche.png"))); // NOI18N
+				"/Resources/img/statistiche.png"))); // NOI18N
 		jBStatistiche.setText("Statistiche");
 		jBStatistiche.setFocusable(false);
 		jBStatistiche
@@ -380,12 +380,12 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jMStrumenti.add(jSeparator4);
 
 		jMIDelTemp.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/img/GreenTrashbinIcon.png"))); // NOI18N
+				"/Resources/img/GreenTrashbinIcon.png"))); // NOI18N
 		jMIDelTemp.setText("Rimuovi temporanei");
 		jMStrumenti.add(jMIDelTemp);
 
 		jMIDelAll.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/img/YellowTrashbinIcon.png"))); // NOI18N
+				"/Resources/img/YellowTrashbinIcon.png"))); // NOI18N
 		jMIDelAll.setText("Rimuovi pdf e qr");
 		jMStrumenti.add(jMIDelAll);
 

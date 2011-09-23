@@ -39,7 +39,7 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	/**
      *
      */
-	public static final String OUTFILE_ET = "/works/templates/etichette.tex.template";
+	public static final String OUTFILE_ET = "/Resources/templates/etichette.tex.template";
 
 	/**
 	 * 

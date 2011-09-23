@@ -33,10 +33,10 @@ import gestXml.MonetaXml;
  */
 public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 
-	private static final String POSIZIONI = "/works/templates/posizioni.tex.template";
-	public static final String COLLEZIONE_TEX = "/works/templates/Collezione.tex.template";
+	private static final String POSIZIONI = "/Resources/templates/posizioni.tex.template";
+	public static final String COLLEZIONE_TEX = "/Resources/templates/Collezione.tex.template";
 	
-	private static final String XSL_FILE = "/works/Xsl_tranformations/schedaLaTeX.xsl";
+	private static final String XSL_FILE = "/Resources/Xsl_tranformations/schedaLaTeX.xsl";
 
 	/**
 	 * 
