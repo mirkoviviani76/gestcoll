@@ -22,6 +22,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import main.Common;
+
 import exceptions.InternalGestCollError;
 import exceptions.XmlException;
 import exceptions.XsltException;
@@ -87,21 +89,6 @@ public class GestXml {
 	}
 	
 	/**
-	 * Ottiene l'inputstream della risorsa (dentro il jar)
-	 * @param id
-	 * @return lo stream
-	 * @throws InternalGestCollError nel caso la risorsa non sia stata trovata
-	 */
-	private InputStream getResource(String id) throws InternalGestCollError {
-		/* ottiene la risorsa xsl */
-		InputStream ret = getClass().getResourceAsStream(id);
-		if (ret == null) {
-			throw new InternalGestCollError("getResource() cannot find resource");
-		}
-		return ret;
-	}
-
-	/**
 	 * Converte in stringa utilizzando un xslt
 	 * 
 	 * @param xsltResourceLocation
@@ -112,7 +99,7 @@ public class GestXml {
 	 */
 	public String xsltConvert(String xsltResourceLocation) throws XsltException, InternalGestCollError {
 		/* ottiene la risorsa xsl */
-		InputStream resource = this.getResource(xsltResourceLocation);
+		InputStream resource = Common.getCommon().getResource(xsltResourceLocation);
 
 		StringWriter strWriter = new StringWriter();
 		TransformerFactory tFactory = TransformerFactory.newInstance();
@@ -141,7 +128,7 @@ public class GestXml {
 	 */
 	public void xsltConvert(String xsltResourceLocation, File outFile) throws XsltException, InternalGestCollError {
 		/* ottiene la risorsa xsl */
-		InputStream resource = this.getResource(xsltResourceLocation);
+		InputStream resource = Common.getCommon().getResource(xsltResourceLocation);
 
 		TransformerFactory tFactory = TransformerFactory.newInstance();
 		try {

@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -22,6 +23,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.persistence.tools.file.FileUtil;
+
+import exceptions.InternalGestCollError;
 
 /**
  * Recursive file listing under a specified directory.
@@ -38,24 +42,19 @@ public final class GenericUtil {
 	 * Riempie un template. Copia il file template in outFile e effettua le
 	 * modifiche.
 	 * 
-	 * @param template
-	 *            il file sorgente
+	 * @param in
+	 *            il template
 	 * @param outFile
 	 *            il file destinazione
 	 * @param conversione
 	 *            una lista di {marker, sostituzione}
 	 * @throws IOException
 	 */
-	public static void fillTemplate(String template, String outFile,
+	public static void fillTemplate(InputStream in, String outFile,
 			String[][] conversione) throws IOException {
-		File source = new File(template);
-		if (source.exists()) {
-			FileUtils.copyFile(source, new File(outFile));
-			GenericUtil.replaceInFile(new File(outFile), conversione);
-		} else {
-			GestLog.Error(GenericUtil.class, "fillTemplate",
-					"Il file instance.xml.template non esiste");
-		}
+		FileOutputStream out = new FileOutputStream(outFile);
+		FileUtil.copy(in, out);
+		GenericUtil.replaceInFile(new File(outFile), conversione);
 	}
 
 	/**
@@ -150,5 +149,6 @@ public final class GenericUtil {
 		osw.close();
 		fw.close();
 	}
+	
 
 }

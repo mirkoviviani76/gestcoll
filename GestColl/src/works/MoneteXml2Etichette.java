@@ -7,6 +7,7 @@ package works;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
@@ -16,6 +17,7 @@ import main.GenericUtil;
 import main.Message;
 import main.Progress;
 import XmlData.Moneta.Zecca;
+import exceptions.InternalGestCollError;
 import exceptions.XmlException;
 import gestXml.ContenitoriXml;
 import gestXml.MonetaXml;
@@ -37,7 +39,7 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	/**
      *
      */
-	public static final String OUTFILE_ET = "etichette.tex";
+	public static final String OUTFILE_ET = "/works/templates/etichette.tex.template";
 
 	/**
 	 * 
@@ -56,10 +58,11 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	 * @param params
 	 * @throws XmlException
 	 * @throws IOException
+	 * @throws InternalGestCollError 
 	 */
 	@Override
 	public Object[] doWork(File inDir, File outDir, Object[] params)
-			throws XmlException, IOException {
+			throws XmlException, IOException, InternalGestCollError {
 		String etichetteA = "";
 		String etichetteB = "";
 		String etichetteC = "";
@@ -123,8 +126,8 @@ public class MoneteXml2Etichette extends CollectionWorker {
 				{ MARKER_QRB, qrB }, { MARKER_QRC, qrC }, { MARKER_QRD, qrD } };
 
 		/* aggiorna il template */
-		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/"
-				+ OUTFILE_ET + Common.TEMPLATE_END, outDir + "/" + OUTFILE_ET,
+		InputStream is = Common.getCommon().getResource(OUTFILE_ET);
+		GenericUtil.fillTemplate(is, outDir + "/" + "etichette.tex",
 				conversione);
 
 		Message m = new Message("Etichette.tex creati", Level.INFO);

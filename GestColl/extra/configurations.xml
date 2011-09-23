@@ -8,15 +8,11 @@
 				<base_dir>D:/mieProve/Java/GestColl/GestColl</base_dir>
 				<monete_dir>D:/mieProve/Java/GestColl/Monete</monete_dir>
 				<backup_dir>D:/mieProve/Java/GestColl/Backup</backup_dir>
-				<template_dir>D:/mieProve/Java/GestColl/bin/template</template_dir>
 				<biblioteca_dir>D:/mieProve/Java/GestColl/Biblioteca</biblioteca_dir>
 				<html_dir>D:/mieProve/Java/GestColl/Reports/Html</html_dir>
 				<latex_dir>D:/mieProve/Java/GestColl/Reports/LaTeX</latex_dir>
 				<qr_dir>D:/mieProve/Java/GestColl/Reports/QR</qr_dir>
 		</dirs>
-		<templates>
-				<xml_moneta_void_instance>D:/mieProve/Java/GestColl/bin/template/instance.xml.template</xml_moneta_void_instance>
-		</templates>
 		<data>
 				<contenitori_xml>D:/mieProve/Java/GestColl/bin/data/contenitori.xml</contenitori_xml>
 				<contatti_xml>D:/mieProve/Java/GestColl/bin/data/contatti.xml</contatti_xml>
@@ -33,15 +29,11 @@
 				<base_dir>/dati/Collezione/bin</base_dir>
 				<monete_dir>/dati/Collezione/Monete</monete_dir>
 				<backup_dir>/dati/Collezione/Backup</backup_dir>
-				<template_dir>/dati/Collezione/bin/template/template</template_dir>
 				<biblioteca_dir>/dati/Collezione/Biblioteca</biblioteca_dir>
 				<html_dir>/dati/Collezione/Reports/Html</html_dir>
 				<latex_dir>/dati/Collezione/Reports/LaTeX</latex_dir>
 				<qr_dir>/dati/Collezione/Reports/QR</qr_dir>
 		</dirs>
-		<templates>
-				<xml_moneta_void_instance>/dati/Collezione/bin/template/instance.xml.template</xml_moneta_void_instance>
-		</templates>
 		<data>
 				<contenitori_xml>/dati/Collezione/bin/data/contenitori.xml</contenitori_xml>
 				<contatti_xml>/dati/Collezione/bin/data/contatti.xml</contatti_xml>
