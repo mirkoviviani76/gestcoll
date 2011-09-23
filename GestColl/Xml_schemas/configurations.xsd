@@ -25,17 +25,6 @@ xmlns:tns="http://gestColl/configurations">
 		</xsd:all>
 	</xsd:complexType>
 
-	<xsd:complexType name="transformations">
-		<xsd:annotation>
-			<xsd:documentation>Tipo che definisce un elenco di trasformazioni xsl</xsd:documentation>
-		</xsd:annotation>
-		<xsd:all>
-			<xsd:element minOccurs="1" maxOccurs="1" name="xsl_latex" type="xsd:string" />
-			<xsd:element minOccurs="1" maxOccurs="1" name="xsl_html" type="xsd:string" />
-			<xsd:element minOccurs="1" maxOccurs="1" name="xsl_txt" type="xsd:string" />
-		</xsd:all>
-	</xsd:complexType>
-
 	<xsd:complexType name="templates">
 		<xsd:annotation>
 			<xsd:documentation>Tipo che definisce un elenco di template</xsd:documentation>
@@ -71,7 +60,6 @@ xmlns:tns="http://gestColl/configurations">
 	<xsd:complexType name="configuration">
 		<xsd:sequence>
 			<xsd:element maxOccurs="1" minOccurs="1" name="dirs" type="tns:dirs"/>
-			<xsd:element maxOccurs="1" minOccurs="1" name="transformations" type="tns:transformations"/>
 			<xsd:element maxOccurs="1" minOccurs="1" name="templates" type="tns:templates"/>
 			<xsd:element maxOccurs="1" minOccurs="1" name="data" type="tns:data"/>
 			<xsd:element maxOccurs="1" minOccurs="1" name="logs" type="tns:logs"/>

@@ -7,6 +7,7 @@ package works;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import exceptions.InternalGestCollError;
 import exceptions.XmlException;
 import exceptions.XsltException;
 import gestXml.MonetaXml;
@@ -32,6 +34,9 @@ import gestXml.MonetaXml;
  */
 public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 
+	
+	private static final String XSL_FILE = "/works/Xsl_tranformations/schedaTxt.xsl";
+	
 	/**
 	 * genera un codice qr contenente la stringa data
 	 * 
@@ -68,12 +73,14 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	 * @throws XsltException
 	 * @throws IOException
 	 * @throws WriterException
+	 * @throws InternalGestCollError 
 	 */
 	@Override
 	public File convert(MonetaXml mng, File outDir) throws XsltException,
-			WriterException, IOException {
+			WriterException, IOException, InternalGestCollError {
 		File out = new File(outDir + "/" + mng.getId() + ".png");
-		String dati = mng.xsltConvert(new File(Common.getCommon().getXslTxt()));
+
+		String dati = mng.xsltConvert(XSL_FILE);
 		MoneteXml2QR.encode(dati, out);
 		return out;
 	}
@@ -89,10 +96,11 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	 * @throws IOException
 	 * @throws WriterException
 	 * @throws XsltException
+	 * @throws InternalGestCollError 
 	 */
 	@Override
 	public Object[] doWork(File inDir, File outDir, Object[] params)
-			throws XmlException, XsltException, WriterException, IOException {
+			throws XmlException, XsltException, WriterException, IOException, InternalGestCollError {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = getFileListing(inDir, Common.COIN_END);
 		//crea la dir se non esiste

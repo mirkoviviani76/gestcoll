@@ -8,7 +8,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.URL;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -20,6 +22,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import exceptions.InternalGestCollError;
 import exceptions.XmlException;
 import exceptions.XsltException;
 
@@ -82,21 +85,40 @@ public class GestXml {
 		}
 
 	}
+	
+	/**
+	 * Ottiene l'inputstream della risorsa (dentro il jar)
+	 * @param id
+	 * @return lo stream
+	 * @throws InternalGestCollError nel caso la risorsa non sia stata trovata
+	 */
+	private InputStream getResource(String id) throws InternalGestCollError {
+		/* ottiene la risorsa xsl */
+		InputStream ret = getClass().getResourceAsStream(id);
+		if (ret == null) {
+			throw new InternalGestCollError("getResource() cannot find resource");
+		}
+		return ret;
+	}
 
 	/**
 	 * Converte in stringa utilizzando un xslt
 	 * 
-	 * @param xslt
-	 *            il foglio xslt utilizzato per la conversione
+	 * @param xsltResourceLocation
+	 *            foglio xslt utilizzato per la conversione
 	 * @return la stringa con la conversione effettuata
 	 * @throws XsltException
+	 * @throws InternalGestCollError 
 	 */
-	public String xsltConvert(File xslt) throws XsltException {
+	public String xsltConvert(String xsltResourceLocation) throws XsltException, InternalGestCollError {
+		/* ottiene la risorsa xsl */
+		InputStream resource = this.getResource(xsltResourceLocation);
+
 		StringWriter strWriter = new StringWriter();
 		TransformerFactory tFactory = TransformerFactory.newInstance();
 		Transformer transformer;
 		try {
-			transformer = tFactory.newTransformer(new StreamSource(xslt));
+			transformer = tFactory.newTransformer(new StreamSource(resource));
 			transformer.transform(new StreamSource(this.xmlFile),
 					new StreamResult(strWriter));
 		} catch (TransformerConfigurationException e) {
@@ -110,18 +132,21 @@ public class GestXml {
 	/**
 	 * Converte utilizzando un xslt
 	 * 
-	 * @param xslt
-	 *            il foglio xslt utilizzato per la conversione
+	 * @param xsltResourceLocation
+	 *            locazione della risora del foglio xslt utilizzato per la conversione
 	 * @param outFile
 	 *            il file di output generato
 	 * @throws XsltException
+	 * @throws InternalGestCollError 
 	 */
-	public void xsltConvert(File xslt, File outFile) throws XsltException {
-		TransformerFactory tFactory = TransformerFactory.newInstance();
+	public void xsltConvert(String xsltResourceLocation, File outFile) throws XsltException, InternalGestCollError {
+		/* ottiene la risorsa xsl */
+		InputStream resource = this.getResource(xsltResourceLocation);
 
+		TransformerFactory tFactory = TransformerFactory.newInstance();
 		try {
 			Transformer transformer = tFactory.newTransformer(new StreamSource(
-					xslt));
+					resource));
 			transformer.transform(new StreamSource(this.xmlFile),
 					new StreamResult(new FileOutputStream(outFile)));
 		} catch (TransformerConfigurationException e) {

@@ -24,7 +24,6 @@
   	    name="externallib.dir"
   		location="../libraries" />
 	
-	
   <path id="gestcoll-classpath-id">
 	    <pathelement location="${externallib.dir}"/>
   </path>

@@ -7,6 +7,7 @@ package works;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
@@ -20,6 +21,7 @@ import main.Progress;
 import org.apache.commons.io.FileUtils;
 
 import XmlData.Moneta.DocumentoAddizionale;
+import exceptions.InternalGestCollError;
 import exceptions.XmlException;
 import exceptions.XsltException;
 import gestXml.MonetaXml;
@@ -32,6 +34,8 @@ import gestXml.MonetaXml;
 public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 
 	private static final String POSIZIONI = "posizioni.tex";
+	
+	private static final String XSL_FILE = "/works/Xsl_tranformations/schedaLaTeX.xsl";
 
 	/**
 	 * 
@@ -50,13 +54,15 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 	 * @throws XsltException
 	 * @throws IOException
 	 * @throws FileNotFoundException
+	 * @throws InternalGestCollError 
 	 */
 	@Override
 	public File convert(MonetaXml mng, File outDir) throws XsltException,
-			FileNotFoundException, IOException {
+			FileNotFoundException, IOException, InternalGestCollError {
 		/* prepara il file di output */
 		File out = new File(outDir + "/" + mng.getId() + ".tex");
-		mng.xsltConvert(new File(Common.getCommon().getXslLatex()), out);
+
+		mng.xsltConvert(XSL_FILE, out);
 		String[][] conversione = { { "&", "\\\\&" } };
 		GenericUtil.replaceInFile(out, conversione);
 		return out;
@@ -71,10 +77,11 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 	 * @throws XmlException
 	 * @throws IOException
 	 * @throws XsltException
+	 * @throws InternalGestCollError 
 	 */
 	@Override
 	public Object[] doWork(File inDir, File outDir, Object[] params)
-			throws XmlException, XsltException, IOException {
+			throws XmlException, XsltException, IOException, InternalGestCollError {
 		/* ottiene l'elenco di tutte le monete */
 		List<File> files = getFileListing(inDir, Common.COIN_END);
 		Collections.sort(files);
