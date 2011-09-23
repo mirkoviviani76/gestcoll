@@ -22,10 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.apache.commons.io.FileUtils;
 import org.eclipse.persistence.tools.file.FileUtil;
-
-import exceptions.InternalGestCollError;
 
 /**
  * Recursive file listing under a specified directory.
