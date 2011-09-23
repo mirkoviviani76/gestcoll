@@ -33,9 +33,9 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 
 	
 	
-	private static final String XSL_FILE = "/works/Xsl_tranformations/schedaHtml.xsl";
-	private static final String INDEX_HTML_FILE = "/works/templates/index.html.template";
-	private static final String OUTFILE_MONETE = "/works/templates/Monete.html.template";
+	private static final String XSL_FILE = "/Resources/Xsl_tranformations/schedaHtml.xsl";
+	private static final String INDEX_HTML_FILE = "/Resources/templates/index.html.template";
+	private static final String OUTFILE_MONETE = "/Resources/templates/Monete.html.template";
 
 	/**
 	 * 

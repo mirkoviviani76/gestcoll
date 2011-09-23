@@ -34,7 +34,7 @@ import gestXml.MonetaXml;
 public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 
 	
-	private static final String XSL_FILE = "/works/Xsl_tranformations/schedaTxt.xsl";
+	private static final String XSL_FILE = "/Resources/Xsl_tranformations/schedaTxt.xsl";
 	
 	/**
 	 * genera un codice qr contenente la stringa data

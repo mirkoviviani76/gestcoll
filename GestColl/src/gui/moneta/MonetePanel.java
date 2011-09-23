@@ -62,7 +62,7 @@ import gui.moneta.forms.AddMonetaForm;
 public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		ActionListener {
 
-	private final static String NEW_MONETA_TEMPLATE = "/works/templates/instance.xml.template";
+	private final static String NEW_MONETA_TEMPLATE = "/Resources/templates/instance.xml.template";
 	
 	private final static String ORDER_BY_ID = "Ordina per ID";
 	private final static String ORDER_BY_PAESE = "Ordina per Paese";
@@ -506,7 +506,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jToolBar1.add(jSeparator2);
 
 		jTBEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/img/EditIcon.png"))); // NOI18N
+				"/Resources/img/EditIcon.png"))); // NOI18N
 		jTBEdit.setMnemonic('E');
 		jTBEdit.setText("Edit");
 		jTBEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -516,7 +516,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jToolBar1.add(jTBEdit);
 
 		jBSalva.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/img/SaveIcon.png"))); // NOI18N
+				"/Resources/img/SaveIcon.png"))); // NOI18N
 		jBSalva.setMnemonic('S');
 		jBSalva.setText("Salva");
 		jBSalva.setEnabled(false);
