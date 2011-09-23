@@ -5,15 +5,11 @@
 
 package works;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
@@ -23,7 +19,6 @@ import main.GenericUtil;
 import main.Message;
 import main.Progress;
 
-import org.apache.commons.io.FileUtils;
 import org.eclipse.persistence.tools.file.FileUtil;
 
 import exceptions.InternalGestCollError;
