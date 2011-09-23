@@ -4,9 +4,11 @@
  */
 package main;
 
+import exceptions.InternalGestCollError;
 import gestXml.GestXml;
 
 import java.io.File;
+import java.io.InputStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -50,10 +52,6 @@ public final class Common extends GestXml {
 	 */
 	public static final String[] COIN_END = { "xml" };
 
-	/**
-	 * nome del file tex per generare il pdf con la collezione
-	 */
-	public static final String COLLEZIONE_TEX = "Collezione.tex";
 
 	/**
 	 * formato data per xml
@@ -292,22 +290,23 @@ public final class Common extends GestXml {
 			return this.currentConfig.getDirs().getQrDir();
 		return null;
 	}
+	
 
 	/**
-	 * Ottiene il nome del template xml di moneta
-	 * 
-	 * @return il nome
+	 * Ottiene l'inputstream della risorsa (dentro il jar)
+	 * @param id
+	 * @return lo stream
+	 * @throws InternalGestCollError nel caso la risorsa non sia stata trovata
 	 */
-	public String getVoidMoneta() {
-		if (this.isValidConfig())
-			return this.currentConfig.getTemplates().getXmlMonetaVoidInstance();
-		return null;
+	public InputStream getResource(String id) throws InternalGestCollError {
+		/* ottiene la risorsa xsl */
+		InputStream ret = getClass().getResourceAsStream(id);
+		if (ret == null) {
+			throw new InternalGestCollError("getResource() cannot find resource");
+		}
+		return ret;
 	}
+		
 
-	public String getTemplateDir() {
-		if (this.isValidConfig())
-			return this.currentConfig.getDirs().getTemplateDir();
-		return null;
-	}
 
 }

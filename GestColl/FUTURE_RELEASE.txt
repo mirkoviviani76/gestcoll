@@ -1,3 +1,5 @@
+- salvare qualche nome di file in una costante (es. index.html)
+
 - wiki?
 
 - pagina che visualizzi sigla -> libro (magari da integrare con la scheda moneta...)

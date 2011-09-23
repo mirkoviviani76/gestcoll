@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Collezione</title>
+<link rel="stylesheet" type="text/css" href="../../bin/data/report.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<div id='collezione_header' class='collezione_header'><h1>Collezione</h1></div> <!-- fine collezione_header -->
+<div id='collezione_content' class='collezione_content'>
+<table>
+<tr><td><a href='Monete.html'>Monete.html</a></td></tr>
+</table>
+</div> <!-- fine collezione_content -->
+<div id='collezione_footer' class='collezione_footer'>
+<small>(C) Mirko Viviani<br/>Generato il TODO</small>
+</div> <!-- fine collezione_footer -->
+</body>
+</html>

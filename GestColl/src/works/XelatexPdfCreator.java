@@ -24,6 +24,7 @@ import main.Progress;
 public class XelatexPdfCreator extends CollectionWorker {
 
 	private static final String COMMAND_STRING = "xelatex -halt-on-error ";
+	public static final String COLLEZIONE_TEX = "Collezione.tex";
 
 	/**
 	 * Costruttore
@@ -37,7 +38,7 @@ public class XelatexPdfCreator extends CollectionWorker {
 
 	private void creaCollezione(File outDir) throws IOException,
 			InterruptedException {
-		String inFile = Common.COLLEZIONE_TEX;
+		String inFile = COLLEZIONE_TEX;
 		File cur = new File(Common.getCommon().getLatexDir() + "/" + inFile);
 		if (cur.exists()) {
 			/* esegue la conversione a pdf */

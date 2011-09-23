@@ -5,10 +5,14 @@
 
 package works;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ListIterator;
@@ -20,6 +24,7 @@ import main.Message;
 import main.Progress;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.persistence.tools.file.FileUtil;
 
 import exceptions.InternalGestCollError;
 import exceptions.XsltException;
@@ -31,9 +36,11 @@ import gestXml.MonetaXml;
  */
 public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 
-	private static final String OUTFILE_MONETE = "Monete.html";
+	
 	
 	private static final String XSL_FILE = "/works/Xsl_tranformations/schedaHtml.xsl";
+	private static final String INDEX_HTML_FILE = "/works/templates/index.html.template";
+	private static final String OUTFILE_MONETE = "/works/templates/Monete.html.template";
 
 	/**
 	 * 
@@ -66,12 +73,13 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	 * 
 	 * @param destDir
 	 * @throws IOException
+	 * @throws InternalGestCollError 
 	 */
-	private void copyIndex(File destDir) throws IOException {
+	private void copyIndex(File destDir) throws IOException, InternalGestCollError {
 		if (!(new File(destDir + "/" + "index.html")).exists()) {
-			FileUtils.copyFile(new File(Common.getCommon().getTemplateDir()
-					+ "/" + "index.html.template"), new File(destDir + "/"
-					+ "index.html"));
+			InputStream in = Common.getCommon().getResource(INDEX_HTML_FILE);
+			FileOutputStream out = new FileOutputStream(destDir + "/" + "index.html");
+			FileUtil.copy(in, out);
 		}
 	}
 
@@ -134,9 +142,10 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 
 		String[][] conversione = { { "%DATA", data } };
 		/* crea il file di output usando il template */
-		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/"
-				+ OUTFILE_MONETE + Common.TEMPLATE_END, outDir + "/"
-				+ OUTFILE_MONETE, conversione);
+		
+		InputStream is = Common.getCommon().getResource(OUTFILE_MONETE);
+		GenericUtil.fillTemplate(is, outDir + "/"
+				+ "Monete.html", conversione);
 
 		/* copia il file index.html */
 		this.copyIndex(outDir);

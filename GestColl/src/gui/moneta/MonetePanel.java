@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,6 +44,7 @@ import works.MoneteXml2Html;
 import works.MoneteXml2QR;
 import works.MoneteXml2Tex;
 import works.XelatexPdfCreator;
+import exceptions.InternalGestCollError;
 import exceptions.XmlException;
 import gestXml.ContenitoriXml;
 import gestXml.MonetaXml;
@@ -60,6 +62,8 @@ import gui.moneta.forms.AddMonetaForm;
 public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		ActionListener {
 
+	private final static String NEW_MONETA_TEMPLATE = "/works/templates/instance.xml.template";
+	
 	private final static String ORDER_BY_ID = "Ordina per ID";
 	private final static String ORDER_BY_PAESE = "Ordina per Paese";
 	private final static String ORDER_BY_REVISIONE = "Ordina per Revisione";
@@ -164,6 +168,8 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 			try {
 				this.addMoneta();
 			} catch (XmlException e) {
+				GestLog.Error(this.getClass(), e);
+			} catch (InternalGestCollError e) {
 				GestLog.Error(this.getClass(), e);
 			}
 		} else if (ae.getSource() == jButtonTex2Pdf) {
@@ -281,8 +287,9 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	 * Aggiunge una moneta, creando una directory e un file xml pronto per
 	 * l'editing 
 	 * @throws XmlException
+	 * @throws InternalGestCollError 
 	 */
-	private void addMoneta() throws XmlException {
+	private void addMoneta() throws XmlException, InternalGestCollError {
 		AddMonetaForm am = new AddMonetaForm(null, true);
 		am.setVisible(true);
 		if (am.getReturnStatus() == AddMonetaForm.RET_OK) {
@@ -303,9 +310,8 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 					// immagini
 					String newXml = Common.getCommon().getMoneteDir() + "/"
 							+ id + "/" + id + ".xml";
-					GenericUtil.fillTemplate(
-							Common.getCommon().getVoidMoneta(), newXml,
-							conversione);
+					InputStream is = Common.getCommon().getResource(NEW_MONETA_TEMPLATE);
+					GenericUtil.fillTemplate(is, newXml, conversione);
 					// ricarica la lista
 					this.jListMonete
 							.setModel(new gui.datamodels.MonetaListModel(
@@ -324,7 +330,8 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 			}
 		}
 	}
-
+	
+	
 	/**
 	 * @throws XmlException
 	 * @throws SAXException

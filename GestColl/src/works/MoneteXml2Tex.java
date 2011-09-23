@@ -7,6 +7,7 @@ package works;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +34,8 @@ import gestXml.MonetaXml;
  */
 public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 
-	private static final String POSIZIONI = "posizioni.tex";
+	private static final String POSIZIONI = "/works/templates/posizioni.tex.template";
+	public static final String COLLEZIONE_TEX = "/works/templates/Collezione.tex.template";
 	
 	private static final String XSL_FILE = "/works/Xsl_tranformations/schedaLaTeX.xsl";
 
@@ -141,13 +143,12 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 		String[][] conversione = { { "%POSIZIONI", posizioni } };
 		String[][] conversione_uno = { { "%INCLUDES", allXmlList } };
 		/* crea le posizioni usando il template */
-		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/"
-				+ POSIZIONI + Common.TEMPLATE_END, outDir + "/" + POSIZIONI,
+		InputStream is = Common.getCommon().getResource(POSIZIONI);
+		GenericUtil.fillTemplate(is, outDir + "/" + "posizioni.tex",
 				conversione);
 		/* crea il file principale usando il template */
-		GenericUtil.fillTemplate(Common.getCommon().getTemplateDir() + "/"
-				+ Common.COLLEZIONE_TEX + Common.TEMPLATE_END, outDir + "/"
-				+ Common.COLLEZIONE_TEX, conversione_uno);
+		InputStream is2 = Common.getCommon().getResource(COLLEZIONE_TEX);
+		GenericUtil.fillTemplate(is2, outDir + "/" + "Collezione.tex", conversione_uno);
 
 		Message m = new Message("Tex creati", Level.INFO);
 		this.setChanged();

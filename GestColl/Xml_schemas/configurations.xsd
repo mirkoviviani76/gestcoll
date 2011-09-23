@@ -17,20 +17,10 @@ xmlns:tns="http://gestColl/configurations">
 			<xsd:element minOccurs="1" maxOccurs="1" name="base_dir" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="monete_dir" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="backup_dir" type="xsd:string" />
-			<xsd:element minOccurs="1" maxOccurs="1" name="template_dir" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="biblioteca_dir" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="html_dir" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="latex_dir" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="qr_dir" type="xsd:string" />
-		</xsd:all>
-	</xsd:complexType>
-
-	<xsd:complexType name="templates">
-		<xsd:annotation>
-			<xsd:documentation>Tipo che definisce un elenco di template</xsd:documentation>
-		</xsd:annotation>
-		<xsd:all>
-			<xsd:element minOccurs="1" maxOccurs="1" name="xml_moneta_void_instance" type="xsd:string" />
 		</xsd:all>
 	</xsd:complexType>
 
@@ -60,7 +50,6 @@ xmlns:tns="http://gestColl/configurations">
 	<xsd:complexType name="configuration">
 		<xsd:sequence>
 			<xsd:element maxOccurs="1" minOccurs="1" name="dirs" type="tns:dirs"/>
-			<xsd:element maxOccurs="1" minOccurs="1" name="templates" type="tns:templates"/>
 			<xsd:element maxOccurs="1" minOccurs="1" name="data" type="tns:data"/>
 			<xsd:element maxOccurs="1" minOccurs="1" name="logs" type="tns:logs"/>
 		</xsd:sequence>
