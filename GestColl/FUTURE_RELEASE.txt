@@ -2,8 +2,6 @@
 
 - mettere il css come risorsa interna
 
-- spostare img, templates e Xsl_transformations da work a resources
-
 - wiki?
 
 - pagina che visualizzi sigla -> libro (magari da integrare con la scheda moneta...)
