@@ -21,7 +21,7 @@ public final class Common extends GestXml {
 	/** Nome dell'applicazione */
 	public static final String APPNAME = "GestColl";
 	/** versione del progetto */
-	public static final String VERSION = "31.9";
+	public static final String VERSION = "32.0";
 	
 	private String currentConfigId;
 	
@@ -302,40 +302,6 @@ public final class Common extends GestXml {
 		if (this.isValidConfig())
 			return this.currentConfig.getTemplates().getXmlMonetaVoidInstance();
 		return null;
-	}
-
-	/**
-	 * Ottiene il nome del file xsd verso html
-	 * 
-	 * @return il file
-	 */
-	public String getXslHtml() {
-		if (this.isValidConfig())
-			return this.currentConfig.getTransformations().getXslHtml();
-		return null;
-	}
-
-	/**
-	 * Ottiene il nome del file xsd verso tex
-	 * 
-	 * @return il file
-	 */
-	public String getXslLatex() {
-		if (this.isValidConfig())
-			return this.currentConfig.getTransformations().getXslLatex();
-		return null;
-	}
-
-	/**
-	 * Ottiene il nome del file xsd verso txt
-	 * 
-	 * @return il file
-	 */
-	public String getXslTxt() {
-		if (this.isValidConfig())
-			return this.currentConfig.getTransformations().getXslTxt();
-		return null;
-
 	}
 
 	public String getTemplateDir() {

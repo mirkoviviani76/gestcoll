@@ -8,6 +8,8 @@ package works;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
@@ -19,6 +21,7 @@ import main.Progress;
 
 import org.apache.commons.io.FileUtils;
 
+import exceptions.InternalGestCollError;
 import exceptions.XsltException;
 import gestXml.MonetaXml;
 
@@ -29,6 +32,8 @@ import gestXml.MonetaXml;
 public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 
 	private static final String OUTFILE_MONETE = "Monete.html";
+	
+	private static final String XSL_FILE = "/works/Xsl_tranformations/schedaHtml.xsl";
 
 	/**
 	 * 
@@ -45,12 +50,14 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	 * @param outDir
 	 * @return il file convertito
 	 * @throws XsltException
+	 * @throws InternalGestCollError 
 	 */
 	@Override
-	public File convert(MonetaXml mng, File outDir) throws XsltException {
+	public File convert(MonetaXml mng, File outDir) throws XsltException, InternalGestCollError {
 		/* prepara il file di output */
 		File ret = new File(outDir + "/" + mng.getId() + ".html");
-		mng.xsltConvert(new File(Common.getCommon().getXslHtml()), ret);
+
+		mng.xsltConvert(XSL_FILE, ret);
 		return ret;
 	}
 
@@ -89,16 +96,17 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 		ListIterator<File> iterator = files.listIterator();
 
 		String data = "";
-
+		
 		data = data + "<table>" + "\n";
 		int i = 1;
+
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
 			MonetaXml mng = new MonetaXml((iterator.next()));
 			String id = mng.getId();
 			/* prepara il file di output */
 			String outFile = outDir + "/" + id + ".html";
-			mng.xsltConvert(new File(Common.getCommon().getXslHtml()),
+			mng.xsltConvert(XSL_FILE,
 					new File(outFile));
 
 			/* scrive l'item nell'indice */
