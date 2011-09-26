@@ -60,7 +60,7 @@ public class XelatexPdfCreator extends CollectionWorker {
 	private void creaEtichette(File outDir) throws IOException,
 			InterruptedException {
 
-		String[] filesEtichette = { MoneteXml2Etichette.OUTFILE_ET };
+		String[] filesEtichette = { MoneteXml2Etichette.OUTFILE };
 		/* esegue la creazione del pdf */
 		for (String f : filesEtichette) {
 			File cur = new File(Common.getCommon().getLatexDir() + "/" + f);

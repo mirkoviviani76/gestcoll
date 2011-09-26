@@ -1,7 +1,3 @@
-- salvare qualche nome di file in una costante (es. index.html)
-
-- wiki?
-
 - pagina che visualizzi sigla -> libro (magari da integrare con la scheda moneta...)
 
 - suggerire una posizione in caso di aggiunta nuova moneta
@@ -19,4 +15,7 @@
 - check dei files necessari: se non ci sono segnalare l'errore.
 
 - sistemare lo schema moneta con i namespace giusti (comporta la modifica a TUTTI gli xml)
+
+- internazionalizzazione?
+- wiki?
 

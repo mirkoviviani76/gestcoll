@@ -39,7 +39,9 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	/**
      *
      */
-	public static final String OUTFILE_ET = "/Resources/templates/etichette.tex.template";
+	public static final String TEMPLATE_ET = "/Resources/templates/etichette.tex.template";
+	public static final String OUTFILE = "etichette.tex";
+	
 
 	/**
 	 * 
@@ -74,7 +76,7 @@ public class MoneteXml2Etichette extends CollectionWorker {
 		Integer[] contatore = { 0, 0, 0, 0 };
 
 		/* ottiene l'elenco di tutte le monete */
-		List<File> files = getFileListing(inDir, Common.COIN_END);
+		List<File> files = getCoinsFileListing();
 		//crea la dir se non esiste
 		createPath(outDir);
 
@@ -126,11 +128,11 @@ public class MoneteXml2Etichette extends CollectionWorker {
 				{ MARKER_QRB, qrB }, { MARKER_QRC, qrC }, { MARKER_QRD, qrD } };
 
 		/* aggiorna il template */
-		InputStream is = Common.getCommon().getResource(OUTFILE_ET);
-		GenericUtil.fillTemplate(is, outDir + "/" + "etichette.tex",
+		InputStream is = Common.getCommon().getResource(TEMPLATE_ET);
+		GenericUtil.fillTemplate(is, outDir + "/" + OUTFILE,
 				conversione);
 
-		Message m = new Message("Etichette.tex creati", Level.INFO);
+		Message m = new Message(OUTFILE + " creato", Level.INFO);
 		this.setChanged();
 		this.notifyObservers(m);
 

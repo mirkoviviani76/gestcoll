@@ -33,8 +33,10 @@ import gestXml.MonetaXml;
  */
 public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 
-	private static final String POSIZIONI = "/Resources/templates/posizioni.tex.template";
+	private static final String POSIZIONI_TEMPLATE = "/Resources/templates/posizioni.tex.template";
+	private static final String POSIZIONI_FILE = "posizioni.tex";
 	public static final String COLLEZIONE_TEX = "/Resources/templates/Collezione.tex.template";
+	public static final String COLLEZIONE_FILE = "Collezione.tex";
 	
 	private static final String XSL_FILE = "/Resources/Xsl_tranformations/schedaLaTeX.xsl";
 
@@ -142,12 +144,12 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 		String[][] conversione = { { "%POSIZIONI", posizioni } };
 		String[][] conversione_uno = { { "%INCLUDES", allXmlList } };
 		/* crea le posizioni usando il template */
-		InputStream is = Common.getCommon().getResource(POSIZIONI);
-		GenericUtil.fillTemplate(is, outDir + "/" + "posizioni.tex",
+		InputStream is = Common.getCommon().getResource(POSIZIONI_TEMPLATE);
+		GenericUtil.fillTemplate(is, outDir + "/" + POSIZIONI_FILE,
 				conversione);
 		/* crea il file principale usando il template */
 		InputStream is2 = Common.getCommon().getResource(COLLEZIONE_TEX);
-		GenericUtil.fillTemplate(is2, outDir + "/" + "Collezione.tex", conversione_uno);
+		GenericUtil.fillTemplate(is2, outDir + "/" + COLLEZIONE_FILE, conversione_uno);
 
 		Message m = new Message("Tex creati", Level.INFO);
 		this.setChanged();
