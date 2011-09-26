@@ -34,8 +34,10 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	
 	
 	private static final String XSL_FILE = "/Resources/Xsl_tranformations/schedaHtml.xsl";
-	private static final String INDEX_HTML_FILE = "/Resources/templates/index.html.template";
-	private static final String OUTFILE_MONETE = "/Resources/templates/Monete.html.template";
+	private static final String INDEX_HTML_FILE = "index.html";
+	private static final String OUTFILE_MONETE = "Monete.html";
+	private static final String INDEX_HTML_TEMPLATE = "/Resources/templates/index.html.template";
+	private static final String OUTFILE_MONETE_TEMPLATE = "/Resources/templates/Monete.html.template";
 	private static final String CSS_FILE = "/Resources/css/report.css";
 
 	/**
@@ -72,9 +74,9 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	 * @throws InternalGestCollError 
 	 */
 	private void copyIndex(File destDir) throws IOException, InternalGestCollError {
-		if (!(new File(destDir + "/" + "index.html")).exists()) {
-			InputStream in = Common.getCommon().getResource(INDEX_HTML_FILE);
-			FileOutputStream out = new FileOutputStream(destDir + "/" + "index.html");
+		if (!(new File(destDir + "/" + INDEX_HTML_FILE)).exists()) {
+			InputStream in = Common.getCommon().getResource(INDEX_HTML_TEMPLATE);
+			FileOutputStream out = new FileOutputStream(destDir + "/" + INDEX_HTML_FILE);
 			FileUtil.copy(in, out);
 		}
 	}
@@ -145,9 +147,8 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 		String[][] conversione = { { "%DATA", data } };
 		/* crea il file di output usando il template */
 		
-		InputStream is = Common.getCommon().getResource(OUTFILE_MONETE);
-		GenericUtil.fillTemplate(is, outDir + "/"
-				+ "Monete.html", conversione);
+		InputStream is = Common.getCommon().getResource(OUTFILE_MONETE_TEMPLATE);
+		GenericUtil.fillTemplate(is, outDir + "/" + OUTFILE_MONETE, conversione);
 
 		/* copia il file index.html */
 		this.copyIndex(outDir);
