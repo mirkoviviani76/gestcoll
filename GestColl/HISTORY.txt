@@ -4,7 +4,7 @@ yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
 
 32.0
-I file xsl e i template sono ora dentro il jar e caricati a runtime come resource.
+I file xsl, il css e i vari template sono ora dentro il jar e caricati a runtime come resource.
 Modificata la gestione delle conversioni e dei template.
 Sistemate immagini e altre risorse in un package apposito (Resources)
 31.9
