@@ -23,7 +23,7 @@
 <head>
 <title><xsl:value-of select="/moneta/@id"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="../../bin/data/report.css" />
+<link rel="stylesheet" type="text/css" href="report.css" />
 </head>
 
 <body>

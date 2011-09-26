@@ -36,6 +36,7 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	private static final String XSL_FILE = "/Resources/Xsl_tranformations/schedaHtml.xsl";
 	private static final String INDEX_HTML_FILE = "/Resources/templates/index.html.template";
 	private static final String OUTFILE_MONETE = "/Resources/templates/Monete.html.template";
+	private static final String CSS_FILE = "/Resources/css/report.css";
 
 	/**
 	 * 
@@ -95,6 +96,12 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 		List<File> files = getFileListing(inDir, Common.COIN_END);
 		//crea la dir se non esiste
 		createPath(outDir);
+		
+		/* copia il foglio stile */
+		InputStream in = Common.getCommon().getResource(CSS_FILE);
+		FileOutputStream out = new FileOutputStream(outDir + "/" + "report.css");
+		FileUtil.copy(in, out);
+
 
 		ListIterator<File> iterator = files.listIterator();
 
