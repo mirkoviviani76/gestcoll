@@ -4,8 +4,6 @@
 
 - aggiunta di elenchi nella statistica (es. lista dei nominali, delle autorita...)
 
-- uniformare la gestione del template delle etichette (monetexml2etichette)
-
 - modificare lo schema moneta per aggiungere collezioni e sottocollezioni
 <ambiti>
 	<ambito>SRI</ambito>
