@@ -5,8 +5,11 @@
 package gestXml.data;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import main.Common;
 
 /**
  * In una pubblicazione nessun campo e' obbligatorio.
@@ -93,11 +96,17 @@ public class Pubblicazione {
 	}
 
 	/**
-	 * 
-	 * @return il filename
+	 * corregge il filename con la dir della biblioteca
+	 * @return il filename corretto o null
 	 */
 	public String getFilename() {
-		return filename;
+		String url = filename; 
+		if (url == null || url.equals("")) {
+		} else {
+			url = "";
+		}
+		
+		return url;
 	}
 
 	/**
@@ -189,7 +198,17 @@ public class Pubblicazione {
 	 *            il filename
 	 */
 	public void setFilename(String filename) {
-		this.filename = filename;
+		this.filename = filename; 
+		if (this.filename != null && !this.filename.equals("")) {
+				try {
+					this.filename = new File(Common.getCommon().getBibliotecaDir() + "/"
+							+ filename).getCanonicalPath();
+				} catch (IOException e) {
+					this.filename = "";
+				}
+		} else {
+			this.filename = "";
+		}
 	}
 
 	/**
@@ -255,49 +274,9 @@ public class Pubblicazione {
 
 		return "<h2>" + titolo + "</h2>" + aut + "<b>id:</b> " + id + "<br>"
 				+ "<b>supporti:</b> " + supp + "<br>" + "<b>argomenti:</b> "
-				+ args + "<b>filename:</b> " + filename + "<br>"
+				+ args + "<b>filename:</b> <a href=\"file://"+filename+"\">" + filename + "</a><br>"
 				+ "<b>data:</b> " + data;
 
 	}
 
-	/**
-	 * converte in xml
-	 * 
-	 * @return la stringa
-	 */
-	public String toXmlString() {
-		String _autori = "";
-		for (String autore : this.getAutori()) {
-			_autori = _autori + "<autore>" + autore + "</autore>";
-		}
-		String _supporti = "";
-		for (String supp : this.getSupporti()) {
-			_supporti = _supporti + "<supporto>" + supp + "</supporto>";
-		}
-		boolean isAsta = false;
-		String xml = "\t\t";
-		// controlla se contiene Aste
-		if (!this.getFilename().contains("Libri_e_Documenti")) {
-			isAsta = true;
-			xml = xml + "<catalogo>";
-		} else {
-			xml = xml + "<pubblicazione>";
-		}
-		xml = xml + "\n\t\t\t<titolo>" + this.getTitolo() + "</titolo>";
-		xml = xml + "\n\t\t\t<autori>" + _autori + "</autori>";
-		xml = xml + "\n\t\t\t<supporti>" + _supporti + "</supporti>";
-		if (this.hasElectronicForm()) {
-			File f = new File(this.getFilename());
-			String fff = f.toURI().toString().replaceAll(".*Biblioteca/", "./");
-			xml = xml + "\n\t\t\t<filename>" + fff + "</filename>";
-		}
-		if (isAsta) {
-			xml = xml + "\n\t\t</catalogo>";
-		} else {
-			xml = xml + "\n\t\t</pubblicazione>";
-		}
-
-		return xml;
-
-	}
 }

@@ -17,7 +17,7 @@
 				<contenitori_xml>D:/mieProve/Java/GestColl/bin/data/contenitori.xml</contenitori_xml>
 				<contatti_xml>D:/mieProve/Java/GestColl/bin/data/contatti.xml</contatti_xml>
 				<links_xml>D:/mieProve/Java/GestColl/bin/data/links.xml</links_xml>
-				<biblio_xml>D:/mieProve/Java/GestColl/Biblioteca/biblioteca.xml</biblio_xml>
+				<biblio_xml>D:/mieProve/Java/GestColl/bin/data/biblioteca.xml</biblio_xml>
 		</data>
 		<logs>
 				<history_log>D:/mieProve/Java/GestColl/bin/data/history.txt</history_log>
@@ -38,7 +38,7 @@
 				<contenitori_xml>/dati/Collezione/bin/data/contenitori.xml</contenitori_xml>
 				<contatti_xml>/dati/Collezione/bin/data/contatti.xml</contatti_xml>
 				<links_xml>/dati/Collezione/bin/data/links.xml</links_xml>
-				<biblio_xml>/dati/Collezione/Biblioteca/biblioteca.xml</biblio_xml>
+				<biblio_xml>/dati/Collezione/bin/data/biblioteca.xml</biblio_xml>
 		</data>
 		<logs>
 				<history_log>/dati/Collezione/bin/data/history.txt</history_log>

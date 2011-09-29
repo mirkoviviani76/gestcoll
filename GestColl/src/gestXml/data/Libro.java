@@ -81,9 +81,9 @@ public class Libro extends Pubblicazione {
 		}
 		String s = "";
 		if (this.getAutori().size() > 0) {
-			s = String.format("(L) %s %s", this.getAutori().get(0), curTitolo);
+			s = String.format("(L) [%s] %s %s", this.getId(), this.getAutori().get(0), curTitolo);
 		} else {
-			s = String.format("(L) %s", curTitolo);
+			s = String.format("(L) [%s] %s", this.getId(), curTitolo);
 		}
 		return s;
 	}

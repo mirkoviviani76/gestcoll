@@ -6,6 +6,7 @@
 package gui.datamodels;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -91,4 +92,5 @@ public class GenericListModel<E> extends DefaultListModel {
 		}
 		return retVal;
 	}
+	
 }
