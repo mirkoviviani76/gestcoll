@@ -8,11 +8,14 @@ package gui.extraPanels.biblioteca;
 import exceptions.XmlException;
 import gestXml.BibliotecaXml;
 import gestXml.data.Pubblicazione;
+import gui.datamodels.GenericListModel;
 
 import java.awt.Font;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.Transferable;
+import java.io.IOException;
+import java.util.Collections;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -104,7 +107,7 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer,
 					@Override
 					public void valueChanged(
 							javax.swing.event.ListSelectionEvent evt) {
-						jLBibliotecaValueChanged(evt);
+							jLBibliotecaValueChanged(evt);
 					}
 				});
 		jScrollPane1.setViewportView(jLBiblioteca);
@@ -160,10 +163,9 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer,
 			} catch (XmlException e) {
 				GestLog.Error(this.getClass(), e);
 			}
+			GenericListModel<Pubblicazione> dataset = new GenericListModel<Pubblicazione>(this.biblioteca.getItems());
 			// setta il modello
-			this.jLBiblioteca
-					.setModel(new gui.datamodels.GenericListModel<Pubblicazione>(
-							this.biblioteca.getItems()));
+			this.jLBiblioteca.setModel(dataset);
 		}
 	}
 
@@ -184,4 +186,7 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer,
 					"Tipo di argomento non gestito.");
 		}
 	}
+	
+	
+	
 }

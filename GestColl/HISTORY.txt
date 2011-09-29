@@ -2,7 +2,9 @@ Metodologia versionamento (xx.yy.zz)
 xx : incrementato con l'aggiunta di nuove funzionalita' (major) (+10 in caso di super funzionalita')
 yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
-
+32.1
+biblioteca.xml spostata in data/dir
+eliminato pulsante "apri cartella". Il file ora si apre come hiperlink (se funziona il browser)
 32.0
 I file xsl, il css e i vari template sono ora dentro il jar e caricati a runtime come resource.
 Modificata la gestione delle conversioni e dei template.
