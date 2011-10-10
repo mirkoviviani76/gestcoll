@@ -14,8 +14,6 @@ import java.awt.Font;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.Transferable;
-import java.io.IOException;
-import java.util.Collections;
 import java.util.Observable;
 import java.util.Observer;
 
