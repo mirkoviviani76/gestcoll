@@ -6,7 +6,6 @@
 package gui.datamodels;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.DefaultListModel;

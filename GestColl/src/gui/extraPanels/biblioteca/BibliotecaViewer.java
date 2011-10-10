@@ -5,15 +5,12 @@
 
 package gui.extraPanels.biblioteca;
 
-import java.awt.Desktop;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-import main.Common;
 import main.GenericUtil;
 import main.GestLog;
 
