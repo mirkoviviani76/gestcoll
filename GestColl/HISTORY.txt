@@ -2,6 +2,8 @@ Metodologia versionamento (xx.yy.zz)
 xx : incrementato con l'aggiunta di nuove funzionalita' (major) (+10 in caso di super funzionalita')
 yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
+33.0
+sistemato lo schema moneta con i namespace giusti (tutti gli xml modificati)
 32.1
 biblioteca.xml spostata in data/dir
 eliminato pulsante "apri cartella". Il file ora si apre come hiperlink (se funziona il browser)

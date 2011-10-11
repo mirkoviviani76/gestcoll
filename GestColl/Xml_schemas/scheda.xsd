@@ -1,199 +1,203 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" >
-	<xs:annotation>
-		<xs:documentation>Descrizione Moneta</xs:documentation>
-		<xs:appinfo>v.1.7</xs:appinfo>
-	</xs:annotation>
+<xsd:schema 
+targetNamespace="http://gestColl/coins" elementFormDefault="qualified" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:tns="http://gestColl/coins">
 
-	<xs:complexType name="autorita">
-		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="0" name="nome" type="xs:string"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:annotation>
+		<xsd:documentation>Descrizione Moneta</xsd:documentation>
+		<xsd:appinfo>v.1.7</xsd:appinfo>
+	</xsd:annotation>
 
-	<xs:complexType name="zecca">
-		<xs:annotation>
-			<xs:documentation>Tipo che definisce una zecca</xs:documentation>
-		</xs:annotation>
-		<xs:all>
-			<xs:element minOccurs="0" name="nome" type="xs:string"/>
-			<xs:element minOccurs="0" name="segno" type="xs:string"/>
-		</xs:all>
-	</xs:complexType>
+	<xsd:complexType name="autorita">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="nome" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
 
-	<xs:complexType name="zecchiere">
-		<xs:annotation>
-			<xs:documentation>Tipo che definisce uno zecchiere</xs:documentation>
-		</xs:annotation>
-		<xs:all>
-			<xs:element minOccurs="0" name="nome" type="xs:string"/>
-			<xs:element minOccurs="0" name="segno" type="xs:string"/>
-			<xs:element minOccurs="0" name="ruolo" type="xs:string"/>
-		</xs:all>
-	</xs:complexType>
+	<xsd:complexType name="zecca">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce una zecca</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element minOccurs="0" name="nome" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="segno" type="xsd:string"/>
+		</xsd:all>
+	</xsd:complexType>
 
-	<xs:complexType name="legenda">
-		<xs:annotation>
-			<xs:documentation>Tipo che definisce una legenda</xs:documentation>
-		</xs:annotation>
-		<xs:all>
-			<xs:element name="testo" type="xs:string" minOccurs="1" maxOccurs="1"/>
-			<xs:element name="scioglimento" type="xs:string" minOccurs="0" maxOccurs="1"/>
-		</xs:all>
-	</xs:complexType>
+	<xsd:complexType name="zecchiere">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce uno zecchiere</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element minOccurs="0" name="nome" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="segno" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="ruolo" type="xsd:string"/>
+		</xsd:all>
+	</xsd:complexType>
 
-	<xs:complexType name="descrizioni">
-		<xs:annotation>
-			<xs:documentation>Tipo che definisce una descrizione</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="descrizione" minOccurs="1" maxOccurs="1" type="xs:string"/>
-			<xs:element name="legenda" minOccurs="0" maxOccurs="unbounded" type="legenda"/>
-			<xs:element name="fileImmagine" type="xs:string" minOccurs="0" maxOccurs="1" />
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:complexType name="legenda">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce una legenda</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element name="testo" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="scioglimento" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:all>
+	</xsd:complexType>
 
-	<xs:complexType name="misura">
-		<xs:annotation>
-			<xs:documentation>Tipo che definisce una unita di misura e un valore (numerico)</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="unita" type="xs:string"/>
-			<xs:element name="valore" type="xs:decimal"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:complexType name="descrizioni">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce una descrizione</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="descrizione" minOccurs="1" maxOccurs="1" type="xsd:string"/>
+			<xsd:element name="legenda" minOccurs="0" maxOccurs="unbounded" type="tns:legenda"/>
+			<xsd:element name="fileImmagine" type="xsd:string" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
 
-	<xs:complexType name="nominale">
-		<xs:annotation>
-			<xs:documentation>Tipo che definisce un nominale</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="valuta" type="xs:string"/>
-			<xs:element name="valore" type="xs:string"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:complexType name="misura">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce una unita di misura e un valore (numerico)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="unita" type="xsd:string"/>
+			<xsd:element name="valore" type="xsd:decimal"/>
+		</xsd:sequence>
+	</xsd:complexType>
 
-	<xs:complexType name="libro">
-		<xs:annotation>
-			<xs:documentation>Tipo che definisce un libro</xs:documentation>
-		</xs:annotation>
-		<xs:all>
-			<xs:element name="sigla" type="xs:string"/>
-			<xs:element name="numero" type="xs:string"/>
-		</xs:all>
-	</xs:complexType>
+	<xsd:complexType name="nominale">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce un nominale</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="valuta" type="xsd:string"/>
+			<xsd:element name="valore" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
 
-	<xs:complexType name="asta">
-		<xs:annotation>
-			<xs:documentation>Tipo che definisce un passaggio in asta</xs:documentation>
-		</xs:annotation>
-		<xs:all>
-			<xs:element name="casa" type="xs:string"/>
-			<xs:element name="idAsta" type="xs:string"/>
-			<xs:element name="data" type="xs:date"/>
-			<xs:element name="lotto" type="xs:string"/>
-			<xs:element name="stima" type="misura"/>
-			<xs:element name="aggiudicazione" type="misura"/>
-		</xs:all>
-	</xs:complexType>
+	<xsd:complexType name="libro">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce un libro</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element name="sigla" type="xsd:string"/>
+			<xsd:element name="numero" type="xsd:string"/>
+		</xsd:all>
+	</xsd:complexType>
 
-	<xs:complexType name="documentoAddizionale">
-		<xs:annotation>
-			<xs:documentation>Tipo che definisce un file addizionale</xs:documentation>
-		</xs:annotation>
-		<xs:all>
-			<xs:element name="filename" type="xs:string"/>
-			<xs:element name="url" type="xs:string"/>
-			<xs:element name="descrizione" type="xs:string"/>
-		</xs:all>
-	</xs:complexType>
+	<xsd:complexType name="asta">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce un passaggio in asta</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element name="casa" type="xsd:string"/>
+			<xsd:element name="idAsta" type="xsd:string"/>
+			<xsd:element name="data" type="xsd:date"/>
+			<xsd:element name="lotto" type="xsd:string"/>
+			<xsd:element name="stima" type="tns:misura"/>
+			<xsd:element name="aggiudicazione" type="tns:misura"/>
+		</xsd:all>
+	</xsd:complexType>
 
-	 <xs:complexType name="documentiAggiuntivi">
-		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="0" name="documento" type="documentoAddizionale"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:complexType name="documentoAddizionale">
+		<xsd:annotation>
+			<xsd:documentation>Tipo che definisce un file addizionale</xsd:documentation>
+		</xsd:annotation>
+		<xsd:all>
+			<xsd:element name="filename" type="xsd:string"/>
+			<xsd:element name="url" type="xsd:string"/>
+			<xsd:element name="descrizione" type="xsd:string"/>
+		</xsd:all>
+	</xsd:complexType>
 
-	 <xs:complexType name="letteratura">
-		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="0" name="libro" type="libro"/>
-			<xs:element maxOccurs="unbounded" minOccurs="0" name="asta" type="asta"/>
-		</xs:sequence>
-	</xs:complexType>
+	 <xsd:complexType name="documentiAggiuntivi">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="documento" type="tns:documentoAddizionale"/>
+		</xsd:sequence>
+	</xsd:complexType>
 
-	 <xs:complexType name="note">
-		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="0" name="nota" type="xs:string"/>
-		</xs:sequence>
-	</xs:complexType>
+	 <xsd:complexType name="letteratura">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="libro" type="tns:libro"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="asta" type="tns:asta"/>
+		</xsd:sequence>
+	</xsd:complexType>
 
-	<xs:complexType name="posizione">
-		 <xs:all>
-			 <xs:element name="contenitore" type="xs:integer" minOccurs="1" maxOccurs="1"/>
-			 <xs:element name="vassoio" type="xs:integer" minOccurs="1" maxOccurs="1"/>
-			 <xs:element name="riga" type="xs:integer" minOccurs="1" maxOccurs="1"/>
-			 <xs:element name="colonna" type="xs:integer" minOccurs="1" maxOccurs="1"/>
-		</xs:all>
-	</xs:complexType>
+	 <xsd:complexType name="note">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="nota" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
 
-	<xs:complexType name="datiAcquisto" >
-		<xs:sequence>
-			<xs:element name="luogo" minOccurs="0" type="xs:string"/>
-			<xs:element name="data" minOccurs="0" type="xs:date"/>
-			<xs:element name="prezzo" minOccurs="0" type="misura"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:complexType name="posizione">
+		 <xsd:all>
+			 <xsd:element name="contenitore" type="xsd:integer" minOccurs="1" maxOccurs="1"/>
+			 <xsd:element name="vassoio" type="xsd:integer" minOccurs="1" maxOccurs="1"/>
+			 <xsd:element name="riga" type="xsd:integer" minOccurs="1" maxOccurs="1"/>
+			 <xsd:element name="colonna" type="xsd:integer" minOccurs="1" maxOccurs="1"/>
+		</xsd:all>
+	</xsd:complexType>
+
+	<xsd:complexType name="datiAcquisto" >
+		<xsd:sequence>
+			<xsd:element name="luogo" minOccurs="0" type="xsd:string"/>
+			<xsd:element name="data" minOccurs="0" type="xsd:date"/>
+			<xsd:element name="prezzo" minOccurs="0" type="tns:misura"/>
+		</xsd:sequence>
+	</xsd:complexType>
 	
-	<xs:complexType name="datiFisici">
-		<xs:all>
-			<xs:element name="peso" type="misura"/>
-			<xs:element name="diametro" type="misura"/>
-			<xs:element name="forma" type="xs:string"/>
-			<xs:element name="metallo" type="xs:string"/>
-		</xs:all>
-	</xs:complexType>
+	<xsd:complexType name="datiFisici">
+		<xsd:all>
+			<xsd:element name="peso" type="tns:misura"/>
+			<xsd:element name="diametro" type="tns:misura"/>
+			<xsd:element name="forma" type="xsd:string"/>
+			<xsd:element name="metallo" type="xsd:string"/>
+		</xsd:all>
+	</xsd:complexType>
 
-	<xs:complexType name="datiArtistici">
-		<xs:sequence>
-			<xs:element name="dritto" type="descrizioni" minOccurs="1" maxOccurs="1"/>
-			<xs:element name="rovescio" type="descrizioni" minOccurs="1" maxOccurs="1"/>
-			<xs:element name="taglio" type="descrizioni" minOccurs="0" maxOccurs="1"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:complexType name="datiArtistici">
+		<xsd:sequence>
+			<xsd:element name="dritto" type="tns:descrizioni" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="rovescio" type="tns:descrizioni" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="taglio" type="tns:descrizioni" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
 
-	<xs:complexType name="zecchieri" >
-		<xs:sequence>
-			<xs:element name="zecchiere" type="zecchiere" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xsd:complexType name="zecchieri" >
+		<xsd:sequence>
+			<xsd:element name="zecchiere" type="tns:zecchiere" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
 
 
-	<xs:element name="moneta">
-		<xs:annotation>
-			<xs:documentation>Descrizione di una moneta</xs:documentation>
-		</xs:annotation>
-		<xs:complexType>
-			<xs:all>
-				<xs:element name="paese" type="xs:string" minOccurs="1"/>
-				<xs:element name="autorita" type="autorita" minOccurs="0"/>
-				<xs:element name="anno" type="xs:string" minOccurs="0"/>
-				<xs:element name="nominale" type="nominale"/>
-				<xs:element name="zecca" type="zecca" minOccurs="0"/>
-				<xs:element name="zecchieri" type="zecchieri" minOccurs="0" maxOccurs="1" />
-				<xs:element name="datiArtistici" type="datiArtistici" />
-				<xs:element name="datiFisici" type="datiFisici" />
-				<xs:element name="datiAcquisto" type="datiAcquisto" minOccurs="1" maxOccurs="1" />
-				<xs:element name="posizione" type="posizione" minOccurs="0" maxOccurs="1" />
-				<xs:element name="grado" type="xs:string" minOccurs="0" maxOccurs="1"/>
-				<xs:element name="note" type="note" minOccurs="0" maxOccurs="1" />
-				<xs:element name="letteratura" type="letteratura" minOccurs="0" maxOccurs="1" />
-				<xs:element name="itemAddizionali" type="documentiAggiuntivi" minOccurs="0" maxOccurs="1" />
-				<xs:element name="revisione" type="xs:date" minOccurs="1" maxOccurs="1" />
-			</xs:all>
-			<xs:attribute name="id" type="xs:string" use="required"/>
-		</xs:complexType>
-	</xs:element>
-</xs:schema>
+	<xsd:element name="moneta">
+		<xsd:annotation>
+			<xsd:documentation>Descrizione di una moneta</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element name="paese" type="xsd:string" minOccurs="1"/>
+				<xsd:element name="autorita" type="tns:autorita" minOccurs="0"/>
+				<xsd:element name="anno" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="nominale" type="tns:nominale"/>
+				<xsd:element name="zecca" type="tns:zecca" minOccurs="0"/>
+				<xsd:element name="zecchieri" type="tns:zecchieri" minOccurs="0" maxOccurs="1" />
+				<xsd:element name="datiArtistici" type="tns:datiArtistici" />
+				<xsd:element name="datiFisici" type="tns:datiFisici" />
+				<xsd:element name="datiAcquisto" type="tns:datiAcquisto" minOccurs="1" maxOccurs="1" />
+				<xsd:element name="posizione" type="tns:posizione" minOccurs="0" maxOccurs="1" />
+				<xsd:element name="grado" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="note" type="tns:note" minOccurs="0" maxOccurs="1" />
+				<xsd:element name="letteratura" type="tns:letteratura" minOccurs="0" maxOccurs="1" />
+				<xsd:element name="itemAddizionali" type="tns:documentiAggiuntivi" minOccurs="0" maxOccurs="1" />
+				<xsd:element name="revisione" type="xsd:date" minOccurs="1" maxOccurs="1" />
+			</xsd:all>
+			<xsd:attribute name="id" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
 
 
 
