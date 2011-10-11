@@ -1,4 +1,7 @@
-<moneta id="%ID">
+<moneta xmlns="http://gestColl/coins" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://gestColl/coins ./scheda.xsd"
+id="%ID">
   <paese>string</paese>
   <autorita>
     <nome>string</nome>

@@ -12,8 +12,7 @@
 
 - check dei files necessari: se non ci sono segnalare l'errore.
 
-- sistemare lo schema moneta con i namespace giusti (comporta la modifica a TUTTI gli xml)
-
 - internazionalizzazione?
+
 - wiki?
 
