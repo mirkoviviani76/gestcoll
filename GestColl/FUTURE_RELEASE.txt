@@ -10,9 +10,8 @@
 	<ambito>Guerra dei trenta anni</ambito>
 </ambiti>
 
-- check dei files necessari: se non ci sono segnalare l'errore.
-
 - internazionalizzazione?
 
 - wiki?
 
+- spostare la cartella "data" nella stessa dir del jar (per distribuire il package).

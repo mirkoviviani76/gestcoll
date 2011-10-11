@@ -4,6 +4,7 @@ yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
 33.0
 sistemato lo schema moneta con i namespace giusti (tutti gli xml modificati)
+check dei files necessari: se non ci sono segnala l'errore ed esce.
 32.1
 biblioteca.xml spostata in data/dir
 eliminato pulsante "apri cartella". Il file ora si apre come hiperlink (se funziona il browser)
