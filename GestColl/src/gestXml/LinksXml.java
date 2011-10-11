@@ -14,6 +14,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import main.Common;
+import main.GestLog;
 import XmlData.Links.Linklist;
 import exceptions.XmlException;
 import gestXml.data.Link;
@@ -34,6 +35,10 @@ public class LinksXml extends GestXml {
 	 */
 	public LinksXml() throws XmlException {
 		super(new File(Common.getCommon().getLinksXml()));
+		if (!new File(Common.getCommon().getLinksXml()).exists()) {
+			GestLog.Message(this.getClass(), "Links.xml non trovato", true);
+			System.exit(-1);
+		}
 		links = new ArrayList<gestXml.data.Link>();
 		try {
 			JAXBContext jc = JAXBContext.newInstance("XmlData.Links");

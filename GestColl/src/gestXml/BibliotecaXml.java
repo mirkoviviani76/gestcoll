@@ -14,6 +14,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import main.Common;
+import main.GestLog;
 import exceptions.XmlException;
 import gestXml.data.Catalogo;
 import gestXml.data.Libro;
@@ -35,6 +36,11 @@ public class BibliotecaXml extends GestXml {
 	public BibliotecaXml() throws XmlException {
 		super(new File(Common.getCommon().getBiblioXml()));
 		File xml = new File(Common.getCommon().getBiblioXml());
+		if (!xml.exists()) {
+			GestLog.Message(this.getClass(), "Biblioteca.xml non trovato", true);
+			System.exit(-1);
+		}
+			
 		try {
 			JAXBContext jc = JAXBContext.newInstance("XmlData.Biblioteca");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
