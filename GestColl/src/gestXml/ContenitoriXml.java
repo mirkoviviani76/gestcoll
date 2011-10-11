@@ -23,6 +23,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.TransformerException;
 
 import main.Common;
+import main.GestLog;
 import works.CollectionWorker;
 
 /**
@@ -40,6 +41,10 @@ public class ContenitoriXml extends GestXml {
 	 */
 	public ContenitoriXml() throws XmlException {
 		super(new File(Common.getCommon().getContenitoriXml()));
+		if (!new File(Common.getCommon().getContenitoriXml()).exists()) {
+			GestLog.Message(this.getClass(), "Contenitori.xml non trovato", true);
+			System.exit(-1);
+		}
 		armadi = new HashMap<String, Armadio>();
 		// legge i dati dall'xml
 		readXml();

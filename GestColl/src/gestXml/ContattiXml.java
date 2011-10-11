@@ -14,6 +14,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import main.Common;
+import main.GestLog;
 import XmlData.Contatti.Contatti;
 import exceptions.XmlException;
 import gestXml.data.Contatto;
@@ -33,6 +34,11 @@ public class ContattiXml extends GestXml {
 	 */
 	public ContattiXml() throws XmlException {
 		super(new File(Common.getCommon().getContattiXml()));
+		if (!new File(Common.getCommon().getContattiXml()).exists()) {
+			GestLog.Message(this.getClass(), "Contatti.xml non trovato", true);
+			System.exit(-1);
+		}
+
 		try {
 			JAXBContext jc = JAXBContext.newInstance("XmlData.Contatti");
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
