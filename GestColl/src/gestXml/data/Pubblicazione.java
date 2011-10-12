@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Resources.i18n.Messages;
+
 import main.Common;
 
 /**
@@ -21,15 +23,15 @@ public class Pubblicazione {
 	/**
      *
      */
-	public final static String SUPPORTO_ELETTRONICO = "E";
+	public final static String SUPPORTO_ELETTRONICO = "E"; //$NON-NLS-1$
 	/**
      *
      */
-	public final static String SUPPORTO_MANCANTE = "X";
+	public final static String SUPPORTO_MANCANTE = "X"; //$NON-NLS-1$
 	/**
      *
      */
-	public final static String SUPPORTO_STAMPA = "S";
+	public final static String SUPPORTO_STAMPA = "S"; //$NON-NLS-1$
 	/**
      *
      */
@@ -64,11 +66,11 @@ public class Pubblicazione {
      */
 	public Pubblicazione() {
 		supporti = new ArrayList<String>();
-		filename = "";
-		data = "";
+		filename = ""; //$NON-NLS-1$
+		data = ""; //$NON-NLS-1$
 		autori = new ArrayList<String>();
-		titolo = "";
-		id = "";
+		titolo = ""; //$NON-NLS-1$
+		id = ""; //$NON-NLS-1$
 	}
 
 	/**
@@ -101,9 +103,9 @@ public class Pubblicazione {
 	 */
 	public String getFilename() {
 		String url = filename; 
-		if (url == null || url.equals("")) {
+		if (url == null || url.equals("")) { //$NON-NLS-1$
 		} else {
-			url = "";
+			url = ""; //$NON-NLS-1$
 		}
 		
 		return url;
@@ -199,15 +201,15 @@ public class Pubblicazione {
 	 */
 	public void setFilename(String filename) {
 		this.filename = filename; 
-		if (this.filename != null && !this.filename.equals("")) {
+		if (this.filename != null && !this.filename.equals("")) { //$NON-NLS-1$
 				try {
-					this.filename = new File(Common.getCommon().getBibliotecaDir() + "/"
+					this.filename = new File(Common.getCommon().getBibliotecaDir() + "/" //$NON-NLS-1$
 							+ filename).getCanonicalPath();
 				} catch (IOException e) {
-					this.filename = "";
+					this.filename = ""; //$NON-NLS-1$
 				}
 		} else {
-			this.filename = "";
+			this.filename = ""; //$NON-NLS-1$
 		}
 	}
 
@@ -247,35 +249,35 @@ public class Pubblicazione {
 	 */
 	public String toHtmlString() {
 
-		String supp = "[";
+		String supp = "["; //$NON-NLS-1$
 		for (String f : supporti) {
 			supp = supp + f;
 		}
-		supp = supp + "]";
+		supp = supp + "]"; //$NON-NLS-1$
 
-		String args = "<br>";
+		String args = "<br>"; //$NON-NLS-1$
 		if (argomenti != null && !argomenti.isEmpty()) {
-			args = "<ul>";
+			args = "<ul>"; //$NON-NLS-1$
 			for (String f : argomenti) {
-				args = args + "<li>" + f + "</li>";
+				args = args + "<li>" + f + "</li>"; //$NON-NLS-1$ //$NON-NLS-2$
 			}
-			args = args + "</ul>";
+			args = args + "</ul>"; //$NON-NLS-1$
 		}
 
-		String aut = "<br>";
+		String aut = "<br>"; //$NON-NLS-1$
 		if (autori != null && !autori.isEmpty()) {
-			aut = "<h2>";
+			aut = "<h2>"; //$NON-NLS-1$
 			for (String f : autori) {
-				aut = aut + f + ", ";
+				aut = aut + f + ", "; //$NON-NLS-1$
 			}
-			aut = aut + "</h2>";
-			aut = aut.replace(", </h2>", "</h2>");
+			aut = aut + "</h2>"; //$NON-NLS-1$
+			aut = aut.replace(", </h2>", "</h2>"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		return "<h2>" + titolo + "</h2>" + aut + "<b>id:</b> " + id + "<br>"
-				+ "<b>supporti:</b> " + supp + "<br>" + "<b>argomenti:</b> "
-				+ args + "<b>filename:</b> <a href=\"file://"+filename+"\">" + filename + "</a><br>"
-				+ "<b>data:</b> " + data;
+		return "<h2>" + titolo + "</h2>" + aut + "<b>"+Messages.getString("Pubblicazione.4") +"</b>"+ id + "<br>" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+				+ "<b>"+Messages.getString("Pubblicazione.3")+"</b> " + supp + "<br>" + "<b>"+Messages.getString("Pubblicazione.2")+"</b> " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+				+ args + "<b>"+Messages.getString("Pubblicazione.1")+"</b> <a href=\"file://"+filename+"\">" + filename + "</a><br>" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+				+ "<b>"+Messages.getString("Pubblicazione.0")+"</b> " + data; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	}
 

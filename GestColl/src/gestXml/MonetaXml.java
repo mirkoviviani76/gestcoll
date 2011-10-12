@@ -23,6 +23,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import main.Common;
 import main.Common.Lato;
 import main.GestLog;
+import Resources.i18n.Messages;
 import XmlData.Moneta.Autorita;
 import XmlData.Moneta.DatiAcquisto;
 import XmlData.Moneta.DatiArtistici;
@@ -73,15 +74,15 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			moneta = (XmlData.Moneta.Moneta) unmarshaller
 					.unmarshal(new InputStreamReader(new FileInputStream(
-							_xmlFile), "UTF-8"));
+							_xmlFile), "UTF-8")); //$NON-NLS-1$
 		} catch (JAXBException e) {
-			throw new XmlException("MonetaXml(): JAXB exception reading "
+			throw new XmlException("MonetaXml() "+Messages.getString("Generic.1") //$NON-NLS-1$
 					+ _xmlFile, e);
 		} catch (UnsupportedEncodingException e) {
-			throw new XmlException("MonetaXml(): Encoding error reading "
+			throw new XmlException("MonetaXml() "+Messages.getString("Generic.2") //$NON-NLS-1$
 					+ _xmlFile, e);
 		} catch (FileNotFoundException e) {
-			throw new XmlException("MonetaXml(): File not found "
+			throw new XmlException("MonetaXml() "+Messages.getString("Generic.3") //$NON-NLS-1$
 					+ _xmlFile, e);
 		}
 	}
@@ -100,8 +101,8 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 		int ret = 0;
 
 		if (this.getOrdering() == Ordering.BY_ID) {
-			String id1 = "";
-			String id2 = "";
+			String id1 = ""; //$NON-NLS-1$
+			String id2 = ""; //$NON-NLS-1$
 			id1 = this.moneta.getId();
 			id2 = t.moneta.getId();
 			// sostituisce X con spazio (' ' precede numeri e lettere)
@@ -110,15 +111,15 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 			// se entrambi cominciano con lo stesso valore, controlla il
 			// progressivo
 			if (id1.substring(0, 4).equals(id2.substring(0, 4))) {
-				String progressivo1 = id1.split("-")[2];
-				String progressivo2 = id2.split("-")[2];
+				String progressivo1 = id1.split("-")[2]; //$NON-NLS-1$
+				String progressivo2 = id2.split("-")[2]; //$NON-NLS-1$
 				ret = progressivo1.compareTo(progressivo2);
 			} else {
 				ret = id1.compareTo(id2);
 			}
 		} else if (this.getOrdering() == Ordering.BY_PAESE) {
-			String paese1 = "";
-			String paese2 = "";
+			String paese1 = ""; //$NON-NLS-1$
+			String paese2 = ""; //$NON-NLS-1$
 			paese1 = this.moneta.getPaese();
 			paese2 = t.moneta.getPaese();
 			ret = paese1.compareTo(paese2);
@@ -153,7 +154,7 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	 * @return la data
 	 */
 	public String getData() {
-		String ret = "";
+		String ret = ""; //$NON-NLS-1$
 		if (this.moneta.getDatiAcquisto() != null
 				&& this.moneta.getDatiAcquisto().getData() != null) {
 			ret = this.moneta.getDatiAcquisto().getData().toString();
@@ -168,7 +169,7 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	 * @return la descrizione del lato
 	 */
 	public String getDescrizione(Lato lato) {
-		String s = "";
+		String s = ""; //$NON-NLS-1$
 		if (lato == Common.Lato.DRITTO
 				&& this.moneta.getDatiArtistici().getDritto() != null) {
 			s = this.moneta.getDatiArtistici().getDritto().getDescrizione();
@@ -200,7 +201,7 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	 * @return il file immagine del lato
 	 */
 	public String getFileImmagine(Lato lato) {
-		String s = "";
+		String s = ""; //$NON-NLS-1$
 		if (lato == Common.Lato.DRITTO
 				&& this.moneta.getDatiArtistici().getDritto() != null) {
 			s = this.moneta.getDatiArtistici().getDritto().getFileImmagine();
@@ -213,7 +214,7 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 				&& this.moneta.getDatiArtistici().getTaglio() != null) {
 			s = this.moneta.getDatiArtistici().getTaglio().getFileImmagine();
 		}
-		return this.getPath() + "/" + s;
+		return this.getPath() + "/" + s; //$NON-NLS-1$
 
 	}
 
@@ -379,7 +380,7 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	 * @return la data
 	 */
 	public String getRevisione() {
-		String ret = "";
+		String ret = ""; //$NON-NLS-1$
 		if (this.moneta.getRevisione() != null) {
 			ret = this.moneta.getRevisione().toString();
 		}
@@ -651,7 +652,7 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 			}
 			break;
 		default:
-			GestLog.Message(this.getClass(), "SetValue: Campo sconosciuto: "
+			GestLog.Message(this.getClass(), Messages.getString("MonetaXml.4") //$NON-NLS-1$
 					+ field.toString(), true);
 			break;
 		}
@@ -674,34 +675,34 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	 * @return la stringa
 	 */
 	public String toFullText() {
-		String s = "";
+		String s = ""; //$NON-NLS-1$
 		s = s
-				+ String.format("%s: %s %s (%s)", this.moneta.getPaese(),
+				+ String.format("%s: %s %s (%s)", this.moneta.getPaese(), //$NON-NLS-1$
 						this.moneta.getNominale().getValore(), this.moneta
 								.getNominale().getValuta(), this.moneta
-								.getAnno()) + "\n";
+								.getAnno()) + "\n"; //$NON-NLS-1$
 		List<String> nomi = this.moneta.getAutorita().getNome();
 		for (String nome : nomi) {
-			s = s + nome + ", ";
+			s = s + nome + ", "; //$NON-NLS-1$
 		}
-		s = s + "\n";
+		s = s + "\n"; //$NON-NLS-1$
 		return s;
 	}
 
 	@Override
 	public String toString() {
-		String s = "";
+		String s = ""; //$NON-NLS-1$
 		s = String
-				.format("%s, %s", this.moneta.getId(), this.moneta.getPaese());
+				.format("%s, %s", this.moneta.getId(), this.moneta.getPaese()); //$NON-NLS-1$
 		return s;
 	}
 
 	@Override
 	public String toTooltip() {
-		String tooltip = "";
+		String tooltip = ""; //$NON-NLS-1$
 		// imgD = mng.getImg(MonetaXml.lato.DRITTO);
 		tooltip = String
-				.format("%s %s revisione %s", this.moneta.getNominale().getValore(), 
+				.format("%s %s revisione %s", this.moneta.getNominale().getValore(),  //$NON-NLS-1$
 						this.moneta.getNominale().getValuta(),
 						this.moneta.getRevisione());
 		return tooltip;

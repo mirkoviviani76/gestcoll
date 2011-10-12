@@ -22,6 +22,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.TransformerException;
 
+import Resources.i18n.Messages;
+
 import main.Common;
 import main.GestLog;
 import works.CollectionWorker;
@@ -42,7 +44,7 @@ public class ContenitoriXml extends GestXml {
 	public ContenitoriXml() throws XmlException {
 		super(new File(Common.getCommon().getContenitoriXml()));
 		if (!new File(Common.getCommon().getContenitoriXml()).exists()) {
-			GestLog.Message(this.getClass(), "Contenitori.xml non trovato", true);
+			GestLog.Message(this.getClass(), Messages.getString("ContenitoriXml.0"), true); //$NON-NLS-1$
 			System.exit(-1);
 		}
 		armadi = new HashMap<String, Armadio>();
@@ -71,16 +73,16 @@ public class ContenitoriXml extends GestXml {
 		int colonne = Integer.parseInt(c);
 		// aggiungere il vassoio
 		DimensioneCaselle dc = null;
-		if (dim.equals("A")) {
+		if (dim.equals("A")) { //$NON-NLS-1$
 			dc = DimensioneCaselle.A;
 		}
-		if (dim.equals("B")) {
+		if (dim.equals("B")) { //$NON-NLS-1$
 			dc = DimensioneCaselle.B;
 		}
-		if (dim.equals("C")) {
+		if (dim.equals("C")) { //$NON-NLS-1$
 			dc = DimensioneCaselle.C;
 		}
-		if (dim.equals("D")) {
+		if (dim.equals("D")) { //$NON-NLS-1$
 			dc = DimensioneCaselle.D;
 		}
 		Vassoio v = new Vassoio(vass, righe, colonne, dc);
@@ -95,7 +97,7 @@ public class ContenitoriXml extends GestXml {
 	 * @return l'armadio
 	 */
 	public Armadio getArmadio() {
-		return armadi.get("SRI");
+		return armadi.get("SRI"); //$NON-NLS-1$
 	}
 
 	/**
@@ -158,8 +160,8 @@ public class ContenitoriXml extends GestXml {
 			String vass = mng.getPosizione().getVassoio().toString();
 			String riga = mng.getPosizione().getRiga().toString();
 			String col = mng.getPosizione().getColonna().toString();
-			String pos = this.getArmadio().nome + "-" + cont + "-" + vass + "-"
-					+ riga + "-" + col;
+			String pos = this.getArmadio().nome + "-" + cont + "-" + vass + "-" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					+ riga + "-" + col; //$NON-NLS-1$
 			posizioniId.put(pos, mng.getId());
 		}
 		return posizioniId;
@@ -177,8 +179,8 @@ public class ContenitoriXml extends GestXml {
 		String vass = mng.getPosizione().getVassoio().toString();
 		String riga = mng.getPosizione().getRiga().toString();
 		String col = mng.getPosizione().getColonna().toString();
-		String pos = this.getArmadio().nome + "-" + cont + "-" + vass + "-"
-				+ riga + "-" + col;
+		String pos = this.getArmadio().nome + "-" + cont + "-" + vass + "-" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				+ riga + "-" + col; //$NON-NLS-1$
 		return pos;
 	}
 
@@ -189,7 +191,7 @@ public class ContenitoriXml extends GestXml {
 	 */
 	private void readXml() throws XmlException {
 		try {
-			JAXBContext jc = JAXBContext.newInstance("XmlData.Contenitori");
+			JAXBContext jc = JAXBContext.newInstance("XmlData.Contenitori"); //$NON-NLS-1$
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			/* posso fare il cast perche' le classi contengono @XmlRootElement se
 			 * altrimenti si doveva fare JAXBElement<tipo> elem = (JAXBElement<tipo>)unmarshaller.unmarshal(xml)
@@ -206,7 +208,7 @@ public class ContenitoriXml extends GestXml {
 			for (XmlData.Contenitori.Armadio curArmadioItem : armadi) {
 				// ottiene l'id dell'armadio corrente
 				String curArmadio = curArmadioItem.getId();
-				if (!curArmadio.equals("")) {
+				if (!curArmadio.equals("")) { //$NON-NLS-1$
 					Armadio a = new Armadio(curArmadio);
 					// cicla su tutti i contenitori
 					List<XmlData.Contenitori.Contenitore> curcontenitori = curArmadioItem
@@ -238,7 +240,7 @@ public class ContenitoriXml extends GestXml {
 				}
 			}
 		} catch (JAXBException e) {
-			throw new XmlException("readXml()", e);
+			throw new XmlException("ReadXml()", e); //$NON-NLS-1$
 		}
 
 	}

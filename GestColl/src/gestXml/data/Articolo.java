@@ -19,7 +19,7 @@ public class Articolo extends Pubblicazione {
 	 */
 	public Articolo() {
 		super();
-		this.provenienza = "";
+		this.provenienza = ""; //$NON-NLS-1$
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class Articolo extends Pubblicazione {
 	@Override
 	public boolean isValid() {
 		boolean ret = false;
-		if (!titolo.equals("")) {
+		if (!titolo.equals("")) { //$NON-NLS-1$
 			ret = true;
 		}
 		return ret;
@@ -50,13 +50,13 @@ public class Articolo extends Pubblicazione {
 
 	@Override
 	public String toHtmlString() {
-		return "<h1>ARTICOLO</h1>" + super.toHtmlString() + "<br>"
-				+ "<b>provenienza:</b> " + provenienza + "<br>";
+		return "<h1>ARTICOLO</h1>" + super.toHtmlString() + "<br>" //$NON-NLS-1$ //$NON-NLS-2$
+				+ "<b>provenienza:</b> " + provenienza + "<br>"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Override
 	public String toString() {
-		return String.format("(A) %s %s", this.getAutori().get(0),
+		return String.format("(A) %s %s", this.getAutori().get(0), //$NON-NLS-1$
 				this.getTitolo());
 	}
 

@@ -33,7 +33,7 @@ import org.eclipse.persistence.tools.file.FileUtil;
  */
 public final class GenericUtil {
 
-	private static final String UTF8 = "UTF-8";
+	private static final String UTF8 = "UTF-8"; //$NON-NLS-1$
 
 	/**
 	 * Riempie un template. Copia il file template in outFile e effettua le
@@ -60,7 +60,7 @@ public final class GenericUtil {
 	 * @return la data e l'ora
 	 */
 	public static String getDateTime() {
-		return getDateTime("dd-MM-yyyy HH:mm:ss");
+		return getDateTime("dd-MM-yyyy HH:mm:ss"); //$NON-NLS-1$
 	}
 
 	/**
@@ -99,12 +99,12 @@ public final class GenericUtil {
 	static private String readAll(File inout)
 			throws UnsupportedEncodingException, FileNotFoundException,
 			IOException {
-		String oldtext = "";
+		String oldtext = ""; //$NON-NLS-1$
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				new FileInputStream(inout), GenericUtil.UTF8));
-		String line = "";
+		String line = ""; //$NON-NLS-1$
 		while ((line = reader.readLine()) != null) {
-			oldtext += line + "\n";
+			oldtext += line + "\n"; //$NON-NLS-1$
 		}
 		reader.close();
 		return oldtext;

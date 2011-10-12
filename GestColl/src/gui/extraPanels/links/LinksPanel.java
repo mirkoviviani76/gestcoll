@@ -31,6 +31,8 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import Resources.i18n.Messages;
+
 import main.Common;
 import main.GenericUtil;
 import main.GestLog;
@@ -100,7 +102,7 @@ public class LinksPanel extends javax.swing.JPanel {
 		if (currLink != null)
 			this.textPane.setText(currLink.toHtml());
 		else
-			this.textPane.setText("");
+			this.textPane.setText(""); //$NON-NLS-1$
 	}
 
 	/**
@@ -187,7 +189,7 @@ public class LinksPanel extends javax.swing.JPanel {
 		textPane = new JTextPane();
 		textPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		textPane.setEditable(false);
-		textPane.setContentType("text/html");
+		textPane.setContentType("text/html"); //$NON-NLS-1$
 		textPane.addHyperlinkListener(new HyperlinkListener() {
 
 			@Override
@@ -203,7 +205,7 @@ public class LinksPanel extends javax.swing.JPanel {
 		jToolBar1.setMaximumSize(new java.awt.Dimension(63, 25));
 		jToolBar1.setMinimumSize(new java.awt.Dimension(63, 25));
 
-		jBAggiungi.setText("Aggiungi");
+		jBAggiungi.setText(Messages.getString("Generic.0")); //$NON-NLS-1$
 		jBAggiungi.setFocusable(false);
 		jBAggiungi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jBAggiungi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -242,7 +244,7 @@ public class LinksPanel extends javax.swing.JPanel {
 		String cat = this.getCategory();
 		//controlla la selezione di un nodo
 		if (cat == null) {
-			JOptionPane.showMessageDialog(null, "Devi selezionare una categoria", Common.APPNAME,
+			JOptionPane.showMessageDialog(null, Messages.getString("LinksPanel.3"), Common.APPNAME, //$NON-NLS-1$
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -256,7 +258,7 @@ public class LinksPanel extends javax.swing.JPanel {
 			try {
 				this.links.add(nuovo);
 				//scrive l'xml
-				this.links.writeXml(this.links.getJaxbObject(), "XmlData.Links",
+				this.links.writeXml(this.links.getJaxbObject(), "XmlData.Links", //$NON-NLS-1$
 						Common.getCommon().getLinksXml());
 				// carica i nuovi valori
 				this.loadData();
@@ -265,7 +267,7 @@ public class LinksPanel extends javax.swing.JPanel {
 			}
 			/* logga in vario modo */
 			History.addEvent(History.MODIFY, Common.getCommon().getLinksXml());
-			String msg = "MODIFICATO con successo: " + Common.getCommon().getLinksXml();
+			String msg = Messages.getString("Generic.15") + Common.getCommon().getLinksXml(); //$NON-NLS-1$
 			MainFrame.setMessage(new Message(msg, Level.INFO));
 		}
 		
@@ -282,7 +284,7 @@ public class LinksPanel extends javax.swing.JPanel {
 		// mappa per ottenere i nodi
 		Map<String, DefaultMutableTreeNode> nodiCategorie = new HashMap<String, DefaultMutableTreeNode>();
 
-		rootNode = new DefaultMutableTreeNode("Links");
+		rootNode = new DefaultMutableTreeNode(Messages.getString("LinksPanel.6")); //$NON-NLS-1$
 		treeModel = new DefaultTreeModel(rootNode);
 
 		/* cicla su tutti i link */

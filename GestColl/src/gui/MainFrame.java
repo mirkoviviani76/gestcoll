@@ -19,6 +19,8 @@ import java.util.logging.Level;
 
 import javax.swing.JOptionPane;
 
+import Resources.i18n.Messages;
+
 import main.Common;
 import main.GenericUtil;
 import main.GestLog;
@@ -49,8 +51,8 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 			foreground = Color.RED;
 		}
 		jTFMessages.setForeground(foreground);
-		String ora = GenericUtil.getDateTime("HH:mm:ss");
-		jTFMessages.setText(ora + "\t" + m.toString());
+		String ora = GenericUtil.getDateTime("HH:mm:ss"); //$NON-NLS-1$
+		jTFMessages.setText(ora + "\t" + m.toString()); //$NON-NLS-1$
 	}
 
 	private gui.extraPanels.contatti.ContattiPanel contattiPanel1;
@@ -100,17 +102,17 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	 * @throws XmlException
 	 */
 	public MainFrame() throws XmlException {
-		Splash.getInstance().splashProgress("Start...");
+		Splash.getInstance().splashProgress(Messages.getString("MainFrame.2")); //$NON-NLS-1$
 		// inizializza i componenti grafici
 		initComponents();
 		// sistema i listener
 		this.addActionListener();
 		// mostra la versione come primo messaggio
-		setMessage(new Message(Common.APPNAME + " versione " + Common.VERSION,
+		setMessage(new Message(Common.APPNAME + Messages.getString("MainFrame.3") + " " + Common.VERSION, //$NON-NLS-1$
 				Level.INFO));
 		// carica i vari dati dei pannelli
 		this.loadAllData();
-		Splash.getInstance().splashProgress("Fine...");
+		Splash.getInstance().splashProgress(Messages.getString("MainFrame.4")); //$NON-NLS-1$
 		// mostra il pannello delle monete
 		this.gestSelectMonete();
 	}
@@ -145,7 +147,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 			gestStorico();
 		} else {
 			// azione non gestita
-			GestLog.Error(MainFrame.class, "actionPerformed", "Unhandled: "
+			GestLog.Error(MainFrame.class, "actionPerformed", Messages.getString("Generic.11") //$NON-NLS-1$ //$NON-NLS-2$
 					+ ae.getActionCommand());
 		}
 	}
@@ -168,10 +170,10 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	}
 
 	private void gestAbout() throws HeadlessException {
-		JOptionPane.showMessageDialog(this, String.format("%s\nVersione: %s",
+		JOptionPane.showMessageDialog(this, String.format("%s\n"+Messages.getString("MainFrame.7")+" %s", //$NON-NLS-1$
 				Common.APPNAME, Common.VERSION), Common.APPNAME,
 				JOptionPane.INFORMATION_MESSAGE);
-		GestLog.Error(this.getClass(), "test", "TEST");
+		GestLog.Error(this.getClass(), Messages.getString("MainFrame.8"), Messages.getString("MainFrame.9")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private void gestContatti() {
@@ -201,7 +203,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 					Common.getCommon().getLatexDir(),
 					Common.getCommon().getQrDir() };
 			int count = CollectionWorker.removeAll(ddd);
-			setMessage(new Message(String.format("Rimossi %d oggetti.", count),
+			setMessage(new Message(String.format(Messages.getString("Generic.21"), count), //$NON-NLS-1$
 					Level.INFO));
 		} catch (FileNotFoundException ex) {
 			GestLog.Error(MainFrame.class, ex);
@@ -221,7 +223,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		} catch (IOException ex) {
 			GestLog.Error(MainFrame.class, ex);
 		}
-		setMessage(new Message(String.format("Rimossi %d oggetti.", count),
+		setMessage(new Message(String.format(Messages.getString("Generic.21"), count), //$NON-NLS-1$
 				Level.INFO));
 	}
 
@@ -293,30 +295,30 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jMIAbout = new javax.swing.JMenuItem();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("GestColl"); // NOI18N
+		setTitle(Common.APPNAME);
 
 		jToolBar1.setFloatable(false);
 		jToolBar1.setRollover(true);
 
 		jBGestMonete.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/Resources/img/CoinIcon.png"))); // NOI18N
+				"/Resources/img/CoinIcon.png"))); // NOI18N //$NON-NLS-1$
 		jBGestMonete.setMnemonic('M');
-		jBGestMonete.setText("Monete"); // NOI18N
-		jBGestMonete.setToolTipText("Gestione monete");
+		jBGestMonete.setText(Messages.getString("Generic.24")); // NOI18N //$NON-NLS-1$
+		jBGestMonete.setToolTipText(Messages.getString("MainFrame.15")); //$NON-NLS-1$
 		jBGestMonete.setFocusable(false);
 		jToolBar1.add(jBGestMonete);
 
 		jBGestLibri.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/Resources/img/BookIcon.png"))); // NOI18N
+				"/Resources/img/BookIcon.png"))); // NOI18N //$NON-NLS-1$
 		jBGestLibri.setMnemonic('B');
-		jBGestLibri.setText("Biblioteca"); // NOI18N
+		jBGestLibri.setText(Messages.getString("MainFrame.17")); // NOI18N //$NON-NLS-1$
 		jBGestLibri.setFocusable(false);
 		jBGestLibri.setMaximumSize(new java.awt.Dimension(85, 37));
 		jToolBar1.add(jBGestLibri);
 
 		jBGestContatti.setIcon(new javax.swing.ImageIcon(getClass()
-				.getResource("/Resources/img/Mail.png"))); // NOI18N
-		jBGestContatti.setText("Contatti");
+				.getResource("/Resources/img/Mail.png"))); // NOI18N //$NON-NLS-1$
+		jBGestContatti.setText(Messages.getString("MainFrame.19")); //$NON-NLS-1$
 		jBGestContatti.setFocusable(false);
 		jBGestContatti.setMaximumSize(new java.awt.Dimension(85, 37));
 		jBGestContatti.setMinimumSize(new java.awt.Dimension(85, 37));
@@ -324,8 +326,8 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jToolBar1.add(jBGestContatti);
 
 		jBGestLinks.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/Resources/img/internet.png"))); // NOI18N
-		jBGestLinks.setText("Link");
+				"/Resources/img/internet.png"))); // NOI18N //$NON-NLS-1$
+		jBGestLinks.setText(Messages.getString("MainFrame.21")); //$NON-NLS-1$
 		jBGestLinks.setFocusable(false);
 		jBGestLinks.setMaximumSize(new java.awt.Dimension(85, 37));
 		jBGestLinks.setMinimumSize(new java.awt.Dimension(85, 37));
@@ -333,8 +335,8 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jToolBar1.add(jBGestLinks);
 
 		jBStatistiche.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/Resources/img/statistiche.png"))); // NOI18N
-		jBStatistiche.setText("Statistiche");
+				"/Resources/img/statistiche.png"))); // NOI18N //$NON-NLS-1$
+		jBStatistiche.setText(Messages.getString("MainFrame.23")); //$NON-NLS-1$
 		jBStatistiche.setFocusable(false);
 		jBStatistiche
 				.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -346,12 +348,12 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jToolBar1.add(jSeparator2);
 
 		jLabel1.setLabelFor(jTFMessages);
-		jLabel1.setText("Ultimo messaggio:");
+		jLabel1.setText(Messages.getString("MainFrame.24")); //$NON-NLS-1$
 		jToolBar1.add(jLabel1);
 
 		jTFMessages.setColumns(20);
 		jTFMessages.setEditable(false);
-		jTFMessages.setFont(new java.awt.Font("Monospaced", 0, 12));
+		jTFMessages.setFont(new java.awt.Font("Monospaced", 0, 12)); //$NON-NLS-1$
 		jTFMessages.setLineWrap(true);
 		jTFMessages.setRows(2);
 		jTFMessages.setTabSize(4);
@@ -360,40 +362,40 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		jToolBar1.add(jScrollPane1);
 
 		jPanel1.setLayout(new java.awt.CardLayout());
-		jPanel1.add(monetePanel1, "card2");
-		jPanel1.add(libriPanel1, "card3");
-		jPanel1.add(contattiPanel1, "card4");
-		jPanel1.add(linksPanel1, "card5");
-		jPanel1.add(statistichePanel1, "card6");
+		jPanel1.add(monetePanel1, "card2"); //$NON-NLS-1$
+		jPanel1.add(libriPanel1, "card3"); //$NON-NLS-1$
+		jPanel1.add(contattiPanel1, "card4"); //$NON-NLS-1$
+		jPanel1.add(linksPanel1, "card5"); //$NON-NLS-1$
+		jPanel1.add(statistichePanel1, "card6"); //$NON-NLS-1$
 
-		jMenu1.setText("File"); // NOI18N
+		jMenu1.setText(Messages.getString("Generic.5")); // NOI18N //$NON-NLS-1$
 
-		jMIExit.setText("Esci");
+		jMIExit.setText(Messages.getString("MainFrame.32")); //$NON-NLS-1$
 		jMenu1.add(jMIExit);
 
 		jMRimuoviTemp.add(jMenu1);
 
-		jMStrumenti.setText("Strumenti");
+		jMStrumenti.setText(Messages.getString("MainFrame.33")); //$NON-NLS-1$
 
-		jMIShowStorico.setText("Mostra Storico");
+		jMIShowStorico.setText(Messages.getString("MainFrame.34")); //$NON-NLS-1$
 		jMStrumenti.add(jMIShowStorico);
 		jMStrumenti.add(jSeparator4);
 
 		jMIDelTemp.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/Resources/img/GreenTrashbinIcon.png"))); // NOI18N
-		jMIDelTemp.setText("Rimuovi temporanei");
+				"/Resources/img/GreenTrashbinIcon.png"))); // NOI18N //$NON-NLS-1$
+		jMIDelTemp.setText(Messages.getString("MainFrame.36")); //$NON-NLS-1$
 		jMStrumenti.add(jMIDelTemp);
 
 		jMIDelAll.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/Resources/img/YellowTrashbinIcon.png"))); // NOI18N
-		jMIDelAll.setText("Rimuovi pdf e qr");
+				"/Resources/img/YellowTrashbinIcon.png"))); // NOI18N //$NON-NLS-1$
+		jMIDelAll.setText(Messages.getString("MainFrame.38")); //$NON-NLS-1$
 		jMStrumenti.add(jMIDelAll);
 
 		jMRimuoviTemp.add(jMStrumenti);
 
-		jMenu3.setText("About..."); // NOI18N
+		jMenu3.setText(Messages.getString("MainFrame.39")); // NOI18N //$NON-NLS-1$
 
-		jMIAbout.setText("Info");
+		jMIAbout.setText(Messages.getString("MainFrame.40")); //$NON-NLS-1$
 		jMenu3.add(jMIAbout);
 
 		jMRimuoviTemp.add(jMenu3);
@@ -427,21 +429,21 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 	}
 
 	private void loadAllData() throws XmlException {
-		Splash.getInstance().splashProgress("Load monete...");
+		Splash.getInstance().splashProgress(Messages.getString("MainFrame.41")); //$NON-NLS-1$
 		this.monetePanel1.setupWorks();
-		Splash.getInstance().splashProgress("Load monete eseguito");
+		Splash.getInstance().splashProgress(Messages.getString("MainFrame.42")); //$NON-NLS-1$
 
-		Splash.getInstance().splashProgress("Load libri...");
+		Splash.getInstance().splashProgress(Messages.getString("MainFrame.43")); //$NON-NLS-1$
 		this.libriPanel1.loadData();
-		Splash.getInstance().splashProgress("Load libri eseguito");
+		Splash.getInstance().splashProgress(Messages.getString("MainFrame.44")); //$NON-NLS-1$
 
-		Splash.getInstance().splashProgress("Load links...");
+		Splash.getInstance().splashProgress(Messages.getString("MainFrame.45")); //$NON-NLS-1$
 		this.linksPanel1.loadData();
-		Splash.getInstance().splashProgress("Load links eseguito");
+		Splash.getInstance().splashProgress(Messages.getString("MainFrame.46")); //$NON-NLS-1$
 
-		Splash.getInstance().splashProgress("Load contatti...");
+		Splash.getInstance().splashProgress(Messages.getString("MainFrame.47")); //$NON-NLS-1$
 		this.contattiPanel1.loadData();
-		Splash.getInstance().splashProgress("Load contatti eseguito.");
+		Splash.getInstance().splashProgress(Messages.getString("MainFrame.48")); //$NON-NLS-1$
 	}
 
 }

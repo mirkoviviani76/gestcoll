@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 
+import Resources.i18n.Messages;
+
 import works.CollectionWorker;
 
 /**
@@ -72,10 +74,10 @@ public class Splash {
 			/* scrive il nome */
 			jLAppName = new JLabel(Common.APPNAME, SwingConstants.CENTER);
 			jLAppName.setSize(width, appSize);
-			jLAppName.setFont(new Font("Verdana", Font.BOLD, appSize));
+			jLAppName.setFont(new Font("Verdana", Font.BOLD, appSize)); //$NON-NLS-1$
 
 			/* scrive la versione */
-			jLVersion = new JLabel("Versione: " + Common.VERSION,
+			jLVersion = new JLabel(Messages.getString("Splash.1") + Common.VERSION, //$NON-NLS-1$
 					SwingConstants.CENTER);
 			jLVersion.setSize(width, versionSize);
 
@@ -95,7 +97,7 @@ public class Splash {
 			jLVersion.update(labelGraph);
 
 		} else {
-			System.out.println("SPLASH null");
+			System.out.println(Messages.getString("Splash.2")); //$NON-NLS-1$
 		}
 	}
 

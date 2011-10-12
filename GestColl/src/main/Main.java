@@ -10,6 +10,8 @@ import java.util.logging.LogManager;
 
 import javax.swing.JOptionPane;
 
+import Resources.i18n.Messages;
+
 /**
  * 
  * La classe Main, che contiene l'entry point di GestColl.
@@ -24,7 +26,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		String msgErrore = "Occorre specificare una configurazione presente in configurations.xml"; 
+		String msgErrore = Messages.getString("Main.0");  //$NON-NLS-1$
 		/* controlla l'elenco dei parametri */
 		if (args.length != 1) {
 			//emette un messaggio di errore ed esce
@@ -48,10 +50,10 @@ public class Main {
 			mn.readConfiguration(fis);
 		} catch (IOException ex) {
 			// NB: non posso scrivere su log, perche' si e' verificato un errore durante il setup del log
-			JOptionPane.showMessageDialog(null, "ERRORE: " + ex.getMessage(), Common.APPNAME, JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, Messages.getString("Generic.ERROR") + ex.getMessage(), Common.APPNAME, JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 		} catch (SecurityException ex) {
 			// NB: non posso scrivere su log, perche' si e' verificato un errore durante il setup del log
-			JOptionPane.showMessageDialog(null, "ERRORE: " + ex.getMessage(), Common.APPNAME, JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, Messages.getString("Generic.ERROR") + ex.getMessage(), Common.APPNAME, JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 		}
 
 		/* invoca la gui */

@@ -40,6 +40,7 @@ import main.Message;
 import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
+import Resources.i18n.Messages;
 import XmlData.Moneta.Libro;
 import XmlData.Moneta.Zecchiere;
 
@@ -209,9 +210,9 @@ public class MonetaViewer extends javax.swing.JPanel {
 		this.jTFForma.setText(mng.getForma());
 		this.JTFLuogo.setText(mng.getLuogo());
 		String data = mng.getData();
-		if (!data.equals("")) {
-			this.jDateChooser1.setDateFormatString("dd/MM/yyyy");
-			DateFormat in = new SimpleDateFormat("yyyy-MM-dd");
+		if (!data.equals("")) { //$NON-NLS-1$
+			this.jDateChooser1.setDateFormatString("dd/MM/yyyy"); //$NON-NLS-1$
+			DateFormat in = new SimpleDateFormat("yyyy-MM-dd"); //$NON-NLS-1$
 			this.jDateChooser1.setDate(in.parse(data));
 		}
 		this.jTFPrezzo.setMisura(mng.getPrezzo());
@@ -220,14 +221,14 @@ public class MonetaViewer extends javax.swing.JPanel {
 		this.monetaDescrizioneRovescio.fillData(mng);
 		this.monetaDescrizioneTaglio.fillData(mng);
 
-		this.jTFPosizione.setText(mng.getPosizione().getContenitore() + " "
-				+ mng.getPosizione().getVassoio() + " "
-				+ mng.getPosizione().getRiga() + " "
+		this.jTFPosizione.setText(mng.getPosizione().getContenitore() + " " //$NON-NLS-1$
+				+ mng.getPosizione().getVassoio() + " " //$NON-NLS-1$
+				+ mng.getPosizione().getRiga() + " " //$NON-NLS-1$
 				+ mng.getPosizione().getColonna());
-		this.jTFPosizione.setToolTipText("Cont."
-				+ mng.getPosizione().getContenitore() + " Vass."
-				+ mng.getPosizione().getVassoio() + " R."
-				+ mng.getPosizione().getRiga() + " C."
+		this.jTFPosizione.setToolTipText(Messages.getString("MonetaViewer.0") //$NON-NLS-1$
+				+ mng.getPosizione().getContenitore() + "."
+				+ mng.getPosizione().getVassoio() + "."
+				+ mng.getPosizione().getRiga() + "."
 				+ mng.getPosizione().getColonna());
 
 		this.jLNote.setModel(new GenericListModel<String>(mng.getNote()));
@@ -349,7 +350,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
 		jLabel2.setLabelFor(jTFId);
-		jLabel2.setText("Id"); // NOI18N
+		jLabel2.setText(Messages.getString("MonetaViewer.4")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -367,7 +368,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel1.add(jTFId, gridBagConstraints);
 
 		jLabel3.setLabelFor(jTFPaese);
-		jLabel3.setText("Paese"); // NOI18N
+		jLabel3.setText(Messages.getString("MonetaViewer.5")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
@@ -391,7 +392,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel1.add(jTFPaese, gridBagConstraints);
 
 		jLabel5.setLabelFor(jTFNominale);
-		jLabel5.setText("Nomin."); // NOI18N
+		jLabel5.setText(Messages.getString("Generic.26")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
@@ -409,7 +410,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel1.add(jTFNominale, gridBagConstraints);
 
 		jLabel6.setLabelFor(jTFAnno);
-		jLabel6.setText("Anno"); // NOI18N
+		jLabel6.setText(Messages.getString("Generic.1")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 3;
@@ -427,7 +428,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel1.add(jTFAnno, gridBagConstraints);
 
 		jLabelAutorita.setLabelFor(jLAutorita);
-		jLabelAutorita.setText("Autorita"); // NOI18N
+		jLabelAutorita.setText(Messages.getString("MonetaViewer.8")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 4;
@@ -460,7 +461,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel1.add(jScrollPane4, gridBagConstraints);
 
 		jLabel13.setLabelFor(jTFPeso);
-		jLabel13.setText("Peso"); // NOI18N
+		jLabel13.setText(Messages.getString("MonetaViewer.10")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 6;
@@ -478,7 +479,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel1.add(jTFPeso, gridBagConstraints);
 
 		jLabel17.setLabelFor(jTFDiametro);
-		jLabel17.setText("Diametro"); // NOI18N
+		jLabel17.setText(Messages.getString("MonetaViewer.11")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 7;
@@ -496,7 +497,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel1.add(jTFDiametro, gridBagConstraints);
 
 		jLabel15.setLabelFor(jTFForma);
-		jLabel15.setText("Forma"); // NOI18N
+		jLabel15.setText(Messages.getString("MonetaViewer.12")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 8;
@@ -514,7 +515,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel1.add(jTFForma, gridBagConstraints);
 
 		jLabel16.setLabelFor(jTFMetallo);
-		jLabel16.setText("Metallo"); // NOI18N
+		jLabel16.setText(Messages.getString("MonetaViewer.13")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 9;
@@ -531,8 +532,8 @@ public class MonetaViewer extends javax.swing.JPanel {
 		gridBagConstraints.weightx = 1.0;
 		jPanel1.add(jTFMetallo, gridBagConstraints);
 
-		jBAddAutorita.setFont(new java.awt.Font("Dialog", 0, 10));
-		jBAddAutorita.setText("+");
+		jBAddAutorita.setFont(new java.awt.Font("Dialog", 0, 10)); //$NON-NLS-1$
+		jBAddAutorita.setText("+"); //$NON-NLS-1$
 		jBAddAutorita.setInheritsPopupMenu(true);
 		jBAddAutorita.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		jBAddAutorita.setMaximumSize(new java.awt.Dimension(25, 25));
@@ -555,7 +556,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel2.setLayout(new java.awt.GridBagLayout());
 
 		jLabelZecca.setLabelFor(jTFZecca);
-		jLabelZecca.setText("Zecca"); // NOI18N
+		jLabelZecca.setText(Messages.getString("MonetaViewer.16")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -564,7 +565,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel2.add(jLabelZecca, gridBagConstraints);
 
 		jLabelZecchiere.setLabelFor(jLZecchiere);
-		jLabelZecchiere.setText("Zecchiere"); // NOI18N
+		jLabelZecchiere.setText(Messages.getString("MonetaViewer.17")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
@@ -574,7 +575,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 
 		jScrollPane7.setInheritsPopupMenu(true);
 
-		jLZecchiere.setFont(new java.awt.Font("Dialog", 0, 12));
+		jLZecchiere.setFont(new java.awt.Font("Dialog", 0, 12)); //$NON-NLS-1$
 		jLZecchiere
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jLZecchiere.setCellRenderer(new GenericCellRenderer<Zecchiere>());
@@ -599,7 +600,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 
 		jScrollPane1.setInheritsPopupMenu(true);
 
-		jLLetteratura.setFont(new java.awt.Font("Dialog", 0, 11));
+		jLLetteratura.setFont(new java.awt.Font("Dialog", 0, 11)); //$NON-NLS-1$
 		jLLetteratura
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jLLetteratura
@@ -622,7 +623,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		gridBagConstraints.weighty = 1.0;
 		jPanel2.add(jScrollPane1, gridBagConstraints);
 
-		jLabelLetteratura.setText("Letteratura");
+		jLabelLetteratura.setText(Messages.getString("MonetaViewer.14")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 3;
@@ -635,8 +636,8 @@ public class MonetaViewer extends javax.swing.JPanel {
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 		jPanel2.add(jTFZecca, gridBagConstraints);
 
-		jBAddZecchiere.setFont(new java.awt.Font("Dialog", 0, 10));
-		jBAddZecchiere.setText("+");
+		jBAddZecchiere.setFont(new java.awt.Font("Dialog", 0, 10)); //$NON-NLS-1$
+		jBAddZecchiere.setText("+"); //$NON-NLS-1$
 		jBAddZecchiere.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		jBAddZecchiere.setMaximumSize(new java.awt.Dimension(25, 25));
 		jBAddZecchiere.setMinimumSize(new java.awt.Dimension(25, 25));
@@ -653,8 +654,8 @@ public class MonetaViewer extends javax.swing.JPanel {
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
 		jPanel2.add(jBAddZecchiere, gridBagConstraints);
 
-		jBAddLetteratura.setFont(new java.awt.Font("Dialog", 0, 10));
-		jBAddLetteratura.setText("+");
+		jBAddLetteratura.setFont(new java.awt.Font("Dialog", 0, 10)); //$NON-NLS-1$
+		jBAddLetteratura.setText("+"); //$NON-NLS-1$
 		jBAddLetteratura.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		jBAddLetteratura.setMaximumSize(new java.awt.Dimension(25, 25));
 		jBAddLetteratura.setMinimumSize(new java.awt.Dimension(25, 25));
@@ -675,7 +676,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel3.setInheritsPopupMenu(true);
 		jPanel3.setLayout(new java.awt.GridBagLayout());
 
-		jLabel12.setText("Note");
+		jLabel12.setText(Messages.getString("Generic.20")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -684,7 +685,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel3.add(jLabel12, gridBagConstraints);
 
 		jLabel11.setLabelFor(jTFPosizione);
-		jLabel11.setText("Pos."); // NOI18N
+		jLabel11.setText(Messages.getString("MonetaViewer.18")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 4;
@@ -693,7 +694,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel3.add(jLabel11, gridBagConstraints);
 
 		jLabel1.setLabelFor(JTFLuogo);
-		jLabel1.setText("Luogo"); // NOI18N
+		jLabel1.setText(Messages.getString("MonetaViewer.19")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 5;
@@ -701,7 +702,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
 		jPanel3.add(jLabel1, gridBagConstraints);
 
-		jLabel9.setText("Data"); // NOI18N
+		jLabel9.setText(Messages.getString("MonetaViewer.20")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 6;
@@ -710,7 +711,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jPanel3.add(jLabel9, gridBagConstraints);
 
 		jLabel10.setLabelFor(jTFPrezzo);
-		jLabel10.setText("Prezzo"); // NOI18N
+		jLabel10.setText(Messages.getString("MonetaViewer.21")); // NOI18N //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 7;
@@ -736,7 +737,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		gridBagConstraints.weightx = 1.0;
 		jPanel3.add(JTFLuogo, gridBagConstraints);
 
-		jDateChooser1.setDateFormatString("dd-MM-yyyy");
+		jDateChooser1.setDateFormatString("dd-MM-yyyy"); //$NON-NLS-1$
 		jDateChooser1.setInheritsPopupMenu(true);
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
@@ -756,7 +757,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 
 		jScrollPane2.setInheritsPopupMenu(true);
 
-		jLNote.setFont(new java.awt.Font("Dialog", 0, 11));
+		jLNote.setFont(new java.awt.Font("Dialog", 0, 11)); //$NON-NLS-1$
 		jLNote.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jLNote.setCellRenderer(new GenericCellRenderer<String>());
 		jLNote.setInheritsPopupMenu(true);
@@ -775,8 +776,8 @@ public class MonetaViewer extends javax.swing.JPanel {
 		gridBagConstraints.weighty = 0.5;
 		jPanel3.add(jScrollPane2, gridBagConstraints);
 
-		jBAddNote.setFont(new java.awt.Font("Dialog", 0, 10));
-		jBAddNote.setText("+");
+		jBAddNote.setFont(new java.awt.Font("Dialog", 0, 10)); //$NON-NLS-1$
+		jBAddNote.setText("+"); //$NON-NLS-1$
 		jBAddNote.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		jBAddNote.setMaximumSize(new java.awt.Dimension(25, 25));
 		jBAddNote.setMinimumSize(new java.awt.Dimension(25, 25));
@@ -815,7 +816,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		gridBagConstraints.weighty = 0.5;
 		jPanel3.add(jScrollPane3, gridBagConstraints);
 
-		jLabel4.setText("Doc");
+		jLabel4.setText(Messages.getString("MonetaViewer.22")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
@@ -823,8 +824,8 @@ public class MonetaViewer extends javax.swing.JPanel {
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		jPanel3.add(jLabel4, gridBagConstraints);
 
-		jBAddDoc.setFont(new java.awt.Font("Dialog", 0, 10));
-		jBAddDoc.setText("+");
+		jBAddDoc.setFont(new java.awt.Font("Dialog", 0, 10)); //$NON-NLS-1$
+		jBAddDoc.setText("+"); //$NON-NLS-1$
 		jBAddDoc.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		jBAddDoc.setMaximumSize(new java.awt.Dimension(25, 25));
 		jBAddDoc.setMinimumSize(new java.awt.Dimension(25, 25));
@@ -905,7 +906,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 										.addContainerGap()));
 
 		jPanelDritto.setBorder(javax.swing.BorderFactory
-				.createTitledBorder("Dritto"));
+				.createTitledBorder(Messages.getString("MonetaViewer.23"))); //$NON-NLS-1$
 		jPanelDritto.setInheritsPopupMenu(true);
 		jPanelDritto.setLayout(new java.awt.BorderLayout());
 
@@ -914,7 +915,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 				java.awt.BorderLayout.PAGE_START);
 
 		jPanelRovescio.setBorder(javax.swing.BorderFactory
-				.createTitledBorder("Rovescio"));
+				.createTitledBorder(Messages.getString("MonetaViewer.24"))); //$NON-NLS-1$
 		jPanelRovescio.setInheritsPopupMenu(true);
 		jPanelRovescio.setLayout(new java.awt.BorderLayout());
 
@@ -923,7 +924,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 				java.awt.BorderLayout.CENTER);
 
 		jPanelTaglio.setBorder(javax.swing.BorderFactory
-				.createTitledBorder("Taglio"));
+				.createTitledBorder(Messages.getString("MonetaViewer.25"))); //$NON-NLS-1$
 		jPanelTaglio.setInheritsPopupMenu(true);
 		jPanelTaglio.setLayout(new java.awt.BorderLayout());
 
@@ -1133,7 +1134,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		} else if (!evt.isPopupTrigger()) {
 			// genera una stringa per cercare l'autorita concatenandola con il
 			// Paese
-			String s = (jLAutorita.getSelectedValue() + " " + jTFPaese
+			String s = (jLAutorita.getSelectedValue() + " " + jTFPaese //$NON-NLS-1$
 					.getText());
 			this.openBrowser(s);
 		}
@@ -1256,10 +1257,10 @@ public class MonetaViewer extends javax.swing.JPanel {
 	 * @param itemToSearch
 	 */
 	private void openBrowser(String itemToSearch) {
-		String search = itemToSearch.replace(" ", "+");
+		String search = itemToSearch.replace(" ", "+"); //$NON-NLS-1$ //$NON-NLS-2$
 		// ottiene l'uri per la ricerca con google
 		String uri = String.format(
-				"http://www.google.it/#sclient=psy&&q=%s&fp=1", search);
+				"http://www.google.it/#sclient=psy&&q=%s&fp=1", search); //$NON-NLS-1$
 		try {
 			GenericUtil.openBrowser(new URI(uri));
 		} catch (URISyntaxException e) {
@@ -1304,20 +1305,20 @@ public class MonetaViewer extends javax.swing.JPanel {
 		try {
 			String id = this.mng.getId();
 			// ottiene il nome del file da scrivere
-			String outFile = Common.getCommon().getMoneteDir() + "/" + id + "/"
-					+ id + ".xml";
+			String outFile = Common.getCommon().getMoneteDir() + "/" + id + "/" //$NON-NLS-1$ //$NON-NLS-2$
+					+ id + ".xml"; //$NON-NLS-1$
 			// ottiene il nome del file di backup
-			String oldFileRen = Common.getCommon().getBackupDir() + "/" + id
-					+ "-" + Calendar.getInstance().getTimeInMillis() + ".xml";
+			String oldFileRen = Common.getCommon().getBackupDir() + "/" + id //$NON-NLS-1$
+					+ "-" + Calendar.getInstance().getTimeInMillis() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
 			// esegue il backup
 			FileUtils.copyFile(new File(outFile), new File(oldFileRen));
 			// salva il file
-			this.mng.writeXml(this.mng.getJaxbObject(), "XmlData.Moneta",
+			this.mng.writeXml(this.mng.getJaxbObject(), "XmlData.Moneta", //$NON-NLS-1$
 					outFile);
 			// Log
 			History.addEvent(History.MODIFY, id);
 			String msg = String.format(
-					"Salvato %s. Il file vecchio e' stato salvato in %s",
+					Messages.getString("MonetaViewer.26"), //$NON-NLS-1$
 					outFile, oldFileRen);
 			MainFrame.setMessage(new Message(msg, Level.INFO));
 		} catch (IOException ex) {

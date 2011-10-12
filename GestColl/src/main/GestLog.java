@@ -22,7 +22,7 @@ public class GestLog {
 	@SuppressWarnings("rawtypes")
 	public static void Error(Class source, Exception e) {
 		JOptionPane.showMessageDialog(null,
-				source.getName() + ": " + e.getMessage(), Common.APPNAME,
+				source.getName() + ": " + e.getMessage(), Common.APPNAME, //$NON-NLS-1$
 				JOptionPane.ERROR_MESSAGE);
 		Logger.getLogger(source.getName()).logp(Level.SEVERE, source.getName(),
 				null, null, e);

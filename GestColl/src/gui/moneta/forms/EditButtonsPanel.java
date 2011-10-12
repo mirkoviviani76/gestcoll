@@ -26,18 +26,18 @@ import javax.swing.JTextArea;
 public class EditButtonsPanel extends javax.swing.JPanel {
 
 	private JButton buttons[];
-	private String buttonsValue[] = { "\u00C4", "\u00D6", "\u00DC", "\u00E4",
-			"\u00F6", "\u00FC", "\u00DF", "\u02D9", "\u00B7", "\u2022",
-			"\u2042", "\u2043", "\u25C6", "\u25C7", "\u25CA", "\u25CB",
-			"\u25CC", "\u25CF", "\u2716", "\u2719", "\u271A", "\u271B",
-			"\u271C", "\u2720", "\u2722", "\u2723", "\u2724", "\u2725",
-			"\u2726", "\u2727", "\u2729", "\u272A", "\u272B", "\u272C",
-			"\u272D", "\u272E", "\u272F", "\u2730", "\u2731", "\u2732",
-			"\u2733", "\u2734", "\u2735", "\u2736", "\u2737", "\u2738",
-			"\u2739", "\u273A", "\u273B", "\u273C", "\u273D", "\u273E",
-			"\u273F", "\u2740", "\u2741", "\u2742", "\u2743", "\u2744",
-			"\u2745", "\u2746", "\u2747", "\u2748", "\u2749", "\u274A",
-			"\u274B" };
+	private String buttonsValue[] = { "\u00C4", "\u00D6", "\u00DC", "\u00E4", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			"\u00F6", "\u00FC", "\u00DF", "\u02D9", "\u00B7", "\u2022", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+			"\u2042", "\u2043", "\u25C6", "\u25C7", "\u25CA", "\u25CB", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+			"\u25CC", "\u25CF", "\u2716", "\u2719", "\u271A", "\u271B", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+			"\u271C", "\u2720", "\u2722", "\u2723", "\u2724", "\u2725", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+			"\u2726", "\u2727", "\u2729", "\u272A", "\u272B", "\u272C", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+			"\u272D", "\u272E", "\u272F", "\u2730", "\u2731", "\u2732", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+			"\u2733", "\u2734", "\u2735", "\u2736", "\u2737", "\u2738", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+			"\u2739", "\u273A", "\u273B", "\u273C", "\u273D", "\u273E", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+			"\u273F", "\u2740", "\u2741", "\u2742", "\u2743", "\u2744", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+			"\u2745", "\u2746", "\u2747", "\u2748", "\u2749", "\u274A", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+			"\u274B" }; //$NON-NLS-1$
 
 	/** Creates new form EditButtonsPanel */
 	public EditButtonsPanel() {

@@ -124,7 +124,7 @@ public class DocumentoAddizionale {
 
 	@Override
 	public String toString() {
-		return "" + (descrizione != null ? "" + descrizione : "") + "";
+		return "" + (descrizione != null ? "" + descrizione : "") + ""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 	}
     
     

@@ -13,6 +13,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import Resources.i18n.Messages;
+
 import main.Common;
 import main.GestLog;
 import exceptions.XmlException;
@@ -37,12 +39,12 @@ public class BibliotecaXml extends GestXml {
 		super(new File(Common.getCommon().getBiblioXml()));
 		File xml = new File(Common.getCommon().getBiblioXml());
 		if (!xml.exists()) {
-			GestLog.Message(this.getClass(), "Biblioteca.xml non trovato", true);
+			GestLog.Message(this.getClass(), Messages.getString("BibliotecaXml.0"), true); //$NON-NLS-1$
 			System.exit(-1);
 		}
 			
 		try {
-			JAXBContext jc = JAXBContext.newInstance("XmlData.Biblioteca");
+			JAXBContext jc = JAXBContext.newInstance("XmlData.Biblioteca"); //$NON-NLS-1$
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			/* posso fare il cast perche' le classi contengono @XmlRootElement se
 			 * altrimenti si doveva fare JAXBElement<tipo> elem = (JAXBElement<tipo>)unmarshaller.unmarshal(xml)
@@ -51,7 +53,7 @@ public class BibliotecaXml extends GestXml {
 			biblio = (XmlData.Biblioteca.Biblioteca) unmarshaller
 					.unmarshal(xml);
 		} catch (JAXBException e) {
-			throw new XmlException("BibliotecaXml(), file: "+xml.getAbsolutePath(), e);
+			throw new XmlException("BibliotecaXml()"+Messages.getString("Generic.5")+xml.getAbsolutePath(), e); //$NON-NLS-1$
 		}
 
 	}

@@ -21,6 +21,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import Resources.i18n.Messages;
+
 import main.Common;
 import exceptions.InternalGestCollError;
 import exceptions.XmlException;
@@ -70,18 +72,18 @@ public class GestXml {
 			Marshaller m = jc.createMarshaller();
 			// richiede un output formattato
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-			m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+			m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8"); //$NON-NLS-1$
 
 			// Esegue il marshalling dell'oggetto nel file.
 			m.marshal(myJAXBObject, fos);
 
 			fos.close();
 		} catch (JAXBException e) {
-			throw new XmlException("writeXml()", e);
+			throw new XmlException("writeXml() "+Messages.getString("Generic.12"), e); //$NON-NLS-1$
 		} catch (FileNotFoundException e) {
-			throw new XmlException("writeXml() file not found", e);
+			throw new XmlException("writeXml() "+Messages.getString("Generic.13"), e); //$NON-NLS-1$
 		} catch (IOException e) {
-			throw new XmlException("writeXml() error writing file ", e);
+			throw new XmlException("writeXml() "+Messages.getString("Generic.14"), e); //$NON-NLS-1$
 		}
 
 	}
@@ -107,9 +109,9 @@ public class GestXml {
 			transformer.transform(new StreamSource(this.xmlFile),
 					new StreamResult(strWriter));
 		} catch (TransformerConfigurationException e) {
-			throw new XsltException("xsltConvert()", e);
+			throw new XsltException("XsltConvert()", e); //$NON-NLS-1$
 		} catch (TransformerException e) {
-			throw new XsltException("xsltConvert()", e);
+			throw new XsltException("XsltConvert()", e); //$NON-NLS-1$
 		}
 		return strWriter.toString();
 	}
@@ -135,11 +137,11 @@ public class GestXml {
 			transformer.transform(new StreamSource(this.xmlFile),
 					new StreamResult(new FileOutputStream(outFile)));
 		} catch (TransformerConfigurationException e) {
-			throw new XsltException("xsltConvert(): transform failed. ", e);
+			throw new XsltException("XsltConvert() " +Messages.getString("GestXml.6"), e); //$NON-NLS-1$
 		} catch (TransformerException e) {
-			throw new XsltException("xsltConvert(): transform failed. ", e);
+			throw new XsltException("XsltConvert() " +Messages.getString("GestXml.6"), e); //$NON-NLS-1$
 		} catch (FileNotFoundException e) {
-			throw new XsltException("xsltConvert(): outputfile not found . ", e);
+			throw new XsltException("XsltConvert() " +Messages.getString("GestXml.7"), e); //$NON-NLS-1$
 		}
 	}
 

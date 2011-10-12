@@ -5,6 +5,8 @@
 
 package gui.moneta.forms;
 
+import Resources.i18n.Messages;
+
 /**
  *
  * 
@@ -94,7 +96,7 @@ public class NotaForm extends javax.swing.JDialog {
 			}
 		});
 
-		okButton.setText("OK");
+		okButton.setText(Messages.getString("Generic.OK")); //$NON-NLS-1$
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +104,7 @@ public class NotaForm extends javax.swing.JDialog {
 			}
 		});
 
-		cancelButton.setText("Cancel");
+		cancelButton.setText(Messages.getString("Generic.2")); //$NON-NLS-1$
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +114,7 @@ public class NotaForm extends javax.swing.JDialog {
 
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jLabel1.setText("Nota");
+		jLabel1.setText(Messages.getString("NotaForm.2")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -202,9 +204,9 @@ public class NotaForm extends javax.swing.JDialog {
 
 		/* cambia il testo del bottone ok */
 		if (flag) {
-			this.okButton.setText("Modifica");
+			this.okButton.setText(Messages.getString("Generic.6")); //$NON-NLS-1$
 		} else {
-			this.okButton.setText("OK");
+			this.okButton.setText(Messages.getString("Generic.OK")); //$NON-NLS-1$
 		}
 	}
 

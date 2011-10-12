@@ -10,8 +10,4 @@
 	<ambito>Guerra dei trenta anni</ambito>
 </ambiti>
 
-- internazionalizzazione?
-
 - wiki?
-
-- spostare la cartella "data" nella stessa dir del jar (per distribuire il package).

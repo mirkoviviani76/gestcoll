@@ -15,6 +15,7 @@ import javax.xml.bind.Unmarshaller;
 
 import main.Common;
 import main.GestLog;
+import Resources.i18n.Messages;
 import XmlData.Links.Linklist;
 import exceptions.XmlException;
 import gestXml.data.Link;
@@ -36,12 +37,12 @@ public class LinksXml extends GestXml {
 	public LinksXml() throws XmlException {
 		super(new File(Common.getCommon().getLinksXml()));
 		if (!new File(Common.getCommon().getLinksXml()).exists()) {
-			GestLog.Message(this.getClass(), "Links.xml non trovato", true);
+			GestLog.Message(this.getClass(), Messages.getString("LinksXml.0"), true); //$NON-NLS-1$
 			System.exit(-1);
 		}
 		links = new ArrayList<gestXml.data.Link>();
 		try {
-			JAXBContext jc = JAXBContext.newInstance("XmlData.Links");
+			JAXBContext jc = JAXBContext.newInstance("XmlData.Links"); //$NON-NLS-1$
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			/* posso fare il cast perche' le classi contengono @XmlRootElement se
 			 * altrimenti si doveva fare JAXBElement<tipo> elem = (JAXBElement<tipo>)unmarshaller.unmarshal(xml)
@@ -61,7 +62,7 @@ public class LinksXml extends GestXml {
 
 			}
 		} catch (JAXBException e) {
-			throw new XmlException("LinksXml()", e);
+			throw new XmlException(Messages.getString("LinksXml.2"), e); //$NON-NLS-1$
 		}
 
 	}

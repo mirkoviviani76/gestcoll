@@ -15,6 +15,8 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
+import Resources.i18n.Messages;
+
 /**
  * 
  * @author intecs
@@ -149,7 +151,7 @@ public final class DescrizioneForm extends javax.swing.JDialog {
 		gridBagConstraints.weighty = 1.0;
 		getContentPane().add(jPanel1, gridBagConstraints);
 
-		okButton.setText("OK");
+		okButton.setText(Messages.getString("Generic.OK")); //$NON-NLS-1$
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +159,7 @@ public final class DescrizioneForm extends javax.swing.JDialog {
 			}
 		});
 
-		cancelButton.setText("Cancel");
+		cancelButton.setText(Messages.getString("Generic.2")); //$NON-NLS-1$
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {

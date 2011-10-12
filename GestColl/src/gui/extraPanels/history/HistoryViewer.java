@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import Resources.i18n.Messages;
+
 import main.GestLog;
 
 /**
@@ -80,7 +82,7 @@ public class HistoryViewer extends javax.swing.JDialog {
 			}
 		});
 
-		okButton.setText("OK");
+		okButton.setText(Messages.getString("Generic.OK")); //$NON-NLS-1$
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,10 +131,10 @@ public class HistoryViewer extends javax.swing.JDialog {
 	public void showFile(File f) {
 		try {
 			BufferedReader bis = new BufferedReader(new FileReader(f));
-			String allFile = "";
-			String temp = "";
+			String allFile = ""; //$NON-NLS-1$
+			String temp = ""; //$NON-NLS-1$
 			while ((temp = bis.readLine()) != null) {
-				allFile = allFile + temp + "\n";
+				allFile = allFile + temp + "\n"; //$NON-NLS-1$
 			}
 			this.jTextPane1.setText(allFile);
 			this.setTitle(f.getName());

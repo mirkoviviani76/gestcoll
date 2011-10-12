@@ -80,7 +80,7 @@ public class XmlDocumentChangeListener implements DocumentListener,
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if (evt.getPropertyName().equals("date")) {
+		if (evt.getPropertyName().equals("date")) { //$NON-NLS-1$
 			// la data va convertita nel formato xml normale
 			Date d = (Date) (evt.getNewValue());
 			DateFormat out = new SimpleDateFormat(Common.DATE_XML_FORMAT);

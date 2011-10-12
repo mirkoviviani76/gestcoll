@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import main.Common;
+import Resources.i18n.Messages;
 import XmlData.Moneta.Legenda;
 
 /**
@@ -54,7 +55,7 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 	/** costruttore fittizio per gui creator */
 	public MonetaDescrizione() {
 		initComponents();
-		origImgFilename = "";
+		origImgFilename = ""; //$NON-NLS-1$
 		lato = null;
 		mng = null;
 	}
@@ -66,7 +67,7 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 	 */
 	public MonetaDescrizione(Common.Lato _lato) {
 		initComponents();
-		origImgFilename = "";
+		origImgFilename = ""; //$NON-NLS-1$
 		lato = _lato;
 		isEditingMode = false;
 	}
@@ -106,9 +107,9 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 		jLLegende = new javax.swing.JList();
 		jButton1 = new javax.swing.JButton();
 
-		jLabel2.setText("Descrizione"); // NOI18N
+		jLabel2.setText(Messages.getString("Generic.19")); // NOI18N //$NON-NLS-1$
 
-		jLabel3.setText("Legenda"); // NOI18N
+		jLabel3.setText(Messages.getString("Generic.22")); // NOI18N //$NON-NLS-1$
 
 		jImmagine.setBackground(new java.awt.Color(255, 255, 255));
 		jImmagine.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -134,7 +135,7 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 		});
 		jScrollPane2.setViewportView(jTADescrizione);
 
-		jLLegende.setFont(new java.awt.Font("Dialog", 0, 11));
+		jLLegende.setFont(new java.awt.Font("Dialog", 0, 11)); //$NON-NLS-1$
 		jLLegende
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jLLegende.setCellRenderer(new GenericCellRenderer<Legenda>());
@@ -148,7 +149,7 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 		});
 		jScrollPane1.setViewportView(jLLegende);
 
-		jButton1.setText("+");
+		jButton1.setText("+"); //$NON-NLS-1$
 		jButton1.setMargin(new java.awt.Insets(0, 0, 0, 0));
 		jButton1.setMaximumSize(new java.awt.Dimension(25, 25));
 		jButton1.setMinimumSize(new java.awt.Dimension(25, 25));
@@ -264,7 +265,7 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 	 * @param evt
 	 */
 	private void jImmagineMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jImmagineMouseClicked
-		if (!this.origImgFilename.equals("")) {
+		if (!this.origImgFilename.equals("")) { //$NON-NLS-1$
 			// ingrandisce l'immagine in un dialogo esterno
 			MonetaImgViewer miv = new MonetaImgViewer(
 					(JFrame) SwingUtilities.getRoot(this), false);

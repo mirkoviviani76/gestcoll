@@ -112,8 +112,8 @@ public class MisuraControl extends javax.swing.JPanel {
 	 */
 	public void setMisura(Misura m) {
 
-		String val = "";
-		String un = "";
+		String val = ""; //$NON-NLS-1$
+		String un = ""; //$NON-NLS-1$
 		if (m != null) {
 			if (m.getValore() != null) {
 				val = m.getValore().toPlainString();
