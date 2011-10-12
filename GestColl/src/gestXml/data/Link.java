@@ -63,8 +63,8 @@ public class Link implements Comparable<Link> {
 
 	public String toHtml() {
 		String ret;
-		ret = "<html><a href=\"" + this.url + "\">" + this.nome + "</a> <br>"
-				+ this.note + "</html>";
+		ret = "<html><a href=\"" + this.url + "\">" + this.nome + "</a> <br>" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				+ this.note + "</html>"; //$NON-NLS-1$
 		return ret;
 	}
 

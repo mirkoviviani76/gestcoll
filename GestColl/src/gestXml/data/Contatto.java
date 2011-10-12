@@ -41,7 +41,7 @@ public class Contatto implements Comparable<Contatto> {
 
 	@Override
 	public String toString() {
-		return nome + ": " + email + " " + note;
+		return nome + ": " + email + " " + note; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 }

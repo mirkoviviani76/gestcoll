@@ -38,6 +38,8 @@ import main.Progress;
 
 import org.xml.sax.SAXException;
 
+import Resources.i18n.Messages;
+
 import works.CollectionWorker;
 import works.MoneteXml2Etichette;
 import works.MoneteXml2Html;
@@ -62,11 +64,11 @@ import gui.moneta.forms.AddMonetaForm;
 public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		ActionListener {
 
-	private final static String NEW_MONETA_TEMPLATE = "/Resources/templates/instance.xml.template";
+	private final static String NEW_MONETA_TEMPLATE = "/Resources/templates/instance.xml.template"; //$NON-NLS-1$
 	
-	private final static String ORDER_BY_ID = "Ordina per ID";
-	private final static String ORDER_BY_PAESE = "Ordina per Paese";
-	private final static String ORDER_BY_REVISIONE = "Ordina per Revisione";
+	private final static String ORDER_BY_ID = Messages.getString("MonetePanel.1"); //$NON-NLS-1$
+	private final static String ORDER_BY_PAESE = Messages.getString("MonetePanel.2"); //$NON-NLS-1$
+	private final static String ORDER_BY_REVISIONE = Messages.getString("MonetePanel.3"); //$NON-NLS-1$
 	private static final long serialVersionUID = 1L;
 	private javax.swing.JButton jBAdd;
 	private javax.swing.JButton jBCerca;
@@ -146,7 +148,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		this.monetaViewer1.setVisible(false);
 		this.addActionListener();
 		this.lastSearchedIndex = 0;
-		this.lastSearchedText = "";
+		this.lastSearchedText = ""; //$NON-NLS-1$
 	}
 
 	@Override
@@ -162,7 +164,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 							Common.getCommon().getLatexDir()), null);
 		} else if (ae.getSource() == jButtonWiki) {
 			//mostra un messaggio
-			JOptionPane.showMessageDialog(null, "TODO: wiki", Common.APPNAME,
+			JOptionPane.showMessageDialog(null, Messages.getString("MonetePanel.5"), Common.APPNAME, //$NON-NLS-1$
 					JOptionPane.INFORMATION_MESSAGE);
 		} else if (ae.getSource() == jBAdd) {
 			try {
@@ -227,7 +229,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 			}
 		} else {
 			// azione non gestita
-			GestLog.Error(MonetePanel.class, "ActionListener", "Unhandled: "
+			GestLog.Error(MonetePanel.class, "ActionListener", Messages.getString("Generic.11") //$NON-NLS-1$ //$NON-NLS-2$
 					+ ae.getActionCommand());
 		}
 	}
@@ -256,7 +258,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 						if (evt.getClickCount() == 2) {
 							String valore = monetaViewer1.jTFPosizione
 									.getText();
-							String[] posizione = valore.split(" ");
+							String[] posizione = valore.split(" "); //$NON-NLS-1$
 							String cont = posizione[0];
 							String vass = posizione[1];
 							String r = posizione[2];
@@ -269,7 +271,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 							/* cerca la tab che contiene la moneta */
 							// costruisce il nome: lo spazio distingue 6/1 da
 							// 6/10
-							String nomeVassoio = String.format("%s/%s", cont,
+							String nomeVassoio = String.format("%s/%s", cont, //$NON-NLS-1$
 									vass);
 							vassoi.setSelectedIndex(vassoi
 									.indexOfTab(nomeVassoio));
@@ -294,22 +296,22 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		am.setVisible(true);
 		if (am.getReturnStatus() == AddMonetaForm.RET_OK) {
 			String id = am.getId();
-			File newDir = new File(Common.getCommon().getMoneteDir() + "/" + id);
+			File newDir = new File(Common.getCommon().getMoneteDir() + "/" + id); //$NON-NLS-1$
 			// crea dir
 			boolean success = newDir.mkdir();
 			if (success) {
 				try {
-					String imgD = id + "-D.jpg";
-					String imgR = id + "-R.jpg";
+					String imgD = id + "-D.jpg"; //$NON-NLS-1$
+					String imgR = id + "-R.jpg"; //$NON-NLS-1$
 					// sistema un po' di dati per le conversioni
-					String[][] conversione = { { "%ID", id },
-							{ "%IMG_D", imgD }, { "%IMG_R", imgR },
-							{ "%CONTENITORE", "6" }, { "%VASSOIO", "0" },
-							{ "%RIGA", "0" }, { "%COLONNA", "0" } };
+					String[][] conversione = { { "%ID", id }, //$NON-NLS-1$
+							{ "%IMG_D", imgD }, { "%IMG_R", imgR }, //$NON-NLS-1$ //$NON-NLS-2$
+							{ "%CONTENITORE", "6" }, { "%VASSOIO", "0" }, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+							{ "%RIGA", "0" }, { "%COLONNA", "0" } }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 					// copia file template di istanza e sistema l'attributo e le
 					// immagini
-					String newXml = Common.getCommon().getMoneteDir() + "/"
-							+ id + "/" + id + ".xml";
+					String newXml = Common.getCommon().getMoneteDir() + "/" //$NON-NLS-1$
+							+ id + "/" + id + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
 					InputStream is = Common.getCommon().getResource(NEW_MONETA_TEMPLATE);
 					GenericUtil.fillTemplate(is, newXml, conversione);
 					// ricarica la lista
@@ -318,15 +320,15 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 									MonetaXml.Ordering.BY_ID));
 					// messaggio di conferma
 					History.addEvent(History.ADD, id);
-					String msg = "AGGIUNTA con successo: " + id;
+					String msg = Messages.getString("MonetePanel.27") + id; //$NON-NLS-1$
 					MainFrame.setMessage(new Message(msg, Level.INFO));
 				} catch (IOException ex) {
-					System.out.println("ERRORE");
+					System.out.println(Messages.getString("Generic.ERROR")); //$NON-NLS-1$
 					GestLog.Error(MonetePanel.class, ex);
 				}
 			} else {
-				GestLog.Error(MonetePanel.class, "addMoneta",
-						"Impossibile creare directory " + id);
+				GestLog.Error(MonetePanel.class, "addMoneta", //$NON-NLS-1$
+						Messages.getString("MonetePanel.30") + id); //$NON-NLS-1$
 			}
 		}
 	}
@@ -341,11 +343,11 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	public void disegnaVassoi() throws XmlException {
 		ContenitoriXml disp = new ContenitoriXml();
 		JTabbedPane vassoiContainer = new JTabbedPane();
-		this.jTabbedPane1.add("Vassoi", vassoiContainer);
+		this.jTabbedPane1.add(Messages.getString("MonetePanel.31"), vassoiContainer); //$NON-NLS-1$
 		HashMap<String, String> posizioni;
 		try {
 			posizioni = disp.getMapPosizioniId();
-			Armadio a = disp.getArmadio("SRI");
+			Armadio a = disp.getArmadio("SRI"); //$NON-NLS-1$
 			List<Integer> contenitori = new ArrayList<Integer>(
 					a.armadio.keySet());
 			/* ordina i contenitori */
@@ -368,7 +370,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 					// riempie la tabella
 					curVassPanel.riempieDati(v.righe, v.colonne, s);
 					// aggiunge la tab
-					String nomeTab = String.format("%d/%d", cont, vass);
+					String nomeTab = String.format("%d/%d", cont, vass); //$NON-NLS-1$
 					vassoiContainer.add(nomeTab, curVassPanel);
 				}
 			}
@@ -393,7 +395,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		for (int i = 1; i <= v.righe; i++) {
 			for (int j = 1; j <= v.colonne; j++) {
 				// costruisce la presunta chiave
-				String pos = a.nome + "-" + c.id + "-" + v.id + "-" + i + "-"
+				String pos = a.nome + "-" + c.id + "-" + v.id + "-" + i + "-" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 						+ j;
 				// le righe sono invertite
 				if (posizioni.containsKey(pos)) {
@@ -401,7 +403,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 					matrice[v.righe - i][j - 1] = posizioni.get(pos);
 				} else {
 					// se la chiave non esite stampa un po' di puntini
-					matrice[v.righe - i][j - 1] = "";
+					matrice[v.righe - i][j - 1] = ""; //$NON-NLS-1$
 				}
 			}
 		}
@@ -448,7 +450,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jToolBar1.setRollover(true);
 
 		jButtonXml2Tex.setMnemonic('X');
-		jButtonXml2Tex.setText("->Tex");
+		jButtonXml2Tex.setText(Messages.getString("MonetePanel.39")); //$NON-NLS-1$
 		jButtonXml2Tex.setFocusable(false);
 		jButtonXml2Tex
 				.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -457,7 +459,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jToolBar1.add(jButtonXml2Tex);
 
 		jButtonTex2Pdf.setMnemonic('P');
-		jButtonTex2Pdf.setText("->PDF");
+		jButtonTex2Pdf.setText(Messages.getString("MonetePanel.40")); //$NON-NLS-1$
 		jButtonTex2Pdf.setFocusable(false);
 		jButtonTex2Pdf
 				.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -466,7 +468,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jToolBar1.add(jButtonTex2Pdf);
 
 		jButtonXml2Html.setMnemonic('H');
-		jButtonXml2Html.setText("->Html");
+		jButtonXml2Html.setText(Messages.getString("MonetePanel.41")); //$NON-NLS-1$
 		jButtonXml2Html.setFocusable(false);
 		jButtonXml2Html
 				.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -475,20 +477,20 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jToolBar1.add(jButtonXml2Html);
 
 		jButtonQR.setMnemonic('Q');
-		jButtonQR.setText("->QR");
+		jButtonQR.setText(Messages.getString("MonetePanel.42")); //$NON-NLS-1$
 		jButtonQR.setFocusable(false);
 		jButtonQR.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jButtonQR.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 		jToolBar1.add(jButtonQR);
 
-		jButtonWiki.setText("->Wiki");
+		jButtonWiki.setText(Messages.getString("MonetePanel.43")); //$NON-NLS-1$
 		jButtonWiki.setFocusable(false);
 		jButtonWiki
 				.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jButtonWiki.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 		jToolBar1.add(jButtonWiki);
 
-		jBToClipboard.setText("->Clip");
+		jBToClipboard.setText(Messages.getString("MonetePanel.44")); //$NON-NLS-1$
 		jBToClipboard.setFocusable(false);
 		jBToClipboard
 				.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -498,7 +500,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jToolBar1.add(jSeparator3);
 
 		jButtonVerify.setMnemonic('V');
-		jButtonVerify.setText("Verifica");
+		jButtonVerify.setText(Messages.getString("MonetePanel.45")); //$NON-NLS-1$
 		jButtonVerify
 				.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jToolBar1.add(jButtonVerify);
@@ -506,9 +508,9 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jToolBar1.add(jSeparator2);
 
 		jTBEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/Resources/img/EditIcon.png"))); // NOI18N
+				"/Resources/img/EditIcon.png"))); // NOI18N //$NON-NLS-1$
 		jTBEdit.setMnemonic('E');
-		jTBEdit.setText("Edit");
+		jTBEdit.setText(Messages.getString("MonetePanel.47")); //$NON-NLS-1$
 		jTBEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jTBEdit.setMaximumSize(new java.awt.Dimension(55, 25));
 		jTBEdit.setMinimumSize(new java.awt.Dimension(55, 25));
@@ -516,9 +518,9 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jToolBar1.add(jTBEdit);
 
 		jBSalva.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-				"/Resources/img/SaveIcon.png"))); // NOI18N
+				"/Resources/img/SaveIcon.png"))); // NOI18N //$NON-NLS-1$
 		jBSalva.setMnemonic('S');
-		jBSalva.setText("Salva");
+		jBSalva.setText(Messages.getString("MonetePanel.49")); //$NON-NLS-1$
 		jBSalva.setEnabled(false);
 		jBSalva.setFocusable(false);
 		jBSalva.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -528,13 +530,13 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jToolBar1.add(jBSalva);
 		jToolBar1.add(jSeparator4);
 
-		jBAdd.setText("Aggiungi");
+		jBAdd.setText(Messages.getString("Generic.0")); //$NON-NLS-1$
 		jBAdd.setFocusable(false);
 		jBAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jBAdd.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 		jToolBar1.add(jBAdd);
 
-		jBCerca.setText("Cerca");
+		jBCerca.setText(Messages.getString("Generic.18")); //$NON-NLS-1$
 		jBCerca.setFocusable(false);
 		jBCerca.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jBCerca.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -546,7 +548,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 
 		jScrollPane1.setMinimumSize(new java.awt.Dimension(200, 24));
 
-		jListMonete.setFont(new java.awt.Font("Tahoma", 0, 10));
+		jListMonete.setFont(new java.awt.Font("Tahoma", 0, 10)); //$NON-NLS-1$
 		jListMonete.setModel(new gui.datamodels.MonetaListModel(
 				MonetaXml.Ordering.BY_ID));
 		jListMonete
@@ -568,7 +570,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 
 		jScrollPane2.setViewportView(monetaViewer1);
 
-		jTabbedPane1.addTab("Monete", jScrollPane2);
+		jTabbedPane1.addTab(Messages.getString("Generic.24"), jScrollPane2); //$NON-NLS-1$
 
 		jSplitPane1.setRightComponent(jTabbedPane1);
 
@@ -696,18 +698,18 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		pm = new ProgressMonitor(this, null, null, 0, 100);
 		// vrf = new Verify("Verifica", "Verifica XML con XSD");
 		// vrf.addObserver(this);
-		xml2et = new MoneteXml2Etichette("XML -> Etichette",
-				"Generazione di Etichette*.pdf");
+		xml2et = new MoneteXml2Etichette(Messages.getString("MonetePanel.54"), //$NON-NLS-1$
+				Messages.getString("MonetePanel.55")); //$NON-NLS-1$
 		xml2et.addObserver(this);
-		xml2html = new MoneteXml2Html("XML -> HTML",
-				"Conversione da Xml a Html");
+		xml2html = new MoneteXml2Html(Messages.getString("MonetePanel.56"), //$NON-NLS-1$
+				Messages.getString("MonetePanel.57")); //$NON-NLS-1$
 		xml2html.addObserver(this);
-		xml2tex = new MoneteXml2Tex("XML -> TEX",
-				"Generazione di Collezione.pdf");
+		xml2tex = new MoneteXml2Tex(Messages.getString("MonetePanel.58"), //$NON-NLS-1$
+				Messages.getString("MonetePanel.59")); //$NON-NLS-1$
 		xml2tex.addObserver(this);
-		qrc = new MoneteXml2QR("XML -> QR", "Generazione codici QR");
+		qrc = new MoneteXml2QR(Messages.getString("MonetePanel.60"), Messages.getString("MonetePanel.61")); //$NON-NLS-1$ //$NON-NLS-2$
 		qrc.addObserver(this);
-		xpc = new XelatexPdfCreator("TEX -> PDF", "Crea i file pdf dai tex");
+		xpc = new XelatexPdfCreator(Messages.getString("MonetePanel.62"), Messages.getString("MonetePanel.63")); //$NON-NLS-1$ //$NON-NLS-2$
 		xpc.addObserver(this);
 		disegnaVassoi();
 	}
@@ -725,7 +727,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		this.jListMonete.setModel(mlm);
 		int index = 0;
 		if (sel != null) {
-			String id = "";
+			String id = ""; //$NON-NLS-1$
 			id = sel.getId();
 			/* cerca l'indice */
 			for (int i = 0; i < mlm.getSize(); i++) {
@@ -765,8 +767,8 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 			// mette il messaggio
 			MainFrame.setMessage((Message) (arg));
 		} else {
-			GestLog.Error(MonetePanel.class, "update",
-					"Tipo di argomento non gestito.");
+			GestLog.Error(MonetePanel.class, "update", //$NON-NLS-1$
+					Messages.getString("Generic.9")); //$NON-NLS-1$
 		}
 	}
 }

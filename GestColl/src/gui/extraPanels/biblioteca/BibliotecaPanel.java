@@ -19,6 +19,8 @@ import java.util.Observer;
 
 import javax.swing.ProgressMonitor;
 
+import Resources.i18n.Messages;
+
 import main.GestLog;
 import main.Progress;
 
@@ -68,7 +70,7 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer,
 		jSplitPane1 = new javax.swing.JSplitPane();
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jLBiblioteca = new javax.swing.JList();
-		jLBiblioteca.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		jLBiblioteca.setFont(new Font("Tahoma", Font.PLAIN, 11)); //$NON-NLS-1$
 		bibliotecaViewer1 = new gui.extraPanels.biblioteca.BibliotecaViewer();
 
 		jToolBar1.setFloatable(false);
@@ -84,7 +86,7 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer,
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
-			String[] strings = { "a" };
+			String[] strings = { "a" }; //$NON-NLS-1$
 
 			@Override
 			public Object getElementAt(int i) {
@@ -153,7 +155,7 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer,
 	 */
 	public void loadData() {
 		// sld = new ScanLibri();
-		pm = new ProgressMonitor(this, "", "", 0, 100);
+		pm = new ProgressMonitor(this, "", "", 0, 100); //$NON-NLS-1$ //$NON-NLS-2$
 		// sld.addObserver(this);
 		if (this.biblioteca == null) {
 			try {
@@ -180,8 +182,8 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer,
 			this.pm.setProgress(p.getCurrent());
 			this.pm.setNote(p.getMsg());
 		} else {
-			GestLog.Error(BibliotecaPanel.class, "update",
-					"Tipo di argomento non gestito.");
+			GestLog.Error(BibliotecaPanel.class, "update", //$NON-NLS-1$
+					Messages.getString("Generic.9")); //$NON-NLS-1$
 		}
 	}
 	

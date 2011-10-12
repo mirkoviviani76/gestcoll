@@ -95,7 +95,7 @@ public class Statistiche {
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
 			MonetaXml mng = new MonetaXml((iterator.next()));
-			String chiave = mng.getNominale().getValore()+" "+mng.getNominale().getValuta();
+			String chiave = mng.getNominale().getValore()+" "+mng.getNominale().getValuta(); //$NON-NLS-1$
 			if (valori.containsKey(chiave)) {
 				valori.put(chiave, valori.get(chiave).intValue() + 1);
 			} else {

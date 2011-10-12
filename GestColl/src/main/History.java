@@ -9,6 +9,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import Resources.i18n.Messages;
+
 /**
  * Gestisce la history, memorizzando su file gli eventi.
  * 
@@ -16,9 +18,9 @@ import java.io.IOException;
  */
 public class History {
 
-	public static final String ADD = "ADD";
-	public static final String DELETE = "DELETE";
-	public static final String MODIFY = "MODIFY";
+	public static final String ADD = Messages.getString("History.0"); //$NON-NLS-1$
+	public static final String DELETE = Messages.getString("History.1"); //$NON-NLS-1$
+	public static final String MODIFY = Messages.getString("History.2"); //$NON-NLS-1$
 
 	/**
 	 * aggiunge un evento alla history
@@ -30,7 +32,7 @@ public class History {
 		FileWriter fw = null;
 		try {
 			/* genera l'item da scrivere */
-			String item = GenericUtil.getDateTime() + "\t" + e + "\t" + id;
+			String item = GenericUtil.getDateTime() + "\t" + e + "\t" + id; //$NON-NLS-1$ //$NON-NLS-2$
 			/* scrive l'item su file */
 			fw = new FileWriter(Common.getCommon().getHistoryLog(), true);
 			BufferedWriter bfw = new BufferedWriter(fw);

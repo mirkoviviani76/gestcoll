@@ -4,6 +4,7 @@
  */
 package gui.moneta.forms;
 
+import Resources.i18n.Messages;
 import XmlData.Moneta.Zecchiere;
 
 /**
@@ -98,7 +99,7 @@ public class ZecchiereForm extends javax.swing.JDialog {
 		jTFNome = new javax.swing.JTextField();
 		jLabel1 = new javax.swing.JLabel();
 
-		setTitle("Modifica zecchiere");
+		setTitle(Messages.getString("Generic.16")); //$NON-NLS-1$
 		addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -106,7 +107,7 @@ public class ZecchiereForm extends javax.swing.JDialog {
 			}
 		});
 
-		okButton.setText("Modifica");
+		okButton.setText(Messages.getString("Generic.6")); //$NON-NLS-1$
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +115,7 @@ public class ZecchiereForm extends javax.swing.JDialog {
 			}
 		});
 
-		cancelButton.setText("Annulla");
+		cancelButton.setText(Messages.getString("Generic.2")); //$NON-NLS-1$
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +126,7 @@ public class ZecchiereForm extends javax.swing.JDialog {
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
 		jCBRuolo.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
-				"", "Münzmeister", "Münzwardein", "Münzschneider" }));
+				"", Messages.getString("ZecchiereForm.4"), Messages.getString("ZecchiereForm.5"), Messages.getString("ZecchiereForm.6") })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 2;
@@ -136,7 +137,7 @@ public class ZecchiereForm extends javax.swing.JDialog {
 		gridBagConstraints.weightx = 1.0;
 		jPanel1.add(jCBRuolo, gridBagConstraints);
 
-		jLabel3.setText("Ruolo");
+		jLabel3.setText(Messages.getString("ZecchiereForm.7")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
@@ -144,7 +145,7 @@ public class ZecchiereForm extends javax.swing.JDialog {
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		jPanel1.add(jLabel3, gridBagConstraints);
 
-		jLabel2.setText("Segno");
+		jLabel2.setText(Messages.getString("ZecchiereForm.8")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
@@ -168,7 +169,7 @@ public class ZecchiereForm extends javax.swing.JDialog {
 		gridBagConstraints.weightx = 1.0;
 		jPanel1.add(jTFNome, gridBagConstraints);
 
-		jLabel1.setText("Nome");
+		jLabel1.setText(Messages.getString("Generic.8")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;

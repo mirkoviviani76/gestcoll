@@ -15,6 +15,8 @@ import main.Common;
 import main.Message;
 import main.Progress;
 
+import Resources.i18n.Messages;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -34,7 +36,7 @@ import gestXml.MonetaXml;
 public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 
 	
-	private static final String XSL_FILE = "/Resources/Xsl_tranformations/schedaTxt.xsl";
+	private static final String XSL_FILE = "/Resources/Xsl_tranformations/schedaTxt.xsl"; //$NON-NLS-1$
 	
 	/**
 	 * genera un codice qr contenente la stringa data
@@ -49,7 +51,7 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 		// get a byte matrix for the data
 		QRCodeWriter writer = new QRCodeWriter();
 		BitMatrix matrix = writer.encode(data, BarcodeFormat.QR_CODE, 500, 500);
-		MatrixToImageWriter.writeToFile(matrix, "png", out);
+		MatrixToImageWriter.writeToFile(matrix, "png", out); //$NON-NLS-1$
 	}
 
 	/**
@@ -77,7 +79,7 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	@Override
 	public File convert(MonetaXml mng, File outDir) throws XsltException,
 			WriterException, IOException, InternalGestCollError {
-		File out = new File(outDir + "/" + mng.getId() + ".png");
+		File out = new File(outDir + "/" + mng.getId() + ".png"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		String dati = mng.xsltConvert(XSL_FILE);
 		MoneteXml2QR.encode(dati, out);
@@ -114,13 +116,13 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 			MonetaXml mng;
 			mng = new MonetaXml((iterator.next()));
 			convert(mng, outDir);
-			Progress p = new Progress(i, count, "QR");
+			Progress p = new Progress(i, count, Messages.getString("MoneteXml2QR.4")); //$NON-NLS-1$
 			this.setChanged();
 			this.notifyObservers(p);
 			i++;
 		}
 
-		Message m = new Message("QR creati", Level.INFO);
+		Message m = new Message(Messages.getString("MoneteXml2QR.5"), Level.INFO); //$NON-NLS-1$
 		this.setChanged();
 		this.notifyObservers(m);
 

@@ -120,9 +120,9 @@ public class Zecchiere {
 
 	@Override
 	public String toString() {
-		return (nome != null ? "" + nome + ", " : "")
-				+ (segno != null ? " [" + segno + "] " : "")
-				+ (ruolo != null ? " " + ruolo : "") + "";
+		return (nome != null ? "" + nome + ", " : "") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				+ (segno != null ? " [" + segno + "] " : "") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				+ (ruolo != null ? " " + ruolo : "") + ""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
     
 }

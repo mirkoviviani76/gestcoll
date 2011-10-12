@@ -43,7 +43,7 @@ public class BibliotecaViewer extends javax.swing.JPanel {
 
 		setLayout(new java.awt.GridBagLayout());
 
-		jTPDati.setContentType("text/html");
+		jTPDati.setContentType("text/html"); //$NON-NLS-1$
 		jTPDati.setEditable(false);
 		jScrollPane1.setViewportView(jTPDati);
 

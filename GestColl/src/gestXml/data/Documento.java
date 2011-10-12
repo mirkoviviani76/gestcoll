@@ -4,6 +4,8 @@
  */
 package gestXml.data;
 
+import Resources.i18n.Messages;
+
 /**
  * In un documento, solo la descrizione e' obbligatoria
  * 
@@ -17,7 +19,7 @@ public class Documento extends Pubblicazione {
 	 */
 	public Documento() {
 		super();
-		this.descrizione = "";
+		this.descrizione = ""; //$NON-NLS-1$
 	}
 
 	/**
@@ -31,7 +33,7 @@ public class Documento extends Pubblicazione {
 	@Override
 	public boolean isValid() {
 		boolean ret = false;
-		if (!descrizione.equals("")) {
+		if (!descrizione.equals("")) { //$NON-NLS-1$
 			ret = true;
 		}
 		return ret;
@@ -48,13 +50,13 @@ public class Documento extends Pubblicazione {
 
 	@Override
 	public String toHtmlString() {
-		return "<h1>DOCUMENTO</h1>" + super.toHtmlString() + "<br>"
-				+ "<b>descrizione:</b> " + descrizione;
+		return "<h1>"+Messages.getString("Documento.3")+"</h1>" + super.toHtmlString() + "<br>" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				+ "<b>"+Messages.getString("Generic.19")+"</b> " + descrizione; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	@Override
 	public String toString() {
-		return String.format("(D) %s %s", this.getAutori().get(0),
+		return String.format("(D) %s %s", this.getAutori().get(0), //$NON-NLS-1$
 				this.getTitolo());
 	}
 

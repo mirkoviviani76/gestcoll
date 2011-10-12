@@ -57,7 +57,7 @@ public class VassoioTableModel extends AbstractTableModel {
 
 	@Override
 	public String getColumnName(int col) {
-		return "" + (col + 1);
+		return "" + (col + 1); //$NON-NLS-1$
 	}
 
 	@Override

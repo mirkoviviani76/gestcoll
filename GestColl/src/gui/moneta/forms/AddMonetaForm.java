@@ -13,6 +13,8 @@ import java.util.List;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import Resources.i18n.Messages;
+
 import works.CollectionWorker;
 
 /**
@@ -111,8 +113,8 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 	 * @return l'id calcolato della nuova moneta
 	 */
 	public String getId() {
-		return this.jTFAnno.getText() + "-" + this.jCBDim.getSelectedItem()
-				+ "-" + this.jTFProgressivo.getText();
+		return this.jTFAnno.getText() + "-" + this.jCBDim.getSelectedItem() //$NON-NLS-1$
+				+ "-" + this.jTFProgressivo.getText(); //$NON-NLS-1$
 	}
 
 	/**
@@ -150,7 +152,7 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 			}
 		});
 
-		okButton.setText("OK");
+		okButton.setText(Messages.getString("Generic.OK")); //$NON-NLS-1$
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +160,7 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 			}
 		});
 
-		cancelButton.setText("Cancel");
+		cancelButton.setText(Messages.getString("Generic.2")); //$NON-NLS-1$
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +170,7 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jLabel1.setText("Anno");
+		jLabel1.setText(Messages.getString("Generic.1")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -177,7 +179,7 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 		jPanel1.add(jLabel1, gridBagConstraints);
 
 		jTFAnno.setColumns(4);
-		jTFAnno.setText("16XX");
+		jTFAnno.setText("16XX"); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 0;
@@ -188,7 +190,7 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 		gridBagConstraints.weighty = 1.0;
 		jPanel1.add(jTFAnno, gridBagConstraints);
 
-		jLabel2.setText("Dimensione");
+		jLabel2.setText(Messages.getString("Generic.3")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
@@ -197,7 +199,7 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 		jPanel1.add(jLabel2, gridBagConstraints);
 
 		jCBDim.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
-				"A", "B", "C", "D" }));
+				"A", "B", "C", "D" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 1;
@@ -207,7 +209,7 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 		gridBagConstraints.weighty = 1.0;
 		jPanel1.add(jCBDim, gridBagConstraints);
 
-		jLabel3.setText("Progressivo");
+		jLabel3.setText(Messages.getString("Generic.26")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
@@ -216,7 +218,7 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 		gridBagConstraints.insets = new java.awt.Insets(25, 0, 0, 0);
 		jPanel1.add(jLabel3, gridBagConstraints);
 
-		jLabel4.setText("ID completo");
+		jLabel4.setText(Messages.getString("AddMonetaForm.12")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 3;
@@ -314,9 +316,9 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 	private void updateData() {
 		/* controlla se l'anno e' su 4 cifre e comincia con un 1 */
 		String anno = this.jTFAnno.getText();
-		if ((anno.length() != 4) || (!anno.startsWith("1"))) {
-			this.jTFProgressivo.setText("");
-			this.jTFId.setText("");
+		if ((anno.length() != 4) || (!anno.startsWith("1"))) { //$NON-NLS-1$
+			this.jTFProgressivo.setText(""); //$NON-NLS-1$
+			this.jTFId.setText(""); //$NON-NLS-1$
 			return;
 		}
 		/* cerca il progressivo giusto */
@@ -327,7 +329,7 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 			}
 		}
 		// assegna il progressivo a jTFProgressivo
-		String strcounter = String.format("%1$04d", counter);
+		String strcounter = String.format("%1$04d", counter); //$NON-NLS-1$
 		this.jTFProgressivo.setText(strcounter);
 		// genera l'ID corrente
 		this.jTFId.setText(this.getId());

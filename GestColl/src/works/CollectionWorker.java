@@ -18,6 +18,8 @@ import main.GestLog;
 
 import org.apache.commons.io.FileUtils;
 
+import Resources.i18n.Messages;
+
 /**
  *
  * 
@@ -26,20 +28,20 @@ public abstract class CollectionWorker extends Observable {
 	/**
      * elenco delle estensioni dei file importanti
      */
-	public static final String[] ALL = { "html", "pdf", "png" };
+	public static final String[] ALL = { "html", "pdf", "png" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	/**
      * elenco delle estensioni dei file da cancellare
      */
-	public static final String[] INUTILI = { "aux", "toc", "log", "out" };
+	public static final String[] INUTILI = { "aux", "toc", "log", "out" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 
 	/**
      * nome dell'estensione dei template
      */
-	public static final String TEMPLATE_END = ".template";
+	public static final String TEMPLATE_END = ".template"; //$NON-NLS-1$
 	/**
      * elenco delle estensioni dei file temporanei
      */
-	public static final String[] TMP = { "tex" };
+	public static final String[] TMP = { "tex" }; //$NON-NLS-1$
 
 	/**
 	 * Cancella tutti i file con le estensioni contenute in pattern a partire
@@ -64,9 +66,9 @@ public abstract class CollectionWorker extends Observable {
 			}
 		}
 		if (count != daEliminare.size()) {
-			String msg = "Non ho potuto cancellare tutti gli oggetti: " + count
-					+ "/" + daEliminare.size();
-			GestLog.Warning(CollectionWorker.class, "deleteFiles", msg);
+			String msg = Messages.getString("CollectionWorker.0") + count //$NON-NLS-1$
+					+ "/" + daEliminare.size(); //$NON-NLS-1$
+			GestLog.Warning(CollectionWorker.class, "deleteFiles", msg); //$NON-NLS-1$
 		}
 
 		return count;
@@ -191,7 +193,7 @@ public abstract class CollectionWorker extends Observable {
 	 */
 	public CollectionWorker(String name) {
 		this.name = name;
-		this.description = "";
+		this.description = ""; //$NON-NLS-1$
 	}
 
 	/**

@@ -97,8 +97,8 @@ public class Libro {
 
 	@Override
 	public String toString() {
-		return (sigla != null ? "" + sigla + " " : "")
-				+ (numero != null ? "" + numero : "") + "";
+		return (sigla != null ? "" + sigla + " " : "") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				+ (numero != null ? "" + numero : "") + ""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 }

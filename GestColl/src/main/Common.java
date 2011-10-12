@@ -14,6 +14,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import Resources.i18n.Messages;
+
 /**
  * Classe di utilita' per contenere le costanti comuni e gestire il file di ini.
  * 
@@ -21,9 +23,9 @@ import javax.xml.bind.Unmarshaller;
 public final class Common extends GestXml {
 
 	/** Nome dell'applicazione */
-	public static final String APPNAME = "GestColl";
+	public static final String APPNAME = "GestColl"; //$NON-NLS-1$
 	/** versione del progetto */
-	public static final String VERSION = "33.0";
+	public static final String VERSION = "33.1"; //$NON-NLS-1$
 	
 	private String currentConfigId;
 	
@@ -43,40 +45,40 @@ public final class Common extends GestXml {
 	/**
 	 * estensioni file generati
 	 */
-	public static final String[] ALL = { "html", "pdf", "png" };
+	public static final String[] ALL = { "html", "pdf", "png" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 
 	
 	/**
 	 * estensione scheda
 	 */
-	public static final String[] COIN_END = { "xml" };
+	public static final String[] COIN_END = { "xml" }; //$NON-NLS-1$
 
 
 	/**
 	 * formato data per xml
 	 */
-	public static final String DATE_XML_FORMAT = "yyyy-MM-dd";
+	public static final String DATE_XML_FORMAT = "yyyy-MM-dd"; //$NON-NLS-1$
 
 	/**
 	 * Nome del file di ini
 	 */
-	public static final String INI_FILE = "configurations.xml";
+	public static final String INI_FILE = "configurations.xml"; //$NON-NLS-1$
 
 	/**
 	 * estensioni file inutili/temporanei
 	 */
-	public static final String[] INUTILI = { "aux", "toc", "log", "out" };
+	public static final String[] INUTILI = { "aux", "toc", "log", "out" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 
 	private static Common istanza = null;
 	/**
 	 * estensione template
 	 */
-	public static final String TEMPLATE_END = ".template";
+	public static final String TEMPLATE_END = ".template"; //$NON-NLS-1$
 	/**
 	 * estensioni file temporanei
 	 */
-	public static final String[] TMP = { "tex" };
+	public static final String[] TMP = { "tex" }; //$NON-NLS-1$
 
 	/**
 	 * Metodo della classe impiegato per accedere al Singleton
@@ -134,8 +136,8 @@ public final class Common extends GestXml {
 	private Common() {
 		super(new File(Common.INI_FILE));
 		try {
-			this.currentConfigId = "";
-			JAXBContext jc = JAXBContext.newInstance("XmlData.Configurations");
+			this.currentConfigId = ""; //$NON-NLS-1$
+			JAXBContext jc = JAXBContext.newInstance("XmlData.Configurations"); //$NON-NLS-1$
 			Unmarshaller unmarshaller = jc.createUnmarshaller();
 			/* posso fare il cast perche' le classi contengono @XmlRootElement se
 			 * altrimenti si doveva fare JAXBElement<tipo> elem = (JAXBElement<tipo>)unmarshaller.unmarshal(xml)
@@ -302,7 +304,7 @@ public final class Common extends GestXml {
 		/* ottiene la risorsa xsl */
 		InputStream ret = getClass().getResourceAsStream(id);
 		if (ret == null) {
-			throw new InternalGestCollError("getResource() cannot find resource");
+			throw new InternalGestCollError(Messages.getString("Common.0")); //$NON-NLS-1$
 		}
 		return ret;
 	}

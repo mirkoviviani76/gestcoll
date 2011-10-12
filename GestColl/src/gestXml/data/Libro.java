@@ -4,6 +4,8 @@
  */
 package gestXml.data;
 
+import Resources.i18n.Messages;
+
 /**
  * In un Libro solo il titolo e' obbligatorio.
  * 
@@ -19,8 +21,8 @@ public class Libro extends Pubblicazione {
 	 */
 	public Libro() {
 		super();
-		isbn = "";
-		volume = "";
+		isbn = ""; //$NON-NLS-1$
+		volume = ""; //$NON-NLS-1$
 	}
 
 	/**
@@ -42,7 +44,7 @@ public class Libro extends Pubblicazione {
 	@Override
 	public boolean isValid() {
 		boolean ret = false;
-		if (!titolo.equals("")) {
+		if (!titolo.equals("")) { //$NON-NLS-1$
 			ret = true;
 		}
 		return ret;
@@ -68,8 +70,8 @@ public class Libro extends Pubblicazione {
 
 	@Override
 	public String toHtmlString() {
-		return "<h1>LIBRO</h1>" + super.toHtmlString() + "<br>"
-				+ "<b>isbn:</b> " + isbn + "<br>" + "<b>volume:</b> " + volume;
+		return "<h1>"+Messages.getString("Generic.23")+"</h1>" + super.toHtmlString() + "<br>" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				+ "<b>"+Messages.getString("Libro.1")+"</b> " + isbn + "<br>" + "<b>"+Messages.getString("Libro.2")+"</b> " + volume; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 	}
 
 	@Override
@@ -77,13 +79,13 @@ public class Libro extends Pubblicazione {
 		String curTitolo = this.getTitolo();
 		/* riduce il titolo, tanto non serve a molto */
 		if (curTitolo.length() > 30) {
-			curTitolo = curTitolo.substring(0, 30) + "...";
+			curTitolo = curTitolo.substring(0, 30) + "..."; //$NON-NLS-1$
 		}
-		String s = "";
+		String s = ""; //$NON-NLS-1$
 		if (this.getAutori().size() > 0) {
-			s = String.format("(L) [%s] %s %s", this.getId(), this.getAutori().get(0), curTitolo);
+			s = String.format("(L) [%s] %s %s", this.getId(), this.getAutori().get(0), curTitolo); //$NON-NLS-1$
 		} else {
-			s = String.format("(L) [%s] %s", this.getId(), curTitolo);
+			s = String.format("(L) [%s] %s", this.getId(), curTitolo); //$NON-NLS-1$
 		}
 		return s;
 	}

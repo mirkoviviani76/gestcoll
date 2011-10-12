@@ -21,6 +21,8 @@ import main.Progress;
 
 import org.eclipse.persistence.tools.file.FileUtil;
 
+import Resources.i18n.Messages;
+
 import exceptions.InternalGestCollError;
 import exceptions.XsltException;
 import gestXml.MonetaXml;
@@ -33,12 +35,12 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 
 	
 	
-	private static final String XSL_FILE = "/Resources/Xsl_tranformations/schedaHtml.xsl";
-	private static final String INDEX_HTML_FILE = "index.html";
-	private static final String OUTFILE_MONETE = "Monete.html";
-	private static final String INDEX_HTML_TEMPLATE = "/Resources/templates/index.html.template";
-	private static final String OUTFILE_MONETE_TEMPLATE = "/Resources/templates/Monete.html.template";
-	private static final String CSS_FILE = "/Resources/css/report.css";
+	private static final String XSL_FILE = "/Resources/Xsl_tranformations/schedaHtml.xsl"; //$NON-NLS-1$
+	private static final String INDEX_HTML_FILE = "index.html"; //$NON-NLS-1$
+	private static final String OUTFILE_MONETE = "Monete.html"; //$NON-NLS-1$
+	private static final String INDEX_HTML_TEMPLATE = "/Resources/templates/index.html.template"; //$NON-NLS-1$
+	private static final String OUTFILE_MONETE_TEMPLATE = "/Resources/templates/Monete.html.template"; //$NON-NLS-1$
+	private static final String CSS_FILE = "/Resources/css/report.css"; //$NON-NLS-1$
 
 	/**
 	 * 
@@ -60,7 +62,7 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	@Override
 	public File convert(MonetaXml mng, File outDir) throws XsltException, InternalGestCollError {
 		/* prepara il file di output */
-		File ret = new File(outDir + "/" + mng.getId() + ".html");
+		File ret = new File(outDir + "/" + mng.getId() + ".html"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		mng.xsltConvert(XSL_FILE, ret);
 		return ret;
@@ -74,9 +76,9 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	 * @throws InternalGestCollError 
 	 */
 	private void copyIndex(File destDir) throws IOException, InternalGestCollError {
-		if (!(new File(destDir + "/" + INDEX_HTML_FILE)).exists()) {
+		if (!(new File(destDir + "/" + INDEX_HTML_FILE)).exists()) { //$NON-NLS-1$
 			InputStream in = Common.getCommon().getResource(INDEX_HTML_TEMPLATE);
-			FileOutputStream out = new FileOutputStream(destDir + "/" + INDEX_HTML_FILE);
+			FileOutputStream out = new FileOutputStream(destDir + "/" + INDEX_HTML_FILE); //$NON-NLS-1$
 			FileUtil.copy(in, out);
 		}
 	}
@@ -101,15 +103,15 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 		
 		/* copia il foglio stile */
 		InputStream in = Common.getCommon().getResource(CSS_FILE);
-		FileOutputStream out = new FileOutputStream(outDir + "/" + "report.css");
+		FileOutputStream out = new FileOutputStream(outDir + "/" + "report.css"); //$NON-NLS-1$ //$NON-NLS-2$
 		FileUtil.copy(in, out);
 
 
 		ListIterator<File> iterator = files.listIterator();
 
-		String data = "";
+		String data = ""; //$NON-NLS-1$
 		
-		data = data + "<table>" + "\n";
+		data = data + "<table>" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
 		int i = 1;
 
 		/* cicla su tutte le monete */
@@ -117,43 +119,43 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 			MonetaXml mng = new MonetaXml((iterator.next()));
 			String id = mng.getId();
 			/* prepara il file di output */
-			String outFile = outDir + "/" + id + ".html";
+			String outFile = outDir + "/" + id + ".html"; //$NON-NLS-1$ //$NON-NLS-2$
 			mng.xsltConvert(XSL_FILE,
 					new File(outFile));
 
 			/* scrive l'item nell'indice */
-			data = data + "<tr>" + "\n";
-			data = data + "<td><a href=\"" + id + ".html\"'>" + id
-					+ "</a></td>" + "\n";
-			data = data + "<td>" + mng.getPaese() + "\n";
-			data = data + "<td>" + mng.getNominale().getValore() + "\n";
-			data = data + "<td>" + mng.getNominale().getValuta() + "\n";
-			data = data + "<td>" + mng.getAnno() + "\n";
-			data = data + "<td>" + mng.getPosizione().getContenitore() + "\n";
-			data = data + "<td>" + mng.getPosizione().getVassoio() + "\n";
-			data = data + "<td>" + mng.getPosizione().getRiga() + "\n";
-			data = data + "<td>" + mng.getPosizione().getColonna() + "\n";
-			data = data + "</tr>" + "\n";
+			data = data + "<tr>" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			data = data + "<td><a href=\"" + id + ".html\"'>" + id //$NON-NLS-1$ //$NON-NLS-2$
+					+ "</a></td>" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			data = data + "<td>" + mng.getPaese() + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			data = data + "<td>" + mng.getNominale().getValore() + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			data = data + "<td>" + mng.getNominale().getValuta() + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			data = data + "<td>" + mng.getAnno() + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			data = data + "<td>" + mng.getPosizione().getContenitore() + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			data = data + "<td>" + mng.getPosizione().getVassoio() + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			data = data + "<td>" + mng.getPosizione().getRiga() + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			data = data + "<td>" + mng.getPosizione().getColonna() + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
+			data = data + "</tr>" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
 			// outBuffer.println(id);
 			// GenericUtil.printProgress(String.format("%d/%d",
 			// (i++),files.size()), outBuffer);
-			Progress p = new Progress(i, files.size(), "HTML");
+			Progress p = new Progress(i, files.size(), "HTML"); //$NON-NLS-1$
 			this.setChanged();
 			this.notifyObservers(p);
 			i++;
 		}
-		data = data + "</table>" + "\n";
+		data = data + "</table>" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
 
-		String[][] conversione = { { "%DATA", data } };
+		String[][] conversione = { { "%DATA", data } }; //$NON-NLS-1$
 		/* crea il file di output usando il template */
 		
 		InputStream is = Common.getCommon().getResource(OUTFILE_MONETE_TEMPLATE);
-		GenericUtil.fillTemplate(is, outDir + "/" + OUTFILE_MONETE, conversione);
+		GenericUtil.fillTemplate(is, outDir + "/" + OUTFILE_MONETE, conversione); //$NON-NLS-1$
 
 		/* copia il file index.html */
 		this.copyIndex(outDir);
 
-		Message m = new Message("HTML creati", Level.INFO);
+		Message m = new Message(Messages.getString("MoneteXml2Html.0"), Level.INFO); //$NON-NLS-1$
 		this.setChanged();
 		this.notifyObservers(m);
 

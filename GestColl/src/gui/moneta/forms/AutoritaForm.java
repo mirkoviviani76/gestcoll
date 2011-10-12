@@ -5,6 +5,8 @@
 
 package gui.moneta.forms;
 
+import Resources.i18n.Messages;
+
 /**
  *
  * 
@@ -86,7 +88,7 @@ public class AutoritaForm extends javax.swing.JDialog {
 			}
 		});
 
-		okButton.setText("OK");
+		okButton.setText(Messages.getString("Generic.OK")); //$NON-NLS-1$
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +96,7 @@ public class AutoritaForm extends javax.swing.JDialog {
 			}
 		});
 
-		cancelButton.setText("Cancel");
+		cancelButton.setText(Messages.getString("Generic.2")); //$NON-NLS-1$
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +104,7 @@ public class AutoritaForm extends javax.swing.JDialog {
 			}
 		});
 
-		jLabel1.setText("Nome");
+		jLabel1.setText(Messages.getString("Generic.8")); //$NON-NLS-1$
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
@@ -180,9 +182,9 @@ public class AutoritaForm extends javax.swing.JDialog {
 	public void setEditable(boolean flag) {
 		/* cambia il testo del bottone ok */
 		if (flag) {
-			this.okButton.setText("Modifica");
+			this.okButton.setText(Messages.getString("Generic.6")); //$NON-NLS-1$
 		} else {
-			this.okButton.setText("OK");
+			this.okButton.setText(Messages.getString("Generic.OK")); //$NON-NLS-1$
 		}
 	}
 

@@ -21,6 +21,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import Resources.i18n.Messages;
+
 import main.GestLog;
 
 /**
@@ -105,27 +107,27 @@ public class MonetaImgViewer extends javax.swing.JDialog implements
 		jScrollPane1.setColumnHeaderView(panel);
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Ruota", TitledBorder.LEADING,
+		panel_1.setBorder(new TitledBorder(null, Messages.getString("MonetaImgViewer.0"), TitledBorder.LEADING, //$NON-NLS-1$
 				TitledBorder.TOP, null, null));
 		panel.add(panel_1);
 
-		this.rotateLeft = new JButton("<");
+		this.rotateLeft = new JButton("<"); //$NON-NLS-1$
 		panel_1.add(rotateLeft);
 
-		this.rotateRight = new JButton(">");
+		this.rotateRight = new JButton(">"); //$NON-NLS-1$
 		panel_1.add(rotateRight);
 		this.rotateRight.addMouseListener(this);
 		this.rotateLeft.addMouseListener(this);
 
 		panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "Ingrandimento",
+		panel_2.setBorder(new TitledBorder(null, Messages.getString("MonetaImgViewer.3"), //$NON-NLS-1$
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(panel_2);
 
-		this.growUp = new JButton("+");
+		this.growUp = new JButton("+"); //$NON-NLS-1$
 		panel_2.add(growUp);
 
-		this.growDown = new JButton("-");
+		this.growDown = new JButton("-"); //$NON-NLS-1$
 		panel_2.add(growDown);
 		this.growDown.addMouseListener(this);
 		this.growUp.addMouseListener(this);

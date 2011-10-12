@@ -20,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JDialog;
 
+import Resources.i18n.Messages;
+
 
 /**
  * Una finestra di dialogo per aggiungere un contatto
@@ -59,7 +61,7 @@ public class NuovoLinkDialog extends javax.swing.JDialog {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 		
-		lblCategoria = new JLabel("Categoria");
+		lblCategoria = new JLabel(Messages.getString("NuovoLinkDialog.0")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblCategoria = new GridBagConstraints();
 		gbc_lblCategoria.anchor = GridBagConstraints.EAST;
 		gbc_lblCategoria.insets = new Insets(0, 0, 5, 5);
@@ -77,7 +79,7 @@ public class NuovoLinkDialog extends javax.swing.JDialog {
 		getContentPane().add(jTFCategoria, gbc_jTFCategoria);
 		jTFCategoria.setColumns(10);
 		
-		JLabel lblNome = new JLabel("Nome");
+		JLabel lblNome = new JLabel(Messages.getString("Generic.8")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNome = new GridBagConstraints();
 		gbc_lblNome.anchor = GridBagConstraints.WEST;
 		gbc_lblNome.insets = new Insets(0, 0, 5, 5);
@@ -94,7 +96,7 @@ public class NuovoLinkDialog extends javax.swing.JDialog {
 		getContentPane().add(jTFName, gbc_jTFName);
 		jTFName.setColumns(1);
 		
-		JLabel lblUrl = new JLabel("Url");
+		JLabel lblUrl = new JLabel(Messages.getString("Generic.10")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblUrl = new GridBagConstraints();
 		gbc_lblUrl.anchor = GridBagConstraints.WEST;
 		gbc_lblUrl.insets = new Insets(0, 0, 5, 5);
@@ -103,7 +105,7 @@ public class NuovoLinkDialog extends javax.swing.JDialog {
 		getContentPane().add(lblUrl, gbc_lblUrl);
 		
 		jTFUrl = new JTextField();
-		jTFUrl.setText("http://");
+		jTFUrl.setText("http://"); //$NON-NLS-1$
 		GridBagConstraints gbc_jTFUrl = new GridBagConstraints();
 		gbc_jTFUrl.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jTFUrl.insets = new Insets(0, 0, 5, 5);
@@ -112,7 +114,7 @@ public class NuovoLinkDialog extends javax.swing.JDialog {
 		getContentPane().add(jTFUrl, gbc_jTFUrl);
 		jTFUrl.setColumns(10);
 		
-		JLabel lblNote = new JLabel("Note");
+		JLabel lblNote = new JLabel(Messages.getString("Generic.20")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNote = new GridBagConstraints();
 		gbc_lblNote.anchor = GridBagConstraints.WEST;
 		gbc_lblNote.insets = new Insets(0, 0, 5, 5);
@@ -138,7 +140,7 @@ public class NuovoLinkDialog extends javax.swing.JDialog {
 		getContentPane().add(panel, gbc_panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		okbutton = new JButton("Aggiungi");
+		okbutton = new JButton(Messages.getString("Generic.0")); //$NON-NLS-1$
 		okbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent aevt) {
 				okButtonActionPerformed(aevt);
@@ -146,14 +148,14 @@ public class NuovoLinkDialog extends javax.swing.JDialog {
 		});
 		panel.add(okbutton);
 		
-		cancelbutton = new JButton("Cancella");
+		cancelbutton = new JButton(Messages.getString("Generic.2")); //$NON-NLS-1$
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent aevt) {
 				cancelButtonActionPerformed(aevt);
 			}
 		});
 		panel.add(cancelbutton);
-		setTitle("Aggiungi Link");
+		setTitle(Messages.getString("NuovoLinkDialog.7")); //$NON-NLS-1$
 		addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent evt) {

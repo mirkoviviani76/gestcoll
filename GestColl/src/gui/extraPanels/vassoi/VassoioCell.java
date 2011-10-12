@@ -52,7 +52,7 @@ public class VassoioCell extends javax.swing.JPanel {
 
 		setLayout(new java.awt.GridBagLayout());
 
-		jTextPane1.setContentType("text/html");
+		jTextPane1.setContentType("text/html"); //$NON-NLS-1$
 		jScrollPane1.setViewportView(jTextPane1);
 
 		gridBagConstraints = new java.awt.GridBagConstraints();

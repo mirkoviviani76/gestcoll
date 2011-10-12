@@ -20,6 +20,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JDialog;
 
+import Resources.i18n.Messages;
+
 
 /**
  * Una finestra di dialogo per aggiungere un contatto
@@ -57,7 +59,7 @@ public class NuovoContattoDialog extends javax.swing.JDialog {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 		
-		JLabel lblNome = new JLabel("Nome");
+		JLabel lblNome = new JLabel(Messages.getString("Generic.8")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNome = new GridBagConstraints();
 		gbc_lblNome.anchor = GridBagConstraints.WEST;
 		gbc_lblNome.insets = new Insets(0, 0, 5, 5);
@@ -75,7 +77,7 @@ public class NuovoContattoDialog extends javax.swing.JDialog {
 		getContentPane().add(jTFName, gbc_jTFName);
 		jTFName.setColumns(10);
 		
-		JLabel lblEmail = new JLabel("Email");
+		JLabel lblEmail = new JLabel(Messages.getString("NuovoContattoDialog.1")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.WEST;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
@@ -93,7 +95,7 @@ public class NuovoContattoDialog extends javax.swing.JDialog {
 		getContentPane().add(jTFEmail, gbc_jTFEmail);
 		jTFEmail.setColumns(10);
 		
-		JLabel lblNote = new JLabel("Note");
+		JLabel lblNote = new JLabel(Messages.getString("Generic.20")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNote = new GridBagConstraints();
 		gbc_lblNote.anchor = GridBagConstraints.WEST;
 		gbc_lblNote.insets = new Insets(0, 0, 5, 5);
@@ -120,7 +122,7 @@ public class NuovoContattoDialog extends javax.swing.JDialog {
 		getContentPane().add(panel, gbc_panel);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		okbutton = new JButton("Aggiungi");
+		okbutton = new JButton(Messages.getString("Generic.0")); //$NON-NLS-1$
 		okbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent aevt) {
 				okButtonActionPerformed(aevt);
@@ -128,14 +130,14 @@ public class NuovoContattoDialog extends javax.swing.JDialog {
 		});
 		panel.add(okbutton);
 		
-		cancelbutton = new JButton("Cancella");
+		cancelbutton = new JButton(Messages.getString("Generic.2")); //$NON-NLS-1$
 		cancelbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent aevt) {
 				cancelButtonActionPerformed(aevt);
 			}
 		});
 		panel.add(cancelbutton);
-		setTitle("Aggiungi Contatto");
+		setTitle(Messages.getString("NuovoContattoDialog.5")); //$NON-NLS-1$
 		addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent evt) {

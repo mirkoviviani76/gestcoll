@@ -25,6 +25,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
+import Resources.i18n.Messages;
+
 import works.Statistiche;
 import exceptions.XmlException;
 
@@ -45,24 +47,24 @@ public final class StatistichePanel extends javax.swing.JPanel {
 		initComponents();
 		try {
 			this.jTabbedPane1.addTab(
-					"Dimensione",
-					createMyBarChart("Monete per dimensione", "dim",
-							"nr. monete", getDatasetCoinBySize()));
+					Messages.getString("Generic.3"), //$NON-NLS-1$
+					createMyBarChart(Messages.getString("StatistichePanel.1"), Messages.getString("StatistichePanel.2"), //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("Generic.27"), getDatasetCoinBySize())); //$NON-NLS-1$
 			this.jTabbedPane1.addTab(
-					"Anno",
-					createMyBarChart("Monete per anno", "anno", "nr. monete",
+					Messages.getString("Generic.1"), //$NON-NLS-1$
+					createMyBarChart(Messages.getString("StatistichePanel.5"), Messages.getString("Generic.2"), Messages.getString("Generic.27"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 							getDatasetCoinByYear()));
 			this.jTabbedPane1.addTab(
-					"Metallo",
-					createMyBarChart("Monete per metallo", "metallo",
-							"nr. monete", getDatasetCoinByMetal()));
+					Messages.getString("StatistichePanel.8"), //$NON-NLS-1$
+					createMyBarChart(Messages.getString("Generic.25"), Messages.getString("StatistichePanel.10"), //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("Generic.27"), getDatasetCoinByMetal())); //$NON-NLS-1$
 			this.jTabbedPane1.addTab(
-					"Metallo2",
-					createMy3DPieChart("Monete per metallo",
+					Messages.getString("StatistichePanel.12"), //$NON-NLS-1$
+					createMy3DPieChart(Messages.getString("Generic.25"), //$NON-NLS-1$
 							getPieDatasetCoinByMetal()));
 			this.jTabbedPane1.addTab(
-					"Nominale",
-					createMy3DPieChart("Monete per nominale",
+					Messages.getString("Generic.26"), //$NON-NLS-1$
+					createMy3DPieChart(Messages.getString("StatistichePanel.15"), //$NON-NLS-1$
 							getPieDatasetCoinByNominal()));
 		} catch (XmlException e) {
 			GestLog.Error(this.getClass(), e);
@@ -162,7 +164,7 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	 * @throws XmlException
 	 */
 	private CategoryDataset getDatasetCoinByMetal() throws XmlException {
-		return this.getDataset(Statistiche.coinByMetal(), "metallo");
+		return this.getDataset(Statistiche.coinByMetal(), Messages.getString("StatistichePanel.16")); //$NON-NLS-1$
 	}
 
 	/**
@@ -172,7 +174,7 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	 * @throws XmlException
 	 */
 	private CategoryDataset getDatasetCoinBySize() throws XmlException {
-		return this.getDataset(Statistiche.coinBySize(), "Dimensione");
+		return this.getDataset(Statistiche.coinBySize(), Messages.getString("Generic.3")); //$NON-NLS-1$
 	}
 
 	/**
@@ -182,7 +184,7 @@ public final class StatistichePanel extends javax.swing.JPanel {
 	 * @throws XmlException
 	 */
 	private CategoryDataset getDatasetCoinByYear() throws XmlException {
-		return this.getDataset(Statistiche.coinByYear(), "Anno");
+		return this.getDataset(Statistiche.coinByYear(), Messages.getString("Generic.2")); //$NON-NLS-1$
 	}
 
 	/**

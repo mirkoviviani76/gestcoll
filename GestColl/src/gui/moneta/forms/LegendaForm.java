@@ -5,6 +5,8 @@
 
 package gui.moneta.forms;
 
+import Resources.i18n.Messages;
+
 /**
  *
  * 
@@ -111,7 +113,7 @@ public final class LegendaForm extends javax.swing.JDialog {
 
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jLabel1.setText("Legenda");
+		jLabel1.setText(Messages.getString("Generic.22")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -119,7 +121,7 @@ public final class LegendaForm extends javax.swing.JDialog {
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		jPanel1.add(jLabel1, gridBagConstraints);
 
-		jLabel2.setText("Scioglimento");
+		jLabel2.setText(Messages.getString("LegendaForm.1")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
@@ -158,7 +160,7 @@ public final class LegendaForm extends javax.swing.JDialog {
 		gridBagConstraints.weighty = 1.0;
 		jPanel1.add(jScrollPane2, gridBagConstraints);
 
-		okButton.setText("OK");
+		okButton.setText(Messages.getString("Generic.OK")); //$NON-NLS-1$
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,7 +168,7 @@ public final class LegendaForm extends javax.swing.JDialog {
 			}
 		});
 
-		cancelButton.setText("Cancel");
+		cancelButton.setText(Messages.getString("Generic.2")); //$NON-NLS-1$
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,9 +277,9 @@ public final class LegendaForm extends javax.swing.JDialog {
 		this.jTAScioglimento.setEditable(flag);
 		/* cambia il testo del bottone ok */
 		if (flag) {
-			this.okButton.setText("Modifica");
+			this.okButton.setText(Messages.getString("Generic.6")); //$NON-NLS-1$
 		} else {
-			this.okButton.setText("OK");
+			this.okButton.setText(Messages.getString("Generic.OK")); //$NON-NLS-1$
 		}
 	}
 }

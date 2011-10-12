@@ -16,6 +16,7 @@ import main.Common;
 import main.GenericUtil;
 import main.Message;
 import main.Progress;
+import Resources.i18n.Messages;
 import XmlData.Moneta.Zecca;
 import exceptions.InternalGestCollError;
 import exceptions.XmlException;
@@ -28,19 +29,19 @@ import gestXml.MonetaXml;
  */
 public class MoneteXml2Etichette extends CollectionWorker {
 
-	private static final String MARKER_ETA = "%ETICHETTEA";
-	private static final String MARKER_ETB = "%ETICHETTEB";
-	private static final String MARKER_ETC = "%ETICHETTEC";
-	private static final String MARKER_ETD = "%ETICHETTED";
-	private static final String MARKER_QRA = "%QRA";
-	private static final String MARKER_QRB = "%QRB";
-	private static final String MARKER_QRC = "%QRC";
-	private static final String MARKER_QRD = "%QRD";
+	private static final String MARKER_ETA = "%ETICHETTEA"; //$NON-NLS-1$
+	private static final String MARKER_ETB = "%ETICHETTEB"; //$NON-NLS-1$
+	private static final String MARKER_ETC = "%ETICHETTEC"; //$NON-NLS-1$
+	private static final String MARKER_ETD = "%ETICHETTED"; //$NON-NLS-1$
+	private static final String MARKER_QRA = "%QRA"; //$NON-NLS-1$
+	private static final String MARKER_QRB = "%QRB"; //$NON-NLS-1$
+	private static final String MARKER_QRC = "%QRC"; //$NON-NLS-1$
+	private static final String MARKER_QRD = "%QRD"; //$NON-NLS-1$
 	/**
      *
      */
-	public static final String TEMPLATE_ET = "/Resources/templates/etichette.tex.template";
-	public static final String OUTFILE = "etichette.tex";
+	public static final String TEMPLATE_ET = "/Resources/templates/etichette.tex.template"; //$NON-NLS-1$
+	public static final String OUTFILE = "etichette.tex"; //$NON-NLS-1$
 	
 
 	/**
@@ -65,14 +66,14 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	@Override
 	public Object[] doWork(File inDir, File outDir, Object[] params)
 			throws XmlException, IOException, InternalGestCollError {
-		String etichetteA = "";
-		String etichetteB = "";
-		String etichetteC = "";
-		String etichetteD = "";
-		String qrA = "";
-		String qrB = "";
-		String qrC = "";
-		String qrD = "";
+		String etichetteA = ""; //$NON-NLS-1$
+		String etichetteB = ""; //$NON-NLS-1$
+		String etichetteC = ""; //$NON-NLS-1$
+		String etichetteD = ""; //$NON-NLS-1$
+		String qrA = ""; //$NON-NLS-1$
+		String qrB = ""; //$NON-NLS-1$
+		String qrC = ""; //$NON-NLS-1$
+		String qrD = ""; //$NON-NLS-1$
 		Integer[] contatore = { 0, 0, 0, 0 };
 
 		/* ottiene l'elenco di tutte le monete */
@@ -84,7 +85,7 @@ public class MoneteXml2Etichette extends CollectionWorker {
 		int i = 1;
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			Progress notify = new Progress(i, files.size(), "Etichette");
+			Progress notify = new Progress(i, files.size(), Messages.getString("MoneteXml2Etichette.1")); //$NON-NLS-1$
 			MonetaXml mng;
 			mng = new MonetaXml((iterator.next()));
 			/* prepara il file di output */
@@ -95,24 +96,24 @@ public class MoneteXml2Etichette extends CollectionWorker {
 			String etichetta = getEtichetta(mng, dimensione, id);
 
 			/* aggiorna l'elenco globale di etichette e codici qr */
-			if (dimensione.equals("A")) {
-				etichetteA = etichetteA + etichetta + "\n";
-				qrA = qrA + "\\\\qrA{" + id + "}" + "\n";
+			if (dimensione.equals("A")) { //$NON-NLS-1$
+				etichetteA = etichetteA + etichetta + "\n"; //$NON-NLS-1$
+				qrA = qrA + "\\\\qrA{" + id + "}" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				contatore[0]++;
 			}
-			if (dimensione.equals("B")) {
-				etichetteB = etichetteB + etichetta + "\n";
-				qrB = qrB + "\\\\qrB{" + id + "}" + "\n";
+			if (dimensione.equals("B")) { //$NON-NLS-1$
+				etichetteB = etichetteB + etichetta + "\n"; //$NON-NLS-1$
+				qrB = qrB + "\\\\qrB{" + id + "}" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				contatore[1]++;
 			}
-			if (dimensione.equals("C")) {
-				etichetteC = etichetteC + etichetta + "\n";
-				qrC = qrC + "\\\\qrC{" + id + "}" + "\n";
+			if (dimensione.equals("C")) { //$NON-NLS-1$
+				etichetteC = etichetteC + etichetta + "\n"; //$NON-NLS-1$
+				qrC = qrC + "\\\\qrC{" + id + "}" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				contatore[2]++;
 			}
-			if (dimensione.equals("D")) {
-				etichetteD = etichetteD + etichetta + "\n";
-				qrD = qrD + "\\\\qrD{" + id + "}" + "\n";
+			if (dimensione.equals("D")) { //$NON-NLS-1$
+				etichetteD = etichetteD + etichetta + "\n"; //$NON-NLS-1$
+				qrD = qrD + "\\\\qrD{" + id + "}" + "\n"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				contatore[3]++;
 			}
 
@@ -129,10 +130,10 @@ public class MoneteXml2Etichette extends CollectionWorker {
 
 		/* aggiorna il template */
 		InputStream is = Common.getCommon().getResource(TEMPLATE_ET);
-		GenericUtil.fillTemplate(is, outDir + "/" + OUTFILE,
+		GenericUtil.fillTemplate(is, outDir + "/" + OUTFILE, //$NON-NLS-1$
 				conversione);
 
-		Message m = new Message(OUTFILE + " creato", Level.INFO);
+		Message m = new Message(OUTFILE + " " + Messages.getString("MoneteXml2Etichette.0"), Level.INFO); //$NON-NLS-1$
 		this.setChanged();
 		this.notifyObservers(m);
 
@@ -169,36 +170,36 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	 * 
 	 */
 	private String getEtichetta(MonetaXml xml, String dimensione, String id) {
-		String out = "";
-		String autorita = "";
+		String out = ""; //$NON-NLS-1$
+		String autorita = ""; //$NON-NLS-1$
 
 		String paese = xml.getPaese();
 		if (xml.getAutorita() != null && xml.getAutorita().getNome() != null) {
 			for (String nome : xml.getAutorita().getNome()) {
-				autorita = autorita + ", " + nome;
+				autorita = autorita + ", " + nome; //$NON-NLS-1$
 			}
 		}
 		Zecca valZecca = xml.getZecca();
-		String zecca = "";
+		String zecca = ""; //$NON-NLS-1$
 		if (valZecca != null) {
 			zecca = valZecca.toString();
 		}
 		// serve almeno uno spazio per il latex
-		if (autorita.equals("")) {
-			autorita = " ";
+		if (autorita.equals("")) { //$NON-NLS-1$
+			autorita = " "; //$NON-NLS-1$
 		}
 
-		if (!zecca.equals(" ") && !autorita.equals(" ")) {
-			zecca = "\\\\\\\\" + zecca;
+		if (!zecca.equals(" ") && !autorita.equals(" ")) { //$NON-NLS-1$ //$NON-NLS-2$
+			zecca = "\\\\\\\\" + zecca; //$NON-NLS-1$
 		}
 
-		String valore = xml.getNominale().getValore() + " "
+		String valore = xml.getNominale().getValore() + " " //$NON-NLS-1$
 				+ xml.getNominale().getValuta();
 		String anno = xml.getAnno();
-		String nominale = valore + " " + anno;
+		String nominale = valore + " " + anno; //$NON-NLS-1$
 		/* compone l'etichetta */
-		out = "\\\\casella" + dimensione + "{" + paese + "}{" + autorita + "}{"
-				+ zecca + "}{" + nominale + "}{" + id + "}";
+		out = "\\\\casella" + dimensione + "{" + paese + "}{" + autorita + "}{" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				+ zecca + "}{" + nominale + "}{" + id + "}"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		return out;
 
 	}

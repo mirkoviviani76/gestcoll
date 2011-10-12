@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 
+import Resources.i18n.Messages;
+
 import main.Common;
 import main.GestLog;
 
@@ -103,7 +105,7 @@ public class DocumentoForm extends javax.swing.JDialog {
 		jTFFile = new javax.swing.JTextField();
 		jLabel3 = new javax.swing.JLabel();
 
-		setTitle("Modifica zecchiere");
+		setTitle(Messages.getString("Generic.16")); //$NON-NLS-1$
 		addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -111,7 +113,7 @@ public class DocumentoForm extends javax.swing.JDialog {
 			}
 		});
 
-		okButton.setText("Modifica");
+		okButton.setText(Messages.getString("Generic.6")); //$NON-NLS-1$
 		okButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,7 +121,7 @@ public class DocumentoForm extends javax.swing.JDialog {
 			}
 		});
 
-		cancelButton.setText("Annulla");
+		cancelButton.setText(Messages.getString("Generic.2")); //$NON-NLS-1$
 		cancelButton.addActionListener(new java.awt.event.ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +131,7 @@ public class DocumentoForm extends javax.swing.JDialog {
 
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jBBrowse.setText("Browse...");
+		jBBrowse.setText(Messages.getString("DocumentoForm.3")); //$NON-NLS-1$
 		jBBrowse.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -141,7 +143,7 @@ public class DocumentoForm extends javax.swing.JDialog {
 		gridBagConstraints.gridy = 1;
 		jPanel1.add(jBBrowse, gridBagConstraints);
 
-		jLabel2.setText("URL");
+		jLabel2.setText(Messages.getString("Generic.10")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
@@ -166,7 +168,7 @@ public class DocumentoForm extends javax.swing.JDialog {
 		gridBagConstraints.weightx = 1.0;
 		jPanel1.add(jTFDescrizione, gridBagConstraints);
 
-		jLabel1.setText("Descrizione");
+		jLabel1.setText(Messages.getString("Generic.19")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
@@ -179,7 +181,7 @@ public class DocumentoForm extends javax.swing.JDialog {
 		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 		jPanel1.add(jTFFile, gridBagConstraints);
 
-		jLabel3.setText("File");
+		jLabel3.setText(Messages.getString("Generic.5")); //$NON-NLS-1$
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
@@ -228,14 +230,14 @@ public class DocumentoForm extends javax.swing.JDialog {
 	}// </editor-fold>//GEN-END:initComponents
 	private void jBBrowseMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jBBrowseMouseClicked
 		try {
-			FileDialog fd = new FileDialog(this, "File");
+			FileDialog fd = new FileDialog(this, Messages.getString("Generic.5")); //$NON-NLS-1$
 			fd.setVisible(true);
 			// String selectedFile = fd.getDirectory()+"/"+fd.getFile();
 			File selectedFile = new File(fd.getDirectory());
 			URI file = selectedFile.toURI();
 			File globalDir = new File(Common.getCommon().getBaseDir());
 			URI global = globalDir.getCanonicalFile().toURI();
-			this.jTFUrl.setText("../../" + global.relativize(file).toString());
+			this.jTFUrl.setText("../../" + global.relativize(file).toString()); //$NON-NLS-1$
 			this.jTFFile.setText(fd.getFile());
 		} catch (IOException ex) {
 			GestLog.Error(DocumentoForm.class, ex);

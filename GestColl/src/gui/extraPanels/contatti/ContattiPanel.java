@@ -18,6 +18,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 
+import Resources.i18n.Messages;
+
 import main.Common;
 import main.GestLog;
 import main.History;
@@ -55,7 +57,7 @@ public class ContattiPanel extends javax.swing.JPanel {
 		initComponents();
 		this.jLContatti.setModel(new GenericListModel<Contatto>());
 		this.lastSearchedIndex = 0;
-		this.lastSearchedText = "";
+		this.lastSearchedText = ""; //$NON-NLS-1$
 		contatti = new ContattiXml(); 
 	}
 
@@ -74,7 +76,7 @@ public class ContattiPanel extends javax.swing.JPanel {
 
 		jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1,
 				javax.swing.BoxLayout.LINE_AXIS));
-		jLContatti.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		jLContatti.setFont(new Font("Tahoma", Font.PLAIN, 11)); //$NON-NLS-1$
 		jLContatti
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jLContatti
@@ -94,7 +96,7 @@ public class ContattiPanel extends javax.swing.JPanel {
 		jToolBar1.setMaximumSize(new java.awt.Dimension(63, 25));
 		jToolBar1.setMinimumSize(new java.awt.Dimension(63, 25));
 
-		jBAggiungi.setText("Aggiungi");
+		jBAggiungi.setText(Messages.getString("Generic.0")); //$NON-NLS-1$
 		jBAggiungi.setFocusable(false);
 		jBAggiungi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jBAggiungi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -106,7 +108,7 @@ public class ContattiPanel extends javax.swing.JPanel {
 		});
 		jToolBar1.add(jBAggiungi);
 
-		jBCerca.setText("Cerca");
+		jBCerca.setText(Messages.getString("Generic.18")); //$NON-NLS-1$
 		jBCerca.setFocusable(false);
 		jBCerca.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jBCerca.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -158,7 +160,7 @@ public class ContattiPanel extends javax.swing.JPanel {
 			this.contatti.add(nuovo);
 			// salva il file
 			try {
-				this.contatti.writeXml(this.contatti.getJaxbObject(), "XmlData.Contatti",
+				this.contatti.writeXml(this.contatti.getJaxbObject(), "XmlData.Contatti", //$NON-NLS-1$
 						Common.getCommon().getContattiXml());
 				// carica i nuovi valori
 				this.jLContatti.setModel(new GenericListModel<Contatto>(contatti.getContatti()));
@@ -167,7 +169,7 @@ public class ContattiPanel extends javax.swing.JPanel {
 			}
 			/* logga in vario modo */
 			History.addEvent(History.MODIFY, Common.getCommon().getContattiXml());
-			String msg = "MODIFICATO con successo: " + Common.getCommon().getContattiXml();
+			String msg = Messages.getString("Generic.15") + Common.getCommon().getContattiXml(); //$NON-NLS-1$
 			MainFrame.setMessage(new Message(msg, Level.INFO));
 		}
 		
@@ -204,8 +206,8 @@ public class ContattiPanel extends javax.swing.JPanel {
 		if (evt.getClickCount() == 2) {
 			try {
 				Contatto c = (Contatto) this.jLContatti.getSelectedValue();
-				Desktop.getDesktop().mail(new URI("mailto:" + c.email));
-				System.out.println("SELEZIONATO per email+ " + c);
+				Desktop.getDesktop().mail(new URI(Messages.getString("ContattiPanel.6") + c.email)); //$NON-NLS-1$
+				System.out.println(Messages.getString("ContattiPanel.7") + c); //$NON-NLS-1$
 			} catch (IOException ex) {
 				GestLog.Error(ContattiPanel.class, ex);
 			} catch (URISyntaxException ex) {

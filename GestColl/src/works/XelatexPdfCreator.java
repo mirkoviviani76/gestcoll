@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import Resources.i18n.Messages;
+
 import main.Common;
 import main.GestLog;
 import main.Progress;
@@ -23,8 +25,8 @@ import main.Progress;
  */
 public class XelatexPdfCreator extends CollectionWorker {
 
-	private static final String COMMAND_STRING = "xelatex -halt-on-error ";
-	public static final String COLLEZIONE_TEX = "Collezione.tex";
+	private static final String COMMAND_STRING = "xelatex -halt-on-error "; //$NON-NLS-1$
+	public static final String COLLEZIONE_TEX = "Collezione.tex"; //$NON-NLS-1$
 
 	/**
 	 * Costruttore
@@ -39,11 +41,11 @@ public class XelatexPdfCreator extends CollectionWorker {
 	private void creaCollezione(File outDir) throws IOException,
 			InterruptedException {
 		String inFile = COLLEZIONE_TEX;
-		File cur = new File(Common.getCommon().getLatexDir() + "/" + inFile);
+		File cur = new File(Common.getCommon().getLatexDir() + "/" + inFile); //$NON-NLS-1$
 		if (cur.exists()) {
 			/* esegue la conversione a pdf */
 			String cmd = COMMAND_STRING + inFile;
-			this.execute(cmd, outDir, 3, "Genero " + inFile);
+			this.execute(cmd, outDir, 3, Messages.getString("Generic.17") + inFile); //$NON-NLS-1$
 		} else
 			throw new FileNotFoundException();
 		/* pulizia */
@@ -63,10 +65,10 @@ public class XelatexPdfCreator extends CollectionWorker {
 		String[] filesEtichette = { MoneteXml2Etichette.OUTFILE };
 		/* esegue la creazione del pdf */
 		for (String f : filesEtichette) {
-			File cur = new File(Common.getCommon().getLatexDir() + "/" + f);
+			File cur = new File(Common.getCommon().getLatexDir() + "/" + f); //$NON-NLS-1$
 			if (cur.exists()) {
 				String cmd = COMMAND_STRING + f;
-				this.execute(cmd, outDir, 2, "Genero " + f);
+				this.execute(cmd, outDir, 2, Messages.getString("Generic.17") + f); //$NON-NLS-1$
 			} else
 				throw new FileNotFoundException();
 		}
