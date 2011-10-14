@@ -172,11 +172,10 @@ xmlns:tns="http://gestColl/coins">
 	</xsd:complexType>
 
 
-	<xsd:element name="moneta">
+	<xsd:complexType name="moneta">
 		<xsd:annotation>
 			<xsd:documentation>Descrizione di una moneta</xsd:documentation>
 		</xsd:annotation>
-		<xsd:complexType>
 			<xsd:all>
 				<xsd:element name="paese" type="xsd:string" minOccurs="1"/>
 				<xsd:element name="autorita" type="tns:autorita" minOccurs="0"/>
@@ -196,7 +195,20 @@ xmlns:tns="http://gestColl/coins">
 			</xsd:all>
 			<xsd:attribute name="id" type="xsd:string" use="required"/>
 		</xsd:complexType>
+	
+	
+	<xsd:element name="monete">
+		<xsd:annotation>
+			<xsd:documentation>La collezione</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="moneta" type="tns:moneta" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
 	</xsd:element>
+	
+	
 </xsd:schema>
 
 

@@ -20,6 +20,7 @@ import Resources.i18n.Messages;
 import XmlData.Moneta.Zecca;
 import exceptions.InternalGestCollError;
 import exceptions.XmlException;
+import gestXml.CollezioneXml;
 import gestXml.ContenitoriXml;
 import gestXml.MonetaXml;
 
@@ -64,7 +65,7 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	 * @throws InternalGestCollError 
 	 */
 	@Override
-	public Object[] doWork(File inDir, File outDir, Object[] params)
+	public Object[] doWork(File outDir, Object[] params)
 			throws XmlException, IOException, InternalGestCollError {
 		String etichetteA = ""; //$NON-NLS-1$
 		String etichetteB = ""; //$NON-NLS-1$
@@ -77,17 +78,16 @@ public class MoneteXml2Etichette extends CollectionWorker {
 		Integer[] contatore = { 0, 0, 0, 0 };
 
 		/* ottiene l'elenco di tutte le monete */
-		List<File> files = getCoinsFileListing();
+		List<MonetaXml> monete = CollezioneXml.getCollezione().getMonete();
 		//crea la dir se non esiste
 		createPath(outDir);
 
-		ListIterator<File> iterator = files.listIterator();
+		ListIterator<MonetaXml> iterator = monete.listIterator();
 		int i = 1;
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			Progress notify = new Progress(i, files.size(), Messages.getString("MoneteXml2Etichette.1")); //$NON-NLS-1$
-			MonetaXml mng;
-			mng = new MonetaXml((iterator.next()));
+			Progress notify = new Progress(i, monete.size(), Messages.getString("MoneteXml2Etichette.1")); //$NON-NLS-1$
+			MonetaXml mng = (MonetaXml) iterator.next();
 			/* prepara il file di output */
 			String id = mng.getId();
 			/* ottiene la dimensione della casella */
@@ -203,5 +203,14 @@ public class MoneteXml2Etichette extends CollectionWorker {
 		return out;
 
 	}
+
+	@Override
+	public Object[] doWork(File inDir, File outDir, Object[] extraParam)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 }

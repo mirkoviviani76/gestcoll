@@ -12,6 +12,7 @@ import java.util.TreeMap;
 
 import XmlData.Moneta.Misura;
 import exceptions.XmlException;
+import gestXml.CollezioneXml;
 import gestXml.MonetaXml;
 
 /**
@@ -24,13 +25,12 @@ public class Statistiche {
 	public static TreeMap<String, Number> coinByMetal() throws XmlException {
 		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
-		List<File> files;
-		files = CollectionWorker.getCoinsFileListing();
-		ListIterator<File> iterator = files.listIterator();
+		List<MonetaXml> monete = CollezioneXml.getCollezione().getMonete();
+		ListIterator<MonetaXml> iterator = monete.listIterator();
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng = new MonetaXml((iterator.next()));
+			MonetaXml mng = (MonetaXml)iterator.next();
 			String metallo = mng.getMetallo();
 			if (valori.containsKey(metallo)) {
 				int v = valori.get(metallo).intValue() + 1;
@@ -45,13 +45,12 @@ public class Statistiche {
 	public static TreeMap<String, Number> coinBySize() throws XmlException {
 		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
-		List<File> files;
-		files = CollectionWorker.getCoinsFileListing();
-		ListIterator<File> iterator = files.listIterator();
+		List<MonetaXml> monete = CollezioneXml.getCollezione().getMonete();
+		ListIterator<MonetaXml> iterator = monete.listIterator();
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng = new MonetaXml((iterator.next()));
+			MonetaXml mng = (MonetaXml)iterator.next();
 			Misura diam = mng.getDiametro();
 			String d = diam.getValore().toPlainString();
 			if (valori.containsKey(d)) {
@@ -68,13 +67,12 @@ public class Statistiche {
 	public static TreeMap<String, Number> coinByYear() throws XmlException {
 		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
-		List<File> files;
-		files = CollectionWorker.getCoinsFileListing();
-		ListIterator<File> iterator = files.listIterator();
+		List<MonetaXml> monete = CollezioneXml.getCollezione().getMonete();
+		ListIterator<MonetaXml> iterator = monete.listIterator();
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng = new MonetaXml((iterator.next()));
+			MonetaXml mng = (MonetaXml)iterator.next();
 			String anno = mng.getAnno();
 			if (valori.containsKey(anno)) {
 				valori.put(anno, valori.get(anno).intValue() + 1);
@@ -88,13 +86,12 @@ public class Statistiche {
 	public static TreeMap<String, Number> coinByNominal() throws XmlException {
 		TreeMap<String, Number> valori = new TreeMap<String, Number>();
 		/* ottiene l'elenco di tutte le monete */
-		List<File> files;
-		files = CollectionWorker.getCoinsFileListing();
-		ListIterator<File> iterator = files.listIterator();
+		List<MonetaXml> monete = CollezioneXml.getCollezione().getMonete();
+		ListIterator<MonetaXml> iterator = monete.listIterator();
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng = new MonetaXml((iterator.next()));
+			MonetaXml mng = (MonetaXml)iterator.next();
 			String chiave = mng.getNominale().getValore()+" "+mng.getNominale().getValuta(); //$NON-NLS-1$
 			if (valori.containsKey(chiave)) {
 				valori.put(chiave, valori.get(chiave).intValue() + 1);

@@ -123,14 +123,14 @@ public class ContenitoriXml extends GestXml {
 	public HashMap<String, String> getMapIdPosizioni()
 			throws FileNotFoundException, TransformerException, XmlException {
 		/* ottiene l'elenco di tutte le monete */
-		List<File> files = CollectionWorker.getCoinsFileListing();
-		ListIterator<File> iterator = files.listIterator();
+		List<MonetaXml> monete = CollezioneXml.getCollezione().getMonete();
+		ListIterator<MonetaXml> iterator = monete.listIterator();
 		HashMap<String, String> posizioniId = new HashMap<String, String>(
-				files.size());
+				monete.size());
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng = new MonetaXml((iterator.next()));
+			MonetaXml mng = (MonetaXml) iterator.next();
 			String pos = getPosAsString(mng);
 			posizioniId.put(mng.getId(), pos);
 		}
@@ -148,14 +148,14 @@ public class ContenitoriXml extends GestXml {
 	public HashMap<String, String> getMapPosizioniId()
 			throws FileNotFoundException, XmlException {
 		/* ottiene l'elenco di tutte le monete */
-		List<File> files = CollectionWorker.getCoinsFileListing();
-		ListIterator<File> iterator = files.listIterator();
+		List<MonetaXml> monete = CollezioneXml.getCollezione().getMonete();
+		ListIterator<MonetaXml> iterator = monete.listIterator();
 		HashMap<String, String> posizioniId = new HashMap<String, String>(
-				files.size());
+				monete.size());
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng = new MonetaXml((iterator.next()));
+			MonetaXml mng = (MonetaXml) iterator.next();
 			String cont = mng.getPosizione().getContenitore().toString();
 			String vass = mng.getPosizione().getVassoio().toString();
 			String riga = mng.getPosizione().getRiga().toString();

@@ -24,6 +24,7 @@ import javax.xml.transform.stream.StreamSource;
 import Resources.i18n.Messages;
 
 import main.Common;
+import main.GestLog;
 import exceptions.InternalGestCollError;
 import exceptions.XmlException;
 import exceptions.XsltException;
@@ -49,7 +50,7 @@ public class GestXml {
 	public GestXml(File _xmlFile) {
 		xmlFile = _xmlFile;
 	}
-
+	
 	/**
 	 * Scrive nel file "out" il Documento xmldoc
 	 * 
@@ -87,6 +88,7 @@ public class GestXml {
 		}
 
 	}
+
 	
 	/**
 	 * Converte in stringa utilizzando un xslt
@@ -145,4 +147,65 @@ public class GestXml {
 		}
 	}
 
+	/**
+	 * Converte utilizzando un xslt
+	 * 
+	 * @param xsltResourceLocation
+	 *            locazione della risora del foglio xslt utilizzato per la conversione
+	 * @param outFile
+	 *            il file di output generato
+	 * @throws XsltException
+	 * @throws InternalGestCollError 
+	 */
+	public void xsltConvert(String id, String xsltResourceLocation, File outFile) throws XsltException, InternalGestCollError {
+		/* ottiene la risorsa xsl */
+		InputStream resource = Common.getCommon().getResource(xsltResourceLocation);
+
+		TransformerFactory tFactory = TransformerFactory.newInstance();
+		try {
+			Transformer transformer = tFactory.newTransformer(new StreamSource(
+					resource));
+			transformer.setParameter("monetaId", id);
+			transformer.transform(new StreamSource(new File(Common.getCommon().getMoneteXml())),
+					new StreamResult(new FileOutputStream(outFile)));
+		} catch (TransformerConfigurationException e) {
+			throw new XsltException("XsltConvert() " +Messages.getString("GestXml.6"), e); //$NON-NLS-1$
+		} catch (TransformerException e) {
+			throw new XsltException("XsltConvert() " +Messages.getString("GestXml.6"), e); //$NON-NLS-1$
+		} catch (FileNotFoundException e) {
+			throw new XsltException("XsltConvert() " +Messages.getString("GestXml.7"), e); //$NON-NLS-1$
+		}
+	}
+
+	/**
+	 * Converte utilizzando un xslt
+	 * 
+	 * @param xsltResourceLocation
+	 *            locazione della risora del foglio xslt utilizzato per la conversione
+	 * @param outFile
+	 *            il file di output generato
+	 * @throws XsltException
+	 * @throws InternalGestCollError 
+	 */
+	public String xsltConvert(String id, String xsltResourceLocation) throws XsltException, InternalGestCollError {
+		/* ottiene la risorsa xsl */
+		InputStream resource = Common.getCommon().getResource(xsltResourceLocation);
+		StringWriter strWriter = new StringWriter();
+		
+		TransformerFactory tFactory = TransformerFactory.newInstance();
+		try {
+			Transformer transformer = tFactory.newTransformer(new StreamSource(
+					resource));
+			transformer.setParameter("monetaId", id);
+			transformer.transform(new StreamSource(new File(Common.getCommon().getMoneteXml())),
+					new StreamResult(strWriter));
+		} catch (TransformerConfigurationException e) {
+			throw new XsltException("XsltConvert()", e); //$NON-NLS-1$
+		} catch (TransformerException e) {
+			throw new XsltException("XsltConvert()", e); //$NON-NLS-1$
+		}
+		return strWriter.toString();
+
+	}
+	
 }

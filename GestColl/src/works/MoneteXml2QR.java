@@ -26,6 +26,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import exceptions.InternalGestCollError;
 import exceptions.XmlException;
 import exceptions.XsltException;
+import gestXml.CollezioneXml;
 import gestXml.MonetaXml;
 
 /**
@@ -75,13 +76,14 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	 * @throws IOException
 	 * @throws WriterException
 	 * @throws InternalGestCollError 
+	 * @throws XmlException 
 	 */
 	@Override
 	public File convert(MonetaXml mng, File outDir) throws XsltException,
-			WriterException, IOException, InternalGestCollError {
+			WriterException, IOException, InternalGestCollError, XmlException {
 		File out = new File(outDir + "/" + mng.getId() + ".png"); //$NON-NLS-1$ //$NON-NLS-2$
 
-		String dati = mng.xsltConvert(XSL_FILE);
+		String dati = CollezioneXml.getCollezione().xsltConvert(mng.getId(), XSL_FILE);
 		MoneteXml2QR.encode(dati, out);
 		return out;
 	}
@@ -100,21 +102,19 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	 * @throws InternalGestCollError 
 	 */
 	@Override
-	public Object[] doWork(File inDir, File outDir, Object[] params)
+	public Object[] doWork(File outDir, Object[] params)
 			throws XmlException, XsltException, WriterException, IOException, InternalGestCollError {
-		/* ottiene l'elenco di tutte le monete */
-		List<File> files = getFileListing(inDir, Common.COIN_END);
 		//crea la dir se non esiste
 		createPath(outDir);
 		
-		ListIterator<File> iterator = files.listIterator();
-		int count = files.size();
+		List<MonetaXml> monete = CollezioneXml.getCollezione().getMonete();
+		ListIterator<MonetaXml> iterator = monete.listIterator();
+		int count = monete.size();
 
 		int i = 1;
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng;
-			mng = new MonetaXml((iterator.next()));
+			MonetaXml mng = (MonetaXml) iterator.next();
 			convert(mng, outDir);
 			Progress p = new Progress(i, count, Messages.getString("MoneteXml2QR.4")); //$NON-NLS-1$
 			this.setChanged();
@@ -126,6 +126,13 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 		this.setChanged();
 		this.notifyObservers(m);
 
+		return null;
+	}
+
+	@Override
+	public Object[] doWork(File inDir, File outDir, Object[] extraParam)
+			throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

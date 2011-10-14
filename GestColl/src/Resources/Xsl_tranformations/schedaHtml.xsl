@@ -1,35 +1,41 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fn="http://www.w3.org/2006/xpath-functions" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:exslt="http://exslt.org/common" xmlns:dyn="http://exslt.org/dynamic">
-<!-- versione 1.4 -->
+﻿<?xml version="1.0" encoding="UTF-8"?> <!-- Prologo XML-->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns="http://gestColl/coins" 
+xmlns:ns0="http://gestColl/coins">
 
-<xsl:output method="xml" omit-xml-declaration="yes" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" indent="yes"/>
 
-<!-- TEMPLATE PRINCIPALE -->
 
-<xsl:template match="/">
+<xsl:param name="monetaId"></xsl:param>
+<xsl:template match="ns0:monete/ns0:moneta">
+<xsl:if test="@id = $monetaId">
+	<xsl:call-template name="templateMoneta" />
+</xsl:if>
+</xsl:template>
+
+<xsl:template name="templateMoneta" xmlns:ns0="http://gestColl/coins">
+
+<xsl:variable name="directoryMoneta">../../bin/data/img</xsl:variable>
 <xsl:variable name="imgDritto">  
-<xsl:value-of select="/moneta/datiArtistici/dritto/fileImmagine"/>  
+<xsl:value-of select="ns0:datiArtistici/ns0:dritto/ns0:fileImmagine"/>  
 </xsl:variable>
 <xsl:variable name="imgRovescio">  
-<xsl:value-of select="/moneta/datiArtistici/rovescio/fileImmagine"/>  
+<xsl:value-of select="ns0:datiArtistici/ns0:rovescio/ns0:fileImmagine"/>  
 </xsl:variable>
 <xsl:variable name="imgTaglio">  
-<xsl:value-of select="/moneta/datiArtistici/taglio/fileImmagine"/>  
+<xsl:value-of select="ns0:datiArtistici/ns0:taglio/ns0:fileImmagine"/>  
 </xsl:variable>
-
-<xsl:variable name="directoryMoneta">../../Monete/<xsl:value-of select="/moneta/@id"/></xsl:variable>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title><xsl:value-of select="/moneta/@id"/></title>
+<title><xsl:value-of select="@id"/></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="report.css" />
 </head>
 
 <body>
 	<div id='collezione_header' class='collezione_header'><h1>
-		<xsl:value-of select="/moneta/paese"/><xsl:text> </xsl:text><xsl:value-of select="/moneta/nominale/valore"/><xsl:text> </xsl:text><xsl:value-of select="/moneta/nominale/valuta"/> (<xsl:value-of select="/moneta/anno"/>)<br/>
-		<xsl:value-of select="/moneta/@id"/></h1>
+		<xsl:value-of select="ns0:paese"/><xsl:text> </xsl:text><xsl:value-of select="ns0:nominale/ns0:valore"/><xsl:text> </xsl:text><xsl:value-of select="ns0:nominale/ns0:valuta"/> (<xsl:value-of select="ns0:anno"/>)<br/>
+		<xsl:value-of select="@id"/></h1>
 	</div> <!-- fine collezione_header -->
  
 	<div id='collezione_content' class='collezione_content'> 
@@ -37,19 +43,19 @@
 			<ul>
 				<li><span class="categoria">Paese:</span>
 					<ul>
-						<xsl:for-each select="/moneta/paese"><li><xsl:apply-templates/></li></xsl:for-each>
+						<xsl:for-each select="ns0:paese"><li><xsl:apply-templates/></li></xsl:for-each>
 					</ul>
 				</li>
 				<li><span class="categoria">Autorita:</span>
 					<ul>
-						<xsl:for-each select="/moneta/autorita/nome"><li><xsl:apply-templates/></li></xsl:for-each>
+						<xsl:for-each select="ns0:autorita/ns0:nome"><li><xsl:apply-templates/></li></xsl:for-each>
 					</ul>
 				</li>
 				<li><span class="categoria">Zecca:</span>
-					<xsl:for-each select="/moneta/zecca">Nome: <xsl:value-of select="nome"/> Segno: <xsl:value-of select="segno"/><br /></xsl:for-each>
+					<xsl:for-each select="ns0:zecca">Nome: <xsl:value-of select="ns0:nome"/> Segno: <xsl:value-of select="ns0:segno"/><br /></xsl:for-each>
 				</li>
 				<li><span class="categoria">Zecchieri:</span>
-					<xsl:for-each select="/moneta/zecchieri/zecchiere">Nome: <xsl:value-of select="nome"/> Segno: <xsl:value-of select="segno"/> Ruolo: <xsl:value-of select="ruolo"/><br /></xsl:for-each>
+					<xsl:for-each select="ns0:zecchieri/ns0:zecchiere">Nome: <xsl:value-of select="ns0:nome"/> Segno: <xsl:value-of select="ns0:segno"/> Ruolo: <xsl:value-of select="ns0:ruolo"/><br /></xsl:for-each>
 				</li>
 			</ul>
 		<h2><a name="datiArtistici">Dati artistici</a></h2>
@@ -60,40 +66,40 @@
 					<th width="20%"><span class="categoria">Taglio</span></th></tr>
 				<tr>
 					<td>
-						<xsl:value-of select="/moneta/datiArtistici/dritto/descrizione"/><br/>
-						<xsl:for-each select="/moneta/datiArtistici/dritto/legenda">
+						<xsl:value-of select="ns0:datiArtistici/ns0:dritto/ns0:descrizione"/><br/>
+						<xsl:for-each select="ns0:datiArtistici/ns0:dritto/ns0:legenda">
 							<div class="legenda">
-								<xsl:if test="testo != ''">
-									<span class="categoria">Legenda:</span> <span class="testoLegenda"><xsl:value-of select="testo"/></span><br/>
+								<xsl:if test="ns0:testo != ''">
+									<span class="categoria">Legenda:</span> <span class="testoLegenda"><xsl:value-of select="ns0:testo"/></span><br/>
 								</xsl:if>
-								<xsl:if test="scioglimento != ''">
-									<span class="categoria">Scioglimento:</span> <span class="scioglimentoLegenda"><xsl:value-of select="scioglimento"/><br/></span>
+								<xsl:if test="ns0:scioglimento != ''">
+									<span class="categoria">Scioglimento:</span> <span class="scioglimentoLegenda"><xsl:value-of select="ns0:scioglimento"/><br/></span>
 								</xsl:if>
 							</div>
 						</xsl:for-each>
 					</td>
 					<td>
-						<xsl:value-of select="/moneta/datiArtistici/rovescio/descrizione"/><br/>
-						<xsl:for-each select="/moneta/datiArtistici/rovescio/legenda">
+						<xsl:value-of select="ns0:datiArtistici/ns0:rovescio/ns0:descrizione"/><br/>
+						<xsl:for-each select="ns0:datiArtistici/ns0:rovescio/ns0:legenda">
 							<div class="legenda">
-								<xsl:if test="testo != ''">
-									<span class="categoria">Legenda:</span> <span class="testoLegenda"><xsl:value-of select="testo"/></span><br/>
+								<xsl:if test="ns0:testo != ''">
+									<span class="categoria">Legenda:</span> <span class="testoLegenda"><xsl:value-of select="ns0:testo"/></span><br/>
 								</xsl:if>
-								<xsl:if test="scioglimento != ''">
-									<span class="categoria">Scioglimento:</span> <span class="scioglimentoLegenda"><xsl:value-of select="scioglimento"/><br/></span>
+								<xsl:if test="ns0:scioglimento != ''">
+									<span class="categoria">Scioglimento:</span> <span class="scioglimentoLegenda"><xsl:value-of select="ns0:scioglimento"/><br/></span>
 								</xsl:if>
 							</div>
 						</xsl:for-each>
 					</td>
 					<td>
-						<xsl:value-of select="/moneta/datiArtistici/taglio/descrizione"/><br/>
-						<xsl:for-each select="/moneta/datiArtistici/taglio/legenda">
+						<xsl:value-of select="ns0:datiArtistici/ns0:taglio/ns0:descrizione"/><br/>
+						<xsl:for-each select="ns0:datiArtistici/ns0:taglio/ns0:legenda">
 							<div class="legenda">
-								<xsl:if test="testo != ''">
-									<span class="categoria">Legenda:</span> <span class="testoLegenda"><xsl:value-of select="testo"/></span><br/>
+								<xsl:if test="ns0:testo != ''">
+									<span class="categoria">Legenda:</span> <span class="testoLegenda"><xsl:value-of select="ns0:testo"/></span><br/>
 								</xsl:if>
-								<xsl:if test="scioglimento != ''">
-									<span class="categoria">Scioglimento:</span> <span class="scioglimentoLegenda"><xsl:value-of select="scioglimento"/><br/></span>
+								<xsl:if test="ns0:scioglimento != ''">
+									<span class="categoria">Scioglimento:</span> <span class="scioglimentoLegenda"><xsl:value-of select="ns0:scioglimento"/><br/></span>
 								</xsl:if>
 							</div>
 						</xsl:for-each>
@@ -108,37 +114,39 @@
 
 		<h2><a name="datiFisici">Dati fisici</a></h2>
 			<ul>
-				<li><span class="categoria">Forma: </span> <xsl:value-of select="/moneta/datiFisici/forma"/></li>
-				<li><span class="categoria">Diametro: </span> <xsl:value-of select="/moneta/datiFisici/diametro/valore"/><xsl:text> </xsl:text><xsl:value-of select="/moneta/datiFisici/diametro/unita"/></li>
-				<li><span class="categoria">Metallo: </span> <xsl:value-of select="/moneta/datiFisici/metallo"/></li>
-				<li><span class="categoria">Peso: </span> <xsl:value-of select="/moneta/datiFisici/peso/valore"/><xsl:text> </xsl:text><xsl:value-of select="/moneta/datiFisici/peso/unita"/></li>
+				<li><span class="categoria">Forma: </span> <xsl:value-of select="ns0:datiFisici/ns0:forma"/></li>
+				
+				<li><span class="categoria">Diametro: </span> <xsl:value-of select="ns0:datiFisici/ns0:diametro/ns0:valore"/><xsl:text> </xsl:text><xsl:value-of select="ns0:datiFisici/ns0:diametro/ns0:unita"/></li>
+				<li><span class="categoria">Metallo: </span> <xsl:value-of select="ns0:datiFisici/ns0:metallo"/></li>
+				<li><span class="categoria">Peso: </span> <xsl:value-of select="ns0:datiFisici/ns0:peso/ns0:valore"/><xsl:text> </xsl:text><xsl:value-of select="ns0:datiFisici/ns0:peso/ns0:unita"/></li>
+
 			</ul>
 
 		<h2><a name="datiCollezione">Dati collezione</a></h2>
-			<span class="categoria">Acquisto: </span> <xsl:value-of select="/moneta/datiAcquisto/luogo" /><xsl:text> </xsl:text>
-			<xsl:value-of select="/moneta/datiAcquisto/data"/><xsl:text> </xsl:text>
-			<xsl:value-of select="/moneta/datiAcquisto/prezzo/valore"/><xsl:text> </xsl:text>
-			<xsl:value-of select="/moneta/datiAcquisto/prezzo/unita"/>
+			<span class="categoria">Acquisto: </span> <xsl:value-of select="ns0:datiAcquisto/ns0:luogo" /><xsl:text> </xsl:text>
+			<xsl:value-of select="ns0:datiAcquisto/ns0:data"/><xsl:text> </xsl:text>
+			<xsl:value-of select="ns0:datiAcquisto/ns0:prezzo/ns0:valore"/><xsl:text> </xsl:text>
+			<xsl:value-of select="ns0:datiAcquisto/ns0:prezzo/ns0:unita"/>
 
 		<h2><a name="datiLetteratura">Letteratura</a></h2>
 			<ul>
-				<xsl:for-each select="/moneta/letteratura/libro">
-					<li><xsl:value-of select="sigla"/><xsl:text> </xsl:text><xsl:value-of select="numero"/></li>
+				<xsl:for-each select="ns0:letteratura/ns0:libro">
+					<li><xsl:value-of select="ns0:sigla"/><xsl:text> </xsl:text><xsl:value-of select="ns0:numero"/></li>
 				</xsl:for-each>
 			</ul>
 
 		<h2><a name="note">Note</a></h2>
 			<ul>
-				<xsl:for-each select="/moneta/note/nota">
+				<xsl:for-each select="ns0:note/ns0:nota">
 					<li><xsl:apply-templates/></li>
 				</xsl:for-each>
 			</ul>
 		<h2><a name="Documenti">Documenti</a></h2>
 			<ul>
-				<xsl:for-each select="/moneta/itemAddizionali/documento">
-					<xsl:variable name="curFile" select="filename"/>
-					<xsl:variable name="curUrl" select="url"/>
-					<li><a href="{$directoryMoneta}/{$curUrl}/{$curFile}"><xsl:value-of select="filename"/></a><xsl:text> </xsl:text><xsl:value-of select="descrizione"/></li>
+				<xsl:for-each select="ns0:itemAddizionali/ns0:documento">
+					<xsl:variable name="curFile" select="ns0:filename"/>
+					<xsl:variable name="curUrl" select="ns0:url"/>
+					<li><a href="{$directoryMoneta}/{$curUrl}/{$curFile}"><xsl:value-of select="ns0:filename"/></a><xsl:text> </xsl:text><xsl:value-of select="ns0:descrizione"/></li>
 				</xsl:for-each>
 			</ul>
 	</div> <!-- fine collezione_content' -->
@@ -146,4 +154,5 @@
 </html>
 
 </xsl:template>
+
 </xsl:stylesheet>

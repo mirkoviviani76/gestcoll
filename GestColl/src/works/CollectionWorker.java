@@ -108,22 +108,6 @@ public abstract class CollectionWorker extends Observable {
 		return res;
 	}
 	
-	/**
-	 * Ottiene l'elenco di tutti i file di monete
-	 * @return la lista o lista nulla nel caso di errore
-	 */
-	static public List<File> getCoinsFileListing() {
-		List<File> ret = null;
-		try {
-			ret = CollectionWorker.getFileListing(
-					new File(Common.getCommon().getMoneteDir()), Common.COIN_END);
-		} catch (FileNotFoundException e) {
-			GestLog.Error(CollectionWorker.class, e);
-		}
-		return ret;
-	}
-			
-
 
 	/**
 	 * Ottiene la lista dei file con un determinato pattern a partire da una dir
@@ -207,6 +191,17 @@ public abstract class CollectionWorker extends Observable {
 	}
 
 	/**
+	 * Metodo astratto relativo all'esecuzione del lavoro sulla collezione
+	 * 
+	 * @param outDir
+	 * @param extraParam
+	 * @return un elenco di risultati del lavoro
+	 * @throws Exception
+	 */
+	public abstract Object[] doWork(File outDir, Object[] extraParam)
+			throws Exception;
+
+	/**
 	 * Metodo astratto relativo all'esecuzione del lavoro
 	 * 
 	 * @param inDir
@@ -217,7 +212,7 @@ public abstract class CollectionWorker extends Observable {
 	 */
 	public abstract Object[] doWork(File inDir, File outDir, Object[] extraParam)
 			throws Exception;
-
+	
 	/**
 	 * @return the description
 	 */

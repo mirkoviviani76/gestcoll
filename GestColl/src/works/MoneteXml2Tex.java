@@ -25,6 +25,7 @@ import XmlData.Moneta.DocumentoAddizionale;
 import exceptions.InternalGestCollError;
 import exceptions.XmlException;
 import exceptions.XsltException;
+import gestXml.CollezioneXml;
 import gestXml.MonetaXml;
 
 /**
@@ -59,14 +60,15 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 * @throws InternalGestCollError 
+	 * @throws XmlException 
 	 */
 	@Override
 	public File convert(MonetaXml mng, File outDir) throws XsltException,
-			FileNotFoundException, IOException, InternalGestCollError {
+			FileNotFoundException, IOException, InternalGestCollError, XmlException {
 		/* prepara il file di output */
 		File out = new File(outDir + "/" + mng.getId() + ".tex"); //$NON-NLS-1$ //$NON-NLS-2$
 
-		mng.xsltConvert(XSL_FILE, out);
+		CollezioneXml.getCollezione().xsltConvert(mng.getId(), XSL_FILE, out);
 		String[][] conversione = { { "&", "\\\\&" } }; //$NON-NLS-1$ //$NON-NLS-2$
 		GenericUtil.replaceInFile(out, conversione);
 		return out;
@@ -84,26 +86,22 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 	 * @throws InternalGestCollError 
 	 */
 	@Override
-	public Object[] doWork(File inDir, File outDir, Object[] params)
+	public Object[] doWork(File outDir, Object[] params)
 			throws XmlException, XsltException, IOException, InternalGestCollError {
-		/* ottiene l'elenco di tutte le monete */
-		List<File> files = getFileListing(inDir, Common.COIN_END);
-		Collections.sort(files);
 		//crea la dir se non esiste
 		createPath(outDir);
 
-
-		ListIterator<File> iterator = files.listIterator();
+		List<MonetaXml> monete = CollezioneXml.getCollezione().getMonete();
+		ListIterator<MonetaXml> iterator = monete.listIterator();
 
 		String allXmlList = "\\\\include{posizioni}\n"; //$NON-NLS-1$
 		String posizioni = ""; //$NON-NLS-1$
 		int i = 1;
 
-		int size = files.size();
+		int size = monete.size();
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng;
-			mng = new MonetaXml((iterator.next()));
+			MonetaXml mng =(MonetaXml)iterator.next();
 			String id = mng.getId();
 			Progress p = new Progress(i, size, Messages.getString("MoneteXml2Tex.0")); //$NON-NLS-1$
 
@@ -129,10 +127,11 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 			for (DocumentoAddizionale f : documenti) {
 				if (f.getFilename().endsWith("tex")) { //$NON-NLS-1$
 					// copia il tex in outdir
-					File xxx = new File(inDir.getPath() + "/" + mng.getId() //$NON-NLS-1$
-							+ "/" + f.getFilename()); //$NON-NLS-1$
-					FileUtils.copyFile(xxx,
-							new File(outDir + "/" + xxx.getName())); //$NON-NLS-1$
+					//TODO verificare
+//					File xxx = new File(inDir.getPath() + "/" + mng.getId() //$NON-NLS-1$
+//							+ "/" + f.getFilename()); //$NON-NLS-1$
+//					FileUtils.copyFile(xxx,
+//							new File(outDir + "/" + xxx.getName())); //$NON-NLS-1$
 					String tmp = f.getFilename().replace(".tex", ""); //$NON-NLS-1$ //$NON-NLS-2$
 					allXmlList = allXmlList + "\\\\include{" + tmp + "}\n"; //$NON-NLS-1$ //$NON-NLS-2$
 				}
@@ -156,6 +155,13 @@ public class MoneteXml2Tex extends CollectionWorker implements CoinConverter {
 		this.setChanged();
 		this.notifyObservers(m);
 
+		return null;
+	}
+
+	@Override
+	public Object[] doWork(File inDir, File outDir, Object[] extraParam)
+			throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

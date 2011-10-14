@@ -6,6 +6,7 @@
 package gui.moneta;
 
 import exceptions.XmlException;
+import gestXml.CollezioneXml;
 import gestXml.MonetaXml;
 import gui.MainFrame;
 import gui.datamodels.GenericCellRenderer;
@@ -25,6 +26,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 
 import javax.swing.JTextField;
@@ -1305,15 +1307,13 @@ public class MonetaViewer extends javax.swing.JPanel {
 		try {
 			String id = this.mng.getId();
 			// ottiene il nome del file da scrivere
-			String outFile = Common.getCommon().getMoneteDir() + "/" + id + "/" //$NON-NLS-1$ //$NON-NLS-2$
-					+ id + ".xml"; //$NON-NLS-1$
+			String outFile = Common.getCommon().getMoneteXml();
 			// ottiene il nome del file di backup
-			String oldFileRen = Common.getCommon().getBackupDir() + "/" + id //$NON-NLS-1$
-					+ "-" + Calendar.getInstance().getTimeInMillis() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+			String oldFileRen = Common.getCommon().getMoneteXml()+ "-" + Calendar.getInstance().getTimeInMillis() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
 			// esegue il backup
 			FileUtils.copyFile(new File(outFile), new File(oldFileRen));
 			// salva il file
-			this.mng.writeXml(this.mng.getJaxbObject(), "XmlData.Moneta", //$NON-NLS-1$
+			CollezioneXml.getCollezione().writeXml("XmlData.Moneta", //$NON-NLS-1$
 					outFile);
 			// Log
 			History.addEvent(History.MODIFY, id);

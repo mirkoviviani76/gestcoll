@@ -6,6 +6,7 @@
 package gui.datamodels;
 
 import exceptions.XmlException;
+import gestXml.CollezioneXml;
 import gestXml.MonetaXml;
 import gui.extraPanels.vassoi.VassoioCell;
 
@@ -53,12 +54,8 @@ public class VassoioCellRenderer extends DefaultTableCellRenderer {
 		String contenuto = id;
 		// se e' un posto occupato, mostra i dati
 		if (!id.equals("")) { //$NON-NLS-1$
-			// estrae i dati dall'xml
-			String filename = Common.getCommon().getMoneteDir() + "/" + id //$NON-NLS-1$
-					+ "/" + id + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
-			MonetaXml mng;
 			try {
-				mng = new MonetaXml(new File(filename));
+				MonetaXml mng = CollezioneXml.getCollezione().getMoneta(id);
 				contenuto = mng.getPaese() + "<br>" //$NON-NLS-1$
 						+ mng.getNominale().getValore() + " " //$NON-NLS-1$
 						+ mng.getNominale().getValuta() + " (" + mng.getAnno() //$NON-NLS-1$
