@@ -4,31 +4,13 @@
  */
 package gestXml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 
 import main.Common;
 import main.Common.Lato;
@@ -47,9 +29,6 @@ import XmlData.Moneta.Nominale;
 import XmlData.Moneta.Posizione;
 import XmlData.Moneta.Zecca;
 import XmlData.Moneta.Zecchiere;
-import exceptions.InternalGestCollError;
-import exceptions.XmlException;
-import exceptions.XsltException;
 
 /**
  * Classe per gestire il file xml di una moneta.
