@@ -207,7 +207,6 @@ public class MoneteXml2Etichette extends CollectionWorker {
 	@Override
 	public Object[] doWork(File inDir, File outDir, Object[] extraParam)
 			throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

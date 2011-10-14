@@ -143,8 +143,16 @@ public class CollezioneXml extends GestXml {
 			XmlData.Moneta.Monete temp = (XmlData.Moneta.Monete) unmarshaller
 					.unmarshal(xmlTemplate); //$NON-NLS-1$
 			//TODO sistemare il template
+			XmlData.Moneta.Moneta nuova = temp.getMoneta().get(0);
+			nuova.setAnno(anno);
+			nuova.setId(id);
+			nuova.getDatiArtistici().getDritto().setFileImmagine(id+"-D.jpg");
+			nuova.getDatiArtistici().getRovescio().setFileImmagine(id+"-R.jpg");
+			nuova.getDatiArtistici().getTaglio().setFileImmagine(id+"-T.jpg");
+			
+			
 			//aggiunge la moneta
-			this.collezioneXml.getMoneta().add(temp.getMoneta().get(0));
+			this.collezioneXml.getMoneta().add(nuova);
 			//salva il nuovo file
 			this.writeXml(this.collezioneXml, "XmlData.Moneta", Common.getCommon().getMoneteXml());
 			//ricarica i dati
