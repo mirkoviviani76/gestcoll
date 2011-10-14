@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
@@ -17,9 +16,6 @@ import main.Common;
 import main.GenericUtil;
 import main.Message;
 import main.Progress;
-
-import org.apache.commons.io.FileUtils;
-
 import Resources.i18n.Messages;
 import XmlData.Moneta.DocumentoAddizionale;
 import exceptions.InternalGestCollError;

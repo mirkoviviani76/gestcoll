@@ -12,15 +12,12 @@ import gui.extraPanels.vassoi.VassoioCell;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.io.File;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import Resources.i18n.Messages;
-
-import main.Common;
 import main.GestLog;
+import Resources.i18n.Messages;
 
 /**
  * Renderer per le celle (caselle) del vassoio.

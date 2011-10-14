@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
-import main.Common;
 import main.GestLog;
 
 import org.apache.commons.io.FileUtils;
