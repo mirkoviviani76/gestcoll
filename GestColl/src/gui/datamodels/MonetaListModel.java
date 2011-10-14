@@ -9,15 +9,10 @@ import exceptions.XmlException;
 import gestXml.CollezioneXml;
 import gestXml.MonetaXml;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.ListIterator;
 
-import main.Common;
 import main.Splash;
-import works.CollectionWorker;
 
 /**
  *

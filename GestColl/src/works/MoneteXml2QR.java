@@ -11,10 +11,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.logging.Level;
 
-import main.Common;
 import main.Message;
 import main.Progress;
-
 import Resources.i18n.Messages;
 
 import com.google.zxing.BarcodeFormat;

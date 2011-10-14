@@ -5,23 +5,17 @@
 
 package gui.moneta.forms;
 
-import exceptions.XmlException;
-import gestXml.CollezioneXml;
-import gestXml.MonetaXml;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.List;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import main.GestLog;
-
 import Resources.i18n.Messages;
-
-import works.CollectionWorker;
+import exceptions.XmlException;
+import gestXml.CollezioneXml;
+import gestXml.MonetaXml;
 
 /**
  * 

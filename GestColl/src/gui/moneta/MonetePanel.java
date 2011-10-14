@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +29,6 @@ import javax.swing.ProgressMonitor;
 import javax.xml.transform.TransformerException;
 
 import main.Common;
-import main.GenericUtil;
 import main.GestLog;
 import main.History;
 import main.Message;
@@ -38,14 +36,13 @@ import main.Progress;
 
 import org.xml.sax.SAXException;
 
-import Resources.i18n.Messages;
-
 import works.CollectionWorker;
 import works.MoneteXml2Etichette;
 import works.MoneteXml2Html;
 import works.MoneteXml2QR;
 import works.MoneteXml2Tex;
 import works.XelatexPdfCreator;
+import Resources.i18n.Messages;
 import exceptions.InternalGestCollError;
 import exceptions.XmlException;
 import gestXml.CollezioneXml;
