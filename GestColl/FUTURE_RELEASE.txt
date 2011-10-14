@@ -10,11 +10,15 @@
 	<ambito>Guerra dei trenta anni</ambito>
 </ambiti>
 
-- wiki?
+- wiki? (eliminare il bottone e il gestore)
 
 - negli xsl passare come parametro la dir delle immagini
 
 - per una nuova moneta riempire i campi (riempire il template)
+
+- bozze di nuove monete, da inserire in seguito
+
+- elenco dei campi mancanti per le monete (es. per XXXX mancano le autorità, la letteratura....)
 
 -BUGFIXING
 -- se non esistono note, l'aggiunta di una nota genera errore. Verificare altri campi.
