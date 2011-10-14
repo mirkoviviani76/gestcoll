@@ -20,5 +20,7 @@
 
 - elenco dei campi mancanti per le monete (es. per XXXX mancano le autorità, la letteratura....)
 
+- pensare all'integrità di collezione.xml.... salvare? bz2? backup? checksum?
+
 -BUGFIXING
 -- se non esistono note, l'aggiunta di una nota genera errore. Verificare altri campi.
