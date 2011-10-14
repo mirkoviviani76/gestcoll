@@ -15,12 +15,12 @@ xmlns:tns="http://gestColl/configurations">
 		</xsd:annotation>
 		<xsd:all>
 			<xsd:element minOccurs="1" maxOccurs="1" name="base_dir" type="xsd:string" />
-			<xsd:element minOccurs="1" maxOccurs="1" name="monete_dir" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="backup_dir" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="biblioteca_dir" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="html_dir" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="latex_dir" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="qr_dir" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="img_dir" type="xsd:string" />
 		</xsd:all>
 	</xsd:complexType>
 
@@ -33,6 +33,7 @@ xmlns:tns="http://gestColl/configurations">
 			<xsd:element minOccurs="1" maxOccurs="1" name="contatti_xml" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="links_xml" type="xsd:string" />
 			<xsd:element minOccurs="1" maxOccurs="1" name="biblio_xml" type="xsd:string" />
+			<xsd:element minOccurs="1" maxOccurs="1" name="collezione_xml" type="xsd:string" />
 		</xsd:all>
 	</xsd:complexType>
 

@@ -11,3 +11,10 @@
 </ambiti>
 
 - wiki?
+
+- negli xsl passare come parametro la dir delle immagini
+
+- per una nuova moneta riempire i campi (riempire il template)
+
+-BUGFIXING
+-- se non esistono note, l'aggiunta di una nota genera errore. Verificare altri campi.

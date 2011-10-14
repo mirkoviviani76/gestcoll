@@ -5,6 +5,10 @@
 
 package gui.moneta.forms;
 
+import exceptions.XmlException;
+import gestXml.CollezioneXml;
+import gestXml.MonetaXml;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -12,6 +16,8 @@ import java.util.List;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import main.GestLog;
 
 import Resources.i18n.Messages;
 
@@ -53,7 +59,6 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 	private javax.swing.JButton okButton;
 	// End of variables declaration//GEN-END:variables
 	private int returnStatus = RET_CANCEL;
-	private List<File> tuttiXmlMonete;
 
 	/**
 	 * Creates new form AddMonetaForm
@@ -64,13 +69,15 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 	public AddMonetaForm(java.awt.Frame parent, boolean modal) {
 		super(parent, modal);
 		initComponents();
-		// carica i file xml delle monete
-		this.tuttiXmlMonete = CollectionWorker.getCoinsFileListing();
 		// aggiunge i listener
 		this.jTFAnno.getDocument().addDocumentListener(this);
 		this.jCBDim.addActionListener(this);
 		// effettua un primo aggiornamento
-		this.updateData();
+		try {
+			this.updateData();
+		} catch (XmlException e) {
+			GestLog.Error(this.getClass(), e);
+		}
 	}
 
 	/**
@@ -80,7 +87,12 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == this.jCBDim) {
-			this.updateData();
+			try {
+				this.updateData();
+			} catch (XmlException e) {
+				GestLog.Error(this.getClass(), e);
+			}
+
 		}
 	}
 
@@ -94,7 +106,11 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 	 */
 	@Override
 	public void changedUpdate(DocumentEvent de) {
-		this.updateData();
+		try {
+			this.updateData();
+		} catch (XmlException e) {
+			GestLog.Error(this.getClass(), e);
+		}
 	}
 
 	/** Closes the dialog */
@@ -117,6 +133,14 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 				+ "-" + this.jTFProgressivo.getText(); //$NON-NLS-1$
 	}
 
+	/**
+	 * 
+	 * @return l'id calcolato della nuova moneta
+	 */
+	public String getAnno() {
+		return this.jTFAnno.getText();
+	}
+	
 	/**
 	 * @return the return status of this dialog - one of RET_OK or RET_CANCEL
 	 */
@@ -294,7 +318,11 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 	 */
 	@Override
 	public void insertUpdate(DocumentEvent de) {
-		this.updateData();
+		try {
+			this.updateData();
+		} catch (XmlException e) {
+			GestLog.Error(this.getClass(), e);
+		}
 	}
 
 	private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
@@ -307,13 +335,18 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 	 */
 	@Override
 	public void removeUpdate(DocumentEvent de) {
-		this.updateData();
+		try {
+			this.updateData();
+		} catch (XmlException e) {
+			GestLog.Error(this.getClass(), e);
+		}
 	}
 
 	/**
 	 * aggiorna i campi a seconda di cio' che viene digitato
+	 * @throws XmlException 
 	 */
-	private void updateData() {
+	private void updateData() throws XmlException {
 		/* controlla se l'anno e' su 4 cifre e comincia con un 1 */
 		String anno = this.jTFAnno.getText();
 		if ((anno.length() != 4) || (!anno.startsWith("1"))) { //$NON-NLS-1$
@@ -323,8 +356,9 @@ public class AddMonetaForm extends javax.swing.JDialog implements
 		}
 		/* cerca il progressivo giusto */
 		int counter = 1;
-		for (File cur : tuttiXmlMonete) {
-			if (cur.getName().startsWith(anno)) {
+		for (MonetaXml cur : CollezioneXml.getCollezione().getMonete()) {
+			String id = cur.getId();
+			if (id.startsWith(anno)) {
 				counter++;
 			}
 		}

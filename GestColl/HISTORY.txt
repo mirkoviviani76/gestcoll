@@ -2,6 +2,9 @@ Metodologia versionamento (xx.yy.zz)
 xx : incrementato con l'aggiunta di nuove funzionalita' (major) (+10 in caso di super funzionalita')
 yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
+40.0
+modificato xml di monete: ne esiste ora solo uno (collezione.xml)
+modificata struttura directory monete: esiste solo una dir img e non esistono piu' singole directory
 33.1
 le stringhe sono state internazionalizzate
 33.0

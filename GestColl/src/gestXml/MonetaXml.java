@@ -7,7 +7,10 @@ package gestXml;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.GregorianCalendar;
@@ -19,6 +22,13 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import main.Common;
 import main.Common.Lato;
@@ -37,13 +47,15 @@ import XmlData.Moneta.Nominale;
 import XmlData.Moneta.Posizione;
 import XmlData.Moneta.Zecca;
 import XmlData.Moneta.Zecchiere;
+import exceptions.InternalGestCollError;
 import exceptions.XmlException;
+import exceptions.XsltException;
 
 /**
  * Classe per gestire il file xml di una moneta.
  * 
  */
-public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
+public class MonetaXml implements Comparable<MonetaXml>,
 		Tooltipper {
 
 	public static enum Fields {
@@ -59,32 +71,9 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 	private Ordering ordering;
 	private String path;
 
-	/**
-	 * Il file della moneta
-	 * 
-	 * @param _xmlFile
-	 * @throws XmlException
-	 */
-	public MonetaXml(File _xmlFile) throws XmlException {
-		super(_xmlFile);
-		this.path = _xmlFile.getParent();
-		ordering = Ordering.BY_ID;
-		try {
-			JAXBContext jc = JAXBContext.newInstance("XmlData.Moneta");
-			Unmarshaller unmarshaller = jc.createUnmarshaller();
-			moneta = (XmlData.Moneta.Moneta) unmarshaller
-					.unmarshal(new InputStreamReader(new FileInputStream(
-							_xmlFile), "UTF-8")); //$NON-NLS-1$
-		} catch (JAXBException e) {
-			throw new XmlException("MonetaXml() "+Messages.getString("Generic.1") //$NON-NLS-1$
-					+ _xmlFile, e);
-		} catch (UnsupportedEncodingException e) {
-			throw new XmlException("MonetaXml() "+Messages.getString("Generic.2") //$NON-NLS-1$
-					+ _xmlFile, e);
-		} catch (FileNotFoundException e) {
-			throw new XmlException("MonetaXml() "+Messages.getString("Generic.3") //$NON-NLS-1$
-					+ _xmlFile, e);
-		}
+
+	public MonetaXml(XmlData.Moneta.Moneta m) {
+			moneta = m;
 	}
 
 	/**
@@ -214,7 +203,7 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 				&& this.moneta.getDatiArtistici().getTaglio() != null) {
 			s = this.moneta.getDatiArtistici().getTaglio().getFileImmagine();
 		}
-		return this.getPath() + "/" + s; //$NON-NLS-1$
+		return Common.getCommon().getImgDir() + "/" + s; //$NON-NLS-1$
 
 	}
 
@@ -707,6 +696,5 @@ public class MonetaXml extends GestXml implements Comparable<MonetaXml>,
 						this.moneta.getRevisione());
 		return tooltip;
 	}
-
 	
 }

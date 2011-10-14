@@ -48,6 +48,7 @@ import works.MoneteXml2Tex;
 import works.XelatexPdfCreator;
 import exceptions.InternalGestCollError;
 import exceptions.XmlException;
+import gestXml.CollezioneXml;
 import gestXml.ContenitoriXml;
 import gestXml.MonetaXml;
 import gestXml.data.Armadio;
@@ -64,8 +65,6 @@ import gui.moneta.forms.AddMonetaForm;
 public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		ActionListener {
 
-	private final static String NEW_MONETA_TEMPLATE = "/Resources/templates/instance.xml.template"; //$NON-NLS-1$
-	
 	private final static String ORDER_BY_ID = Messages.getString("MonetePanel.1"); //$NON-NLS-1$
 	private final static String ORDER_BY_PAESE = Messages.getString("MonetePanel.2"); //$NON-NLS-1$
 	private final static String ORDER_BY_REVISIONE = Messages.getString("MonetePanel.3"); //$NON-NLS-1$
@@ -157,11 +156,8 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 			ArrayList<CollectionWorker> works = new ArrayList<CollectionWorker>();
 			works.add(xml2tex);
 			works.add(xml2et);
-			System.out.println(Common.getCommon().getMoneteDir());
-			System.out.println(Common.getCommon().getLatexDir());
 			this.runInThread(works,
-					new File(Common.getCommon().getMoneteDir()), new File(
-							Common.getCommon().getLatexDir()), null);
+					new File(Common.getCommon().getLatexDir()), null);
 		} else if (ae.getSource() == jButtonWiki) {
 			//mostra un messaggio
 			JOptionPane.showMessageDialog(null, Messages.getString("MonetePanel.5"), Common.APPNAME, //$NON-NLS-1$
@@ -178,14 +174,13 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 			this.runInThread(xpc, new File(Common.getCommon().getLatexDir()),
 					new File(Common.getCommon().getLatexDir()), null);
 		} else if (ae.getSource() == jButtonXml2Html) {
-			this.runInThread(xml2html, new File(Common.getCommon()
-					.getMoneteDir()),
+			this.runInThread(xml2html, 
 					new File(Common.getCommon().getHtmlDir()), null);
 		} else if (ae.getSource() == jButtonVerify) {
 			// this.runInThread(vrf, new File(Common.MONETE_DIR), new
 			// File(Common.HTML_DIR), null);
 		} else if (ae.getSource() == jButtonQR) {
-			this.runInThread(qrc, new File(Common.getCommon().getMoneteDir()),
+			this.runInThread(qrc, 
 					new File(Common.getCommon().getQrDir()), null);
 		} else if (ae.getSource() == jTBEdit) {
 			this.monetaViewer1.setEditable(this.jTBEdit.isSelected());
@@ -296,40 +291,16 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		am.setVisible(true);
 		if (am.getReturnStatus() == AddMonetaForm.RET_OK) {
 			String id = am.getId();
-			File newDir = new File(Common.getCommon().getMoneteDir() + "/" + id); //$NON-NLS-1$
-			// crea dir
-			boolean success = newDir.mkdir();
-			if (success) {
-				try {
-					String imgD = id + "-D.jpg"; //$NON-NLS-1$
-					String imgR = id + "-R.jpg"; //$NON-NLS-1$
-					// sistema un po' di dati per le conversioni
-					String[][] conversione = { { "%ID", id }, //$NON-NLS-1$
-							{ "%IMG_D", imgD }, { "%IMG_R", imgR }, //$NON-NLS-1$ //$NON-NLS-2$
-							{ "%CONTENITORE", "6" }, { "%VASSOIO", "0" }, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-							{ "%RIGA", "0" }, { "%COLONNA", "0" } }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-					// copia file template di istanza e sistema l'attributo e le
-					// immagini
-					String newXml = Common.getCommon().getMoneteDir() + "/" //$NON-NLS-1$
-							+ id + "/" + id + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
-					InputStream is = Common.getCommon().getResource(NEW_MONETA_TEMPLATE);
-					GenericUtil.fillTemplate(is, newXml, conversione);
-					// ricarica la lista
-					this.jListMonete
-							.setModel(new gui.datamodels.MonetaListModel(
-									MonetaXml.Ordering.BY_ID));
-					// messaggio di conferma
-					History.addEvent(History.ADD, id);
-					String msg = Messages.getString("MonetePanel.27") + id; //$NON-NLS-1$
-					MainFrame.setMessage(new Message(msg, Level.INFO));
-				} catch (IOException ex) {
-					System.out.println(Messages.getString("Generic.ERROR")); //$NON-NLS-1$
-					GestLog.Error(MonetePanel.class, ex);
-				}
-			} else {
-				GestLog.Error(MonetePanel.class, "addMoneta", //$NON-NLS-1$
-						Messages.getString("MonetePanel.30") + id); //$NON-NLS-1$
-			}
+			// copia file template di istanza e sistema l'attributo e le immagini
+			CollezioneXml.getCollezione().addMoneta(am.getAnno(), id);
+			// ricarica la lista
+			this.jListMonete
+			.setModel(new gui.datamodels.MonetaListModel(
+					MonetaXml.Ordering.BY_ID));
+			// messaggio di conferma
+			History.addEvent(History.ADD, id);
+			String msg = Messages.getString("MonetePanel.27") + id; //$NON-NLS-1$
+			MainFrame.setMessage(new Message(msg, Level.INFO));
 		}
 	}
 	
@@ -653,18 +624,17 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	 * Esegue il CollectionWorker in un thread separato per non bloccare l'EDT.
 	 * 
 	 * @param arrayCw elenco di collection worker
-	 * @param startDir la directory di partenza
 	 * @param outDir la directory di output
 	 * @param params i parametri
 	 */
 	public void runInThread(final ArrayList<CollectionWorker> arrayCw,
-			final File startDir, final File outDir, final Object[] params) {
+			final File outDir, final Object[] params) {
 		thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				for (CollectionWorker cw : arrayCw) {
 					try {
-						cw.doWork(startDir, outDir, params);
+						cw.doWork(outDir, params);
 					} catch (Exception ex) {
 						GestLog.Error(MonetePanel.class, ex);
 					}
@@ -677,16 +647,38 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 	/**
 	 * Esegue il CollectionWorker in un thread separato per non bloccare l'EDT.
 	 * 
+	 * @param arrayCw elenco di collection worker
+	 * @param outDir la directory di output
+	 * @param params i parametri
+	 */
+	public void runInThread(final CollectionWorker cw,
+			final File inDir, final File outDir, final Object[] params) {
+		thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					cw.doWork(inDir, outDir, params);
+				} catch (Exception ex) {
+					GestLog.Error(MonetePanel.class, ex);
+				}
+			}
+		});
+		thread.start();
+	}
+	
+	/**
+	 * Esegue il CollectionWorker in un thread separato per non bloccare l'EDT.
+	 * 
 	 * @param cw
 	 * @param startDir
 	 * @param outDir
 	 * @param params
 	 */
-	public void runInThread(final CollectionWorker cw, final File startDir,
+	public void runInThread(final CollectionWorker cw, 
 			final File outDir, final Object[] params) {
 		ArrayList<CollectionWorker> works = new ArrayList<CollectionWorker>();
 		works.add(cw);
-		this.runInThread(works, startDir, outDir, params);
+		this.runInThread(works, outDir, params);
 	}
 
 	/**

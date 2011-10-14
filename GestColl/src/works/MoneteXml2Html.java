@@ -24,7 +24,9 @@ import org.eclipse.persistence.tools.file.FileUtil;
 import Resources.i18n.Messages;
 
 import exceptions.InternalGestCollError;
+import exceptions.XmlException;
 import exceptions.XsltException;
+import gestXml.CollezioneXml;
 import gestXml.MonetaXml;
 
 /**
@@ -58,13 +60,14 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	 * @return il file convertito
 	 * @throws XsltException
 	 * @throws InternalGestCollError 
+	 * @throws XmlException 
 	 */
 	@Override
-	public File convert(MonetaXml mng, File outDir) throws XsltException, InternalGestCollError {
+	public File convert(MonetaXml mng, File outDir) throws XsltException, InternalGestCollError, XmlException {
 		/* prepara il file di output */
 		File ret = new File(outDir + "/" + mng.getId() + ".html"); //$NON-NLS-1$ //$NON-NLS-2$
 
-		mng.xsltConvert(XSL_FILE, ret);
+		CollezioneXml.getCollezione().xsltConvert(mng.getId(), XSL_FILE, ret);
 		return ret;
 	}
 
@@ -94,10 +97,8 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 	 * @throws Exception
 	 */
 	@Override
-	public Object[] doWork(File inDir, File outDir, Object[] params)
+	public Object[] doWork(File outDir, Object[] params)
 			throws FileNotFoundException, Exception {
-		/* ottiene l'elenco di tutte le monete */
-		List<File> files = getFileListing(inDir, Common.COIN_END);
 		//crea la dir se non esiste
 		createPath(outDir);
 		
@@ -107,7 +108,8 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 		FileUtil.copy(in, out);
 
 
-		ListIterator<File> iterator = files.listIterator();
+		List<MonetaXml> monete = CollezioneXml.getCollezione().getMonete();
+		ListIterator<MonetaXml> iterator = monete.listIterator();
 
 		String data = ""; //$NON-NLS-1$
 		
@@ -116,11 +118,11 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 
 		/* cicla su tutte le monete */
 		while (iterator.hasNext()) {
-			MonetaXml mng = new MonetaXml((iterator.next()));
+			MonetaXml mng = (MonetaXml)iterator.next();
 			String id = mng.getId();
 			/* prepara il file di output */
 			String outFile = outDir + "/" + id + ".html"; //$NON-NLS-1$ //$NON-NLS-2$
-			mng.xsltConvert(XSL_FILE,
+			CollezioneXml.getCollezione().xsltConvert(mng.getId(), XSL_FILE,
 					new File(outFile));
 
 			/* scrive l'item nell'indice */
@@ -139,7 +141,7 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 			// outBuffer.println(id);
 			// GenericUtil.printProgress(String.format("%d/%d",
 			// (i++),files.size()), outBuffer);
-			Progress p = new Progress(i, files.size(), "HTML"); //$NON-NLS-1$
+			Progress p = new Progress(i, monete.size(), "HTML"); //$NON-NLS-1$
 			this.setChanged();
 			this.notifyObservers(p);
 			i++;
@@ -159,6 +161,13 @@ public class MoneteXml2Html extends CollectionWorker implements CoinConverter {
 		this.setChanged();
 		this.notifyObservers(m);
 
+		return null;
+	}
+
+	@Override
+	public Object[] doWork(File inDir, File outDir, Object[] extraParam)
+			throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

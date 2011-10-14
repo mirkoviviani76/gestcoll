@@ -140,4 +140,9 @@ public class XelatexPdfCreator extends CollectionWorker {
 
 	}
 
+	@Override
+	public Object[] doWork(File outDir, Object[] extraParam) throws Exception {
+		return null;
+	}
+
 }

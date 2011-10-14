@@ -1,5 +1,7 @@
 package main;
 
+import gestXml.CollezioneXml;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -81,10 +83,7 @@ public class Splash {
 					SwingConstants.CENTER);
 			jLVersion.setSize(width, versionSize);
 
-			int countMonete = 0;
-			/* ottiene il numero di monete */
-			List<File> files = CollectionWorker.getCoinsFileListing();
-			countMonete = files.size();
+			int countMonete = CollezioneXml.size();
 						
 			
 			/* crea e inizializza la barra */
