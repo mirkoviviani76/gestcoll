@@ -132,7 +132,6 @@ public class MoneteXml2QR extends CollectionWorker implements CoinConverter {
 	@Override
 	public Object[] doWork(File inDir, File outDir, Object[] extraParam)
 			throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
