@@ -1,16 +1,11 @@
 package gestXml;
 
-import exceptions.InternalGestCollError;
-import exceptions.XmlException;
-import gestXml.MonetaXml.Ordering;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -20,9 +15,9 @@ import javax.xml.bind.Unmarshaller;
 
 import main.Common;
 import main.GestLog;
-
 import Resources.i18n.Messages;
-import XmlData.Moneta.Misura;
+import exceptions.InternalGestCollError;
+import exceptions.XmlException;
 
 public class CollezioneXml extends GestXml {
 	

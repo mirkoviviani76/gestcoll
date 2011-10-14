@@ -22,11 +22,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.TransformerException;
 
-import Resources.i18n.Messages;
-
 import main.Common;
 import main.GestLog;
-import works.CollectionWorker;
+import Resources.i18n.Messages;
 
 /**
  * Gestisce i contenitori, utilzzando i dati di un xml

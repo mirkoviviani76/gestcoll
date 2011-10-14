@@ -21,10 +21,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import Resources.i18n.Messages;
-
 import main.Common;
-import main.GestLog;
+import Resources.i18n.Messages;
 import exceptions.InternalGestCollError;
 import exceptions.XmlException;
 import exceptions.XsltException;
