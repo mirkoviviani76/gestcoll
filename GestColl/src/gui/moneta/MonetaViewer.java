@@ -26,6 +26,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 
 import javax.swing.JTextField;
@@ -1090,7 +1091,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		if (nf.getReturnStatus() == NotaForm.RET_OK) {
 			// ottiene i nuovi dati della nota dal form
 			String nuovaNota = nf.getData();
-			mng.getNote().add(nuovaNota);
+			mng.addNota(nuovaNota);
 			// carica i nuovi valori
 			this.jLNote.setModel(new GenericListModel<String>(mng.getNote()));
 		}
@@ -1297,7 +1298,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 
 	/**
 	 * Salva i dati nell'xml. Esegue una copia nella cartella di backup come
-	 * <id>-<millis>.xml
+	 * <id>-<yyyyMMddHHmmss>.xml
 	 * 
 	 * @throws XmlException
 	 * 
@@ -1308,7 +1309,8 @@ public class MonetaViewer extends javax.swing.JPanel {
 			// ottiene il nome del file da scrivere
 			String outFile = Common.getCommon().getMoneteXml();
 			// ottiene il nome del file di backup
-			String oldFileRen = Common.getCommon().getMoneteXml()+ "-" + Calendar.getInstance().getTimeInMillis() + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String oldFileRen = Common.getCommon().getMoneteXml()+ "-" + sdf.format(new Date()) + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
 			// esegue il backup
 			FileUtils.copyFile(new File(outFile), new File(oldFileRen));
 			// salva il file

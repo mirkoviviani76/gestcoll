@@ -26,6 +26,7 @@ import XmlData.Moneta.Legenda;
 import XmlData.Moneta.Libro;
 import XmlData.Moneta.Misura;
 import XmlData.Moneta.Nominale;
+import XmlData.Moneta.Note;
 import XmlData.Moneta.Posizione;
 import XmlData.Moneta.Zecca;
 import XmlData.Moneta.Zecchiere;
@@ -674,6 +675,19 @@ public class MonetaXml implements Comparable<MonetaXml>,
 						this.moneta.getNominale().getValuta(),
 						this.moneta.getRevisione());
 		return tooltip;
+	}
+
+	/**
+	 * aggiunge una nota
+	 * @param nuovaNota
+	 */
+	public void addNota(String nuovaNota) {
+		if (this.moneta.getNote() == null) {
+			XmlData.Moneta.Note note = new Note();
+			this.moneta.setNote(note);
+		}
+		this.getNote().add(nuovaNota);
+		
 	}
 	
 }
