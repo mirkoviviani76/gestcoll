@@ -18,9 +18,9 @@
 
 - bozze di nuove monete, da inserire in seguito
 
-- elenco dei campi mancanti per le monete (es. per XXXX mancano le autorit√†, la letteratura....)
+- elenco dei campi mancanti per le monete (es. per XXXX mancano le autorita'†, la letteratura....)
 
-- pensare all'integrit√† di collezione.xml.... salvare? bz2? backup? checksum?
+- pensare all'integrita'† di collezione.xml.... salvare? bz2? backup? checksum?
 
 -BUGFIXING
--- se non esistono note, l'aggiunta di una nota genera errore. Verificare altri campi.
+-- verificare inserimento campi nel caso in cui non esista il tag (es. con una nuova moneta)
