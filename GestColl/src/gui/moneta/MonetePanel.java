@@ -181,7 +181,6 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 					new File(Common.getCommon().getQrDir()), null);
 		} else if (ae.getSource() == jTBEdit) {
 			this.monetaViewer1.setEditable(this.jTBEdit.isSelected());
-			this.jBSalva.setEnabled(this.jTBEdit.isSelected());
 		} else if (ae.getSource() == jBToClipboard) {
 			MonetaXml mng = (MonetaXml) this.jListMonete.getSelectedValue();
 			String testo = mng.toFullText();
@@ -195,9 +194,9 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 				this.monetaViewer1.salvaDati();
 			} catch (XmlException e) {
 				GestLog.Error(this.getClass(), e);
+			} catch (IOException e) {
+				GestLog.Error(this.getClass(), e);
 			}
-			// disabilita il pulsante salva
-			this.jBSalva.setEnabled(false);
 			// disabilita il pulsante edit
 			this.jTBEdit.setSelected(false);
 			// disabilita l'editing della moneta
@@ -489,7 +488,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 				"/Resources/img/SaveIcon.png"))); // NOI18N //$NON-NLS-1$
 		jBSalva.setMnemonic('S');
 		jBSalva.setText(Messages.getString("MonetePanel.49")); //$NON-NLS-1$
-		jBSalva.setEnabled(false);
+		jBSalva.setEnabled(true);
 		jBSalva.setFocusable(false);
 		jBSalva.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 		jBSalva.setMaximumSize(new java.awt.Dimension(55, 25));

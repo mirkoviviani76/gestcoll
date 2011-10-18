@@ -3,18 +3,25 @@ package gestXml;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import main.Common;
+import main.GenericUtil;
 import main.GestLog;
+
+import org.apache.commons.io.FileUtils;
+
 import Resources.i18n.Messages;
 import exceptions.InternalGestCollError;
 import exceptions.XmlException;
@@ -166,6 +173,37 @@ public class CollezioneXml extends GestXml {
 			throw new XmlException("MonetaXml() "+Messages.getString("Generic.12") //$NON-NLS-1$
 					+ NEW_MONETA_TEMPLATE, e);
 		}			
+	}
+
+	/**
+	 * salva e comprime una copia di collezione.xml
+	 * @return il nome del file compresso creato
+	 * @throws XmlException
+	 * @throws IOException
+	 */
+	public String salva() throws XmlException, IOException {
+		// ottiene il nome del file da scrivere
+		String originale = Common.getCommon().getMoneteXml();
+		// ottiene il nome del file di backup
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		//String digestBefore = GenericUtil.getDigestForFile(originale, "SHA-256");
+		
+		String outFile = Common.getCommon().getBackupDir() + "/" + sdf.format(new Date()) + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
+		String outbz2 = outFile+".bz2";
+		// esegue il backup
+		File backupFile = new File(outFile);
+		FileUtils.copyFile(new File(originale), backupFile);
+		//comprime
+		GenericUtil.compressBz2(outFile, outbz2);
+		//cancella il file non compresso
+		FileUtils.deleteQuietly(backupFile);
+
+		// salva il file con le modifiche effettuate
+		CollezioneXml.getCollezione().writeXml("XmlData.Moneta", originale);
+		
+		return outbz2;
+
 	}
 	
 }

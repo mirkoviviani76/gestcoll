@@ -1297,34 +1297,21 @@ public class MonetaViewer extends javax.swing.JPanel {
 	}
 
 	/**
-	 * Salva i dati nell'xml. Esegue una copia nella cartella di backup come
-	 * <id>-<yyyyMMddHHmmss>.xml
+	 * Esegue il baclup
 	 * 
 	 * @throws XmlException
+	 * @throws IOException 
 	 * 
 	 */
-	public void salvaDati() throws XmlException {
-		try {
-			String id = this.mng.getId();
-			// ottiene il nome del file da scrivere
-			String outFile = Common.getCommon().getMoneteXml();
-			// ottiene il nome del file di backup
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			String oldFileRen = Common.getCommon().getMoneteXml()+ "-" + sdf.format(new Date()) + ".xml"; //$NON-NLS-1$ //$NON-NLS-2$
-			// esegue il backup
-			FileUtils.copyFile(new File(outFile), new File(oldFileRen));
-			// salva il file
-			CollezioneXml.getCollezione().writeXml("XmlData.Moneta", //$NON-NLS-1$
-					outFile);
-			// Log
-			History.addEvent(History.MODIFY, id);
-			String msg = String.format(
-					Messages.getString("MonetaViewer.26"), //$NON-NLS-1$
-					outFile, oldFileRen);
-			MainFrame.setMessage(new Message(msg, Level.INFO));
-		} catch (IOException ex) {
-			GestLog.Error(MonetaViewer.class, ex);
-		}
+	public void salvaDati() throws XmlException, IOException {
+		//esegue il backup
+		String backup = CollezioneXml.getCollezione().salva();
+		// Log
+		History.addEvent(History.MODIFY);
+		String msg = String.format(
+				Messages.getString("MonetaViewer.26"), //$NON-NLS-1$
+				backup);
+		MainFrame.setMessage(new Message(msg, Level.INFO));
 	}
 
 	/**

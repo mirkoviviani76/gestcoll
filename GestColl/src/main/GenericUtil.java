@@ -6,6 +6,7 @@
 package main;
 
 import java.awt.Desktop;
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,13 +16,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
 import org.eclipse.persistence.tools.file.FileUtil;
 
 /**
@@ -145,6 +150,57 @@ public final class GenericUtil {
 		bw.close();
 		osw.close();
 		fw.close();
+	}
+	
+
+	/**
+	 * comprime il file di input come bz2
+	 * @param inputFile il file di input
+	 * @param outFile il file di output
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public static void compressBz2(String inputFile, String outFile) throws FileNotFoundException, IOException {
+		final File source = new File(inputFile);
+		final File destination = new File(outFile);
+		final BZip2CompressorOutputStream output = new BZip2CompressorOutputStream(new FileOutputStream(destination));
+		final FileInputStream input = new FileInputStream(source);
+		final byte[] buffer = new byte[8024];
+		int n = 0;
+		while (-1 != (n = input.read(buffer))) {
+			output.write(buffer, 0, n);
+		}
+
+		input.close();
+		output.close();	
+	
+	}
+	
+	public static String getDigestForFile(String file, String algorithm) throws IOException {
+		File input = new File(file);
+	    byte[] buffer = new byte[(int) input.length()];
+	    BufferedInputStream f = null;
+	    String digest = "";
+	    try {
+	        f = new BufferedInputStream(new FileInputStream(input));
+	        f.read(buffer);
+	    } finally {
+	        if (f != null) try { f.close(); } catch (IOException ignored) { }
+	    }
+	    try {
+			MessageDigest messagedigest = MessageDigest.getInstance(algorithm);
+			byte[] sha = messagedigest.digest(buffer);
+			
+			for (int i=0; i < sha.length; i++) {
+				digest +=
+						Integer.toString( ( sha[i] & 0xff ) + 0x100, 16).substring( 1 );
+			}
+		} catch (NoSuchAlgorithmException e) {
+			GestLog.Error(GenericUtil.class, e);
+		}
+
+	    return digest.toUpperCase();
+		
 	}
 	
 
