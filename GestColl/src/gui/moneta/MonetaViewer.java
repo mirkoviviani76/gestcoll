@@ -18,28 +18,23 @@ import gui.moneta.forms.LetteraturaForm;
 import gui.moneta.forms.NotaForm;
 import gui.moneta.forms.ZecchiereForm;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 
 import javax.swing.JTextField;
 import javax.xml.transform.TransformerException;
 
-import main.Common;
 import main.Common.Lato;
 import main.GenericUtil;
 import main.GestLog;
 import main.History;
 import main.Message;
 
-import org.apache.commons.io.FileUtils;
 import org.xml.sax.SAXException;
 
 import Resources.i18n.Messages;
