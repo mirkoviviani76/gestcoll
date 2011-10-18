@@ -22,6 +22,10 @@ public class History {
 	public static final String DELETE = Messages.getString("History.1"); //$NON-NLS-1$
 	public static final String MODIFY = Messages.getString("History.2"); //$NON-NLS-1$
 
+	public static void addEvent(String e) {
+		addEvent(e, "");
+	}
+	
 	/**
 	 * aggiunge un evento alla history
 	 * 
