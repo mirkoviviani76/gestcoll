@@ -18,7 +18,7 @@ import javax.swing.JList;
  * 
  * @param <E>
  */
-public class GenericCellRenderer<E> extends DefaultListCellRenderer {
+public class GenericCellRenderer<T> extends DefaultListCellRenderer {
 
 	/**
 	 * 
@@ -41,7 +41,7 @@ public class GenericCellRenderer<E> extends DefaultListCellRenderer {
 		JLabel label = (JLabel) super.getListCellRendererComponent(list, value,
 				index, isSelected, hasFocus);
 		@SuppressWarnings("unchecked")
-		E mng = (E) value;
+		T mng = (T) value;
 		label.setText(mng.toString());
 		// se E implementa Tooltipper, ottiene il tooltip
 		if (mng instanceof Tooltipper) {

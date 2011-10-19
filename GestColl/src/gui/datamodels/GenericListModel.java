@@ -17,29 +17,29 @@ import javax.swing.DefaultListModel;
  * @param <E>
  */
 @SuppressWarnings("serial")
-public class GenericListModel<E> extends DefaultListModel {
+public class GenericListModel<T> extends DefaultListModel {
 
 	/**
      *
      */
-	protected ArrayList<E> contenuto;
+	protected ArrayList<T> contenuto;
 
 	/**
 	 * Costruttore
 	 */
 	public GenericListModel() {
-		contenuto = new ArrayList<E>();
+		contenuto = new ArrayList<T>();
 	}
 
 	/**
 	 * 
 	 * @param list
 	 */
-	public GenericListModel(List<E> list) {
-		contenuto = new ArrayList<E>();
+	public GenericListModel(List<T> list) {
+		contenuto = new ArrayList<T>();
 		if (list == null)
 			return;
-		for (E l : list) {
+		for (T l : list) {
 			contenuto.add(l);
 		}
 	}
@@ -83,7 +83,7 @@ public class GenericListModel<E> extends DefaultListModel {
 
 		for (int i = fromIndex; i < this.contenuto.size(); i++) {
 			@SuppressWarnings("unchecked")
-			E curVal = (E) this.getElementAt(i);
+			T curVal = (T) this.getElementAt(i);
 			if (curVal.toString().contains(text)) {
 				retVal = i;
 				break;
