@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project 
+  name="GestColl"
+  default="package" >
+
+  <property
+    name="src.dir"
+    location="src" />
+
+  <property 
+    name="class.dir"
+    location="build/classes" />
+
+  <property
+	    name="jar.dir"
+	    location="build/jar" />
+
+  <property 
+	    name="lib.dir"
+		location="${jar.dir}/GestColl_lib" />
+
+  <property 
+  	    name="externallib.dir"
+  		location="../libraries" />
+	
+  <path id="gestcoll-classpath-id">
+	    <pathelement location="${externallib.dir}"/>
+  </path>
+
+	
+  <target name="init">
+  	<echo level="info">Init in corso</echo>
+    <mkdir dir="${class.dir}" />
+    <mkdir dir="${jar.dir}" />
+  	<mkdir dir="${lib.dir}" />
+  </target>
+
+  <target name="clean">
+  	<echo level="info">Clean in corso</echo>
+    <delete dir="${class.dir}" quiet="true"/>
+  	<delete dir="${lib.dir}" quiet="true" />
+    <delete dir="${jar.dir}" quiet="true" />
+  </target>
+  
+  <target name="compile" depends="init" >
+  	<echo level="info">Compilazione in corso: ${src.dir} -> ${class.dir} </echo>
+  	<javac 
+      destdir="${class.dir}" 
+      debug="on" 
+      optimize="on" 
+      includeAntRuntime="false"
+      includeJavaRuntime="true">
+    	  <src path="${src.dir}"/>
+	  	  <classpath refid="gestcoll-classpath-id"/>
+    </javac>
+  </target>
+  	
+ 
+  <target name="package" depends="compile">
+  	<echo level="info">Packaging in corso di ${jar.dir}/GestColl.jar</echo>
+    <jar destfile="${jar.dir}/GestColl.jar" duplicate="fail">
+        <manifest>
+            <attribute name="Main-Class" value="main.Main"/>
+        		<attribute name="Class-Path" value=". GestColl_lib/swtgraphics2d.jar GestColl_lib/commons-cli-1.2.jar GestColl_lib/commons-io-2.0.jar GestColl_lib/commons-logging-1.1.1.jar GestColl_lib/jcalendar-1.3.3.jar GestColl_lib/jcommon-1.0.16.jar GestColl_lib/jfreechart-1.0.13.jar GestColl_lib/jfreechart-1.0.13-swt.jar GestColl_lib/QRCreator.jar GestColl_lib/QRcore.jar GestColl_lib/eclipselink.jar GestColl_lib/javax.persistence_2.0.3.v201010191057.jar GestColl_lib/com.sun.tools.xjc_2.2.0.jar GestColl_lib/com.sun.xml.bind_2.2.0.v201004141950.jar GestColl_lib/javax.activation_1.1.0.v201005080500.jar GestColl_lib/javax.mail_1.4.0.v201005080615.jar GestColl_lib/javax.xml.bind_2.2.0.v201005080402.jar GestColl_lib/javax.xml.stream_1.0.1.v201004272200.jar"/>
+            <attribute name="SplashScreen-Image" value="Resources/img/splash.png"/>
+        </manifest>
+    	<fileset dir="${class.dir}" />
+    </jar>
+    <copy file="${externallib.dir}/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/jpa/javax.persistence_2.0.3.v201010191057.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/eclipselink.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/moxy/javax.mail_1.4.0.v201005080615.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/moxy/javax.xml.stream_1.0.1.v201004272200.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/moxy/com.sun.xml.bind_2.2.0.v201004141950.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/moxy/javax.activation_1.1.0.v201005080500.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/EclipseLink 2.3.0 - Indigo/eclipselink/jlib/moxy/javax.xml.bind_2.2.0.v201005080402.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/commons-cli-1.2.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/commons-io-2.0.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/commons-logging-1.1.1.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/jcalendar-1.3.3.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/jfreechart-1.0.13.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/jfreechart-1.0.13-swt.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/swtgraphics2d.jar" todir="${lib.dir}"/>
+    <copy file="${externallib.dir}/jcommon-1.0.16.jar" todir="${lib.dir}"/>
+	<copy file="${externallib.dir}/QRCreator.jar" todir="${lib.dir}"/>
+  	<copy file="${externallib.dir}/QRcore.jar" todir="${lib.dir}"/>
+  	
+  	<copy file="extra/configurations.xml" todir="${jar.dir}"/>
+    
+  </target>    
+
+    
+    <target name="documentation">
+    	<path id="doc-classpath">
+    	      <fileset id="libFiles" dir="${externallib.dir}">
+    	        <include name="**/**/*.jar"/>
+    	      	<include name="**/*.jar"/>
+    	      	<include name="*.jar"/>
+    	       </fileset>
+    	</path>	
+
+    	<javadoc 
+		sourcepath="${src.dir}"
+		destdir="build/javadoc" 
+		classpathref="doc-classpath"
+		private="true"
+		/>
+    </target>
+  
+</project>
