@@ -3,7 +3,7 @@
  * -
  */
 
-package gui.datamodels;
+package gui.datamodels.CellRenderer;
 
 import exceptions.XmlException;
 import gestXml.CollezioneXml;

@@ -1,6 +1,5 @@
-package gui.datamodels;
+package gui.datamodels.CellRenderer;
 
-import gui.datamodels.CellRenderer.GenericCellRenderer;
 import XmlData.Moneta.Zecchiere;
 
 

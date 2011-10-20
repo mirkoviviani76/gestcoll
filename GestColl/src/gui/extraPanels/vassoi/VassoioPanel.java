@@ -6,8 +6,8 @@
 package gui.extraPanels.vassoi;
 
 import gestXml.MonetaXml;
-import gui.datamodels.VassoioCellRenderer;
 import gui.datamodels.VassoioTableModel;
+import gui.datamodels.CellRenderer.VassoioCellRenderer;
 
 import javax.swing.JList;
 import javax.swing.JTable;
