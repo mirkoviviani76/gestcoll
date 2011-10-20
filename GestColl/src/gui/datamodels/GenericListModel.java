@@ -5,7 +5,6 @@
 
 package gui.datamodels;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -14,7 +13,7 @@ import javax.swing.DefaultListModel;
  * Classe per rappresentare un generico modello per una JList. I dati sono di un
  * tipo generico. La classe fornisce un metodo di ricerca testuale.
  * 
- * @param <E>
+ * @param <T> il tipo generico
  */
 @SuppressWarnings("serial")
 public class GenericListModel<T> extends DefaultListModel {
