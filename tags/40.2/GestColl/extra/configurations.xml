@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurations xmlns="http://gestColl/configurations"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://gestColl/configurations ./configurations.xsd">
+>
+	<configuration id="windows">
+		<dirs>
+				<base_dir>D:/mieProve/Java/GestColl/GestColl</base_dir>
+				<backup_dir>D:/mieProve/Java/GestColl/Backup</backup_dir>
+				<biblioteca_dir>D:/mieProve/Java/GestColl/Biblioteca</biblioteca_dir>
+				<html_dir>D:/mieProve/Java/GestColl/Reports/Html</html_dir>
+				<latex_dir>D:/mieProve/Java/GestColl/Reports/LaTeX</latex_dir>
+				<qr_dir>D:/mieProve/Java/GestColl/Reports/QR</qr_dir>
+				<img_dir>D:/mieProve/Java/GestColl/bin/data/img</img_dir>
+		</dirs>
+		<data>
+				<contenitori_xml>D:/mieProve/Java/GestColl/bin/data/contenitori.xml</contenitori_xml>
+				<contatti_xml>D:/mieProve/Java/GestColl/bin/data/contatti.xml</contatti_xml>
+				<links_xml>D:/mieProve/Java/GestColl/bin/data/links.xml</links_xml>
+				<biblio_xml>D:/mieProve/Java/GestColl/bin/data/biblioteca.xml</biblio_xml>
+				<collezione_xml>D:/mieProve/Java/GestColl/bin/data/collezione.xml</collezione_xml>
+		</data>
+		<logs>
+				<history_log>D:/mieProve/Java/GestColl/bin/data/history.txt</history_log>
+				<log_property>D:/mieProve/Java/GestColl/bin/data/myLoggingProperties.properties</log_property>
+		</logs>
+	</configuration>
+	<configuration id="linux">
+		<dirs>
+				<base_dir>/dati/Collezione/bin</base_dir>
+				<backup_dir>/dati/Collezione/Backup</backup_dir>
+				<biblioteca_dir>/dati/Collezione/Biblioteca</biblioteca_dir>
+				<html_dir>/dati/Collezione/Reports/Html</html_dir>
+				<latex_dir>/dati/Collezione/Reports/LaTeX</latex_dir>
+				<qr_dir>/dati/Collezione/Reports/QR</qr_dir>
+				<img_dir>/dati/Collezione/bin/data/img</img_dir>
+		</dirs>
+		<data>
+				<contenitori_xml>/dati/Collezione/bin/data/contenitori.xml</contenitori_xml>
+				<contatti_xml>/dati/Collezione/bin/data/contatti.xml</contatti_xml>
+				<links_xml>/dati/Collezione/bin/data/links.xml</links_xml>
+				<biblio_xml>/dati/Collezione/bin/data/biblioteca.xml</biblio_xml>
+				<collezione_xml>/dati/Collezione/bin/data/collezione.xml</collezione_xml>
+		</data>
+		<logs>
+				<history_log>/dati/Collezione/bin/data/history.txt</history_log>
+				<log_property>/dati/Collezione/bin/data/myLoggingProperties.properties</log_property>
+		</logs>
+	</configuration>
+</configurations>

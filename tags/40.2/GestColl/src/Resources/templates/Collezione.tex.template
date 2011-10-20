@@ -1,0 +1,69 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template Collezione.tex versione 1.0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,a4paper]{report}
+\usepackage{graphicx}
+\usepackage[italian]{babel}
+\usepackage{hyperref}
+%\usepackage{lettrine}
+%\usepackage{url}
+\usepackage{eurosym}
+\usepackage{fancyhdr}
+\usepackage{bbding}
+\usepackage{pifont}
+\usepackage{yfonts}
+\usepackage{chappg}
+\usepackage[compact]{titlesec}
+\usepackage[big]{layaureo}
+%\usepackage{scalebar}
+%\usepackage{textcomp}
+%\usepackage{slashbox}
+%\usepackage{tocbibind}
+\usepackage{array}
+\usepackage{multirow}
+%\usepackage{natbib}
+%\usepackage{pgf}
+%\usepackage{tikz}
+%\usepackage{nicefrac}
+%\usepackage{calc}
+\usepackage{aurical}
+\usepackage{longtable}
+%\usepackage[utf8]{inputenc}
+\usepackage{xltxtra}
+\setmainfont{Free Serif}
+\pagestyle{empty}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\campo}[2]{\textbf{#1:} #2\\}
+\newcommand{\legenda}[2]{#1 \footnote{#2}}
+\newcommand{\zecca}[2]{#1 \ding{239} #2} %#1=nome #3=simbolo/sigle
+\newcommand{\zecchiere}[3]{#1 \ding{239} #2 #3} %#1=nome #2=simbolo/sigle #3 ruolo
+%\renewcommand{\mtctitle}{Contenuto}
+%\renewcommand{\mlftitle}{Figure}
+\renewcommand{\dot}{$\,\cdot\,$\linebreak[2]}
+\newcommand{\parte}[1]{\part*{#1}\setcounter{chapter}{0}}
+\newcommand{\moneta}[2]{\chapter*{#1\\#2} \addcontentsline{toc}{chapter}{#1 -- #2}\vspace{-20mm}}
+\newcommand{\sezione}[1]{\section*{\Fontlukas \underline{#1}}}
+\newcommand{\subsezione}[1]{\subsection*{\Fontlukas #1}}
+
+\titlespacing{\chapter}{0pt}{1pt}{1in}
+\titleformat{\chapter}[hang]{\normalfont\Large\filcenter\Fontlukas\bfseries}
+{\LARGE \thechapter.}{1pc}{ \vspace{1pc} \Huge}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{empty}
+
+\title{Collezione Numismatica SRI}
+\date{\today}
+\maketitle
+
+\tableofcontents
+
+%INCLUDES
+
+\end{document}

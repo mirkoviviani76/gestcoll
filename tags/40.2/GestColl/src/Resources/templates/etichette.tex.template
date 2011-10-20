@@ -1,0 +1,91 @@
+% use the corresponding paper size for your ticket definition
+\documentclass[a4paper,10pt]{article}
+% load ticket.sty with the appropriate ticket definition
+%\usepackage[labelBig,crossmark]{ticket}
+\usepackage[flashCard,boxed]{ticket}
+% make your default ticket. \ticketdefault is somewhat like a background
+\usepackage{anysize}
+\marginsize{1cm}{1cm}{1cm}{1cm}
+\unitlength=1mm
+%% tested for an HP5SiMX, adjust it for your printer
+\hoffset=0mm
+\voffset=0mm
+
+\usepackage{xltxtra}
+\setmainfont{Free Serif}
+
+\renewcommand{\ticketdefault}{}
+
+\newcommand{\casellaA}[5]{\ticket{\put(1,37){\begin{minipage}[t]{40mm}{\fontsize{12pt}{8pt}\selectfont \begin{center}{\bfseries #1}\end{center}}
+{\fontsize{6pt}{8pt}\selectfont \begin{center}{{\bfseries #2}#3}\end{center}}
+\vspace{12pt}
+{\fontsize{9pt}{8pt}\selectfont \begin{center}#4\end{center}}
+\end{minipage}}
+\put(1,5){\begin{minipage}{40mm}{\fontsize{8pt}{8pt}\selectfont\begin{center}\bfseries #5\end{center}}\end{minipage}}
+}}
+
+\newcommand{\casellaB}[5]{\ticket{\put(0.5,33){\begin{minipage}[t]{37mm}{\fontsize{12pt}{8pt}\selectfont \begin{center}{\bfseries #1}\end{center}}
+{\fontsize{6pt}{8pt}\selectfont \begin{center}{{\bfseries #2}#3}\end{center}}
+\vspace{7pt}
+{\fontsize{9pt}{8pt}\selectfont \begin{center}#4\end{center}}
+\end{minipage}}
+\put(0.5,5){\begin{minipage}{37mm}{\fontsize{8pt}{8pt}\selectfont\begin{center}\bfseries #5\end{center}}\end{minipage}}
+}}
+
+\newcommand{\casellaC}[5]{\ticket{\put(0.5,26){\begin{minipage}[t]{29mm}{\fontsize{10pt}{0pt}\selectfont \begin{center}{\bfseries #1}\end{center}}
+{\fontsize{5pt}{0pt}\selectfont \begin{center}{{\bfseries #2}#3}\end{center}}
+{\fontsize{9pt}{0pt}\selectfont \begin{center}#4\end{center}}
+\end{minipage}}
+\put(0.5,2){\begin{minipage}{29mm}{\fontsize{8pt}{8pt}\selectfont\begin{center}\bfseries #5\end{center}}\end{minipage}}
+}}
+
+\newcommand{\casellaD}[5]{\ticket{\put(0.5,20.5){\begin{minipage}[t]{22mm}{\fontsize{8pt}{0pt}\selectfont \begin{center}{\bfseries #1}\end{center}}
+{\fontsize{4pt}{0pt}\selectfont \begin{center}{{\bfseries #2}#3}\end{center}}
+{\fontsize{8pt}{0pt}\selectfont \begin{center}#4\end{center}\vspace{-2mm}}
+\end{minipage}}
+\put(0.5,2){\begin{minipage}{23mm}{\fontsize{7pt}{0pt}\selectfont\begin{center}\bfseries #5\end{center}}\end{minipage}}
+}}
+
+\newcommand{\qrA}[1]{\ticket{\includegraphics[width=41mm,height=41mm,keepaspectratio=false]{../QR/#1.png}}}
+\newcommand{\qrB}[1]{\ticket{\includegraphics[width=38mm,height=38mm,keepaspectratio=false]{../QR/#1.png}}}
+\newcommand{\qrC}[1]{\ticket{\includegraphics[width=30mm,height=30mm,keepaspectratio=false]{../QR/#1.png}}}
+\newcommand{\qrD}[1]{\ticket{\includegraphics[width=23mm,height=23mm,keepaspectratio=false]{../QR/#1.png}}}
+
+
+
+
+% and here are the labels...
+\begin{document}
+
+\ticketNumbers{4}{5}
+\ticketSize{41}{41} % in unitlength
+\ticketDistance{0}{0} % in unitlength
+
+%ETICHETTEA
+
+\newpage\ticketreset
+\ticketNumbers{4}{5}
+\ticketSize{38}{38} % in unitlength
+\ticketDistance{0}{0} % in unitlength
+
+%ETICHETTEB
+
+\newpage\ticketreset
+\ticketNumbers{5}{8}
+\ticketSize{30}{30} % in unitlength
+\ticketDistance{0}{0} % in unitlength
+
+%ETICHETTEC
+
+\newpage\ticketreset
+\ticketNumbers{7}{10}
+\ticketSize{23}{23} % in unitlength
+\ticketDistance{0}{0} % in unitlength
+
+%ETICHETTED
+
+
+
+\end{document}
+
+
