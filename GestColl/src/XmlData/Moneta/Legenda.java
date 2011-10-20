@@ -8,8 +8,6 @@
 
 package XmlData.Moneta;
 
-import gestXml.Tooltipper;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -42,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "legenda", propOrder = {
 
 })
-public class Legenda  implements Tooltipper {
+public class Legenda {
 
     @XmlElement(required = true)
     protected String testo;
@@ -95,17 +93,6 @@ public class Legenda  implements Tooltipper {
     public void setScioglimento(String value) {
         this.scioglimento = value;
     }
-
-    
-	@Override
-	public String toString() {
-		return this.getTesto();
-	}
-
-	@Override
-	public String toTooltip() {
-		return this.getScioglimento();
-	}
 
 	
 }

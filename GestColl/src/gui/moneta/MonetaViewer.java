@@ -9,9 +9,11 @@ import exceptions.XmlException;
 import gestXml.CollezioneXml;
 import gestXml.MonetaXml;
 import gui.MainFrame;
-import gui.datamodels.GenericCellRenderer;
 import gui.datamodels.GenericListModel;
 import gui.datamodels.XmlDocumentChangeListener;
+import gui.datamodels.ZecchiereCellRenderer;
+import gui.datamodels.CellRenderer.LibroCellRenderer;
+import gui.datamodels.CellRenderer.NotaCellRenderer;
 import gui.moneta.forms.AutoritaForm;
 import gui.moneta.forms.DocumentoForm;
 import gui.moneta.forms.LetteraturaForm;
@@ -575,7 +577,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jLZecchiere.setFont(new java.awt.Font("Dialog", 0, 12)); //$NON-NLS-1$
 		jLZecchiere
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jLZecchiere.setCellRenderer(new GenericCellRenderer<Zecchiere>());
+		jLZecchiere.setCellRenderer(new ZecchiereCellRenderer());
 		jLZecchiere.setInheritsPopupMenu(true);
 		jLZecchiere.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
@@ -601,7 +603,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 		jLLetteratura
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jLLetteratura
-				.setCellRenderer(new GenericCellRenderer<XmlData.Moneta.Libro>());
+				.setCellRenderer(new LibroCellRenderer());
 		jLLetteratura.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -756,7 +758,7 @@ public class MonetaViewer extends javax.swing.JPanel {
 
 		jLNote.setFont(new java.awt.Font("Dialog", 0, 11)); //$NON-NLS-1$
 		jLNote.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jLNote.setCellRenderer(new GenericCellRenderer<String>());
+		jLNote.setCellRenderer(new NotaCellRenderer());
 		jLNote.setInheritsPopupMenu(true);
 		jLNote.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override

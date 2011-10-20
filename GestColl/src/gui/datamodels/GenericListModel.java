@@ -20,15 +20,9 @@ import javax.swing.DefaultListModel;
 public class GenericListModel<T> extends DefaultListModel {
 
 	/**
-     *
-     */
-	protected ArrayList<T> contenuto;
-
-	/**
 	 * Costruttore
 	 */
 	public GenericListModel() {
-		contenuto = new ArrayList<T>();
 	}
 
 	/**
@@ -36,11 +30,10 @@ public class GenericListModel<T> extends DefaultListModel {
 	 * @param list
 	 */
 	public GenericListModel(List<T> list) {
-		contenuto = new ArrayList<T>();
 		if (list == null)
 			return;
 		for (T l : list) {
-			contenuto.add(l);
+			this.addElement(l);
 		}
 	}
 
@@ -52,19 +45,10 @@ public class GenericListModel<T> extends DefaultListModel {
 	@Override
 	public Object getElementAt(int index) {
 		Object ret = null;
-		if (index < contenuto.size()) {
-			ret = contenuto.get(index);
+		if (index < this.getSize()) {
+			ret = this.get(index);
 		}
 		return ret;
-	}
-
-	/**
-	 * 
-	 * @return il numero di oggetti
-	 */
-	@Override
-	public int getSize() {
-		return contenuto.size();
 	}
 
 	/**
@@ -77,11 +61,11 @@ public class GenericListModel<T> extends DefaultListModel {
 	public int search(String text, int fromIndex) {
 		int retVal = -1;
 		/* se l'indice e' troppo grande, ricomincia a cerca dall'inizio */
-		if (fromIndex > this.contenuto.size()) {
+		if (fromIndex > this.getSize()) {
 			fromIndex = 0;
 		}
 
-		for (int i = fromIndex; i < this.contenuto.size(); i++) {
+		for (int i = fromIndex; i < this.getSize(); i++) {
 			@SuppressWarnings("unchecked")
 			T curVal = (T) this.getElementAt(i);
 			if (curVal.toString().contains(text)) {

@@ -2,14 +2,14 @@ BUGFIXING
 - verificare inserimento campi nel caso in cui non esista il tag (es. con una nuova moneta)
 
 IMPROVEMENTS
-- fare il wrapper delle classi generate da jaxb per il tostring.
 - negli xsl passare come parametro la dir delle immagini
 - suggerire una posizione in caso di aggiunta nuova moneta
 - modificare lo schema moneta per aggiungere collezioni e sottocollezioni: <ambiti><ambito>SRI</ambito><ambito>Guerra dei trenta anni</ambito></ambiti>
 - per una nuova moneta riempire i campi (riempire il template)
-- pensare all'integrita'  di collezione.xml.... salvare? bz2? backup? checksum?
+- pensare all'integrita'  di collezione.xml.... checksum?
 
 FUTURE
+- galleria fotografica cliccabile
 - aggiunta di elenchi testuali nella statistica (es. lista dei nominali, delle autorita...)
 - elenco dei campi mancanti per le monete (es. per XXXX mancano le autorita' , la letteratura....)
 - pagina che visualizzi sigla -> libro (magari da integrare con la scheda moneta...)

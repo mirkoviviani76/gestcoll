@@ -39,9 +39,18 @@ public class Contatto implements Comparable<Contatto> {
 		return this.nome.compareTo(o.nome);
 	}
 
-	@Override
-	public String toString() {
-		return nome + ": " + email + " " + note; //$NON-NLS-1$ //$NON-NLS-2$
+	public String getEmail() {
+		return email;
 	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	
 
 }

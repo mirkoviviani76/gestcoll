@@ -10,6 +10,7 @@ import gestXml.ContattiXml;
 import gestXml.data.Contatto;
 import gui.MainFrame;
 import gui.datamodels.GenericListModel;
+import gui.datamodels.CellRenderer.ContattoCellRenderer;
 
 import java.awt.Desktop;
 import java.awt.Font;
@@ -80,7 +81,7 @@ public class ContattiPanel extends javax.swing.JPanel {
 		jLContatti
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jLContatti
-				.setCellRenderer(new gui.datamodels.GenericCellRenderer<Contatto>());
+				.setCellRenderer(new ContattoCellRenderer());
 		jLContatti.addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {

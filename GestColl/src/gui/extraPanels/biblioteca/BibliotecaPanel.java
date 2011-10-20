@@ -7,8 +7,10 @@ package gui.extraPanels.biblioteca;
 
 import exceptions.XmlException;
 import gestXml.BibliotecaXml;
+import gestXml.data.Contatto;
 import gestXml.data.Pubblicazione;
 import gui.datamodels.GenericListModel;
+import gui.datamodels.CellRenderer.PubblicazioneCellRenderer;
 
 import java.awt.Font;
 import java.awt.datatransfer.Clipboard;
@@ -56,6 +58,7 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer,
 	/** Creates new form BibliotecaPanel */
 	public BibliotecaPanel() {
 		initComponents();
+		this.jLBiblioteca.setModel(new GenericListModel<Pubblicazione>());
 	}
 
 	/**
@@ -81,27 +84,10 @@ public class BibliotecaPanel extends javax.swing.JPanel implements Observer,
 
 		jScrollPane1.setMaximumSize(new java.awt.Dimension(50, 32767));
 
-		jLBiblioteca.setModel(new javax.swing.AbstractListModel() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			String[] strings = { "a" }; //$NON-NLS-1$
-
-			@Override
-			public Object getElementAt(int i) {
-				return strings[i];
-			}
-
-			@Override
-			public int getSize() {
-				return strings.length;
-			}
-		});
 		jLBiblioteca
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jLBiblioteca
-				.setCellRenderer(new gui.datamodels.GenericCellRenderer<Pubblicazione>());
+				jLBiblioteca
+				.setCellRenderer(new PubblicazioneCellRenderer());
 		jLBiblioteca
 				.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
 					@Override

@@ -35,8 +35,7 @@ import XmlData.Moneta.Zecchiere;
  * Classe per gestire il file xml di una moneta.
  * 
  */
-public class MonetaXml implements Comparable<MonetaXml>,
-		Tooltipper {
+public class MonetaXml implements Comparable<MonetaXml> {
 
 	public static enum Fields {
 		ANNO, DATA, DESCRIZIONE_D, DESCRIZIONE_R, DESCRIZIONE_T, DIAMETRO_M, DIAMETRO_V, FORMA, LAST, LUOGO, METALLO, PAESE, PESO_M, PESO_V, PREZZO_M, PREZZO_V, VALORE, VALUTA, ZECCA_N, ZECCA_S
@@ -656,25 +655,6 @@ public class MonetaXml implements Comparable<MonetaXml>,
 		}
 		s = s + "\n"; //$NON-NLS-1$
 		return s;
-	}
-
-	@Override
-	public String toString() {
-		String s = ""; //$NON-NLS-1$
-		s = String
-				.format("%s, %s", this.moneta.getId(), this.moneta.getPaese()); //$NON-NLS-1$
-		return s;
-	}
-
-	@Override
-	public String toTooltip() {
-		String tooltip = ""; //$NON-NLS-1$
-		// imgD = mng.getImg(MonetaXml.lato.DRITTO);
-		tooltip = String
-				.format("%s %s revisione %s", this.moneta.getNominale().getValore(),  //$NON-NLS-1$
-						this.moneta.getNominale().getValuta(),
-						this.moneta.getRevisione());
-		return tooltip;
 	}
 
 	/**

@@ -2,6 +2,8 @@ Metodologia versionamento (xx.yy.zz)
 xx : incrementato con l'aggiunta di nuove funzionalita' (major) (+10 in caso di super funzionalita')
 yy : incrementato per miglioramenti (minor)
 zz : incrementato per aggiustamenti progressivi
+40.2
+modificati i cell renderer. Tolta la rappresentazione dell'oggetto dalle classi jaxb e demandata ai cell renderer.
 40.1
 modificata gestione del backup. Ora viene anche compresso come bz2.
 40.0

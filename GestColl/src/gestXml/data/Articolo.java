@@ -55,7 +55,7 @@ public class Articolo extends Pubblicazione {
 	}
 
 	@Override
-	public String toString() {
+	public String getText() {
 		return String.format("(A) %s %s", this.getAutori().get(0), //$NON-NLS-1$
 				this.getTitolo());
 	}
