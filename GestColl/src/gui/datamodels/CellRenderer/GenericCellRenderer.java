@@ -14,9 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 
 /**
- * 
- * 
- * @param <E>
+ * La classe astratta GenericCellRenderer fornisce il supporto per la visualizzazione
+ * in una cella per un tipo generico.
+ *  
+ * @param <T> il tipo generico
  */
 public abstract class GenericCellRenderer<T> extends DefaultListCellRenderer {
 
@@ -58,7 +59,6 @@ public abstract class GenericCellRenderer<T> extends DefaultListCellRenderer {
 			label.setBackground((index % 2 == 0) ? Color.LIGHT_GRAY
 					: Color.WHITE);
 		}
-
 		return label;
 
 	}
