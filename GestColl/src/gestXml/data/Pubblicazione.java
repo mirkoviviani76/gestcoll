@@ -18,8 +18,10 @@ import main.Common;
  * 
  * @author furetto76
  */
-public class Pubblicazione {
+public abstract class Pubblicazione {
 
+	public abstract String getText();
+	
 	/**
      *
      */

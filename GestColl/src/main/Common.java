@@ -25,7 +25,7 @@ public final class Common extends GestXml {
 	/** Nome dell'applicazione */
 	public static final String APPNAME = "GestColl"; //$NON-NLS-1$
 	/** versione del progetto */
-	public static final String VERSION = "40.1"; //$NON-NLS-1$
+	public static final String VERSION = "40.2"; //$NON-NLS-1$
 	
 	private String currentConfigId;
 	

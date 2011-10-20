@@ -75,7 +75,7 @@ public class Libro extends Pubblicazione {
 	}
 
 	@Override
-	public String toString() {
+	public String getText() {
 		String curTitolo = this.getTitolo();
 		/* riduce il titolo, tanto non serve a molto */
 		if (curTitolo.length() > 30) {

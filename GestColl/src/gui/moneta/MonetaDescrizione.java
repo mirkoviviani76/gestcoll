@@ -6,9 +6,9 @@
 package gui.moneta;
 
 import gestXml.MonetaXml;
-import gui.datamodels.GenericCellRenderer;
 import gui.datamodels.GenericListModel;
 import gui.datamodels.XmlDocumentChangeListener;
+import gui.datamodels.CellRenderer.LegendaCellRenderer;
 import gui.moneta.forms.DescrizioneForm;
 import gui.moneta.forms.LegendaForm;
 
@@ -138,7 +138,7 @@ public class MonetaDescrizione extends javax.swing.JPanel {
 		jLLegende.setFont(new java.awt.Font("Dialog", 0, 11)); //$NON-NLS-1$
 		jLLegende
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jLLegende.setCellRenderer(new GenericCellRenderer<Legenda>());
+		jLLegende.setCellRenderer(new LegendaCellRenderer());
 		jLLegende.setMaximumSize(new java.awt.Dimension(162, 92));
 		jLLegende.setMinimumSize(new java.awt.Dimension(162, 92));
 		jLLegende.addMouseListener(new java.awt.event.MouseAdapter() {

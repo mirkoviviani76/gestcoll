@@ -53,6 +53,7 @@ import gestXml.data.Contenitore;
 import gestXml.data.Vassoio;
 import gui.MainFrame;
 import gui.datamodels.MonetaListModel;
+import gui.datamodels.CellRenderer.MonetaXmlCellRenderer;
 import gui.extraPanels.vassoi.VassoioPanel;
 import gui.moneta.forms.AddMonetaForm;
 
@@ -521,7 +522,7 @@ public final class MonetePanel extends javax.swing.JPanel implements Observer,
 		jListMonete
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jListMonete
-				.setCellRenderer(new gui.datamodels.GenericCellRenderer<MonetaXml>());
+				.setCellRenderer(new MonetaXmlCellRenderer());
 		jListMonete.setComponentPopupMenu(jPopupMenu1);
 		jListMonete
 				.addListSelectionListener(new javax.swing.event.ListSelectionListener() {

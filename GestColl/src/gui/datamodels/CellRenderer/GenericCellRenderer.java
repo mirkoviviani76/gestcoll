@@ -2,9 +2,9 @@
  * Modifiche:
  * -
  */
-package gui.datamodels;
+package gui.datamodels.CellRenderer;
 
-import gestXml.Tooltipper;
+
 
 import java.awt.Color;
 import java.awt.Component;
@@ -18,13 +18,18 @@ import javax.swing.JList;
  * 
  * @param <E>
  */
-public class GenericCellRenderer<T> extends DefaultListCellRenderer {
+public abstract class GenericCellRenderer<T> extends DefaultListCellRenderer {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	
+	public abstract String getText(T mng);
+	
+	public abstract String getTooltip(T mng);
+	
 	/**
 	 * 
 	 * @param list
@@ -42,12 +47,10 @@ public class GenericCellRenderer<T> extends DefaultListCellRenderer {
 				index, isSelected, hasFocus);
 		@SuppressWarnings("unchecked")
 		T mng = (T) value;
-		label.setText(mng.toString());
-		// se E implementa Tooltipper, ottiene il tooltip
-		if (mng instanceof Tooltipper) {
-			label.setToolTipText(((Tooltipper) mng).toTooltip());
-		}
-
+		label.setText(this.getText(mng));
+		if (this.getTooltip(mng) != null)
+			label.setToolTipText(this.getTooltip(mng));
+		
 		if (hasFocus || isSelected) {
 			label.setBackground(Color.yellow);
 		} else {

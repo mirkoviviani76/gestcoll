@@ -49,7 +49,8 @@ public class MonetaListModel extends GenericListModel<MonetaXml> {
 			//sistema l'ordinamento
 			mng.setOrdering(ordering);
 			//aggiunge alla lista
-			contenuto.add(mng);
+			//contenuto.add(mng);
+			this.addElement(mng);
 		}
 	}
 
