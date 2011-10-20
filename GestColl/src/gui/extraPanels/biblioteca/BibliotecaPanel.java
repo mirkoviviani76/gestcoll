@@ -7,7 +7,6 @@ package gui.extraPanels.biblioteca;
 
 import exceptions.XmlException;
 import gestXml.BibliotecaXml;
-import gestXml.data.Contatto;
 import gestXml.data.Pubblicazione;
 import gui.datamodels.GenericListModel;
 import gui.datamodels.CellRenderer.PubblicazioneCellRenderer;
@@ -21,10 +20,9 @@ import java.util.Observer;
 
 import javax.swing.ProgressMonitor;
 
-import Resources.i18n.Messages;
-
 import main.GestLog;
 import main.Progress;
+import Resources.i18n.Messages;
 
 /**
  * Gestione pannello biblioteca
