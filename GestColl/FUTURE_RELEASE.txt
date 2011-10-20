@@ -7,8 +7,10 @@ IMPROVEMENTS
 - modificare lo schema moneta per aggiungere collezioni e sottocollezioni: <ambiti><ambito>SRI</ambito><ambito>Guerra dei trenta anni</ambito></ambiti>
 - per una nuova moneta riempire i campi (riempire il template)
 - pensare all'integrita'  di collezione.xml.... checksum?
+- possibilità di caricare xml diversi per collezioni diverse (i vassoi andrebbero messi nell'xml però)
 
 FUTURE
+- appunti vari e liberi
 - galleria fotografica cliccabile
 - aggiunta di elenchi testuali nella statistica (es. lista dei nominali, delle autorita...)
 - elenco dei campi mancanti per le monete (es. per XXXX mancano le autorita' , la letteratura....)

@@ -105,6 +105,7 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		Splash.getInstance().splashProgress(Messages.getString("MainFrame.2")); //$NON-NLS-1$
 		// inizializza i componenti grafici
 		initComponents();
+		this.setTitle(Common.getCommon().getAppCompleteName());
 		// sistema i listener
 		this.addActionListener();
 		// mostra la versione come primo messaggio
@@ -169,13 +170,19 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		this.jBStatistiche.addActionListener(this);
 	}
 
+	/**
+	 * mostra il messaggio di about
+	 * @throws HeadlessException
+	 */
 	private void gestAbout() throws HeadlessException {
 		JOptionPane.showMessageDialog(this, String.format("%s\n"+Messages.getString("MainFrame.7")+" %s", //$NON-NLS-1$
 				Common.APPNAME, Common.VERSION), Common.APPNAME,
 				JOptionPane.INFORMATION_MESSAGE);
-		GestLog.Error(this.getClass(), Messages.getString("MainFrame.8"), Messages.getString("MainFrame.9")); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
+	/**
+	 * attiva la gestione contatti
+	 */
 	private void gestContatti() {
 		this.libriPanel1.setVisible(false);
 		this.monetePanel1.setVisible(false);
@@ -184,11 +191,17 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		this.statistichePanel1.setVisible(false);
 	}
 
+	/**
+	 * esce
+	 */
 	private void gestExit() {
 		// esce
 		System.exit(0);
 	}
 
+	/**
+	 * attiva la gestione links
+	 */
 	private void gestLinks() {
 		this.libriPanel1.setVisible(false);
 		this.monetePanel1.setVisible(false);
@@ -197,6 +210,10 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		this.statistichePanel1.setVisible(false);
 	}
 
+	/**
+	 * elimina i file non necessari
+	 * @throws HeadlessException
+	 */
 	private void gestRemoveAll() throws HeadlessException {
 		try {
 			String[] ddd = { Common.getCommon().getHtmlDir(),
@@ -212,6 +229,10 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * rimuove i file temporanei
+	 * @throws HeadlessException
+	 */
 	private void gestRemoveTemp() throws HeadlessException {
 		String[] ddd = { Common.getCommon().getHtmlDir(),
 				Common.getCommon().getLatexDir() };
@@ -227,6 +248,9 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 				Level.INFO));
 	}
 
+	/**
+	 * attiva la gestione dei libri
+	 */
 	private void gestSelectLibri() {
 		this.libriPanel1.setVisible(true);
 		this.monetePanel1.setVisible(false);
@@ -235,6 +259,9 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		this.statistichePanel1.setVisible(false);
 	}
 
+	/**
+	 * attiva la gestione delle monete
+	 */
 	private void gestSelectMonete() {
 		this.libriPanel1.setVisible(false);
 		this.monetePanel1.setVisible(true);
@@ -243,6 +270,9 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		this.statistichePanel1.setVisible(false);
 	}
 
+	/**
+	 * attiva la gestione delle statistiche
+	 */
 	private void gestSelectStatistiche() {
 		this.libriPanel1.setVisible(false);
 		this.monetePanel1.setVisible(false);
@@ -251,6 +281,9 @@ public class MainFrame extends javax.swing.JFrame implements ActionListener {
 		this.statistichePanel1.setVisible(true);
 	}
 
+	/**
+	 * attiva la gestione dello storico
+	 */
 	private void gestStorico() {
 		HistoryViewer hw = new HistoryViewer(this, true);
 		hw.showFile(new File(Common.getCommon().getHistoryLog()));

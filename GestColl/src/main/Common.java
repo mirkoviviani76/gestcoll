@@ -262,6 +262,14 @@ public final class Common extends GestXml {
 		return null;
 
 	}
+	
+	/**
+	 * restituisce il nome dell'applicazione completo di versione
+	 * @return
+	 */
+	public String getAppCompleteName() {
+		return String.format("%s v.%s", Common.APPNAME, Common.VERSION);
+	}
 
 	/**
 	 * Ottiene la dir delle immagini
