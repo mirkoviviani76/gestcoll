@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical|center_horizontal"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tab_welcome_layout_titolo"
+        style="@style/TabWelcomeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Collezione"
+        android:textIsSelectable="false" >
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tab_welcome_layout_proprietario"
+        android:textIsSelectable="false"
+        style="@style/TabWelcomeOwner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proprietario"
+         >
+    </TextView>
+
+    
+</LinearLayout>
