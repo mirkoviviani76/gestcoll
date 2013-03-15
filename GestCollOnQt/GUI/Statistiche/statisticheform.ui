@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StatisticheForm</class>
+ <widget class="QWidget" name="StatisticheForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>3</number>
+     </property>
+     <widget class="QWidget" name="stat_1">
+      <attribute name="title">
+       <string>Monete per anno</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="StatisticaMonetePerAnno" name="widgetMonetePerAnno" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="stat_2">
+      <attribute name="title">
+       <string>Monete per Metallo</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="StatisticaMonetePerMetallo" name="widgetMonetePerMetallo" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="stat_3">
+      <attribute name="title">
+       <string>Monete per nominale</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="StatisticaMonetePerNominale" name="widgetMonetePerNominale" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Anomalie e info varie</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="AnomalieMonete" name="widgetAnomalieMonete" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Sommario</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="SommarioMonete" name="widgetSommarioMonete" native="true"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>StatisticaMonetePerAnno</class>
+   <extends>QWidget</extends>
+   <header>statisticamoneteperanno.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StatisticaMonetePerMetallo</class>
+   <extends>QWidget</extends>
+   <header>statisticamonetepermetallo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StatisticaMonetePerNominale</class>
+   <extends>QWidget</extends>
+   <header>statisticamonetepernominale.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AnomalieMonete</class>
+   <extends>QWidget</extends>
+   <header>anomaliemonete.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SommarioMonete</class>
+   <extends>QWidget</extends>
+   <header>sommariomonete.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

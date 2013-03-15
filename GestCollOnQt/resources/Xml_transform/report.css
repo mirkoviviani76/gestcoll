@@ -1,0 +1,101 @@
+body {
+		margin:0;
+		padding:0;
+		border:0;			/* This removes the border around the viewport in old versions of IE */
+		width:100%;
+		min-width:600px;		/* Minimum width of layout - remove line if not required */
+	}
+
+	
+	
+	h2 {
+	border: 2px solid lightgray;
+}
+
+.libro {
+	padding: 3px;
+}
+
+.sezione {
+	border: 1px solid lightgray;
+	font-size: 150%;
+	margin-top: 25px;
+}
+
+.legenda {
+	border: 1px solid lightgray;
+}
+.legenda .testoLegenda {
+	font-weight: bold;
+}
+.legenda .scioglimentoLegenda {
+	font-family: verdana;
+}
+
+.collezione_header {
+	display: block;
+	background: #9999cc;
+	color: #FFFFDD;
+	font-weight: bold;
+	text-align: center;
+}
+
+img.collezione_header_img {
+	height:80px;
+	display:block;
+	position:absolute;
+	z-index:5;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	
+}
+
+.collezione_content {
+	border: 1px solid black;
+	/*background-color: gray;*/
+	display: block;
+	/*background-color: #750001;*/
+	/*background-image: url(coatofarms.jpg);*/
+	padding: 10px;
+}
+
+.collezione_footer {
+	background: #99cc99;
+	height: 55px;
+	overflow: hidden;
+	margin-top: 3px;
+	text-align: center;
+	padding-top: 5px;
+
+}
+
+
+table {
+	border: 1px solid gray;
+}
+
+th {
+	border: 1px solid gray;
+	background-color: lightgray;
+	text-align: center;
+}
+
+img {
+	vertical-align:text-top;
+}
+
+td {
+	border: 1px solid lightgray;
+}
+
+.categoria {
+	font-weight: bold;
+	margin: 5px;
+}
+
+.sommario {
+	margin-top: 250px;
+	background-color: #eeeeee;
+	font-family: Verdana, sans;
+}
+

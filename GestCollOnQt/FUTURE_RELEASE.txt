@@ -1,0 +1,22 @@
+BUGFIXING
+- extra qt: sistemare la biblioteca (mancano riferimenti a tanti libri presenti in formato digitale)
+
+FUTURE
+- migliorare gestione biblioteca (aggiunta/modifica)
+- schema biblioteca: per ogni libro aggiungere gli ambiti
+- visualizzare gli ambiti nell'elenco libri
+- gestione vassoi (aggiunta/modifica/cancellazione)
+- gestione icone per gli ambiti della collezione
+
+IPOTESI
+- scansione area biblioteca per estrarre informazioni dai pdf
+- gestione aste
+- migliore libreria per la generazione dei grafici
+- galleria di tutte le foto
+- possibilità  di caricare xml diversi per collezioni diverse (i vassoi andrebbero messi nell'xml della collezione)
+- licenza GPL
+- includere i documenti addizionali nel tex
+- cartina (google) con indicati più o meno i Paesi delle monete.
+- scegliere se, ad esempio, salvare solo le modifiche alla collezione e scartare le modifiche ai link)
+
+

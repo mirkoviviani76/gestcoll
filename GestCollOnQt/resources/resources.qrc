@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/filesave.ico</file>
+        <file>icons/signature.ico</file>
+        <file>icons/BookIcon.ico</file>
+        <file>icons/CoinIcon.ico</file>
+        <file>icons/GreenTrashbinIcon.ico</file>
+        <file>icons/internet.ico</file>
+        <file>icons/Mail.ico</file>
+        <file>icons/splash.png</file>
+        <file>Xml_transform/schedaTxt.xsl</file>
+        <file>Xml_transform/schedaHtml.xsl</file>
+        <file>Templates/etichette.tex.template</file>
+        <file>Templates/index.html.template</file>
+        <file>Templates/Monete.html.template</file>
+        <file>Templates/instance.xml.template</file>
+        <file>icons/statistiche.png</file>
+        <file>icons/newItemIcon.png</file>
+        <file>icons/blocnotes.png</file>
+        <file>Templates/BlocknoteNuovaMoneta.txt.template</file>
+        <file>icons/process_info.png</file>
+        <file>Xml_transform/report.css</file>
+        <file>Xml_transform/collezioneLaTeX.xsl</file>
+    </qresource>
+</RCC>
