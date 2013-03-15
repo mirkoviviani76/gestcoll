@@ -1,0 +1,135 @@
+Versione 8.1
+        - inserita SortFilterProxy anche per la biblioteca
+Versione 8.0
+        - l'elenco delle monete è ora gestito a tabella
+        - modello per l'elenco delle monete è ora gestito con un SortFilterProxy in mezzo
+        - aggiunto un delegato per l'elenco delle monete
+        - il sorting per paese gestisce correttamente le lettere con gli umlaut
+Versione 7.4
+        - attivazione/disattivazione del pulsante "Salva".
+        - migliorata gestione memoria per le immagini ingrandite delle monete.
+        - ordinamento per ambito monetale.
+        - miglioramento visualizzazione ingrandita moneta.
+Versione 7.3
+        - risolti bug minori riguardanti la gestione delle modifiche.
+Versione 7.2
+        - sistemata gestione modifiche. Ora le modifiche vengono cumulate e il salvataggio salva tutte le modifiche presenti.
+        - sistemato bug relativo alla mancata segnalazione della presenza di modifiche non salvate.
+Versione 7.1
+        - risolto bug nella chiamata del menu contestuale per documenti addizionali
+        - aggiunta funzionalità di aggiunta "bulk" di documenti addizionali. La descrizione viene condivisa
+Versione 7.0
+        - Salvato Trunk
+Versione 6.6
+        - risolto piccolo bug per l'apertura dei documenti addizionali
+Versione 6.5
+        - introdotta apertura dei file collezione.pdf e etichette.pdf (funziona Qt 4.8)
+        - introdotta apertura dei file pdf della biblioteca
+        - introdotta apertura dei file dei "documenti addizionali"
+        - sistemato template nuova moneta (il taglio ora e' vuoto)
+Versione 6.4
+        - introdotta aggiunta, modifica e cancellazione dei link.
+        - i documenti addizionali possono includere una dir all'interno della dir dei documenti.
+Versione 6.3
+        - aggiornata la generazione dei tex. Ora viene generato un unico file contenente la collezione.
+          Il file posizioni.tex viene generato da xsl.
+        - migliorata generazione legende per il tex (footnote applicata solo se esiste lo scioglimento)
+        - cancella temporanei ora lascia i tex ed elimina i file aux, toc, log, out
+Versione 6.2
+        - aggiornati gli xsl
+        - inserito il foglio stile report.css nelle risorse
+        - il foglio stile report.css viene ora copiato nella cartella html al momento della generazione del report
+        - aggiunta gestione immagini monetali
+Versione 6.1
+        - gestione aggiunta ambito globale per la collezione
+        - modifica ambito globale della collezione comporta la modifica
+          di quell'ambito (per titolo) nelle singole monete
+        - introdotto dialog e pulsante per info globali collezione
+        - gestione salvataggio e modifica delle info globali collezione
+          proprietario, titolo, data. Da fare: ambiti.
+        - gli ambiti della moneta possono essere ora inseriti o rimossi
+        - rimosse chiamate inutili a c_str()
+        - piccole sistemazioni
+        - aggiunta anomalia moneta per legende senza scioglimento
+        - sistemato bug relativo alla mancata cancellazione dei puntatori delle liste
+Versione 6.0
+        - introdotte informazioni sulla collezione: proprietario, data di inizio, ambiti
+        - introdotti gli ambiti di pertinenza per moneta
+        - gestione per la lettura degli ambiti di pertinenza di una moneta
+        - ridisegnata gui moneta per gestione ambiti
+        - ridisegnata gui per gestione info collezione
+Versione 5.2
+        - aggiunta possibilità di eliminare e modificare un contatto
+Versione 5.1
+        - aggiunta possibilità di eliminare un'autorità, una nota, una legenda, un libro
+        - introdotta cartella documents per contenere i documenti relativi alle varie monete
+        - tolto dall'istanza xml di collezione le foto della moneta dai documenti addizionali
+        - tolta da collezione.xsd il campo url per i documenti
+        - gestione documenti aggiuntivi: inserimento, modifica e cancellazione
+Versione 5.0
+        - schema moneta modificato: ora esiste uno stato della moneta
+        - introdotto dialog per modificare lo stato della moneta
+        - l'elenco delle monete comprende ora l'immagine dello stato
+        - aggiunto un timer per monitorare il conteggio delle monete e dei libri
+Versione 4.2
+        - il blocco note ora dispone del widget di selezione dei caratteri particolari
+Versione 4.1
+        - impostato dialog per modificare l'ini
+        - introdotta possiblità di cambiare il colore delle righe nella lista
+        - introdotta aggiunta (e salvataggio) di un nuovo contatto. Da sistemare.
+Versione 4.0
+        - introdotto blocco note con possibilità di salvare e creare note
+        - blocco note: template per appunti riguardanti una nuova moneta
+        - migliorata gestione creazione nuova moneta
+        - migliorata gestione del file ini
+Versione 3.9
+        - pulsante di aggiornamento per le statistiche
+        - vengono indicate le modifiche effettuate su una moneta e non salvate
+        - la chiusura in caso di modifiche non salvate provoca la richiesta di salvataggio
+        - la data revisione contiene anche l'orario
+        - ordinamento nella biblioteca e miglioramento vista
+        - la lista delle monete e' ora ordinabile in base a diversi parametri scelti da menu contestuale
+        - le liste delle monete e dei libri sono allargabili
+Versione 3.8
+        - la letteratura nel form moneta genera un tooltip con le indicazioni del libro (se lo trova in biblioteca)
+        - aggiunta statistica per letteratura non trovata
+        - iniziata gestione led di stato
+Versione 3.7
+        - corretto bug che non faceva visualizzare la tab monete al primo clic
+        - corretto bug in linux relativo all'include di QGraphicsScene in nightcharts.cpp (veniva incluso "qgraphicsscene")
+        - sistemata gestione logger (il messaggio viene scritto con il suo livello, non con quello del logger)
+        - sistemata gestione file ini
+           aggiunta di getter per tutti i valori
+           se i valori obbligatori non esistono viene generato un messaggio e l'app viene chiusa
+           se i valori facoltativi non esistono viene usato un default
+        - divisa lettura file xml biblioteca dalla visualizzazione nel form
+Versione 3.6
+        - migliorata vista tab vassoi (aggiunta colore e anche immagini delle monete)
+        - corretto bug che faceva visualizzare male la gui veniva scelta una moneta ed
+          era attiva la visualizzazione vassoi
+Versione 3.5
+        - aggiunto "sommario" nella visualizzazione statistiche
+Versione 3.4
+        - il menu contestuale permette di caricare negli appunti l'id della moneta
+        - il menu contestuale permette di caricare negli appunti la descrizione della moneta
+        - sistemato l'xsl schedaTxt.xsl
+Versione 3.3
+        - corretto bug riguardante la data e il prezzo.
+        - cambiato schema
+        - aggiunta visualizzazione contatti
+        - migliorata visualizzazione links (vengono anche ordinati alfabeticamente per categoria)
+Versione 3.2
+        - introdotta pagina di anomalie in statistiche con link alla moneta
+        - corretti bug riguardanti la generazione dei latex
+        - corretti bug riguardanti la cancellazione dei files temporanei
+        - effettuata gestione conversione in immagini QR
+        - aggiunta icona per windows
+        - i template xsl hanno ora la directory delle immagini
+Versione 3.1
+        - le modifiche alla moneta aggiornano la revisione della moneta stessa
+        - il nome del backup della collezione contiene ora la checksum md5
+        - introdotta la gestione dei vassoi tramite file xml
+        - introdotta visualizzazione cataloghi (da migliorare)
+Versione 3.0
+        - Aggiornamento a struttura nuova xml (collezione.xml contiene tutte le monete)
+        - Inserimento di alcuni dati nelle risorse (xslt)

@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MonetaForm</class>
+ <widget class="QWidget" name="MonetaForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>942</width>
+    <height>738</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QGroupBox {
+font-size: 15px;
+font-variant: small-caps;
+font-weight: bold;
+}</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QDockWidget" name="dockWidget">
+      <property name="features">
+       <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+      </property>
+      <widget class="QWidget" name="dockWidgetContents">
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="setupCollezione">
+          <property name="text">
+           <string>Collezione</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../resources/resources.qrc">
+            <normaloff>:/icons/process_info.png</normaloff>:/icons/process_info.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableView" name="itemList">
+          <property name="whatsThis">
+           <string/>
+          </property>
+          <property name="accessibleName">
+           <string/>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QTableView {
+/* font-size: 8px;*/
+font-family: sans;
+selection-background-color: qlineargradient(spread:reflect, x1:0.506, y1:0.926136, x2:0.5, y2:0.477273, stop:0 rgba(0, 0, 246, 255), stop:0.965909 rgba(255, 255, 255, 255));
+selection-color: black;
+}
+
+</string>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="showGrid">
+           <bool>false</bool>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QTabWidget" name="Tabs">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTabBar::tab {
+	border-left: 1px solid gray;
+	border-right: 1px solid gray;
+	border-top: 1px solid gray;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	min-width: 20ex;
+	padding: 10px;
+	font-size: 15px;
+	font-weight: bold;
+	font-style: small-caps;
+ }
+
+QTabBar::tab:selected {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                 stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                 stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);
+ }</string>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tabMoneta">
+       <attribute name="title">
+        <string>Moneta</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <property name="leftMargin">
+         <number>2</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QWidget" name="superiore" native="true">
+          <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,1,1">
+           <property name="margin">
+            <number>0</number>
+           </property>
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QWidget" name="sup_sin" native="true">
+             <layout class="QFormLayout" name="formLayout">
+              <property name="fieldGrowthPolicy">
+               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+              </property>
+              <property name="horizontalSpacing">
+               <number>3</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>0</number>
+              </property>
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>Stato</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLedIndicator" name="led">
+                <property name="text">
+                 <string>PushButton</string>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>Id</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLabel" name="id">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>id</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_10">
+                <property name="text">
+                 <string>Posizione</string>
+                </property>
+                <property name="buddy">
+                 <cstring>posizione</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QPushButton" name="posizione">
+                <property name="minimumSize">
+                 <size>
+                  <width>150</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>150</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>PushButton</string>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>true</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0" colspan="2">
+               <widget class="QGroupBox" name="groupBox_5">
+                <property name="title">
+                 <string>Emissione</string>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0" columnstretch="0,0,0,0,0">
+                 <property name="leftMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label">
+                   <property name="text">
+                    <string>Paese</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>paese</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1" colspan="4">
+                  <widget class="QLineEdit" name="paese">
+                   <property name="placeholderText">
+                    <string>Paese</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_2">
+                   <property name="text">
+                    <string>Nominale</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="MisuraForm" name="nominale" native="true"/>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_14">
+                   <property name="text">
+                    <string>Autorità</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>autorita</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1" rowspan="2" colspan="4">
+                  <widget class="QListView" name="autorita">
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="3">
+                  <widget class="QLabel" name="label_3">
+                   <property name="text">
+                    <string>Anno</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>anno</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="4">
+                  <widget class="QLineEdit" name="anno"/>
+                 </item>
+                 <item row="1" column="2">
+                  <spacer name="horizontalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="17" column="0" colspan="2">
+               <widget class="QGroupBox" name="datiFisici">
+                <property name="title">
+                 <string>Dati Fisici</string>
+                </property>
+                <layout class="QFormLayout" name="formLayout_5">
+                 <property name="fieldGrowthPolicy">
+                  <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>0</number>
+                 </property>
+                 <property name="verticalSpacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_15">
+                   <property name="text">
+                    <string>Peso</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="MisuraForm" name="peso" native="true"/>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_16">
+                   <property name="text">
+                    <string>Dim.</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="MisuraForm" name="dimensione" native="true"/>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_17">
+                   <property name="text">
+                    <string>Forma</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>forma</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QLineEdit" name="forma"/>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_18">
+                   <property name="text">
+                    <string>Metallo</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>metallo</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QLineEdit" name="metallo"/>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="21" column="0" colspan="2">
+               <widget class="QGroupBox" name="datiAcquisto">
+                <property name="title">
+                 <string>Dati Acquisto</string>
+                </property>
+                <layout class="QFormLayout" name="formLayout_4">
+                 <property name="fieldGrowthPolicy">
+                  <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>0</number>
+                 </property>
+                 <property name="verticalSpacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>2</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_11">
+                   <property name="text">
+                    <string>Luogo</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>luogo</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLineEdit" name="luogo"/>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_12">
+                   <property name="text">
+                    <string>Data</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>data</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_13">
+                   <property name="text">
+                    <string>Prezzo</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="MisuraForm" name="prezzo" native="true"/>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QDateEdit" name="data">
+                   <property name="calendarPopup">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QWidget" name="sup_des" native="true">
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <property name="leftMargin">
+               <number>2</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>2</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Letteratura</string>
+                </property>
+                <property name="buddy">
+                 <cstring>letteratura</cstring>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QTableView" name="letteratura">
+                <property name="showDropIndicator" stdset="0">
+                 <bool>true</bool>
+                </property>
+                <property name="dragDropOverwriteMode">
+                 <bool>true</bool>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::SingleSelection</enum>
+                </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
+                </property>
+                <property name="textElideMode">
+                 <enum>Qt::ElideNone</enum>
+                </property>
+                <property name="showGrid">
+                 <bool>false</bool>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+                <property name="cornerButtonEnabled">
+                 <bool>false</bool>
+                </property>
+                <attribute name="horizontalHeaderVisible">
+                 <bool>false</bool>
+                </attribute>
+                <attribute name="verticalHeaderVisible">
+                 <bool>false</bool>
+                </attribute>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>Note</string>
+                </property>
+                <property name="buddy">
+                 <cstring>note</cstring>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QListView" name="note">
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="isWrapping" stdset="0">
+                 <bool>false</bool>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_9">
+                <property name="text">
+                 <string>Documenti legati alla moneta</string>
+                </property>
+                <property name="buddy">
+                 <cstring>documenti</cstring>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QListView" name="documenti">
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QWidget" name="sup_cen" native="true">
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QGroupBox" name="groupBox_2">
+                <property name="title">
+                 <string>Ambiti</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_11">
+                 <property name="margin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QListView" name="ambiti">
+                   <property name="alternatingRowColors">
+                    <bool>true</bool>
+                   </property>
+                   <property name="selectionBehavior">
+                    <enum>QAbstractItemView::SelectItems</enum>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="groupBox">
+                <property name="title">
+                 <string>Zecche e zecchieri</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_7">
+                 <property name="margin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="MisuraForm" name="zecca" native="true"/>
+                 </item>
+                 <item>
+                  <widget class="QTableView" name="zecchieri">
+                   <property name="alternatingRowColors">
+                    <bool>true</bool>
+                   </property>
+                   <property name="selectionMode">
+                    <enum>QAbstractItemView::SingleSelection</enum>
+                   </property>
+                   <property name="selectionBehavior">
+                    <enum>QAbstractItemView::SelectRows</enum>
+                   </property>
+                   <property name="showGrid">
+                    <bool>false</bool>
+                   </property>
+                   <attribute name="horizontalHeaderVisible">
+                    <bool>false</bool>
+                   </attribute>
+                   <attribute name="verticalHeaderVisible">
+                    <bool>false</bool>
+                   </attribute>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="inferiore" native="true">
+          <layout class="QGridLayout" name="gridLayout_4" columnstretch="2,2,1">
+           <property name="leftMargin">
+            <number>2</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="dritto">
+             <property name="title">
+              <string>Dritto</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0,1,0">
+              <property name="spacing">
+               <number>3</number>
+              </property>
+              <property name="leftMargin">
+               <number>2</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>2</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QTextEdit" name="descrizioneDritto"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_21">
+                <property name="text">
+                 <string>Legende</string>
+                </property>
+                <property name="buddy">
+                 <cstring>legendeDritto</cstring>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QListView" name="legendeDritto">
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="ImgMoneta" name="imgDritto">
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="rovescio">
+             <property name="title">
+              <string>Rovescio</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,1,0">
+              <property name="spacing">
+               <number>3</number>
+              </property>
+              <property name="leftMargin">
+               <number>2</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>2</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QTextEdit" name="descrizioneRovescio"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_23">
+                <property name="text">
+                 <string>Legende</string>
+                </property>
+                <property name="buddy">
+                 <cstring>legendeRovescio</cstring>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QListView" name="legendeRovescio">
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="ImgMoneta" name="imgRovescio">
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QGroupBox" name="taglio">
+             <property name="title">
+              <string>Taglio</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,0,1,0">
+              <property name="spacing">
+               <number>3</number>
+              </property>
+              <property name="leftMargin">
+               <number>2</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>2</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QTextEdit" name="descrizioneTaglio"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_24">
+                <property name="text">
+                 <string>Legende</string>
+                </property>
+                <property name="buddy">
+                 <cstring>legendeTaglio</cstring>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QListView" name="legendeTaglio">
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="ImgMoneta" name="imgTaglio">
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Vassoi">
+       <attribute name="title">
+        <string>Vassoi</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <widget class="QTabWidget" name="tabsVassoi">
+          <widget class="QWidget" name="tab">
+           <attribute name="title">
+            <string>Tab 1</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="title">
+            <string>Tab 2</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MisuraForm</class>
+   <extends>QWidget</extends>
+   <header>misuraform.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ImgMoneta</class>
+   <extends>QLabel</extends>
+   <header>imgmoneta.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QLedIndicator</class>
+   <extends>QPushButton</extends>
+   <header>qledindicator.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>paese</tabstop>
+  <tabstop>anno</tabstop>
+  <tabstop>autorita</tabstop>
+  <tabstop>forma</tabstop>
+  <tabstop>metallo</tabstop>
+  <tabstop>luogo</tabstop>
+  <tabstop>data</tabstop>
+  <tabstop>ambiti</tabstop>
+  <tabstop>zecchieri</tabstop>
+  <tabstop>letteratura</tabstop>
+  <tabstop>note</tabstop>
+  <tabstop>documenti</tabstop>
+  <tabstop>descrizioneDritto</tabstop>
+  <tabstop>legendeDritto</tabstop>
+  <tabstop>descrizioneRovescio</tabstop>
+  <tabstop>legendeRovescio</tabstop>
+  <tabstop>descrizioneTaglio</tabstop>
+  <tabstop>setupCollezione</tabstop>
+  <tabstop>posizione</tabstop>
+  <tabstop>itemList</tabstop>
+  <tabstop>led</tabstop>
+  <tabstop>Tabs</tabstop>
+  <tabstop>tabsVassoi</tabstop>
+  <tabstop>legendeTaglio</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../resources/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

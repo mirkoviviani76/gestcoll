@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>632</width>
+    <height>330</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GestColl</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../resources/resources.qrc">
+    <normaloff>:/icons/CoinIcon.ico</normaloff>:/icons/CoinIcon.ico</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <widget class="QWidget" name="ContainerCollezione">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="MonetaForm" name="widgetCollezione" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="ContainerBiblioteca">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="BibliotecaForm" name="widgetBiblioteca" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="ContainerContatti">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="ContattiForm" name="widgetContatti" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="ContainerLinks">
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="LinksForm" name="widgetLinks" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="ContainerStatistiche">
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="StatisticheForm" name="widgetStatistiche" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="ContainerBlocknotes">
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="BlocknotesForm" name="widgetBlocknotes" native="true"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>632</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionSalva"/>
+    <addaction name="separator"/>
+    <addaction name="actionEsci"/>
+   </widget>
+   <widget class="QMenu" name="menuStrumenti">
+    <property name="title">
+     <string>&amp;Strumenti</string>
+    </property>
+    <addaction name="actionVedi_Log"/>
+    <addaction name="separator"/>
+    <addaction name="actionCollezione"/>
+    <addaction name="actionBiblioteca"/>
+    <addaction name="actionContatti"/>
+    <addaction name="actionLinks"/>
+    <addaction name="separator"/>
+    <addaction name="actionCancella_temporanei"/>
+    <addaction name="actionCancella_pdf_qr"/>
+    <addaction name="separator"/>
+    <addaction name="actionXml_Tex"/>
+    <addaction name="actionXml_Qr"/>
+    <addaction name="actionXml_Html"/>
+    <addaction name="actionTex_Qr_Pdf"/>
+    <addaction name="actionVedi_Collezione_pdf"/>
+    <addaction name="actionVedi_Etichette_pdf"/>
+    <addaction name="separator"/>
+    <addaction name="actionOpzioni"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>&amp;?</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionAbout_Qt"/>
+   </widget>
+   <widget class="QMenu" name="menuModifica">
+    <property name="title">
+     <string>Modifica</string>
+    </property>
+    <addaction name="actionEdit"/>
+    <addaction name="actionAddItem"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuModifica"/>
+   <addaction name="menuStrumenti"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionCollezione"/>
+   <addaction name="actionStatistiche"/>
+   <addaction name="actionBiblioteca"/>
+   <addaction name="actionContatti"/>
+   <addaction name="actionLinks"/>
+   <addaction name="actionBlocknotes"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="editSaveToolbar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionAddItem"/>
+   <addaction name="actionEdit"/>
+   <addaction name="actionSalva"/>
+  </widget>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionEsci">
+   <property name="text">
+    <string>&amp;Esci</string>
+   </property>
+  </action>
+  <action name="actionCancella_temporanei">
+   <property name="text">
+    <string>Cancella temporanei</string>
+   </property>
+  </action>
+  <action name="actionCancella_pdf_qr">
+   <property name="text">
+    <string>Cancella pdf, qr</string>
+   </property>
+  </action>
+  <action name="actionVerifica_xml">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Verifica xml</string>
+   </property>
+  </action>
+  <action name="actionLinks">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/internet.ico</normaloff>:/icons/internet.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Links</string>
+   </property>
+   <property name="shortcut">
+    <string>F8</string>
+   </property>
+  </action>
+  <action name="actionContatti">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/Mail.ico</normaloff>:/icons/Mail.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Contatti</string>
+   </property>
+   <property name="shortcut">
+    <string>F7</string>
+   </property>
+  </action>
+  <action name="actionBiblioteca">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/BookIcon.ico</normaloff>:/icons/BookIcon.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Biblioteca</string>
+   </property>
+   <property name="shortcut">
+    <string>F6</string>
+   </property>
+  </action>
+  <action name="actionCollezione">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/CoinIcon.ico</normaloff>:/icons/CoinIcon.ico</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Collezione</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="actionXml_Tex">
+   <property name="text">
+    <string>Xml -&gt; Tex</string>
+   </property>
+  </action>
+  <action name="actionXml_Qr">
+   <property name="text">
+    <string>Xml -&gt; Qr</string>
+   </property>
+  </action>
+  <action name="actionXml_Html">
+   <property name="text">
+    <string>Xml -&gt; Html</string>
+   </property>
+  </action>
+  <action name="actionEdit">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/signature.ico</normaloff>:/icons/signature.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Edit</string>
+   </property>
+   <property name="toolTip">
+    <string>Edit (F2)</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
+  <action name="actionSalva">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/filesave.ico</normaloff>:/icons/filesave.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Salva</string>
+   </property>
+   <property name="toolTip">
+    <string>Salva (CTRL+s)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WindowShortcut</enum>
+   </property>
+  </action>
+  <action name="actionTex_Qr_Pdf">
+   <property name="text">
+    <string>Tex, Qr -&gt; Pdf</string>
+   </property>
+  </action>
+  <action name="actionVedi_Log">
+   <property name="text">
+    <string>Vedi Log</string>
+   </property>
+  </action>
+  <action name="actionStatistiche">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/statistiche.png</normaloff>:/icons/statistiche.png</iconset>
+   </property>
+   <property name="text">
+    <string>Statistiche</string>
+   </property>
+   <property name="toolTip">
+    <string>Statistiche</string>
+   </property>
+  </action>
+  <action name="actionBlocknotes">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/blocnotes.png</normaloff>:/icons/blocnotes.png</iconset>
+   </property>
+   <property name="text">
+    <string>Blocknotes</string>
+   </property>
+  </action>
+  <action name="actionAddItem">
+   <property name="icon">
+    <iconset resource="../../resources/resources.qrc">
+     <normaloff>:/icons/newItemIcon.png</normaloff>:/icons/newItemIcon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Aggiungi...</string>
+   </property>
+   <property name="toolTip">
+    <string>addItem</string>
+   </property>
+  </action>
+  <action name="actionOpzioni">
+   <property name="text">
+    <string>Opzioni</string>
+   </property>
+  </action>
+  <action name="actionVedi_Collezione_pdf">
+   <property name="text">
+    <string>Vedi Collezione.pdf</string>
+   </property>
+  </action>
+  <action name="actionVedi_Etichette_pdf">
+   <property name="text">
+    <string>Vedi Etichette.pdf</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>BibliotecaForm</class>
+   <extends>QWidget</extends>
+   <header>bibliotecaform.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MonetaForm</class>
+   <extends>QWidget</extends>
+   <header>monetaform.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LinksForm</class>
+   <extends>QWidget</extends>
+   <header>linksform.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StatisticheForm</class>
+   <extends>QWidget</extends>
+   <header>statisticheform.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ContattiForm</class>
+   <extends>QWidget</extends>
+   <header>contattiform.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BlocknotesForm</class>
+   <extends>QWidget</extends>
+   <header>blocknotesform.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../resources/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
