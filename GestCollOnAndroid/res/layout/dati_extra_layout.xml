@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_a"
+    android:padding="10dp"
+    android:shrinkColumns="1" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp" >
+
+        <TextView style="@style/DataLabel"
+            android:id="@+id/textView1"
+            android:text="@string/Note" />
+
+        <ListView
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/note_list_view" >
+        </ListView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp" >
+
+        <TextView style="@style/DataLabel"
+            android:id="@+id/textView2"
+            android:text="@string/Letteratura" />
+
+        <ExpandableListView
+            android:id="@+id/letteratura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/letteratura_libri_list_view" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView style="@style/DataLabel"
+            android:id="@+id/textView3"
+            android:text="@string/Documenti" />
+
+        <ListView
+            android:id="@+id/itemAddizionali"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/items_addizionali_list_view" />
+    </TableRow>
+
+</TableLayout>
