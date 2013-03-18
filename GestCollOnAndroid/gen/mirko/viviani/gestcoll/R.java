@@ -55,8 +55,8 @@ public final class R {
         public static final int libroTitolo=0x7f07003f;
         public static final int luogo=0x7f070006;
         public static final int main_container=0x7f070043;
-        public static final int menu_about=0x7f070054;
-        public static final int menu_settings=0x7f070053;
+        public static final int menu_about=0x7f070055;
+        public static final int menu_settings=0x7f070054;
         public static final int metallo=0x7f070015;
         public static final int nomeZecca=0x7f070036;
         public static final int notaTesto=0x7f070044;
@@ -70,6 +70,7 @@ public final class R {
         public static final int segnoZecca=0x7f070037;
         public static final int status=0x7f070027;
         public static final int tab_welcome_layout_proprietario=0x7f07004f;
+        public static final int tab_welcome_layout_statcoins=0x7f070050;
         public static final int tab_welcome_layout_titolo=0x7f07004e;
         public static final int tableRow1=0x7f070004;
         public static final int tableRow2=0x7f070007;
@@ -98,9 +99,9 @@ public final class R {
         public static final int valore=0x7f070031;
         public static final int valuta=0x7f070032;
         public static final int vassoio=0x7f070022;
-        public static final int zecchiereNome=0x7f070050;
-        public static final int zecchiereRuolo=0x7f070052;
-        public static final int zecchiereSegno=0x7f070051;
+        public static final int zecchiereNome=0x7f070051;
+        public static final int zecchiereRuolo=0x7f070053;
+        public static final int zecchiereSegno=0x7f070052;
         public static final int zecchieri=0x7f07003a;
     }
     public static final class layout {
@@ -144,21 +145,24 @@ public final class R {
         public static final int Peso=0x7f05000b;
         public static final int Posizione=0x7f05000d;
         public static final int Prezzo=0x7f050004;
+        /**  TAB_WELCOME 
+         */
+        public static final int StatCoins=0x7f050017;
         public static final int Status=0x7f05000e;
         public static final int Zecca=0x7f050014;
         public static final int Zecchieri=0x7f050015;
         public static final int app_name=0x7f050000;
         public static final int datiartisticiimg=0x7f050016;
-        public static final int menu_about=0x7f050018;
+        public static final int menu_about=0x7f050019;
         /**  MENU 
          */
-        public static final int menu_settings=0x7f050017;
+        public static final int menu_settings=0x7f050018;
         public static final int ok=0x7f050001;
-        public static final int tab_coins=0x7f05001a;
-        public static final int tab_library=0x7f05001b;
+        public static final int tab_coins=0x7f05001b;
+        public static final int tab_library=0x7f05001c;
         /**  ACTION_BAR 
          */
-        public static final int tab_welcome=0x7f050019;
+        public static final int tab_welcome=0x7f05001a;
     }
     public static final class style {
         public static final int DataLabel=0x7f040000;

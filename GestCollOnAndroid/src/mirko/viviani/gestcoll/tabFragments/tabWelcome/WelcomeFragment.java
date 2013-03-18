@@ -31,6 +31,7 @@ public class WelcomeFragment extends Fragment {
 
 		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_titolo)).setText(CoinData.getInfo().getTitolo());
 		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_proprietario)).setText(CoinData.getInfo().getProprietario());
+		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_statcoins)).setText(""+CoinData.getIds().size());
 	}
 	
 	
