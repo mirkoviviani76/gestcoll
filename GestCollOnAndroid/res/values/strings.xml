@@ -45,8 +45,8 @@ limitations under the License.
     <string name="datiartisticiimg">Immagine</string>
 
     <!-- TAB_WELCOME -->
-    <string name="StatCoins">Nr. Monete</string>
-    <string name="StatLib">Nr. Libri</string>
+    <string name="StatCoins">Nr. Monete:</string>
+    <string name="StatLib">Nr. Libri:</string>
 
     <!-- MENU -->
     <string name="menu_settings">Impostazioni&#8230;</string>

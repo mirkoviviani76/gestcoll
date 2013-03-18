@@ -20,12 +20,14 @@
         style="@style/TabWelcomeOwner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Proprietario"
+        android:text=""
         android:textIsSelectable="false" >
     </TextView>
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal|center_vertical|center"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
         <TableRow
