@@ -19,8 +19,6 @@ import mirko.viviani.gestcoll.data.BiblioData;
 import mirko.viviani.gestcoll.data.CoinData;
 import mirko.viviani.gestcoll.settings.Settings;
 import mirko.viviani.gestcoll.tabFragments.tabCoins.CoinDataFragment;
-import mirko.viviani.gestcoll.tabFragments.tabCoins.CoinFragment;
-import mirko.viviani.gestcoll.tabFragments.tabCoins.CoinListFragment;
 import mirko.viviani.gestcoll.tabFragments.tabLibrary.LibraryDataFragment;
 import mirko.viviani.gestcoll.tabFragments.tabWelcome.WelcomeFragment;
 import mirko.viviani.xmlData.biblio.Biblioteca;
@@ -33,7 +31,6 @@ import org.simpleframework.xml.core.Persister;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -47,12 +44,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends Activity  implements CoinListFragment.OnCoinSelectedListener {
+public class MainActivity extends Activity  implements CoinDataFragment.OnCoinSelectedListener {
 	
 	ProgressDialog dialog;
 	
 	private static final int FILE_SELECT_CODE = 0;
 
+    //create the two fragments we want to use for display content
+    private WelcomeFragment welcomeFragment;
+    private CoinDataFragment coinDataFragment;
+    private LibraryDataFragment libraryFragment;
+	
     private void showFileChooser() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT); 
         intent.setType("*/*"); 
@@ -180,9 +182,9 @@ public class MainActivity extends Activity  implements CoinListFragment.OnCoinSe
 	        libraryTab.setText(R.string.tab_library);
 
 	        //create the two fragments we want to use for display content
-	        Fragment welcomeFragment = new WelcomeFragment();
-	        Fragment coinDataFragment = new CoinDataFragment();
-	        Fragment libraryFragment = new LibraryDataFragment();
+	        welcomeFragment = new WelcomeFragment();
+	        coinDataFragment = new CoinDataFragment();
+	        libraryFragment = new LibraryDataFragment();
 	        
 
 	        //set the Tab listener. Now we can listen for clicks.
@@ -198,12 +200,6 @@ public class MainActivity extends Activity  implements CoinListFragment.OnCoinSe
 		}
 		
 	}
-	
-	public MainActivity() {
-		super();
-	}
-
-	
 	
     /** Called when the activity is first created. */
     @Override
@@ -269,20 +265,13 @@ public class MainActivity extends Activity  implements CoinListFragment.OnCoinSe
     }    
     
 
-    public void onArticleSelected(String coinId) {
+    public void onCoinIdSelected(String coinId) {
+    	/* TODO se necessario fare qualcosa. Per ora non serve far niente, però così il parametro viene passato
+    	 * eventualmente anche ad altri frammenti
+    	*/
     	
-        // The user selected the headline of an article from the CoinListFragment
-
-        // Capture the article fragment from the activity layout
-        CoinFragment coindataFrag = (CoinFragment)
-        		getFragmentManager().findFragmentById(R.id.coin_fragment);
-
-        if (coindataFrag != null) {
-            // Call a method in the CoinFragment to update its content
-        	coindataFrag.updateCoinView(coinId);
-
-        }
     }
+
     
 }
 
