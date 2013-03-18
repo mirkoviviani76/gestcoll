@@ -20,6 +20,13 @@ public class BiblioData {
 		dataCataloghi = new TreeMap<String, Catalogo>();
 	}
 	
+	public static int getBooksCount() {
+		return dataLibri.size();
+	}
+	
+	public static int getCatalogueCount() {
+		return dataCataloghi.size();
+	}
 	
 	public static void Clear() {
 		dataLibri.clear();

@@ -1,6 +1,7 @@
 package mirko.viviani.gestcoll.tabFragments.tabWelcome;
 
 import mirko.viviani.gestcoll.R;
+import mirko.viviani.gestcoll.data.BiblioData;
 import mirko.viviani.gestcoll.data.CoinData;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class WelcomeFragment extends Fragment {
 		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_titolo)).setText(CoinData.getInfo().getTitolo());
 		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_proprietario)).setText(CoinData.getInfo().getProprietario());
 		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_statcoins)).setText(""+CoinData.getIds().size());
+		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_statlib)).setText(""+BiblioData.getBooksCount());
 	}
 	
 	
