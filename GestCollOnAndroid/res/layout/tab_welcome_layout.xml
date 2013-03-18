@@ -42,6 +42,20 @@
                 android:layout_height="wrap_content"
                 android:text="" />
         </TableRow>
-    </TableLayout>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/DataLabel"
+                android:text="@string/StatLib" />
+
+            <TextView
+                android:id="@+id/tab_welcome_layout_statlib"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </TableRow>
+        </TableLayout>
 
 </LinearLayout>

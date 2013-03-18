@@ -46,6 +46,7 @@ limitations under the License.
 
     <!-- TAB_WELCOME -->
     <string name="StatCoins">Nr. Monete</string>
+    <string name="StatLib">Nr. Libri</string>
 
     <!-- MENU -->
     <string name="menu_settings">Impostazioni&#8230;</string>
