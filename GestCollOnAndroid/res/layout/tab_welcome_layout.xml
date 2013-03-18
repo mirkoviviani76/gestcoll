@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical|center_horizontal"
     android:layout_gravity="center_vertical|center_horizontal"
+    android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical" >
 
     <TextView
@@ -13,18 +13,35 @@
         android:layout_height="wrap_content"
         android:text="Collezione"
         android:textIsSelectable="false" >
-
     </TextView>
 
     <TextView
         android:id="@+id/tab_welcome_layout_proprietario"
-        android:textIsSelectable="false"
         style="@style/TabWelcomeOwner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Proprietario"
-         >
+        android:textIsSelectable="false" >
     </TextView>
 
-    
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/DataLabel"
+                android:text="@string/StatCoins" />
+
+            <TextView
+                android:id="@+id/tab_welcome_layout_statcoins"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </TableRow>
+    </TableLayout>
+
 </LinearLayout>

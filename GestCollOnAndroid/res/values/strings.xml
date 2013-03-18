@@ -43,7 +43,9 @@ limitations under the License.
     <string name="Zecchieri">Zecchieri:</string>
     
     <string name="datiartisticiimg">Immagine</string>
-    
+
+    <!-- TAB_WELCOME -->
+    <string name="StatCoins">Nr. Monete</string>
 
     <!-- MENU -->
     <string name="menu_settings">Impostazioni&#8230;</string>
