@@ -66,6 +66,9 @@ public class CoinDataFragment extends Fragment {
     }
     
     
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onCreateView()
+	 */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
         Bundle savedInstanceState) {
@@ -79,20 +82,23 @@ public class CoinDataFragment extends Fragment {
     	}
 
     	currentView = inflater.inflate(R.layout.tab_coins_layout, container, false);
-    	coinListView = (ListView) currentView.findViewById(R.id.coin_list_view);
-    	editText = (EditText) currentView.findViewById(R.id.coin_list_filter);
+    	coinListView = (ListView) currentView.findViewById(R.id.tab_coindata_coin_list_view);
+    	editText = (EditText) currentView.findViewById(R.id.tab_coindata_coin_list_filter);
         return currentView;
 
     }
 	
     
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onStart()
+	 */
     @Override
     public void onStart() {
         super.onStart();
 
         ArrayList<HashMap<String, String>> mylistData = new ArrayList<HashMap<String, String>>();
         String[] columnTags = new String[] {"tagId", "tagPaese"};
-        int[] columnIds = new int[] {R.id.coinlist_id, R.id.coinlist_other};
+        int[] columnIds = new int[] {R.id.tab_coindata_coinlist_id, R.id.tab_coindata_coinlist_other};
 
         for (String id: CoinData.getIds()) {
         	HashMap<String,String> map = new HashMap<String, String>();
@@ -176,6 +182,9 @@ public class CoinDataFragment extends Fragment {
     }
 
     
+	/* (non-Javadoc)
+	 * @see android.app.Fragment#onAttach()
+	 */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -197,16 +206,16 @@ public class CoinDataFragment extends Fragment {
     	try {
     		Moneta coin = CoinData.getData(coinId);
 
-    		setDatiGenerali((View) getActivity().findViewById(R.id.datiGenerali), coin);
+    		setDatiGenerali((View) getActivity().findViewById(R.id.tab_coindata_datiGenerali), coin);
 
-    		setDatiFisici((View) getActivity().findViewById(R.id.datiFisici), coin.getDatiFisici());
-    		setDatiAcquisto((View) getActivity().findViewById(R.id.datiAcquisto), coin.getDatiAcquisto());
-    		setDatiExtra((View) getActivity().findViewById(R.id.datiExtra), coin);
+    		setDatiFisici((View) getActivity().findViewById(R.id.tab_coindata_datiFisici), coin.getDatiFisici());
+    		setDatiAcquisto((View) getActivity().findViewById(R.id.tab_coindata_datiAcquisto), coin.getDatiAcquisto());
+    		setDatiExtra((View) getActivity().findViewById(R.id.tab_coindata_datiExtra), coin);
 
 
-    		setDescrizione(getActivity().findViewById(R.id.datiArtisticiDritto), coin.getDatiArtistici().getDritto());
-    		setDescrizione(getActivity().findViewById(R.id.datiArtisticiRovescio), coin.getDatiArtistici().getRovescio());
-    		setDescrizione(getActivity().findViewById(R.id.datiArtisticiTaglio), coin.getDatiArtistici().getTaglio());
+    		setDescrizione(getActivity().findViewById(R.id.tab_coindata_datiArtisticiDritto), coin.getDatiArtistici().getDritto());
+    		setDescrizione(getActivity().findViewById(R.id.tab_coindata_datiArtisticiRovescio), coin.getDatiArtistici().getRovescio());
+    		setDescrizione(getActivity().findViewById(R.id.tab_coindata_datiArtisticiTaglio), coin.getDatiArtistici().getTaglio());
 
     		mCurrentId = coinId;
     	} catch (Exception ex) {
