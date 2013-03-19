@@ -1,8 +1,12 @@
 package mirko.viviani.gestcoll.tabFragments.tabWelcome;
 
+import java.util.ArrayList;
+
 import mirko.viviani.gestcoll.R;
 import mirko.viviani.gestcoll.data.BiblioData;
 import mirko.viviani.gestcoll.data.CoinData;
+import mirko.viviani.utils.Utils;
+import mirko.viviani.xmlData.coins.Ambito;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,11 +33,17 @@ public class WelcomeFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
+		ArrayList<String> ambitiStr = new ArrayList<String>();
+		for (Ambito a : CoinData.getInfo().getAmbiti()) {
+			ambitiStr.add(a.getTitolo());
+		}
 
 		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_titolo)).setText(CoinData.getInfo().getTitolo());
 		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_proprietario)).setText(CoinData.getInfo().getProprietario());
-		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_statcoins)).setText(""+CoinData.getIds().size());
-		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_statlib)).setText(""+BiblioData.getBooksCount());
+		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_ambiti)).setText(Utils.concatStringsWSep(ambitiStr, ", "));
+		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_statcoins)).setText(String.format("%1$d", CoinData.getIds().size()));
+		((TextView) getActivity().findViewById(R.id.tab_welcome_layout_statlib)).setText(String.format("%1$d", BiblioData.getBooksCount()));
+		
 	}
 	
 	

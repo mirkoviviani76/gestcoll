@@ -36,6 +36,20 @@
 
             <TextView
                 style="@style/DataLabel"
+                android:text="@string/Ambiti" />
+
+            <TextView
+                android:id="@+id/tab_welcome_layout_ambiti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                style="@style/DataLabel"
                 android:text="@string/StatCoins" />
 
             <TextView

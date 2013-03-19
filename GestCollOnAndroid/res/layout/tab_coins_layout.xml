@@ -25,12 +25,12 @@ limitations under the License.
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical" >
 
         <EditText
-            android:id="@+id/coin_list_filter"
+            android:id="@+id/tab_coindata_coin_list_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@android:drawable/ic_menu_search"
@@ -40,7 +40,7 @@ limitations under the License.
         </EditText>
 
         <ListView
-            android:id="@+id/coin_list_view"
+            android:id="@+id/tab_coindata_coin_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:choiceMode="singleChoice" >
@@ -62,7 +62,7 @@ limitations under the License.
             android:orientation="horizontal" >
 
             <include
-                android:id="@+id/datiGenerali"
+                android:id="@+id/tab_coindata_datiGenerali"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -75,14 +75,14 @@ limitations under the License.
                 android:orientation="vertical" >
 
                 <include
-                    android:id="@+id/datiFisici"
+                    android:id="@+id/tab_coindata_datiFisici"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight=".40"
                     layout="@layout/dati_fisici_layout" />
 
                 <include
-                    android:id="@+id/datiAcquisto"
+                    android:id="@+id/tab_coindata_datiAcquisto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight=".40"
@@ -90,7 +90,7 @@ limitations under the License.
             </LinearLayout>
 
             <include
-                android:id="@+id/datiExtra"
+                android:id="@+id/tab_coindata_datiExtra"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -106,21 +106,21 @@ limitations under the License.
             android:orientation="horizontal" >
 
             <include
-                android:id="@+id/datiArtisticiDritto"
+                android:id="@+id/tab_coindata_datiArtisticiDritto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight=".33"
                 layout="@layout/dati_artistici_layout" />
 
             <include
-                android:id="@+id/datiArtisticiRovescio"
+                android:id="@+id/tab_coindata_datiArtisticiRovescio"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight=".33"
                 layout="@layout/dati_artistici_layout" />
 
             <include
-                android:id="@+id/datiArtisticiTaglio"
+                android:id="@+id/tab_coindata_datiArtisticiTaglio"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight=".33"
