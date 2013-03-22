@@ -33,6 +33,7 @@ limitations under the License.
             android:id="@+id/tab_coindata_coin_list_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="text"
             android:drawableLeft="@android:drawable/ic_menu_search"
             android:ems="10" >
 

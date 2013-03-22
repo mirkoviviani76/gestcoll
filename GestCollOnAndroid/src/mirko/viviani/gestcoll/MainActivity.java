@@ -28,14 +28,12 @@ import mirko.viviani.xmlData.coins.Monete;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
+import sheetrock.panda.changelog.ChangeLog;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources.NotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -206,6 +204,12 @@ public class MainActivity extends Activity  implements CoinDataFragment.OnCoinSe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        /* abilitare se si vuol mostrare ad ogni nuova versione il log
+        ChangeLog cl = new ChangeLog(this);
+        if (cl.firstRun())
+            cl.getLogDialog().show();
+            */        
+        
         Settings.getInstance().setPreferences(this.getPreferences(MODE_PRIVATE));
         
 
@@ -235,26 +239,8 @@ public class MainActivity extends Activity  implements CoinDataFragment.OnCoinSe
         // Handle item selection
     	switch (item.getItemId()) {
     	case R.id.menu_about:
-    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		// Add the buttons
-    		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-    			public void onClick(DialogInterface dialog, int id) {
-    				// User clicked OK button
-    			}
-    		});
-    		// Create the AlertDialog
-    		builder.setIcon(android.R.drawable.ic_dialog_info);
-    		AlertDialog infodialog = builder.create();
-    		infodialog.setTitle(this.getApplicationInfo().labelRes);
-    		String versione = "UNKNOWN";
-    		try {
-    			versione = this.getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-    		} catch (NameNotFoundException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
-    		infodialog.setMessage(versione);
-    		infodialog.show();
+            ChangeLog cl = new ChangeLog(this);
+            cl.getFullLogDialog().show();
     		return true;
     	case R.id.menu_settings:
     		showFileChooser();

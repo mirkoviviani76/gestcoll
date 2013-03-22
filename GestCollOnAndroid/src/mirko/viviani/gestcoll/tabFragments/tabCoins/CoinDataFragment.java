@@ -177,6 +177,7 @@ public class CoinDataFragment extends Fragment {
         
         if (mPositionCurrentId != -1) {
         	coinListView.setItemChecked(mPositionCurrentId, true);
+        	coinListView.smoothScrollToPosition(mPositionCurrentId);
         }
         
     }
