@@ -133,49 +133,48 @@ public final class R {
         public static final int changelog=0x7f040000;
     }
     public static final class string {
-        public static final int Ambiti=0x7f06000f;
-        public static final int Anno=0x7f060011;
-        public static final int Autorita=0x7f060013;
-        public static final int Data=0x7f060003;
-        public static final int Diametro=0x7f06000a;
-        public static final int Documenti=0x7f060007;
-        public static final int Forma=0x7f060009;
-        public static final int Id=0x7f06000c;
-        public static final int Letteratura=0x7f060006;
-        public static final int Luogo=0x7f060002;
-        public static final int Metallo=0x7f060008;
-        public static final int Nominale=0x7f060012;
-        public static final int Note=0x7f060005;
-        public static final int Paese=0x7f060010;
-        public static final int Peso=0x7f06000b;
-        public static final int Posizione=0x7f06000d;
-        public static final int Prezzo=0x7f060004;
-        public static final int StatCoins=0x7f060018;
-        public static final int StatLib=0x7f060019;
-        public static final int Status=0x7f06000e;
+        public static final int Ambiti=0x7f06000e;
+        public static final int Anno=0x7f060010;
+        public static final int Autorita=0x7f060012;
+        public static final int Data=0x7f060002;
+        public static final int Diametro=0x7f060009;
+        public static final int Documenti=0x7f060006;
+        public static final int Forma=0x7f060008;
+        public static final int Id=0x7f06000b;
+        public static final int Letteratura=0x7f060005;
+        public static final int Luogo=0x7f060001;
+        public static final int Metallo=0x7f060007;
+        public static final int Nominale=0x7f060011;
+        public static final int Note=0x7f060004;
+        public static final int Paese=0x7f06000f;
+        public static final int Peso=0x7f06000a;
+        public static final int Posizione=0x7f06000c;
+        public static final int Prezzo=0x7f060003;
+        public static final int StatCoins=0x7f060017;
+        public static final int StatLib=0x7f060018;
+        public static final int Status=0x7f06000d;
         /**  TAB_WELCOME 
          */
-        public static final int TitoloCollezione=0x7f060017;
-        public static final int Zecca=0x7f060014;
-        public static final int Zecchieri=0x7f060015;
+        public static final int TitoloCollezione=0x7f060016;
+        public static final int Zecca=0x7f060013;
+        public static final int Zecchieri=0x7f060014;
         public static final int app_name=0x7f060000;
         /**  CHANGELOG 
          */
-        public static final int changelog_full_title=0x7f06001f;
-        public static final int changelog_ok_button=0x7f060021;
-        public static final int changelog_show_full=0x7f060022;
-        public static final int changelog_title=0x7f060020;
-        public static final int datiartisticiimg=0x7f060016;
-        public static final int menu_about=0x7f06001b;
+        public static final int changelog_full_title=0x7f06001e;
+        public static final int changelog_ok_button=0x7f060020;
+        public static final int changelog_show_full=0x7f060021;
+        public static final int changelog_title=0x7f06001f;
+        public static final int datiartisticiimg=0x7f060015;
+        public static final int menu_about=0x7f06001a;
         /**  MENU 
          */
-        public static final int menu_settings=0x7f06001a;
-        public static final int ok=0x7f060001;
-        public static final int tab_coins=0x7f06001d;
-        public static final int tab_library=0x7f06001e;
+        public static final int menu_settings=0x7f060019;
+        public static final int tab_coins=0x7f06001c;
+        public static final int tab_library=0x7f06001d;
         /**  ACTION_BAR 
          */
-        public static final int tab_welcome=0x7f06001c;
+        public static final int tab_welcome=0x7f06001b;
     }
     public static final class style {
         public static final int DataLabel=0x7f050000;
