@@ -6,13 +6,13 @@
 
     <TextView
         android:id="@+id/zecchiereNome"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left" />
 
     <TextView
         android:id="@+id/zecchiereSegno"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingRight="5dp"
@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/zecchiereRuolo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right" />
 
