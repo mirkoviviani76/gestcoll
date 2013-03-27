@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:fillViewport="true" >
 
-    <LinearLayout
+    <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border_a"
@@ -32,7 +32,7 @@
             android:paddingTop="5dp"
             android:scaleType="fitXY"
             android:contentDescription="@string/datiartisticiimg"
-            android:src="@drawable/ic_launcher" />
+            android:src="@android:color/transparent" />
     </LinearLayout>
 
 </ScrollView>
