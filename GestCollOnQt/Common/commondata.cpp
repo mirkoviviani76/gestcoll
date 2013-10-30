@@ -41,21 +41,25 @@ bool CommonData::checkIni() {
     if (ret)
         ret = this->checkFileExists(getBinDir());
     if (!ret) {
+        qFatal("Bin Dir not found");
         exit(INIFILE_WRONG); //questo errore e' fatale
     }
     if (ret)
         ret = this->checkFileExists(getImgDir());
     if (!ret) {
+        qFatal("Img Dir not found");
         exit(INIFILE_WRONG); //questo errore e' fatale
     }
     if (ret)
         ret = this->checkFileExists(getDocDir());
     if (!ret) {
+        qFatal("Doc Dir not found");
         exit(INIFILE_WRONG); //questo errore e' fatale
     }
     if (ret)
         ret = this->checkFileExists(getReportDir());
     if (!ret) {
+        qFatal("Reports Dir not found");
         exit(INIFILE_WRONG); //questo errore e' fatale
     }
     if (ret)

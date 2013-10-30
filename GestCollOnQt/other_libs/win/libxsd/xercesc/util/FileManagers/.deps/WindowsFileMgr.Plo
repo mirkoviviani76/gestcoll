@@ -1,0 +1,252 @@
+xercesc/util/FileManagers/WindowsFileMgr.lo \
+  xercesc/util/FileManagers/WindowsFileMgr.o:  \
+ xercesc/util/FileManagers/WindowsFileMgr.cpp \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/windows.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/include/stdarg.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/windef.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winnt.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winerror.h \
+  /usr/include/string.h /usr/include/_ansi.h /usr/include/sys/config.h \
+  /usr/include/sys/reent.h /usr/include/_ansi.h /usr/include/sys/_types.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/include/stddef.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/basetsd.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/pshpack4.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/poppack.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/wincon.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winbase.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/wingdi.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winuser.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winnls.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winver.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winnetwk.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winreg.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winsvc.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/cderr.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/dde.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/ddeml.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/dlgs.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/imm.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/lzexpand.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/mmsystem.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/nb30.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpc.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcdce.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/basetyps.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcdcep.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcnsi.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcnterr.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/shellapi.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/pshpack2.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winperf.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/commdlg.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winspool.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/ole2.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/objbase.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcndr.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcnsip.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/objfwd.h \
+  /usr/include/stdlib.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/wtypes.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/unknwn.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/objidl.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/cguid.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/olectlid.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/oleauto.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/oaidl.h \
+  /usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/oleidl.h \
+  ./xercesc/util/FileManagers/WindowsFileMgr.hpp \
+  ./xercesc/util/XMLFileMgr.hpp ./xercesc/util/XercesDefs.hpp \
+  ./xercesc/util/Xerces_autoconf_config.hpp /usr/include/sys/types.h \
+  /usr/include/machine/types.h /usr/include/sys/features.h \
+  /usr/include/cygwin/types.h /usr/include/wchar.h \
+  /usr/include/sys/cdefs.h /usr/include/stdio.h \
+  ./xercesc/util/XercesVersion.hpp ./xercesc/util/XMemory.hpp \
+  ./xercesc/util/Janitor.hpp ./xercesc/framework/MemoryManager.hpp \
+  ./xercesc/util/Janitor.c ./xercesc/util/XMLString.hpp \
+  ./xercesc/util/BaseRefVectorOf.hpp \
+  ./xercesc/util/ArrayIndexOutOfBoundsException.hpp \
+  ./xercesc/util/XMLException.hpp ./xercesc/util/XMLExceptMsgs.hpp \
+  ./xercesc/dom/DOMError.hpp ./xercesc/util/XMLUni.hpp \
+  ./xercesc/framework/XMLErrorReporter.hpp \
+  ./xercesc/util/XMLEnumerator.hpp ./xercesc/util/PlatformUtils.hpp \
+  ./xercesc/util/PanicHandler.hpp ./xercesc/util/XMLMutexMgr.hpp \
+  ./xercesc/util/BaseRefVectorOf.c ./xercesc/framework/XMLBuffer.hpp \
+  /usr/include/assert.h ./xercesc/util/XMLUniDefs.hpp
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/windows.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/include/stdarg.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/windef.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winnt.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winerror.h:
+
+/usr/include/string.h:
+
+/usr/include/_ansi.h:
+
+/usr/include/sys/config.h:
+
+/usr/include/sys/reent.h:
+
+/usr/include/_ansi.h:
+
+/usr/include/sys/_types.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/include/stddef.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/basetsd.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/pshpack4.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/poppack.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/wincon.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winbase.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/wingdi.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winuser.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winnls.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winver.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winnetwk.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winreg.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winsvc.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/cderr.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/dde.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/ddeml.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/dlgs.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/imm.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/lzexpand.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/mmsystem.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/nb30.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpc.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcdce.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/basetyps.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcdcep.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcnsi.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcnterr.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/shellapi.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/pshpack2.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winperf.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/commdlg.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/winspool.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/ole2.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/objbase.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcndr.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/rpcnsip.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/objfwd.h:
+
+/usr/include/stdlib.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/wtypes.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/unknwn.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/objidl.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/cguid.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/olectlid.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/oleauto.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/oaidl.h:
+
+/usr/lib/gcc/i686-pc-msys/3.4.4/../../../../include/w32api/oleidl.h:
+
+./xercesc/util/FileManagers/WindowsFileMgr.hpp:
+
+./xercesc/util/XMLFileMgr.hpp:
+
+./xercesc/util/XercesDefs.hpp:
+
+./xercesc/util/Xerces_autoconf_config.hpp:
+
+/usr/include/sys/types.h:
+
+/usr/include/machine/types.h:
+
+/usr/include/sys/features.h:
+
+/usr/include/cygwin/types.h:
+
+/usr/include/wchar.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/stdio.h:
+
+./xercesc/util/XercesVersion.hpp:
+
+./xercesc/util/XMemory.hpp:
+
+./xercesc/util/Janitor.hpp:
+
+./xercesc/framework/MemoryManager.hpp:
+
+./xercesc/util/Janitor.c:
+
+./xercesc/util/XMLString.hpp:
+
+./xercesc/util/BaseRefVectorOf.hpp:
+
+./xercesc/util/ArrayIndexOutOfBoundsException.hpp:
+
+./xercesc/util/XMLException.hpp:
+
+./xercesc/util/XMLExceptMsgs.hpp:
+
+./xercesc/dom/DOMError.hpp:
+
+./xercesc/util/XMLUni.hpp:
+
+./xercesc/framework/XMLErrorReporter.hpp:
+
+./xercesc/util/XMLEnumerator.hpp:
+
+./xercesc/util/PlatformUtils.hpp:
+
+./xercesc/util/PanicHandler.hpp:
+
+./xercesc/util/XMLMutexMgr.hpp:
+
+./xercesc/util/BaseRefVectorOf.c:
+
+./xercesc/framework/XMLBuffer.hpp:
+
+/usr/include/assert.h:
+
+./xercesc/util/XMLUniDefs.hpp:

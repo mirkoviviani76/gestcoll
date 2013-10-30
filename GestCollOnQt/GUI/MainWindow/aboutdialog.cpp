@@ -8,10 +8,18 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui(new Ui::AboutDialog)
 {
     ui->setupUi(this);
+#ifdef BZLIB
     QString text = QString("<h1>%1</h1>QT v.%2<br>bzlib v.%3")
             .arg(CommonData::getInstance()->getAppId())
             .arg(qVersion())
             .arg(BZ2_bzlibVersion());
+#else
+qWarning() << "BZLIB unavailable";
+    QString text = QString("<h1>%1</h1>QT v.%2<br>bzlib v.%3")
+            .arg(CommonData::getInstance()->getAppId())
+            .arg(qVersion())
+            .arg("XXX");
+#endif
     this->ui->textBrowser->append(text);
 }
 

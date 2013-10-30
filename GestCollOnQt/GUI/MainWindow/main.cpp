@@ -1,4 +1,4 @@
-#include <QtGui/QApplication>
+#include <QApplication>
 #include "mainwindow.h"
 
 #include <commondata.h>
@@ -62,6 +62,8 @@ int main(int argc, char *argv[])
     QPixmap pixmap(":/icons/splash.png");
     splash = new QSplashScreen(pixmap);
 
+
+
     splash->show();
     splash->showMessage("Wait...", Qt::AlignBottom|Qt::AlignRight);
     a.processEvents();//This is used to accept a click on the screen so that user can cancel the screen
@@ -88,5 +90,6 @@ int main(int argc, char *argv[])
         delete splash;
         splash = NULL;
     }
+    qWarning() << x;
     return x;
 }
