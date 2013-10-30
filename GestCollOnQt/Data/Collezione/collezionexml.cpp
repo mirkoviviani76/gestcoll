@@ -9,7 +9,6 @@
 #include <fstream>
 #include <QUrl>
 #include <QTextStream>
-#include <xercesc/parsers/XercesDOMParser.hpp>
 #include <QApplication>
 #include <QResource>
 

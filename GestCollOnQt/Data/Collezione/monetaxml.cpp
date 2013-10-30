@@ -529,7 +529,7 @@ QDate MonetaXml::getData()
     QDate ret;
     moneta::datiAcquisto_type z = this->mon->datiAcquisto();
     datiAcquisto::data_type opt = z.data();
-    ret.setYMD(opt.year(), opt.month(), opt.day());
+    ret.setDate(opt.year(), opt.month(), opt.day());
     return ret;
 }
 

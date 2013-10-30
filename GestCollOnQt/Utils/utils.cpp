@@ -109,7 +109,9 @@ void Utils::doWork(QString workDir, QString command, QStringList args)
   */
 bool Utils::saveAndBackup(QString source, QString backupfile) {
     bool ret = false;
+
     ret = QFile::copy(source, backupfile);
+#ifdef BZ2
 
     /* calcola la checksum md5 del contenuto
        e la usa per comporre il nome del file */
@@ -138,7 +140,9 @@ bool Utils::saveAndBackup(QString source, QString backupfile) {
 
     QFile removeFile(backupfile);
     removeFile.remove();
-
+#else
+    qWarning() << "BZIP Non disponibile";
+#endif
 
     return ret;
 }

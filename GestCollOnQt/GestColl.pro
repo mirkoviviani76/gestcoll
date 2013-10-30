@@ -33,12 +33,10 @@ CONFIG(release, debug|release) {
 
 #message($${QMAKE_HOST.arch} $${QMAKE_HOST.name} $${QMAKE_HOST.host} $${QMAKE_HOST.os} $${QMAKE_HOST.version})
 
-LIBS += -lqrencode \
-        -lxerces-c \
-        -lbz2
+LIBS +=   -Lother_libs/$${OS} -lxerces-c_3
+#-lqrencode \
+#-lbz2
 
-
-LIBS += -Lother_libs/$${OS}
 
 QT     += core gui xmlpatterns xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -53,10 +51,10 @@ TEMPLATE = app
 # Viene invocato dal comando make install (cfr. Projects)
 # Il link al comando "install" viene fatto con INSTALLS+=...
 # NB viene copiato tutto, indipendentemente dalle dll debug/release (da modificare)
-copydll.files += $${MAINDEST}libs_$${OS}/*.*
+#copydll.files += $${MAINDEST}libs_$${OS}/*.*
 #copydll.files += other_libs/qrencode-3.1.1/.libs/*
-copydll.path += $${DESTDIR}
-INSTALLS += copydll
+#copydll.path += $${DESTDIR}
+#INSTALLS += copydll
 
 INCLUDEPATH += other_libs \
                Xml \
@@ -85,8 +83,8 @@ INCLUDEPATH += /dati/develop/Qt/xerces-c-3.1.1/src \
                /dati/develop/Qt/xsd-3.3.0-i686-linux-gnu/libxsd
 }
 win32 {
-INCLUDEPATH += "D:/mieProve/Qt/xerces-c-3.1.1/src" \
-               "C:/Programmi/CodeSynthesis XSD 3.3/include" \
+INCLUDEPATH += "./other_libs/win/libxsd/xercesc/src" \
+               "./other_libs/win/libxsd" \
 }
 
 SOURCES  +=    Common/commondata.cpp \
@@ -273,22 +271,5 @@ RC_FILE = resources/myapp.rc
 OTHER_FILES += \
     FUTURE_RELEASE.txt \
     HISTORY.txt
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
