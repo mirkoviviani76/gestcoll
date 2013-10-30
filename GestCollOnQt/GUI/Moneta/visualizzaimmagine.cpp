@@ -70,25 +70,25 @@ void VisualizzaImmagine::showImage(QString img)
 
 void VisualizzaImmagine::on_antiorario5_clicked()
 {
-    this->item->setRotation(-5);
+    this->item->rotate(-5);
     this->ui->graphicsView->centerOn(item);
 }
 
 void VisualizzaImmagine::on_orario5_clicked()
 {
-    this->item->setRotation(5);
+    this->item->rotate(5);
     this->ui->graphicsView->centerOn(item);
 }
 
 void VisualizzaImmagine::on_antiorario45_clicked()
 {
-    this->item->setRotation(-45);
+    this->item->rotate(-45);
     this->ui->graphicsView->centerOn(item);
 }
 
 void VisualizzaImmagine::on_orario45_clicked()
 {
-    this->item->setRotation(45);
+    this->item->rotate(45);
     this->ui->graphicsView->centerOn(item);
 }
 
@@ -100,13 +100,13 @@ void VisualizzaImmagine::on_ripristina_clicked()
 
 void VisualizzaImmagine::on_zoompiu_clicked()
 {
-    this->item->setScale(1.1);
+    this->item->scale(1.1, 1.1);
     this->ui->graphicsView->centerOn(item);
 }
 
 void VisualizzaImmagine::on_zoommeno_clicked()
 {
-    this->item->setScale(1.0/1.1);
+    this->item->scale(1.0/1.1, 1.0/1.1);
     this->ui->graphicsView->centerOn(item);
 }
 
