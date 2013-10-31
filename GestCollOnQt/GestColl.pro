@@ -33,9 +33,15 @@ CONFIG(release, debug|release) {
 
 #message($${QMAKE_HOST.arch} $${QMAKE_HOST.name} $${QMAKE_HOST.host} $${QMAKE_HOST.os} $${QMAKE_HOST.version})
 
+unix {
 LIBS +=   -Lother_libs/$${OS} -lxerces-c_3
 #-lqrencode \
 #-lbz2
+}
+
+win32 {
+LIBS +=   -Lother_libs/$${OS} -lxerces-c
+}
 
 
 QT     += core gui xmlpatterns xml
@@ -83,8 +89,8 @@ INCLUDEPATH += /dati/develop/Qt/xerces-c-3.1.1/src \
                /dati/develop/Qt/xsd-3.3.0-i686-linux-gnu/libxsd
 }
 win32 {
-INCLUDEPATH += "./other_libs/win/libxsd/xercesc/src" \
-               "./other_libs/win/libxsd" \
+INCLUDEPATH += "other_libs/win/xercesc/src" \
+               "other_libs/win"
 }
 
 SOURCES  +=    Common/commondata.cpp \
