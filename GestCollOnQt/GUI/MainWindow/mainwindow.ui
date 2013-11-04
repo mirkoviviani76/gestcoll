@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>871</width>
+    <width>1024</width>
     <height>500</height>
    </rect>
   </property>
@@ -18,6 +18,12 @@
     <normaloff>:/icons/CoinIcon.ico</normaloff>:/icons/CoinIcon.ico</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
      <number>0</number>
@@ -36,6 +42,12 @@
     </property>
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <widget class="QWidget" name="ContainerCollezione">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <property name="spacing">
@@ -177,7 +189,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>871</width>
+     <width>1024</width>
      <height>21</height>
     </rect>
    </property>
