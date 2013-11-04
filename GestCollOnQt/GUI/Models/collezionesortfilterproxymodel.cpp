@@ -57,7 +57,10 @@ bool CollezioneSortFilterProxyModel::lessThan(const QModelIndex &left, const QMo
         break;
     case 1:
         {
-            ret = ((QString::localeAwareCompare(l->getPaese(), r->getPaese()) == 1) ? false : true);
+            QString paese1 = l->getPaese();
+            QString paese2 = r->getPaese();
+            int v = QString::localeAwareCompare(paese1, paese2);
+            ret = ((v >= 1) ? false : true);
         }
         break;
     case 2:

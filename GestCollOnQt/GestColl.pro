@@ -40,7 +40,7 @@ LIBS +=   -Lother_libs/$${OS} -lxerces-c_3
 }
 
 win32 {
-LIBS +=   -Lother_libs/$${OS} -lxerces-c
+LIBS +=   -Lother_libs/$${OS} -lxerces-c_3
 }
 
 
@@ -278,4 +278,8 @@ OTHER_FILES += \
     FUTURE_RELEASE.txt \
     HISTORY.txt
 
+
+QMAKE_CXXFLAGS += -Zc:wchar_t
+QMAKE_CFLAGS_DEBUG += -Zc:wchar_t
+QMAKE_CFLAGS_RELEASE += -Zc:wchar_t
 

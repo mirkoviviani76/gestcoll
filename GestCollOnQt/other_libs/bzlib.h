@@ -76,6 +76,7 @@ typedef
 #endif
 
 #ifdef _WIN32
+#define NOMINMAX
 #   include <windows.h>
 #   ifdef small
       /* windows.h define small to char */
