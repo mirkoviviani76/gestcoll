@@ -36,6 +36,9 @@ bool CollezioneSortFilterProxyModel::lessThan(const QModelIndex &left, const QMo
     MonetaXml* l = (MonetaXml*)model->getItem(left);
     MonetaXml* r = (MonetaXml*)model->getItem(right);
 
+    assert(l != NULL);
+    assert(r != NULL);
+
     bool ret = false;
     switch (left.column()) {
     case 0:
@@ -60,7 +63,7 @@ bool CollezioneSortFilterProxyModel::lessThan(const QModelIndex &left, const QMo
             QString paese1 = l->getPaese();
             QString paese2 = r->getPaese();
             int v = QString::localeAwareCompare(paese1, paese2);
-            ret = ((v >= 1) ? false : true);
+            ret = ((v > 0) ? false : true);
         }
         break;
     case 2:

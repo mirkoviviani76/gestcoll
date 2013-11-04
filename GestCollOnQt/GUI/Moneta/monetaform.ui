@@ -146,6 +146,9 @@ QTabBar::tab:selected {
        <number>0</number>
       </property>
       <widget class="QWidget" name="tabMoneta">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <attribute name="title">
         <string>Moneta</string>
        </attribute>

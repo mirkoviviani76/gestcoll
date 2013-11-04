@@ -25,9 +25,9 @@ GenericModel::~GenericModel()
 
 void GenericModel::clear()
 {
-    //this->removeRows(0, this->rowCount());
+    this->beginResetModel();
     this->items.clear();
-    this->resetInternalData();
+    this->endResetModel();
 }
 
 

@@ -75,6 +75,10 @@ int main(int argc, char *argv[])
         w.setStyleSheet(styleSheet.readAll());
     }
     styleSheet.close();
+
+    //chiude lo splash screen
+    splash->finish(&w);
+
     w.showMaximized();
 
     if (ret == INIFILE_WRONG) {
@@ -82,8 +86,6 @@ int main(int argc, char *argv[])
         w.on_actionOpzioni_triggered();
     }
 
-    //chiude lo splash screen
-    splash->finish(&w);
     int x = a.exec();
     if (splash != NULL)
     {
