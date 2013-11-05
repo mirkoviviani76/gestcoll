@@ -151,7 +151,6 @@ bool XsltConverter::convertToQr(const QString& id, const QString& xml, const QSt
         foreach (QString key, conversion.keys()) {
             out.replace(key, conversion[key], Qt::CaseSensitive);
         }
-#ifdef QRENCODE
         QRcode *qrcode = QRcode_encodeString8bit(out.toLocal8Bit(), 0, QR_ECLEVEL_Q );
         QImage image = qrcodeToQImage(qrcode);
         QString completeOutFile = QString("%1/%2.png").arg(outDir).arg(id);
@@ -162,9 +161,6 @@ bool XsltConverter::convertToQr(const QString& id, const QString& xml, const QSt
             Log::Logger::getInstance()->log(QString("XsltConverter::convert() Trasformazione xsl eseguita per %1").arg(id), Log::TRACE);
         }
         QRcode_free(qrcode);
-#else
-        qWarning() << "QREncode unavailable";
-#endif
     } else {
         Log::Logger::getInstance()->log(QString("XsltConverter::convert() Trasformazione xsl fallita per %1").arg(id), Log::ERR);
     }

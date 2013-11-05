@@ -41,7 +41,8 @@ LIBS +=   -Lother_libs/$${OS} -lxerces-c_3
 
 win32 {
 LIBS +=   -Lother_libs/$${OS} -lxerces-c_3 \
-          -Lother_libs/$${OS} -llibbz2
+          -Lother_libs/$${OS} -llibbz2 \
+          -Lother_libs/$${OS} -llibqrencode
 }
 
 
