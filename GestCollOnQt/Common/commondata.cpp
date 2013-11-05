@@ -27,7 +27,7 @@ bool CommonData::checkFileExists(QString file) {
             QString msg = QString("Ini file: %1 non esiste").arg(file);
             qCritical() << msg;
         } else {
-            QString msg = QString("Ini file: è stato indicato un valore vuoto");
+            QString msg = QString("Ini file: e' stato indicato un valore vuoto");
             qCritical() << msg;
         }
         ret = false;

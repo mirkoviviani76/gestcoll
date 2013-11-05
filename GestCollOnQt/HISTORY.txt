@@ -1,5 +1,7 @@
 NOTA: x compilare xerces con visual studio, usare la direttiva "Treat WChar as predefined type = NO"
-
+Versione 8.2
+        - Aggiornato a Qt5
+        - Windows: sistemate librerie (VS2010)
 Versione 8.1
         - inserita SortFilterProxy anche per la biblioteca
 Versione 8.0
