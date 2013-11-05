@@ -6,7 +6,7 @@
 #include "gestlog.h"
 
 #define INI_FILE ("GestColl.ini")
-#define VERSIONE_GESTCOLL ("8.1")
+#define VERSIONE_GESTCOLL ("8.2")
 
 
 enum Errors {
