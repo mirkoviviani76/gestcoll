@@ -24,7 +24,9 @@ bool XsltConverter::convertAll(const QString& xml, const QString& xslt, QFile* o
     QXmlQuery query(QXmlQuery::XSLT20);
     ret = query.setFocus(QUrl(xml));
     if (ret) {
-        query.bindVariable("dirImg", QVariant(CommonData::getInstance()->getImgDir()));
+        query.bindVariable("dirImg", QVariant("../../"+CommonData::getInstance()->getImgDir()));
+        //FIXME metterlo come parametro
+        query.bindVariable("hyperref", QVariant("true"));
         QUrl url(xslt);
         query.setQuery(url);
         ret = query.evaluateTo(&tempOut);

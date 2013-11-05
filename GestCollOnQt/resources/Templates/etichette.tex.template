@@ -12,7 +12,7 @@
 \voffset=0mm
 
 \usepackage{xltxtra}
-\setmainfont{Free Serif}
+%\setmainfont{Free Serif}
 
 \renewcommand{\ticketdefault}{}
 

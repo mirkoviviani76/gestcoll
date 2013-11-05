@@ -36,8 +36,22 @@ bool TexGenerator::convert()
 
     /* converte la collezione in tex */
     QString completeOutFile = outDir+"/"+"Collezione.tex";
-    QFile out(completeOutFile);
-    ret = XsltConverter::convertAll(CommonData::getInstance()->getCollezione(), xslt, &out, conversion);
+
+    ret = QFile::copy(":/img/SRI.png", outDir+"/SRI.png");
+    if (!ret) {
+        Log::Logger::getInstance()->log("Unable to copy SRI.png", Log::ERR);
+        return ret;
+    }
+
+    if (ret) {
+        QFile out(completeOutFile);
+        ret = XsltConverter::convertAll(CommonData::getInstance()->getCollezione(), xslt, &out, conversion);
+    }
+
+    if (!ret) {
+        Log::Logger::getInstance()->log("Unable to generate Collezione.tex", Log::ERR);
+        return ret;
+    }
 
 
     if (ret)
@@ -105,6 +119,12 @@ bool TexGenerator::convert()
             Log::Logger::getInstance()->log("TexGenerator: Errore nella generazione di Etichette.tex", Log::ERR);
         }
     }
+
+    if (!ret) {
+        Log::Logger::getInstance()->log("Unable to generate etichette.tex", Log::ERR);
+        return ret;
+    }
+
 
     return ret;
 

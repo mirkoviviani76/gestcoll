@@ -21,5 +21,6 @@
         <file>icons/process_info.png</file>
         <file>Xml_transform/report.css</file>
         <file>Xml_transform/collezioneLaTeX.xsl</file>
+        <file>img/SRI.png</file>
     </qresource>
 </RCC>
