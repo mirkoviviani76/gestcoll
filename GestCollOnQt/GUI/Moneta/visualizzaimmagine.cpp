@@ -57,8 +57,6 @@ void VisualizzaImmagine::showImage(QString img)
     {
         //this->ui->label->setText("");
         item = (QGraphicsItem*) scene->addPixmap(QPixmap::fromImage(image));
-        //ripristina la giusta rotazione
-        this->on_ripristina_clicked();
     }     else {
         item = (QGraphicsItem*) scene->addText("Immagine mancante");
         //this->ui->label->setText("Immagine mancante");
@@ -95,7 +93,8 @@ void VisualizzaImmagine::on_orario45_clicked()
 void VisualizzaImmagine::on_ripristina_clicked()
 {
     this->item->resetTransform();
-    this->ui->graphicsView->centerOn(item);
+    this->item->setRotation(0);
+    this->ui->graphicsView->centerOn(this->item);
 }
 
 void VisualizzaImmagine::on_zoompiu_clicked()
