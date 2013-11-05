@@ -8,13 +8,14 @@ xmlns:cc="http://gestColl/coins">
 
 <xsl:output method="text" indent="yes" />
 <xsl:param name="dirImg"></xsl:param>
+<xsl:param name="hyperref"></xsl:param>
 
 <xsl:template match="/cc:monete" xmlns:cc="http://gestColl/coins">
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Template Collezione.tex versione 1.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[11pt,a4paper]{report}
+\documentclass[11pt,a4paper]{book}
 \usepackage{graphicx}
 \usepackage[italian]{babel}
 \usepackage{bbding}
@@ -24,14 +25,15 @@ xmlns:cc="http://gestColl/coins">
 \usepackage[big]{layaureo}
 \usepackage{aurical}
 \usepackage{longtable}
-\usepackage{hyperref}
+<xsl:if test="$hyperref = 'TRUE'">\usepackage{hyperref}</xsl:if>
 \usepackage{xltxtra}
-\setmainfont{Free Serif}
 \usepackage[perpage]{footmisc}
+\usepackage[italian]{isodate}
+%\setmainfont{Free Serif}
 %\usepackage[utf8]{inputenc}
 %\usepackage{lettrine}
 %\usepackage{url}
-%\usepackage{eurosym}
+\usepackage{eurosym}
 %\usepackage{fancyhdr}
 %\usepackage{chappg}
 %\usepackage{scalebar}
@@ -47,12 +49,14 @@ xmlns:cc="http://gestColl/coins">
 %\usepackage{calc}
 %\pagestyle{empty}
 \usepackage{ifthen}
+
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\newcommand{\campo}[2]{\textbf{#1:} #2\\}
 \newcommand{\legenda}[2]{#1  \ifthenelse{\equal{#2}{}}{}{\footnote{#2}}}
 \newcommand{\zecca}[2]{#1 \ding{239} #2} %#1=nome #3=simbolo/sigle
+
 \newcommand{\zecchiere}[3]{#1 \ding{239} #2 #3} %#1=nome #2=simbolo/sigle #3 ruolo
 %\renewcommand{\mtctitle}{Contenuto}
 %\renewcommand{\mlftitle}{Figure}
@@ -62,12 +66,13 @@ xmlns:cc="http://gestColl/coins">
 \newcommand{\sezione}[1]{\section*{\Fontlukas \underline{#1}}}
 \newcommand{\subsezione}[1]{\subsection*{\Fontlukas #1}}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\posizioni}{\chapter*{Posizioni} \addcontentsline{toc}{chapter}{Posizioni}}
 
 \makeatletter
 \@addtoreset{footnote}{section}
 \makeatother
 
-\titlespacing{\chapter}{0pt}{1pt}{1in}
+\titlespacing{\chapter}{0pt}{-0.5in}{1in}
 \titleformat{\chapter}[hang]{\normalfont\Large\filcenter\Fontlukas\bfseries}
 {\LARGE \thechapter.}{1pc}{ \vspace{1pc} \Huge}
 
@@ -76,37 +81,28 @@ xmlns:cc="http://gestColl/coins">
 
 \pagestyle{empty}
 
-%\title{Collezione Numismatica SRI}
-%\date{\today}
-%\author{Mirko Viviani}
-%\maketitle
-
 \begin{titlepage}
-
 \vspace*{5cm}
 \begin{center}
-
-
 % Title
 {\LARGE Mirko Viviani} \\[0.5cm]
 \HRule
 \\[0.4cm]
 { \Huge \bfseries Collezione Numismatica \\[0.3cm] il Sacro Romano Impero 1600-1806}\\[0.4cm]
+{ \large \bfseries dal 2 luglio 2005}\\[0.4cm]
 \HRule 
-
 \vfill
+\includegraphics[width=8cm]{SRI.png}
 
 % Bottom of the page
-{\large Generato il \today}
 
 \end{center}
 
 \end{titlepage}
 
-
-
+<xsl:if test="$hyperref = 'TRUE'">
 \tableofcontents
-
+</xsl:if>
 
 <xsl:call-template name="posizioni" />
 <xsl:call-template name="monete" />
@@ -122,13 +118,11 @@ xmlns:cc="http://gestColl/coins">
 </xsl:template>
 
 
-
 <xsl:template match="/cc:monete/cc:info" />
 
 <!-- posizione -->
 <xsl:template name="posizioni" xmlns:cc="http://gestColl/coins">
-\chapter*{Posizioni}
-\addcontentsline{toc}{chapter}{Posizioni}
+\posizioni
 \begin{longtable}{| r l || c c c c | }
 \hline
 \multicolumn{2}{| c ||}{\textbf{ID}} $AMPERSAND$ \textbf{Box} $AMPERSAND$ \textbf{Vass.} $AMPERSAND$ \textbf{Riga} $AMPERSAND$ \textbf{Col.}\\
@@ -136,11 +130,13 @@ xmlns:cc="http://gestColl/coins">
 \hline
 \endhead
 <xsl:for-each select="cc:moneta">
-<xsl:value-of select="@id"/> $AMPERSAND$ <xsl:value-of select="cc:paese"/><xsl:text>&#x20;</xsl:text><xsl:value-of select="cc:nominale/cc:valore"/><xsl:text>&#x20;</xsl:text><xsl:value-of select="cc:nominale/cc:valuta"/> $AMPERSAND$ <xsl:value-of select="cc:posizione/cc:contenitore"/> $AMPERSAND$ <xsl:value-of select="cc:posizione/cc:vassoio"/> $AMPERSAND$ <xsl:value-of select="cc:posizione/cc:riga"/> $AMPERSAND$ <xsl:value-of select="cc:posizione/cc:colonna"/> \\
+<xsl:value-of select="@id"/> $AMPERSAND$ <xsl:value-of select="cc:paese"/><xsl:text>&#x20;</xsl:text><xsl:value-of select="cc:nominale/cc:valore"/>~<xsl:value-of select="cc:nominale/cc:valuta"/>\dotfill $AMPERSAND$ <xsl:value-of select="cc:posizione/cc:contenitore"/> $AMPERSAND$ <xsl:value-of select="cc:posizione/cc:vassoio"/> $AMPERSAND$ <xsl:value-of select="cc:posizione/cc:riga"/> $AMPERSAND$ <xsl:value-of select="cc:posizione/cc:colonna"/> \\
 </xsl:for-each>
 \hline
 \caption{Posizioni} \\
 \end{longtable}
+
+\cleardoublepage
 </xsl:template>
 
 
@@ -157,18 +153,18 @@ xmlns:cc="http://gestColl/coins">
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\moneta{<xsl:value-of select="cc:paese"/>}{<xsl:value-of select="cc:nominale/cc:valore"/>
-		<xsl:text>&#x20;</xsl:text><xsl:value-of select="cc:nominale/cc:valuta"/><xsl:text>&#x20;</xsl:text>(<xsl:value-of select="cc:anno"/>)}
+\moneta{<xsl:value-of select="cc:paese"/>}{<xsl:value-of select="cc:nominale/cc:valore"/>~<xsl:value-of select="cc:nominale/cc:valuta"/>
+        <xsl:text>&#x20;</xsl:text>(<xsl:value-of select="cc:anno"/>)}
 \thispagestyle{empty}
 \sezione{Descrizione}
 \begin{description}
 	\item[ID:]<xsl:value-of select="@id"/>
-	\item[Autorita:] <xsl:for-each select="cc:autorita/cc:nome"><xsl:apply-templates/>; </xsl:for-each>
+	\item[Autorita:] <xsl:for-each select="cc:autorita/cc:nome"><xsl:value-of select="."></xsl:value-of><xsl:if test="not(position() = last())">; </xsl:if> </xsl:for-each>
 	<xsl:for-each select="cc:zecca">
 	\item[Zecca:] \zecca{<xsl:value-of select="cc:nome"/>}{<xsl:value-of select="cc:segno"/>}
 	</xsl:for-each>
 	<xsl:variable name="conta1" select="count(cc:zecchieri/cc:zecchiere)"/>
-	<xsl:if test="$conta1 != 0"><xsl:for-each select="cc:zecchieri/cc:zecchiere">\item[Zecchieri:] \zecchiere{<xsl:value-of select="nome"/>}{<xsl:value-of select="cc:segno"/>}{<xsl:value-of select="cc:ruolo"/>}
+	<xsl:if test="$conta1 != 0"><xsl:for-each select="cc:zecchieri/cc:zecchiere">\item[Zecchieri:] \zecchiere{<xsl:value-of select="cc:nome"/>}{<xsl:value-of select="cc:segno"/>}{<xsl:value-of select="cc:ruolo"/>}
 	</xsl:for-each></xsl:if>
 
 	\item[Dritto:]<xsl:value-of select="cc:datiArtistici/cc:dritto/cc:descrizione"/> 
@@ -202,22 +198,29 @@ xmlns:cc="http://gestColl/coins">
 <xsl:if test="$conta5 != 0">
 \sezione{Letteratura}
 \begin{description}
-	\item[Letteratura:] <xsl:for-each select="cc:letteratura/cc:libro"><xsl:value-of select="cc:sigla"/><xsl:text>&#x20;</xsl:text><xsl:value-of select="cc:numero"/>;<xsl:text>&#x20;</xsl:text></xsl:for-each>
+	\item[Letteratura:] 
+	<xsl:for-each select="cc:letteratura/cc:libro"><xsl:value-of select="cc:sigla"/><xsl:text>&#x20;</xsl:text><xsl:value-of select="cc:numero"/><xsl:if test="not(position() = last())">; </xsl:if><xsl:text>&#x20;</xsl:text></xsl:for-each>
 \end{description}
 </xsl:if>
 
 <xsl:variable name="conta6" select="count(cc:note/cc:nota)"/>
 <xsl:if test="$conta6 != 0">
 \sezione{Note}
+\begin{itemize}
 <xsl:for-each select="cc:note/cc:nota">
-<xsl:apply-templates/>
+	\item{<xsl:value-of select="."></xsl:value-of>}
 </xsl:for-each>
+\end{itemize}
 </xsl:if>
 
-\sezione{Dati Acquisto}
+\sezione{Dati di acquisto}
 \begin{description}
-	\item[Provenienza:]<xsl:value-of select="cc:datiAcquisto/cc:luogo" />,<xsl:text>&#x20;</xsl:text><xsl:value-of select="cc:datiAcquisto/cc:data"/>,<xsl:text>&#x20;</xsl:text><xsl:value-of select="cc:datiAcquisto/cc:prezzo/cc:valore"/><xsl:text>&#x20;</xsl:text><xsl:value-of select="cc:datiAcquisto/cc:prezzo/cc:unita"/>
+	\item[Provenienza:]<xsl:value-of select="cc:datiAcquisto/cc:luogo" />,<xsl:text>&#x20;</xsl:text>\printdate{<xsl:value-of select="cc:datiAcquisto/cc:data"/>},<xsl:text>&#x20;</xsl:text>\EUR{<xsl:value-of select="cc:datiAcquisto/cc:prezzo/cc:valore"/>}
 \end{description}
+
+\sezione{Ultima revisione}
+\printdate{<xsl:value-of select="substring(cc:revisione,1,10)"></xsl:value-of>}
+
 
 \newpage
 <xsl:if test="$imgDritto != ''">
@@ -239,10 +242,8 @@ xmlns:cc="http://gestColl/coins">
 \end{figure}
 </xsl:if>
 
-
+\cleardoublepage
 </xsl:template>
-
-
 
 
 
