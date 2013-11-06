@@ -8,7 +8,7 @@ Versione 8.1
         - inserita SortFilterProxy anche per la biblioteca
 Versione 8.0
         - l'elenco delle monete e' ora gestito a tabella
-        - modello per l'elenco delle monete è ora gestito con un SortFilterProxy in mezzo
+        - modello per l'elenco delle monete e' ora gestito con un SortFilterProxy in mezzo
         - aggiunto un delegato per l'elenco delle monete
         - il sorting per paese gestisce correttamente le lettere con gli umlaut
 Versione 7.4
@@ -23,7 +23,7 @@ Versione 7.2
         - sistemato bug relativo alla mancata segnalazione della presenza di modifiche non salvate.
 Versione 7.1
         - risolto bug nella chiamata del menu contestuale per documenti addizionali
-        - aggiunta funzionalità di aggiunta "bulk" di documenti addizionali. La descrizione viene condivisa
+        - aggiunta funzionalita' di aggiunta "bulk" di documenti addizionali. La descrizione viene condivisa
 Versione 7.0
         - Salvato Trunk
 Versione 6.6
@@ -65,9 +65,9 @@ Versione 6.0
         - ridisegnata gui moneta per gestione ambiti
         - ridisegnata gui per gestione info collezione
 Versione 5.2
-        - aggiunta possibilità di eliminare e modificare un contatto
+        - aggiunta possibilita' di eliminare e modificare un contatto
 Versione 5.1
-        - aggiunta possibilità di eliminare un'autorità, una nota, una legenda, un libro
+        - aggiunta possibilita' di eliminare un'autorita', una nota, una legenda, un libro
         - introdotta cartella documents per contenere i documenti relativi alle varie monete
         - tolto dall'istanza xml di collezione le foto della moneta dai documenti addizionali
         - tolta da collezione.xsd il campo url per i documenti
@@ -81,10 +81,10 @@ Versione 4.2
         - il blocco note ora dispone del widget di selezione dei caratteri particolari
 Versione 4.1
         - impostato dialog per modificare l'ini
-        - introdotta possiblità di cambiare il colore delle righe nella lista
+        - introdotta possiblita' di cambiare il colore delle righe nella lista
         - introdotta aggiunta (e salvataggio) di un nuovo contatto. Da sistemare.
 Versione 4.0
-        - introdotto blocco note con possibilità di salvare e creare note
+        - introdotto blocco note con possibilita' di salvare e creare note
         - blocco note: template per appunti riguardanti una nuova moneta
         - migliorata gestione creazione nuova moneta
         - migliorata gestione del file ini
