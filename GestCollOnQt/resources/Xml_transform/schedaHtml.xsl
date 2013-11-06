@@ -108,9 +108,9 @@ xmlns:cc="http://gestColl/coins">
 					</td>
 				</tr>
 				<tr>
-					<td><xsl:if test="$imgDritto != ''"><a href="file://{$dirImg}/{$imgDritto}"><img src="file://{$dirImg}/{$imgDritto}" width="200px" alt="imgDritto" /></a></xsl:if></td>
-					<td><xsl:if test="$imgRovescio != ''"><a href="file://{$dirImg}/{$imgRovescio}"><img src="file://{$dirImg}/{$imgRovescio}" width="200px" alt="imgRovescio" /></a></xsl:if></td>
-					<td><xsl:if test="$imgTaglio != ''"><a href="file://{$dirImg}/{$imgTaglio}"><img src="file://{$dirImg}/{$imgTaglio}" width="200px" alt="imgTaglio" /></a></xsl:if></td>
+                                        <td><xsl:if test="$imgDritto != ''"><a href="{$dirImg}/{$imgDritto}"><img src="{$dirImg}/{$imgDritto}" width="200px" alt="imgDritto" /></a></xsl:if></td>
+                                        <td><xsl:if test="$imgRovescio != ''"><a href="{$dirImg}/{$imgRovescio}"><img src="{$dirImg}/{$imgRovescio}" width="200px" alt="imgRovescio" /></a></xsl:if></td>
+                                        <td><xsl:if test="$imgTaglio != ''"><a href="{$dirImg}/{$imgTaglio}"><img src="{$dirImg}/{$imgTaglio}" width="200px" alt="imgTaglio" /></a></xsl:if></td>
 				</tr>
 			</table>
 

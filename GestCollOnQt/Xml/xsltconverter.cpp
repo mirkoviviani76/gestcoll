@@ -4,6 +4,7 @@
 #include <QTextStream>
 #include <QPainter>
 #include <QResource>
+#include <QApplication>
 
 #include "commondata.h"
 #include "utils.h"
@@ -76,7 +77,8 @@ bool XsltConverter::convert(const QString& id, const QString& xml, const QString
     ret = query.setFocus(QUrl(xml));
     if (ret) {
         query.bindVariable("monetaId", QVariant(id));
-        query.bindVariable("dirImg", QVariant(CommonData::getInstance()->getImgDir()));
+
+        query.bindVariable("dirImg", QVariant("./img"));
         QUrl url(xslt);
         query.setQuery(url);
         ret = query.evaluateTo(out);
