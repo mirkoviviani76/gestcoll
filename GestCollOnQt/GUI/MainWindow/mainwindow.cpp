@@ -206,8 +206,6 @@ void MainWindow::on_actionXml_Html_triggered()
     QString xslt = CommonData::getInstance()->getXml2HtmlXslt();
     QMap<QString, QString> conversion;
     XsltConverter converter;
-    //this->progress->setVisible(true);
-    conversion["__IMGDIR__"] = CommonData::getInstance()->getImgDir();
 
     QProgressDialog progress(this);
     progress.setWindowTitle(CommonData::getInstance()->getAppId());
