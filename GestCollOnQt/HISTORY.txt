@@ -2,6 +2,8 @@ NOTA: x compilare xerces con visual studio, usare la direttiva "Treat WChar as p
 Versione 8.2
         - Aggiornato a Qt5
         - Windows: sistemate librerie (VS2010)
+        - Centralizzata parzialmente la gestione dei menu contestuali
+        - Aggiunta possiblita' di visualizzare il codice QR della moneta
 Versione 8.1
         - inserita SortFilterProxy anche per la biblioteca
 Versione 8.0
