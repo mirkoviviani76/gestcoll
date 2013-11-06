@@ -62,11 +62,16 @@ private:
     void setupTabVassoi(MonetaXml* moneta);
     void tabVassoiRemoveItem(MonetaXml* moneta);
     void contextMenuEnableAction(QString actionText, bool enable);
+    void showQr();
 
     void gestClipboardCopyId(const QString& id);
     void gestClipboardCopy(const QString& id);
 
     void setupAmbiti();
+
+    void legende_customContextMenuRequested(const QPoint& pos, const Moneta::Lato& lato);
+    void descrizione_customContextMenuRequested(const QPoint& pos, const Moneta::Lato& lato);
+    void img_customContextMenuRequested(const QPoint &pos, const Moneta::Lato& lato);
 
 
 public slots:
@@ -76,6 +81,7 @@ public slots:
     void salva();
 
 private slots:
+    void customContextMenuRequested(QPoint pos);
     void on_descrizioneTaglio_customContextMenuRequested(QPoint pos);
     void on_descrizioneRovescio_customContextMenuRequested(QPoint pos);
     void on_descrizioneDritto_customContextMenuRequested(QPoint pos);

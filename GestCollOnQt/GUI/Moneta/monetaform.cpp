@@ -34,6 +34,7 @@
 #define ACTION_EDIT ("Modifica in finestra speciale")
 #define ACTION_COPY_ID ("Copia l'id della moneta negli appunti")
 #define ACTION_COPY ("Copia la descrizione della moneta negli appunti")
+#define ACTION_SHOW_QR ("Mostra QR")
 
 #define ACTION_SORT_BY_ID ("Ordina in base all'id")
 #define ACTION_SORT_BY_COUNTRY ("Ordina in base al paese")
@@ -77,6 +78,7 @@ MonetaForm::MonetaForm(QWidget *parent) :
     this->contextMenu.addAction(ACTION_EDIT);
     this->contextMenu.addAction(ACTION_COPY_ID);
     this->contextMenu.addAction(ACTION_COPY);
+    this->contextMenu.addAction(ACTION_SHOW_QR);
 
     this->contextMenuForMoneteList.addAction(ACTION_SORT_BY_ID);
     this->contextMenuForMoneteList.addAction(ACTION_SORT_BY_COUNTRY);
@@ -94,9 +96,12 @@ MonetaForm::MonetaForm(QWidget *parent) :
     this->contextMenuEnableAction(ACTION_EDIT, false);
     this->contextMenuEnableAction(ACTION_COPY_ID, true);
     this->contextMenuEnableAction(ACTION_COPY, true);
+    this->contextMenuEnableAction(ACTION_SHOW_QR, true);
 
 
+    this->setContextMenuPolicy(Qt::CustomContextMenu);
     this->editingEnabled = false;
+
     this->ui->autorita->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->letteratura->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->note->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -113,8 +118,8 @@ MonetaForm::MonetaForm(QWidget *parent) :
     this->ui->imgDritto->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->imgRovescio->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->imgTaglio->setContextMenuPolicy(Qt::CustomContextMenu);
-
     this->ui->itemList->setContextMenuPolicy(Qt::CustomContextMenu);
+
 
     this->ui->tabMoneta->setVisible(false);
 
@@ -128,6 +133,8 @@ MonetaForm::MonetaForm(QWidget *parent) :
             this, SLOT(on_imgRovescio_customContextMenuRequested(QPoint)));
     connect(this->ui->imgTaglio, SIGNAL(customContextMenuRequested(QPoint)),
             this, SLOT(on_imgTaglio_customContextMenuRequested(QPoint)));
+
+    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(customContextMenuRequested(QPoint)));
 }
 
 /**
@@ -866,15 +873,13 @@ void MonetaForm::on_autorita_customContextMenuRequested(QPoint pos)
             this->loadData();
             //segnala la modifica
             emit this->changesOccurred();
-
-
         } else if (selectedItem->text() == ACTION_COPY_ID) {
             this->gestClipboardCopyId(this->item->getId());
         } else if (selectedItem->text() == ACTION_COPY) {
             this->gestClipboardCopy(this->item->getId());
+        } else if (selectedItem->text() == ACTION_SHOW_QR) {
+            this->showQr();
         }
-
-
     }
     else
     {
@@ -884,7 +889,6 @@ void MonetaForm::on_autorita_customContextMenuRequested(QPoint pos)
 
 void MonetaForm::on_itemList_customContextMenuRequested(const QPoint &pos)
 {
-#if 0
     // for most widgets
     QPoint globalPos = this->ui->itemList->mapToGlobal(pos);
     // for QAbstractScrollArea and derived classes you would use:
@@ -907,7 +911,6 @@ void MonetaForm::on_itemList_customContextMenuRequested(const QPoint &pos)
         }
         this->collezioneModel->sort(column);
     }
-#endif
 }
 
 
@@ -953,114 +956,89 @@ void MonetaForm::on_documenti_customContextMenuRequested(QPoint pos)
         qDebug() << "on_documenti_customContextMenuRequested " << ACTION_COPY_ID;
     } else if (selectedItem->text() == ACTION_COPY) {
         qDebug() << "on_documenti_customContextMenuRequested " << ACTION_COPY;
+    } else if (selectedItem->text() == ACTION_SHOW_QR) {
+        this->showQr();
     }
+
+}
+
+void MonetaForm::legende_customContextMenuRequested(const QPoint& pos, const Moneta::Lato& lato) {
+    QListView* view = NULL;
+    GenericModel* model = NULL;
+    switch (lato) {
+        case Moneta::DRITTO :
+        {
+            view = this->ui->legendeDritto;
+            model = this->modelloLegendaD;
+        }
+            break;
+        case Moneta::ROVESCIO :
+        {
+            view = this->ui->legendeRovescio;
+            model = this->modelloLegendaR;
+
+        }
+            break;
+        case Moneta::TAGLIO :
+        {
+            view = this->ui->legendeTaglio;
+            model = this->modelloLegendaT;
+        }
+            break;
+    }
+
+    // for most widgets
+    QPoint globalPos = view->mapToGlobal(pos);
+    // for QAbstractScrollArea and derived classes you would use:
+    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
+    QAction* selectedItem = this->contextMenu.exec(globalPos);
+    if (selectedItem)
+    {
+        if (selectedItem->text() == ACTION_ADD) {
+            this->addLegenda(lato);
+        } else if (selectedItem->text() == ACTION_DEL) {
+            //ottiene l'indice selezionato
+            int index = view->currentIndex().row();
+            //ottiene l'item
+            xml::Legenda* a = (xml::Legenda*) model->getItem(index);
+            //cancella dalla lista
+            this->item->deleteLegenda(lato ,a);
+            //ricarica la vista
+            this->loadData();
+            //segnala la modifica
+            emit this->changesOccurred();
+
+        } else if (selectedItem->text() == ACTION_COPY_ID) {
+            this->gestClipboardCopyId(this->item->getId());
+        } else if (selectedItem->text() == ACTION_COPY) {
+            this->gestClipboardCopy(this->item->getId());
+        } else if (selectedItem->text() == ACTION_SHOW_QR) {
+            this->showQr();
+        }
+
+
+    }
+    else
+    {
+
+    }
+
 }
 
 void MonetaForm::on_legendeDritto_customContextMenuRequested(QPoint pos)
 {
-    // for most widgets
-    QPoint globalPos = this->ui->legendeDritto->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_ADD) {
-            this->addLegenda(Moneta::DRITTO);
-        } else if (selectedItem->text() == ACTION_DEL) {
-            //ottiene l'indice selezionato
-            int index = this->ui->legendeDritto->currentIndex().row();
-            //ottiene l'item
-            xml::Legenda* a = (xml::Legenda*) this->modelloLegendaD->getItem(index);
-            //cancella dalla lista
-            this->item->deleteLegenda(Moneta::DRITTO ,a);
-            //ricarica la vista
-            this->loadData();
-            //segnala la modifica
-            emit this->changesOccurred();
-
-        } else if (selectedItem->text() == ACTION_COPY_ID) {
-            this->gestClipboardCopyId(this->item->getId());
-        } else if (selectedItem->text() == ACTION_COPY) {
-            this->gestClipboardCopy(this->item->getId());
-        }
-
-    }
-    else
-    {
-
-    }
+    this->legende_customContextMenuRequested(pos, Moneta::DRITTO);
 }
 
 void MonetaForm::on_legendeRovescio_customContextMenuRequested(QPoint pos)
 {
-    // for most widgets
-    QPoint globalPos = this->ui->legendeRovescio->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_ADD) {
-            this->addLegenda(Moneta::ROVESCIO);
-        } else if (selectedItem->text() == ACTION_DEL) {
-            //ottiene l'indice selezionato
-            int index = this->ui->legendeRovescio->currentIndex().row();
-            //ottiene l'item
-            xml::Legenda* a = (xml::Legenda*) this->modelloLegendaR->getItem(index);
-            //cancella dalla lista
-            this->item->deleteLegenda(Moneta::ROVESCIO,a );
-            //ricarica la vista
-            this->loadData();
-            //segnala la modifica
-            emit this->changesOccurred();
-
-        } else if (selectedItem->text() == ACTION_COPY_ID) {
-            this->gestClipboardCopyId(this->item->getId());
-        } else if (selectedItem->text() == ACTION_COPY) {
-            this->gestClipboardCopy(this->item->getId());
-        }
-    }
-    else
-    {
-
-    }
+    this->legende_customContextMenuRequested(pos, Moneta::ROVESCIO);
 }
 
 
 void MonetaForm::on_legendeTaglio_customContextMenuRequested(QPoint pos)
 {
-    // for most widgets
-    QPoint globalPos = this->ui->legendeTaglio->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_ADD) {
-            this->addLegenda(Moneta::TAGLIO);
-        } else if (selectedItem->text() == ACTION_DEL) {
-            //ottiene l'indice selezionato
-            int index = this->ui->legendeTaglio->currentIndex().row();
-            //ottiene l'item
-            xml::Legenda* a = (xml::Legenda*) this->modelloLegendaT->getItem(index);
-            //cancella dalla lista
-            this->item->deleteLegenda(Moneta::TAGLIO, a);
-            //ricarica la vista
-            this->loadData();
-            //segnala la modifica
-            emit this->changesOccurred();
-
-        } else if (selectedItem->text() == ACTION_COPY_ID) {
-            this->gestClipboardCopyId(this->item->getId());
-        } else if (selectedItem->text() == ACTION_COPY) {
-            this->gestClipboardCopy(this->item->getId());
-        }
-    }
-    else
-    {
-
-    }
+    this->legende_customContextMenuRequested(pos, Moneta::TAGLIO);
 }
 
 void MonetaForm::on_zecchieri_customContextMenuRequested(QPoint pos)
@@ -1097,8 +1075,9 @@ void MonetaForm::on_zecchieri_customContextMenuRequested(QPoint pos)
             this->gestClipboardCopyId(this->item->getId());
         } else if (selectedItem->text() == ACTION_COPY) {
             this->gestClipboardCopy(this->item->getId());
+        } else if (selectedItem->text() == ACTION_SHOW_QR) {
+            this->showQr();
         }
-
     }
     else
     {
@@ -1152,7 +1131,10 @@ void MonetaForm::on_note_customContextMenuRequested(QPoint pos)
             this->gestClipboardCopyId(this->item->getId());
         } else if (selectedItem->text() == ACTION_COPY) {
             this->gestClipboardCopy(this->item->getId());
+        } else if (selectedItem->text() == ACTION_SHOW_QR) {
+            this->showQr();
         }
+
     }
     else
     {
@@ -1204,7 +1186,10 @@ void MonetaForm::on_letteratura_customContextMenuRequested(QPoint pos)
             this->gestClipboardCopyId(this->item->getId());
         } else if (selectedItem->text() == ACTION_COPY) {
             this->gestClipboardCopy(this->item->getId());
+        } else if (selectedItem->text() == ACTION_SHOW_QR) {
+            this->showQr();
         }
+
     }
     else
     {
@@ -1318,10 +1303,29 @@ void MonetaForm::on_posizione_clicked()
     }
 }
 
-void MonetaForm::on_descrizioneDritto_customContextMenuRequested(QPoint pos)
-{
+
+void MonetaForm::descrizione_customContextMenuRequested(const QPoint& pos, const Moneta::Lato& lato) {
+    QTextEdit* view;
+    switch (lato) {
+        case Moneta::DRITTO :
+        {
+            view = this->ui->descrizioneDritto;
+        }
+            break;
+        case Moneta::ROVESCIO :
+        {
+            view = this->ui->descrizioneRovescio;
+        }
+            break;
+        case Moneta::TAGLIO :
+        {
+            view = this->ui->descrizioneTaglio;
+        }
+            break;
+    }
+
     // for most widgets
-    QPoint globalPos = this->ui->descrizioneDritto->mapToGlobal(pos);
+    QPoint globalPos = view->mapToGlobal(pos);
     // for QAbstractScrollArea and derived classes you would use:
     // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
     QAction* selectedItem = this->contextMenu.exec(globalPos);
@@ -1331,7 +1335,7 @@ void MonetaForm::on_descrizioneDritto_customContextMenuRequested(QPoint pos)
         {
             /* attiva la vera gestione */
             DescrizioneDialog dialog(this);
-            dialog.setData(this->ui->descrizioneDritto->toPlainText());
+            dialog.setData(view->toPlainText());
             //autoritaDialog.setData(a);
             int ret = dialog.exec();
             if (ret == QDialog::Accepted)
@@ -1339,7 +1343,7 @@ void MonetaForm::on_descrizioneDritto_customContextMenuRequested(QPoint pos)
                 QString nuovaDescrizione;
                 dialog.getData(&nuovaDescrizione);
                 /* modifica/aggiunge il nodo al dom */
-                this->item->setDescrizione(Moneta::DRITTO, nuovaDescrizione);
+                this->item->setDescrizione(lato, nuovaDescrizione);
                 this->loadData();
                 //segnala la modifica
                 emit this->changesOccurred();
@@ -1349,93 +1353,31 @@ void MonetaForm::on_descrizioneDritto_customContextMenuRequested(QPoint pos)
             this->gestClipboardCopyId(this->item->getId());
         } else if (selectedItem->text() == ACTION_COPY) {
             this->gestClipboardCopy(this->item->getId());
+        } else if (selectedItem->text() == ACTION_SHOW_QR) {
+            this->showQr();
         }
+
     }
     else
     {
         // nothing was chosen
     }
 
+}
+
+void MonetaForm::on_descrizioneDritto_customContextMenuRequested(QPoint pos)
+{
+    this->descrizione_customContextMenuRequested(pos, Moneta::DRITTO);
 }
 
 void MonetaForm::on_descrizioneRovescio_customContextMenuRequested(QPoint pos)
 {
-    // for most widgets
-    QPoint globalPos = this->ui->descrizioneRovescio->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_EDIT)
-        {
-            /* attiva la vera gestione */
-            DescrizioneDialog dialog(this);
-            dialog.setData(this->ui->descrizioneRovescio->toPlainText());
-            //autoritaDialog.setData(a);
-            int ret = dialog.exec();
-            if (ret == QDialog::Accepted)
-            {
-                QString nuovaDescrizione;
-                dialog.getData(&nuovaDescrizione);
-                /* modifica/aggiunge il nodo al dom */
-                this->item->setDescrizione(Moneta::ROVESCIO, nuovaDescrizione);
-                this->loadData();
-                //segnala la modifica
-                emit this->changesOccurred();
-
-            }
-        } else if (selectedItem->text() == ACTION_COPY_ID) {
-            this->gestClipboardCopyId(this->item->getId());
-        } else if (selectedItem->text() == ACTION_COPY) {
-            this->gestClipboardCopy(this->item->getId());
-        }
-    }
-    else
-    {
-        // nothing was chosen
-    }
-
+    this->descrizione_customContextMenuRequested(pos, Moneta::ROVESCIO);
 }
 
 void MonetaForm::on_descrizioneTaglio_customContextMenuRequested(QPoint pos)
 {
-    // for most widgets
-    QPoint globalPos = this->ui->descrizioneTaglio->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_EDIT)
-        {
-            /* attiva la vera gestione */
-            DescrizioneDialog dialog(this);
-            dialog.setData(this->ui->descrizioneTaglio->toPlainText());
-            //autoritaDialog.setData(a);
-            int ret = dialog.exec();
-            if (ret == QDialog::Accepted)
-            {
-                QString nuovaDescrizione;
-                dialog.getData(&nuovaDescrizione);
-                /* modifica/aggiunge il nodo al dom */
-                this->item->setDescrizione(Moneta::TAGLIO, nuovaDescrizione);
-                this->loadData();
-                //segnala la modifica
-                emit this->changesOccurred();
-
-            }
-        } else if (selectedItem->text() == ACTION_COPY_ID) {
-            this->gestClipboardCopyId(this->item->getId());
-        } else if (selectedItem->text() == ACTION_COPY) {
-            this->gestClipboardCopy(this->item->getId());
-        }
-    }
-    else
-    {
-        // nothing was chosen
-    }
-
+    this->descrizione_customContextMenuRequested(pos, Moneta::TAGLIO);
 }
 
 void MonetaForm::on_id_customContextMenuRequested(const QPoint &pos)
@@ -1451,7 +1393,10 @@ void MonetaForm::on_id_customContextMenuRequested(const QPoint &pos)
             this->gestClipboardCopyId(this->item->getId());
         } else if (selectedItem->text() == ACTION_COPY) {
             this->gestClipboardCopy(this->item->getId());
+        } else if (selectedItem->text() == ACTION_SHOW_QR) {
+            this->showQr();
         }
+
     }
     else
     {
@@ -1564,6 +1509,23 @@ void MonetaForm::on_ambiti_doubleClicked(const QModelIndex &index)
     this->setupAmbiti();
 }
 
+void MonetaForm::showQr() {
+    qDebug() << this->item->getId();
+}
+
+void MonetaForm::customContextMenuRequested(QPoint pos) {
+    // for most widgets
+    QPoint globalPos = this->mapToGlobal(pos);
+    // for QAbstractScrollArea and derived classes you would use:
+    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
+    //QAction* selectedItem = this->contextMenuForAmbiti.exec(globalPos);
+    QAction* selectedItem = this->contextMenu.exec(globalPos);
+    if (selectedItem)    {
+        if (selectedItem->text() == ACTION_SHOW_QR) {
+            this->showQr();
+        }
+    }
+}
 
 void MonetaForm::on_ambiti_customContextMenuRequested(const QPoint &pos)
 {
@@ -1576,68 +1538,63 @@ void MonetaForm::on_ambiti_customContextMenuRequested(const QPoint &pos)
     if (selectedItem)    {
         if (selectedItem->text() == ACTION_EDIT) {
             this->setupAmbiti();
+        } else if (selectedItem->text() == ACTION_SHOW_QR) {
+            this->showQr();
         }
     }
 }
 
 
-void MonetaForm::on_imgDritto_customContextMenuRequested(const QPoint &pos) {
+void MonetaForm::img_customContextMenuRequested(const QPoint &pos, const Moneta::Lato& lato) {
+    ImgMoneta* img;
+    switch (lato) {
+        case Moneta::DRITTO :
+        {
+            img = this->ui->imgDritto;
+        }
+            break;
+        case Moneta::ROVESCIO :
+        {
+            img = this->ui->imgRovescio;
+        }
+            break;
+        case Moneta::TAGLIO :
+        {
+            img = this->ui->imgTaglio;
+        }
+            break;
+    }
+
     // for most widgets
-    QPoint globalPos = this->ui->imgDritto->mapToGlobal(pos);
+    QPoint globalPos = img->mapToGlobal(pos);
     QAction* selectedItem = this->contextMenuForImg.exec(globalPos);
     if (selectedItem)    {
         if (selectedItem->text() == ACTION_EDIT) {
-            SetImmagineMonetaDialog si(this->item, Moneta::DRITTO, this);
+            SetImmagineMonetaDialog si(this->item, lato, this);
             int ret = si.exec();
             if (ret == QDialog::Accepted) {
                 this->loadData();
                 //segnala la modifica
                 emit this->changesOccurred();
-
             }
+        } else if (selectedItem->text() == ACTION_SHOW_QR) {
+            this->showQr();
         }
+
     }
 
+}
+
+void MonetaForm::on_imgDritto_customContextMenuRequested(const QPoint &pos) {
+    this->img_customContextMenuRequested(pos, Moneta::DRITTO);
 }
 
 void MonetaForm::on_imgRovescio_customContextMenuRequested(const QPoint &pos) {
-    // for most widgets
-    QPoint globalPos = this->ui->imgRovescio->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenuForImg.exec(globalPos);
-    if (selectedItem)    {
-        if (selectedItem->text() == ACTION_EDIT) {
-            SetImmagineMonetaDialog si(this->item, Moneta::ROVESCIO, this);
-            int ret = si.exec();
-            if (ret == QDialog::Accepted) {
-                this->loadData();
-                //segnala la modifica
-                emit this->changesOccurred();
-
-            }
-
-        }
-    }
-
+    this->img_customContextMenuRequested(pos, Moneta::ROVESCIO);
 }
 
 void MonetaForm::on_imgTaglio_customContextMenuRequested(const QPoint &pos) {
-    // for most widgets
-    QPoint globalPos = this->ui->imgTaglio->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenuForImg.exec(globalPos);
-    if (selectedItem)    {
-        if (selectedItem->text() == ACTION_EDIT) {
-            SetImmagineMonetaDialog si(this->item, Moneta::TAGLIO, this);
-            int ret = si.exec();
-            if (ret == QDialog::Accepted) {
-                this->loadData();
-                //segnala la modifica
-                emit this->changesOccurred();
-
-            }
-
-        }
-    }
-
+    this->img_customContextMenuRequested(pos, Moneta::TAGLIO);
 }
 
 
