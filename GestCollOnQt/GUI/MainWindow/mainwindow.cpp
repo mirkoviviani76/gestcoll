@@ -216,6 +216,17 @@ void MainWindow::on_actionXml_Html_triggered()
     progress.setRange(0, CollezioneXml::getInstance()->size());
     progress.setLabelText("Xml->HTML");
 
+    /* copy images */
+    /* create directory img under html */
+    QDir targetDir(CommonData::getInstance()->getHtmlDir());
+    targetDir.mkdir("img");
+    /* copy files */
+    QDir realDir(QApplication::applicationDirPath()+"/"+CommonData::getInstance()->getImgDir());
+    foreach (QString file, realDir.entryList()) {
+       QFile::copy(realDir.absolutePath()+"/"+file, targetDir.absolutePath()+"/img/"+file);
+    }
+
+
     bool ret = true;
     int curIndex = 0;
     foreach (QString id, CollezioneXml::getInstance()->getAllId()) {
