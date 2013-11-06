@@ -1510,7 +1510,16 @@ void MonetaForm::on_ambiti_doubleClicked(const QModelIndex &index)
 }
 
 void MonetaForm::showQr() {
-    qDebug() << this->item->getId();
+    //ottiene il nome della immagine png
+    QString qrImg = CommonData::getInstance()->getQrDir()+"/"+this->item->getId()+".png";
+    QFileInfo fi(qrImg);
+    if (fi.exists()) {
+        //visualizza l'immagine con il qr code
+        VisualizzaImmagine v(qrImg, this);
+        v.exec();
+    } else {
+        Log::Logger::getInstance()->log(QString("L'immagine %1 non esiste").arg(qrImg), Log::ERR);
+    }
 }
 
 void MonetaForm::customContextMenuRequested(QPoint pos) {
