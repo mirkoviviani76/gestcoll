@@ -288,6 +288,7 @@ void MonetaForm::setupModelMonete()
         VassoioForm* vf = (VassoioForm*)(this->ui->tabsVassoi->widget(id));
         vf->resizeRows();
     }
+
     //ordina per id
     this->collezioneModel->sort(0, Qt::AscendingOrder);
     //setta il modello

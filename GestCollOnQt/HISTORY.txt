@@ -5,7 +5,7 @@ Versione 8.2
 Versione 8.1
         - inserita SortFilterProxy anche per la biblioteca
 Versione 8.0
-        - l'elenco delle monete è ora gestito a tabella
+        - l'elenco delle monete e' ora gestito a tabella
         - modello per l'elenco delle monete è ora gestito con un SortFilterProxy in mezzo
         - aggiunto un delegato per l'elenco delle monete
         - il sorting per paese gestisce correttamente le lettere con gli umlaut

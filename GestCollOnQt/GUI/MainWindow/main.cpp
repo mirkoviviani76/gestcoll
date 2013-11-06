@@ -92,6 +92,6 @@ int main(int argc, char *argv[])
         delete splash;
         splash = NULL;
     }
-    qWarning() << x;
+    //qWarning() << x;
     return x;
 }

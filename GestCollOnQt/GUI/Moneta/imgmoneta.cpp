@@ -17,13 +17,19 @@ ImgMoneta::~ImgMoneta()
 
 void ImgMoneta::setupImg(const QString& file)
 {
-    QImage image(file);
-    if (!image.isNull())
+    if (file != "")
     {
-        this->setText("");
-        this->setPixmap(QPixmap::fromImage(image));
-        this->fileImg = file;
-        this->setToolTip("Doppio click per ingrandire");
+        QImage image(file);
+        if (image.isNull()) {
+            this->setText("Immagine non valida");
+            this->fileImg = "";
+            this->setToolTip("");
+        } else {
+            this->setText("");
+            this->setPixmap(QPixmap::fromImage(image));
+            this->fileImg = file;
+            this->setToolTip("Doppio click per ingrandire");
+        }
     }
     else
     {

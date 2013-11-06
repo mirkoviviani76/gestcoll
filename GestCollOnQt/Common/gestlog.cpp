@@ -206,7 +206,7 @@ void Logger::setupMsg()
     }
     catch (...)
     {
-        std::cerr << "Non posso scrivere su disco! Il file è in uso da un altro programma." << std::endl;
+        std::cerr << "Non posso scrivere su disco! Il file e' in uso da un altro programma." << std::endl;
     }
 
     //forza la scrittura
