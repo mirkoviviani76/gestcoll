@@ -790,6 +790,9 @@ QTabBar::tab:selected {
              <property name="title">
               <string>Dritto</string>
              </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
              <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0,1,0">
               <property name="spacing">
                <number>3</number>
@@ -832,7 +835,13 @@ QTabBar::tab:selected {
               <item>
                <widget class="ImgMoneta" name="imgDritto">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../../resources/resources.qrc">:/img/SRI.png</pixmap>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>
@@ -843,6 +852,9 @@ QTabBar::tab:selected {
             <widget class="QGroupBox" name="rovescio">
              <property name="title">
               <string>Rovescio</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,1,0">
               <property name="spacing">
@@ -886,7 +898,13 @@ QTabBar::tab:selected {
               <item>
                <widget class="ImgMoneta" name="imgRovescio">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../../resources/resources.qrc">:/img/SRI.png</pixmap>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>
@@ -897,6 +915,9 @@ QTabBar::tab:selected {
             <widget class="QGroupBox" name="taglio">
              <property name="title">
               <string>Taglio</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,0,1,0">
               <property name="spacing">
@@ -940,7 +961,13 @@ QTabBar::tab:selected {
               <item>
                <widget class="ImgMoneta" name="imgTaglio">
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap resource="../../resources/resources.qrc">:/img/SRI.png</pixmap>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>

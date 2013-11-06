@@ -73,6 +73,7 @@ void BlocknotesForm::salva() {
         QString content = this->ui->textEdit->toPlainText();
         /* salva  */
         QTextStream stream(&file);
+        stream.setCodec("UTF-8");
         stream << content;
         stream.flush();
     } else {
@@ -95,6 +96,7 @@ void BlocknotesForm::on_treeView_activated(const QModelIndex &index)
     if (ret) {
         QString content = file.readAll();
         /* carica nella vista il contenuto */
+        this->ui->textEdit->setAutoFormatting(QTextEdit::AutoAll);
         this->ui->textEdit->setText(content);
     } else {
         Log::Logger::getInstance()->log(QString("Errore nell'apertura del file %1").arg(this->selectedFile), Log::ERR);
