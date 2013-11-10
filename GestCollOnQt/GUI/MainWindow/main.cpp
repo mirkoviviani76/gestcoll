@@ -79,8 +79,8 @@ int main(int argc, char *argv[])
     //chiude lo splash screen
     splash->finish(&w);
 
-    w.showMaximized();
-
+    //w.showMaximized();
+    w.show();
     if (ret == INIFILE_WRONG) {
         /* todo aprire la finestra opzioni */
         w.on_actionOpzioni_triggered();

@@ -34,9 +34,9 @@ CONFIG(release, debug|release) {
 #message($${QMAKE_HOST.arch} $${QMAKE_HOST.name} $${QMAKE_HOST.host} $${QMAKE_HOST.os} $${QMAKE_HOST.version})
 
 unix {
-LIBS +=   -Lother_libs/$${OS} -lxerces-c_3
-#-lqrencode \
-#-lbz2
+LIBS +=   -Lother_libs/$${OS} -lxerces-c \
+-lqrencode \
+-lbz2
 }
 
 win32 {
@@ -280,8 +280,8 @@ OTHER_FILES += \
     FUTURE_RELEASE.txt \
     HISTORY.txt
 
-
+win32 {
 QMAKE_CXXFLAGS += -Zc:wchar_t
 QMAKE_CFLAGS_DEBUG += -Zc:wchar_t
 QMAKE_CFLAGS_RELEASE += -Zc:wchar_t
-
+}
