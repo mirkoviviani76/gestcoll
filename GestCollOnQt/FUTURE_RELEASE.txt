@@ -13,7 +13,7 @@ IPOTESI
 - gestione aste
 - migliore libreria per la generazione dei grafici
 - galleria di tutte le foto
-- possibilità  di caricare xml diversi per collezioni diverse (i vassoi andrebbero messi nell'xml della collezione)
+- possibilita'  di caricare xml diversi per collezioni diverse (i vassoi andrebbero messi nell'xml della collezione)
 - licenza GPL
 - includere i documenti addizionali nel tex
 - cartina (google) con indicati piu' o meno i Paesi delle monete.
