@@ -8,11 +8,11 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui(new Ui::AboutDialog)
 {
     ui->setupUi(this);
-    QString text = QString("<h1>%1</h1>QT v.%2<br>bzlib v.%3")
-            .arg(CommonData::getInstance()->getAppId())
+    this->ui->title->setText(QString("<h1>%1</h1>").arg(CommonData::getInstance()->getAppId()));
+    QString text = QString("<ul><li>QT v.%2<li>bzlib v.%3</ul>")
             .arg(qVersion())
             .arg(BZ2_bzlibVersion());
-    this->ui->textBrowser->append(text);
+    this->ui->text->setText(text);
 }
 
 AboutDialog::~AboutDialog()
