@@ -48,12 +48,18 @@ font-weight: bold;
      <widget class="QDockWidget" name="dockWidget">
       <property name="minimumSize">
        <size>
-        <width>76</width>
-        <height>0</height>
+        <width>98</width>
+        <height>117</height>
        </size>
+      </property>
+      <property name="floating">
+       <bool>false</bool>
       </property>
       <property name="features">
        <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+      </property>
+      <property name="windowTitle">
+       <string>Collezione</string>
       </property>
       <widget class="QWidget" name="dockWidgetContents">
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -865,7 +871,7 @@ QTabBar::tab:selected {
               <item>
                <widget class="ImgMoneta" name="imgDritto">
                 <property name="text">
-                 <string>Img</string>
+                 <string/>
                 </property>
                 <property name="pixmap">
                  <pixmap resource="../../resources/resources.qrc">:/img/SRI.png</pixmap>
@@ -928,7 +934,7 @@ QTabBar::tab:selected {
               <item>
                <widget class="ImgMoneta" name="imgRovescio">
                 <property name="text">
-                 <string>Img</string>
+                 <string/>
                 </property>
                 <property name="pixmap">
                  <pixmap resource="../../resources/resources.qrc">:/img/SRI.png</pixmap>
@@ -991,7 +997,7 @@ QTabBar::tab:selected {
               <item>
                <widget class="ImgMoneta" name="imgTaglio">
                 <property name="text">
-                 <string>Img</string>
+                 <string/>
                 </property>
                 <property name="pixmap">
                  <pixmap resource="../../resources/resources.qrc">:/img/SRI.png</pixmap>
