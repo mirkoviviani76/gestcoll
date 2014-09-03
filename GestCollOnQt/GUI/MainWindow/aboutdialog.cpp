@@ -20,7 +20,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
             .arg("0");
 qDebug() << "MUST BE DONE";
 #endif
-    this->ui->textBrowser->append(text);
+this->ui->text->setText(text);
 }
 
 AboutDialog::~AboutDialog()
