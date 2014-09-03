@@ -3,7 +3,7 @@
 # Project created by QtCreator 2011-03-29T21:54:33
 #
 #-------------------------------------------------
-MAINDEST = ../../bin/Qt/
+MAINDEST = ../bin/Qt/
 
 unix {
  OS = lin
