@@ -140,6 +140,7 @@ QString XsltConverter::convertToText(const QString& id, const QString& xml, cons
 bool XsltConverter::convertToQr(const QString& id, const QString& xml, const QString& outDir, const QString& xslt, const QMap<QString, QString>& conversion)
 {
     bool ret = false;
+#if 1
     QXmlQuery query(QXmlQuery::XSLT20);
     ret = query.setFocus(QUrl(xml));
     query.bindVariable("monetaId", QVariant(id));
@@ -166,7 +167,10 @@ bool XsltConverter::convertToQr(const QString& id, const QString& xml, const QSt
     } else {
         Log::Logger::getInstance()->log(QString("XsltConverter::convert() Trasformazione xsl fallita per %1").arg(id), Log::ERR);
     }
-
+#else
+    ret = true;
+    qDebug() << "MUST BE DONE";
+#endif
 
     return ret;
 
