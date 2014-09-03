@@ -37,10 +37,15 @@ bool TexGenerator::convert()
     /* converte la collezione in tex */
     QString completeOutFile = outDir+"/"+"Collezione.tex";
 
-    ret = QFile::copy(":/img/SRI.png", outDir+"/SRI.png");
-    if (!ret) {
-        Log::Logger::getInstance()->log("Unable to copy SRI.png", Log::ERR);
-        return ret;
+    if (QFileInfo::exists(outDir+"/SRI.png")) {
+        ret = true;
+    } else {
+        /* try to copy data */
+        ret = QFile::copy(":/img/SRI.png", outDir+"/SRI.png");
+        if (!ret) {
+            Log::Logger::getInstance()->log("Unable to copy SRI.png", Log::ERR);
+            return ret;
+        }
     }
 
     if (ret) {
