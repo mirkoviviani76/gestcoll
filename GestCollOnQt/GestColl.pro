@@ -3,7 +3,7 @@
 # Project created by QtCreator 2011-03-29T21:54:33
 #
 #-------------------------------------------------
-MAINDEST = ../bin/
+MAINDEST = ../../bin/Qt/
 
 unix {
  OS = lin
@@ -15,7 +15,7 @@ win32 {
 TARGET  = GestColl
 
 CONFIG(debug, debug|release) {
-    DESTDIR = $${MAINDEST}bin_$${OS}_Debug
+    DESTDIR = $${MAINDEST}$${OS}_Debug
     OBJECTS_DIR = ../build_temp/debug/obj
     MOC_DIR     = ../build_temp/debug/moc
     UI_DIR      = ../build_temp/debug/ui
@@ -23,7 +23,7 @@ CONFIG(debug, debug|release) {
 }
 
 CONFIG(release, debug|release) {
-    DESTDIR = $${MAINDEST}bin_$${OS}
+    DESTDIR = $${MAINDEST}$${OS}
     OBJECTS_DIR = ../build_temp/release/obj
     MOC_DIR     = ../build_temp/release/moc
     UI_DIR      = ../build_temp/release/ui
