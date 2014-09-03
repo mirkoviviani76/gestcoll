@@ -112,16 +112,18 @@ void MainWindow::on_actionXml_Tex_triggered()
     TexGenerator converter;
     //this->progress->setVisible(true);
     bool ret = converter.convert();
+    QString msg;
     if (ret == true)
     {
-        Log::Logger::getInstance()->log("Conversione in Tex: ok", Log::DEBUG);
+        msg = "Conversione in Tex: ok";
+        Log::Logger::getInstance()->log(msg, Log::DEBUG);
     }
     else
     {
-        Log::Logger::getInstance()->log("Conversione in Tex: FALLITA", Log::ERR);
+        msg = "Conversione in Tex: FALLITA";
+        Log::Logger::getInstance()->log(msg, Log::ERR);
     }
-    //this->progress->setVisible(false);
-    this->statusBar()->showMessage("Xml2Tex: OK", 5000);
+    this->statusBar()->showMessage(msg, 5000);
 
 }
 
