@@ -121,16 +121,6 @@ Errors CommonData::readIni()
     return ret;
 }
 
-QString CommonData::getValue(QString key) {
-    QString ret = "";
-    if (this->iniSettings.contains(key)) {
-        //estrae il valore come stringa
-        ret = this->iniSettings[key].toString();
-    } else {
-        qCritical() << QString("Non trovo la chiave %1 nel file ini.").arg(key);
-    }
-    return ret;
-}
 
 QString CommonData::getValue(QString key, QString defaultValue) {
     QString ret = defaultValue;

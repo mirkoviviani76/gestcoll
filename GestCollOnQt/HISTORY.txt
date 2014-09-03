@@ -1,3 +1,5 @@
+NOTA: le lib esterne vanno compilate a 64 bit. Per farlo a "mano" installare i path corretti eseguendo
+      "vcvarsall.bat x86_amd64" dalla cartella VC del visual studio
 NOTA: x compilare xerces con visual studio, usare la direttiva "Treat WChar as predefined type = NO"
 Versione 8.2
         - Aggiornato a Qt5

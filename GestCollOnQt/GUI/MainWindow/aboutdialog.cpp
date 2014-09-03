@@ -1,18 +1,26 @@
 #include "aboutdialog.h"
 #include "ui_aboutdialog.h"
-#include "bzlib.h"
 #include "commondata.h"
+#include "bzlib.h"
 
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AboutDialog)
 {
     ui->setupUi(this);
-    this->ui->title->setText(QString("<h1>%1</h1>").arg(CommonData::getInstance()->getAppId()));
-    QString text = QString("<ul><li>QT v.%2<li>bzlib v.%3</ul>")
+#if 1
+    QString text = QString("<h1>%1</h1>QT v.%2<br>bzlib v.%3")
+            .arg(CommonData::getInstance()->getAppId())
             .arg(qVersion())
             .arg(BZ2_bzlibVersion());
-    this->ui->text->setText(text);
+#else
+    QString text = QString("<h1>%1</h1>QT v.%2<br>bzlib v.%3")
+            .arg(CommonData::getInstance()->getAppId())
+            .arg(qVersion())
+            .arg("0");
+qDebug() << "MUST BE DONE";
+#endif
+    this->ui->textBrowser->append(text);
 }
 
 AboutDialog::~AboutDialog()

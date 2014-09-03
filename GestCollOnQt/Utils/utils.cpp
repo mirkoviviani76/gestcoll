@@ -109,6 +109,7 @@ void Utils::doWork(QString workDir, QString command, QStringList args)
   */
 bool Utils::saveAndBackup(QString source, QString backupfile) {
     bool ret = false;
+#if 1
 
     ret = QFile::copy(source, backupfile);
 
@@ -139,7 +140,10 @@ bool Utils::saveAndBackup(QString source, QString backupfile) {
 
     QFile removeFile(backupfile);
     removeFile.remove();
-
+#else
+    ret = true;
+    qDebug() << "MUST BE DONE";
+#endif
     return ret;
 }
 

@@ -290,22 +290,13 @@ class CommonData
         CommonData();
         /**
          * @brief estrae il valore dal file ini data la chiave.
-         * Esce nel caso la chiave non esista.
-         *
-         * @param key la chiave
-         * @return QString il valore
-         */
-        QString getValue(QString key);
-
-        /**
-         * @brief estrae il valore dal file ini data la chiave.
          * Assegna defaultValue nel caso la chiave non esista.
          *
          * @param key la chiave
          * @param defaultValue il valore di default da assegnare
          * @return QString il valore
          */
-        QString getValue(QString key, QString defaultValue);
+        QString getValue(QString key, QString defaultValue = "");
 
         /**
          * @brief valuta l'esistenza della chiave
