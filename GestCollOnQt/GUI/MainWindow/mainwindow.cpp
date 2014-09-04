@@ -69,6 +69,19 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this->ui->widgetLinks, SIGNAL(changesOccurred()), this, SLOT(onChangesOccurredByLinks()));
 
     this->ui->actionSalva->setEnabled(false);
+
+
+    this->progress = new QProgressDialog(this);
+    this->progress->setWindowModality(Qt::WindowModal);
+    this->progress->setMinimumDuration(0);
+    this->progress->setCancelButton(NULL);
+    this->progress->setWindowTitle(CommonData::getInstance()->getAppId());
+
+    connect(this, SIGNAL(updateRange(int,int)), this->progress, SLOT(setRange(int,int)));
+    connect(this, SIGNAL(updateValue(int)), this->progress, SLOT(setValue(int)));
+    connect(this, SIGNAL(updateLabel(QString)), this->progress, SLOT(setLabelText(QString)));
+
+
 }
 
 
@@ -164,12 +177,10 @@ void MainWindow::on_actionXml_Qr_triggered()
 
     XsltConverter converter;
 
-    QProgressDialog progress(this);
-    progress.setWindowTitle(CommonData::getInstance()->getAppId());
-    progress.setWindowModality(Qt::WindowModal);
-    progress.setAutoClose(true);
-    progress.setRange(0, CollezioneXml::getInstance()->size());
-    progress.setLabelText("Xml->QR");
+    emit updateRange(0, CollezioneXml::getInstance()->size());
+    emit updateValue(0);
+    emit updateLabel("Xml->QR");
+    this->progress->show();
 
     bool ret = true;
     int curIndex = 0;
@@ -181,12 +192,12 @@ void MainWindow::on_actionXml_Qr_triggered()
                                     xslt,
                                     conversion);
         //segnala il nuovo indice
-        progress.setValue(curIndex);
+        emit updateValue(curIndex);
         if (!ret)
             break;
     }
 
-    progress.close(); //per sicurezza
+    this->progress->close();
 
     QString status;
     if (ret == true) {
@@ -209,12 +220,10 @@ void MainWindow::on_actionXml_Html_triggered()
     QMap<QString, QString> conversion;
     XsltConverter converter;
 
-    QProgressDialog progress(this);
-    progress.setWindowTitle(CommonData::getInstance()->getAppId());
-    progress.setWindowModality(Qt::WindowModal);
-    progress.setAutoClose(true);
-    progress.setRange(0, CollezioneXml::getInstance()->size());
-    progress.setLabelText("Xml->HTML");
+    emit updateRange(0, CollezioneXml::getInstance()->size());
+    emit updateValue(0);
+    emit updateLabel("Xml->HTML");
+    this->progress->show();
 
     /* copy images */
     /* create directory img under html */
@@ -236,12 +245,12 @@ void MainWindow::on_actionXml_Html_triggered()
         ret = converter.convert(id,  CommonData::getInstance()->getCollezione(),
                                      xslt, &out, conversion);
         //segnala il nuovo indice
-        progress.setValue(curIndex);
+        emit updateValue(curIndex);
         if (!ret)
             break;
     }
 
-    progress.close(); //per sicurezza
+    this->progress->close();
 
     if (ret) {
         //copia il css
@@ -368,46 +377,39 @@ void MainWindow::on_actionTex_Qr_Pdf_triggered()
 {
     int max = 3;
 
-    QProgressDialog progress(this);
-    progress.setWindowTitle(CommonData::getInstance()->getAppId());
-    progress.setWindowModality(Qt::WindowModal);
-    progress.setAutoClose(true);
-    progress.setRange(0, max+1);
-    progress.setMinimumDuration(500);
-    progress.setLabelText("Genero Collezione.pdf... attendi");
+    emit updateRange(0, max+1);
+    emit updateValue(0);
+    emit updateLabel("Genero Collezione.pdf... attendi");
+    this->progress->show();
 
-    //this->statusBar()->showMessage("Genero Collezione.pdf... attendi");
     QString commandLine = CommonData::getInstance()->getCommandToPdf();
 
     qDebug() << commandLine;
     //genera Collezione.pdf
     for (int i = 0; i < max; i++)
     {
-        progress.setValue(i+1);
+        emit updateValue(i+1);
         Utils::doWork(CommonData::getInstance()->getTexDir(), commandLine, QStringList() << "Collezione.tex");
     }
 
-    progress.close(); //per sicurezza
+    this->progress->close();
 
-    //this->statusBar()->showMessage("Genero Etichette.pdf... attendi");
 
-    progress.setWindowTitle(CommonData::getInstance()->getAppId());
-    progress.setWindowModality(Qt::WindowModal);
-    progress.setAutoClose(true);
-    progress.setRange(0, max+1);
-    progress.setValue(0);
-    progress.show();
-    progress.setLabelText("Genero Etichette.pdf... attendi");
+
+    emit updateValue(0);
+    emit updateLabel("Genero Etichette.pdf... attendi");
+    this->progress->show();
+
 
     //genera etichette.pdf
     for (int i = 0; i < max; i++)
     {
-        progress.setValue(i+1);
+        emit updateValue(i+1);
         Utils::doWork(CommonData::getInstance()->getTexDir(), commandLine, QStringList() << "Etichette.tex");
     }
 
 
-    progress.close(); //per sicurezza
+    this->progress->close();
 
     /* elimina i temporanei creati */
     //this->statusBar()->showMessage("Elimino temporanei... attendi");
