@@ -9,6 +9,7 @@
 #include <texgenerator.h>
 #include <QActionGroup>
 #include <QTimer>
+#include <QProgressDialog>
 #include "modifiche.h"
 
 namespace Ui {
@@ -40,6 +41,7 @@ private:
     QActionGroup* toolsMenu; /**< il menu delle azioni */
     QTimer checkTimer; /**< il timer per i conteggi */
     Modifiche modifiche;
+    QProgressDialog* progress;
     Ui::MainWindow *ui; /**< la ui */
     /**
      * @brief sistema la barra di stato
@@ -147,6 +149,12 @@ private slots:
     void on_actionVedi_Collezione_pdf_triggered();
     void on_actionVedi_Etichette_pdf_triggered();
     void on_actionAbout_Qt_triggered();
+
+signals:
+    void updateRange(int min, int max);
+    void updateValue(int val);
+    void updateLabel(QString label);
+
 };
 
 #endif // MAINWINDOW_H
