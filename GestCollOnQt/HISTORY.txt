@@ -1,6 +1,12 @@
 NOTA: le lib esterne vanno compilate a 64 bit. Per farlo a "mano" installare i path corretti eseguendo
       "vcvarsall.bat x86_amd64" dalla cartella VC del visual studio
 NOTA: x compilare xerces con visual studio, usare la direttiva "Treat WChar as predefined type = NO"
+Versione 9.0
+168     - Aggiornate librerie a 64bit
+        - Sistemato per VS2013
+        - Modifiche minori per progress dialog
+169     - Doppio click sull'autorità apre il browser con una ricerca preimpostata
+        - Doppio click sul paese apre il browser con una ricerca preimpostata
 Versione 8.2
         - Aggiornato a Qt5
         - Windows: sistemate librerie (VS2010)

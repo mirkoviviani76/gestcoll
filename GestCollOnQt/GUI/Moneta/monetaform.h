@@ -131,6 +131,8 @@ private slots:
     void on_imgRovescio_customContextMenuRequested(const QPoint &pos);
     void on_imgTaglio_customContextMenuRequested(const QPoint &pos);
 
+    void on_openPaeseUrl_clicked();
+
 signals:
     void changesOccurred();
     void newIdAdded(MonetaXml* newId);

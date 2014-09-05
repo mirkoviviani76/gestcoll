@@ -730,9 +730,17 @@ void MonetaForm::on_note_doubleClicked(QModelIndex index)
 
 void MonetaForm::on_autorita_doubleClicked(QModelIndex index)
 {
+    if (!index.isValid()) {
+        return;
+    }
+    GenericModel* model = (GenericModel*)index.model();
+
+    if (model == NULL) {
+        return;
+    }
+
     if (this->editingEnabled)
     {
-        GenericModel* model = (GenericModel*)index.model();
         xml::Autorita* vecchio = (xml::Autorita*) model->getItem(index);
         AutoritaDialog autoritaDialog(this);
         autoritaDialog.setData(vecchio);
@@ -748,6 +756,11 @@ void MonetaForm::on_autorita_doubleClicked(QModelIndex index)
             //segnala la modifica
             emit this->changesOccurred();
         }
+    } else {
+        xml::Autorita* autorita = (xml::Autorita*) model->getItem(index);
+        QString searchData = QString("%1 (%2)").arg(autorita->nome).arg(this->item->getPaese());
+        QUrl searchUrl = Utils::getSearchUrl(searchData);
+        QDesktopServices::openUrl(searchUrl);
     }
 }
 
@@ -1631,5 +1644,13 @@ void MonetaForm::on_setupCollezione_clicked()
     int ret = infoDialog.exec();
     if (ret == QDialog::Accepted) {
         this->salva();
+    }
+}
+
+void MonetaForm::on_openPaeseUrl_clicked()
+{
+    if (this->editingEnabled == false) {
+        QString paese = this->item->getPaese();
+        QDesktopServices::openUrl(Utils::getSearchUrl(paese));
     }
 }
