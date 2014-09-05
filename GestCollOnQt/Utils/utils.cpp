@@ -7,6 +7,8 @@
 #include <QCryptographicHash>
 #include <QDebug>
 #include <QUrl>
+#include <QDesktopServices>
+
 #include "bzlib.h"
 
 
@@ -163,5 +165,13 @@ QString Utils::checksum(QString filename) {
     }
 
     return ret;
+}
+
+QUrl Utils::getSearchUrl(const QString &whatToSearch)
+{
+    QString search = whatToSearch;
+    search.replace(' ', '+');
+    QUrl url = QUrl(QString("https://www.google.it/webhp?ie=UTF-8#q=%1").arg(search), QUrl::TolerantMode);
+    return url;
 }
 

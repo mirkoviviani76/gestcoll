@@ -57,6 +57,8 @@ public:
      * @return QString la stringa con l'md5 o la stringa vuota in caso di errore
      */
     static QString checksum(QString filename);
+
+    static QUrl getSearchUrl(const QString &whatToSearch);
 };
 
 #endif // UTILS_H

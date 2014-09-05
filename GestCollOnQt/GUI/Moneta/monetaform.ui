@@ -332,7 +332,7 @@ QTabBar::tab:selected {
                 <property name="title">
                  <string>Emissione</string>
                 </property>
-                <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0" columnstretch="0,0,0,0,0">
+                <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0,0,0" columnstretch="0,0,0,0,0,0">
                  <property name="leftMargin">
                   <number>2</number>
                  </property>
@@ -348,20 +348,20 @@ QTabBar::tab:selected {
                  <property name="spacing">
                   <number>0</number>
                  </property>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label">
+                 <item row="1" column="4">
+                  <widget class="QLabel" name="label_3">
                    <property name="text">
-                    <string>Paese</string>
+                    <string>Anno</string>
                    </property>
                    <property name="buddy">
-                    <cstring>paese</cstring>
+                    <cstring>anno</cstring>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1" colspan="4">
-                  <widget class="QLineEdit" name="paese">
-                   <property name="placeholderText">
-                    <string>Paese</string>
+                 <item row="3" column="2" rowspan="2" colspan="4">
+                  <widget class="QListView" name="autorita">
+                   <property name="wordWrap">
+                    <bool>true</bool>
                    </property>
                   </widget>
                  </item>
@@ -375,8 +375,8 @@ QTabBar::tab:selected {
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="1">
-                  <widget class="MisuraForm" name="nominale" native="true"/>
+                 <item row="1" column="5">
+                  <widget class="QLineEdit" name="anno"/>
                  </item>
                  <item row="3" column="0">
                   <widget class="QLabel" name="label_14">
@@ -388,38 +388,39 @@ QTabBar::tab:selected {
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="1" rowspan="2" colspan="4">
-                  <widget class="QListView" name="autorita">
-                   <property name="wordWrap">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
+                 <item row="1" column="2">
+                  <widget class="MisuraForm" name="nominale" native="true"/>
                  </item>
-                 <item row="1" column="3">
-                  <widget class="QLabel" name="label_3">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label">
                    <property name="text">
-                    <string>Anno</string>
+                    <string>Paese</string>
                    </property>
                    <property name="buddy">
-                    <cstring>anno</cstring>
+                    <cstring>paese</cstring>
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="4">
-                  <widget class="QLineEdit" name="anno"/>
+                 <item row="0" column="1">
+                  <widget class="QToolButton" name="openPaeseUrl">
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources/resources.qrc">
+                     <normaloff>:/icons/internet.ico</normaloff>:/icons/internet.ico</iconset>
+                   </property>
+                  </widget>
                  </item>
-                 <item row="1" column="2">
-                  <spacer name="horizontalSpacer">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                 <item row="0" column="2" colspan="4">
+                  <widget class="QLineEdit" name="paese">
+                   <property name="readOnly">
+                    <bool>false</bool>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
+                   <property name="placeholderText">
+                    <string>Paese</string>
                    </property>
-                  </spacer>
+                  </widget>
                  </item>
                 </layout>
                </widget>
