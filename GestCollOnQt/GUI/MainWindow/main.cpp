@@ -70,17 +70,19 @@ int main(int argc, char *argv[])
 
     MainWindow w;
 
+    /*
     QFile styleSheet("style.css");
     if (styleSheet.open(QIODevice::ReadOnly)) {
         w.setStyleSheet(styleSheet.readAll());
     }
     styleSheet.close();
+    */
 
     //chiude lo splash screen
     splash->finish(&w);
 
-    //w.showMaximized();
-    w.show();
+    w.showMaximized();
+    //w.show();
     if (ret == INIFILE_WRONG) {
         /* todo aprire la finestra opzioni */
         w.on_actionOpzioni_triggered();

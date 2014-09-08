@@ -61,6 +61,8 @@ void MisuraForm::enableEdit(bool editable)
 {
     this->ui->unita->setReadOnly(!editable);
     this->ui->valore->setReadOnly(!editable);
+    this->ui->unita->setFrame(editable);
+    this->ui->valore->setFrame(editable);
 }
 
 
