@@ -181,6 +181,8 @@ public:
 };
 
 
+Q_DECLARE_METATYPE(xml::Misura)
+
 }
 
 
