@@ -161,7 +161,9 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/MainWindow/modifiche.cpp \
     GUI/Models/elencomonetedelegate.cpp \
     GUI/Models/collezionesortfilterproxymodel.cpp \
-    GUI/Models/bibliotecasortfilterproxymodel.cpp
+    GUI/Models/bibliotecasortfilterproxymodel.cpp \
+    GUI/Models/datifisicimodel.cpp \
+    GUI/Models/datifisicidelegate.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -231,7 +233,9 @@ HEADERS  +=    Common/commondata.h \
                GUI/MainWindow/modifiche.h \
     GUI/Models/elencomonetedelegate.h \
     GUI/Models/collezionesortfilterproxymodel.h \
-    GUI/Models/bibliotecasortfilterproxymodel.h
+    GUI/Models/bibliotecasortfilterproxymodel.h \
+    GUI/Models/datifisicimodel.h \
+    GUI/Models/datifisicidelegate.h
 
 
 

@@ -29,6 +29,8 @@
 #include "setimmaginemonetadialog.h"
 #include "elencomonetedelegate.h"
 
+#include "datifisicidelegate.h"
+
 #define ACTION_ADD ("Aggiungi")
 #define ACTION_DEL ("Elimina")
 #define ACTION_EDIT ("Modifica in finestra speciale")
@@ -71,6 +73,12 @@ MonetaForm::MonetaForm(QWidget *parent) :
 
     //setta il delegato per le monete
     this->ui->itemList->setItemDelegate(new ElencoMoneteDelegate(this->ui->itemList));
+
+    /* aggiunge i delegati per l'editing dei Dati Fisici */
+    DatiFisiciDelegate* datiFisiciDelegate = new DatiFisiciDelegate(this);
+    connect(datiFisiciDelegate, SIGNAL(closeEditor(QWidget*)), this, SLOT(datiFisiciChanged()));
+    this->ui->datiFisiciTable->setItemDelegate(datiFisiciDelegate);
+
 
     this->enableEdit(false);
     this->contextMenu.addAction(ACTION_ADD);
@@ -209,7 +217,11 @@ MonetaForm::~MonetaForm()
         delete this->vassoi;
         this->vassoi = NULL;
     }
-
+    if (this->modelloDatiFisici != NULL) {
+        this->modelloDatiFisici->clear();
+        delete this->modelloDatiFisici;
+        this->modelloDatiFisici = NULL;
+    }
 }
 
 void MonetaForm::addMoneta() {
@@ -314,6 +326,8 @@ void MonetaForm::setupModels()
     modelloLegendaR = new GenericModel();
     modelloLegendaT = new GenericModel();
     modelloAmbiti = new GenericModel(2);
+    modelloDatiFisici = new DatiFisiciModel(this);
+
     this->setupModelMonete();
 
     this->ui->letteratura->resizeRowsToContents();
@@ -374,6 +388,7 @@ void MonetaForm::loadData()
     this->modelloLegendaR->clear();
     this->modelloLegendaT->clear();
     this->modelloAmbiti->clear();
+    this->modelloDatiFisici->clear();
 
     /* legende dritto */
 
@@ -420,6 +435,9 @@ void MonetaForm::loadData()
     }
     this->ui->zecchieri->setModel(this->modelloZecchieri);
 
+    /* aggiunge i dati fisici */
+    this->modelloDatiFisici->appendRow(this->item->getDom()->datiFisici());
+    this->ui->datiFisiciTable->setModel(this->modelloDatiFisici);
 
     /* aggiunge la letteratura */
     //TODO ASTE?
@@ -444,10 +462,6 @@ void MonetaForm::loadData()
     this->ui->ambiti->setModel(this->modelloAmbiti);
 
 
-    this->ui->forma->setText(item->getForma());
-    this->ui->metallo->setText(item->getMetallo());
-    this->ui->peso->setData(item->getPeso());
-    this->ui->dimensione->setData(item->getDiametro());
     this->ui->descrizioneDritto->blockSignals(true);
     this->ui->descrizioneDritto->setText(item->getDescrizione(Moneta::DRITTO));
     this->ui->descrizioneDritto->blockSignals(false);
@@ -552,8 +566,6 @@ void MonetaForm::enableEdit(bool editable)
     this->ui->anno->setFrame(editable);
     this->ui->luogo->setFrame(editable);
     this->ui->data->setFrame(editable);
-    this->ui->forma->setFrame(editable);
-    this->ui->metallo->setFrame(editable);
     this->ui->posizione->setFlat(!editable);
 
     /* abilita-disabilita gli item */
@@ -562,16 +574,18 @@ void MonetaForm::enableEdit(bool editable)
     this->ui->led->setEnabled(editable);
     this->ui->luogo->setReadOnly(!editable);
     this->ui->data->setReadOnly(!editable);
-    this->ui->forma->setReadOnly(!editable);
-    this->ui->metallo->setReadOnly(!editable);
     this->ui->descrizioneDritto->setReadOnly(!editable);
     this->ui->descrizioneRovescio->setReadOnly(!editable);
     this->ui->descrizioneTaglio->setReadOnly(!editable);
     this->ui->zecca->enableEdit(editable);
     this->ui->nominale->enableEdit(editable);
-    this->ui->dimensione->enableEdit(editable);
-    this->ui->peso->enableEdit(editable);
     this->ui->prezzo->enableEdit(editable);
+
+    if (editable) {
+        this->ui->datiFisiciTable->setEditTriggers(QAbstractItemView::DoubleClicked);
+    } else {
+        this->ui->datiFisiciTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    }
 }
 
 
@@ -592,18 +606,6 @@ void MonetaForm::on_anno_textChanged(QString newText)
     this->item->setAnno(newText);
     emit this->changesOccurred();
 
-}
-
-void MonetaForm::on_forma_textChanged(QString  newText)
-{
-    this->item->setForma(newText);
-    emit this->changesOccurred();
-}
-
-void MonetaForm::on_metallo_textChanged(QString  newText)
-{
-    this->item->setMetallo(newText);
-    emit this->changesOccurred();
 }
 
 void MonetaForm::on_luogo_textChanged(QString  newText)
@@ -633,25 +635,11 @@ void MonetaForm::on_descrizioneTaglio_textChanged()
     emit this->changesOccurred();
 }
 
-void MonetaForm::on_dimensione_textChanged(QString valore, QString unita)
-{
-    qreal val = valore.toDouble();
-    this->item->setDimensione(val, unita);
-    emit this->changesOccurred();
-}
 
 void MonetaForm::on_nominale_textChanged(QString valore, QString unita)
 {
     this->item->setNominale(valore, unita);
     emit this->changesOccurred();
-}
-
-void MonetaForm::on_peso_textChanged(QString valore, QString unita)
-{
-    qreal val = valore.toDouble();
-    this->item->setPeso(val, unita);
-    emit this->changesOccurred();
-
 }
 
 void MonetaForm::on_prezzo_textChanged(QString valore, QString unita)
@@ -1623,6 +1611,13 @@ void MonetaForm::on_imgRovescio_customContextMenuRequested(const QPoint &pos) {
 
 void MonetaForm::on_imgTaglio_customContextMenuRequested(const QPoint &pos) {
     this->img_customContextMenuRequested(pos, Moneta::TAGLIO);
+}
+
+void MonetaForm::datiFisiciChanged()
+{
+    gestColl::coins::datiFisici editedDatiFisici(this->modelloDatiFisici->getItem());
+    this->item->getDom()->datiFisici(editedDatiFisici);
+    emit changesOccurred();
 }
 
 

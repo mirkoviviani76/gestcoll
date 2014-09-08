@@ -10,6 +10,7 @@
 #include <QDate>
 #include "posizioni.h"
 #include "vassoioform.h"
+#include "datifisicimodel.h"
 
 namespace Ui {
     class MonetaForm;
@@ -54,6 +55,7 @@ private:
     GenericModel* modelloLegendaR; ///< modello legenda rovescio
     GenericModel* modelloLegendaT; ///< modello legenda taglio
     GenericModel* modelloAmbiti; ///< modello ambiti
+    DatiFisiciModel* modelloDatiFisici; ///< modello dati fisici
     MonetaXml* item; ///< la moneta correntemente visualizzata
     Posizioni* vassoi; ///< i vassoi
     void setupModels();
@@ -109,13 +111,9 @@ private slots:
     void on_descrizioneRovescio_textChanged();
     void on_descrizioneDritto_textChanged();
     void on_luogo_textChanged(QString );
-    void on_metallo_textChanged(QString );
-    void on_forma_textChanged(QString );
     void on_anno_textChanged(QString );
     void on_paese_textChanged(QString );
-    void on_dimensione_textChanged(QString valore, QString unita);
     void on_nominale_textChanged(QString valore, QString unita);
-    void on_peso_textChanged(QString valore, QString unita);
     void on_prezzo_textChanged(QString valore, QString unita);
     void on_zecca_textChanged(QString nome, QString segno);
     void on_id_customContextMenuRequested(const QPoint &pos);
@@ -130,6 +128,8 @@ private slots:
     void on_imgDritto_customContextMenuRequested(const QPoint &pos);
     void on_imgRovescio_customContextMenuRequested(const QPoint &pos);
     void on_imgTaglio_customContextMenuRequested(const QPoint &pos);
+
+    void datiFisiciChanged();
 
     void on_openPaeseUrl_clicked();
 

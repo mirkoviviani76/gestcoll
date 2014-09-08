@@ -3,6 +3,7 @@
 
 using namespace xml;
 
+
 QString Libro::toString(int column)
 {
     QString ret;
@@ -87,7 +88,6 @@ QString Ambito::toString(int column) {
     }
     return ret;
 }
-
 
 
 
