@@ -109,7 +109,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionEsci_triggered()
 {
     if (this->modifiche.hasModifiche()) {
-        //mostra la possibilità di salvare
+        //mostra la possibilita' di salvare
         this->on_actionSalva_triggered();
     }
     this->close();

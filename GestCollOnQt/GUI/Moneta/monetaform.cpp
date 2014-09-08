@@ -547,13 +547,19 @@ void MonetaForm::enableEdit(bool editable)
     this->contextMenuEnableAction(ACTION_COPY_ID, true);
     this->contextMenuEnableAction(ACTION_COPY, true);
 
+    /* abilita-disabilita il frame */
+    this->ui->paese->setFrame(editable);
+    this->ui->anno->setFrame(editable);
+    this->ui->luogo->setFrame(editable);
+    this->ui->data->setFrame(editable);
+    this->ui->forma->setFrame(editable);
+    this->ui->metallo->setFrame(editable);
+    this->ui->posizione->setFlat(!editable);
 
-    //abilita-disabilita gli item
+    /* abilita-disabilita gli item */
     this->ui->paese->setReadOnly(!editable);
     this->ui->anno->setReadOnly(!editable);
     this->ui->led->setEnabled(editable);
-    //this->ui->posizione->setEnabled(editable);
-    //this->ui->posizione->setReadOnly(!editable);
     this->ui->luogo->setReadOnly(!editable);
     this->ui->data->setReadOnly(!editable);
     this->ui->forma->setReadOnly(!editable);
