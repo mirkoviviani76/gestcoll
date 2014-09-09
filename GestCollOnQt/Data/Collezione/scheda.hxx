@@ -5337,7 +5337,7 @@ namespace gestColl
        * @name taglio
        *
        * @brief Accessor and modifier functions for the %taglio
-       * optional element.
+       * required element.
        */
       //@{
 
@@ -5347,30 +5347,24 @@ namespace gestColl
       typedef ::gestColl::coins::descrizioni taglio_type;
 
       /**
-       * @brief Element optional container type.
-       */
-      typedef ::xsd::cxx::tree::optional< taglio_type > taglio_optional;
-
-      /**
        * @brief Element traits type.
        */
       typedef ::xsd::cxx::tree::traits< taglio_type, wchar_t > taglio_traits;
 
       /**
-       * @brief Return a read-only (constant) reference to the element
-       * container.
+       * @brief Return a read-only (constant) reference to the element.
        *
-       * @return A constant reference to the optional container.
+       * @return A constant reference to the element.
        */
-      const taglio_optional&
+      const taglio_type&
       taglio () const;
 
       /**
-       * @brief Return a read-write reference to the element container.
+       * @brief Return a read-write reference to the element.
        *
-       * @return A reference to the optional container.
+       * @return A reference to the element.
        */
-      taglio_optional&
+      taglio_type&
       taglio ();
 
       /**
@@ -5385,24 +5379,12 @@ namespace gestColl
       taglio (const taglio_type& x);
 
       /**
-       * @brief Set the element value.
-       *
-       * @param x An optional container with the new value to set.
-       *
-       * If the value is present in @a x then this function makes a copy 
-       * of this value and sets it as the new value of the element.
-       * Otherwise the element container is set the 'not present' state.
-       */
-      void
-      taglio (const taglio_optional& x);
-
-      /**
        * @brief Set the element value without copying.
        *
        * @param p A new value to use.
        *
-       * This function will try to use the passed value directly instead
-       * of making a copy.
+       * This function will try to use the passed value directly
+       * instead of making a copy.
        */
       void
       taglio (::std::auto_ptr< taglio_type > p);
@@ -5419,7 +5401,8 @@ namespace gestColl
        * initializers for required elements and attributes.
        */
       datiArtistici (const dritto_type&,
-                     const rovescio_type&);
+                     const rovescio_type&,
+                     const taglio_type&);
 
       /**
        * @brief Create an instance from the ultimate base and
@@ -5430,7 +5413,8 @@ namespace gestColl
        * instead of making copies.
        */
       datiArtistici (::std::auto_ptr< dritto_type >&,
-                     ::std::auto_ptr< rovescio_type >&);
+                     ::std::auto_ptr< rovescio_type >&,
+                     ::std::auto_ptr< taglio_type >&);
 
       /**
        * @brief Create an instance from a DOM element.
@@ -5493,7 +5477,7 @@ namespace gestColl
       protected:
       ::xsd::cxx::tree::one< dritto_type > dritto_;
       ::xsd::cxx::tree::one< rovescio_type > rovescio_;
-      taglio_optional taglio_;
+      ::xsd::cxx::tree::one< taglio_type > taglio_;
 
       //@endcond
     };

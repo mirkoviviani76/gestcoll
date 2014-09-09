@@ -59,7 +59,6 @@ private:
     Posizioni* vassoi; ///< i vassoi
     void setupModels();
     void loadData();
-    void addLegenda(Moneta::Lato lato);
     void setupTabVassoi(MonetaXml* moneta);
     void tabVassoiRemoveItem(MonetaXml* moneta);
     void contextMenuEnableAction(QString actionText, bool enable);

@@ -404,7 +404,7 @@ void MonetaForm::loadData()
 
     this->ui->dritto->setDati(item->getId(), "D", &(item->getDom()->datiArtistici().dritto()));
     this->ui->rovescio->setDati(item->getId(), "R", &(item->getDom()->datiArtistici().rovescio()));
-    this->ui->taglio->setDati(item->getId(), "T", &(item->getDom()->datiArtistici().taglio().get()));
+    this->ui->taglio->setDati(item->getId(), "T", &(item->getDom()->datiArtistici().taglio()));
 
     /* prepara il led di stato */
     xml::Stato stato = this->item->getStato();
@@ -835,73 +835,6 @@ void MonetaForm::on_documenti_customContextMenuRequested(QPoint pos)
 
 }
 
-void MonetaForm::legende_customContextMenuRequested(const QPoint& pos, const Moneta::Lato& lato) {
-#if 0
-    QListView* view = NULL;
-    GenericModel* model = NULL;
-    switch (lato) {
-        case Moneta::DRITTO :
-        {
-            view = this->ui->legendeDritto;
-            model = this->modelloLegendaD;
-        }
-            break;
-        case Moneta::ROVESCIO :
-        {
-            view = this->ui->legendeRovescio;
-            model = this->modelloLegendaR;
-
-        }
-            break;
-        case Moneta::TAGLIO :
-        {
-            view = this->ui->legendeTaglio;
-            model = this->modelloLegendaT;
-        }
-            break;
-    }
-
-    // for most widgets
-    QPoint globalPos = view->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_ADD) {
-            this->addLegenda(lato);
-        } else if (selectedItem->text() == ACTION_DEL) {
-            //ottiene l'indice selezionato
-            int index = view->currentIndex().row();
-            //ottiene l'item
-            xml::Legenda* a = (xml::Legenda*) model->getItem(index);
-            //cancella dalla lista
-            this->item->deleteLegenda(lato ,a);
-            //ricarica la vista
-            this->loadData();
-            //segnala la modifica
-            emit this->changesOccurred();
-
-        } else if (selectedItem->text() == ACTION_COPY_ID) {
-            this->gestClipboardCopyId(this->item->getId());
-        } else if (selectedItem->text() == ACTION_COPY) {
-            this->gestClipboardCopy(this->item->getId());
-        } else if (selectedItem->text() == ACTION_SHOW_QR) {
-            this->showQr();
-        }
-
-
-    }
-    else
-    {
-
-    }
-#else
-    //TODO
-    qWarning() << "TODO";
-#endif
-}
-
 void MonetaForm::on_zecchieri_customContextMenuRequested(QPoint pos)
 {
     // for most widgets
@@ -1057,34 +990,6 @@ void MonetaForm::on_letteratura_customContextMenuRequested(QPoint pos)
         // nothing was chosen
     }
 }
-
-void MonetaForm::addLegenda(Moneta::Lato lato)
-{
-#if 0
-    /* attiva la vera gestione */
-    LegendaDialog dialog(this);
-    //dialog.setData(a);
-    int ret = dialog.exec();
-    if (ret == QDialog::Accepted)
-    {
-        QString testo;
-        QString scioglimento;
-        dialog.getData(&testo, &scioglimento);
-        xml::Legenda nuovo(testo, scioglimento);
-        /* modifica/aggiunge il nodo al dom */
-        this->item->addLegenda(lato, nuovo);
-        this->loadData();
-        //segnala la modifica
-        emit this->changesOccurred();
-
-    }
-#else
-    //TODO
-    qWarning() << "TODO";
-#endif
-}
-
-
 
 
 void MonetaForm::on_data_dateChanged(QDate date)

@@ -44,7 +44,6 @@ private:
     bool updateLegenda(::descrizioni::legenda_iterator it, const xml::Legenda &vecchio, const xml::Legenda &nuovo);
     void gestLegendaModifica(QModelIndex index);
     QList<xml::Legenda *> fillLegende();
-    void addLegenda(const xml::Legenda &l);
     void setLegende();
 public slots:
     void setReadOnly(bool readonly);
@@ -56,6 +55,10 @@ private slots:
     void on_specialEdit_clicked();
 
     void on_descrizione_textChanged();
+
+    void on_addLegenda_clicked();
+
+    void on_deleteLegenda_clicked();
 
 signals:
     void changesOccurred();

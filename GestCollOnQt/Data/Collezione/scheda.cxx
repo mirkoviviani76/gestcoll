@@ -1275,28 +1275,22 @@ namespace gestColl
       this->rovescio_.set (x);
     }
 
-    const datiArtistici::taglio_optional& datiArtistici::
+    const datiArtistici::taglio_type& datiArtistici::
     taglio () const
     {
-      return this->taglio_;
+      return this->taglio_.get ();
     }
 
-    datiArtistici::taglio_optional& datiArtistici::
+    datiArtistici::taglio_type& datiArtistici::
     taglio ()
     {
-      return this->taglio_;
+      return this->taglio_.get ();
     }
 
     void datiArtistici::
     taglio (const taglio_type& x)
     {
       this->taglio_.set (x);
-    }
-
-    void datiArtistici::
-    taglio (const taglio_optional& x)
-    {
-      this->taglio_ = x;
     }
 
     void datiArtistici::
@@ -4059,21 +4053,23 @@ namespace gestColl
 
     datiArtistici::
     datiArtistici (const dritto_type& dritto,
-                   const rovescio_type& rovescio)
+                   const rovescio_type& rovescio,
+                   const taglio_type& taglio)
     : ::xml_schema::type (),
       dritto_ (dritto, ::xml_schema::flags (), this),
       rovescio_ (rovescio, ::xml_schema::flags (), this),
-      taglio_ (::xml_schema::flags (), this)
+      taglio_ (taglio, ::xml_schema::flags (), this)
     {
     }
 
     datiArtistici::
     datiArtistici (::std::auto_ptr< dritto_type >& dritto,
-                   ::std::auto_ptr< rovescio_type >& rovescio)
+                   ::std::auto_ptr< rovescio_type >& rovescio,
+                   ::std::auto_ptr< taglio_type >& taglio)
     : ::xml_schema::type (),
       dritto_ (dritto, ::xml_schema::flags (), this),
       rovescio_ (rovescio, ::xml_schema::flags (), this),
-      taglio_ (::xml_schema::flags (), this)
+      taglio_ (taglio, ::xml_schema::flags (), this)
     {
     }
 
@@ -4149,7 +4145,7 @@ namespace gestColl
           ::std::auto_ptr< taglio_type > r (
             taglio_traits::create (i, f, this));
 
-          if (!this->taglio_)
+          if (!taglio_.present ())
           {
             this->taglio_.set (r);
             continue;
@@ -4170,6 +4166,13 @@ namespace gestColl
       {
         throw ::xsd::cxx::tree::expected_element< wchar_t > (
           L"rovescio",
+          L"http://gestColl/coins");
+      }
+
+      if (!taglio_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< wchar_t > (
+          L"taglio",
           L"http://gestColl/coins");
       }
     }
@@ -5959,7 +5962,6 @@ namespace gestColl
 
       // taglio
       //
-      if (i.taglio ())
       {
         ::xercesc::DOMElement& s (
           ::xsd::cxx::xml::dom::create_element (
@@ -5967,7 +5969,7 @@ namespace gestColl
             L"http://gestColl/coins",
             e));
 
-        s << *i.taglio ();
+        s << i.taglio ();
       }
     }
 
