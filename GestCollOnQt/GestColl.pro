@@ -80,7 +80,20 @@ INCLUDEPATH += other_libs \
                GUI/Biblioteca \
                GUI/Links \
                GUI/Contatti \
-               GUI/Moneta \
+               GUI/Moneta/Ambito \
+               GUI/Moneta/Autorita \
+			   GUI/Moneta/DatiFisici \
+               GUI/Moneta/Descrizione \
+               GUI/Moneta/Documenti \
+               GUI/Moneta/Immagini \
+               GUI/Moneta/Legende \
+               GUI/Moneta/Letteratura \
+               GUI/Moneta/Moneta \
+               GUI/Moneta/Note \
+               GUI/Moneta/Posizione \
+               GUI/Moneta/Utilita \
+               GUI/Moneta/Vassoi \
+               GUI/Moneta/Zecchiere \
                GUI/Statistiche \
                GUI/Blocknotes \
                GUI/Collezione
@@ -124,20 +137,23 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/MainWindow/viewlog.cpp \
                GUI/Models/genericmodel.cpp \
                GUI/Models/generictabmodel.cpp \
-               GUI/Moneta/autoritadialog.cpp \
-               GUI/Moneta/charselector.cpp \
-               GUI/Moneta/descrizionedialog.cpp \
-               GUI/Moneta/imgmoneta.cpp \
-               GUI/Moneta/legendadialog.cpp \
-               GUI/Moneta/letteraturadialog.cpp \
-               GUI/Moneta/misuraform.cpp \
-               GUI/Moneta/monetaform.cpp \
-               GUI/Moneta/notadialog.cpp \
-               GUI/Moneta/nuovamonetadialog.cpp \
-               GUI/Moneta/posizionedialog.cpp \
-               GUI/Moneta/vassoioform.cpp \
-               GUI/Moneta/visualizzaimmagine.cpp \
-               GUI/Moneta/zecchieredialog.cpp \
+               GUI/Moneta/Ambito/setambitodialog.cpp \
+               GUI/Moneta/Autorita/autoritadialog.cpp \
+               GUI/Moneta/Descrizione/descrizionedialog.cpp \
+               GUI/Moneta/Documenti/adddocumentdialog.cpp \
+               GUI/Moneta/Immagini/imgmoneta.cpp \
+               GUI/Moneta/Immagini/setimmaginemonetadialog.cpp \
+               GUI/Moneta/Immagini/visualizzaimmagine.cpp \
+               GUI/Moneta/Legende/legendadialog.cpp \
+               GUI/Moneta/Letteratura/letteraturadialog.cpp \
+               GUI/Moneta/Moneta/monetaform.cpp \
+               GUI/Moneta/Moneta/nuovamonetadialog.cpp \
+               GUI/Moneta/Note/notadialog.cpp \
+               GUI/Moneta/Posizione/posizionedialog.cpp \
+               GUI/Moneta/Utilita/charselector.cpp \
+               GUI/Moneta/Utilita/misuraform.cpp \
+               GUI/Moneta/Vassoi/vassoioform.cpp \
+               GUI/Moneta/Zecchiere/zecchieredialog.cpp \
                GUI/Statistiche/statisticheform.cpp \
                GUI/Statistiche/nightcharts.cpp \
                GUI/Statistiche/statisticamoneteperanno.cpp \
@@ -150,20 +166,18 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/Blocknotes/blocknotesform.cpp \
                GUI/MainWindow/opzionidialog.cpp \
                GUI/Contatti/newcontattodialog.cpp \
-               GUI/Moneta/adddocumentdialog.cpp \
-               GUI/Moneta/setambitodialog.cpp \
                GUI/Collezione/setcollezioneinfodialog.cpp \
                GUI/Collezione/modifyambitodialog.cpp \
-               GUI/Moneta/setimmaginemonetadialog.cpp \
                Data/Link/linksxml.cpp \
                GUI/Links/treeitem.cpp \
                GUI/Links/newlinkdialog.cpp \
                GUI/MainWindow/modifiche.cpp \
-    GUI/Models/elencomonetedelegate.cpp \
-    GUI/Models/collezionesortfilterproxymodel.cpp \
-    GUI/Models/bibliotecasortfilterproxymodel.cpp \
-    GUI/Models/datifisicimodel.cpp \
-    GUI/Models/datifisicidelegate.cpp
+    GUI/Collezione/elencomonetedelegate.cpp \
+    GUI/Collezione/collezionesortfilterproxymodel.cpp \
+    GUI/Biblioteca/bibliotecasortfilterproxymodel.cpp \
+    GUI/Moneta/DatiFisici/datifisicimodel.cpp \
+    GUI/Moneta/DatiFisici/datifisicidelegate.cpp \
+    GUI/Moneta/Descrizione/descrizioneform.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -196,20 +210,23 @@ HEADERS  +=    Common/commondata.h \
                GUI/MainWindow/viewlog.h \
                GUI/Models/genericmodel.h \
                GUI/Models/generictabmodel.h \
-               GUI/Moneta/autoritadialog.h \
-               GUI/Moneta/charselector.h \
-               GUI/Moneta/descrizionedialog.h \
-               GUI/Moneta/imgmoneta.h \
-               GUI/Moneta/legendadialog.h \
-               GUI/Moneta/letteraturadialog.h \
-               GUI/Moneta/misuraform.h \
-               GUI/Moneta/monetaform.h \
-               GUI/Moneta/notadialog.h \
-               GUI/Moneta/nuovamonetadialog.h \
-               GUI/Moneta/posizionedialog.h \
-               GUI/Moneta/vassoioform.h \
-               GUI/Moneta/visualizzaimmagine.h \
-               GUI/Moneta/zecchieredialog.h \
+               GUI/Moneta/Ambito/setambitodialog.h \
+               GUI/Moneta/Autorita/autoritadialog.h \
+               GUI/Moneta/Descrizione/descrizionedialog.h \
+               GUI/Moneta/Documenti/adddocumentdialog.h \
+               GUI/Moneta/Immagini/imgmoneta.h \
+               GUI/Moneta/Immagini/setimmaginemonetadialog.h \
+               GUI/Moneta/Immagini/visualizzaimmagine.h \
+               GUI/Moneta/Legende/legendadialog.h \
+               GUI/Moneta/Letteratura/letteraturadialog.h \
+               GUI/Moneta/Moneta/monetaform.h \
+               GUI/Moneta/Moneta/nuovamonetadialog.h \
+               GUI/Moneta/Note/notadialog.h \
+               GUI/Moneta/Posizione/posizionedialog.h \
+               GUI/Moneta/Utilita/charselector.h \
+               GUI/Moneta/Utilita/misuraform.h \
+               GUI/Moneta/Vassoi/vassoioform.h \
+               GUI/Moneta/Zecchiere/zecchieredialog.h \
                GUI/Statistiche/statisticheform.h \
                GUI/Statistiche/nightcharts.h \
                GUI/Statistiche/statisticamoneteperanno.h \
@@ -222,42 +239,43 @@ HEADERS  +=    Common/commondata.h \
                GUI/Blocknotes/blocknotesform.h \
                GUI/MainWindow/opzionidialog.h \
                GUI/Contatti/newcontattodialog.h \
-               GUI/Moneta/adddocumentdialog.h \
-               GUI/Moneta/setambitodialog.h \
                GUI/Collezione/setcollezioneinfodialog.h \
                GUI/Collezione/modifyambitodialog.h \
-               GUI/Moneta/setimmaginemonetadialog.h \
                Data/Link/linksxml.h \
                GUI/Links/treeitem.h \
                GUI/Links/newlinkdialog.h \
                GUI/MainWindow/modifiche.h \
-    GUI/Models/elencomonetedelegate.h \
-    GUI/Models/collezionesortfilterproxymodel.h \
-    GUI/Models/bibliotecasortfilterproxymodel.h \
-    GUI/Models/datifisicimodel.h \
-    GUI/Models/datifisicidelegate.h
+    GUI/Collezione/elencomonetedelegate.h \
+    GUI/Collezione/collezionesortfilterproxymodel.h \
+    GUI/Biblioteca/bibliotecasortfilterproxymodel.h \
+    GUI/Moneta/DatiFisici/datifisicimodel.h \
+    GUI/Moneta/DatiFisici/datifisicidelegate.h \
+    GUI/Moneta/Descrizione/descrizioneform.h
 
 
 
 
 FORMS    += GUI/MainWindow/mainwindow.ui \
             GUI/Biblioteca/bibliotecaform.ui \
-            GUI/Moneta/monetaform.ui \
-            GUI/Moneta/misuraform.ui \
-            GUI/Moneta/visualizzaimmagine.ui \
             GUI/MainWindow/aboutdialog.ui \
-            GUI/Moneta/letteraturadialog.ui \
-            GUI/Moneta/notadialog.ui \
-            GUI/Moneta/autoritadialog.ui \
-            GUI/Moneta/legendadialog.ui \
-            GUI/Moneta/zecchieredialog.ui \
-            GUI/Moneta/nuovamonetadialog.ui \
-            GUI/Moneta/vassoioform.ui \
             GUI/MainWindow/viewlog.ui \
             GUI/Links/linksform.ui \
-            GUI/Moneta/posizionedialog.ui \
-            GUI/Moneta/charselector.ui \
-            GUI/Moneta/descrizionedialog.ui \
+               GUI/Moneta/Ambito\setambitodialog.ui \
+               GUI/Moneta/Autorita\autoritadialog.ui \
+               GUI/Moneta/Descrizione\descrizionedialog.ui \
+               GUI/Moneta/Documenti\adddocumentdialog.ui \
+               GUI/Moneta/Immagini\setimmaginemonetadialog.ui \
+               GUI/Moneta/Immagini\visualizzaimmagine.ui \
+               GUI/Moneta/Legende\legendadialog.ui \
+               GUI/Moneta/Letteratura\letteraturadialog.ui \
+               GUI/Moneta/Moneta\monetaform.ui \
+               GUI/Moneta/Moneta\nuovamonetadialog.ui \
+               GUI/Moneta/Note\notadialog.ui \
+               GUI/Moneta/Posizione\posizionedialog.ui \
+               GUI/Moneta/Utilita\charselector.ui \
+               GUI/Moneta/Utilita\misuraform.ui \
+               GUI/Moneta/Vassoi\vassoioform.ui \
+               GUI/Moneta/Zecchiere\zecchieredialog.ui \
             GUI/Statistiche/statisticheform.ui \
             GUI/Statistiche/statisticamoneteperanno.ui \
             GUI/Statistiche/statisticamonetepermetallo.ui \
@@ -268,15 +286,14 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
             GUI/Blocknotes/blocknotesform.ui \
             GUI/MainWindow/opzionidialog.ui \
             GUI/Contatti/newcontattodialog.ui \
-            GUI/Moneta/adddocumentdialog.ui \
-            GUI/Moneta/setambitodialog.ui \
             GUI/Collezione/setcollezioneinfodialog.ui \
             GUI/Collezione/modifyambitodialog.ui \
-            GUI/Moneta/setimmaginemonetadialog.ui \
-            GUI/Links/newlinkdialog.ui
+            GUI/Links/newlinkdialog.ui \
+    GUI/Moneta/Descrizione/descrizioneform.ui
 
 
-RESOURCES += resources/resources.qrc
+RESOURCES += resources/resources.qrc \
+    GUI/resources/resources.qrc
 
 RC_FILE = resources/myapp.rc
 
