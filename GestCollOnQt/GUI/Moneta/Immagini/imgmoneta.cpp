@@ -15,6 +15,11 @@ ImgMoneta::~ImgMoneta()
 {
 }
 
+QString ImgMoneta::getFilename()
+{
+    return this->fileImg;
+}
+
 void ImgMoneta::setupImg(const QString& file)
 {
     if (file != "")
@@ -45,14 +50,6 @@ void ImgMoneta::setupImg(const QString& file)
 void ImgMoneta::mouseDoubleClickEvent (QMouseEvent * event)
 {
     Q_UNUSED(event);
-    if (this->fileImg != "")
-    {
-        /* mostra la finestra grande dell'immagine */
-        VisualizzaImmagine bigImg(this->fileImg, this);
-        bigImg.setModal(true);
-        bigImg.showMaximized();
-        bigImg.exec();
-
-    }
+    emit doubleClicked();
 }
 

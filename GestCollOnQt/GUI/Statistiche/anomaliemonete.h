@@ -31,7 +31,6 @@ private slots:
     void checkAutorita();
     void checkAcquisto();
     void checkPeso();
-    void checkLegendeSenzaScioglimento();
 
 signals:
     void itemSelected(QString id);

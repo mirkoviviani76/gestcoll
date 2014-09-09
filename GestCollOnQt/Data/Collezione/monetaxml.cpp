@@ -34,9 +34,6 @@ MonetaXml::MonetaXml(const moneta& m)
     this->fillAutorita();
     this->fillItemAddizionali();
     this->fillLetteratura();
-    this->fillLegende(Moneta::DRITTO);
-    this->fillLegende(Moneta::ROVESCIO);
-    this->fillLegende(Moneta::TAGLIO);
     this->fillNote();
     this->fillZecchieri();
 }
@@ -49,9 +46,6 @@ MonetaXml::MonetaXml(moneta *m) {
     this->fillAutorita();
     this->fillItemAddizionali();
     this->fillLetteratura();
-    this->fillLegende(Moneta::DRITTO);
-    this->fillLegende(Moneta::ROVESCIO);
-    this->fillLegende(Moneta::TAGLIO);
     this->fillNote();
     this->fillZecchieri();
 }
@@ -69,9 +63,6 @@ MonetaXml::~MonetaXml()
         this->image = NULL;
     }
     deleteNoteList();
-    deleteLegendeList(Moneta::DRITTO);
-    deleteLegendeList(Moneta::ROVESCIO);
-    deleteLegendeList(Moneta::TAGLIO);
     deleteAutoritaList();
     deleteZecchieriList();
     deleteLetteraturaList();
@@ -91,37 +82,6 @@ void MonetaXml::deleteNoteList() {
     this->xmlNote.clear();
 }
 
-void MonetaXml::deleteLegendeList(Moneta::Lato l) {
-    switch(l) {
-    case Moneta::DRITTO:
-        foreach (xml::Legenda* a, xmlLegendaD) {
-            if (a != NULL) {
-                delete a;
-                a = NULL;
-            }
-        }
-        this->xmlLegendaD.clear();
-        break;
-    case Moneta::ROVESCIO:
-        foreach (xml::Legenda* a, xmlLegendaR) {
-            if (a != NULL) {
-                delete a;
-                a = NULL;
-            }
-        }
-        this->xmlLegendaR.clear();
-        break;
-    case Moneta::TAGLIO:
-        foreach (xml::Legenda* a, xmlLegendaT) {
-            if (a != NULL) {
-                delete a;
-                a = NULL;
-            }
-        }
-        this->xmlLegendaT.clear();
-        break;
-    }
-}
 void MonetaXml::deleteAutoritaList() {
     foreach (xml::Autorita* a, xmlAutorita) {
         if (a != NULL) {
@@ -175,22 +135,6 @@ void MonetaXml::deleteAmbitiList() {
 
 QList<xml::Nota*> MonetaXml::getNote() {
     return this->xmlNote;
-}
-
-QList<xml::Legenda*> MonetaXml::getLegende(Moneta::Lato l) {
-    QList<xml::Legenda*> ret;
-    switch (l) {
-    case Moneta::DRITTO:
-        ret = this->xmlLegendaD;
-        break;
-    case Moneta::ROVESCIO:
-        ret = this->xmlLegendaR;
-        break;
-    case Moneta::TAGLIO:
-        ret = this->xmlLegendaT;
-        break;
-    }
-    return ret;
 }
 
 QList<xml::Autorita*> MonetaXml::getAutorita() {
@@ -441,12 +385,6 @@ xml::Zecca MonetaXml::getZecca()
 
 }
 
-xml::Misura MonetaXml::getDiametro()
-{
-    xml::Misura m(QString::fromStdWString(this->mon->datiFisici().diametro().unita()),
-                  this->mon->datiFisici().diametro().valore());
-    return m;
-}
 
 xml::Misura MonetaXml::getPeso()
 {
@@ -456,63 +394,12 @@ xml::Misura MonetaXml::getPeso()
     return m;
 }
 
-QString MonetaXml::getForma()
-{
-    return QString::fromStdWString(this->mon->datiFisici().forma());
-}
 
 QString MonetaXml::getMetallo()
 {
     return QString::fromStdWString(this->mon->datiFisici().metallo());
 }
 
-QString MonetaXml::getDescrizione(Moneta::Lato lato)
-{
-    QString ret = "";
-    switch (lato)
-    {
-    case Moneta::DRITTO:
-        ret = QString::fromStdWString(this->mon->datiArtistici().dritto().descrizione());
-        break;
-    case Moneta::ROVESCIO:
-        ret = QString::fromStdWString(this->mon->datiArtistici().rovescio().descrizione());
-        break;
-//TODO! errato xsd
-    case Moneta::TAGLIO:
-        //ret = QString::fromStdWString(this->mon->datiArtistici().taglio());
-        ret = "";
-        break;
-
-    }
-    return ret;
-}
-
-
-QString MonetaXml::getImg(Moneta::Lato lato)
-{
-    QString ret = "";
-    descrizioni::fileImmagine_optional fi;
-
-    switch (lato)
-    {
-    case Moneta::DRITTO:
-        fi = this->mon->datiArtistici().dritto().fileImmagine();
-        break;
-    case Moneta::ROVESCIO:
-        fi = this->mon->datiArtistici().rovescio().fileImmagine();
-        break;
-    case Moneta::TAGLIO:
-        //TODO fi = this->mon->datiArtistici().taglio().fileImmagine();
-        break;
-    }
-
-    if (fi.present())  {
-        ret = CommonData::getInstance()->getImgDir()+"/"+QString::fromStdWString(fi.get());
-    }
-
-    return ret;
-
-}
 
 
 QString MonetaXml::getLuogo()
@@ -580,49 +467,6 @@ void MonetaXml::fillAutorita()
             this->xmlAutorita.append(n);
         }
     }
-}
-
-void MonetaXml::fillLegende(Moneta::Lato l)
-{
-    QList<xml::Legenda*>* target = NULL;
-    descrizioni::legenda_sequence seq;
-    this->deleteLegendeList(l);
-    switch (l)
-    {
-    case Moneta::DRITTO :
-        target = &(this->xmlLegendaD);
-        seq = this->mon->datiArtistici().dritto().legenda();
-        break;
-    case Moneta::ROVESCIO :
-        target = &(this->xmlLegendaR);
-        seq = this->mon->datiArtistici().rovescio().legenda();
-        break;
-    case Moneta::TAGLIO :
-        target = &(this->xmlLegendaT);
-        //TODO errore dello schema
-        //seq = this->mon->datiArtistici().taglio().legenda();
-        break;
-    }
-
-    for (descrizioni::legenda_iterator it(seq.begin());
-        it != seq.end();
-        ++it
-        )
-    {
-        descrizioni::legenda_type curLeg = (*it);
-        QString myT = QString::fromStdWString(curLeg.testo());
-        descrizioni::legenda_type::scioglimento_optional sop = curLeg.scioglimento();
-        QString myS = "";
-        if (sop.present())
-        {
-            descrizioni::legenda_type::scioglimento_type st = sop.get();
-            myS = QString::fromStdWString(st);
-        }
-
-        xml::Legenda* leg = new xml::Legenda(myT, myS);
-        target->append(leg);
-    }
-
 }
 
 void MonetaXml::fillZecchieri()
@@ -762,81 +606,28 @@ void MonetaXml::updateRevision() {
 void MonetaXml::setPaese(QString p)
 {
     this->mon->paese(p.toStdWString());
-    this->updateRevision();
-}
-
-void MonetaXml::setImmagine(Moneta::Lato l, const QString& filename) {
-    switch (l)
-    {
-    case Moneta::DRITTO:
-        this->mon->datiArtistici().dritto().fileImmagine(filename.toStdWString());
-        break;
-    case Moneta::ROVESCIO:
-        this->mon->datiArtistici().rovescio().fileImmagine(filename.toStdWString());
-        break;
-    case Moneta::TAGLIO:
-        datiArtistici::taglio_optional opt = mon->datiArtistici().taglio();
-        if (opt.present()) {
-            datiArtistici::taglio_type taglio = opt.get();
-            taglio.fileImmagine(filename.toStdWString());
-        }
-
-        break;
-    }
-    this->updateRevision();
-
 }
 
 void MonetaXml::setLuogo(QString p)
 {
     this->mon->datiAcquisto().luogo(p.toStdWString());
-    this->updateRevision();
 }
 
 void MonetaXml::setAnno(QString p)
 {
     mon->anno(p.toStdWString());
-    this->updateRevision();
-}
-
-void MonetaXml::setForma(QString p)
-{
-    this->mon->datiFisici().forma(p.toStdWString());
-    this->updateRevision();
-}
-
-void MonetaXml::setMetallo(QString p)
-{
-    this->mon->datiFisici().metallo(p.toStdWString());
-    this->updateRevision();
-}
-
-void MonetaXml::setDimensione(qreal valore, QString unita)
-{
-    this->mon->datiFisici().diametro().unita(unita.toStdWString());
-    this->mon->datiFisici().diametro().valore(valore);
-    this->updateRevision();
 }
 
 void MonetaXml::setNominale(QString valore, QString unita)
 {
     this->mon->nominale().valuta(unita.toStdWString());
     this->mon->nominale().valore(valore.toStdWString());
-    this->updateRevision();
-}
-
-void MonetaXml::setPeso(qreal valore, QString unita)
-{
-    this->mon->datiFisici().peso().unita(unita.toStdWString());
-    this->mon->datiFisici().peso().valore(valore);
-    this->updateRevision();
 }
 
 void MonetaXml::setPrezzo(qreal valore, QString unita)
 {
     ::datiAcquisto::prezzo_type dia(unita.toStdWString(), valore);
     this->mon->datiAcquisto().prezzo(dia);
-    this->updateRevision();
 }
 
 void MonetaXml::setZecca(QString nome, QString segno)
@@ -845,29 +636,6 @@ void MonetaXml::setZecca(QString nome, QString segno)
     zec.nome(nome.toStdWString());
     zec.segno(segno.toStdWString());
     this->mon->zecca().set(zec);
-    this->updateRevision();
-}
-
-void MonetaXml::setDescrizione(Moneta::Lato l, QString p)
-{
-    switch (l)
-    {
-    case Moneta::DRITTO:
-        this->mon->datiArtistici().dritto().descrizione(p.toStdWString());
-        break;
-    case Moneta::ROVESCIO:
-        this->mon->datiArtistici().rovescio().descrizione(p.toStdWString());
-        break;
-    case Moneta::TAGLIO:
-        datiArtistici::taglio_optional opt = mon->datiArtistici().taglio();
-        if (opt.present()) {
-            datiArtistici::taglio_type taglio = opt.get();
-            taglio.descrizione(p.toStdWString());
-        }
-
-        break;
-    }
-    this->updateRevision();
 }
 
 void MonetaXml::setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo)
@@ -893,7 +661,6 @@ void MonetaXml::setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo)
     //salva le modifiche nel dom
     mon->letteratura(let);
     this->fillLetteratura();
-    this->updateRevision();
 }
 
 void MonetaXml::setNota(const xml::Nota& vecchio, const xml::Nota& nuovo)
@@ -917,7 +684,6 @@ void MonetaXml::setNota(const xml::Nota& vecchio, const xml::Nota& nuovo)
     //salva le modifiche nel dom
     mon->note(let);
     this->fillNote();
-    this->updateRevision();
 
 }
 
@@ -943,7 +709,6 @@ void MonetaXml::setAutorita(const xml::Autorita& vecchio, const xml::Autorita& n
     //salva le modifiche nel dom
     mon->autorita(let);
     this->fillAutorita();
-    this->updateRevision();
 
 }
 
@@ -973,7 +738,6 @@ void MonetaXml::setDocumento(const xml::Documento& vecchio, const xml::Documento
     //salva le modifiche nel dom
     mon->itemAddizionali(let);
     this->fillItemAddizionali();
-    this->updateRevision();
 
 }
 
@@ -1012,76 +776,8 @@ void MonetaXml::setZecchiere(const xml::Zecchiere& vecchio, const xml::Zecchiere
     //salva le modifiche nel dom
     mon->zecchieri(let);
     this->fillZecchieri();
-    this->updateRevision();
 }
 
-bool MonetaXml::updateLegenda(::descrizioni::legenda_iterator it, const xml::Legenda& vecchio, const xml::Legenda& nuovo)
-{
-    bool done = false;
-    //cerca l'item "giusto"
-    QString testo = QString::fromStdWString(it->testo());
-    QString sciog = "";
-    if (it->scioglimento().present())
-    {
-        sciog = QString::fromStdWString(it->scioglimento().get());
-    }
-    if ((testo == vecchio.testo) && (sciog == vecchio.scioglimento))
-    {
-        /* trovato: effettua le modifiche */
-        it->testo(nuovo.testo.toStdWString());
-        it->scioglimento(nuovo.scioglimento.toStdWString());
-        done = true;
-    }
-    this->updateRevision();
-    return done;
-}
-
-void MonetaXml::setLegenda(Moneta::Lato lato, const xml::Legenda& vecchio, const xml::Legenda& nuovo)
-{
-    bool done = false;
-    switch (lato)
-    {
-    case Moneta::DRITTO:
-        for (::descrizioni::legenda_iterator it = this->mon->datiArtistici().dritto().legenda().begin();
-             it != this->mon->datiArtistici().dritto().legenda().end() && !done;
-             ++it
-             )
-        {
-            done = updateLegenda(it, vecchio, nuovo);
-        }
-        break;
-    case Moneta::ROVESCIO:
-        for (::descrizioni::legenda_iterator it = this->mon->datiArtistici().rovescio().legenda().begin();
-             it != this->mon->datiArtistici().rovescio().legenda().end() && !done;
-             ++it
-             )
-        {
-            done = updateLegenda(it, vecchio, nuovo);
-        }
-
-        break;
-    case Moneta::TAGLIO:
-        datiArtistici::taglio_optional opt = mon->datiArtistici().taglio();
-        if (opt.present())
-        {
-            datiArtistici::taglio_type taglio = opt.get();
-            for (::descrizioni::legenda_iterator it = taglio.legenda().begin();
-                 it != taglio.legenda().end() && !done;
-                 ++it
-                 )
-            {
-                done = updateLegenda(it, vecchio, nuovo);
-            }
-        }
-        break;
-    }
-    this->fillLegende(lato);
-
-    this->updateRevision();
-
-
-
-}
 
 void MonetaXml::setPosizione(int cont, int vass, int r, int c)
 {
@@ -1091,14 +787,12 @@ void MonetaXml::setPosizione(int cont, int vass, int r, int c)
     pos.riga(r);
     pos.colonna(c);
     mon->posizione(pos);
-    this->updateRevision();
 }
 
 void MonetaXml::setData(QDate date)
 {
     xml_schema::date xmlData(date.year(), date.month(), date.day());
     this->mon->datiAcquisto().data(xmlData);
-    this->updateRevision();
 }
 
 
@@ -1109,7 +803,6 @@ void MonetaXml::addLibro(const xml::Libro& l)
     let.libro().push_back(libro);
     this->mon->letteratura().set(let);
     this->fillLetteratura();
-    this->updateRevision();
 }
 
 void MonetaXml::addNota(const xml::Nota& l)
@@ -1119,7 +812,6 @@ void MonetaXml::addNota(const xml::Nota& l)
     let.nota().push_back(nota);
     this->mon->note().set(let);
     this->fillNote();
-    this->updateRevision();
 }
 
 
@@ -1133,7 +825,6 @@ void MonetaXml::addAutorita(const xml::Autorita& l)
     let.nome().push_back(autorita);
     this->mon->autorita().set(let);
     this->fillAutorita();
-    this->updateRevision();
 }
 
 void MonetaXml::addDocumento(const xml::Documento& l)
@@ -1146,7 +837,6 @@ void MonetaXml::addDocumento(const xml::Documento& l)
     let.documento().push_back(doc);
     this->mon->itemAddizionali().set(let);
     this->fillItemAddizionali();
-    this->updateRevision();
 
 }
 
@@ -1167,7 +857,7 @@ void MonetaXml::deleteAutorita(xml::Autorita* l)
     }
     this->mon->autorita().set(let);
     this->fillAutorita();
-    this->updateRevision();
+
 }
 
 void MonetaXml::deleteNota(xml::Nota* l)
@@ -1184,7 +874,6 @@ void MonetaXml::deleteNota(xml::Nota* l)
 
     this->mon->note().set(let);
     this->fillNote();
-    this->updateRevision();
 
 }
 
@@ -1210,7 +899,6 @@ void MonetaXml::deleteDocumento(xml::Documento* l)
 
     this->mon->itemAddizionali().set(let);
     this->fillItemAddizionali();
-    this->updateRevision();
 
 }
 
@@ -1232,83 +920,12 @@ void MonetaXml::deleteLetteratura(xml::Libro* l)
 
         mon->letteratura().get().libro(letteratura);
         this->fillLetteratura();
-        this->updateRevision();
     }
 
 }
 
 
 
-void MonetaXml::deleteLegenda(Moneta::Lato lato, xml::Legenda* l)
-{
-    switch (lato)
-    {
-    case Moneta::DRITTO:
-    {
-        gestColl::coins::descrizioni::legenda_sequence leg(mon->datiArtistici().dritto().legenda());
-        for (unsigned int i = 0; i < leg.size(); i++) {
-            descrizioni::legenda_type curLeg = leg.at(i);
-            QString curTesto = QString::fromStdWString(curLeg.testo());
-            QString curSciog = "";
-            if (curLeg.scioglimento().present()) {
-                curSciog = QString::fromStdWString(curLeg.scioglimento().get());
-            }
-            if (curTesto == l->testo && curSciog == l->scioglimento) {
-                leg.erase(leg.begin()+i);
-                break;
-            }
-        }
-        mon->datiArtistici().dritto().legenda(leg);
-    }
-        break;
-    case Moneta::ROVESCIO:
-    {
-        gestColl::coins::descrizioni::legenda_sequence leg = mon->datiArtistici().rovescio().legenda();
-        for (unsigned int i = 0; i < leg.size(); i++) {
-            descrizioni::legenda_type curLeg = leg.at(i);
-            QString curTesto = QString::fromStdWString(curLeg.testo());
-            QString curSciog = "";
-            if (curLeg.scioglimento().present()) {
-                curSciog = QString::fromStdWString(curLeg.scioglimento().get());
-            }
-            if (curTesto == l->testo && curSciog == l->scioglimento) {
-                leg.erase(leg.begin()+i);
-                break;
-            }
-        }
-        mon->datiArtistici().rovescio().legenda(leg);
-    }
-        break;
-    case Moneta::TAGLIO:
-    {
-#if 0
-        datiArtistici::taglio_optional opt = mon->datiArtistici().taglio();
-        if (opt.present())
-        {
-            datiArtistici::taglio_type t = opt.get();
-            for (unsigned int i = 0; i < t.legenda().size(); i++) {
-                descrizioni::legenda_type curLeg = t.legenda().at(i);
-                QString curTesto = QString::fromStdWString(curLeg.testo());
-                QString curSciog = "";
-                if (curLeg.scioglimento().present()) {
-                    curSciog = QString::fromStdWString(curLeg.scioglimento().get());
-                }
-                if (curTesto == l->testo && curSciog == l->scioglimento) {
-                    t.legenda().erase(t.legenda().begin()+i);
-                    break;
-                }
-            }
-        }
-#endif
-        qDebug() << "TODO: " << " DeleteLegenda on TAGLIO";
-    }
-        break;
-    }
-
-    this->fillLegende(lato);
-    this->updateRevision();
-
-}
 
 
 void MonetaXml::addZecchiere(const xml::Zecchiere& l)
@@ -1324,38 +941,8 @@ void MonetaXml::addZecchiere(const xml::Zecchiere& l)
     let.zecchiere().push_back(zec);
     this->mon->zecchieri().set(let);
     this->fillZecchieri();
-    this->updateRevision();
 }
 
-
-void MonetaXml::addLegenda(Moneta::Lato lato, const xml::Legenda& l)
-{
-    ::legenda leg(L"");
-    leg.testo(l.testo.toStdWString());
-    leg.scioglimento(l.scioglimento.toStdWString());
-    switch (lato)
-    {
-    case Moneta::DRITTO:
-        mon->datiArtistici().dritto().legenda().push_back(leg);
-        break;
-    case Moneta::ROVESCIO:
-        mon->datiArtistici().rovescio().legenda().push_back(leg);
-        break;
-    case Moneta::TAGLIO:
-        datiArtistici::taglio_optional opt = mon->datiArtistici().taglio();
-        if (opt.present())
-        {
-            datiArtistici::taglio_type t = opt.get();
-            t.legenda().push_back(leg);
-        }
-        break;
-    }
-
-    this->fillLegende(lato);
-    this->updateRevision();
-
-
-}
 
 
 void MonetaXml::setAmbiti(QList<xml::Ambito*> ambiti) {
@@ -1367,7 +954,6 @@ void MonetaXml::setAmbiti(QList<xml::Ambito*> ambiti) {
     }
     this->mon->ambiti(let);
     this->fillAmbiti();
-    this->updateRevision();
 }
 
 
