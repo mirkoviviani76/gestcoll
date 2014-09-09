@@ -17,7 +17,6 @@ public:
     void setData(const QString& testo);
     void getData(QString* testo);
 
-
 protected:
     void changeEvent(QEvent *e);
 

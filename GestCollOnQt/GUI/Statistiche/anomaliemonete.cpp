@@ -29,7 +29,6 @@ void AnomalieMonete::fillData() {
     this->checkNote();
     this->checkAutorita();
     this->checkAcquisto();
-    this->checkLegendeSenzaScioglimento();
     this->checkPeso();
 }
 
@@ -158,34 +157,6 @@ void AnomalieMonete::checkPeso() {
 }
 
 
-/**
-  Controlla la presenza dello scioglimento per ogni legenda
-  */
-void AnomalieMonete::checkLegendeSenzaScioglimento() {
-    QTreeWidgetItem* node = new QTreeWidgetItem(QStringList() << "Scioglimenti mancanti");
-
-    this->ui->treeWidget->addTopLevelItem(node);
-    QList<QTreeWidgetItem *> items;
-
-    QList<QString> allid = CollezioneXml::getInstance()->getAllId();
-    foreach (QString id, allid) {
-        MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        foreach(xml::Legenda* a, m->getLegende(Moneta::DRITTO)) {
-            if (a->scioglimento == "" && a->testo != "")
-                items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("%1").arg(id))));
-        }
-        foreach(xml::Legenda* a, m->getLegende(Moneta::ROVESCIO)) {
-            if (a->scioglimento == "" && a->testo != "")
-                items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("%1").arg(id))));
-        }
-        foreach(xml::Legenda* a, m->getLegende(Moneta::TAGLIO)) {
-            if (a->scioglimento == "" && a->testo != "")
-                items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("%1").arg(id))));
-        }
-    }
-    node->addChildren(items);
-
-}
 
 
 /**

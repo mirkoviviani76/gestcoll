@@ -6,38 +6,23 @@
 #include <QFileDialog>
 #include <QDebug>
 #include <QMessageBox>
+#include "commondata.h"
 
-SetImmagineMonetaDialog::SetImmagineMonetaDialog(MonetaXml* _moneta, Moneta::Lato _lato, QWidget *parent) :
+SetImmagineMonetaDialog::SetImmagineMonetaDialog(const QString &filename, const QString& id, const QString& _latoId, QWidget *parent) :
     QDialog(parent),
+    monetaId(id),
+    latoId(_latoId),
     ui(new Ui::SetImmagineMonetaDialog)
 {
-    this->moneta = _moneta;
-    this->lato = _lato;
-    this->oldFilename = this->moneta->getImg(lato);
+    this->oldFilename = filename;
 
     ui->setupUi(this);
 
-    this->ui->title->setText(this->moneta->getId());
-
-
-
-    QString latoAsString = "";
-    switch (this->lato) {
-    case Moneta::DRITTO:
-        latoAsString = "D";
-        break;
-    case Moneta::ROVESCIO:
-        latoAsString = "R";
-        break;
-    case Moneta::TAGLIO:
-        latoAsString = "T";
-        break;
-
-    }
+    this->ui->title->setText(QString("Imposta immagine moneta %1").arg(id));
 
     this->suggestedFilename = QString("%1-%2.jpg")
-            .arg(this->moneta->getId())
-            .arg(latoAsString);
+            .arg(monetaId)
+            .arg(latoId);
 
     QString textRinomina = QString("Rinomina in %1")
             .arg(this->suggestedFilename);
@@ -55,6 +40,11 @@ SetImmagineMonetaDialog::SetImmagineMonetaDialog(MonetaXml* _moneta, Moneta::Lat
 SetImmagineMonetaDialog::~SetImmagineMonetaDialog()
 {
     delete ui;
+}
+
+QString SetImmagineMonetaDialog::getNewFilename()
+{
+    return this->targetFilename;
 }
 
 void SetImmagineMonetaDialog::on_checkBox_rinomina_stateChanged(int arg1)
@@ -99,28 +89,27 @@ void SetImmagineMonetaDialog::on_buttonBox_accepted()
     QString filename = this->ui->filename->text();
 
     if (this->ui->checkBox_noImg->isChecked()) {
-        this->moneta->setImmagine(this->lato, "");
+        this->targetFilename = "";
         return;
     }
 
     QFileInfo info(filename);
     if (info.exists()) {
-        QString targetfilename = "";
+        this->targetFilename = "";
         if (this->ui->checkBox_rinomina->isChecked()) {
-            targetfilename = this->suggestedFilename;
+            this->targetFilename = this->suggestedFilename;
         } else {
-            targetfilename = info.fileName();
+            this->targetFilename = info.fileName();
         }
-
         //copia nella dir immagini
         QString target = QString("%1/%2")
                 .arg(CommonData::getInstance()->getImgDir())
-                .arg(targetfilename);
+                .arg(targetFilename);
         QFileInfo infoTarget(target);
         if (infoTarget.exists() || filename == target) {
             QMessageBox::critical(this,
                                   CommonData::getInstance()->getAppName(),
-                                  "File già presente");
+                                  "File gia' presente");
         } else {
             QFile source(filename);
             bool ris = source.copy(target);
@@ -128,8 +117,6 @@ void SetImmagineMonetaDialog::on_buttonBox_accepted()
                 QMessageBox::critical(this,
                                       CommonData::getInstance()->getAppName(),
                                       "Copia non riuscita");
-            } else {
-                this->moneta->setImmagine(this->lato, targetfilename);
             }
         }
     }

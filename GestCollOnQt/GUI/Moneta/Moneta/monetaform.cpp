@@ -13,7 +13,6 @@
 #include <QDateTime>
 #include <gestlog.h>
 #include <posizionedialog.h>
-#include "descrizionedialog.h"
 #include <QDebug>
 #include <QClipboard>
 #include <QColorDialog>
@@ -28,7 +27,7 @@
 #include "setcollezioneinfodialog.h"
 #include "setimmaginemonetadialog.h"
 #include "elencomonetedelegate.h"
-
+#include "visualizzaimmagine.h"
 #include "datifisicidelegate.h"
 
 #define ACTION_ADD ("Aggiungi")
@@ -96,8 +95,6 @@ MonetaForm::MonetaForm(QWidget *parent) :
 
     this->contextMenuForAmbiti.addAction(ACTION_EDIT);
 
-    this->contextMenuForImg.addAction(ACTION_EDIT);
-
 
     this->contextMenuEnableAction(ACTION_ADD, false);
     this->contextMenuEnableAction(ACTION_DEL, false);
@@ -113,19 +110,10 @@ MonetaForm::MonetaForm(QWidget *parent) :
     this->ui->autorita->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->letteratura->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->note->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->legendeDritto->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->legendeRovescio->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->legendeTaglio->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->descrizioneDritto->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->descrizioneRovescio->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->descrizioneTaglio->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->documenti->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->zecchieri->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->id->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->ambiti->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->imgDritto->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->imgRovescio->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->imgTaglio->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->itemList->setContextMenuPolicy(Qt::CustomContextMenu);
 
 
@@ -135,14 +123,12 @@ MonetaForm::MonetaForm(QWidget *parent) :
     connect(this->ui->ambiti, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(on_ambiti_customContextMenuRequested(QPoint)));
     connect(this->ui->ambiti, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(on_ambiti_doubleClicked(QModelIndex)));
 
-    connect(this->ui->imgDritto, SIGNAL(customContextMenuRequested(QPoint)),
-            this, SLOT(on_imgDritto_customContextMenuRequested(QPoint)));
-    connect(this->ui->imgRovescio, SIGNAL(customContextMenuRequested(QPoint)),
-            this, SLOT(on_imgRovescio_customContextMenuRequested(QPoint)));
-    connect(this->ui->imgTaglio, SIGNAL(customContextMenuRequested(QPoint)),
-            this, SLOT(on_imgTaglio_customContextMenuRequested(QPoint)));
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(customContextMenuRequested(QPoint)));
+
+    connect(this->ui->dritto, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
+    connect(this->ui->rovescio, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
+    connect(this->ui->taglio, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
 }
 
 /**
@@ -181,24 +167,6 @@ MonetaForm::~MonetaForm()
         this->modelloDoc->clear();
         delete modelloDoc;
         this->modelloDoc = NULL;
-    }
-    if (modelloLegendaT != NULL)
-    {
-        this->modelloLegendaT->clear();
-        delete modelloLegendaT;
-        this->modelloLegendaT = NULL;
-    }
-    if (modelloLegendaD != NULL)
-    {
-        this->modelloLegendaD->clear();
-        delete modelloLegendaD;
-        this->modelloLegendaD = NULL;
-    }
-    if (modelloLegendaR != NULL)
-    {
-        this->modelloLegendaR->clear();
-        delete modelloLegendaR;
-        this->modelloLegendaR = NULL;
     }
     if (modelloAmbiti != NULL)
     {
@@ -322,9 +290,6 @@ void MonetaForm::setupModels()
     modelloAutorita = new GenericModel();
     modelloLetteratura = new GenericModel(2);
     modelloDoc = new GenericModel();
-    modelloLegendaD = new GenericModel();
-    modelloLegendaR = new GenericModel();
-    modelloLegendaT = new GenericModel();
     modelloAmbiti = new GenericModel(2);
     modelloDatiFisici = new DatiFisiciModel(this);
 
@@ -384,33 +349,8 @@ void MonetaForm::loadData()
     this->modelloAutorita->clear();
     this->modelloLetteratura->clear();
     this->modelloDoc->clear();
-    this->modelloLegendaD->clear();
-    this->modelloLegendaR->clear();
-    this->modelloLegendaT->clear();
     this->modelloAmbiti->clear();
     this->modelloDatiFisici->clear();
-
-    /* legende dritto */
-
-    foreach (xml::Legenda* a, item->getLegende(Moneta::DRITTO))
-    {
-        this->modelloLegendaD->appendRow(a);
-    }
-    this->ui->legendeDritto->setModel(this->modelloLegendaD);
-
-    /* legende rovescio */
-    foreach (xml::Legenda* a, item->getLegende(Moneta::ROVESCIO))
-    {
-        this->modelloLegendaR->appendRow(a);
-    }
-    this->ui->legendeRovescio->setModel(this->modelloLegendaR);
-
-    /* legende taglio */
-    foreach (xml::Legenda* a, item->getLegende(Moneta::TAGLIO))
-    {
-        this->modelloLegendaT->appendRow(a);
-    }
-    this->ui->legendeTaglio->setModel(this->modelloLegendaT);
 
     /* aggiunge le note */
     foreach (xml::Nota* a, item->getNote())
@@ -462,43 +402,9 @@ void MonetaForm::loadData()
     this->ui->ambiti->setModel(this->modelloAmbiti);
 
 
-    this->ui->descrizioneDritto->blockSignals(true);
-    this->ui->descrizioneDritto->setText(item->getDescrizione(Moneta::DRITTO));
-    this->ui->descrizioneDritto->blockSignals(false);
-
-    this->ui->descrizioneRovescio->blockSignals(true);
-    this->ui->descrizioneRovescio->setText(item->getDescrizione(Moneta::ROVESCIO));
-    this->ui->descrizioneRovescio->blockSignals(false);
-
-    this->ui->descrizioneTaglio->blockSignals(true);
-    this->ui->descrizioneTaglio->setText(item->getDescrizione(Moneta::TAGLIO));
-    this->ui->descrizioneTaglio->blockSignals(false);
-
-
-    QString fileImgD = item->getImg(Moneta::DRITTO);
-    this->ui->imgDritto->setupImg(fileImgD);
-
-    QString fileImgR = item->getImg(Moneta::ROVESCIO);
-    this->ui->imgRovescio->setupImg(fileImgR);
-
-    QString fileImgT = item->getImg(Moneta::TAGLIO);
-    this->ui->imgTaglio->setupImg(fileImgT);
-
-#if 0
-    foreach (Asta* a, item->letteratura.aste)
-    {
-        QString asta = QString("Asta: %1 %2 %3 %4 (%5 %6) (%7 %8)")
-               .arg(a->casa)
-               .arg(a->idAsta)
-               .arg(a->data)
-               .arg(a->lotto)
-               .arg(a->stima.valore)
-               .arg(a->stima.unita)
-               .arg(a->aggiudicazione.valore)
-               .arg(a->aggiudicazione.unita);
-        this->ui->textEdit->append(asta);
-    }
-#endif
+    this->ui->dritto->setDati(item->getId(), "D", &(item->getDom()->datiArtistici().dritto()));
+    this->ui->rovescio->setDati(item->getId(), "R", &(item->getDom()->datiArtistici().rovescio()));
+    this->ui->taglio->setDati(item->getId(), "T", &(item->getDom()->datiArtistici().taglio().get()));
 
     /* prepara il led di stato */
     xml::Stato stato = this->item->getStato();
@@ -574,9 +480,9 @@ void MonetaForm::enableEdit(bool editable)
     this->ui->led->setEnabled(editable);
     this->ui->luogo->setReadOnly(!editable);
     this->ui->data->setReadOnly(!editable);
-    this->ui->descrizioneDritto->setReadOnly(!editable);
-    this->ui->descrizioneRovescio->setReadOnly(!editable);
-    this->ui->descrizioneTaglio->setReadOnly(!editable);
+    this->ui->dritto->setReadOnly(!editable);
+    this->ui->rovescio->setReadOnly(!editable);
+    this->ui->taglio->setReadOnly(!editable);
     this->ui->zecca->enableEdit(editable);
     this->ui->nominale->enableEdit(editable);
     this->ui->prezzo->enableEdit(editable);
@@ -611,27 +517,6 @@ void MonetaForm::on_anno_textChanged(QString newText)
 void MonetaForm::on_luogo_textChanged(QString  newText)
 {
     this->item->setLuogo(newText);
-    emit this->changesOccurred();
-}
-
-void MonetaForm::on_descrizioneDritto_textChanged()
-{
-    QString newText = this->ui->descrizioneDritto->toPlainText();
-    this->item->setDescrizione(Moneta::DRITTO, newText);
-    emit this->changesOccurred();
-}
-
-void MonetaForm::on_descrizioneRovescio_textChanged()
-{
-    QString newText = this->ui->descrizioneRovescio->toPlainText();
-    this->item->setDescrizione(Moneta::ROVESCIO, newText);
-    emit this->changesOccurred();
-}
-
-void MonetaForm::on_descrizioneTaglio_textChanged()
-{
-    QString newText = this->ui->descrizioneTaglio->toPlainText();
-    this->item->setDescrizione(Moneta::TAGLIO, newText);
     emit this->changesOccurred();
 }
 
@@ -687,6 +572,7 @@ void MonetaForm::salva()
 
     if (ret)
     {
+        this->item->updateRevision();
         //salvataggio
         ret = CollezioneXml::getInstance()->save();
     }
@@ -782,43 +668,6 @@ void MonetaForm::on_letteratura_doubleClicked(QModelIndex index)
     }
 }
 
-void MonetaForm::gestLegendaModifica(Moneta::Lato lato, QModelIndex index)
-{
-    GenericModel* model = (GenericModel*)index.model();
-    xml::Legenda* vecchio = (xml::Legenda*) model->getItem(index);
-    LegendaDialog legendaDialog(this);
-    legendaDialog.setData(vecchio);
-    int ret = legendaDialog.exec();
-    if (ret == QDialog::Accepted && this->editingEnabled)
-    {
-        QString testo;
-        QString scioglimento;
-        legendaDialog.getData(&testo, &scioglimento);
-        xml::Legenda nuovo(testo, scioglimento);
-        /* modifica/aggiunge il nodo al dom */
-        this->item->setLegenda(lato, *vecchio, nuovo);
-        this->loadData();
-        //segnala la modifica
-        emit this->changesOccurred();
-    }
-}
-
-void MonetaForm::on_legendeDritto_doubleClicked(QModelIndex index)
-{
-    gestLegendaModifica(Moneta::DRITTO, index);
-}
-
-void MonetaForm::on_legendeRovescio_doubleClicked(QModelIndex index)
-{
-    gestLegendaModifica(Moneta::ROVESCIO, index);
-}
-
-void MonetaForm::on_legendeTaglio_doubleClicked(QModelIndex index)
-{
-    gestLegendaModifica(Moneta::TAGLIO, index);
-}
-
-
 void MonetaForm::on_zecchieri_doubleClicked(QModelIndex index)
 {
     GenericModel* model = (GenericModel*)index.model();
@@ -893,6 +742,23 @@ void MonetaForm::on_autorita_customContextMenuRequested(QPoint pos)
         // nothing was chosen
     }
 }
+
+
+void MonetaForm::showQr() {
+    //ottiene il nome della immagine png
+    QString qrImg = CommonData::getInstance()->getQrDir()+"/"+this->item->getId()+".png";
+    QFileInfo fi(qrImg);
+    if (fi.exists()) {
+        //visualizza l'immagine con il qr code
+        VisualizzaImmagine v(qrImg, this);
+        v.exec();
+    } else {
+        Log::Logger::getInstance()->log(QString("L'immagine %1 non esiste").arg(qrImg), Log::ERR);
+    }
+}
+
+
+
 
 void MonetaForm::on_itemList_customContextMenuRequested(const QPoint &pos)
 {
@@ -970,6 +836,7 @@ void MonetaForm::on_documenti_customContextMenuRequested(QPoint pos)
 }
 
 void MonetaForm::legende_customContextMenuRequested(const QPoint& pos, const Moneta::Lato& lato) {
+#if 0
     QListView* view = NULL;
     GenericModel* model = NULL;
     switch (lato) {
@@ -1029,23 +896,10 @@ void MonetaForm::legende_customContextMenuRequested(const QPoint& pos, const Mon
     {
 
     }
-
-}
-
-void MonetaForm::on_legendeDritto_customContextMenuRequested(QPoint pos)
-{
-    this->legende_customContextMenuRequested(pos, Moneta::DRITTO);
-}
-
-void MonetaForm::on_legendeRovescio_customContextMenuRequested(QPoint pos)
-{
-    this->legende_customContextMenuRequested(pos, Moneta::ROVESCIO);
-}
-
-
-void MonetaForm::on_legendeTaglio_customContextMenuRequested(QPoint pos)
-{
-    this->legende_customContextMenuRequested(pos, Moneta::TAGLIO);
+#else
+    //TODO
+    qWarning() << "TODO";
+#endif
 }
 
 void MonetaForm::on_zecchieri_customContextMenuRequested(QPoint pos)
@@ -1206,6 +1060,7 @@ void MonetaForm::on_letteratura_customContextMenuRequested(QPoint pos)
 
 void MonetaForm::addLegenda(Moneta::Lato lato)
 {
+#if 0
     /* attiva la vera gestione */
     LegendaDialog dialog(this);
     //dialog.setData(a);
@@ -1223,6 +1078,10 @@ void MonetaForm::addLegenda(Moneta::Lato lato)
         emit this->changesOccurred();
 
     }
+#else
+    //TODO
+    qWarning() << "TODO";
+#endif
 }
 
 
@@ -1310,82 +1169,6 @@ void MonetaForm::on_posizione_clicked()
     }
 }
 
-
-void MonetaForm::descrizione_customContextMenuRequested(const QPoint& pos, const Moneta::Lato& lato) {
-    QTextEdit* view;
-    switch (lato) {
-        case Moneta::DRITTO :
-        {
-            view = this->ui->descrizioneDritto;
-        }
-            break;
-        case Moneta::ROVESCIO :
-        {
-            view = this->ui->descrizioneRovescio;
-        }
-            break;
-        case Moneta::TAGLIO :
-        {
-            view = this->ui->descrizioneTaglio;
-        }
-            break;
-    }
-
-    // for most widgets
-    QPoint globalPos = view->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_EDIT)
-        {
-            /* attiva la vera gestione */
-            DescrizioneDialog dialog(this);
-            dialog.setData(view->toPlainText());
-            //autoritaDialog.setData(a);
-            int ret = dialog.exec();
-            if (ret == QDialog::Accepted)
-            {
-                QString nuovaDescrizione;
-                dialog.getData(&nuovaDescrizione);
-                /* modifica/aggiunge il nodo al dom */
-                this->item->setDescrizione(lato, nuovaDescrizione);
-                this->loadData();
-                //segnala la modifica
-                emit this->changesOccurred();
-
-            }
-        } else if (selectedItem->text() == ACTION_COPY_ID) {
-            this->gestClipboardCopyId(this->item->getId());
-        } else if (selectedItem->text() == ACTION_COPY) {
-            this->gestClipboardCopy(this->item->getId());
-        } else if (selectedItem->text() == ACTION_SHOW_QR) {
-            this->showQr();
-        }
-
-    }
-    else
-    {
-        // nothing was chosen
-    }
-
-}
-
-void MonetaForm::on_descrizioneDritto_customContextMenuRequested(QPoint pos)
-{
-    this->descrizione_customContextMenuRequested(pos, Moneta::DRITTO);
-}
-
-void MonetaForm::on_descrizioneRovescio_customContextMenuRequested(QPoint pos)
-{
-    this->descrizione_customContextMenuRequested(pos, Moneta::ROVESCIO);
-}
-
-void MonetaForm::on_descrizioneTaglio_customContextMenuRequested(QPoint pos)
-{
-    this->descrizione_customContextMenuRequested(pos, Moneta::TAGLIO);
-}
 
 void MonetaForm::on_id_customContextMenuRequested(const QPoint &pos)
 {
@@ -1516,19 +1299,6 @@ void MonetaForm::on_ambiti_doubleClicked(const QModelIndex &index)
     this->setupAmbiti();
 }
 
-void MonetaForm::showQr() {
-    //ottiene il nome della immagine png
-    QString qrImg = CommonData::getInstance()->getQrDir()+"/"+this->item->getId()+".png";
-    QFileInfo fi(qrImg);
-    if (fi.exists()) {
-        //visualizza l'immagine con il qr code
-        VisualizzaImmagine v(qrImg, this);
-        v.exec();
-    } else {
-        Log::Logger::getInstance()->log(QString("L'immagine %1 non esiste").arg(qrImg), Log::ERR);
-    }
-}
-
 void MonetaForm::customContextMenuRequested(QPoint pos) {
     // for most widgets
     QPoint globalPos = this->mapToGlobal(pos);
@@ -1561,57 +1331,7 @@ void MonetaForm::on_ambiti_customContextMenuRequested(const QPoint &pos)
 }
 
 
-void MonetaForm::img_customContextMenuRequested(const QPoint &pos, const Moneta::Lato& lato) {
-    ImgMoneta* img;
-    switch (lato) {
-        case Moneta::DRITTO :
-        {
-            img = this->ui->imgDritto;
-        }
-            break;
-        case Moneta::ROVESCIO :
-        {
-            img = this->ui->imgRovescio;
-        }
-            break;
-        case Moneta::TAGLIO :
-        {
-            img = this->ui->imgTaglio;
-        }
-            break;
-    }
 
-    // for most widgets
-    QPoint globalPos = img->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenuForImg.exec(globalPos);
-    if (selectedItem)    {
-        if (selectedItem->text() == ACTION_EDIT) {
-            SetImmagineMonetaDialog si(this->item, lato, this);
-            int ret = si.exec();
-            if (ret == QDialog::Accepted) {
-                this->loadData();
-                //segnala la modifica
-                emit this->changesOccurred();
-            }
-        } else if (selectedItem->text() == ACTION_SHOW_QR) {
-            this->showQr();
-        }
-
-    }
-
-}
-
-void MonetaForm::on_imgDritto_customContextMenuRequested(const QPoint &pos) {
-    this->img_customContextMenuRequested(pos, Moneta::DRITTO);
-}
-
-void MonetaForm::on_imgRovescio_customContextMenuRequested(const QPoint &pos) {
-    this->img_customContextMenuRequested(pos, Moneta::ROVESCIO);
-}
-
-void MonetaForm::on_imgTaglio_customContextMenuRequested(const QPoint &pos) {
-    this->img_customContextMenuRequested(pos, Moneta::TAGLIO);
-}
 
 void MonetaForm::datiFisiciChanged()
 {

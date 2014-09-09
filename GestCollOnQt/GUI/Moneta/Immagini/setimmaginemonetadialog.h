@@ -2,7 +2,7 @@
 #define SETIMMAGINEMONETADIALOG_H
 
 #include <QDialog>
-#include "monetaxml.h"
+#include "scheda.hxx"
 
 namespace Ui {
 class SetImmagineMonetaDialog;
@@ -13,8 +13,9 @@ class SetImmagineMonetaDialog : public QDialog
     Q_OBJECT
     
 public:
-    explicit SetImmagineMonetaDialog(MonetaXml* moneta, Moneta::Lato, QWidget *parent = 0);
+    explicit SetImmagineMonetaDialog(const QString& filename, const QString &id, const QString &_latoId, QWidget *parent = 0);
     ~SetImmagineMonetaDialog();
+    QString getNewFilename();
     
 private slots:
     void on_checkBox_rinomina_stateChanged(int arg1);
@@ -29,8 +30,11 @@ private:
     Ui::SetImmagineMonetaDialog *ui;
     QString suggestedFilename;
     QString oldFilename;
-    MonetaXml* moneta;
-    Moneta::Lato lato;
+    QString monetaId;
+    QString latoId;
+
+    QString targetFilename;
+
 };
 
 #endif // SETIMMAGINEMONETADIALOG_H

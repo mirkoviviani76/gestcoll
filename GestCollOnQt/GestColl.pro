@@ -143,7 +143,7 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/Moneta/Documenti/adddocumentdialog.cpp \
                GUI/Moneta/Immagini/imgmoneta.cpp \
                GUI/Moneta/Immagini/setimmaginemonetadialog.cpp \
-               GUI/Moneta/Immagini/visualizzaimmagine.cpp \
+               GUI/Moneta/Utilita/visualizzaimmagine.cpp \
                GUI/Moneta/Legende/legendadialog.cpp \
                GUI/Moneta/Letteratura/letteraturadialog.cpp \
                GUI/Moneta/Moneta/monetaform.cpp \
@@ -216,7 +216,7 @@ HEADERS  +=    Common/commondata.h \
                GUI/Moneta/Documenti/adddocumentdialog.h \
                GUI/Moneta/Immagini/imgmoneta.h \
                GUI/Moneta/Immagini/setimmaginemonetadialog.h \
-               GUI/Moneta/Immagini/visualizzaimmagine.h \
+               GUI/Moneta/Utilita/visualizzaimmagine.h \
                GUI/Moneta/Legende/legendadialog.h \
                GUI/Moneta/Letteratura/letteraturadialog.h \
                GUI/Moneta/Moneta/monetaform.h \
@@ -265,7 +265,7 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
                GUI/Moneta/Descrizione\descrizionedialog.ui \
                GUI/Moneta/Documenti\adddocumentdialog.ui \
                GUI/Moneta/Immagini\setimmaginemonetadialog.ui \
-               GUI/Moneta/Immagini\visualizzaimmagine.ui \
+               GUI/Moneta/Utilita\visualizzaimmagine.ui \
                GUI/Moneta/Legende\legendadialog.ui \
                GUI/Moneta/Letteratura\letteraturadialog.ui \
                GUI/Moneta/Moneta\monetaform.ui \
@@ -292,8 +292,7 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
     GUI/Moneta/Descrizione/descrizioneform.ui
 
 
-RESOURCES += resources/resources.qrc \
-    GUI/resources/resources.qrc
+RESOURCES += resources/resources.qrc
 
 RC_FILE = resources/myapp.rc
 

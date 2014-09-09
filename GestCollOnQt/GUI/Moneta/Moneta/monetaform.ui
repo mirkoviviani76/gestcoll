@@ -84,7 +84,7 @@ font-weight: bold;
            <string>Collezione</string>
           </property>
           <property name="icon">
-           <iconset resource="../../resources/resources.qrc">
+           <iconset resource="../../../resources/resources.qrc">
             <normaloff>:/icons/process_info.png</normaloff>:/icons/process_info.png</iconset>
           </property>
           <property name="iconSize">
@@ -443,7 +443,7 @@ QTabBar::tab:selected {
                     <string>...</string>
                    </property>
                    <property name="icon">
-                    <iconset resource="../../resources/resources.qrc">
+                    <iconset resource="../../../resources/resources.qrc">
                      <normaloff>:/icons/internet.ico</normaloff>:/icons/internet.ico</iconset>
                    </property>
                   </widget>
@@ -818,224 +818,35 @@ QTabBar::tab:selected {
         </item>
         <item>
          <widget class="QWidget" name="inferiore" native="true">
-          <layout class="QGridLayout" name="gridLayout_4" columnstretch="2,2,1">
-           <property name="leftMargin">
-            <number>2</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item row="0" column="0">
-            <widget class="QGroupBox" name="dritto">
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="DescrizioneForm" name="dritto">
              <property name="title">
               <string>Dritto</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0,1,0">
-              <property name="spacing">
-               <number>3</number>
-              </property>
-              <property name="leftMargin">
-               <number>2</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>2</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QTextEdit" name="descrizioneDritto"/>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_21">
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Legende</string>
-                </property>
-                <property name="buddy">
-                 <cstring>legendeDritto</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QListView" name="legendeDritto">
-                <property name="alternatingRowColors">
-                 <bool>true</bool>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="ImgMoneta" name="imgDritto">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="pixmap">
-                 <pixmap resource="../../resources/resources.qrc">:/img/SRI.png</pixmap>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-             </layout>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QGroupBox" name="rovescio">
+           <item>
+            <widget class="DescrizioneForm" name="rovescio">
              <property name="title">
               <string>Rovescio</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,1,0">
-              <property name="spacing">
-               <number>3</number>
-              </property>
-              <property name="leftMargin">
-               <number>2</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>2</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QTextEdit" name="descrizioneRovescio"/>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_23">
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Legende</string>
-                </property>
-                <property name="buddy">
-                 <cstring>legendeRovescio</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QListView" name="legendeRovescio">
-                <property name="alternatingRowColors">
-                 <bool>true</bool>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="ImgMoneta" name="imgRovescio">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="pixmap">
-                 <pixmap resource="../../resources/resources.qrc">:/img/SRI.png</pixmap>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-             </layout>
             </widget>
            </item>
-           <item row="0" column="2">
-            <widget class="QGroupBox" name="taglio">
+           <item>
+            <widget class="DescrizioneForm" name="taglio">
              <property name="title">
               <string>Taglio</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,0,1,0">
-              <property name="spacing">
-               <number>3</number>
-              </property>
-              <property name="leftMargin">
-               <number>2</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>2</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QTextEdit" name="descrizioneTaglio"/>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_24">
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Legende</string>
-                </property>
-                <property name="buddy">
-                 <cstring>legendeTaglio</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QListView" name="legendeTaglio">
-                <property name="alternatingRowColors">
-                 <bool>true</bool>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="ImgMoneta" name="imgTaglio">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="pixmap">
-                 <pixmap resource="../../resources/resources.qrc">:/img/SRI.png</pixmap>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-             </layout>
             </widget>
            </item>
           </layout>
@@ -1066,14 +877,15 @@ QTabBar::tab:selected {
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>ImgMoneta</class>
-   <extends>QLabel</extends>
-   <header>imgmoneta.h</header>
-  </customwidget>
-  <customwidget>
    <class>QLedIndicator</class>
    <extends>QPushButton</extends>
    <header>qledindicator.h</header>
+  </customwidget>
+  <customwidget>
+   <class>DescrizioneForm</class>
+   <extends>QGroupBox</extends>
+   <header>descrizioneform.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -1087,21 +899,15 @@ QTabBar::tab:selected {
   <tabstop>letteratura</tabstop>
   <tabstop>note</tabstop>
   <tabstop>documenti</tabstop>
-  <tabstop>descrizioneDritto</tabstop>
-  <tabstop>legendeDritto</tabstop>
-  <tabstop>descrizioneRovescio</tabstop>
-  <tabstop>legendeRovescio</tabstop>
-  <tabstop>descrizioneTaglio</tabstop>
   <tabstop>setupCollezione</tabstop>
   <tabstop>posizione</tabstop>
   <tabstop>itemList</tabstop>
   <tabstop>led</tabstop>
   <tabstop>Tabs</tabstop>
   <tabstop>tabsVassoi</tabstop>
-  <tabstop>legendeTaglio</tabstop>
  </tabstops>
  <resources>
-  <include location="../../resources/resources.qrc"/>
+  <include location="../../../resources/resources.qrc"/>
  </resources>
  <connections/>
 </ui>
