@@ -64,19 +64,6 @@ class Nota : public GenericItem
         inline QImage toImg() { return QImage(); }
         inline QColor getColor() { return QColor(QColor::Invalid);}
 };
-class  Legenda : public GenericItem
-{
-    public:
-        QString testo;
-        QString scioglimento;
-
-        virtual ~Legenda() {}
-        Legenda(QString t = "", QString s = "") {testo = t; scioglimento = s;}
-        inline QString toString(int column=-1) {Q_UNUSED(column); return testo;}
-        inline QString toTooltip() {return scioglimento;}
-        inline QImage toImg() { return QImage(); }
-        inline QColor getColor() { return QColor(QColor::Invalid);}
-};
 class  Autorita : public GenericItem
 {
     public:

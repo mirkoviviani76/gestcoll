@@ -4,8 +4,7 @@
 #include <QGroupBox>
 #include <QList>
 #include <QMenu>
-#include "monetaxml.h"
-#include "genericmodel.h"
+#include "modellolegenda.h"
 
 #include "scheda.hxx"
 
@@ -30,7 +29,7 @@ public:
 private:
 
     Ui::DescrizioneForm *ui;
-    GenericModel* modelloLegende;
+    ModelloLegenda* modelloLegende;
     bool editingEnabled;
     ::gestColl::coins::descrizioni* xmlDom;
     QString monetaId;
@@ -40,10 +39,9 @@ private:
     QMenu contextMenuForImg;
 
 
-    void updateLegenda(const xml::Legenda &vecchio, const xml::Legenda &nuovo);
-    bool updateLegenda(::descrizioni::legenda_iterator it, const xml::Legenda &vecchio, const xml::Legenda &nuovo);
+    void updateLegenda(const gestColl::coins::legenda &vecchio, const QString &nuovoTesto, const QString &nuovoScioglimento);
     void gestLegendaModifica(QModelIndex index);
-    QList<xml::Legenda *> fillLegende();
+    QList< ::gestColl::coins::legenda > fillLegende();
     void setLegende();
 public slots:
     void setReadOnly(bool readonly);
