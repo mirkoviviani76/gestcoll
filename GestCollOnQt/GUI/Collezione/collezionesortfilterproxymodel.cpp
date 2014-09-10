@@ -33,6 +33,12 @@ QVariant CollezioneSortFilterProxyModel::headerData(int section, Qt::Orientation
 
 bool CollezioneSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const {
     GenericModel* model = (GenericModel*)this->sourceModel();
+
+    if (!left.isValid())
+        return false;
+    if (!right.isValid())
+        return false;
+
     MonetaXml* l = (MonetaXml*)model->getItem(left);
     MonetaXml* r = (MonetaXml*)model->getItem(right);
 
@@ -60,11 +66,16 @@ bool CollezioneSortFilterProxyModel::lessThan(const QModelIndex &left, const QMo
         break;
     case 1:
         {
-            QString paese1 = l->getPaese();
-            QString paese2 = r->getPaese();
+            const QString paese1 = l->getPaese();
+            const QString paese2 = r->getPaese();
             int v = QString::localeAwareCompare(paese1, paese2);
-            ret = ((v > 0) ? false : true);
-        }
+            if (v == 0)
+                ret = false;
+            else if (v > 0)
+                ret = false;
+            else if (v < 0)
+               ret = true;
+    }
         break;
     case 2:
         {

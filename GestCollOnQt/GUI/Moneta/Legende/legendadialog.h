@@ -13,7 +13,7 @@ class LegendaDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit LegendaDialog(QWidget *parent = 0);
+    explicit LegendaDialog(bool editingMode, QWidget *parent = 0);
     ~LegendaDialog();
     void setData(gestColl::coins::legenda legenda);
     void getData(QString* testo, QString* scioglimento);

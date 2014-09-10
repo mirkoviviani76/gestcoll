@@ -48,7 +48,7 @@ font-weight: bold;
      <widget class="QDockWidget" name="dockWidget">
       <property name="minimumSize">
        <size>
-        <width>98</width>
+        <width>450</width>
         <height>117</height>
        </size>
       </property>
