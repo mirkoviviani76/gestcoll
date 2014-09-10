@@ -1431,28 +1431,22 @@ namespace gestColl
       this->paese_.set (x);
     }
 
-    const moneta::autorita_optional& moneta::
+    const moneta::autorita_type& moneta::
     autorita () const
     {
-      return this->autorita_;
+      return this->autorita_.get ();
     }
 
-    moneta::autorita_optional& moneta::
+    moneta::autorita_type& moneta::
     autorita ()
     {
-      return this->autorita_;
+      return this->autorita_.get ();
     }
 
     void moneta::
     autorita (const autorita_type& x)
     {
       this->autorita_.set (x);
-    }
-
-    void moneta::
-    autorita (const autorita_optional& x)
-    {
-      this->autorita_ = x;
     }
 
     void moneta::
@@ -4369,6 +4363,7 @@ namespace gestColl
 
     moneta::
     moneta (const paese_type& paese,
+            const autorita_type& autorita,
             const nominale_type& nominale,
             const datiArtistici_type& datiArtistici,
             const datiFisici_type& datiFisici,
@@ -4379,7 +4374,7 @@ namespace gestColl
     : ::xml_schema::type (),
       ambiti_ (::xml_schema::flags (), this),
       paese_ (paese, ::xml_schema::flags (), this),
-      autorita_ (::xml_schema::flags (), this),
+      autorita_ (autorita, ::xml_schema::flags (), this),
       anno_ (::xml_schema::flags (), this),
       nominale_ (nominale, ::xml_schema::flags (), this),
       zecca_ (::xml_schema::flags (), this),
@@ -4400,6 +4395,7 @@ namespace gestColl
 
     moneta::
     moneta (const paese_type& paese,
+            ::std::auto_ptr< autorita_type >& autorita,
             ::std::auto_ptr< nominale_type >& nominale,
             ::std::auto_ptr< datiArtistici_type >& datiArtistici,
             ::std::auto_ptr< datiFisici_type >& datiFisici,
@@ -4410,7 +4406,7 @@ namespace gestColl
     : ::xml_schema::type (),
       ambiti_ (::xml_schema::flags (), this),
       paese_ (paese, ::xml_schema::flags (), this),
-      autorita_ (::xml_schema::flags (), this),
+      autorita_ (autorita, ::xml_schema::flags (), this),
       anno_ (::xml_schema::flags (), this),
       nominale_ (nominale, ::xml_schema::flags (), this),
       zecca_ (::xml_schema::flags (), this),
@@ -4531,7 +4527,7 @@ namespace gestColl
           ::std::auto_ptr< autorita_type > r (
             autorita_traits::create (i, f, this));
 
-          if (!this->autorita_)
+          if (!autorita_.present ())
           {
             this->autorita_.set (r);
             continue;
@@ -4741,6 +4737,13 @@ namespace gestColl
       {
         throw ::xsd::cxx::tree::expected_element< wchar_t > (
           L"paese",
+          L"http://gestColl/coins");
+      }
+
+      if (!autorita_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< wchar_t > (
+          L"autorita",
           L"http://gestColl/coins");
       }
 
@@ -6056,7 +6059,6 @@ namespace gestColl
 
       // autorita
       //
-      if (i.autorita ())
       {
         ::xercesc::DOMElement& s (
           ::xsd::cxx::xml::dom::create_element (
@@ -6064,7 +6066,7 @@ namespace gestColl
             L"http://gestColl/coins",
             e));
 
-        s << *i.autorita ();
+        s << i.autorita ();
       }
 
       // anno

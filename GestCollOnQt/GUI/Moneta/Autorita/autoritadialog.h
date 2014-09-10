@@ -2,7 +2,8 @@
 #define AUTORITADIALOG_H
 
 #include <QDialog>
-#include <commondefs.h>
+#include "scheda.hxx"
+
 
 namespace Ui {
     class AutoritaDialog;
@@ -15,18 +16,15 @@ class AutoritaDialog : public QDialog
 public:
     explicit AutoritaDialog(QWidget *parent = 0);
     ~AutoritaDialog();
-    void setData(xml::Autorita* autorita);
-    void getData(QString* nome);
+    void setData(::gestColl::coins::autorita::nome_type autorita);
+    void getData(::gestColl::coins::autorita::nome_type* nome);
 
 protected:
     void changeEvent(QEvent *e);
 
 private:
     Ui::AutoritaDialog *ui;
-    xml::Autorita* autorita;
 
-private slots:
-    void on_buttonBox_accepted();
 };
 
 #endif // AUTORITADIALOG_H

@@ -25,20 +25,14 @@ void AutoritaDialog::changeEvent(QEvent *e)
     }
 }
 
-void AutoritaDialog::setData(xml::Autorita* autorita)
+void AutoritaDialog::setData(::gestColl::coins::autorita::nome_type autorita)
 {
-    this->autorita = autorita;
-    this->ui->lineEdit->setText(autorita->nome);
+    this->ui->lineEdit->setText(QString::fromStdWString(autorita));
 }
 
 
-void AutoritaDialog::getData(QString* nome)
+void AutoritaDialog::getData(gestColl::coins::autorita::nome_type *nome)
 {
-    *nome = this->ui->lineEdit->text();
+    *nome = this->ui->lineEdit->text().toStdWString();
 }
 
-
-void AutoritaDialog::on_buttonBox_accepted()
-{
-
-}

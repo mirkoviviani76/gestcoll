@@ -178,7 +178,9 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/DatiFisici/datifisicimodel.cpp \
     GUI/Moneta/DatiFisici/datifisicidelegate.cpp \
     GUI/Moneta/Descrizione/descrizioneform.cpp \
-    GUI/Moneta/Descrizione/modellolegenda.cpp
+    GUI/Moneta/Descrizione/modellolegenda.cpp \
+    GUI/Moneta/Autorita/modelloautorita.cpp \
+    GUI/Moneta/Autorita/autoritaform.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -252,7 +254,9 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/DatiFisici/datifisicimodel.h \
     GUI/Moneta/DatiFisici/datifisicidelegate.h \
     GUI/Moneta/Descrizione/descrizioneform.h \
-    GUI/Moneta/Descrizione/modellolegenda.h
+    GUI/Moneta/Descrizione/modellolegenda.h \
+    GUI/Moneta/Autorita/modelloautorita.h \
+    GUI/Moneta/Autorita/autoritaform.h
 
 
 
@@ -291,7 +295,8 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
             GUI/Collezione/setcollezioneinfodialog.ui \
             GUI/Collezione/modifyambitodialog.ui \
             GUI/Links/newlinkdialog.ui \
-    GUI/Moneta/Descrizione/descrizioneform.ui
+    GUI/Moneta/Descrizione/descrizioneform.ui \
+    GUI/Moneta/Autorita/autoritaform.ui
 
 
 RESOURCES += resources/resources.qrc

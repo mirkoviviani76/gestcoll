@@ -25,7 +25,6 @@ private:
     Ui::LegendaDialog *ui;
 
 private slots:
-    void on_buttonBox_accepted();
     void specialCharSelected(QString sc);
 };
 

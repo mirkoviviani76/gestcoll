@@ -61,10 +61,6 @@ void LegendaDialog::getData(QString* testo, QString* scioglimento)
 }
 
 
-void LegendaDialog::on_buttonBox_accepted()
-{
-}
-
 /**
   Aggiunge il carattere selezionato nel testo della legenda.
   */
