@@ -31,7 +31,6 @@ MonetaXml::MonetaXml(const moneta& m)
     //this->setOrdering(Moneta::BY_ID);
     this->updateImage();
     this->fillAmbiti();
-    this->fillAutorita();
     this->fillItemAddizionali();
     this->fillLetteratura();
     this->fillNote();
@@ -43,7 +42,6 @@ MonetaXml::MonetaXml(moneta *m) {
     //this->setOrdering(Moneta::BY_ID);
     this->updateImage();
     this->fillAmbiti();
-    this->fillAutorita();
     this->fillItemAddizionali();
     this->fillLetteratura();
     this->fillNote();
@@ -451,24 +449,6 @@ void MonetaXml::fillNote()
 }
 
 
-void MonetaXml::fillAutorita()
-{
-    this->deleteAutoritaList();
-    moneta::autorita_optional nop = this->mon->autorita();
-    if (nop.present())
-    {
-        moneta::autorita_type nt = nop.get();
-        for (moneta::autorita_type::nome_iterator it(nt.nome().begin());
-            it != nt.nome().end();
-            ++it
-            )
-        {
-            xml::Autorita* n = new xml::Autorita(QString::fromStdWString((*it)));
-            this->xmlAutorita.append(n);
-        }
-    }
-}
-
 void MonetaXml::fillZecchieri()
 {
     this->deleteZecchieriList();
@@ -687,30 +667,6 @@ void MonetaXml::setNota(const xml::Nota& vecchio, const xml::Nota& nuovo)
 
 }
 
-void MonetaXml::setAutorita(const xml::Autorita& vecchio, const xml::Autorita& nuovo)
-{
-    bool done = false;
-    moneta::autorita_type let = mon->autorita().get();
-
-    for (::autorita::nome_iterator it = let.nome().begin();
-         it != let.nome().end() && !done;
-         ++it)
-    {
-        //cerca l'item "giusto"
-        QString cur = QString::fromStdWString(*it);
-        if (cur == vecchio.nome)
-        {
-            /* trovato: effettua le modifiche */
-            *it = nuovo.nome.toStdWString();
-            done = true;
-        }
-    }
-
-    //salva le modifiche nel dom
-    mon->autorita(let);
-    this->fillAutorita();
-
-}
 
 void MonetaXml::setDocumento(const xml::Documento& vecchio, const xml::Documento& nuovo)
 {
@@ -820,11 +776,9 @@ void MonetaXml::addAutorita(const xml::Autorita& l)
     moneta::autorita_type::nome_type autorita(l.nome.toStdWString());
     moneta::autorita_type let;
 
-    if (this->mon->autorita().present())
-        let = mon->autorita().get();
+    let = mon->autorita();
     let.nome().push_back(autorita);
-    this->mon->autorita().set(let);
-    this->fillAutorita();
+    //TODO this->mon->autorita().set(let);
 }
 
 void MonetaXml::addDocumento(const xml::Documento& l)
@@ -846,8 +800,7 @@ void MonetaXml::deleteAutorita(xml::Autorita* l)
     moneta::autorita_type::nome_type autorita(l->nome.toStdWString());
     moneta::autorita_type let;
 
-    if (this->mon->autorita().present())
-        let = mon->autorita().get();
+    let = mon->autorita();
 
     for (unsigned int i = 0; i < let.nome().size(); i++) {
         if (let.nome().at(i) == autorita) {
@@ -855,8 +808,7 @@ void MonetaXml::deleteAutorita(xml::Autorita* l)
             break;
         }
     }
-    this->mon->autorita().set(let);
-    this->fillAutorita();
+    //TODO this->mon->autorita().set(let);
 
 }
 

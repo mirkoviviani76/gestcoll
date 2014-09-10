@@ -73,7 +73,6 @@ public:
     void setZecca(QString nome, QString segno);
     void setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo);
     void setNota(const xml::Nota& vecchio, const xml::Nota& nuovo);
-    void setAutorita(const xml::Autorita& vecchio, const xml::Autorita& nuovo);
     void setZecchiere(const xml::Zecchiere& vecchio, const xml::Zecchiere& nuovo);
     void setDocumento(const xml::Documento& vecchio, const xml::Documento& nuovo);
     void setData(QDate date);

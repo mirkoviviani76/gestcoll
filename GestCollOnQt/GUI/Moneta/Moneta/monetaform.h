@@ -50,7 +50,6 @@ private:
     CollezioneSortFilterProxyModel* collezioneModel; ///< modello collezione
     GenericModel* modelloNote; ///< modello collezione
     GenericModel* modelloZecchieri; ///< modello zecchieri
-    GenericModel* modelloAutorita; ///< modello autorita
     GenericModel* modelloLetteratura; ///< modello letteratura
     GenericModel* modelloDoc; ///< modello documenti
     GenericModel* modelloAmbiti; ///< modello ambiti
@@ -80,7 +79,6 @@ private slots:
     void on_posizione_clicked();
     void on_itemList_activated(QModelIndex index);
     void on_data_dateChanged(QDate date);
-    void on_autorita_customContextMenuRequested(QPoint pos);
     void on_documenti_customContextMenuRequested(QPoint pos);
     void on_note_customContextMenuRequested(QPoint pos);
     void on_zecchieri_customContextMenuRequested(QPoint pos);
@@ -89,7 +87,6 @@ private slots:
     void on_zecchieri_doubleClicked(QModelIndex index);
     void on_letteratura_doubleClicked(QModelIndex index);
     void on_note_doubleClicked(QModelIndex index);
-    void on_autorita_doubleClicked(QModelIndex index);
     void on_luogo_textChanged(QString );
     void on_anno_textChanged(QString );
     void on_paese_textChanged(QString );

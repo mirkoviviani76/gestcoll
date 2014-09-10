@@ -5978,7 +5978,7 @@ namespace gestColl
        * @name autorita
        *
        * @brief Accessor and modifier functions for the %autorita
-       * optional element.
+       * required element.
        */
       //@{
 
@@ -5988,30 +5988,24 @@ namespace gestColl
       typedef ::gestColl::coins::autorita autorita_type;
 
       /**
-       * @brief Element optional container type.
-       */
-      typedef ::xsd::cxx::tree::optional< autorita_type > autorita_optional;
-
-      /**
        * @brief Element traits type.
        */
       typedef ::xsd::cxx::tree::traits< autorita_type, wchar_t > autorita_traits;
 
       /**
-       * @brief Return a read-only (constant) reference to the element
-       * container.
+       * @brief Return a read-only (constant) reference to the element.
        *
-       * @return A constant reference to the optional container.
+       * @return A constant reference to the element.
        */
-      const autorita_optional&
+      const autorita_type&
       autorita () const;
 
       /**
-       * @brief Return a read-write reference to the element container.
+       * @brief Return a read-write reference to the element.
        *
-       * @return A reference to the optional container.
+       * @return A reference to the element.
        */
-      autorita_optional&
+      autorita_type&
       autorita ();
 
       /**
@@ -6026,24 +6020,12 @@ namespace gestColl
       autorita (const autorita_type& x);
 
       /**
-       * @brief Set the element value.
-       *
-       * @param x An optional container with the new value to set.
-       *
-       * If the value is present in @a x then this function makes a copy 
-       * of this value and sets it as the new value of the element.
-       * Otherwise the element container is set the 'not present' state.
-       */
-      void
-      autorita (const autorita_optional& x);
-
-      /**
        * @brief Set the element value without copying.
        *
        * @param p A new value to use.
        *
-       * This function will try to use the passed value directly instead
-       * of making a copy.
+       * This function will try to use the passed value directly
+       * instead of making a copy.
        */
       void
       autorita (::std::auto_ptr< autorita_type > p);
@@ -7074,6 +7056,7 @@ namespace gestColl
        * initializers for required elements and attributes.
        */
       moneta (const paese_type&,
+              const autorita_type&,
               const nominale_type&,
               const datiArtistici_type&,
               const datiFisici_type&,
@@ -7091,6 +7074,7 @@ namespace gestColl
        * instead of making copies.
        */
       moneta (const paese_type&,
+              ::std::auto_ptr< autorita_type >&,
               ::std::auto_ptr< nominale_type >&,
               ::std::auto_ptr< datiArtistici_type >&,
               ::std::auto_ptr< datiFisici_type >&,
@@ -7160,7 +7144,7 @@ namespace gestColl
       protected:
       ambiti_optional ambiti_;
       ::xsd::cxx::tree::one< paese_type > paese_;
-      autorita_optional autorita_;
+      ::xsd::cxx::tree::one< autorita_type > autorita_;
       anno_optional anno_;
       ::xsd::cxx::tree::one< nominale_type > nominale_;
       zecca_optional zecca_;
