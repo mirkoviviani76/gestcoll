@@ -30,11 +30,14 @@ void LegendaDialog::changeEvent(QEvent *e)
 }
 
 
-void LegendaDialog::setData(xml::Legenda* legenda)
+void LegendaDialog::setData(::gestColl::coins::legenda legenda)
 {
-    this->legenda = legenda;
-    this->ui->testo->setText(legenda->testo);
-    this->ui->scioglimento->setText(legenda->scioglimento);
+    this->ui->testo->setText(QString::fromStdWString(legenda.testo()));
+    if (legenda.scioglimento().present()) {
+        this->ui->scioglimento->setText(QString::fromStdWString(legenda.scioglimento().get()));
+    } else {
+        this->ui->scioglimento->setText("");
+    }
 }
 
 void LegendaDialog::getData(QString* testo, QString* scioglimento)

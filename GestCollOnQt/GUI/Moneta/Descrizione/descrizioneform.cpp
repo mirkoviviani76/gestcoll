@@ -4,17 +4,35 @@
 #include "visualizzaimmagine.h"
 #include "descrizionedialog.h"
 #include "legendadialog.h"
+#include "commondata.h"
+
+bool operator==(const ::gestColl::coins::legenda &a, const ::gestColl::coins::legenda &b)
+{
+    if (QString::fromStdWString(a.testo()) != QString::fromStdWString(b.testo())) {
+        return false;
+    }
+    if ((a.scioglimento().present()) && (!b.scioglimento().present())) {
+        return false;
+    }
+    if ((!a.scioglimento().present()) && (b.scioglimento().present())) {
+        return false;
+    }
+    if ((QString::fromStdWString(a.testo()) == QString::fromStdWString(b.testo())) &&
+        (QString::fromStdWString(a.scioglimento().get()) == QString::fromStdWString(b.scioglimento().get()))) {
+        return true;
+    }
+    return false;
+}
+
+
+
 
 DescrizioneForm::DescrizioneForm(QWidget *parent) :
     QGroupBox(parent), editingEnabled(false),
     ui(new Ui::DescrizioneForm)
 {
     ui->setupUi(this);
-    modelloLegende = new GenericModel(1, this);
-
-    this->ui->legende->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->descrizione->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->img->setContextMenuPolicy(Qt::CustomContextMenu);
+    modelloLegende = new ModelloLegenda(this);
 
     this->ui->specialEdit->setVisible(false);
     this->ui->addLegenda->setVisible(false);
@@ -66,9 +84,9 @@ void DescrizioneForm::setImage(const QString &filename)
 
 void DescrizioneForm::setLegende()
 {
-    QList<xml::Legenda *> data = fillLegende();
+    QList< ::gestColl::coins::legenda > data = fillLegende();
     this->modelloLegende->clear();
-    foreach (xml::Legenda* a, data) {
+    foreach ( ::gestColl::coins::legenda a, data) {
         this->modelloLegende->appendRow(a);
     }
     this->ui->legende->setModel(this->modelloLegende);
@@ -125,19 +143,17 @@ void DescrizioneForm::on_legende_doubleClicked(const QModelIndex &index)
     if (!index.isValid())
         return;
 
-    GenericModel* model = (GenericModel*)index.model();
-    xml::Legenda* vecchio = (xml::Legenda*) model->getItem(index);
+    ::gestColl::coins::legenda vecchio = this->modelloLegende->getItem(index);
     LegendaDialog legendaDialog(this);
     legendaDialog.setData(vecchio);
     int ret = legendaDialog.exec();
     if (ret == QDialog::Accepted && this->editingEnabled)
     {
-        QString testo;
-        QString scioglimento;
-        legendaDialog.getData(&testo, &scioglimento);
-        xml::Legenda nuovo(testo, scioglimento);
+        QString nuovoTesto;
+        QString nuovoScioglimento;
+        legendaDialog.getData(&nuovoTesto, &nuovoScioglimento);
         /* modifica/aggiunge il nodo al dom */
-        this->updateLegenda(*vecchio, nuovo);
+        this->updateLegenda(vecchio, nuovoTesto, nuovoScioglimento);
         emit this->changesOccurred();
     }
 
@@ -173,7 +189,7 @@ void DescrizioneForm::on_specialEdit_clicked()
 
 void DescrizioneForm::gestLegendaModifica(QModelIndex index)
 {
-    xml::Legenda* vecchio = (xml::Legenda*) this->modelloLegende->getItem(index);
+    ::gestColl::coins::legenda vecchio = this->modelloLegende->getItem(index);
     LegendaDialog legendaDialog(this);
     legendaDialog.setData(vecchio);
     int ret = legendaDialog.exec();
@@ -182,18 +198,22 @@ void DescrizioneForm::gestLegendaModifica(QModelIndex index)
         QString testo;
         QString scioglimento;
         legendaDialog.getData(&testo, &scioglimento);
-        xml::Legenda nuovo(testo, scioglimento);
         /* modifica/aggiunge il nodo al dom */
-        this->updateLegenda(*vecchio, nuovo);
+        this->updateLegenda(vecchio, testo, scioglimento);
         //segnala la modifica
         emit this->changesOccurred();
     }
 }
 
-void DescrizioneForm::updateLegenda(const xml::Legenda& vecchio, const xml::Legenda& nuovo)
+void DescrizioneForm::updateLegenda(const ::gestColl::coins::legenda& vecchio, const QString& nuovoTesto, const QString& nuovoScioglimento)
 {
-    for (::descrizioni::legenda_iterator it = this->xmlDom->legenda().begin(); it != this->xmlDom->legenda().end(); ++it) {
-        if (updateLegenda(it, vecchio, nuovo) == true) {
+    for ( ::gestColl::coins::descrizioni::legenda_iterator it = this->xmlDom->legenda().begin();
+          it != this->xmlDom->legenda().end(); ++it) {
+
+        if (*it == vecchio) {
+            /* trovato: effettua le modifiche */
+            it->testo(nuovoTesto.toStdWString());
+            it->scioglimento(nuovoScioglimento.toStdWString());
             break;
         }
     }
@@ -203,46 +223,14 @@ void DescrizioneForm::updateLegenda(const xml::Legenda& vecchio, const xml::Lege
 }
 
 
-bool DescrizioneForm::updateLegenda(::descrizioni::legenda_iterator it, const xml::Legenda& vecchio, const xml::Legenda& nuovo)
+QList<gestColl::coins::legenda> DescrizioneForm::fillLegende()
 {
-    bool done = false;
-    //cerca l'item "giusto"
-    QString testo = QString::fromStdWString(it->testo());
-    QString sciog = "";
-    if (it->scioglimento().present())
+    QList< ::gestColl::coins::legenda > target;
+    ::gestColl::coins::descrizioni::legenda_sequence seq = this->xmlDom->legenda();
+
+    for (::gestColl::coins::descrizioni::legenda_iterator it(seq.begin()); it != seq.end(); ++it)
     {
-        sciog = QString::fromStdWString(it->scioglimento().get());
-    }
-    if ((testo == vecchio.testo) && (sciog == vecchio.scioglimento))
-    {
-        /* trovato: effettua le modifiche */
-        it->testo(nuovo.testo.toStdWString());
-        it->scioglimento(nuovo.scioglimento.toStdWString());
-        done = true;
-    }
-    return done;
-}
-
-
-QList<xml::Legenda*> DescrizioneForm::fillLegende()
-{
-    QList<xml::Legenda*> target;
-    descrizioni::legenda_sequence seq = this->xmlDom->legenda();
-
-    for (descrizioni::legenda_iterator it(seq.begin()); it != seq.end(); ++it)
-    {
-        descrizioni::legenda_type curLeg = (*it);
-        QString myT = QString::fromStdWString(curLeg.testo());
-        descrizioni::legenda_type::scioglimento_optional sop = curLeg.scioglimento();
-        QString myS = "";
-        if (sop.present())
-        {
-            descrizioni::legenda_type::scioglimento_type st = sop.get();
-            myS = QString::fromStdWString(st);
-        }
-
-        xml::Legenda* leg = new xml::Legenda(myT, myS);
-        target.append(leg);
+        target.append(*it);
     }
     return target;
 
@@ -260,7 +248,7 @@ void DescrizioneForm::on_addLegenda_clicked()
         QString scioglimento;
         dialog.getData(&testo, &scioglimento);
         /* modifica/aggiunge il nodo al dom */
-        ::legenda leg(testo.toStdWString());
+        ::gestColl::coins::legenda leg(testo.toStdWString());
         leg.scioglimento(scioglimento.toStdWString());
         this->xmlDom->legenda().push_back(leg);
 
@@ -272,20 +260,17 @@ void DescrizioneForm::on_addLegenda_clicked()
 
 }
 
+
 void DescrizioneForm::on_deleteLegenda_clicked()
 {
     foreach (QModelIndex index, this->ui->legende->selectionModel()->selectedIndexes()) {
-        xml::Legenda* selectedLeg = (xml::Legenda*) this->modelloLegende->getItem(index);
+        ::gestColl::coins::legenda selectedLeg = this->modelloLegende->getItem(index);
 
         gestColl::coins::descrizioni::legenda_sequence leg(this->xmlDom->legenda());
         for (unsigned int i = 0; i < leg.size(); i++) {
-            descrizioni::legenda_type curLeg = leg.at(i);
-            QString curTesto = QString::fromStdWString(curLeg.testo());
-            QString curSciog = "";
-            if (curLeg.scioglimento().present()) {
-                curSciog = QString::fromStdWString(curLeg.scioglimento().get());
-            }
-            if (curTesto == selectedLeg->testo && curSciog == selectedLeg->scioglimento) {
+            ::gestColl::coins::legenda curLeg = leg.at(i);
+
+            if (selectedLeg == curLeg) {
                 leg.erase(leg.begin()+i);
                 break;
             }
