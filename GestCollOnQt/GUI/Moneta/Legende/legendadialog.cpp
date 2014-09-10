@@ -2,14 +2,28 @@
 #include "ui_legendadialog.h"
 #include <QDebug>
 
-LegendaDialog::LegendaDialog(QWidget *parent) :
+LegendaDialog::LegendaDialog(bool editingMode, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LegendaDialog)
 {
     ui->setupUi(this);
-    //permette di gestire il click su un carattere speciale
-    connect(this->ui->widget_2, SIGNAL(specialCharSelected(QString)),
-            this, SLOT(specialCharSelected(QString)));
+    if (editingMode == true) {
+        this->ui->testo->setFrame(true);
+        this->ui->testo->setReadOnly(false);
+        this->ui->scioglimento->setFrame(true);
+        this->ui->scioglimento->setReadOnly(false);
+        this->setWindowTitle("Modifica Legenda");
+        //permette di gestire il click su un carattere speciale
+        connect(this->ui->widget_2, SIGNAL(specialCharSelected(QString)),
+                this, SLOT(specialCharSelected(QString)));
+    } else {
+        this->ui->testo->setFrame(false);
+        this->ui->testo->setReadOnly(true);
+        this->ui->scioglimento->setFrame(false);
+        this->ui->scioglimento->setReadOnly(true);
+        this->ui->widget_2->setVisible(false);
+        this->setWindowTitle("Legenda");
+    }
 }
 
 LegendaDialog::~LegendaDialog()

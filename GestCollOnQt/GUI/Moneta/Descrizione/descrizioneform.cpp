@@ -8,15 +8,18 @@
 
 bool operator==(const ::gestColl::coins::legenda &a, const ::gestColl::coins::legenda &b)
 {
+    /* controlla se il testo e' diverso */
     if (QString::fromStdWString(a.testo()) != QString::fromStdWString(b.testo())) {
         return false;
     }
+    /* controlla se solo uno dei due ha lo scioglimento */
     if ((a.scioglimento().present()) && (!b.scioglimento().present())) {
         return false;
     }
     if ((!a.scioglimento().present()) && (b.scioglimento().present())) {
         return false;
     }
+    /* controlla se testo e scioglimento sono uguali */
     if ((QString::fromStdWString(a.testo()) == QString::fromStdWString(b.testo())) &&
         (QString::fromStdWString(a.scioglimento().get()) == QString::fromStdWString(b.scioglimento().get()))) {
         return true;
@@ -144,8 +147,9 @@ void DescrizioneForm::on_legende_doubleClicked(const QModelIndex &index)
         return;
 
     ::gestColl::coins::legenda vecchio = this->modelloLegende->getItem(index);
-    LegendaDialog legendaDialog(this);
+    LegendaDialog legendaDialog(this->editingEnabled, this);
     legendaDialog.setData(vecchio);
+
     int ret = legendaDialog.exec();
     if (ret == QDialog::Accepted && this->editingEnabled)
     {
@@ -190,7 +194,7 @@ void DescrizioneForm::on_specialEdit_clicked()
 void DescrizioneForm::gestLegendaModifica(QModelIndex index)
 {
     ::gestColl::coins::legenda vecchio = this->modelloLegende->getItem(index);
-    LegendaDialog legendaDialog(this);
+    LegendaDialog legendaDialog(this->editingEnabled, this);
     legendaDialog.setData(vecchio);
     int ret = legendaDialog.exec();
     if (ret == QDialog::Accepted && this->editingEnabled)
@@ -239,7 +243,7 @@ QList<gestColl::coins::legenda> DescrizioneForm::fillLegende()
 void DescrizioneForm::on_addLegenda_clicked()
 {
     /* attiva la vera gestione */
-    LegendaDialog dialog(this);
+    LegendaDialog dialog(this->editingEnabled, this);
     //dialog.setData(a);
     int ret = dialog.exec();
     if (ret == QDialog::Accepted)

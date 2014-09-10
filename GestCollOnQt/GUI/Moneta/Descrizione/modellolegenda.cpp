@@ -41,9 +41,10 @@ QVariant ModelloLegenda::data(const QModelIndex &index, int role) const
     if (index.row() >= this->items.size() || index.row() < 0)
         return QVariant();
 
+    ::gestColl::coins::legenda item = this->items.at(index.row());
+
     if (role == Qt::ToolTipRole)
     {
-        ::gestColl::coins::legenda item = this->items.at(index.row());
         QString tooltip = "";
         if (item.scioglimento().present()) {
             tooltip = QString::fromStdWString(item.scioglimento().get());
@@ -52,13 +53,13 @@ QVariant ModelloLegenda::data(const QModelIndex &index, int role) const
     }
     if (role == Qt::DisplayRole)
     {
-        return QString::fromStdWString(this->items.at(index.row()).testo());
+        return QString::fromStdWString(item.testo());
     }
     if (role == Qt::BackgroundRole) {
         if (index.row() % 2 == 0)
             return QBrush(Qt::white);
         else
-            return QBrush(Qt::gray);
+            return QBrush(Qt::lightGray);
     }
 
     return QVariant();
