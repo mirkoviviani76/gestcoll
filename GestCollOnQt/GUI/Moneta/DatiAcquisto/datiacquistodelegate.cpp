@@ -20,7 +20,11 @@ QWidget* DatiAcquistoDelegate::createEditor(QWidget *parent, const   QStyleOptio
     case 0:
         return new QLineEdit(parent);
     case 1:
-        return new QDateEdit(parent);
+    {
+        QDateEdit* editor = new QDateEdit(parent);
+        editor->setCalendarPopup(true);
+        return editor;
+    }
     case 2:
         return new QDoubleSpinBox(parent);
     }
