@@ -128,6 +128,7 @@ MonetaForm::MonetaForm(QWidget *parent) :
     connect(this->ui->rovescio, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->taglio, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->autorita, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
+    connect(this->ui->datiAcquisto, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
 }
 
 /**
@@ -329,12 +330,6 @@ void MonetaForm::loadData()
                                .arg(item->getVassoio())
                                .arg(item->getRiga())
                                .arg(item->getColonna()));
-    this->ui->luogo->setText(item->getLuogo());
-    this->ui->data->clear();
-    QDate xmldata = item->getData();
-    this->ui->data->setDisplayFormat("dd/MM/yyyy");
-    this->ui->data->setDate(xmldata);
-    this->ui->prezzo->setData(item->getPrezzo());
 
     this->modelloNote->clear();
     this->modelloZecchieri->clear();
@@ -366,6 +361,10 @@ void MonetaForm::loadData()
     /* aggiunge i dati fisici */
     this->modelloDatiFisici->appendRow(this->item->getDom()->datiFisici());
     this->ui->datiFisiciTable->setModel(this->modelloDatiFisici);
+
+    /* aggiunge i dati di acquisto */
+    this->ui->datiAcquisto->setData(&(this->item->getDom()->datiAcquisto()));
+
 
     /* aggiunge la letteratura */
     //TODO ASTE?
@@ -458,24 +457,21 @@ void MonetaForm::enableEdit(bool editable)
     /* abilita-disabilita il frame */
     this->ui->paese->setFrame(editable);
     this->ui->anno->setFrame(editable);
-    this->ui->luogo->setFrame(editable);
-    this->ui->data->setFrame(editable);
     this->ui->posizione->setFlat(!editable);
 
     /* abilita-disabilita gli item */
     this->ui->paese->setReadOnly(!editable);
     this->ui->anno->setReadOnly(!editable);
     this->ui->led->setEnabled(editable);
-    this->ui->luogo->setReadOnly(!editable);
-    this->ui->data->setReadOnly(!editable);
     this->ui->dritto->setReadOnly(!editable);
     this->ui->rovescio->setReadOnly(!editable);
     this->ui->taglio->setReadOnly(!editable);
     this->ui->zecca->enableEdit(editable);
     this->ui->nominale->enableEdit(editable);
-    this->ui->prezzo->enableEdit(editable);
 
     this->ui->autorita->setEditable(editable);
+
+    this->ui->datiAcquisto->setEditable(editable);
 
     if (editable) {
         this->ui->datiFisiciTable->setEditTriggers(QAbstractItemView::DoubleClicked);
@@ -504,23 +500,10 @@ void MonetaForm::on_anno_textChanged(QString newText)
 
 }
 
-void MonetaForm::on_luogo_textChanged(QString  newText)
-{
-    this->item->setLuogo(newText);
-    emit this->changesOccurred();
-}
-
 
 void MonetaForm::on_nominale_textChanged(QString valore, QString unita)
 {
     this->item->setNominale(valore, unita);
-    emit this->changesOccurred();
-}
-
-void MonetaForm::on_prezzo_textChanged(QString valore, QString unita)
-{
-    qreal val = valore.toDouble();
-    this->item->setPrezzo(val, unita);
     emit this->changesOccurred();
 }
 
@@ -890,18 +873,6 @@ void MonetaForm::on_letteratura_customContextMenuRequested(QPoint pos)
     {
         // nothing was chosen
     }
-}
-
-
-void MonetaForm::on_data_dateChanged(QDate date)
-{
-    if (this->editingEnabled) {
-        this->item->setData(date);
-        this->loadData();
-        //segnala la modifica
-        emit this->changesOccurred();
-    }
-
 }
 
 

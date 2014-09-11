@@ -82,7 +82,8 @@ INCLUDEPATH += other_libs \
                GUI/Contatti \
                GUI/Moneta/Ambito \
                GUI/Moneta/Autorita \
-			   GUI/Moneta/DatiFisici \
+               GUI/Moneta/DatiFisici \
+               GUI/Moneta/DatiAcquisto \
                GUI/Moneta/Descrizione \
                GUI/Moneta/Documenti \
                GUI/Moneta/Immagini \
@@ -180,7 +181,10 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/Descrizione/modellolegenda.cpp \
     GUI/Moneta/Autorita/modelloautorita.cpp \
     GUI/Moneta/Autorita/autoritaform.cpp \
-    GUI/Moneta/Autorita/autoritadelegate.cpp
+    GUI/Moneta/Autorita/autoritadelegate.cpp \
+    GUI/Moneta/DatiAcquisto/datiacquistowidget.cpp \
+    GUI/Moneta/DatiAcquisto/datiacquistomodel.cpp \
+    GUI/Moneta/DatiAcquisto/datiacquistodelegate.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -256,7 +260,10 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/Descrizione/modellolegenda.h \
     GUI/Moneta/Autorita/modelloautorita.h \
     GUI/Moneta/Autorita/autoritaform.h \
-    GUI/Moneta/Autorita/autoritadelegate.h
+    GUI/Moneta/Autorita/autoritadelegate.h \
+    GUI/Moneta/DatiAcquisto/datiacquistowidget.h \
+    GUI/Moneta/DatiAcquisto/datiacquistomodel.h \
+    GUI/Moneta/DatiAcquisto/datiacquistodelegate.h
 
 
 
@@ -295,7 +302,8 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
             GUI/Collezione/modifyambitodialog.ui \
             GUI/Links/newlinkdialog.ui \
     GUI/Moneta/Descrizione/descrizioneform.ui \
-    GUI/Moneta/Autorita/autoritaform.ui
+    GUI/Moneta/Autorita/autoritaform.ui \
+    GUI/Moneta/DatiAcquisto/datiacquistowidget.ui
 
 
 RESOURCES += resources/resources.qrc
