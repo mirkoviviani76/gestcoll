@@ -44,10 +44,6 @@ public:
     QString getId() const;
     QString getPaese();
     QString getAnno();
-    QString getForma();
-    QString getMetallo();
-    xml::Misura getDiametro();
-    xml::Misura getPeso();
     xml::Zecca getZecca();
     xml::Nominale getNominale();
     xml::Stato getStato();
