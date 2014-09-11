@@ -80,12 +80,10 @@ public:
     void setAmbiti(QList<xml::Ambito*> ambiti);
     void addLibro(const xml::Libro& l);
     void addNota(const xml::Nota& l);
-    void addAutorita(const xml::Autorita& l);
     void addZecchiere(const xml::Zecchiere& l);
     void addDocumento(const xml::Documento& l);
 
 
-    void deleteAutorita(xml::Autorita *l);
     void deleteNota(xml::Nota* l);
     void deleteLetteratura(xml::Libro* l);
     void deleteDocumento(xml::Documento* l);

@@ -19,6 +19,8 @@ public:
     void clear();
     bool fillData(gestColl::coins::autorita *_items);
 
+    Qt::ItemFlags flags(const QModelIndex &index) const;
+    bool setData(const QModelIndex &index, const QVariant &value, int role);
 private:
     ::gestColl::coins::autorita* items;
 

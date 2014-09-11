@@ -770,17 +770,6 @@ void MonetaXml::addNota(const xml::Nota& l)
     this->fillNote();
 }
 
-
-void MonetaXml::addAutorita(const xml::Autorita& l)
-{
-    moneta::autorita_type::nome_type autorita(l.nome.toStdWString());
-    moneta::autorita_type let;
-
-    let = mon->autorita();
-    let.nome().push_back(autorita);
-    //TODO this->mon->autorita().set(let);
-}
-
 void MonetaXml::addDocumento(const xml::Documento& l)
 {
     moneta::itemAddizionali_type::documento_type doc(l.filename.toStdWString(),
@@ -794,23 +783,6 @@ void MonetaXml::addDocumento(const xml::Documento& l)
 
 }
 
-
-void MonetaXml::deleteAutorita(xml::Autorita* l)
-{
-    moneta::autorita_type::nome_type autorita(l->nome.toStdWString());
-    moneta::autorita_type let;
-
-    let = mon->autorita();
-
-    for (unsigned int i = 0; i < let.nome().size(); i++) {
-        if (let.nome().at(i) == autorita) {
-            let.nome().erase(let.nome().begin()+i);
-            break;
-        }
-    }
-    //TODO this->mon->autorita().set(let);
-
-}
 
 void MonetaXml::deleteNota(xml::Nota* l)
 {

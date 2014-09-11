@@ -138,7 +138,6 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/Models/genericmodel.cpp \
                GUI/Models/generictabmodel.cpp \
                GUI/Moneta/Ambito/setambitodialog.cpp \
-               GUI/Moneta/Autorita/autoritadialog.cpp \
                GUI/Moneta/Descrizione/descrizionedialog.cpp \
                GUI/Moneta/Documenti/adddocumentdialog.cpp \
                GUI/Moneta/Immagini/imgmoneta.cpp \
@@ -180,7 +179,8 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/Descrizione/descrizioneform.cpp \
     GUI/Moneta/Descrizione/modellolegenda.cpp \
     GUI/Moneta/Autorita/modelloautorita.cpp \
-    GUI/Moneta/Autorita/autoritaform.cpp
+    GUI/Moneta/Autorita/autoritaform.cpp \
+    GUI/Moneta/Autorita/autoritadelegate.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -214,7 +214,6 @@ HEADERS  +=    Common/commondata.h \
                GUI/Models/genericmodel.h \
                GUI/Models/generictabmodel.h \
                GUI/Moneta/Ambito/setambitodialog.h \
-               GUI/Moneta/Autorita/autoritadialog.h \
                GUI/Moneta/Descrizione/descrizionedialog.h \
                GUI/Moneta/Documenti/adddocumentdialog.h \
                GUI/Moneta/Immagini/imgmoneta.h \
@@ -256,7 +255,8 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/Descrizione/descrizioneform.h \
     GUI/Moneta/Descrizione/modellolegenda.h \
     GUI/Moneta/Autorita/modelloautorita.h \
-    GUI/Moneta/Autorita/autoritaform.h
+    GUI/Moneta/Autorita/autoritaform.h \
+    GUI/Moneta/Autorita/autoritadelegate.h
 
 
 
@@ -267,7 +267,6 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
             GUI/MainWindow/viewlog.ui \
             GUI/Links/linksform.ui \
                GUI/Moneta/Ambito\setambitodialog.ui \
-               GUI/Moneta/Autorita\autoritadialog.ui \
                GUI/Moneta/Descrizione\descrizionedialog.ui \
                GUI/Moneta/Documenti\adddocumentdialog.ui \
                GUI/Moneta/Immagini\setimmaginemonetadialog.ui \
