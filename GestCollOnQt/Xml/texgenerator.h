@@ -16,7 +16,7 @@ public:
 private:
     Posizioni* posizioni;
     QString getDim(const MonetaXml& item);
-    QString getEtichetta(MonetaXml* xml, QString dimensione);
+    QString getEtichetta(moneta *xml, QString dimensione);
 };
 
 #endif // TEXGENERATOR_H

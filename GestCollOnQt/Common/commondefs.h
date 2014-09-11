@@ -64,18 +64,7 @@ class Nota : public GenericItem
         inline QImage toImg() { return QImage(); }
         inline QColor getColor() { return QColor(QColor::Invalid);}
 };
-class  Autorita : public GenericItem
-{
-    public:
-        QString nome;
 
-        virtual ~Autorita() {}
-        Autorita(QString t = "") {nome = t;}
-        inline QString toString(int column=-1) {Q_UNUSED(column); return nome;}
-        inline QString toTooltip() {return "";}
-        inline QImage toImg() { return QImage(); }
-        inline QColor getColor() { return QColor(QColor::Invalid);}
-};
 class Zecchiere : public GenericItem
 {
     public:

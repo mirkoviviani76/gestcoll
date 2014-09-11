@@ -127,7 +127,6 @@ void AutoritaForm::on_removeAutorita_clicked()
     this->xmlDom->nome(leg);
     //aggiorna il modello
     this->modelloAutorita->fillData(this->xmlDom);
-
     //segnala la modifica
     emit this->changesOccurred();
 
