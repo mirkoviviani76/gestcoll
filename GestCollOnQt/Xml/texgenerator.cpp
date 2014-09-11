@@ -79,7 +79,7 @@ bool TexGenerator::convert()
             /* ottiene la dimensione della casella */
             QString dimensione = this->getDim(*mng);
             /* ottiene l'etichetta singola */
-            QString etichetta = this->getEtichetta(mng, dimensione);
+            QString etichetta = this->getEtichetta(mng->getDom(), dimensione);
             /* aggiorna l'elenco globale di etichette e codici qr */
             if (dimensione == "A") {
                 etichetteA = etichetteA + etichetta + "\n";
@@ -151,28 +151,37 @@ QString TexGenerator::getDim(const MonetaXml& item)
  * @param xml il file di moneta
  * @param dimensione la dimensione della casella
  */
-QString TexGenerator::getEtichetta(MonetaXml* xml, QString dimensione)
+QString TexGenerator::getEtichetta(::gestColl::coins::moneta* xml, QString dimensione)
 {
     QString out = "";
 
-    QString id = xml->getId();
-    QString paese = xml->getPaese();
-    QString autorita;
-
-    for (int i = 0; i < xml->getAutorita().count(); i++)
+    QString id = QString::fromStdWString(xml->id());
+    QString paese = QString::fromStdWString(xml->paese());
+    QStringList elencoAutorita;
+    for (::gestColl::coins::moneta::autorita_type::nome_iterator it = xml->autorita().nome().begin();
+         it != xml->autorita().nome().end(); ++it)
     {
-        if (i!=0)
-        {
-            autorita = autorita.append("; ");
-        }
-        xml->getAutorita().at(i);
+        elencoAutorita.append(QString::fromStdWString(*it));
+    }
+    QString autorita = elencoAutorita.join("; ");
 
-        autorita = autorita.append(xml->getAutorita().at(i)->nome);
+    QString zeccaNome = "";
+    QString zeccaSegno = "";
+    if (xml->zecca().present())
+    {
+        moneta::zecca_type z;
+        z = xml->zecca().get();
+        moneta::zecca_type::nome_optional nomeopt = z.nome();
+        moneta::zecca_type::segno_optional segnoopt = z.segno();
+        if (nomeopt.present())
+            zeccaNome = QString::fromStdWString(nomeopt.get());
+        if (segnoopt.present())
+            zeccaSegno = QString::fromStdWString(segnoopt.get());
     }
 
     QString zecca = QString("%1 %2")
-            .arg(xml->getZecca().nome)
-            .arg(xml->getZecca().segno);
+                     .arg(zeccaNome)
+                     .arg(zeccaSegno);
 
     //serve almeno uno spazio per il latex
     if (autorita == "")
@@ -183,9 +192,12 @@ QString TexGenerator::getEtichetta(MonetaXml* xml, QString dimensione)
     }
 
     QString valore = QString("%1 %2")
-            .arg(xml->getNominale().valore)
-            .arg(xml->getNominale().valuta);
-    QString anno = xml->getAnno();
+            .arg(QString::fromStdWString(xml->nominale().valore()))
+            .arg(QString::fromStdWString(xml->nominale().valuta()));
+    QString anno = "";
+    if (xml->anno().present()) {
+        anno = QString::fromStdWString(xml->anno().get());
+    }
     QString nominale = valore + " " + anno;
     /* compone l'etichetta */
     out = "\\casella" + dimensione + "{" + paese + "}{" + autorita + "}{" + zecca + "}{" + nominale + "}{" + id + "}";

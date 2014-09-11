@@ -61,7 +61,6 @@ MonetaXml::~MonetaXml()
         this->image = NULL;
     }
     deleteNoteList();
-    deleteAutoritaList();
     deleteZecchieriList();
     deleteLetteraturaList();
     deleteItemAddizionaliList();
@@ -80,16 +79,7 @@ void MonetaXml::deleteNoteList() {
     this->xmlNote.clear();
 }
 
-void MonetaXml::deleteAutoritaList() {
-    foreach (xml::Autorita* a, xmlAutorita) {
-        if (a != NULL) {
-            delete a;
-            a = NULL;
-        }
-    }
-    this->xmlAutorita.clear();
 
-}
 void MonetaXml::deleteZecchieriList() {
     foreach (xml::Zecchiere* a, xmlZecchieri) {
         if (a != NULL) {
@@ -133,10 +123,6 @@ void MonetaXml::deleteAmbitiList() {
 
 QList<xml::Nota*> MonetaXml::getNote() {
     return this->xmlNote;
-}
-
-QList<xml::Autorita*> MonetaXml::getAutorita() {
-    return this->xmlAutorita;
 }
 
 QList<xml::Zecchiere*> MonetaXml::getZecchieri() {

@@ -44,11 +44,14 @@ void SommarioMonete::checkAutorita() {
     QList<QString> lista;
     foreach (QString id, allid) {
         MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        foreach (xml::Autorita* a, m->getAutorita()) {
-            QString data = m->getPaese()+" | "+a->nome;
+        for ( ::gestColl::coins::autorita::nome_iterator it = m->getDom()->autorita().nome().begin();
+              it != m->getDom()->autorita().nome().end();
+              ++it) {
+            QString data = QString("%1 | %2").arg(QString::fromStdWString(*it)).arg(m->getPaese());
             if (!lista.contains(data))
                 lista.append(data);
         }
+
     }
     qSort(lista);
 

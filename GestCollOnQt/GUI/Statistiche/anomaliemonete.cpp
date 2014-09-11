@@ -121,14 +121,14 @@ void AnomalieMonete::checkNote() {
   */
 void AnomalieMonete::checkAutorita() {
     QTreeWidgetItem* node = new QTreeWidgetItem(QStringList() << "Autorita mancante");
-
     this->ui->treeWidget->addTopLevelItem(node);
     QList<QTreeWidgetItem *> items;
 
     QList<QString> allid = CollezioneXml::getInstance()->getAllId();
     foreach (QString id, allid) {
         MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        bool ok = (m->getAutorita().size() > 0 ? true : false);
+        bool ok = false;
+        ok = ((m->getDom()->autorita().nome().size() > 0) ? true : false);
         if (!ok) {
             items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("%1").arg(id))));
         }

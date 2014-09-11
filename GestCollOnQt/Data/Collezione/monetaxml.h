@@ -55,7 +55,6 @@ public:
     xml::Misura getPrezzo();
     xml::Stato getStato();
     QList<xml::Nota*> getNote();
-    QList<xml::Autorita*> getAutorita();
     QList<xml::Zecchiere*> getZecchieri();
     QList<xml::Libro*> getLetteratura();
     QList<xml::Documento*> getItemAddizionali();
@@ -98,7 +97,6 @@ private:
     QImage* image;
     void updateImage();
     QList<xml::Nota*> xmlNote;
-    QList<xml::Autorita*> xmlAutorita;
     QList<xml::Zecchiere*> xmlZecchieri;
     QList<xml::Libro*> xmlLetteratura;
     QList<xml::Documento*> xmlItemAddizionali;
@@ -106,14 +104,12 @@ private:
 
     void deleteNoteList();
     void deleteLegendeList(Moneta::Lato l);
-    void deleteAutoritaList();
     void deleteZecchieriList();
     void deleteLetteraturaList();
     void deleteItemAddizionaliList();
     void deleteAmbitiList();
 
     void fillNote();
-    void fillAutorita();
     void fillZecchieri();
     void fillLetteratura();
     void fillItemAddizionali();
