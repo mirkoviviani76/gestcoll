@@ -1,7 +1,7 @@
 #include "autoritaform.h"
 #include "ui_autoritaform.h"
-#include "autoritadialog.h"
 #include "utils.h"
+#include "autoritadelegate.h"
 #include <QDesktopServices>
 #include <QUrl>
 
@@ -11,6 +11,10 @@ AutoritaForm::AutoritaForm(QWidget *parent) :
 {
     ui->setupUi(this);
     modelloAutorita = new ModelloAutorita(this);
+    AutoritaDelegate* autoritaDelegate = new AutoritaDelegate(this);
+    connect(autoritaDelegate, SIGNAL(closeEditor(QWidget*)), this, SIGNAL(changesOccurred()));
+
+    this->ui->autoritaListView->setItemDelegate(autoritaDelegate);
 }
 
 AutoritaForm::~AutoritaForm()
@@ -80,22 +84,7 @@ void AutoritaForm::on_autoritaListView_doubleClicked(const QModelIndex &index)
         return;
     }
 
-    if (this->editable)
-    {
-        ::gestColl::coins::autorita::nome_type vecchio = this->modelloAutorita->getItem(index);
-        AutoritaDialog autoritaDialog(this);
-        autoritaDialog.setData(vecchio);
-        int ret = autoritaDialog.exec();
-        if (ret == QDialog::Accepted)
-        {
-            ::gestColl::coins::autorita::nome_type nuovoNome;
-            autoritaDialog.getData(&nuovoNome);
-            /* modifica/aggiunge il nodo al dom */
-            this->updateAutorita(vecchio, QString::fromStdWString(nuovoNome));
-            //segnala la modifica
-            emit this->changesOccurred();
-        }
-    } else {
+    if (!this->editable) {
         ::gestColl::coins::autorita::nome_type autorita = this->modelloAutorita->getItem(index);
         QString searchData = QString("%1 (%2)")
                 .arg(QString::fromStdWString(autorita))
@@ -108,22 +97,16 @@ void AutoritaForm::on_autoritaListView_doubleClicked(const QModelIndex &index)
 
 void AutoritaForm::on_addAutorita_clicked()
 {
-    /* attiva la vera gestione */
-    AutoritaDialog autoritaDialog(this);
-    //autoritaDialog.setData(a);
-    int ret = autoritaDialog.exec();
-    if (ret == QDialog::Accepted)
-    {
-        this->modelloAutorita->clear();
-        ::gestColl::coins::autorita::nome_type nuovoNome;
-        autoritaDialog.getData(&nuovoNome);
+    if (this->editable) {
+        ::gestColl::coins::autorita::nome_type nuovoNome(L"Nuova autorita");
         /* modifica/aggiunge il nodo al dom */
         this->xmlDom->nome().push_back(nuovoNome);
+        this->modelloAutorita->clear();
         this->modelloAutorita->fillData(this->xmlDom);
+
         //segnala la modifica
         emit this->changesOccurred();
     }
-
 }
 
 void AutoritaForm::on_removeAutorita_clicked()
