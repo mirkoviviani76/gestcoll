@@ -50,9 +50,6 @@ public:
     xml::Misura getPeso();
     xml::Zecca getZecca();
     xml::Nominale getNominale();
-    QString getLuogo();
-    QDate getData();
-    xml::Misura getPrezzo();
     xml::Stato getStato();
     QList<xml::Nota*> getNote();
     QList<xml::Zecchiere*> getZecchieri();
@@ -65,16 +62,13 @@ public:
 
     void setStato(xml::Stato& nuovo);
     void setPaese(QString p);
-    void setLuogo(QString p);
     void setAnno(QString p);
     void setNominale(QString valore, QString unita);
-    void setPrezzo(qreal valore, QString unita);
     void setZecca(QString nome, QString segno);
     void setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo);
     void setNota(const xml::Nota& vecchio, const xml::Nota& nuovo);
     void setZecchiere(const xml::Zecchiere& vecchio, const xml::Zecchiere& nuovo);
     void setDocumento(const xml::Documento& vecchio, const xml::Documento& nuovo);
-    void setData(QDate date);
     void setPosizione(int cont, int vass, int r, int c);
     void setAmbiti(QList<xml::Ambito*> ambiti);
     void addLibro(const xml::Libro& l);

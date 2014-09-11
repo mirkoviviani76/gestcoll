@@ -29,7 +29,6 @@ private slots:
     void checkLetteratura();
     void checkNote();
     void checkAutorita();
-    void checkAcquisto();
     void checkPeso();
 
 signals:

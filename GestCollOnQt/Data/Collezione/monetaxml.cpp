@@ -384,37 +384,6 @@ QString MonetaXml::getMetallo()
     return QString::fromStdWString(this->mon->datiFisici().metallo());
 }
 
-
-
-QString MonetaXml::getLuogo()
-{
-    QString ret = "";
-    moneta::datiAcquisto_type z = this->mon->datiAcquisto();
-    ret = QString::fromStdWString(z.luogo());
-    return ret;
-
-}
-
-QDate MonetaXml::getData()
-{
-    QDate ret;
-    moneta::datiAcquisto_type z = this->mon->datiAcquisto();
-    datiAcquisto::data_type opt = z.data();
-    ret.setDate(opt.year(), opt.month(), opt.day());
-    return ret;
-}
-
-xml::Misura MonetaXml::getPrezzo()
-{
-    xml::Misura ret("", 0.0);
-    moneta::datiAcquisto_type z = this->mon->datiAcquisto();
-    moneta::datiAcquisto_type::prezzo_type opt = z.prezzo();
-    ret.unita = QString::fromStdWString(opt.unita());
-    ret.valore = opt.valore();
-    return ret;
-}
-
-
 void MonetaXml::fillNote()
 {
     this->deleteNoteList();
@@ -574,11 +543,6 @@ void MonetaXml::setPaese(QString p)
     this->mon->paese(p.toStdWString());
 }
 
-void MonetaXml::setLuogo(QString p)
-{
-    this->mon->datiAcquisto().luogo(p.toStdWString());
-}
-
 void MonetaXml::setAnno(QString p)
 {
     mon->anno(p.toStdWString());
@@ -588,12 +552,6 @@ void MonetaXml::setNominale(QString valore, QString unita)
 {
     this->mon->nominale().valuta(unita.toStdWString());
     this->mon->nominale().valore(valore.toStdWString());
-}
-
-void MonetaXml::setPrezzo(qreal valore, QString unita)
-{
-    ::datiAcquisto::prezzo_type dia(unita.toStdWString(), valore);
-    this->mon->datiAcquisto().prezzo(dia);
 }
 
 void MonetaXml::setZecca(QString nome, QString segno)
@@ -730,13 +688,6 @@ void MonetaXml::setPosizione(int cont, int vass, int r, int c)
     pos.colonna(c);
     mon->posizione(pos);
 }
-
-void MonetaXml::setData(QDate date)
-{
-    xml_schema::date xmlData(date.year(), date.month(), date.day());
-    this->mon->datiAcquisto().data(xmlData);
-}
-
 
 void MonetaXml::addLibro(const xml::Libro& l)
 {

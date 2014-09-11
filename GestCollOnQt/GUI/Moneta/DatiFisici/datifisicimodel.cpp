@@ -20,22 +20,14 @@ DatiFisiciModel::~DatiFisiciModel()
     this->clear();
 }
 
-bool DatiFisiciModel::appendRow(const gestColl::coins::datiFisici& item)
+bool DatiFisiciModel::appendRow(gestColl::coins::datiFisici* item)
 {
     int row = this->rowCount();
-    this->datiFisici = new gestColl::coins::datiFisici(item);
+    this->datiFisici = item;
     QModelIndex index = this->createIndex(row,0,this->datiFisici);
     this->insertRow(row, index);
     return true;
 }
-
-#if 0
-bool DatiFisiciModel::removeRow(int row, const QModelIndex &parent)
-{
-    QAbstractTableModel::removeRow(row, parent);
-    return this->items.removeAll(this->getItem(row));
-}
-#endif
 
 
 QVariant DatiFisiciModel::headerData(int section, Qt::Orientation orientation, int role) const {
@@ -188,18 +180,6 @@ int DatiFisiciModel::columnCount(const QModelIndex &parent) const
     return 4;
 }
 
-#if 0
-ScenarioData::Event* DatiFisiciModel::getItem(const QModelIndex &index)
-{
-    return this->items.at(index.row());
-}
-
-ScenarioData::Event* DatiFisiciModel::getItem(int index)
-{
-    return this->items.at(index);
-}
-#endif
-
 QModelIndex DatiFisiciModel::getIndex(int index)
 {
     QModelIndex ind = this->createIndex(index, 0, 1);
@@ -209,14 +189,8 @@ QModelIndex DatiFisiciModel::getIndex(int index)
 void DatiFisiciModel::clear()
 {
     this->beginResetModel();
-    delete this->datiFisici;
     this->datiFisici = NULL;
     this->endResetModel();
 
 }
 
-#if 0
-QList<ScenarioData::Event*> DatiFisiciModel::getItems() {
-    return this->items;
-}
-#endif

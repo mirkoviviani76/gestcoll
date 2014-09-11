@@ -2,7 +2,6 @@
 #define DATIFISICIMODEL_H
 
 #include <QAbstractTableModel>
-//#include <QStyledItemDelegate>
 
 #include <scheda.hxx>
 
@@ -16,7 +15,7 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     QModelIndex getIndex(int index);
     void clear();
-    bool appendRow(const gestColl::coins::datiFisici& item);
+    bool appendRow(gestColl::coins::datiFisici *item);
     //bool removeRow(int row, const QModelIndex &parent = QModelIndex());
     //QList<ScenarioData::Event*> getItems();
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;

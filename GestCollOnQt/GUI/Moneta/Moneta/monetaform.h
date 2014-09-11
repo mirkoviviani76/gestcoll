@@ -10,7 +10,6 @@
 #include <QDate>
 #include "posizioni.h"
 #include "vassoioform.h"
-#include "datifisicimodel.h"
 
 namespace Ui {
     class MonetaForm;
@@ -53,7 +52,6 @@ private:
     GenericModel* modelloLetteratura; ///< modello letteratura
     GenericModel* modelloDoc; ///< modello documenti
     GenericModel* modelloAmbiti; ///< modello ambiti
-    DatiFisiciModel* modelloDatiFisici; ///< modello dati fisici
     MonetaXml* item; ///< la moneta correntemente visualizzata
     Posizioni* vassoi; ///< i vassoi
     void setupModels();
@@ -98,8 +96,6 @@ private slots:
     void on_ambiti_customContextMenuRequested(const QPoint &pos);
 
     void on_setupCollezione_clicked();
-
-    void datiFisiciChanged();
 
     void on_openPaeseUrl_clicked();
 
