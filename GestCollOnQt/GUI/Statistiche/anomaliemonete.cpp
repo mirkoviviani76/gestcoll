@@ -147,7 +147,7 @@ void AnomalieMonete::checkPeso() {
     QList<QString> allid = CollezioneXml::getInstance()->getAllId();
     foreach (QString id, allid) {
         MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        bool ok = (m->getPeso().valore > 0 ? true : false);
+        bool ok = ((m->getDom()->datiFisici().peso().valore()) > 0 ? true : false);
         if (!ok) {
             items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("%1").arg(id))));
         }

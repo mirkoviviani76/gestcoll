@@ -370,20 +370,6 @@ xml::Zecca MonetaXml::getZecca()
 }
 
 
-xml::Misura MonetaXml::getPeso()
-{
-    xml::Misura m;
-    m.unita = QString::fromStdWString(this->mon->datiFisici().peso().unita());
-    m.valore = this->mon->datiFisici().peso().valore();
-    return m;
-}
-
-
-QString MonetaXml::getMetallo()
-{
-    return QString::fromStdWString(this->mon->datiFisici().metallo());
-}
-
 void MonetaXml::fillNote()
 {
     this->deleteNoteList();

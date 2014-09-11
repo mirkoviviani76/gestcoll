@@ -40,7 +40,7 @@ void StatisticaMonetePerMetallo::paintEvent(QPaintEvent* e)
     QList<QString> idmonete = CollezioneXml::getInstance()->getAllId();
     foreach (QString id, idmonete) {
         MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        QString key = m->getMetallo();
+        QString key = QString::fromStdWString(m->getDom()->datiFisici().metallo());
         if (dati.contains(key))
             dati[key]++;
         else
