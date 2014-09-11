@@ -152,7 +152,7 @@ int DatiAcquistoModel::rowCount(const QModelIndex &parent) const
 int DatiAcquistoModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return 4;
+    return 3;
 }
 
 QModelIndex DatiAcquistoModel::getIndex(int index)
