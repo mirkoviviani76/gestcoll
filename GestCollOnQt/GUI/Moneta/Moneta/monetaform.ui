@@ -455,40 +455,10 @@ QTabBar::tab:selected {
                </widget>
               </item>
               <item row="17" column="0" colspan="2">
-               <widget class="QGroupBox" name="datiFisici">
+               <widget class="DatiFisiciWidget" name="datiFisici">
                 <property name="title">
                  <string>Dati Fisici</string>
                 </property>
-                <layout class="QFormLayout" name="formLayout_5">
-                 <property name="fieldGrowthPolicy">
-                  <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-                 </property>
-                 <property name="horizontalSpacing">
-                  <number>0</number>
-                 </property>
-                 <property name="verticalSpacing">
-                  <number>0</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>2</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>2</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                 <item row="0" column="0" colspan="2">
-                  <widget class="QTableView" name="datiFisiciTable">
-                   <property name="selectionMode">
-                    <enum>QAbstractItemView::SingleSelection</enum>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
                </widget>
               </item>
               <item row="21" column="0" colspan="2">
@@ -806,6 +776,12 @@ QTabBar::tab:selected {
    <class>DatiAcquistoWidget</class>
    <extends>QGroupBox</extends>
    <header>datiacquistowidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DatiFisiciWidget</class>
+   <extends>QGroupBox</extends>
+   <header>datifisiciwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

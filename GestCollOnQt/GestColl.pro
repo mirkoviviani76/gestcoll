@@ -184,7 +184,8 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/Autorita/autoritadelegate.cpp \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.cpp \
     GUI/Moneta/DatiAcquisto/datiacquistomodel.cpp \
-    GUI/Moneta/DatiAcquisto/datiacquistodelegate.cpp
+    GUI/Moneta/DatiAcquisto/datiacquistodelegate.cpp \
+    GUI/Moneta/DatiFisici/datifisiciwidget.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -263,7 +264,8 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/Autorita/autoritadelegate.h \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.h \
     GUI/Moneta/DatiAcquisto/datiacquistomodel.h \
-    GUI/Moneta/DatiAcquisto/datiacquistodelegate.h
+    GUI/Moneta/DatiAcquisto/datiacquistodelegate.h \
+    GUI/Moneta/DatiFisici/datifisiciwidget.h
 
 
 
@@ -303,7 +305,8 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
             GUI/Links/newlinkdialog.ui \
     GUI/Moneta/Descrizione/descrizioneform.ui \
     GUI/Moneta/Autorita/autoritaform.ui \
-    GUI/Moneta/DatiAcquisto/datiacquistowidget.ui
+    GUI/Moneta/DatiAcquisto/datiacquistowidget.ui \
+    GUI/Moneta/DatiFisici/datifisiciwidget.ui
 
 
 RESOURCES += resources/resources.qrc

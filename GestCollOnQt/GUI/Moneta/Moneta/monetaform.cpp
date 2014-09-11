@@ -27,7 +27,6 @@
 #include "setimmaginemonetadialog.h"
 #include "elencomonetedelegate.h"
 #include "visualizzaimmagine.h"
-#include "datifisicidelegate.h"
 
 #define ACTION_ADD ("Aggiungi")
 #define ACTION_DEL ("Elimina")
@@ -71,11 +70,6 @@ MonetaForm::MonetaForm(QWidget *parent) :
 
     //setta il delegato per le monete
     this->ui->itemList->setItemDelegate(new ElencoMoneteDelegate(this->ui->itemList));
-
-    /* aggiunge i delegati per l'editing dei Dati Fisici */
-    DatiFisiciDelegate* datiFisiciDelegate = new DatiFisiciDelegate(this);
-    connect(datiFisiciDelegate, SIGNAL(closeEditor(QWidget*)), this, SLOT(datiFisiciChanged()));
-    this->ui->datiFisiciTable->setItemDelegate(datiFisiciDelegate);
 
 
     this->enableEdit(false);
@@ -129,6 +123,7 @@ MonetaForm::MonetaForm(QWidget *parent) :
     connect(this->ui->taglio, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->autorita, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->datiAcquisto, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
+    connect(this->ui->datiFisici, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
 }
 
 /**
@@ -178,11 +173,6 @@ MonetaForm::~MonetaForm()
     {
         delete this->vassoi;
         this->vassoi = NULL;
-    }
-    if (this->modelloDatiFisici != NULL) {
-        this->modelloDatiFisici->clear();
-        delete this->modelloDatiFisici;
-        this->modelloDatiFisici = NULL;
     }
 }
 
@@ -284,7 +274,6 @@ void MonetaForm::setupModels()
     modelloLetteratura = new GenericModel(2);
     modelloDoc = new GenericModel();
     modelloAmbiti = new GenericModel(2);
-    modelloDatiFisici = new DatiFisiciModel(this);
 
     this->setupModelMonete();
 
@@ -336,7 +325,6 @@ void MonetaForm::loadData()
     this->modelloLetteratura->clear();
     this->modelloDoc->clear();
     this->modelloAmbiti->clear();
-    this->modelloDatiFisici->clear();
 
     /* aggiunge le note */
     foreach (xml::Nota* a, item->getNote())
@@ -359,8 +347,7 @@ void MonetaForm::loadData()
     this->ui->zecchieri->setModel(this->modelloZecchieri);
 
     /* aggiunge i dati fisici */
-    this->modelloDatiFisici->appendRow(this->item->getDom()->datiFisici());
-    this->ui->datiFisiciTable->setModel(this->modelloDatiFisici);
+    this->ui->datiFisici->setData(&(this->item->getDom()->datiFisici()));
 
     /* aggiunge i dati di acquisto */
     this->ui->datiAcquisto->setData(&(this->item->getDom()->datiAcquisto()));
@@ -472,12 +459,8 @@ void MonetaForm::enableEdit(bool editable)
     this->ui->autorita->setEditable(editable);
 
     this->ui->datiAcquisto->setEditable(editable);
+    this->ui->datiFisici->setEditable(editable);
 
-    if (editable) {
-        this->ui->datiFisiciTable->setEditTriggers(QAbstractItemView::DoubleClicked);
-    } else {
-        this->ui->datiFisiciTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    }
 }
 
 
@@ -1108,14 +1091,6 @@ void MonetaForm::on_ambiti_customContextMenuRequested(const QPoint &pos)
 }
 
 
-
-
-void MonetaForm::datiFisiciChanged()
-{
-    gestColl::coins::datiFisici editedDatiFisici(this->modelloDatiFisici->getItem());
-    this->item->getDom()->datiFisici(editedDatiFisici);
-    emit changesOccurred();
-}
 
 
 void MonetaForm::setupAmbiti() {

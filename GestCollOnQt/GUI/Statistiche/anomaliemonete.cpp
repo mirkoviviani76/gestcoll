@@ -28,7 +28,6 @@ void AnomalieMonete::fillData() {
     this->checkLetteratura();
     this->checkNote();
     this->checkAutorita();
-    this->checkAcquisto();
     this->checkPeso();
 }
 
@@ -149,30 +148,6 @@ void AnomalieMonete::checkPeso() {
     foreach (QString id, allid) {
         MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
         bool ok = (m->getPeso().valore > 0 ? true : false);
-        if (!ok) {
-            items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("%1").arg(id))));
-        }
-    }
-    node->addChildren(items);
-}
-
-
-
-
-/**
-  Controlla la presenza delle autorita in ogni moneta
-  */
-void AnomalieMonete::checkAcquisto() {
-    QTreeWidgetItem* node = new QTreeWidgetItem(QStringList() << "Dati acquisto mancanti");
-
-    this->ui->treeWidget->addTopLevelItem(node);
-    QList<QTreeWidgetItem *> items;
-
-    QList<QString> allid = CollezioneXml::getInstance()->getAllId();
-    foreach (QString id, allid) {
-        MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        bool ok = ((m->getPrezzo().valore != 0.0 && m->getLuogo() != ""
-                && m->getData().isValid() && m->getData().year() > 1950) ? true : false);
         if (!ok) {
             items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("%1").arg(id))));
         }
