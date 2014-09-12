@@ -167,16 +167,11 @@ QString TexGenerator::getEtichetta(::gestColl::coins::moneta* xml, QString dimen
 
     QString zeccaNome = "";
     QString zeccaSegno = "";
-    if (xml->zecca().present())
-    {
-        moneta::zecca_type z;
-        z = xml->zecca().get();
-        moneta::zecca_type::nome_optional nomeopt = z.nome();
-        moneta::zecca_type::segno_optional segnoopt = z.segno();
-        if (nomeopt.present())
-            zeccaNome = QString::fromStdWString(nomeopt.get());
-        if (segnoopt.present())
-            zeccaSegno = QString::fromStdWString(segnoopt.get());
+    if (xml->zecca().nome().present()) {
+        zeccaNome = QString::fromStdWString(xml->zecca().nome().get());
+    }
+    if (xml->zecca().segno().present()) {
+        zeccaSegno = QString::fromStdWString(xml->zecca().segno().get());
     }
 
     QString zecca = QString("%1 %2")

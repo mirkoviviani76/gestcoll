@@ -25,14 +25,21 @@ void DatiFisiciWidget::setData(gestColl::coins::datiFisici* datiFisici)
     this->modelloDatiFisici->clear();
     this->datiFisici = datiFisici;
     this->modelloDatiFisici->appendRow(datiFisici);
+
+    this->ui->datiFisiciTable->resizeColumnsToContents();
 }
 
 void DatiFisiciWidget::setEditable(bool editable)
 {
+
     if (editable) {
         this->ui->datiFisiciTable->setEditTriggers(QAbstractItemView::DoubleClicked);
+        this->ui->datiFisiciTable->setSelectionBehavior(QAbstractItemView::SelectItems);
+        this->ui->datiFisiciTable->setSelectionMode(QAbstractItemView::SingleSelection);
     } else {
         this->ui->datiFisiciTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        this->ui->datiFisiciTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+        this->ui->datiFisiciTable->setSelectionMode(QAbstractItemView::SingleSelection);
     }
 
 }

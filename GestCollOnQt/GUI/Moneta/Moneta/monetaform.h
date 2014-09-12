@@ -48,7 +48,6 @@ private:
     Ui::MonetaForm *ui; ///< la form principale
     CollezioneSortFilterProxyModel* collezioneModel; ///< modello collezione
     GenericModel* modelloNote; ///< modello collezione
-    GenericModel* modelloZecchieri; ///< modello zecchieri
     GenericModel* modelloLetteratura; ///< modello letteratura
     GenericModel* modelloDoc; ///< modello documenti
     GenericModel* modelloAmbiti; ///< modello ambiti
@@ -81,7 +80,6 @@ private slots:
     void on_zecchieri_customContextMenuRequested(QPoint pos);
     void on_letteratura_customContextMenuRequested(QPoint pos);
 
-    void on_zecchieri_doubleClicked(QModelIndex index);
     void on_letteratura_doubleClicked(QModelIndex index);
     void on_note_doubleClicked(QModelIndex index);
     void on_anno_textChanged(QString );

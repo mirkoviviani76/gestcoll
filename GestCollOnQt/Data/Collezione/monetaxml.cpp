@@ -34,7 +34,7 @@ MonetaXml::MonetaXml(const moneta& m)
     this->fillItemAddizionali();
     this->fillLetteratura();
     this->fillNote();
-    this->fillZecchieri();
+    //this->fillZecchieri();
 }
 
 MonetaXml::MonetaXml(moneta *m) {
@@ -45,7 +45,7 @@ MonetaXml::MonetaXml(moneta *m) {
     this->fillItemAddizionali();
     this->fillLetteratura();
     this->fillNote();
-    this->fillZecchieri();
+    //this->fillZecchieri();
 }
 
 
@@ -81,6 +81,7 @@ void MonetaXml::deleteNoteList() {
 
 
 void MonetaXml::deleteZecchieriList() {
+#if 0
     foreach (xml::Zecchiere* a, xmlZecchieri) {
         if (a != NULL) {
             delete a;
@@ -88,7 +89,7 @@ void MonetaXml::deleteZecchieriList() {
         }
     }
     this->xmlZecchieri.clear();
-
+#endif
 }
 void MonetaXml::deleteLetteraturaList() {
     foreach (xml::Libro* a, xmlLetteratura) {
@@ -123,10 +124,6 @@ void MonetaXml::deleteAmbitiList() {
 
 QList<xml::Nota*> MonetaXml::getNote() {
     return this->xmlNote;
-}
-
-QList<xml::Zecchiere*> MonetaXml::getZecchieri() {
-    return this->xmlZecchieri;
 }
 
 QList<xml::Libro*> MonetaXml::getLetteratura() {
@@ -350,24 +347,6 @@ xml::Nominale MonetaXml::getNominale()
     return n;
 }
 
-xml::Zecca MonetaXml::getZecca()
-{
-    moneta::zecca_optional ppp = this->mon->zecca();
-    moneta::zecca_type z;
-    xml::Zecca zec;
-    if (ppp.present())
-    {
-        z = ppp.get();
-        moneta::zecca_type::nome_optional nomeopt = z.nome();
-        moneta::zecca_type::segno_optional segnoopt = z.segno();
-        if (nomeopt.present())
-            zec.nome = QString::fromStdWString(nomeopt.get());
-        if (segnoopt.present())
-            zec.segno = QString::fromStdWString(segnoopt.get());
-    }
-    return zec;
-
-}
 
 
 void MonetaXml::fillNote()
@@ -385,35 +364,6 @@ void MonetaXml::fillNote()
             xml::Nota* n = new xml::Nota(QString::fromStdWString((*it)));
             this->xmlNote.append(n);
         }
-    }
-
-}
-
-
-void MonetaXml::fillZecchieri()
-{
-    this->deleteZecchieriList();
-    moneta::zecchieri_optional zopt = this->mon->zecchieri();
-    if (zopt.present())
-    {
-        moneta::zecchieri_type ztt = zopt.get();
-        moneta::zecchieri_type::zecchiere_sequence seq = ztt.zecchiere();
-        for (moneta::zecchieri_type::zecchiere_iterator it(seq.begin());
-        it != seq.end(); ++it
-                )
-        {
-            ::zecchieri::zecchiere_type curZec = (*it);
-            xml::Zecchiere* z = new xml::Zecchiere();
-            if (curZec.nome().present())
-                z->nome = QString::fromStdWString(curZec.nome().get());
-            if (curZec.ruolo().present())
-                z->ruolo = QString::fromStdWString(curZec.ruolo().get());
-            if (curZec.segno().present())
-                z->segno = QString::fromStdWString(curZec.segno().get());
-
-            this->xmlZecchieri.append(z);
-        }
-
     }
 
 }
@@ -542,10 +492,12 @@ void MonetaXml::setNominale(QString valore, QString unita)
 
 void MonetaXml::setZecca(QString nome, QString segno)
 {
+#if 0
     moneta::zecca_type zec;
     zec.nome(nome.toStdWString());
     zec.segno(segno.toStdWString());
     this->mon->zecca().set(zec);
+#endif
 }
 
 void MonetaXml::setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo)
@@ -630,7 +582,7 @@ void MonetaXml::setDocumento(const xml::Documento& vecchio, const xml::Documento
 
 void MonetaXml::setZecchiere(const xml::Zecchiere& vecchio, const xml::Zecchiere& nuovo)
 {
-
+#if 0
     bool done = false;
     moneta::zecchieri_type let = mon->zecchieri().get();
 
@@ -662,6 +614,7 @@ void MonetaXml::setZecchiere(const xml::Zecchiere& vecchio, const xml::Zecchiere
     //salva le modifiche nel dom
     mon->zecchieri(let);
     this->fillZecchieri();
+#endif
 }
 
 
@@ -777,6 +730,7 @@ void MonetaXml::deleteLetteratura(xml::Libro* l)
 
 void MonetaXml::addZecchiere(const xml::Zecchiere& l)
 {
+#if 0
     ::zecchieri::zecchiere_type zec;
     zec.nome(l.nome.toStdWString());
     zec.ruolo(l.ruolo.toStdWString());
@@ -788,6 +742,7 @@ void MonetaXml::addZecchiere(const xml::Zecchiere& l)
     let.zecchiere().push_back(zec);
     this->mon->zecchieri().set(let);
     this->fillZecchieri();
+#endif
 }
 
 

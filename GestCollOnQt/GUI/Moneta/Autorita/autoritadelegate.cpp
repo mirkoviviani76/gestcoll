@@ -9,6 +9,7 @@ AutoritaDelegate::AutoritaDelegate(QObject* parent) : QStyledItemDelegate(parent
 
 
 QWidget* AutoritaDelegate::createEditor(QWidget *parent, const   QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(option);
     // create widget for use
     switch (index.column()) {
     case 0:
@@ -47,5 +48,6 @@ void AutoritaDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, 
 }
 
 void AutoritaDelegate::updateEditorGeometry(QWidget *editor, const     QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(index);
     editor->setGeometry(option.rect);
 }

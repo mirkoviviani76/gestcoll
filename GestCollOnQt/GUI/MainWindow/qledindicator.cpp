@@ -40,6 +40,8 @@ void QLedIndicator::resizeEvent(QResizeEvent *event) {
 }
 
 void QLedIndicator::paintEvent(QPaintEvent *event) {
+    Q_UNUSED(event);
+
     qreal realSize = qMin(width(), height());
 
     QRadialGradient gradient;

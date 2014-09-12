@@ -111,7 +111,6 @@ void Utils::doWork(QString workDir, QString command, QStringList args)
   */
 bool Utils::saveAndBackup(QString source, QString backupfile) {
     bool ret = false;
-#if 1
 
     ret = QFile::copy(source, backupfile);
 
@@ -121,8 +120,17 @@ bool Utils::saveAndBackup(QString source, QString backupfile) {
     QString out = QString("%1__%2.bz2").arg(backupfile).arg(checksum);
 
 
-    FILE *tarFD = fopen(backupfile.toLatin1(), "r");
-    FILE *tbz2File = fopen(out.toLatin1(), "wb");
+    FILE *tarFD;
+    FILE *tbz2File;
+    errno_t error;
+    error = fopen_s(&tarFD, backupfile.toLatin1(), "r");
+    if (error != 0) {
+        qFatal("Errore aprendo il file di backup");
+    }
+    error = fopen_s(&tbz2File, out.toLatin1(), "wb");
+    if (error != 0) {
+        qFatal("Errore scrivendo il file di backup");
+    }
 
     int bzError;
     const int BLOCK_MULTIPLIER = 7;
@@ -134,7 +142,7 @@ bool Utils::saveAndBackup(QString source, QString backupfile) {
 
     while((bytesRead = fread(buf, 1, BUF_SIZE, tarFD)) > 0)
     {
-        BZ2_bzWrite(&bzError, pBz, buf, bytesRead);
+        BZ2_bzWrite(&bzError, pBz, buf, (int) bytesRead);
     }
     BZ2_bzWriteClose(&bzError, pBz, 0, NULL, NULL);
     fclose(tarFD);
@@ -142,10 +150,7 @@ bool Utils::saveAndBackup(QString source, QString backupfile) {
 
     QFile removeFile(backupfile);
     removeFile.remove();
-#else
-    ret = true;
-    qDebug() << "MUST BE DONE";
-#endif
+
     return ret;
 }
 

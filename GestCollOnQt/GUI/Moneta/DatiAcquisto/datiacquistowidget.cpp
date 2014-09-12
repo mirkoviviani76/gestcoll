@@ -23,14 +23,19 @@ void DatiAcquistoWidget::setData(gestColl::coins::datiAcquisto* datiAcquisto)
     this->modelloDatiAcquisto->clear();
     this->datiAcquisto = datiAcquisto;
     this->modelloDatiAcquisto->appendRow(datiAcquisto);
+
+    this->ui->datiAcquistoView->resizeColumnsToContents();
 }
 
 void DatiAcquistoWidget::setEditable(bool editable)
 {
     if (editable) {
         this->ui->datiAcquistoView->setEditTriggers(QAbstractItemView::DoubleClicked);
+        this->ui->datiAcquistoView->setSelectionBehavior(QAbstractItemView::SelectItems);
+        this->ui->datiAcquistoView->setSelectionMode(QAbstractItemView::SingleSelection);
     } else {
         this->ui->datiAcquistoView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        this->ui->datiAcquistoView->setSelectionBehavior(QAbstractItemView::SelectRows);
+        this->ui->datiAcquistoView->setSelectionMode(QAbstractItemView::SingleSelection);
     }
-
 }

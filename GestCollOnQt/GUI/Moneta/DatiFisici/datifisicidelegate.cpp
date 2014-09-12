@@ -9,12 +9,15 @@ DatiFisiciDelegate::DatiFisiciDelegate(QObject* parent) : QStyledItemDelegate(pa
 
 
 QWidget* DatiFisiciDelegate::createEditor(QWidget *parent, const   QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(option);
     // create widget for use
     switch (index.column()) {
     case 0:
+        return new QDoubleSpinBox(parent);
     case 1:
         return new QDoubleSpinBox(parent);
     case 2:
+        return new QLineEdit(parent);
     case 3:
         return new QLineEdit(parent);
     }
@@ -70,6 +73,7 @@ void DatiFisiciDelegate::setModelData(QWidget *editor, QAbstractItemModel *model
 }
 
 void DatiFisiciDelegate::updateEditorGeometry(QWidget *editor, const     QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(index);
     editor->setGeometry(option.rect);
 }
 
