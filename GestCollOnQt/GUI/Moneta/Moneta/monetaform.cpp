@@ -5,7 +5,6 @@
 #include <letteraturadialog.h>
 #include <notadialog.h>
 #include <legendadialog.h>
-#include <zecchieredialog.h>
 #include <utils.h>
 #include <QFileInfo>
 #include <vassoioform.h>
@@ -103,7 +102,6 @@ MonetaForm::MonetaForm(QWidget *parent) :
     this->ui->letteratura->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->note->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->documenti->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->zecchieri->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->id->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->ambiti->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->itemList->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -124,6 +122,7 @@ MonetaForm::MonetaForm(QWidget *parent) :
     connect(this->ui->autorita, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->datiAcquisto, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->datiFisici, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
+    connect(this->ui->zeccaEzecchieri, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
 }
 
 /**
@@ -138,12 +137,6 @@ MonetaForm::~MonetaForm()
         this->modelloNote->clear();
         delete modelloNote;
         this->modelloNote = NULL;
-    }
-    if (modelloZecchieri != NULL)
-    {
-        this->modelloZecchieri->clear();
-        delete modelloZecchieri;
-        this->modelloZecchieri = NULL;
     }
     if (modelloLetteratura != NULL)
     {
@@ -270,7 +263,6 @@ void MonetaForm::setupModelMonete()
 void MonetaForm::setupModels()
 {
     modelloNote = new GenericModel();
-    modelloZecchieri = new GenericModel(3);
     modelloLetteratura = new GenericModel(2);
     modelloDoc = new GenericModel();
     modelloAmbiti = new GenericModel(2);
@@ -278,7 +270,6 @@ void MonetaForm::setupModels()
     this->setupModelMonete();
 
     this->ui->letteratura->resizeRowsToContents();
-    this->ui->zecchieri->resizeColumnsToContents();
 }
 
 void MonetaForm::changeEvent(QEvent *e)
@@ -310,10 +301,6 @@ void MonetaForm::loadData()
     xml::Nominale nom = item->getNominale();
     this->ui->nominale->setData(nom.valore, nom.valuta);
 
-    xml::Zecca zec = item->getZecca();
-    this->ui->zecca->setData(zec.nome,
-                             zec.segno);
-
     this->ui->posizione->setText(QString("%1-%2-%3-%4")
                                .arg(item->getContenitore())
                                .arg(item->getVassoio())
@@ -321,7 +308,6 @@ void MonetaForm::loadData()
                                .arg(item->getColonna()));
 
     this->modelloNote->clear();
-    this->modelloZecchieri->clear();
     this->modelloLetteratura->clear();
     this->modelloDoc->clear();
     this->modelloAmbiti->clear();
@@ -339,12 +325,6 @@ void MonetaForm::loadData()
     this->ui->autorita->setData(&(this->item->getDom()->autorita()), this->item->getPaese());
 
 
-    /* aggiunge gli zecchieri */
-    foreach (xml::Zecchiere* a, item->getZecchieri())
-    {
-        this->modelloZecchieri->appendRow(a);
-    }
-    this->ui->zecchieri->setModel(this->modelloZecchieri);
 
     /* aggiunge i dati fisici */
     this->ui->datiFisici->setData(&(this->item->getDom()->datiFisici()));
@@ -352,6 +332,8 @@ void MonetaForm::loadData()
     /* aggiunge i dati di acquisto */
     this->ui->datiAcquisto->setData(&(this->item->getDom()->datiAcquisto()));
 
+    /* aggiunge zecca e zecchieri */
+    this->ui->zeccaEzecchieri->setData(&(item->getDom()->zecca()), &(item->getDom()->zecchieri()));
 
     /* aggiunge la letteratura */
     //TODO ASTE?
@@ -391,8 +373,6 @@ void MonetaForm::loadData()
 
     //resize delle righe per le tabelle
     this->ui->letteratura->verticalHeader()->resizeSections(QHeaderView::ResizeToContents);
-    this->ui->zecchieri->verticalHeader()->resizeSections(QHeaderView::ResizeToContents);
-
 
     //riabilita la segnalazione delle modifiche
     this->blockSignals(false);
@@ -453,13 +433,13 @@ void MonetaForm::enableEdit(bool editable)
     this->ui->dritto->setReadOnly(!editable);
     this->ui->rovescio->setReadOnly(!editable);
     this->ui->taglio->setReadOnly(!editable);
-    this->ui->zecca->enableEdit(editable);
     this->ui->nominale->enableEdit(editable);
 
     this->ui->autorita->setEditable(editable);
 
     this->ui->datiAcquisto->setEditable(editable);
     this->ui->datiFisici->setEditable(editable);
+    this->ui->zeccaEzecchieri->setEditable(editable);
 
 }
 
@@ -588,29 +568,6 @@ void MonetaForm::on_letteratura_doubleClicked(QModelIndex index)
     }
 }
 
-void MonetaForm::on_zecchieri_doubleClicked(QModelIndex index)
-{
-    GenericModel* model = (GenericModel*)index.model();
-    xml::Zecchiere* vecchio = (xml::Zecchiere*) model->getItem(index);
-    ZecchiereDialog zecchiereDialog(this->editingEnabled, this);
-    zecchiereDialog.setData(vecchio);
-    int ret = zecchiereDialog.exec();
-    if (ret == QDialog::Accepted && this->editingEnabled)
-    {
-        QString nome;
-        QString sigla;
-        QString ruolo;
-        zecchiereDialog.getData(&nome, &sigla, &ruolo);
-        xml::Zecchiere nuovo(nome, sigla, ruolo);
-        /* modifica/aggiunge il nodo al dom */
-        this->item->setZecchiere(*vecchio, nuovo);
-        this->loadData();
-        //segnala la modifica
-        emit this->changesOccurred();
-
-    }
-}
-
 void MonetaForm::showQr() {
     //ottiene il nome della immagine png
     QString qrImg = CommonData::getInstance()->getQrDir()+"/"+this->item->getId()+".png";
@@ -704,6 +661,7 @@ void MonetaForm::on_documenti_customContextMenuRequested(QPoint pos)
 
 void MonetaForm::on_zecchieri_customContextMenuRequested(QPoint pos)
 {
+#if 0
     // for most widgets
     QPoint globalPos = this->ui->zecchieri->mapToGlobal(pos);
     // for QAbstractScrollArea and derived classes you would use:
@@ -744,6 +702,7 @@ void MonetaForm::on_zecchieri_customContextMenuRequested(QPoint pos)
     {
         // nothing was chosen
     }
+#endif
 }
 
 void MonetaForm::on_note_customContextMenuRequested(QPoint pos)

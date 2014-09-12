@@ -44,11 +44,9 @@ public:
     QString getId() const;
     QString getPaese();
     QString getAnno();
-    xml::Zecca getZecca();
     xml::Nominale getNominale();
     xml::Stato getStato();
     QList<xml::Nota*> getNote();
-    QList<xml::Zecchiere*> getZecchieri();
     QList<xml::Libro*> getLetteratura();
     QList<xml::Documento*> getItemAddizionali();
     QList<xml::Ambito*> getAmbiti();
@@ -87,7 +85,6 @@ private:
     QImage* image;
     void updateImage();
     QList<xml::Nota*> xmlNote;
-    QList<xml::Zecchiere*> xmlZecchieri;
     QList<xml::Libro*> xmlLetteratura;
     QList<xml::Documento*> xmlItemAddizionali;
     QList<xml::Ambito*> xmlAmbiti;
@@ -100,7 +97,6 @@ private:
     void deleteAmbitiList();
 
     void fillNote();
-    void fillZecchieri();
     void fillLetteratura();
     void fillItemAddizionali();
     void fillAmbiti();

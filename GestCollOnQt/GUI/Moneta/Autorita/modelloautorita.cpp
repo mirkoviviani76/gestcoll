@@ -71,7 +71,7 @@ QVariant ModelloAutorita::data(const QModelIndex &index, int role) const
 int ModelloAutorita::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return this->items->nome().size();
+    return (int) this->items->nome().size();
 }
 
 

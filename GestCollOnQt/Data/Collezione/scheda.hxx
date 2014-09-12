@@ -6170,7 +6170,7 @@ namespace gestColl
        * @name zecca
        *
        * @brief Accessor and modifier functions for the %zecca
-       * optional element.
+       * required element.
        */
       //@{
 
@@ -6180,30 +6180,24 @@ namespace gestColl
       typedef ::gestColl::coins::zecca zecca_type;
 
       /**
-       * @brief Element optional container type.
-       */
-      typedef ::xsd::cxx::tree::optional< zecca_type > zecca_optional;
-
-      /**
        * @brief Element traits type.
        */
       typedef ::xsd::cxx::tree::traits< zecca_type, wchar_t > zecca_traits;
 
       /**
-       * @brief Return a read-only (constant) reference to the element
-       * container.
+       * @brief Return a read-only (constant) reference to the element.
        *
-       * @return A constant reference to the optional container.
+       * @return A constant reference to the element.
        */
-      const zecca_optional&
+      const zecca_type&
       zecca () const;
 
       /**
-       * @brief Return a read-write reference to the element container.
+       * @brief Return a read-write reference to the element.
        *
-       * @return A reference to the optional container.
+       * @return A reference to the element.
        */
-      zecca_optional&
+      zecca_type&
       zecca ();
 
       /**
@@ -6218,24 +6212,12 @@ namespace gestColl
       zecca (const zecca_type& x);
 
       /**
-       * @brief Set the element value.
-       *
-       * @param x An optional container with the new value to set.
-       *
-       * If the value is present in @a x then this function makes a copy 
-       * of this value and sets it as the new value of the element.
-       * Otherwise the element container is set the 'not present' state.
-       */
-      void
-      zecca (const zecca_optional& x);
-
-      /**
        * @brief Set the element value without copying.
        *
        * @param p A new value to use.
        *
-       * This function will try to use the passed value directly instead
-       * of making a copy.
+       * This function will try to use the passed value directly
+       * instead of making a copy.
        */
       void
       zecca (::std::auto_ptr< zecca_type > p);
@@ -6246,7 +6228,7 @@ namespace gestColl
        * @name zecchieri
        *
        * @brief Accessor and modifier functions for the %zecchieri
-       * optional element.
+       * required element.
        */
       //@{
 
@@ -6256,30 +6238,24 @@ namespace gestColl
       typedef ::gestColl::coins::zecchieri zecchieri_type;
 
       /**
-       * @brief Element optional container type.
-       */
-      typedef ::xsd::cxx::tree::optional< zecchieri_type > zecchieri_optional;
-
-      /**
        * @brief Element traits type.
        */
       typedef ::xsd::cxx::tree::traits< zecchieri_type, wchar_t > zecchieri_traits;
 
       /**
-       * @brief Return a read-only (constant) reference to the element
-       * container.
+       * @brief Return a read-only (constant) reference to the element.
        *
-       * @return A constant reference to the optional container.
+       * @return A constant reference to the element.
        */
-      const zecchieri_optional&
+      const zecchieri_type&
       zecchieri () const;
 
       /**
-       * @brief Return a read-write reference to the element container.
+       * @brief Return a read-write reference to the element.
        *
-       * @return A reference to the optional container.
+       * @return A reference to the element.
        */
-      zecchieri_optional&
+      zecchieri_type&
       zecchieri ();
 
       /**
@@ -6294,24 +6270,12 @@ namespace gestColl
       zecchieri (const zecchieri_type& x);
 
       /**
-       * @brief Set the element value.
-       *
-       * @param x An optional container with the new value to set.
-       *
-       * If the value is present in @a x then this function makes a copy 
-       * of this value and sets it as the new value of the element.
-       * Otherwise the element container is set the 'not present' state.
-       */
-      void
-      zecchieri (const zecchieri_optional& x);
-
-      /**
        * @brief Set the element value without copying.
        *
        * @param p A new value to use.
        *
-       * This function will try to use the passed value directly instead
-       * of making a copy.
+       * This function will try to use the passed value directly
+       * instead of making a copy.
        */
       void
       zecchieri (::std::auto_ptr< zecchieri_type > p);
@@ -7058,6 +7022,8 @@ namespace gestColl
       moneta (const paese_type&,
               const autorita_type&,
               const nominale_type&,
+              const zecca_type&,
+              const zecchieri_type&,
               const datiArtistici_type&,
               const datiFisici_type&,
               const datiAcquisto_type&,
@@ -7076,6 +7042,8 @@ namespace gestColl
       moneta (const paese_type&,
               ::std::auto_ptr< autorita_type >&,
               ::std::auto_ptr< nominale_type >&,
+              ::std::auto_ptr< zecca_type >&,
+              ::std::auto_ptr< zecchieri_type >&,
               ::std::auto_ptr< datiArtistici_type >&,
               ::std::auto_ptr< datiFisici_type >&,
               ::std::auto_ptr< datiAcquisto_type >&,
@@ -7147,8 +7115,8 @@ namespace gestColl
       ::xsd::cxx::tree::one< autorita_type > autorita_;
       anno_optional anno_;
       ::xsd::cxx::tree::one< nominale_type > nominale_;
-      zecca_optional zecca_;
-      zecchieri_optional zecchieri_;
+      ::xsd::cxx::tree::one< zecca_type > zecca_;
+      ::xsd::cxx::tree::one< zecchieri_type > zecchieri_;
       ::xsd::cxx::tree::one< datiArtistici_type > datiArtistici_;
       ::xsd::cxx::tree::one< datiFisici_type > datiFisici_;
       ::xsd::cxx::tree::one< datiAcquisto_type > datiAcquisto_;

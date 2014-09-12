@@ -1509,16 +1509,16 @@ namespace gestColl
       this->nominale_.set (x);
     }
 
-    const moneta::zecca_optional& moneta::
+    const moneta::zecca_type& moneta::
     zecca () const
     {
-      return this->zecca_;
+      return this->zecca_.get ();
     }
 
-    moneta::zecca_optional& moneta::
+    moneta::zecca_type& moneta::
     zecca ()
     {
-      return this->zecca_;
+      return this->zecca_.get ();
     }
 
     void moneta::
@@ -1528,39 +1528,27 @@ namespace gestColl
     }
 
     void moneta::
-    zecca (const zecca_optional& x)
-    {
-      this->zecca_ = x;
-    }
-
-    void moneta::
     zecca (::std::auto_ptr< zecca_type > x)
     {
       this->zecca_.set (x);
     }
 
-    const moneta::zecchieri_optional& moneta::
+    const moneta::zecchieri_type& moneta::
     zecchieri () const
     {
-      return this->zecchieri_;
+      return this->zecchieri_.get ();
     }
 
-    moneta::zecchieri_optional& moneta::
+    moneta::zecchieri_type& moneta::
     zecchieri ()
     {
-      return this->zecchieri_;
+      return this->zecchieri_.get ();
     }
 
     void moneta::
     zecchieri (const zecchieri_type& x)
     {
       this->zecchieri_.set (x);
-    }
-
-    void moneta::
-    zecchieri (const zecchieri_optional& x)
-    {
-      this->zecchieri_ = x;
     }
 
     void moneta::
@@ -4365,6 +4353,8 @@ namespace gestColl
     moneta (const paese_type& paese,
             const autorita_type& autorita,
             const nominale_type& nominale,
+            const zecca_type& zecca,
+            const zecchieri_type& zecchieri,
             const datiArtistici_type& datiArtistici,
             const datiFisici_type& datiFisici,
             const datiAcquisto_type& datiAcquisto,
@@ -4377,8 +4367,8 @@ namespace gestColl
       autorita_ (autorita, ::xml_schema::flags (), this),
       anno_ (::xml_schema::flags (), this),
       nominale_ (nominale, ::xml_schema::flags (), this),
-      zecca_ (::xml_schema::flags (), this),
-      zecchieri_ (::xml_schema::flags (), this),
+      zecca_ (zecca, ::xml_schema::flags (), this),
+      zecchieri_ (zecchieri, ::xml_schema::flags (), this),
       datiArtistici_ (datiArtistici, ::xml_schema::flags (), this),
       datiFisici_ (datiFisici, ::xml_schema::flags (), this),
       datiAcquisto_ (datiAcquisto, ::xml_schema::flags (), this),
@@ -4397,6 +4387,8 @@ namespace gestColl
     moneta (const paese_type& paese,
             ::std::auto_ptr< autorita_type >& autorita,
             ::std::auto_ptr< nominale_type >& nominale,
+            ::std::auto_ptr< zecca_type >& zecca,
+            ::std::auto_ptr< zecchieri_type >& zecchieri,
             ::std::auto_ptr< datiArtistici_type >& datiArtistici,
             ::std::auto_ptr< datiFisici_type >& datiFisici,
             ::std::auto_ptr< datiAcquisto_type >& datiAcquisto,
@@ -4409,8 +4401,8 @@ namespace gestColl
       autorita_ (autorita, ::xml_schema::flags (), this),
       anno_ (::xml_schema::flags (), this),
       nominale_ (nominale, ::xml_schema::flags (), this),
-      zecca_ (::xml_schema::flags (), this),
-      zecchieri_ (::xml_schema::flags (), this),
+      zecca_ (zecca, ::xml_schema::flags (), this),
+      zecchieri_ (zecchieri, ::xml_schema::flags (), this),
       datiArtistici_ (datiArtistici, ::xml_schema::flags (), this),
       datiFisici_ (datiFisici, ::xml_schema::flags (), this),
       datiAcquisto_ (datiAcquisto, ::xml_schema::flags (), this),
@@ -4569,7 +4561,7 @@ namespace gestColl
           ::std::auto_ptr< zecca_type > r (
             zecca_traits::create (i, f, this));
 
-          if (!this->zecca_)
+          if (!zecca_.present ())
           {
             this->zecca_.set (r);
             continue;
@@ -4583,7 +4575,7 @@ namespace gestColl
           ::std::auto_ptr< zecchieri_type > r (
             zecchieri_traits::create (i, f, this));
 
-          if (!this->zecchieri_)
+          if (!zecchieri_.present ())
           {
             this->zecchieri_.set (r);
             continue;
@@ -4751,6 +4743,20 @@ namespace gestColl
       {
         throw ::xsd::cxx::tree::expected_element< wchar_t > (
           L"nominale",
+          L"http://gestColl/coins");
+      }
+
+      if (!zecca_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< wchar_t > (
+          L"zecca",
+          L"http://gestColl/coins");
+      }
+
+      if (!zecchieri_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< wchar_t > (
+          L"zecchieri",
           L"http://gestColl/coins");
       }
 
@@ -6096,7 +6102,6 @@ namespace gestColl
 
       // zecca
       //
-      if (i.zecca ())
       {
         ::xercesc::DOMElement& s (
           ::xsd::cxx::xml::dom::create_element (
@@ -6104,12 +6109,11 @@ namespace gestColl
             L"http://gestColl/coins",
             e));
 
-        s << *i.zecca ();
+        s << i.zecca ();
       }
 
       // zecchieri
       //
-      if (i.zecchieri ())
       {
         ::xercesc::DOMElement& s (
           ::xsd::cxx::xml::dom::create_element (
@@ -6117,7 +6121,7 @@ namespace gestColl
             L"http://gestColl/coins",
             e));
 
-        s << *i.zecchieri ();
+        s << i.zecchieri ();
       }
 
       // datiArtistici

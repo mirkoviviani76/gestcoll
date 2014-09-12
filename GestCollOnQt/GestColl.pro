@@ -93,7 +93,7 @@ INCLUDEPATH += other_libs \
                GUI/Moneta/Posizione \
                GUI/Moneta/Utilita \
                GUI/Moneta/Vassoi \
-               GUI/Moneta/Zecchiere \
+               GUI/Moneta/Zecca \
                GUI/Statistiche \
                GUI/Blocknotes \
                GUI/Collezione
@@ -152,7 +152,7 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/Moneta/Utilita/charselector.cpp \
                GUI/Moneta/Utilita/misuraform.cpp \
                GUI/Moneta/Vassoi/vassoioform.cpp \
-               GUI/Moneta/Zecchiere/zecchieredialog.cpp \
+               GUI/Moneta/Zecca/zecchieredialog.cpp \
                GUI/Statistiche/statisticheform.cpp \
                GUI/Statistiche/nightcharts.cpp \
                GUI/Statistiche/statisticamoneteperanno.cpp \
@@ -184,7 +184,10 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.cpp \
     GUI/Moneta/DatiAcquisto/datiacquistomodel.cpp \
     GUI/Moneta/DatiAcquisto/datiacquistodelegate.cpp \
-    GUI/Moneta/DatiFisici/datifisiciwidget.cpp
+    GUI/Moneta/DatiFisici/datifisiciwidget.cpp \
+    GUI/Moneta/Zecca/zeccawidget.cpp \
+    GUI/Moneta/Zecca/zecchieremodel.cpp \
+    GUI/Moneta/Zecca/zecchieredelegate.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -232,7 +235,7 @@ HEADERS  +=    Common/commondata.h \
                GUI/Moneta/Utilita/charselector.h \
                GUI/Moneta/Utilita/misuraform.h \
                GUI/Moneta/Vassoi/vassoioform.h \
-               GUI/Moneta/Zecchiere/zecchieredialog.h \
+               GUI/Moneta/Zecca/zecchieredialog.h \
                GUI/Statistiche/statisticheform.h \
                GUI/Statistiche/nightcharts.h \
                GUI/Statistiche/statisticamoneteperanno.h \
@@ -264,7 +267,10 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.h \
     GUI/Moneta/DatiAcquisto/datiacquistomodel.h \
     GUI/Moneta/DatiAcquisto/datiacquistodelegate.h \
-    GUI/Moneta/DatiFisici/datifisiciwidget.h
+    GUI/Moneta/DatiFisici/datifisiciwidget.h \
+    GUI/Moneta/Zecca/zeccawidget.h \
+    GUI/Moneta/Zecca/zecchieremodel.h \
+    GUI/Moneta/Zecca/zecchieredelegate.h
 
 
 
@@ -288,7 +294,7 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
                GUI/Moneta/Utilita\charselector.ui \
                GUI/Moneta/Utilita\misuraform.ui \
                GUI/Moneta/Vassoi\vassoioform.ui \
-               GUI/Moneta/Zecchiere\zecchieredialog.ui \
+               GUI/Moneta/Zecca\zecchieredialog.ui \
             GUI/Statistiche/statisticheform.ui \
             GUI/Statistiche/statisticamoneteperanno.ui \
             GUI/Statistiche/statisticamonetepermetallo.ui \
@@ -305,7 +311,8 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
     GUI/Moneta/Descrizione/descrizioneform.ui \
     GUI/Moneta/Autorita/autoritaform.ui \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.ui \
-    GUI/Moneta/DatiFisici/datifisiciwidget.ui
+    GUI/Moneta/DatiFisici/datifisiciwidget.ui \
+    GUI/Moneta/Zecca/zeccawidget.ui
 
 
 RESOURCES += resources/resources.qrc

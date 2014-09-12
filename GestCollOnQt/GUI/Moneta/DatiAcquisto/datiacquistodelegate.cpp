@@ -15,6 +15,7 @@ DatiAcquistoDelegate::DatiAcquistoDelegate(QObject* parent) : QStyledItemDelegat
 
 
 QWidget* DatiAcquistoDelegate::createEditor(QWidget *parent, const   QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(option);
     // create widget for use
     switch (index.column()) {
     case 0:
@@ -89,5 +90,6 @@ void DatiAcquistoDelegate::setModelData(QWidget *editor, QAbstractItemModel *mod
 }
 
 void DatiAcquistoDelegate::updateEditorGeometry(QWidget *editor, const     QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(index);
     editor->setGeometry(option.rect);
 }
