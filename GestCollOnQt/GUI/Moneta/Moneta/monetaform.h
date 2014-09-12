@@ -77,7 +77,6 @@ private slots:
     void on_itemList_activated(QModelIndex index);
     void on_documenti_customContextMenuRequested(QPoint pos);
     void on_note_customContextMenuRequested(QPoint pos);
-    void on_zecchieri_customContextMenuRequested(QPoint pos);
     void on_letteratura_customContextMenuRequested(QPoint pos);
 
     void on_letteratura_doubleClicked(QModelIndex index);
@@ -85,7 +84,6 @@ private slots:
     void on_anno_textChanged(QString );
     void on_paese_textChanged(QString );
     void on_nominale_textChanged(QString valore, QString unita);
-    void on_zecca_textChanged(QString nome, QString segno);
     void on_id_customContextMenuRequested(const QPoint &pos);
     void on_itemList_customContextMenuRequested(const QPoint &pos);
     void on_led_clicked();

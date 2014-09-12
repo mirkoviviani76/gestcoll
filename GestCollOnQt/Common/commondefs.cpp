@@ -23,29 +23,6 @@ QString Libro::toString(int column)
     return ret;
 }
 
-QString Zecchiere::toString(int column)
-{
-    QString ret;
-    switch (column) {
-    case -1:
-            ret = QString("%1 [ %2 ] (%3)").arg(nome).arg(segno).arg(ruolo);
-        break;
-    case 0: ret = nome;
-        break;
-    case 1: ret = segno;
-        break;
-    case 2: ret = ruolo;
-            break;
-    default:
-            Log::Logger::getInstance()->log(
-                        QString("Zecchiere()::toString: Richiesta colonna non gestita %1").arg(column),
-                        Log::ERR);
-            break;
-    }
-    return ret;
-
-}
-
 
 Documento::Documento(QString _filename, QString _descrizione) {
     filename = _filename;

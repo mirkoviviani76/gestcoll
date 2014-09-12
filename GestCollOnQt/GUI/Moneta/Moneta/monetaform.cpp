@@ -470,13 +470,6 @@ void MonetaForm::on_nominale_textChanged(QString valore, QString unita)
     emit this->changesOccurred();
 }
 
-void MonetaForm::on_zecca_textChanged(QString nome, QString segno)
-{
-    this->item->setZecca(nome, segno);
-    emit this->changesOccurred();
-}
-
-
 /**
   Ricarica il documento corrente da file
   */
@@ -657,52 +650,6 @@ void MonetaForm::on_documenti_customContextMenuRequested(QPoint pos)
         this->showQr();
     }
 
-}
-
-void MonetaForm::on_zecchieri_customContextMenuRequested(QPoint pos)
-{
-#if 0
-    // for most widgets
-    QPoint globalPos = this->ui->zecchieri->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_ADD) {
-            /* attiva la vera gestione */
-            ZecchiereDialog dialog(this);
-            //dialog.setData(a);
-            int ret = dialog.exec();
-            if (ret == QDialog::Accepted)
-            {
-                QString nome;
-                QString ruolo;
-                QString sigla;
-                dialog.getData(&nome, &sigla, &ruolo);
-                xml::Zecchiere nuovo(nome, sigla, ruolo);
-                /* modifica/aggiunge il nodo al dom */
-                this->item->addZecchiere(nuovo);
-                this->loadData();
-                //segnala la modifica
-                emit this->changesOccurred();
-
-            }
-        } else if (selectedItem->text() == ACTION_DEL) {
-            qDebug() << "DEL: TODO";
-        } else if (selectedItem->text() == ACTION_COPY_ID) {
-            this->gestClipboardCopyId(this->item->getId());
-        } else if (selectedItem->text() == ACTION_COPY) {
-            this->gestClipboardCopy(this->item->getId());
-        } else if (selectedItem->text() == ACTION_SHOW_QR) {
-            this->showQr();
-        }
-    }
-    else
-    {
-        // nothing was chosen
-    }
-#endif
 }
 
 void MonetaForm::on_note_customContextMenuRequested(QPoint pos)
