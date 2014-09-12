@@ -87,7 +87,6 @@ INCLUDEPATH += other_libs \
                GUI/Moneta/Descrizione \
                GUI/Moneta/Documenti \
                GUI/Moneta/Immagini \
-               GUI/Moneta/Legende \
                GUI/Moneta/Letteratura \
                GUI/Moneta/Moneta \
                GUI/Moneta/Note \
@@ -144,7 +143,7 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/Moneta/Immagini/imgmoneta.cpp \
                GUI/Moneta/Immagini/setimmaginemonetadialog.cpp \
                GUI/Moneta/Utilita/visualizzaimmagine.cpp \
-               GUI/Moneta/Legende/legendadialog.cpp \
+               GUI/Moneta/Descrizione/legendadialog.cpp \
                GUI/Moneta/Letteratura/letteraturadialog.cpp \
                GUI/Moneta/Moneta/monetaform.cpp \
                GUI/Moneta/Moneta/nuovamonetadialog.cpp \
@@ -224,7 +223,7 @@ HEADERS  +=    Common/commondata.h \
                GUI/Moneta/Immagini/imgmoneta.h \
                GUI/Moneta/Immagini/setimmaginemonetadialog.h \
                GUI/Moneta/Utilita/visualizzaimmagine.h \
-               GUI/Moneta/Legende/legendadialog.h \
+               GUI/Moneta/Descrizione/legendadialog.h \
                GUI/Moneta/Letteratura/letteraturadialog.h \
                GUI/Moneta/Moneta/monetaform.h \
                GUI/Moneta/Moneta/nuovamonetadialog.h \
@@ -280,7 +279,7 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
                GUI/Moneta/Documenti\adddocumentdialog.ui \
                GUI/Moneta/Immagini\setimmaginemonetadialog.ui \
                GUI/Moneta/Utilita\visualizzaimmagine.ui \
-               GUI/Moneta/Legende\legendadialog.ui \
+               GUI/Moneta/Descrizione\legendadialog.ui \
                GUI/Moneta/Letteratura\letteraturadialog.ui \
                GUI/Moneta/Moneta\monetaform.ui \
                GUI/Moneta/Moneta\nuovamonetadialog.ui \
