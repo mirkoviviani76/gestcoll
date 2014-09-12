@@ -61,7 +61,6 @@ MonetaXml::~MonetaXml()
         this->image = NULL;
     }
     deleteNoteList();
-    deleteZecchieriList();
     deleteLetteraturaList();
     deleteItemAddizionaliList();
     deleteAmbitiList();
@@ -80,17 +79,6 @@ void MonetaXml::deleteNoteList() {
 }
 
 
-void MonetaXml::deleteZecchieriList() {
-#if 0
-    foreach (xml::Zecchiere* a, xmlZecchieri) {
-        if (a != NULL) {
-            delete a;
-            a = NULL;
-        }
-    }
-    this->xmlZecchieri.clear();
-#endif
-}
 void MonetaXml::deleteLetteraturaList() {
     foreach (xml::Libro* a, xmlLetteratura) {
         if (a != NULL) {
@@ -490,16 +478,6 @@ void MonetaXml::setNominale(QString valore, QString unita)
     this->mon->nominale().valore(valore.toStdWString());
 }
 
-void MonetaXml::setZecca(QString nome, QString segno)
-{
-#if 0
-    moneta::zecca_type zec;
-    zec.nome(nome.toStdWString());
-    zec.segno(segno.toStdWString());
-    this->mon->zecca().set(zec);
-#endif
-}
-
 void MonetaXml::setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo)
 {
     bool done = false;
@@ -577,44 +555,6 @@ void MonetaXml::setDocumento(const xml::Documento& vecchio, const xml::Documento
     mon->itemAddizionali(let);
     this->fillItemAddizionali();
 
-}
-
-
-void MonetaXml::setZecchiere(const xml::Zecchiere& vecchio, const xml::Zecchiere& nuovo)
-{
-#if 0
-    bool done = false;
-    moneta::zecchieri_type let = mon->zecchieri().get();
-
-    for (::zecchieri::zecchiere_iterator it = let.zecchiere().begin();
-         it != let.zecchiere().end() && !done;
-         ++it)
-    {
-        //cerca l'item "giusto"
-        QString curNome = "";
-        QString curSegno = "";
-        QString curRuolo = "";
-        if (it->nome().present())
-            curNome = QString::fromStdWString(it->nome().get());
-        if (it->segno().present())
-            curSegno = QString::fromStdWString(it->segno().get());
-        if (it->ruolo().present())
-            curRuolo = QString::fromStdWString(it->ruolo().get());
-
-        if ((curNome == vecchio.nome) && (curSegno == vecchio.segno) && (curRuolo == vecchio.ruolo))
-        {
-            /* trovato: effettua le modifiche */
-            it->nome(nuovo.nome.toStdWString());
-            it->segno(nuovo.segno.toStdWString());
-            it->ruolo(nuovo.ruolo.toStdWString());
-            done = true;
-        }
-    }
-
-    //salva le modifiche nel dom
-    mon->zecchieri(let);
-    this->fillZecchieri();
-#endif
 }
 
 
@@ -723,29 +663,6 @@ void MonetaXml::deleteLetteratura(xml::Libro* l)
     }
 
 }
-
-
-
-
-
-void MonetaXml::addZecchiere(const xml::Zecchiere& l)
-{
-#if 0
-    ::zecchieri::zecchiere_type zec;
-    zec.nome(l.nome.toStdWString());
-    zec.ruolo(l.ruolo.toStdWString());
-    zec.segno(l.segno.toStdWString());
-
-    moneta::zecchieri_type let;
-    if (this->mon->zecchieri().present())
-        let = mon->zecchieri().get();
-    let.zecchiere().push_back(zec);
-    this->mon->zecchieri().set(let);
-    this->fillZecchieri();
-#endif
-}
-
-
 
 void MonetaXml::setAmbiti(QList<xml::Ambito*> ambiti) {
     gestColl::coins::moneta::ambiti_type let;

@@ -152,7 +152,6 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/Moneta/Utilita/charselector.cpp \
                GUI/Moneta/Utilita/misuraform.cpp \
                GUI/Moneta/Vassoi/vassoioform.cpp \
-               GUI/Moneta/Zecca/zecchieredialog.cpp \
                GUI/Statistiche/statisticheform.cpp \
                GUI/Statistiche/nightcharts.cpp \
                GUI/Statistiche/statisticamoneteperanno.cpp \
@@ -235,7 +234,6 @@ HEADERS  +=    Common/commondata.h \
                GUI/Moneta/Utilita/charselector.h \
                GUI/Moneta/Utilita/misuraform.h \
                GUI/Moneta/Vassoi/vassoioform.h \
-               GUI/Moneta/Zecca/zecchieredialog.h \
                GUI/Statistiche/statisticheform.h \
                GUI/Statistiche/nightcharts.h \
                GUI/Statistiche/statisticamoneteperanno.h \
@@ -294,7 +292,6 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
                GUI/Moneta/Utilita\charselector.ui \
                GUI/Moneta/Utilita\misuraform.ui \
                GUI/Moneta/Vassoi\vassoioform.ui \
-               GUI/Moneta/Zecca\zecchieredialog.ui \
             GUI/Statistiche/statisticheform.ui \
             GUI/Statistiche/statisticamoneteperanno.ui \
             GUI/Statistiche/statisticamonetepermetallo.ui \

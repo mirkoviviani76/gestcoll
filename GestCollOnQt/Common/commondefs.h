@@ -30,11 +30,6 @@ struct Nominale
         QString valuta;
         QString valore;
 };
-struct Zecca
-{
-        QString nome;
-        QString segno;
-};
 class Misura
 {
     public:
@@ -65,19 +60,6 @@ class Nota : public GenericItem
         inline QColor getColor() { return QColor(QColor::Invalid);}
 };
 
-class Zecchiere : public GenericItem
-{
-    public:
-        QString nome;
-        QString segno;
-        QString ruolo;
-        virtual ~Zecchiere() {}
-        Zecchiere(QString a = "", QString b = "", QString c = "") {nome = a; segno = b; ruolo = c;}
-        QString toString(int column=-1);
-        inline QString toTooltip() {return "";}
-        inline QImage toImg() { return QImage(); }
-        inline QColor getColor() { return QColor(QColor::Invalid);}
-};
 class Libro : public GenericItem
 {
     public:

@@ -58,16 +58,13 @@ public:
     void setPaese(QString p);
     void setAnno(QString p);
     void setNominale(QString valore, QString unita);
-    void setZecca(QString nome, QString segno);
     void setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo);
     void setNota(const xml::Nota& vecchio, const xml::Nota& nuovo);
-    void setZecchiere(const xml::Zecchiere& vecchio, const xml::Zecchiere& nuovo);
     void setDocumento(const xml::Documento& vecchio, const xml::Documento& nuovo);
     void setPosizione(int cont, int vass, int r, int c);
     void setAmbiti(QList<xml::Ambito*> ambiti);
     void addLibro(const xml::Libro& l);
     void addNota(const xml::Nota& l);
-    void addZecchiere(const xml::Zecchiere& l);
     void addDocumento(const xml::Documento& l);
 
 
@@ -91,7 +88,6 @@ private:
 
     void deleteNoteList();
     void deleteLegendeList(Moneta::Lato l);
-    void deleteZecchieriList();
     void deleteLetteraturaList();
     void deleteItemAddizionaliList();
     void deleteAmbitiList();
