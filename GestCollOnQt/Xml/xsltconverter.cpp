@@ -23,7 +23,7 @@ bool XsltConverter::convertAll(const QString& xml, const QString& xslt, QFile* o
 
 
     QXmlQuery query(QXmlQuery::XSLT20);
-    ret = query.setFocus(QUrl(xml));
+    ret = query.setFocus(QUrl::fromLocalFile(xml));
     if (ret) {
         query.bindVariable("dirImg", QVariant("../../"+CommonData::getInstance()->getImgDir()));
         //FIXME metterlo come parametro
@@ -74,7 +74,7 @@ bool XsltConverter::convert(const QString& id, const QString& xml, const QString
 {
     bool ret = false;
     QXmlQuery query(QXmlQuery::XSLT20);
-    ret = query.setFocus(QUrl(xml));
+    ret = query.setFocus(QUrl::fromLocalFile(xml));
     if (ret) {
         query.bindVariable("monetaId", QVariant(id));
 
