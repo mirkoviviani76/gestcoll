@@ -25,7 +25,7 @@ xmlns:cc="http://gestColl/coins">
 \usepackage[big]{layaureo}
 \usepackage{aurical}
 \usepackage{longtable}
-<xsl:if test="$hyperref = 'TRUE'">\usepackage{hyperref}</xsl:if>
+<xsl:if test="$hyperref=1">\usepackage{hyperref}</xsl:if>
 \usepackage{xltxtra}
 \usepackage[perpage]{footmisc}
 \usepackage[italian]{isodate}
@@ -100,9 +100,9 @@ xmlns:cc="http://gestColl/coins">
 
 \end{titlepage}
 
-<xsl:if test="$hyperref = 'TRUE'">
+<!-- <xsl:if test="$hyperref = 'TRUE'">
 \tableofcontents
-</xsl:if>
+</xsl:if> -->
 
 <xsl:call-template name="posizioni" />
 <xsl:call-template name="monete" />

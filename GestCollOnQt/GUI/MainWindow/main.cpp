@@ -8,7 +8,6 @@
 #include <QPainter>
 #include <QDebug>
 
-//TODO fare la documentazione
 /** \mainpage
  * GestColl bla bla bla
  *
