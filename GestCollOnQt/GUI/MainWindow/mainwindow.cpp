@@ -252,11 +252,23 @@ void MainWindow::on_actionXml_Html_triggered()
 
     this->progress->close();
 
+    QFile css(":/Xml_transform/report.css");
+    QString target = CommonData::getInstance()->getHtmlDir()+"/"+"report.css";
     if (ret) {
         //copia il css
-        QFile css(":/Xml_transform/report.css");
-        ret = css.copy(CommonData::getInstance()->getHtmlDir()+"/"+"report.css");
+        if (css.exists()) {
+            QFile targetFile(target);
+            if (targetFile.exists())
+                ret = targetFile.remove();
+        }
+        if (ret) {
+            ret = css.copy(target);
+        }
+    } else {
+        Log::Logger::getInstance()->log(QString("%1 does not exists").arg(css.fileName()), Log::ERR);
+        ret = false;
     }
+
     QString status;
     if (ret == true)
     {
