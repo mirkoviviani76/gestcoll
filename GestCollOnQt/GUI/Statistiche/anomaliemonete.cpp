@@ -26,7 +26,6 @@ AnomalieMonete::~AnomalieMonete()
 void AnomalieMonete::fillData() {
 
     this->checkLetteratura();
-    this->checkNote();
     this->checkAutorita();
     this->checkPeso();
 }
@@ -93,27 +92,6 @@ void AnomalieMonete::checkLetteratura() {
 #endif
 
 }
-
-/**
-  Controlla la presenza delle note in ogni moneta
-  */
-void AnomalieMonete::checkNote() {
-    QTreeWidgetItem* node = new QTreeWidgetItem(QStringList() << "Note mancanti");
-
-    this->ui->treeWidget->addTopLevelItem(node);
-    QList<QTreeWidgetItem *> items;
-
-    QList<QString> allid = CollezioneXml::getInstance()->getAllId();
-    foreach (QString id, allid) {
-        MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        bool ok = (m->getNote().size() > 0 ? true : false);
-        if (!ok) {
-            items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("%1").arg(id))));
-        }
-    }
-    node->addChildren(items);
-}
-
 
 /**
   Controlla la presenza delle autorita in ogni moneta

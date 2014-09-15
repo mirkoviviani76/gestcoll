@@ -1,7 +1,5 @@
 #include "modelloautorita.h"
 
-#include "modellolegenda.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <QDebug>

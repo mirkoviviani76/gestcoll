@@ -33,8 +33,6 @@ MonetaXml::MonetaXml(const moneta& m)
     this->fillAmbiti();
     this->fillItemAddizionali();
     this->fillLetteratura();
-    this->fillNote();
-    //this->fillZecchieri();
 }
 
 MonetaXml::MonetaXml(moneta *m) {
@@ -44,8 +42,6 @@ MonetaXml::MonetaXml(moneta *m) {
     this->fillAmbiti();
     this->fillItemAddizionali();
     this->fillLetteratura();
-    this->fillNote();
-    //this->fillZecchieri();
 }
 
 
@@ -60,22 +56,10 @@ MonetaXml::~MonetaXml()
         delete this->image;
         this->image = NULL;
     }
-    deleteNoteList();
     deleteLetteraturaList();
     deleteItemAddizionaliList();
     deleteAmbitiList();
 
-}
-
-
-void MonetaXml::deleteNoteList() {
-    foreach (xml::Nota* a, xmlNote) {
-        if (a != NULL) {
-            delete a;
-            a = NULL;
-        }
-    }
-    this->xmlNote.clear();
 }
 
 
@@ -109,10 +93,6 @@ void MonetaXml::deleteAmbitiList() {
     this->xmlAmbiti.clear();
 }
 
-
-QList<xml::Nota*> MonetaXml::getNote() {
-    return this->xmlNote;
-}
 
 QList<xml::Libro*> MonetaXml::getLetteratura() {
     return this->xmlLetteratura;
@@ -337,26 +317,6 @@ xml::Nominale MonetaXml::getNominale()
 
 
 
-void MonetaXml::fillNote()
-{
-    this->deleteNoteList();
-    moneta::note_optional nop = this->mon->note();
-    if (nop.present())
-    {
-        moneta::note_type nt = nop.get();
-        for (moneta::note_type::nota_iterator it(nt.nota().begin());
-            it != nt.nota().end();
-            ++it
-            )
-        {
-            xml::Nota* n = new xml::Nota(QString::fromStdWString((*it)));
-            this->xmlNote.append(n);
-        }
-    }
-
-}
-
-
 void MonetaXml::fillLetteratura()
 {
     this->deleteLetteraturaList();
@@ -503,30 +463,6 @@ void MonetaXml::setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo)
     this->fillLetteratura();
 }
 
-void MonetaXml::setNota(const xml::Nota& vecchio, const xml::Nota& nuovo)
-{
-    bool done = false;
-    moneta::note_type let = mon->note().get();
-    for (::note::nota_iterator it = let.nota().begin();
-         it != let.nota().end() && !done;
-         ++it)
-    {
-        //cerca l'item "giusto"
-        QString cur = QString::fromStdWString(*it);
-        if (cur == vecchio.testo)
-        {
-            /* trovato: effettua le modifiche */
-            *it = nuovo.testo.toStdWString();
-            done = true;
-        }
-    }
-
-    //salva le modifiche nel dom
-    mon->note(let);
-    this->fillNote();
-
-}
-
 
 void MonetaXml::setDocumento(const xml::Documento& vecchio, const xml::Documento& nuovo)
 {
@@ -577,15 +513,6 @@ void MonetaXml::addLibro(const xml::Libro& l)
     this->fillLetteratura();
 }
 
-void MonetaXml::addNota(const xml::Nota& l)
-{
-    moneta::note_type::nota_type nota(l.testo.toStdWString());
-    moneta::note_type let = mon->note().get();
-    let.nota().push_back(nota);
-    this->mon->note().set(let);
-    this->fillNote();
-}
-
 void MonetaXml::addDocumento(const xml::Documento& l)
 {
     moneta::itemAddizionali_type::documento_type doc(l.filename.toStdWString(),
@@ -596,24 +523,6 @@ void MonetaXml::addDocumento(const xml::Documento& l)
     let.documento().push_back(doc);
     this->mon->itemAddizionali().set(let);
     this->fillItemAddizionali();
-
-}
-
-
-void MonetaXml::deleteNota(xml::Nota* l)
-{
-    moneta::note_type::nota_type nota(l->testo.toStdWString());
-    moneta::note_type let = mon->note().get();
-
-    for (unsigned int i = 0; i < let.nota().size(); i++) {
-        if (let.nota().at(i) == nota) {
-            let.nota().erase(let.nota().begin()+i);
-            break;
-        }
-    }
-
-    this->mon->note().set(let);
-    this->fillNote();
 
 }
 

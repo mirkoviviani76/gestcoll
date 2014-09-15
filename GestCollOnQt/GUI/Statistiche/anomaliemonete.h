@@ -27,7 +27,6 @@ private slots:
     Ui::ListeMonete *ui;
     void fillData();
     void checkLetteratura();
-    void checkNote();
     void checkAutorita();
     void checkPeso();
 

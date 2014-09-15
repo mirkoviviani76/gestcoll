@@ -123,6 +123,7 @@ MonetaForm::MonetaForm(QWidget *parent) :
     connect(this->ui->datiAcquisto, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->datiFisici, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->zeccaEzecchieri, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
+    connect(this->ui->note, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
 }
 
 /**
@@ -132,12 +133,6 @@ MonetaForm::MonetaForm(QWidget *parent) :
 MonetaForm::~MonetaForm()
 {
     delete ui;
-    if (modelloNote != NULL)
-    {
-        this->modelloNote->clear();
-        delete modelloNote;
-        this->modelloNote = NULL;
-    }
     if (modelloLetteratura != NULL)
     {
         this->modelloLetteratura->clear();
@@ -262,7 +257,6 @@ void MonetaForm::setupModelMonete()
 
 void MonetaForm::setupModels()
 {
-    modelloNote = new GenericModel();
     modelloLetteratura = new GenericModel(2);
     modelloDoc = new GenericModel();
     modelloAmbiti = new GenericModel(2);
@@ -307,24 +301,13 @@ void MonetaForm::loadData()
                                .arg(item->getRiga())
                                .arg(item->getColonna()));
 
-    this->modelloNote->clear();
     this->modelloLetteratura->clear();
     this->modelloDoc->clear();
     this->modelloAmbiti->clear();
 
-    /* aggiunge le note */
-    foreach (xml::Nota* a, item->getNote())
-    {
-        this->modelloNote->appendRow(a);
-    }
-    this->ui->note->setModel(this->modelloNote);
-
-
     /* aggiunge le autorita */
     this->ui->autorita->clear();
     this->ui->autorita->setData(&(this->item->getDom()->autorita()), this->item->getPaese());
-
-
 
     /* aggiunge i dati fisici */
     this->ui->datiFisici->setData(&(this->item->getDom()->datiFisici()));
@@ -334,6 +317,9 @@ void MonetaForm::loadData()
 
     /* aggiunge zecca e zecchieri */
     this->ui->zeccaEzecchieri->setData(&(item->getDom()->zecca()), &(item->getDom()->zecchieri()));
+
+    /* aggiunge le note */
+    this->ui->note->setData(&(item->getDom()->note()));
 
     /* aggiunge la letteratura */
     //TODO ASTE?
@@ -440,6 +426,7 @@ void MonetaForm::enableEdit(bool editable)
     this->ui->datiAcquisto->setEditable(editable);
     this->ui->datiFisici->setEditable(editable);
     this->ui->zeccaEzecchieri->setEditable(editable);
+    this->ui->note->setEditable(editable);
 
 }
 
@@ -517,25 +504,6 @@ void MonetaForm::salva()
 }
 
 
-void MonetaForm::on_note_doubleClicked(QModelIndex index)
-{
-    GenericModel* model = (GenericModel*)index.model();
-    xml::Nota* vecchia = (xml::Nota*) model->getItem(index);
-    NotaDialog notaDialog(this->editingEnabled, this);
-    notaDialog.setData(vecchia);
-    int ret = notaDialog.exec();
-    if (ret == QDialog::Accepted && this->editingEnabled)
-    {
-        xml::Nota testo;
-        notaDialog.getData(&testo);
-        /* modifica/aggiunge il nodo al dom */
-        this->item->setNota(*vecchia, testo);
-        this->loadData();
-        //segnala la modifica
-        emit this->changesOccurred();
-
-    }
-}
 
 void MonetaForm::on_letteratura_doubleClicked(QModelIndex index)
 {
@@ -652,62 +620,6 @@ void MonetaForm::on_documenti_customContextMenuRequested(QPoint pos)
 
 }
 
-void MonetaForm::on_note_customContextMenuRequested(QPoint pos)
-{
-    // for most widgets
-    QPoint globalPos = this->ui->note->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_ADD) {
-            /* aggiunge una nota di comodo */
-            //xml::Nota* a = new xml::Nota();
-            //this->modelloNote->appendRow(a);
-
-            /* attiva la vera gestione */
-            NotaDialog dialog(this);
-            //dialog.setData(a);
-            int ret = dialog.exec();
-            if (ret == QDialog::Accepted)
-            {
-                QString nuovoTesto;
-                xml::Nota n(nuovoTesto);
-                dialog.getData(&n);
-                /* modifica/aggiunge il nodo al dom */
-                this->item->addNota(n);
-                this->loadData();
-                //segnala la modifica
-                emit this->changesOccurred();
-
-            }
-        } else if (selectedItem->text() == ACTION_DEL) {
-            //ottiene l'indice selezionato
-            int index = this->ui->note->currentIndex().row();
-            //ottiene l'item
-            xml::Nota* n = (xml::Nota*) this->modelloNote->getItem(index);
-            //cancella dalla lista
-            this->item->deleteNota(n);
-            //ricarica la vista
-            this->loadData();
-            //segnala la modifica
-            emit this->changesOccurred();
-
-        } else if (selectedItem->text() == ACTION_COPY_ID) {
-            this->gestClipboardCopyId(this->item->getId());
-        } else if (selectedItem->text() == ACTION_COPY) {
-            this->gestClipboardCopy(this->item->getId());
-        } else if (selectedItem->text() == ACTION_SHOW_QR) {
-            this->showQr();
-        }
-
-    }
-    else
-    {
-        // nothing was chosen
-    }
-}
 
 void MonetaForm::on_letteratura_customContextMenuRequested(QPoint pos)
 {

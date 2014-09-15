@@ -186,7 +186,9 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/DatiFisici/datifisiciwidget.cpp \
     GUI/Moneta/Zecca/zeccawidget.cpp \
     GUI/Moneta/Zecca/zecchieremodel.cpp \
-    GUI/Moneta/Zecca/zecchieredelegate.cpp
+    GUI/Moneta/Zecca/zecchieredelegate.cpp \
+    GUI/Moneta/Note/noteform.cpp \
+    GUI/Moneta/Note/notamodel.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -268,7 +270,9 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/DatiFisici/datifisiciwidget.h \
     GUI/Moneta/Zecca/zeccawidget.h \
     GUI/Moneta/Zecca/zecchieremodel.h \
-    GUI/Moneta/Zecca/zecchieredelegate.h
+    GUI/Moneta/Zecca/zecchieredelegate.h \
+    GUI/Moneta/Note/noteform.h \
+    GUI/Moneta/Note/notamodel.h
 
 
 
@@ -309,7 +313,8 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
     GUI/Moneta/Autorita/autoritaform.ui \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.ui \
     GUI/Moneta/DatiFisici/datifisiciwidget.ui \
-    GUI/Moneta/Zecca/zeccawidget.ui
+    GUI/Moneta/Zecca/zeccawidget.ui \
+    GUI/Moneta/Note/noteform.ui
 
 
 RESOURCES += resources/resources.qrc

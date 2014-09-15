@@ -1689,28 +1689,22 @@ namespace gestColl
       this->grado_.set (x);
     }
 
-    const moneta::note_optional& moneta::
+    const moneta::note_type& moneta::
     note () const
     {
-      return this->note_;
+      return this->note_.get ();
     }
 
-    moneta::note_optional& moneta::
+    moneta::note_type& moneta::
     note ()
     {
-      return this->note_;
+      return this->note_.get ();
     }
 
     void moneta::
     note (const note_type& x)
     {
       this->note_.set (x);
-    }
-
-    void moneta::
-    note (const note_optional& x)
-    {
-      this->note_ = x;
     }
 
     void moneta::
@@ -4358,6 +4352,7 @@ namespace gestColl
             const datiArtistici_type& datiArtistici,
             const datiFisici_type& datiFisici,
             const datiAcquisto_type& datiAcquisto,
+            const note_type& note,
             const stato_type& stato,
             const revisione_type& revisione,
             const id_type& id)
@@ -4374,7 +4369,7 @@ namespace gestColl
       datiAcquisto_ (datiAcquisto, ::xml_schema::flags (), this),
       posizione_ (::xml_schema::flags (), this),
       grado_ (::xml_schema::flags (), this),
-      note_ (::xml_schema::flags (), this),
+      note_ (note, ::xml_schema::flags (), this),
       letteratura_ (::xml_schema::flags (), this),
       itemAddizionali_ (::xml_schema::flags (), this),
       stato_ (stato, ::xml_schema::flags (), this),
@@ -4392,6 +4387,7 @@ namespace gestColl
             ::std::auto_ptr< datiArtistici_type >& datiArtistici,
             ::std::auto_ptr< datiFisici_type >& datiFisici,
             ::std::auto_ptr< datiAcquisto_type >& datiAcquisto,
+            ::std::auto_ptr< note_type >& note,
             ::std::auto_ptr< stato_type >& stato,
             const revisione_type& revisione,
             const id_type& id)
@@ -4408,7 +4404,7 @@ namespace gestColl
       datiAcquisto_ (datiAcquisto, ::xml_schema::flags (), this),
       posizione_ (::xml_schema::flags (), this),
       grado_ (::xml_schema::flags (), this),
-      note_ (::xml_schema::flags (), this),
+      note_ (note, ::xml_schema::flags (), this),
       letteratura_ (::xml_schema::flags (), this),
       itemAddizionali_ (::xml_schema::flags (), this),
       stato_ (stato, ::xml_schema::flags (), this),
@@ -4659,7 +4655,7 @@ namespace gestColl
           ::std::auto_ptr< note_type > r (
             note_traits::create (i, f, this));
 
-          if (!this->note_)
+          if (!note_.present ())
           {
             this->note_.set (r);
             continue;
@@ -4778,6 +4774,13 @@ namespace gestColl
       {
         throw ::xsd::cxx::tree::expected_element< wchar_t > (
           L"datiAcquisto",
+          L"http://gestColl/coins");
+      }
+
+      if (!note_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< wchar_t > (
+          L"note",
           L"http://gestColl/coins");
       }
 
@@ -6188,7 +6191,6 @@ namespace gestColl
 
       // note
       //
-      if (i.note ())
       {
         ::xercesc::DOMElement& s (
           ::xsd::cxx::xml::dom::create_element (
@@ -6196,7 +6198,7 @@ namespace gestColl
             L"http://gestColl/coins",
             e));
 
-        s << *i.note ();
+        s << i.note ();
       }
 
       // letteratura

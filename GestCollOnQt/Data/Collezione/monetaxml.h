@@ -46,7 +46,6 @@ public:
     QString getAnno();
     xml::Nominale getNominale();
     xml::Stato getStato();
-    QList<xml::Nota*> getNote();
     QList<xml::Libro*> getLetteratura();
     QList<xml::Documento*> getItemAddizionali();
     QList<xml::Ambito*> getAmbiti();
@@ -59,16 +58,13 @@ public:
     void setAnno(QString p);
     void setNominale(QString valore, QString unita);
     void setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo);
-    void setNota(const xml::Nota& vecchio, const xml::Nota& nuovo);
     void setDocumento(const xml::Documento& vecchio, const xml::Documento& nuovo);
     void setPosizione(int cont, int vass, int r, int c);
     void setAmbiti(QList<xml::Ambito*> ambiti);
     void addLibro(const xml::Libro& l);
-    void addNota(const xml::Nota& l);
     void addDocumento(const xml::Documento& l);
 
 
-    void deleteNota(xml::Nota* l);
     void deleteLetteratura(xml::Libro* l);
     void deleteDocumento(xml::Documento* l);
 
@@ -81,18 +77,15 @@ private:
     moneta* mon;
     QImage* image;
     void updateImage();
-    QList<xml::Nota*> xmlNote;
     QList<xml::Libro*> xmlLetteratura;
     QList<xml::Documento*> xmlItemAddizionali;
     QList<xml::Ambito*> xmlAmbiti;
 
-    void deleteNoteList();
     void deleteLegendeList(Moneta::Lato l);
     void deleteLetteraturaList();
     void deleteItemAddizionaliList();
     void deleteAmbitiList();
 
-    void fillNote();
     void fillLetteratura();
     void fillItemAddizionali();
     void fillAmbiti();

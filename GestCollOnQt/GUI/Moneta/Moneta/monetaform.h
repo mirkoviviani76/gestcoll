@@ -47,7 +47,6 @@ private:
     QMap<QString, int> tabVassoi; ///< mappa fra id vassoio e id tab
     Ui::MonetaForm *ui; ///< la form principale
     CollezioneSortFilterProxyModel* collezioneModel; ///< modello collezione
-    GenericModel* modelloNote; ///< modello collezione
     GenericModel* modelloLetteratura; ///< modello letteratura
     GenericModel* modelloDoc; ///< modello documenti
     GenericModel* modelloAmbiti; ///< modello ambiti
@@ -76,11 +75,9 @@ private slots:
     void on_posizione_clicked();
     void on_itemList_activated(QModelIndex index);
     void on_documenti_customContextMenuRequested(QPoint pos);
-    void on_note_customContextMenuRequested(QPoint pos);
     void on_letteratura_customContextMenuRequested(QPoint pos);
 
     void on_letteratura_doubleClicked(QModelIndex index);
-    void on_note_doubleClicked(QModelIndex index);
     void on_anno_textChanged(QString );
     void on_paese_textChanged(QString );
     void on_nominale_textChanged(QString valore, QString unita);

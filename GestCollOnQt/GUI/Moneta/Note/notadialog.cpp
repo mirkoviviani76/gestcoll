@@ -27,16 +27,15 @@ void NotaDialog::changeEvent(QEvent *e)
     }
 }
 
-void NotaDialog::setData(xml::Nota* nota)
+void NotaDialog::setData(::gestColl::coins::moneta::note_type::nota_type nota)
 {
-    this->nota = nota;
-    this->ui->textEdit->setText(nota->testo);
+    this->ui->textEdit->setText(QString::fromStdWString(nota));
 }
 
 
-void NotaDialog::getData(xml::Nota* nota)
+void NotaDialog::getData(gestColl::coins::note::nota_type* nota)
 {
-    nota->testo = this->ui->textEdit->toPlainText();
+    *nota = this->ui->textEdit->toPlainText().toStdWString();
 }
 
 void NotaDialog::on_buttonBox_accepted()
