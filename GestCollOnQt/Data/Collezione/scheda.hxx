@@ -6612,7 +6612,7 @@ namespace gestColl
        * @name note
        *
        * @brief Accessor and modifier functions for the %note
-       * optional element.
+       * required element.
        */
       //@{
 
@@ -6622,30 +6622,24 @@ namespace gestColl
       typedef ::gestColl::coins::note note_type;
 
       /**
-       * @brief Element optional container type.
-       */
-      typedef ::xsd::cxx::tree::optional< note_type > note_optional;
-
-      /**
        * @brief Element traits type.
        */
       typedef ::xsd::cxx::tree::traits< note_type, wchar_t > note_traits;
 
       /**
-       * @brief Return a read-only (constant) reference to the element
-       * container.
+       * @brief Return a read-only (constant) reference to the element.
        *
-       * @return A constant reference to the optional container.
+       * @return A constant reference to the element.
        */
-      const note_optional&
+      const note_type&
       note () const;
 
       /**
-       * @brief Return a read-write reference to the element container.
+       * @brief Return a read-write reference to the element.
        *
-       * @return A reference to the optional container.
+       * @return A reference to the element.
        */
-      note_optional&
+      note_type&
       note ();
 
       /**
@@ -6660,24 +6654,12 @@ namespace gestColl
       note (const note_type& x);
 
       /**
-       * @brief Set the element value.
-       *
-       * @param x An optional container with the new value to set.
-       *
-       * If the value is present in @a x then this function makes a copy 
-       * of this value and sets it as the new value of the element.
-       * Otherwise the element container is set the 'not present' state.
-       */
-      void
-      note (const note_optional& x);
-
-      /**
        * @brief Set the element value without copying.
        *
        * @param p A new value to use.
        *
-       * This function will try to use the passed value directly instead
-       * of making a copy.
+       * This function will try to use the passed value directly
+       * instead of making a copy.
        */
       void
       note (::std::auto_ptr< note_type > p);
@@ -7027,6 +7009,7 @@ namespace gestColl
               const datiArtistici_type&,
               const datiFisici_type&,
               const datiAcquisto_type&,
+              const note_type&,
               const stato_type&,
               const revisione_type&,
               const id_type&);
@@ -7047,6 +7030,7 @@ namespace gestColl
               ::std::auto_ptr< datiArtistici_type >&,
               ::std::auto_ptr< datiFisici_type >&,
               ::std::auto_ptr< datiAcquisto_type >&,
+              ::std::auto_ptr< note_type >&,
               ::std::auto_ptr< stato_type >&,
               const revisione_type&,
               const id_type&);
@@ -7122,7 +7106,7 @@ namespace gestColl
       ::xsd::cxx::tree::one< datiAcquisto_type > datiAcquisto_;
       posizione_optional posizione_;
       grado_optional grado_;
-      note_optional note_;
+      ::xsd::cxx::tree::one< note_type > note_;
       letteratura_optional letteratura_;
       itemAddizionali_optional itemAddizionali_;
       ::xsd::cxx::tree::one< stato_type > stato_;

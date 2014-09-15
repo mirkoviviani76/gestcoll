@@ -2,7 +2,7 @@
 #define NOTADIALOG_H
 
 #include <QDialog>
-#include <commondefs.h>
+#include "scheda.hxx"
 
 namespace Ui {
     class NotaDialog;
@@ -15,15 +15,14 @@ class NotaDialog : public QDialog
 public:
     explicit NotaDialog(bool editable, QWidget *parent = 0);
     ~NotaDialog();
-    void setData(xml::Nota* nota);
-    void getData(xml::Nota* testo);
+    void setData(gestColl::coins::note::nota_type nota);
+    void getData(gestColl::coins::note::nota_type *testo);
 
 protected:
     void changeEvent(QEvent *e);
 
 private:
     Ui::NotaDialog *ui;
-    xml::Nota* nota;
 
 private slots:
     void on_buttonBox_accepted();

@@ -48,18 +48,6 @@ class Stato
         Stato(QString t="", QString val="") {this->colore = t; this->motivo = val;}
 };
 
-class Nota : public GenericItem
-{
-    public:
-        QString testo;
-        virtual ~Nota() {}
-        Nota(QString t="") {this->testo = t;}
-        inline QString toString(int column=-1)  {Q_UNUSED(column); return testo; }
-        inline QString toTooltip() {return ""; }
-        inline QImage toImg() { return QImage(); }
-        inline QColor getColor() { return QColor(QColor::Invalid);}
-};
-
 class Libro : public GenericItem
 {
     public:

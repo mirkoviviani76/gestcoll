@@ -540,31 +540,9 @@ QTabBar::tab:selected {
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label_8">
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
+               <widget class="NoteForm" name="note">
+                <property name="title">
                  <string>Note</string>
-                </property>
-                <property name="buddy">
-                 <cstring>note</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QListView" name="note">
-                <property name="alternatingRowColors">
-                 <bool>true</bool>
-                </property>
-                <property name="isWrapping" stdset="0">
-                 <bool>false</bool>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -751,13 +729,18 @@ QTabBar::tab:selected {
    <header>zeccawidget.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>NoteForm</class>
+   <extends>QGroupBox</extends>
+   <header>noteform.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>paese</tabstop>
   <tabstop>anno</tabstop>
   <tabstop>ambiti</tabstop>
   <tabstop>letteratura</tabstop>
-  <tabstop>note</tabstop>
   <tabstop>documenti</tabstop>
   <tabstop>setupCollezione</tabstop>
   <tabstop>posizione</tabstop>
