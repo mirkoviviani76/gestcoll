@@ -242,8 +242,7 @@ void MainWindow::on_actionXml_Html_triggered()
         curIndex++;
         QString outfile = CommonData::getInstance()->getHtmlDir()+"/"+id+".html";
         QFile out(outfile);
-        ret = converter.convert(id,  CommonData::getInstance()->getCollezione(),
-                                     xslt, &out, conversion);
+        ret = converter.convert(CommonData::getInstance()->getCollezione(), xslt, &out, conversion, "./img", id);
         //segnala il nuovo indice
         emit updateValue(curIndex);
         if (!ret)

@@ -50,7 +50,7 @@ bool TexGenerator::convert()
 
     if (ret) {
         QFile out(completeOutFile);
-        ret = XsltConverter::convertAll(CommonData::getInstance()->getCollezione(), xslt, &out, conversion);
+        ret = XsltConverter::convert(CommonData::getInstance()->getCollezione(), xslt, &out, conversion, CommonData::getInstance()->getImgDir());
     }
 
     if (!ret) {

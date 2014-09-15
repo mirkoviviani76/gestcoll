@@ -17,68 +17,21 @@
   Esegue la conversione di un xml tramite xslt, utilizzando anche una conversione "al volo"
   delle stringe specificate.
   */
-bool XsltConverter::convertAll(const QString& xml, const QString& xslt, QFile* out, const QMap<QString, QString>& conversion) {
-    bool ret = false;
-    QString tempOut;
-
-
-    QXmlQuery query(QXmlQuery::XSLT20);
-    ret = query.setFocus(QUrl::fromLocalFile(xml));
-    if (ret) {
-        query.bindVariable("dirImg", QVariant(CommonData::getInstance()->getImgDir()));
-
-        query.bindVariable("hyperref", QVariant(1));
-        QUrl url(xslt);
-        query.setQuery(url);
-        ret = query.evaluateTo(&tempOut);
-        if (ret)
-        {
-            //effettua la conversione (se disponibile)
-            foreach (QString key, conversion.keys()) {
-                tempOut.replace(key, conversion[key], Qt::CaseSensitive);
-            }
-            Log::Logger::getInstance()->log(QString("XsltConverter::convertAll() Trasformazione xsl eseguita"), Log::TRACE);
-        } else {
-            Log::Logger::getInstance()->log(QString("XsltConverter::convertAll() Trasformazione xsl fallita"), Log::ERR);
-        }
-    } else {
-        Log::Logger::getInstance()->log(QString("XsltConverter::convertAll() Errore nel caricamento di %1").arg(xml), Log::ERR);
-    }
-
-
-    if (ret)
-    {
-        //apre il file
-        ret = out->open(QIODevice::ReadWrite | QIODevice::Truncate);
-        if (ret) {
-            /* scrive nel file come unicode */
-            QTextStream outStream(out);
-            outStream.setCodec("UTF-8");
-            outStream << tempOut;
-            /* flush e chiusura */
-            outStream.flush();
-            out->close();
-        } else {
-            Log::Logger::getInstance()->log(QString("XsltConverter::convert() Errore scrivendo il file %1").arg(out->fileName()), Log::ERR);
-        }
-    }
-
-    return ret;
-}
-
-/**
-  Esegue la conversione di un xml tramite xslt, utilizzando anche una conversione "al volo"
-  delle stringe specificate.
-  */
-bool XsltConverter::convert(const QString& id, const QString& xml, const QString& xslt, QString* out, const QMap<QString, QString>& conversion)
+bool XsltConverter::convert(const QString& xml, const QString& xslt, QString* out,
+                            const QMap<QString, QString>& conversion,
+                            const QString& imgDir,
+                            const QString& id)
 {
     bool ret = false;
     QXmlQuery query(QXmlQuery::XSLT20);
     ret = query.setFocus(QUrl::fromLocalFile(xml));
     if (ret) {
-        query.bindVariable("monetaId", QVariant(id));
+        query.bindVariable("hyperref", QVariant(1));
+        if (id != "ALL_ID") {
+            query.bindVariable("monetaId", QVariant(id));
+        }
 
-        query.bindVariable("dirImg", QVariant("./img"));
+        query.bindVariable("dirImg", QVariant(imgDir));
         QUrl url(xslt);
         query.setQuery(url);
         ret = query.evaluateTo(out);
@@ -98,11 +51,15 @@ bool XsltConverter::convert(const QString& id, const QString& xml, const QString
     return ret;
 }
 
-bool XsltConverter::convert(const QString& id, const QString& xml, const QString& xslt, QFile* out,const QMap<QString, QString>& conversion)
+bool XsltConverter::convert(const QString& xml,
+                            const QString& xslt, QFile* out,
+                            const QMap<QString, QString>& conversion,
+                            const QString& imgDir,
+                            const QString& id)
 {
     bool ret = false;
     QString tempOut;
-    ret = XsltConverter::convert(id, xml, xslt, &tempOut, conversion);
+    ret = XsltConverter::convert(xml, xslt, &tempOut, conversion, imgDir, id);
     if (ret)
     {
         //apre il file
