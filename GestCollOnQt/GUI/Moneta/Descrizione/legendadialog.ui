@@ -19,8 +19,17 @@
    </property>
    <item row="0" column="0">
     <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
-      <string>Testo</string>
+      <string>&amp;Testo</string>
+     </property>
+     <property name="buddy">
+      <cstring>testo</cstring>
      </property>
     </widget>
    </item>
@@ -29,8 +38,17 @@
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label_2">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
-      <string>Scioglimento</string>
+      <string>&amp;Scioglimento</string>
+     </property>
+     <property name="buddy">
+      <cstring>scioglimento</cstring>
      </property>
     </widget>
    </item>

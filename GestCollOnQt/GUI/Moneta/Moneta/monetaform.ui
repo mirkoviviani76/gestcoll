@@ -188,7 +188,7 @@ QTabBar::tab:selected {
        <attribute name="title">
         <string>Moneta</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0">
+       <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,1">
         <property name="spacing">
          <number>2</number>
         </property>
@@ -345,115 +345,6 @@ QTabBar::tab:selected {
                 </property>
                </widget>
               </item>
-              <item row="9" column="0" colspan="2">
-               <widget class="QGroupBox" name="emissione">
-                <property name="title">
-                 <string>Emissione</string>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0" columnstretch="0,0,0,0,0">
-                 <property name="leftMargin">
-                  <number>2</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>2</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <item row="1" column="2">
-                  <widget class="MisuraForm" name="nominale" native="true"/>
-                 </item>
-                 <item row="1" column="3">
-                  <widget class="QLabel" name="label_3">
-                   <property name="font">
-                    <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Anno</string>
-                   </property>
-                   <property name="buddy">
-                    <cstring>anno</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QToolButton" name="openPaeseUrl">
-                   <property name="text">
-                    <string>...</string>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="../../../resources/resources.qrc">
-                     <normaloff>:/icons/internet.ico</normaloff>:/icons/internet.ico</iconset>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="2" colspan="3">
-                  <widget class="QLineEdit" name="paese">
-                   <property name="readOnly">
-                    <bool>false</bool>
-                   </property>
-                   <property name="placeholderText">
-                    <string>Paese</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label">
-                   <property name="font">
-                    <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Paese</string>
-                   </property>
-                   <property name="buddy">
-                    <cstring>paese</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="label_2">
-                   <property name="font">
-                    <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Nominale</string>
-                   </property>
-                   <property name="buddy">
-                    <cstring>nominale</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="4">
-                  <widget class="QLineEdit" name="anno"/>
-                 </item>
-                 <item row="2" column="0" colspan="5">
-                  <widget class="AutoritaForm" name="autorita" native="true">
-                   <property name="minimumSize">
-                    <size>
-                     <width>10</width>
-                     <height>10</height>
-                    </size>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
               <item row="17" column="0" colspan="2">
                <widget class="DatiFisiciWidget" name="datiFisici">
                 <property name="title">
@@ -465,6 +356,19 @@ QTabBar::tab:selected {
                <widget class="DatiAcquistoWidget" name="datiAcquisto">
                 <property name="title">
                  <string>Acquisto</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0" colspan="2">
+               <widget class="EmissioneForm" name="emissione">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="title">
+                 <string>Emissione</string>
                 </property>
                </widget>
               </item>
@@ -689,12 +593,6 @@ QTabBar::tab:selected {
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MisuraForm</class>
-   <extends>QWidget</extends>
-   <header>misuraform.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>QLedIndicator</class>
    <extends>QPushButton</extends>
    <header>qledindicator.h</header>
@@ -703,12 +601,6 @@ QTabBar::tab:selected {
    <class>DescrizioneForm</class>
    <extends>QGroupBox</extends>
    <header>descrizioneform.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>AutoritaForm</class>
-   <extends>QWidget</extends>
-   <header>autoritaform.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
@@ -735,10 +627,14 @@ QTabBar::tab:selected {
    <header>noteform.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>EmissioneForm</class>
+   <extends>QGroupBox</extends>
+   <header>emissioneform.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>paese</tabstop>
-  <tabstop>anno</tabstop>
   <tabstop>ambiti</tabstop>
   <tabstop>letteratura</tabstop>
   <tabstop>documenti</tabstop>

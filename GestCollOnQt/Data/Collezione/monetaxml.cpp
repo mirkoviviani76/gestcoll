@@ -139,18 +139,18 @@ QString MonetaXml::toString(int column)
         break;
     case 1:
         {
-            return this->getPaese();
+            return QString::fromStdWString(this->getDom()->paese());
         }
         break;
     case 2:
         {
-            xml::Nominale nominale = this->getNominale();
-            return QString("%1 %2").arg(nominale.valore).arg(nominale.valuta);
+            return QString("%1 %2").arg(QString::fromStdWString(this->getDom()->nominale().valore()))
+                    .arg(QString::fromStdWString(this->getDom()->nominale().valuta()));
         }
         break;
     case 3:
         {
-            return this->getAnno();
+            return QString::fromStdWString(this->getDom()->anno());
         }
         break;
     case 4:
@@ -163,19 +163,20 @@ QString MonetaXml::toString(int column)
         }
         break;
     default:
-        {
-            xml::Nominale nominale = this->getNominale();
-            QString label = QString("%1 - %2 %3")
-                            .arg(this->getPaese())
-                            .arg(nominale.valore)
-                            .arg(nominale.valuta);
+    {
+        QString valore = QString::fromStdWString(this->getDom()->nominale().valore());
+        QString valuta = QString::fromStdWString(this->getDom()->nominale().valuta());
+        QString label = QString("%1 - %2 %3")
+                .arg(QString::fromStdWString(this->getDom()->paese()))
+                .arg(valore)
+                .arg(valuta);
 
-            QString completeLabel = QString("%1: %2")
-                            .arg(this->getId())
-                            .arg(label);
+        QString completeLabel = QString("%1: %2")
+                .arg(this->getId())
+                .arg(label);
 
-            return completeLabel;
-        }
+        return completeLabel;
+    }
         break;
 
     }
@@ -290,32 +291,6 @@ int MonetaXml::getColonna() const
 
 }
 
-QString MonetaXml::getPaese()
-{
-    return QString::fromStdWString(this->mon->paese());
-}
-
-QString MonetaXml::getAnno()
-{
-    moneta::anno_optional ppp = this->mon->anno();
-    QString val = "";
-    if (ppp.present())
-    {
-        moneta::anno_type anno = ppp.get();
-        val = QString::fromStdWString(anno);
-    }
-    return val;
-}
-
-xml::Nominale MonetaXml::getNominale()
-{
-    xml::Nominale n;
-    n.valore = QString::fromStdWString(this->mon->nominale().valore());
-    n.valuta = QString::fromStdWString(this->mon->nominale().valuta());
-    return n;
-}
-
-
 
 void MonetaXml::fillLetteratura()
 {
@@ -420,22 +395,6 @@ void MonetaXml::updateRevision() {
                                        today.time().minute(),
                                        today.time().second());
     this->mon->revisione(revisione);
-}
-
-void MonetaXml::setPaese(QString p)
-{
-    this->mon->paese(p.toStdWString());
-}
-
-void MonetaXml::setAnno(QString p)
-{
-    mon->anno(p.toStdWString());
-}
-
-void MonetaXml::setNominale(QString valore, QString unita)
-{
-    this->mon->nominale().valuta(unita.toStdWString());
-    this->mon->nominale().valore(valore.toStdWString());
 }
 
 void MonetaXml::setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo)

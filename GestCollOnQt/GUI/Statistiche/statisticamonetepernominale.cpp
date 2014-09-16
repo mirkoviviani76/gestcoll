@@ -42,8 +42,8 @@ void StatisticaMonetePerNominale::paintEvent(QPaintEvent* e)
     foreach (QString id, idmonete) {
         MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
         QString nominale = QString("%1 %2")
-                .arg(m->getNominale().valore)
-                .arg(m->getNominale().valuta);
+                .arg(QString::fromStdWString(m->getDom()->nominale().valuta()))
+                .arg(QString::fromStdWString(m->getDom()->nominale().valore()));
         if (dati.contains(nominale))
             dati[nominale]++;
         else

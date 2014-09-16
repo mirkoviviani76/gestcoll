@@ -78,9 +78,6 @@ private slots:
     void on_letteratura_customContextMenuRequested(QPoint pos);
 
     void on_letteratura_doubleClicked(QModelIndex index);
-    void on_anno_textChanged(QString );
-    void on_paese_textChanged(QString );
-    void on_nominale_textChanged(QString valore, QString unita);
     void on_id_customContextMenuRequested(const QPoint &pos);
     void on_itemList_customContextMenuRequested(const QPoint &pos);
     void on_led_clicked();
@@ -89,8 +86,6 @@ private slots:
     void on_ambiti_customContextMenuRequested(const QPoint &pos);
 
     void on_setupCollezione_clicked();
-
-    void on_openPaeseUrl_clicked();
 
 signals:
     void changesOccurred();
