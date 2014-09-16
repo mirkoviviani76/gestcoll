@@ -42,9 +42,6 @@ public:
     QString toTooltip();
     QImage toImg();
     QString getId() const;
-    QString getPaese();
-    QString getAnno();
-    xml::Nominale getNominale();
     xml::Stato getStato();
     QList<xml::Libro*> getLetteratura();
     QList<xml::Documento*> getItemAddizionali();
@@ -54,9 +51,6 @@ public:
     bool updateAmbiti(const xml::Ambito& vecchio, const xml::Ambito& nuovo);
 
     void setStato(xml::Stato& nuovo);
-    void setPaese(QString p);
-    void setAnno(QString p);
-    void setNominale(QString valore, QString unita);
     void setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo);
     void setDocumento(const xml::Documento& vecchio, const xml::Documento& nuovo);
     void setPosizione(int cont, int vass, int r, int c);

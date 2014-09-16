@@ -66,8 +66,8 @@ bool CollezioneSortFilterProxyModel::lessThan(const QModelIndex &left, const QMo
         break;
     case 1:
         {
-            const QString paese1 = l->getPaese();
-            const QString paese2 = r->getPaese();
+            const QString paese1 = QString::fromStdWString(l->getDom()->paese());
+            const QString paese2 = QString::fromStdWString(r->getDom()->paese());
             int v = QString::localeAwareCompare(paese1, paese2);
             if (v == 0)
                 ret = false;
@@ -78,9 +78,11 @@ bool CollezioneSortFilterProxyModel::lessThan(const QModelIndex &left, const QMo
     }
         break;
     case 2:
-        {
-            ret = (l->getNominale().valuta < r->getNominale().valuta);
-        }
+    {
+        QString valuta1 = QString::fromStdWString(l->getDom()->nominale().valuta());
+        QString valuta2 = QString::fromStdWString(r->getDom()->nominale().valuta());
+        ret = (valuta1 < valuta2);
+    }
         break;
     default:
         {

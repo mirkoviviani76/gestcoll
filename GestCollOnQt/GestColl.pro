@@ -81,12 +81,12 @@ INCLUDEPATH += other_libs \
                GUI/Links \
                GUI/Contatti \
                GUI/Moneta/Ambito \
-               GUI/Moneta/Autorita \
                GUI/Moneta/DatiFisici \
                GUI/Moneta/DatiAcquisto \
                GUI/Moneta/Descrizione \
                GUI/Moneta/Documenti \
                GUI/Moneta/Immagini \
+               GUI/Moneta/Emissione \
                GUI/Moneta/Letteratura \
                GUI/Moneta/Moneta \
                GUI/Moneta/Note \
@@ -177,9 +177,9 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/DatiFisici/datifisicidelegate.cpp \
     GUI/Moneta/Descrizione/descrizioneform.cpp \
     GUI/Moneta/Descrizione/modellolegenda.cpp \
-    GUI/Moneta/Autorita/modelloautorita.cpp \
-    GUI/Moneta/Autorita/autoritaform.cpp \
-    GUI/Moneta/Autorita/autoritadelegate.cpp \
+    GUI/Moneta/Emissione/modelloautorita.cpp \
+    GUI/Moneta/Emissione/autoritaform.cpp \
+    GUI/Moneta/Emissione/autoritadelegate.cpp \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.cpp \
     GUI/Moneta/DatiAcquisto/datiacquistomodel.cpp \
     GUI/Moneta/DatiAcquisto/datiacquistodelegate.cpp \
@@ -188,7 +188,10 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/Zecca/zecchieremodel.cpp \
     GUI/Moneta/Zecca/zecchieredelegate.cpp \
     GUI/Moneta/Note/noteform.cpp \
-    GUI/Moneta/Note/notamodel.cpp
+    GUI/Moneta/Note/notamodel.cpp \
+    GUI/Moneta/Emissione/emissioneform.cpp \
+    GUI/Moneta/Emissione/emissionedelegate.cpp \
+    GUI/Moneta/Emissione/emissionemodel.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -261,9 +264,9 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/DatiFisici/datifisicidelegate.h \
     GUI/Moneta/Descrizione/descrizioneform.h \
     GUI/Moneta/Descrizione/modellolegenda.h \
-    GUI/Moneta/Autorita/modelloautorita.h \
-    GUI/Moneta/Autorita/autoritaform.h \
-    GUI/Moneta/Autorita/autoritadelegate.h \
+    GUI/Moneta/Emissione/modelloautorita.h \
+    GUI/Moneta/Emissione/autoritaform.h \
+    GUI/Moneta/Emissione/autoritadelegate.h \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.h \
     GUI/Moneta/DatiAcquisto/datiacquistomodel.h \
     GUI/Moneta/DatiAcquisto/datiacquistodelegate.h \
@@ -272,7 +275,10 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/Zecca/zecchieremodel.h \
     GUI/Moneta/Zecca/zecchieredelegate.h \
     GUI/Moneta/Note/noteform.h \
-    GUI/Moneta/Note/notamodel.h
+    GUI/Moneta/Note/notamodel.h \
+    GUI/Moneta/Emissione/emissioneform.h \
+    GUI/Moneta/Emissione/emissionedelegate.h \
+    GUI/Moneta/Emissione/emissionemodel.h
 
 
 
@@ -310,11 +316,12 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
             GUI/Collezione/modifyambitodialog.ui \
             GUI/Links/newlinkdialog.ui \
     GUI/Moneta/Descrizione/descrizioneform.ui \
-    GUI/Moneta/Autorita/autoritaform.ui \
+    GUI/Moneta/Emissione/autoritaform.ui \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.ui \
     GUI/Moneta/DatiFisici/datifisiciwidget.ui \
     GUI/Moneta/Zecca/zeccawidget.ui \
-    GUI/Moneta/Note/noteform.ui
+    GUI/Moneta/Note/noteform.ui \
+    GUI/Moneta/Emissione/emissioneform.ui
 
 
 RESOURCES += resources/resources.qrc

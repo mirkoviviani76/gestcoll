@@ -119,7 +119,7 @@ MonetaXml* CollezioneXml::addMoneta(QString id, QString anno, int contenitore, i
         MonetaXml* mon = new MonetaXml(m);
         this->moneteInCollezione[id] = mon;
         mon->setPosizione(contenitore, vassoio, riga, colonna);
-        mon->setAnno(anno);
+        mon->getDom()->anno(anno.toStdWString());
 
         //verra' salvata al momento richiesto
         this->collezione->moneta().push_back(m);

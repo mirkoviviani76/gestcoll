@@ -7,6 +7,7 @@
 #include "commondata.h"
 #include <QDate>
 #include <QDebug>
+#include "scheda.hxx"
 
 #if 0
 struct Asta
@@ -25,11 +26,16 @@ struct Asta
 
 namespace xml
 {
-struct Nominale
-{
-        QString valuta;
-        QString valore;
+
+
+struct Emissione {
+    gestColl::coins::moneta::nominale_type *nominale;
+    gestColl::coins::moneta::paese_type* paese;
+    gestColl::coins::moneta::anno_type* anno;
+    gestColl::coins::autorita* autorita;
+
 };
+
 class Misura
 {
     public:

@@ -47,7 +47,7 @@ void SommarioMonete::checkAutorita() {
         for ( ::gestColl::coins::autorita::nome_iterator it = m->getDom()->autorita().nome().begin();
               it != m->getDom()->autorita().nome().end();
               ++it) {
-            QString data = QString("%1 | %2").arg(QString::fromStdWString(*it)).arg(m->getPaese());
+            QString data = QString("%1 | %2").arg(QString::fromStdWString(*it)).arg(QString::fromStdWString(m->getDom()->paese()));
             if (!lista.contains(data))
                 lista.append(data);
         }
@@ -75,7 +75,9 @@ void SommarioMonete::checkNominali() {
     QList<QString> lista;
     foreach (QString id, allid) {
         MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        QString data = m->getNominale().valuta + " " + m->getNominale().valore;
+        QString data = QString("%1 %2")
+                .arg(QString::fromStdWString(m->getDom()->nominale().valuta()))
+                .arg(QString::fromStdWString(m->getDom()->nominale().valore()));
         if (!lista.contains(data))
             lista.append(data);
     }
@@ -102,7 +104,7 @@ void SommarioMonete::checkPaesi() {
     QList<QString> lista;
     foreach (QString id, allid) {
         MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        QString data = m->getPaese();
+        QString data = QString::fromStdWString(m->getDom()->paese());
         if (!lista.contains(data))
             lista.append(data);
     }

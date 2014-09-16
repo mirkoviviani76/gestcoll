@@ -189,10 +189,8 @@ QString TexGenerator::getEtichetta(::gestColl::coins::moneta* xml, QString dimen
     QString valore = QString("%1 %2")
             .arg(QString::fromStdWString(xml->nominale().valore()))
             .arg(QString::fromStdWString(xml->nominale().valuta()));
-    QString anno = "";
-    if (xml->anno().present()) {
-        anno = QString::fromStdWString(xml->anno().get());
-    }
+    QString anno = QString::fromStdWString(xml->anno());
+
     QString nominale = valore + " " + anno;
     /* compone l'etichetta */
     out = "\\casella" + dimensione + "{" + paese + "}{" + autorita + "}{" + zecca + "}{" + nominale + "}{" + id + "}";

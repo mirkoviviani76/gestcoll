@@ -26,6 +26,7 @@
 #include "setimmaginemonetadialog.h"
 #include "elencomonetedelegate.h"
 #include "visualizzaimmagine.h"
+#include "commondefs.h"
 
 #define ACTION_ADD ("Aggiungi")
 #define ACTION_DEL ("Elimina")
@@ -119,7 +120,7 @@ MonetaForm::MonetaForm(QWidget *parent) :
     connect(this->ui->dritto, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->rovescio, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->taglio, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
-    connect(this->ui->autorita, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
+    connect(this->ui->emissione, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->datiAcquisto, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->datiFisici, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->zeccaEzecchieri, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
@@ -290,10 +291,6 @@ void MonetaForm::loadData()
     signalsAreBlocked = true;
     //inibisce la segnalazione delle modifiche
     this->ui->id->setText(item->getId());
-    this->ui->paese->setText(item->getPaese());
-    this->ui->anno->setText(item->getAnno());
-    xml::Nominale nom = item->getNominale();
-    this->ui->nominale->setData(nom.valore, nom.valuta);
 
     this->ui->posizione->setText(QString("%1-%2-%3-%4")
                                .arg(item->getContenitore())
@@ -305,9 +302,14 @@ void MonetaForm::loadData()
     this->modelloDoc->clear();
     this->modelloAmbiti->clear();
 
-    /* aggiunge le autorita */
-    this->ui->autorita->clear();
-    this->ui->autorita->setData(&(this->item->getDom()->autorita()), this->item->getPaese());
+    /* aggiunge i dati di emissione */
+    xml::Emissione emissioneData;
+    emissioneData.anno = &(item->getDom()->anno());
+    emissioneData.nominale = &(item->getDom()->nominale());
+    emissioneData.paese = &(item->getDom()->paese());
+    emissioneData.autorita = &(this->item->getDom()->autorita());
+    this->ui->emissione->clear();
+    this->ui->emissione->setData(emissioneData);
 
     /* aggiunge i dati fisici */
     this->ui->datiFisici->setData(&(this->item->getDom()->datiFisici()));
@@ -408,20 +410,15 @@ void MonetaForm::enableEdit(bool editable)
     this->contextMenuEnableAction(ACTION_COPY, true);
 
     /* abilita-disabilita il frame */
-    this->ui->paese->setFrame(editable);
-    this->ui->anno->setFrame(editable);
     this->ui->posizione->setFlat(!editable);
 
     /* abilita-disabilita gli item */
-    this->ui->paese->setReadOnly(!editable);
-    this->ui->anno->setReadOnly(!editable);
     this->ui->led->setEnabled(editable);
     this->ui->dritto->setReadOnly(!editable);
     this->ui->rovescio->setReadOnly(!editable);
     this->ui->taglio->setReadOnly(!editable);
-    this->ui->nominale->enableEdit(editable);
 
-    this->ui->autorita->setEditable(editable);
+    this->ui->emissione->setEditable(editable);
 
     this->ui->datiAcquisto->setEditable(editable);
     this->ui->datiFisici->setEditable(editable);
@@ -436,26 +433,6 @@ void MonetaForm::enableEdit(bool editable)
   GESTIONE EDITING
 *************************************************************************/
 
-void MonetaForm::on_paese_textChanged(QString newText)
-{
-    this->item->setPaese(newText);
-    emit this->changesOccurred();
-}
-
-
-void MonetaForm::on_anno_textChanged(QString newText)
-{
-    this->item->setAnno(newText);
-    emit this->changesOccurred();
-
-}
-
-
-void MonetaForm::on_nominale_textChanged(QString valore, QString unita)
-{
-    this->item->setNominale(valore, unita);
-    emit this->changesOccurred();
-}
 
 /**
   Ricarica il documento corrente da file
@@ -938,10 +915,3 @@ void MonetaForm::on_setupCollezione_clicked()
     }
 }
 
-void MonetaForm::on_openPaeseUrl_clicked()
-{
-    if (this->editingEnabled == false) {
-        QString paese = this->item->getPaese();
-        QDesktopServices::openUrl(Utils::getSearchUrl(paese));
-    }
-}

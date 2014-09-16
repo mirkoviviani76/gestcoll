@@ -40,7 +40,7 @@ void StatisticaMonetePerAnno::paintEvent(QPaintEvent* e)
     QList<QString> idmonete = CollezioneXml::getInstance()->getAllId();
     foreach (QString id, idmonete) {
         MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        QString anno = m->getAnno();
+        QString anno = QString::fromStdWString(m->getDom()->anno());
         if (dati.contains(anno))
             dati[anno]+=1.0;
         else

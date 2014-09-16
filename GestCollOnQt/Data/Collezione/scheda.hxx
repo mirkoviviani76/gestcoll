@@ -6036,7 +6036,7 @@ namespace gestColl
        * @name anno
        *
        * @brief Accessor and modifier functions for the %anno
-       * optional element.
+       * required element.
        */
       //@{
 
@@ -6046,30 +6046,24 @@ namespace gestColl
       typedef ::xml_schema::string anno_type;
 
       /**
-       * @brief Element optional container type.
-       */
-      typedef ::xsd::cxx::tree::optional< anno_type > anno_optional;
-
-      /**
        * @brief Element traits type.
        */
       typedef ::xsd::cxx::tree::traits< anno_type, wchar_t > anno_traits;
 
       /**
-       * @brief Return a read-only (constant) reference to the element
-       * container.
+       * @brief Return a read-only (constant) reference to the element.
        *
-       * @return A constant reference to the optional container.
+       * @return A constant reference to the element.
        */
-      const anno_optional&
+      const anno_type&
       anno () const;
 
       /**
-       * @brief Return a read-write reference to the element container.
+       * @brief Return a read-write reference to the element.
        *
-       * @return A reference to the optional container.
+       * @return A reference to the element.
        */
-      anno_optional&
+      anno_type&
       anno ();
 
       /**
@@ -6084,24 +6078,12 @@ namespace gestColl
       anno (const anno_type& x);
 
       /**
-       * @brief Set the element value.
-       *
-       * @param x An optional container with the new value to set.
-       *
-       * If the value is present in @a x then this function makes a copy 
-       * of this value and sets it as the new value of the element.
-       * Otherwise the element container is set the 'not present' state.
-       */
-      void
-      anno (const anno_optional& x);
-
-      /**
        * @brief Set the element value without copying.
        *
        * @param p A new value to use.
        *
-       * This function will try to use the passed value directly instead
-       * of making a copy.
+       * This function will try to use the passed value directly
+       * instead of making a copy.
        */
       void
       anno (::std::auto_ptr< anno_type > p);
@@ -7003,6 +6985,7 @@ namespace gestColl
        */
       moneta (const paese_type&,
               const autorita_type&,
+              const anno_type&,
               const nominale_type&,
               const zecca_type&,
               const zecchieri_type&,
@@ -7024,6 +7007,7 @@ namespace gestColl
        */
       moneta (const paese_type&,
               ::std::auto_ptr< autorita_type >&,
+              const anno_type&,
               ::std::auto_ptr< nominale_type >&,
               ::std::auto_ptr< zecca_type >&,
               ::std::auto_ptr< zecchieri_type >&,
@@ -7097,7 +7081,7 @@ namespace gestColl
       ambiti_optional ambiti_;
       ::xsd::cxx::tree::one< paese_type > paese_;
       ::xsd::cxx::tree::one< autorita_type > autorita_;
-      anno_optional anno_;
+      ::xsd::cxx::tree::one< anno_type > anno_;
       ::xsd::cxx::tree::one< nominale_type > nominale_;
       ::xsd::cxx::tree::one< zecca_type > zecca_;
       ::xsd::cxx::tree::one< zecchieri_type > zecchieri_;
