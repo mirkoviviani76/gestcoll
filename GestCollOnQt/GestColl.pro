@@ -144,7 +144,6 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/Moneta/Immagini/setimmaginemonetadialog.cpp \
                GUI/Moneta/Utilita/visualizzaimmagine.cpp \
                GUI/Moneta/Descrizione/legendadialog.cpp \
-               GUI/Moneta/Letteratura/letteraturadialog.cpp \
                GUI/Moneta/Moneta/monetaform.cpp \
                GUI/Moneta/Moneta/nuovamonetadialog.cpp \
                GUI/Moneta/Note/notadialog.cpp \
@@ -191,7 +190,10 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/Note/notamodel.cpp \
     GUI/Moneta/Emissione/emissioneform.cpp \
     GUI/Moneta/Emissione/emissionedelegate.cpp \
-    GUI/Moneta/Emissione/emissionemodel.cpp
+    GUI/Moneta/Emissione/emissionemodel.cpp \
+    GUI/Moneta/Letteratura/letteraturaform.cpp \
+    GUI/Moneta/Letteratura/letteraturamodel.cpp \
+    GUI/Moneta/Letteratura/letteraturadelegate.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -231,7 +233,6 @@ HEADERS  +=    Common/commondata.h \
                GUI/Moneta/Immagini/setimmaginemonetadialog.h \
                GUI/Moneta/Utilita/visualizzaimmagine.h \
                GUI/Moneta/Descrizione/legendadialog.h \
-               GUI/Moneta/Letteratura/letteraturadialog.h \
                GUI/Moneta/Moneta/monetaform.h \
                GUI/Moneta/Moneta/nuovamonetadialog.h \
                GUI/Moneta/Note/notadialog.h \
@@ -278,7 +279,10 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/Note/notamodel.h \
     GUI/Moneta/Emissione/emissioneform.h \
     GUI/Moneta/Emissione/emissionedelegate.h \
-    GUI/Moneta/Emissione/emissionemodel.h
+    GUI/Moneta/Emissione/emissionemodel.h \
+    GUI/Moneta/Letteratura/letteraturaform.h \
+    GUI/Moneta/Letteratura/letteraturamodel.h \
+    GUI/Moneta/Letteratura/letteraturadelegate.h
 
 
 
@@ -294,7 +298,6 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
                GUI/Moneta/Immagini\setimmaginemonetadialog.ui \
                GUI/Moneta/Utilita\visualizzaimmagine.ui \
                GUI/Moneta/Descrizione\legendadialog.ui \
-               GUI/Moneta/Letteratura\letteraturadialog.ui \
                GUI/Moneta/Moneta\monetaform.ui \
                GUI/Moneta/Moneta\nuovamonetadialog.ui \
                GUI/Moneta/Note\notadialog.ui \
@@ -321,7 +324,8 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
     GUI/Moneta/DatiFisici/datifisiciwidget.ui \
     GUI/Moneta/Zecca/zeccawidget.ui \
     GUI/Moneta/Note/noteform.ui \
-    GUI/Moneta/Emissione/emissioneform.ui
+    GUI/Moneta/Emissione/emissioneform.ui \
+    GUI/Moneta/Letteratura/letteraturaform.ui
 
 
 RESOURCES += resources/resources.qrc

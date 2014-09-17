@@ -391,56 +391,10 @@ QTabBar::tab:selected {
                <number>0</number>
               </property>
               <item>
-               <widget class="QLabel" name="label_7">
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
+               <widget class="LetteraturaForm" name="letteratura">
+                <property name="title">
                  <string>Letteratura</string>
                 </property>
-                <property name="buddy">
-                 <cstring>letteratura</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTableView" name="letteratura">
-                <property name="showDropIndicator" stdset="0">
-                 <bool>true</bool>
-                </property>
-                <property name="dragDropOverwriteMode">
-                 <bool>true</bool>
-                </property>
-                <property name="alternatingRowColors">
-                 <bool>true</bool>
-                </property>
-                <property name="selectionMode">
-                 <enum>QAbstractItemView::SingleSelection</enum>
-                </property>
-                <property name="selectionBehavior">
-                 <enum>QAbstractItemView::SelectRows</enum>
-                </property>
-                <property name="textElideMode">
-                 <enum>Qt::ElideNone</enum>
-                </property>
-                <property name="showGrid">
-                 <bool>false</bool>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-                <property name="cornerButtonEnabled">
-                 <bool>false</bool>
-                </property>
-                <attribute name="horizontalHeaderVisible">
-                 <bool>false</bool>
-                </attribute>
-                <attribute name="verticalHeaderVisible">
-                 <bool>false</bool>
-                </attribute>
                </widget>
               </item>
               <item>
@@ -633,10 +587,15 @@ QTabBar::tab:selected {
    <header>emissioneform.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>LetteraturaForm</class>
+   <extends>QGroupBox</extends>
+   <header>letteraturaform.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>ambiti</tabstop>
-  <tabstop>letteratura</tabstop>
   <tabstop>documenti</tabstop>
   <tabstop>setupCollezione</tabstop>
   <tabstop>posizione</tabstop>

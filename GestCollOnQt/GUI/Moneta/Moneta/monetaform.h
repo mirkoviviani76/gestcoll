@@ -47,7 +47,6 @@ private:
     QMap<QString, int> tabVassoi; ///< mappa fra id vassoio e id tab
     Ui::MonetaForm *ui; ///< la form principale
     CollezioneSortFilterProxyModel* collezioneModel; ///< modello collezione
-    GenericModel* modelloLetteratura; ///< modello letteratura
     GenericModel* modelloDoc; ///< modello documenti
     GenericModel* modelloAmbiti; ///< modello ambiti
     MonetaXml* item; ///< la moneta correntemente visualizzata
@@ -75,9 +74,7 @@ private slots:
     void on_posizione_clicked();
     void on_itemList_activated(QModelIndex index);
     void on_documenti_customContextMenuRequested(QPoint pos);
-    void on_letteratura_customContextMenuRequested(QPoint pos);
 
-    void on_letteratura_doubleClicked(QModelIndex index);
     void on_id_customContextMenuRequested(const QPoint &pos);
     void on_itemList_customContextMenuRequested(const QPoint &pos);
     void on_led_clicked();
