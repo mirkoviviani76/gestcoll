@@ -125,6 +125,7 @@ MonetaForm::MonetaForm(QWidget *parent) :
     connect(this->ui->datiFisici, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->zeccaEzecchieri, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->note, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
+    connect(this->ui->letteratura, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
 }
 
 /**
@@ -134,12 +135,6 @@ MonetaForm::MonetaForm(QWidget *parent) :
 MonetaForm::~MonetaForm()
 {
     delete ui;
-    if (modelloLetteratura != NULL)
-    {
-        this->modelloLetteratura->clear();
-        delete modelloLetteratura;
-        this->modelloLetteratura = NULL;
-    }
     if (modelloDoc != NULL)
     {
         this->modelloDoc->clear();
@@ -258,13 +253,10 @@ void MonetaForm::setupModelMonete()
 
 void MonetaForm::setupModels()
 {
-    modelloLetteratura = new GenericModel(2);
     modelloDoc = new GenericModel();
     modelloAmbiti = new GenericModel(2);
 
     this->setupModelMonete();
-
-    this->ui->letteratura->resizeRowsToContents();
 }
 
 void MonetaForm::changeEvent(QEvent *e)
@@ -298,7 +290,6 @@ void MonetaForm::loadData()
                                .arg(item->getRiga())
                                .arg(item->getColonna()));
 
-    this->modelloLetteratura->clear();
     this->modelloDoc->clear();
     this->modelloAmbiti->clear();
 
@@ -325,11 +316,8 @@ void MonetaForm::loadData()
 
     /* aggiunge la letteratura */
     //TODO ASTE?
-    foreach (xml::Libro* a, item->getLetteratura())
-    {
-        this->modelloLetteratura->appendRow(a);
-    }
-    this->ui->letteratura->setModel(this->modelloLetteratura);
+    this->ui->letteratura->setData(&(item->getDom()->letteratura()));
+
 
     /* aggiunge i documenti */
     foreach (xml::Documento* a, item->getItemAddizionali())
@@ -358,9 +346,6 @@ void MonetaForm::loadData()
     this->ui->led->setOnColor2(QColor(stato.colore));
     this->ui->led->setToolTip(stato.motivo);
     this->ui->led->setChecked(true);
-
-    //resize delle righe per le tabelle
-    this->ui->letteratura->verticalHeader()->resizeSections(QHeaderView::ResizeToContents);
 
     //riabilita la segnalazione delle modifiche
     this->blockSignals(false);
@@ -425,6 +410,8 @@ void MonetaForm::enableEdit(bool editable)
     this->ui->zeccaEzecchieri->setEditable(editable);
     this->ui->note->setEditable(editable);
 
+    this->ui->letteratura->setEditable(editable);
+
 }
 
 
@@ -480,31 +467,6 @@ void MonetaForm::salva()
 
 }
 
-
-
-void MonetaForm::on_letteratura_doubleClicked(QModelIndex index)
-{
-    if (this->editingEnabled)
-    {
-        GenericModel* model = (GenericModel*)index.model();
-        xml::Libro* vecchio = (xml::Libro*) model->getItem(index);
-        LetteraturaDialog libroDialog(this);
-        libroDialog.setData(vecchio);
-        int ret = libroDialog.exec();
-        if (ret == QDialog::Accepted)
-        {
-            QString sigla;
-            QString numero;
-            libroDialog.getData(&sigla, &numero);
-            /* modifica/aggiunge il nodo al dom */
-            xml::Libro libro(sigla, numero);
-            this->item->setLibro(*vecchio, libro);
-            this->loadData();
-            //segnala la modifica
-            emit this->changesOccurred();
-        }
-    }
-}
 
 void MonetaForm::showQr() {
     //ottiene il nome della immagine png
@@ -595,62 +557,6 @@ void MonetaForm::on_documenti_customContextMenuRequested(QPoint pos)
         this->showQr();
     }
 
-}
-
-
-void MonetaForm::on_letteratura_customContextMenuRequested(QPoint pos)
-{
-    // for most widgets
-    QPoint globalPos = this->ui->letteratura->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_ADD) {
-            /* attiva la vera gestione */
-            LetteraturaDialog dialog(this);
-            //dialog.setData(a);
-            int ret = dialog.exec();
-            if (ret == QDialog::Accepted)
-            {
-                QString sigla;
-                QString numero;
-                dialog.getData(&sigla, &numero);
-                /* modifica/aggiunge il nodo al dom */
-                xml::Libro nuovoLibro(sigla, numero);
-                this->item->addLibro(nuovoLibro);
-                this->loadData();
-                //segnala la modifica
-                emit this->changesOccurred();
-
-            }
-        } else if (selectedItem->text() == ACTION_DEL) {
-            //ottiene l'indice selezionato
-            int index = this->ui->letteratura->currentIndex().row();
-            //ottiene l'item
-            xml::Libro* a = (xml::Libro*) this->modelloLetteratura->getItem(index);
-            //cancella dalla lista
-            this->item->deleteLetteratura(a);
-            //ricarica la vista
-            this->loadData();
-            //segnala la modifica
-            emit this->changesOccurred();
-
-
-        } else if (selectedItem->text() == ACTION_COPY_ID) {
-            this->gestClipboardCopyId(this->item->getId());
-        } else if (selectedItem->text() == ACTION_COPY) {
-            this->gestClipboardCopy(this->item->getId());
-        } else if (selectedItem->text() == ACTION_SHOW_QR) {
-            this->showQr();
-        }
-
-    }
-    else
-    {
-        // nothing was chosen
-    }
 }
 
 

@@ -32,7 +32,6 @@ MonetaXml::MonetaXml(const moneta& m)
     this->updateImage();
     this->fillAmbiti();
     this->fillItemAddizionali();
-    this->fillLetteratura();
 }
 
 MonetaXml::MonetaXml(moneta *m) {
@@ -41,7 +40,6 @@ MonetaXml::MonetaXml(moneta *m) {
     this->updateImage();
     this->fillAmbiti();
     this->fillItemAddizionali();
-    this->fillLetteratura();
 }
 
 
@@ -56,23 +54,12 @@ MonetaXml::~MonetaXml()
         delete this->image;
         this->image = NULL;
     }
-    deleteLetteraturaList();
     deleteItemAddizionaliList();
     deleteAmbitiList();
 
 }
 
 
-void MonetaXml::deleteLetteraturaList() {
-    foreach (xml::Libro* a, xmlLetteratura) {
-        if (a != NULL) {
-            delete a;
-            a = NULL;
-        }
-    }
-    this->xmlLetteratura.clear();
-
-}
 void MonetaXml::deleteItemAddizionaliList() {
     foreach (xml::Documento* a, xmlItemAddizionali) {
         if (a != NULL) {
@@ -93,10 +80,6 @@ void MonetaXml::deleteAmbitiList() {
     this->xmlAmbiti.clear();
 }
 
-
-QList<xml::Libro*> MonetaXml::getLetteratura() {
-    return this->xmlLetteratura;
-}
 
 QList<xml::Documento*> MonetaXml::getItemAddizionali() {
     return this->xmlItemAddizionali;
@@ -292,30 +275,6 @@ int MonetaXml::getColonna() const
 }
 
 
-void MonetaXml::fillLetteratura()
-{
-    this->deleteLetteraturaList();
-    moneta::letteratura_optional zopt = this->mon->letteratura();
-    if (zopt.present())
-    {
-        moneta::letteratura_type ztt = zopt.get();
-        ::letteratura::libro_sequence seq = ztt.libro();
-        for (::letteratura::libro_iterator it(seq.begin());
-        it != seq.end(); ++it
-                )
-        {
-            ::letteratura::libro_type curLibro = (*it);
-            xml::Libro* z = new xml::Libro(QString::fromStdWString(curLibro.sigla()),
-                                           QString::fromStdWString(curLibro.numero())
-                                           );
-            this->xmlLetteratura.append(z);
-        }
-
-    }
-
-}
-
-
 void MonetaXml::fillAmbiti()
 {
     this->deleteAmbitiList();
@@ -397,31 +356,6 @@ void MonetaXml::updateRevision() {
     this->mon->revisione(revisione);
 }
 
-void MonetaXml::setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo)
-{
-    bool done = false;
-    moneta::letteratura_type let = mon->letteratura().get();
-    for (::letteratura::libro_iterator it = let.libro().begin();
-         it != let.libro().end() && !done;
-         ++it)
-    {
-        //cerca l'item "giusto"
-        QString curNum = QString::fromStdWString(it->numero());
-        QString curSig = QString::fromStdWString(it->sigla());
-        if ((curNum == vecchio.numero) && (curSig == vecchio.sigla))
-        {
-            /* trovato: effettua le modifiche */
-            it->numero(nuovo.numero.toStdWString());
-            it->sigla(nuovo.sigla.toStdWString());
-            done = true;
-        }
-    }
-
-    //salva le modifiche nel dom
-    mon->letteratura(let);
-    this->fillLetteratura();
-}
-
 
 void MonetaXml::setDocumento(const xml::Documento& vecchio, const xml::Documento& nuovo)
 {
@@ -463,15 +397,6 @@ void MonetaXml::setPosizione(int cont, int vass, int r, int c)
     mon->posizione(pos);
 }
 
-void MonetaXml::addLibro(const xml::Libro& l)
-{
-    moneta::letteratura_type::libro_type libro(l.sigla.toStdWString(), l.numero.toStdWString());
-    moneta::letteratura_type let = mon->letteratura().get();
-    let.libro().push_back(libro);
-    this->mon->letteratura().set(let);
-    this->fillLetteratura();
-}
-
 void MonetaXml::addDocumento(const xml::Documento& l)
 {
     moneta::itemAddizionali_type::documento_type doc(l.filename.toStdWString(),
@@ -510,27 +435,6 @@ void MonetaXml::deleteDocumento(xml::Documento* l)
 
 }
 
-
-void MonetaXml::deleteLetteratura(xml::Libro* l)
-{
-    if (mon->letteratura().present()) {
-        moneta::letteratura_type::libro_sequence letteratura = mon->letteratura().get().libro();
-
-        for (unsigned int i = 0; i < letteratura.size(); i++) {
-            moneta::letteratura_type::libro_type curLibro = letteratura.at(i);
-            QString curSigla = QString::fromStdWString(curLibro.sigla());
-            QString curNum = QString::fromStdWString(curLibro.numero());
-            if (curSigla == l->sigla && curNum == l->numero) {
-                letteratura.erase(letteratura.begin()+i);
-                break;
-            }
-        }
-
-        mon->letteratura().get().libro(letteratura);
-        this->fillLetteratura();
-    }
-
-}
 
 void MonetaXml::setAmbiti(QList<xml::Ambito*> ambiti) {
     gestColl::coins::moneta::ambiti_type let;

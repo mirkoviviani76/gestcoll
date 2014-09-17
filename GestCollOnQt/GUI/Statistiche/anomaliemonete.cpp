@@ -44,7 +44,7 @@ void AnomalieMonete::checkLetteratura() {
     QList<QString> allid = CollezioneXml::getInstance()->getAllId();
     foreach (QString id, allid) {
         MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        bool ok = (m->getLetteratura().size() > 0 ? true : false);
+        bool ok = (m->getDom()->letteratura().libro().size() > 0 ? true : false);
         if (!ok) {
             items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("%1").arg(id))));
         }
@@ -56,14 +56,19 @@ void AnomalieMonete::checkLetteratura() {
 
     foreach (QString id, allid) {
         MonetaXml* m = CollezioneXml::getInstance()->getMoneta(id);
-        QList<xml::Libro*> letteratura = m->getLetteratura();
+
         QStringList sl;
         sl.append(id);
         QString libri = "";
         bool insert = false;
-        foreach (xml::Libro* l, letteratura) {
-            if (l->toTooltip() == "") {
-                libri = libri + " | " + l->sigla;
+
+        for ( ::gestColl::coins::letteratura::libro_iterator it = m->getDom()->letteratura().libro().begin();
+              it != m->getDom()->letteratura().libro().end(); ++it) {
+            QString sigla = QString::fromStdWString((*it).sigla());
+            QString numero = QString::fromStdWString((*it).numero());
+            xml::Libro libro(sigla, numero);
+            if (libro.toTooltip() == "") {
+                libri = libri + " | " + libro.sigla;
                 insert = true;
             }
         }

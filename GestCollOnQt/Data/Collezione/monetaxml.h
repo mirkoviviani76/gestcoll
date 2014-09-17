@@ -43,7 +43,6 @@ public:
     QImage toImg();
     QString getId() const;
     xml::Stato getStato();
-    QList<xml::Libro*> getLetteratura();
     QList<xml::Documento*> getItemAddizionali();
     QList<xml::Ambito*> getAmbiti();
 
@@ -59,7 +58,6 @@ public:
     void addDocumento(const xml::Documento& l);
 
 
-    void deleteLetteratura(xml::Libro* l);
     void deleteDocumento(xml::Documento* l);
 
     moneta* getDom() {return this->mon;}
@@ -71,16 +69,13 @@ private:
     moneta* mon;
     QImage* image;
     void updateImage();
-    QList<xml::Libro*> xmlLetteratura;
     QList<xml::Documento*> xmlItemAddizionali;
     QList<xml::Ambito*> xmlAmbiti;
 
     void deleteLegendeList(Moneta::Lato l);
-    void deleteLetteraturaList();
     void deleteItemAddizionaliList();
     void deleteAmbitiList();
 
-    void fillLetteratura();
     void fillItemAddizionali();
     void fillAmbiti();
 
