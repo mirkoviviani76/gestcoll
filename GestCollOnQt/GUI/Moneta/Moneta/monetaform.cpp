@@ -2,7 +2,6 @@
 #include "ui_monetaform.h"
 #include <commondata.h>
 #include <QMessageBox>
-#include <letteraturadialog.h>
 #include <notadialog.h>
 #include <legendadialog.h>
 #include <utils.h>

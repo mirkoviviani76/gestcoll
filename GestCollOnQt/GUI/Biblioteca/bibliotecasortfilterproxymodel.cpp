@@ -33,7 +33,15 @@ bool BibliotecaSortFilterProxyModel::lessThan(const QModelIndex &left, const QMo
     GenericModel* model = (GenericModel*)this->sourceModel();
     BibliotecaItem* l = (BibliotecaItem*)model->getItem(left);
     BibliotecaItem* r = (BibliotecaItem*)model->getItem(right);
-    bool ret = ((QString::localeAwareCompare(l->toString(left.column()), r->toString(right.column())) == 1) ? false : true);
+    int v = QString::localeAwareCompare(l->toString(left.column()), r->toString(right.column()));
+    bool ret;
+    if (v == 0)
+        ret = false;
+    if (v > 0)
+        ret = false;
+    if (v < 0)
+        ret = true;
+
     return ret;
 
 }
