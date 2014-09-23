@@ -27,13 +27,6 @@
 #include "visualizzaimmagine.h"
 #include "commondefs.h"
 
-#define ACTION_ADD ("Aggiungi")
-#define ACTION_DEL ("Elimina")
-#define ACTION_EDIT ("Modifica in finestra speciale")
-#define ACTION_COPY_ID ("Copia l'id della moneta negli appunti")
-#define ACTION_COPY ("Copia la descrizione della moneta negli appunti")
-#define ACTION_SHOW_QR ("Mostra QR")
-
 #define ACTION_SORT_BY_ID ("Ordina in base all'id")
 #define ACTION_SORT_BY_COUNTRY ("Ordina in base al paese")
 #define ACTION_SORT_BY_YEAR ("Ordina in base all'anno")
@@ -72,12 +65,6 @@ MonetaForm::MonetaForm(QWidget *parent) :
 
 
     this->enableEdit(false);
-    this->contextMenu.addAction(ACTION_ADD);
-    this->contextMenu.addAction(ACTION_DEL);
-    this->contextMenu.addAction(ACTION_EDIT);
-    this->contextMenu.addAction(ACTION_COPY_ID);
-    this->contextMenu.addAction(ACTION_COPY);
-    this->contextMenu.addAction(ACTION_SHOW_QR);
 
     this->contextMenuForMoneteList.addAction(ACTION_SORT_BY_ID);
     this->contextMenuForMoneteList.addAction(ACTION_SORT_BY_COUNTRY);
@@ -85,35 +72,15 @@ MonetaForm::MonetaForm(QWidget *parent) :
     this->contextMenuForMoneteList.addAction(ACTION_SORT_BY_TYPE);
     this->contextMenuForMoneteList.addAction(ACTION_SORT_BY_CATEGORY);
 
-    this->contextMenuForAmbiti.addAction(ACTION_EDIT);
-
-
-    this->contextMenuEnableAction(ACTION_ADD, false);
-    this->contextMenuEnableAction(ACTION_DEL, false);
-    this->contextMenuEnableAction(ACTION_EDIT, false);
-    this->contextMenuEnableAction(ACTION_COPY_ID, true);
-    this->contextMenuEnableAction(ACTION_COPY, true);
-    this->contextMenuEnableAction(ACTION_SHOW_QR, true);
-
 
     this->setContextMenuPolicy(Qt::CustomContextMenu);
     this->editingEnabled = false;
 
-    this->ui->letteratura->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->note->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->id->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->ambiti->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->itemList->setContextMenuPolicy(Qt::CustomContextMenu);
-
-
     this->ui->tabMoneta->setVisible(false);
 
     /* non funziona il connect by name.... boh! */
-    connect(this->ui->ambiti, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(on_ambiti_customContextMenuRequested(QPoint)));
     connect(this->ui->ambiti, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(on_ambiti_doubleClicked(QModelIndex)));
 
-
-    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(customContextMenuRequested(QPoint)));
 
     connect(this->ui->dritto, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->rovescio, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
@@ -134,12 +101,6 @@ MonetaForm::MonetaForm(QWidget *parent) :
 MonetaForm::~MonetaForm()
 {
     delete ui;
-    if (modelloDoc != NULL)
-    {
-        this->modelloDoc->clear();
-        delete modelloDoc;
-        this->modelloDoc = NULL;
-    }
     if (modelloAmbiti != NULL)
     {
         this->modelloAmbiti->clear();
@@ -252,9 +213,7 @@ void MonetaForm::setupModelMonete()
 
 void MonetaForm::setupModels()
 {
-    modelloDoc = new GenericModel();
     modelloAmbiti = new GenericModel(2);
-
     this->setupModelMonete();
 }
 
@@ -289,7 +248,6 @@ void MonetaForm::loadData()
                                .arg(item->getRiga())
                                .arg(item->getColonna()));
 
-    this->modelloDoc->clear();
     this->modelloAmbiti->clear();
 
     /* aggiunge i dati di emissione */
@@ -381,13 +339,6 @@ void MonetaForm::enableEdit(bool editable)
 {
     this->editingEnabled = editable;
 
-    /* sistema le azioni del menu contestuale */
-    this->contextMenuEnableAction(ACTION_ADD, editable);
-    this->contextMenuEnableAction(ACTION_DEL, editable);
-    this->contextMenuEnableAction(ACTION_EDIT, editable);
-    this->contextMenuEnableAction(ACTION_COPY_ID, true);
-    this->contextMenuEnableAction(ACTION_COPY, true);
-
     /* abilita-disabilita il frame */
     this->ui->posizione->setFlat(!editable);
 
@@ -454,7 +405,6 @@ void MonetaForm::salva()
     if (ret)
     {
         QString msg = QString("Salvato");
-        QMessageBox::information(NULL, "GestColl", msg);
         Log::Logger::getInstance()->log(msg, Log::INFO);
     }
     else
@@ -578,30 +528,7 @@ void MonetaForm::on_posizione_clicked()
 }
 
 
-void MonetaForm::on_id_customContextMenuRequested(const QPoint &pos)
-{
-    // for most widgets
-    QPoint globalPos = this->ui->id->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_COPY_ID) {
-            this->gestClipboardCopyId(this->item->getId());
-        } else if (selectedItem->text() == ACTION_COPY) {
-            this->gestClipboardCopy(this->item->getId());
-        } else if (selectedItem->text() == ACTION_SHOW_QR) {
-            this->showQr();
-        }
-
-    }
-    else
-    {
-        // nothing was chosen
-    }
-}
-
+#if 0
 /**
   abilita/disabilita un'azione del menu contestuale
   */
@@ -614,6 +541,7 @@ void MonetaForm::contextMenuEnableAction(QString actionText, bool enable) {
         }
     }
 }
+#endif
 
 /**
   Gestisce la copia negli appunti dell'id moneta
@@ -675,36 +603,6 @@ void MonetaForm::on_ambiti_doubleClicked(const QModelIndex &index)
     this->setupAmbiti();
 }
 
-void MonetaForm::customContextMenuRequested(QPoint pos) {
-    // for most widgets
-    QPoint globalPos = this->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    //QAction* selectedItem = this->contextMenuForAmbiti.exec(globalPos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem)    {
-        if (selectedItem->text() == ACTION_SHOW_QR) {
-            this->showQr();
-        }
-    }
-}
-
-void MonetaForm::on_ambiti_customContextMenuRequested(const QPoint &pos)
-{
-    // for most widgets
-    QPoint globalPos = this->ui->ambiti->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    //QAction* selectedItem = this->contextMenuForAmbiti.exec(globalPos);
-    QAction* selectedItem = this->contextMenuForAmbiti.exec(globalPos);
-    if (selectedItem)    {
-        if (selectedItem->text() == ACTION_EDIT) {
-            this->setupAmbiti();
-        } else if (selectedItem->text() == ACTION_SHOW_QR) {
-            this->showQr();
-        }
-    }
-}
 
 
 

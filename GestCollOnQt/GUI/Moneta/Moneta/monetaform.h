@@ -47,7 +47,6 @@ private:
     QMap<QString, int> tabVassoi; ///< mappa fra id vassoio e id tab
     Ui::MonetaForm *ui; ///< la form principale
     CollezioneSortFilterProxyModel* collezioneModel; ///< modello collezione
-    GenericModel* modelloDoc; ///< modello documenti
     GenericModel* modelloAmbiti; ///< modello ambiti
     MonetaXml* item; ///< la moneta correntemente visualizzata
     Posizioni* vassoi; ///< i vassoi
@@ -55,7 +54,6 @@ private:
     void loadData();
     void setupTabVassoi(MonetaXml* moneta);
     void tabVassoiRemoveItem(MonetaXml* moneta);
-    void contextMenuEnableAction(QString actionText, bool enable);
 
     void gestClipboardCopyId(const QString& id);
     void gestClipboardCopy(const QString& id);
@@ -70,15 +68,12 @@ public slots:
     void salva();
 
 private slots:
-    void customContextMenuRequested(QPoint pos);
     void on_posizione_clicked();
     void on_itemList_activated(QModelIndex index);
 
-    void on_id_customContextMenuRequested(const QPoint &pos);
     void on_itemList_customContextMenuRequested(const QPoint &pos);
     void on_led_clicked();
     void on_ambiti_doubleClicked(const QModelIndex &index);
-    void on_ambiti_customContextMenuRequested(const QPoint &pos);
 
     void on_setupCollezione_clicked();
 
