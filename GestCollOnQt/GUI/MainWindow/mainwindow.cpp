@@ -547,7 +547,7 @@ void MainWindow::on_actionOpzioni_triggered()
     int ret = opzioni.exec();
     if (ret == QDialog::Accepted) {
         if (this->modifiche.hasModifiche()) {
-            //mostra la possibilità di salvare
+            //mostra la possibilita' di salvare
             this->on_actionSalva_triggered();
         }
 

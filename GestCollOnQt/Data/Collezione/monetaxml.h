@@ -49,10 +49,8 @@ public:
     bool updateAmbiti(const xml::Ambito& vecchio, const xml::Ambito& nuovo);
 
     void setStato(xml::Stato& nuovo);
-    void setLibro(const xml::Libro& vecchio, const xml::Libro& nuovo);
     void setPosizione(int cont, int vass, int r, int c);
     void setAmbiti(QList<xml::Ambito*> ambiti);
-    void addLibro(const xml::Libro& l);
 
     moneta* getDom() {return this->mon;}
 
