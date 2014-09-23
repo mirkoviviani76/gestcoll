@@ -1,12 +1,13 @@
 #include "bibliotecasortfilterproxymodel.h"
-#include "genericmodel.h"
 #include <QFont>
 #include <QDebug>
+
+#include "bibliotecamodel.h"
 
 BibliotecaSortFilterProxyModel::BibliotecaSortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
-    GenericModel* model = new GenericModel(3);
+    ModelloBiblioteca* model = new ModelloBiblioteca(this);
     this->setSourceModel(model);
     this->setSortCaseSensitivity(Qt::CaseInsensitive);
 }
@@ -30,7 +31,7 @@ QVariant BibliotecaSortFilterProxyModel::headerData(int section, Qt::Orientation
 
 
 bool BibliotecaSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const {
-    GenericModel* model = (GenericModel*)this->sourceModel();
+    ModelloBiblioteca* model = (ModelloBiblioteca*)this->sourceModel();
     BibliotecaItem* l = (BibliotecaItem*)model->getItem(left);
     BibliotecaItem* r = (BibliotecaItem*)model->getItem(right);
     int v = QString::localeAwareCompare(l->toString(left.column()), r->toString(right.column()));
@@ -49,12 +50,12 @@ bool BibliotecaSortFilterProxyModel::lessThan(const QModelIndex &left, const QMo
 
 
 void BibliotecaSortFilterProxyModel::appendRow(BibliotecaItem *item) {
-    GenericModel* genericmodel = (GenericModel*) this->sourceModel();
+    ModelloBiblioteca* genericmodel = (ModelloBiblioteca*) this->sourceModel();
     genericmodel->appendRow(item);
 }
 
 BibliotecaItem* BibliotecaSortFilterProxyModel::getItem(const QModelIndex &index) {
-    GenericModel* genericmodel = (GenericModel*) this->sourceModel();
+    ModelloBiblioteca* genericmodel = (ModelloBiblioteca*) this->sourceModel();
     BibliotecaItem* item = (BibliotecaItem*)genericmodel->getItem(this->mapToSource(index));
     return item;
 }

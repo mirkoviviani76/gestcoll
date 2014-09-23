@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QStringList>
-#include "commondefs.h"
+#include "scheda.hxx"
 
 
 namespace Ui {
@@ -19,7 +19,7 @@ public:
     ~AddDocumentDialog();
     QStringList getFilenames();
     QString getDescrizione();
-    void setData(xml::Documento* doc);
+    void setData(const  ::gestColl::coins::documentoAddizionale& doc);
     
 private slots:
     void on_selectFile_clicked();

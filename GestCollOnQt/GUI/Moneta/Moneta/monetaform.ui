@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>961</width>
+    <width>980</width>
     <height>642</height>
    </rect>
   </property>
@@ -405,25 +405,9 @@ QTabBar::tab:selected {
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label_9">
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
+               <widget class="ItemAddizionaliWidget" name="documenti">
+                <property name="title">
                  <string>Documenti legati alla moneta</string>
-                </property>
-                <property name="buddy">
-                 <cstring>documenti</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QListView" name="documenti">
-                <property name="alternatingRowColors">
-                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -593,10 +577,15 @@ QTabBar::tab:selected {
    <header>letteraturaform.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>ItemAddizionaliWidget</class>
+   <extends>QGroupBox</extends>
+   <header>itemaddizionaliwidget.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>ambiti</tabstop>
-  <tabstop>documenti</tabstop>
   <tabstop>setupCollezione</tabstop>
   <tabstop>posizione</tabstop>
   <tabstop>itemList</tabstop>

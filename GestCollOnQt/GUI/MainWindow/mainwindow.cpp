@@ -81,6 +81,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, SIGNAL(updateValue(int)), this->progress, SLOT(setValue(int)));
     connect(this, SIGNAL(updateLabel(QString)), this->progress, SLOT(setLabelText(QString)));
 
+    this->ui->widgetBiblioteca->fillData();
 
 }
 

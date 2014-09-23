@@ -31,7 +31,6 @@ MonetaXml::MonetaXml(const moneta& m)
     //this->setOrdering(Moneta::BY_ID);
     this->updateImage();
     this->fillAmbiti();
-    this->fillItemAddizionali();
 }
 
 MonetaXml::MonetaXml(moneta *m) {
@@ -39,7 +38,6 @@ MonetaXml::MonetaXml(moneta *m) {
     //this->setOrdering(Moneta::BY_ID);
     this->updateImage();
     this->fillAmbiti();
-    this->fillItemAddizionali();
 }
 
 
@@ -54,22 +52,12 @@ MonetaXml::~MonetaXml()
         delete this->image;
         this->image = NULL;
     }
-    deleteItemAddizionaliList();
     deleteAmbitiList();
 
 }
 
 
-void MonetaXml::deleteItemAddizionaliList() {
-    foreach (xml::Documento* a, xmlItemAddizionali) {
-        if (a != NULL) {
-            delete a;
-            a = NULL;
-        }
-    }
-    this->xmlItemAddizionali.clear();
 
-}
 void MonetaXml::deleteAmbitiList() {
     foreach (xml::Ambito* a, xmlAmbiti) {
         if (a != NULL) {
@@ -78,11 +66,6 @@ void MonetaXml::deleteAmbitiList() {
         }
     }
     this->xmlAmbiti.clear();
-}
-
-
-QList<xml::Documento*> MonetaXml::getItemAddizionali() {
-    return this->xmlItemAddizionali;
 }
 
 QList<xml::Ambito*> MonetaXml::getAmbiti() {
@@ -301,32 +284,6 @@ void MonetaXml::fillAmbiti()
 
 }
 
-
-void MonetaXml::fillItemAddizionali()
-{
-    this->deleteItemAddizionaliList();
-    moneta::itemAddizionali_optional zopt = this->mon->itemAddizionali();
-    if (zopt.present())
-    {
-        moneta::itemAddizionali_type ztt = zopt.get();
-
-        ::documentiAggiuntivi::documento_sequence seq = ztt.documento();
-        for (::documentiAggiuntivi::documento_iterator it(seq.begin());
-        it != seq.end(); ++it
-                )
-        {
-            ::documentiAggiuntivi::documento_type cur = (*it);
-
-            xml::Documento* z = new xml::Documento(QString::fromStdWString(cur.filename()),
-                                           QString::fromStdWString(cur.descrizione())
-                                           );
-            this->xmlItemAddizionali.append(z);
-        }
-
-    }
-
-}
-
 xml::Stato MonetaXml::getStato() {
     gestColl::coins::stato s = this->mon->stato();
     QString c = QString::fromStdWString(s.colore());
@@ -357,35 +314,6 @@ void MonetaXml::updateRevision() {
 }
 
 
-void MonetaXml::setDocumento(const xml::Documento& vecchio, const xml::Documento& nuovo)
-{
-    bool done = false;
-    moneta::itemAddizionali_type let = mon->itemAddizionali().get();
-
-    for (moneta::itemAddizionali_type::documento_iterator it = let.documento().begin();
-         it != let.documento().end() && !done;
-         ++it)
-    {
-        //cerca l'item "giusto"
-        moneta::itemAddizionali_type::documento_type cur = *it;
-        QString curFilename = QString::fromStdWString(cur.filename());
-        QString curDescrizione = QString::fromStdWString(cur.descrizione());
-        if ((curFilename == vecchio.filename) &&
-                (curDescrizione == vecchio.descrizione))
-        {
-            /* trovato: effettua le modifiche */
-            (*it).filename(nuovo.filename.toStdWString());
-            (*it).descrizione(nuovo.descrizione.toStdWString());
-            done = true;
-        }
-    }
-
-    //salva le modifiche nel dom
-    mon->itemAddizionali(let);
-    this->fillItemAddizionali();
-
-}
-
 
 void MonetaXml::setPosizione(int cont, int vass, int r, int c)
 {
@@ -395,44 +323,6 @@ void MonetaXml::setPosizione(int cont, int vass, int r, int c)
     pos.riga(r);
     pos.colonna(c);
     mon->posizione(pos);
-}
-
-void MonetaXml::addDocumento(const xml::Documento& l)
-{
-    moneta::itemAddizionali_type::documento_type doc(l.filename.toStdWString(),
-                                                     l.descrizione.toStdWString());
-    moneta::itemAddizionali_type let;
-    if (this->mon->itemAddizionali().present())
-        let = mon->itemAddizionali().get();
-    let.documento().push_back(doc);
-    this->mon->itemAddizionali().set(let);
-    this->fillItemAddizionali();
-
-}
-
-
-void MonetaXml::deleteDocumento(xml::Documento* l)
-{
-    moneta::itemAddizionali_type::documento_type doc(
-                l->filename.toStdWString(),
-                l->descrizione.toStdWString());
-    moneta::itemAddizionali_type let = mon->itemAddizionali().get();
-
-    for (unsigned int i = 0; i < let.documento().size(); i++) {
-        moneta::itemAddizionali_type::documento_type cur = let.documento().at(i);
-        QString curFilename = QString::fromStdWString(cur.filename());
-        QString curDescrizione = QString::fromStdWString(cur.descrizione());
-        if ((curFilename == l->filename) &&
-            (curDescrizione == l->descrizione))
-        {
-            let.documento().erase(let.documento().begin()+i);
-            break;
-        }
-    }
-
-    this->mon->itemAddizionali().set(let);
-    this->fillItemAddizionali();
-
 }
 
 

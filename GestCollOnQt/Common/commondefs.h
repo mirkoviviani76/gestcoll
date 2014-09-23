@@ -74,18 +74,7 @@ class Libro : public GenericItem
         inline QImage toImg() { return QImage(); }
         inline QColor getColor() { return QColor(QColor::Invalid);}
 };
-class Documento : public GenericItem
-{
-    public:
-        QString filename;
-        QString descrizione;
-        virtual ~Documento() {}
-        Documento(QString _filename = "", QString _descrizione = "");
-        QString toString(int column=-1);
-        QString toTooltip();
-        inline QImage toImg() { return QImage(); }
-        inline QColor getColor() { return QColor(QColor::Invalid);}
-};
+
 class Contatto : public GenericItem
 {
     public:

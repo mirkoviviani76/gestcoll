@@ -13,6 +13,7 @@
 #include "gestlog.h"
 
 #include <QMetaObject>
+#include "bibliotecadelegate.h"
 
 extern QSplashScreen* splash;
 
@@ -24,12 +25,10 @@ BibliotecaForm::BibliotecaForm(QWidget *parent) :
     ui->setupUi(this);
 
     this->model = new BibliotecaSortFilterProxyModel();
-    this->fillData();
-    this->model->sort(0);
-    this->ui->listView->setModel(model);
-    //qDebug() << "Nome classe:" << this->metaObject()->className() << this->metaObject()->classInfoCount();
-
-
+    this->setEditable(false);
+    //this->ui->listView->setItemDelegate(new BibliotecaDelegate(this));
+    this->ui->listView->verticalHeader()->setVisible(false);
+    this->ui->listView->setSortingEnabled(true);
 
 }
 
@@ -43,6 +42,16 @@ BibliotecaForm::~BibliotecaForm()
         this->model = NULL;
     }
 
+}
+
+void BibliotecaForm::setEditable(bool editable)
+{
+    this->editable = editable;
+    if (this->editable) {
+        this->ui->listView->setEditTriggers(QAbstractItemView::DoubleClicked);
+    } else {
+        this->ui->listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    }
 }
 
 void BibliotecaForm::changeEvent(QEvent *e)
@@ -61,9 +70,15 @@ void BibliotecaForm::changeEvent(QEvent *e)
 
 void BibliotecaForm::fillData()
 {
+    this->model->clear();
     foreach (BibliotecaItem* item, BibliotecaXml::getInstance()->getItems()) {
         this->model->appendRow(item);
     }
+    this->ui->listView->setModel(model);
+    this->model->sort(0);
+    this->ui->listView->resizeColumnsToContents();
+    this->ui->listView->resizeRowsToContents();
+    this->ui->listView->reset();
 }
 
 
@@ -85,3 +100,5 @@ void BibliotecaForm::on_textBrowser_anchorClicked(const QUrl &arg1)
                              .arg(arg1.toString()));
     }
 }
+
+

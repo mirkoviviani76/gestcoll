@@ -18,7 +18,7 @@ public:
     virtual bool lessThan(GenericItem* due);
     virtual bool operator<(GenericItem* due) {return this->lessThan(due);}
     QColor getColor();
-
+    QStringList getAutori() {return this->listaAutori;}
 
 private:
     QString id;

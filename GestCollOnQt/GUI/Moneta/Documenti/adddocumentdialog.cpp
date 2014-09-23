@@ -49,8 +49,10 @@ void AddDocumentDialog::on_selectFile_clicked()
     }
 }
 
-void AddDocumentDialog::setData(xml::Documento *doc) {
-    this->ui->filename->setText(doc->filename);
-    this->ui->descrizione->setPlainText(doc->descrizione);
+void AddDocumentDialog::setData(const gestColl::coins::documentoAddizionale &doc) {
+    QString filename = QString::fromStdWString(doc.filename());
+    this->ui->filename->setText(filename);
+    this->ui->descrizione->setPlainText(QString::fromStdWString(doc.descrizione()));
+    this->selectedFiles << filename;
 }
 

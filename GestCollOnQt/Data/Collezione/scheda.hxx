@@ -6710,7 +6710,7 @@ namespace gestColl
        * @name itemAddizionali
        *
        * @brief Accessor and modifier functions for the %itemAddizionali
-       * optional element.
+       * required element.
        */
       //@{
 
@@ -6720,30 +6720,24 @@ namespace gestColl
       typedef ::gestColl::coins::documentiAggiuntivi itemAddizionali_type;
 
       /**
-       * @brief Element optional container type.
-       */
-      typedef ::xsd::cxx::tree::optional< itemAddizionali_type > itemAddizionali_optional;
-
-      /**
        * @brief Element traits type.
        */
       typedef ::xsd::cxx::tree::traits< itemAddizionali_type, wchar_t > itemAddizionali_traits;
 
       /**
-       * @brief Return a read-only (constant) reference to the element
-       * container.
+       * @brief Return a read-only (constant) reference to the element.
        *
-       * @return A constant reference to the optional container.
+       * @return A constant reference to the element.
        */
-      const itemAddizionali_optional&
+      const itemAddizionali_type&
       itemAddizionali () const;
 
       /**
-       * @brief Return a read-write reference to the element container.
+       * @brief Return a read-write reference to the element.
        *
-       * @return A reference to the optional container.
+       * @return A reference to the element.
        */
-      itemAddizionali_optional&
+      itemAddizionali_type&
       itemAddizionali ();
 
       /**
@@ -6758,24 +6752,12 @@ namespace gestColl
       itemAddizionali (const itemAddizionali_type& x);
 
       /**
-       * @brief Set the element value.
-       *
-       * @param x An optional container with the new value to set.
-       *
-       * If the value is present in @a x then this function makes a copy 
-       * of this value and sets it as the new value of the element.
-       * Otherwise the element container is set the 'not present' state.
-       */
-      void
-      itemAddizionali (const itemAddizionali_optional& x);
-
-      /**
        * @brief Set the element value without copying.
        *
        * @param p A new value to use.
        *
-       * This function will try to use the passed value directly instead
-       * of making a copy.
+       * This function will try to use the passed value directly
+       * instead of making a copy.
        */
       void
       itemAddizionali (::std::auto_ptr< itemAddizionali_type > p);
@@ -6976,6 +6958,7 @@ namespace gestColl
               const datiAcquisto_type&,
               const note_type&,
               const letteratura_type&,
+              const itemAddizionali_type&,
               const stato_type&,
               const revisione_type&,
               const id_type&);
@@ -6999,6 +6982,7 @@ namespace gestColl
               ::std::auto_ptr< datiAcquisto_type >&,
               ::std::auto_ptr< note_type >&,
               ::std::auto_ptr< letteratura_type >&,
+              ::std::auto_ptr< itemAddizionali_type >&,
               ::std::auto_ptr< stato_type >&,
               const revisione_type&,
               const id_type&);
@@ -7076,7 +7060,7 @@ namespace gestColl
       grado_optional grado_;
       ::xsd::cxx::tree::one< note_type > note_;
       ::xsd::cxx::tree::one< letteratura_type > letteratura_;
-      itemAddizionali_optional itemAddizionali_;
+      ::xsd::cxx::tree::one< itemAddizionali_type > itemAddizionali_;
       ::xsd::cxx::tree::one< stato_type > stato_;
       ::xsd::cxx::tree::one< revisione_type > revisione_;
       ::xsd::cxx::tree::one< id_type > id_;

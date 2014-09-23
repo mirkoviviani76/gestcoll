@@ -19,6 +19,8 @@ public:
     explicit BibliotecaForm(QWidget *parent = 0);
     ~BibliotecaForm();
     void setModel(BibliotecaSortFilterProxyModel* model);
+    void setEditable(bool editable);
+    void fillData();
 
 protected:
     void changeEvent(QEvent *e);
@@ -26,7 +28,7 @@ protected:
 private:
     BibliotecaSortFilterProxyModel* model;
     Ui::BibliotecaForm *ui;
-    void fillData();
+    bool editable;
 
 private slots:
     void on_listView_activated(QModelIndex index);
