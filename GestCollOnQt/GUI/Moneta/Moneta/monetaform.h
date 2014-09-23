@@ -6,8 +6,6 @@
 #include <genericmodel.h>
 #include <monetaxml.h>
 #include "collezionesortfilterproxymodel.h"
-#include <QMenu>
-#include <QDate>
 #include "posizioni.h"
 #include "vassoioform.h"
 
@@ -24,9 +22,6 @@ public:
     ~MonetaForm();
 
     void setModel(GenericModel* model);
-    QMenu contextMenu;
-    QMenu contextMenuForMoneteList;
-    QMenu contextMenuForAmbiti;
     void updateModel(QString newId);
     void reload();
     /**
