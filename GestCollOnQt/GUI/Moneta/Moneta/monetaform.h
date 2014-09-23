@@ -36,8 +36,6 @@ public:
 
     void setupModelMonete();
 
-    void legende_customContextMenuRequested(const QPoint &pos, const Moneta::Lato &lato);
-
 protected:
     void changeEvent(QEvent *e);
 
@@ -71,7 +69,6 @@ private slots:
     void on_posizione_clicked();
     void on_itemList_activated(QModelIndex index);
 
-    void on_itemList_customContextMenuRequested(const QPoint &pos);
     void on_led_clicked();
     void on_ambiti_doubleClicked(const QModelIndex &index);
 

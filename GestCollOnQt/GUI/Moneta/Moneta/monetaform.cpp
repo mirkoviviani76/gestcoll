@@ -429,32 +429,6 @@ void MonetaForm::showQr() {
 
 
 
-void MonetaForm::on_itemList_customContextMenuRequested(const QPoint &pos)
-{
-    // for most widgets
-    QPoint globalPos = this->ui->itemList->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenuForMoneteList.exec(globalPos);
-
-    int column = -1;
-    if (selectedItem)
-    {
-        if (selectedItem->text() == ACTION_SORT_BY_ID) {
-            column = 0;
-        } else if (selectedItem->text() == ACTION_SORT_BY_COUNTRY) {
-            column = 1;
-        } else if (selectedItem->text() == ACTION_SORT_BY_TYPE) {
-            column = 2;
-        } else if (selectedItem->text() == ACTION_SORT_BY_YEAR) {
-            column = 3;
-        } else if (selectedItem->text() == ACTION_SORT_BY_CATEGORY) {
-            column = 4;
-        }
-        this->collezioneModel->sort(column);
-    }
-}
-
 
 
 void MonetaForm::idChanged(QString id)
