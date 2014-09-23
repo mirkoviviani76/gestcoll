@@ -27,12 +27,6 @@
 #include "visualizzaimmagine.h"
 #include "commondefs.h"
 
-#define ACTION_SORT_BY_ID ("Ordina in base all'id")
-#define ACTION_SORT_BY_COUNTRY ("Ordina in base al paese")
-#define ACTION_SORT_BY_YEAR ("Ordina in base all'anno")
-#define ACTION_SORT_BY_TYPE ("Ordina in base alla valuta")
-#define ACTION_SORT_BY_CATEGORY ("Ordina in base all'ambito")
-
 #define TAB_MONETA  (0) ///< id tab moneta
 #define TAB_VASSOI  (1) ///< id tab vassoi
 
@@ -63,25 +57,11 @@ MonetaForm::MonetaForm(QWidget *parent) :
     //setta il delegato per le monete
     this->ui->itemList->setItemDelegate(new ElencoMoneteDelegate(this->ui->itemList));
 
-
     this->enableEdit(false);
-
-    this->contextMenuForMoneteList.addAction(ACTION_SORT_BY_ID);
-    this->contextMenuForMoneteList.addAction(ACTION_SORT_BY_COUNTRY);
-    this->contextMenuForMoneteList.addAction(ACTION_SORT_BY_YEAR);
-    this->contextMenuForMoneteList.addAction(ACTION_SORT_BY_TYPE);
-    this->contextMenuForMoneteList.addAction(ACTION_SORT_BY_CATEGORY);
-
-
-    this->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->editingEnabled = false;
 
     this->ui->tabMoneta->setVisible(false);
 
-    /* non funziona il connect by name.... boh! */
     connect(this->ui->ambiti, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(on_ambiti_doubleClicked(QModelIndex)));
-
-
     connect(this->ui->dritto, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->rovescio, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->taglio, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
