@@ -1731,28 +1731,22 @@ namespace gestColl
       this->letteratura_.set (x);
     }
 
-    const moneta::itemAddizionali_optional& moneta::
+    const moneta::itemAddizionali_type& moneta::
     itemAddizionali () const
     {
-      return this->itemAddizionali_;
+      return this->itemAddizionali_.get ();
     }
 
-    moneta::itemAddizionali_optional& moneta::
+    moneta::itemAddizionali_type& moneta::
     itemAddizionali ()
     {
-      return this->itemAddizionali_;
+      return this->itemAddizionali_.get ();
     }
 
     void moneta::
     itemAddizionali (const itemAddizionali_type& x)
     {
       this->itemAddizionali_.set (x);
-    }
-
-    void moneta::
-    itemAddizionali (const itemAddizionali_optional& x)
-    {
-      this->itemAddizionali_ = x;
     }
 
     void moneta::
@@ -4343,6 +4337,7 @@ namespace gestColl
             const datiAcquisto_type& datiAcquisto,
             const note_type& note,
             const letteratura_type& letteratura,
+            const itemAddizionali_type& itemAddizionali,
             const stato_type& stato,
             const revisione_type& revisione,
             const id_type& id)
@@ -4361,7 +4356,7 @@ namespace gestColl
       grado_ (::xml_schema::flags (), this),
       note_ (note, ::xml_schema::flags (), this),
       letteratura_ (letteratura, ::xml_schema::flags (), this),
-      itemAddizionali_ (::xml_schema::flags (), this),
+      itemAddizionali_ (itemAddizionali, ::xml_schema::flags (), this),
       stato_ (stato, ::xml_schema::flags (), this),
       revisione_ (revisione, ::xml_schema::flags (), this),
       id_ (id, ::xml_schema::flags (), this)
@@ -4380,6 +4375,7 @@ namespace gestColl
             ::std::auto_ptr< datiAcquisto_type >& datiAcquisto,
             ::std::auto_ptr< note_type >& note,
             ::std::auto_ptr< letteratura_type >& letteratura,
+            ::std::auto_ptr< itemAddizionali_type >& itemAddizionali,
             ::std::auto_ptr< stato_type >& stato,
             const revisione_type& revisione,
             const id_type& id)
@@ -4398,7 +4394,7 @@ namespace gestColl
       grado_ (::xml_schema::flags (), this),
       note_ (note, ::xml_schema::flags (), this),
       letteratura_ (letteratura, ::xml_schema::flags (), this),
-      itemAddizionali_ (::xml_schema::flags (), this),
+      itemAddizionali_ (itemAddizionali, ::xml_schema::flags (), this),
       stato_ (stato, ::xml_schema::flags (), this),
       revisione_ (revisione, ::xml_schema::flags (), this),
       id_ (id, ::xml_schema::flags (), this)
@@ -4675,7 +4671,7 @@ namespace gestColl
           ::std::auto_ptr< itemAddizionali_type > r (
             itemAddizionali_traits::create (i, f, this));
 
-          if (!this->itemAddizionali_)
+          if (!itemAddizionali_.present ())
           {
             this->itemAddizionali_.set (r);
             continue;
@@ -4787,6 +4783,13 @@ namespace gestColl
       {
         throw ::xsd::cxx::tree::expected_element< wchar_t > (
           L"letteratura",
+          L"http://gestColl/coins");
+      }
+
+      if (!itemAddizionali_.present ())
+      {
+        throw ::xsd::cxx::tree::expected_element< wchar_t > (
+          L"itemAddizionali",
           L"http://gestColl/coins");
       }
 
@@ -6220,7 +6223,6 @@ namespace gestColl
 
       // itemAddizionali
       //
-      if (i.itemAddizionali ())
       {
         ::xercesc::DOMElement& s (
           ::xsd::cxx::xml::dom::create_element (
@@ -6228,7 +6230,7 @@ namespace gestColl
             L"http://gestColl/coins",
             e));
 
-        s << *i.itemAddizionali ();
+        s << i.itemAddizionali ();
       }
 
       // stato

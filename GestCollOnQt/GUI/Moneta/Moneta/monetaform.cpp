@@ -101,7 +101,6 @@ MonetaForm::MonetaForm(QWidget *parent) :
 
     this->ui->letteratura->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->note->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->ui->documenti->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->id->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->ambiti->setContextMenuPolicy(Qt::CustomContextMenu);
     this->ui->itemList->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -125,6 +124,7 @@ MonetaForm::MonetaForm(QWidget *parent) :
     connect(this->ui->zeccaEzecchieri, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->note, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->letteratura, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
+    connect(this->ui->documenti, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
 }
 
 /**
@@ -317,13 +317,8 @@ void MonetaForm::loadData()
     //TODO ASTE?
     this->ui->letteratura->setData(&(item->getDom()->letteratura()));
 
-
     /* aggiunge i documenti */
-    foreach (xml::Documento* a, item->getItemAddizionali())
-    {
-        this->modelloDoc->appendRow(a);
-    }
-    this->ui->documenti->setModel(this->modelloDoc);
+    this->ui->documenti->setData(&(item->getDom()->itemAddizionali()));
 
     /* aggiunge gli ambiti */
     foreach (xml::Ambito* a, item->getAmbiti())
@@ -408,6 +403,7 @@ void MonetaForm::enableEdit(bool editable)
     this->ui->datiFisici->setEditable(editable);
     this->ui->zeccaEzecchieri->setEditable(editable);
     this->ui->note->setEditable(editable);
+    this->ui->documenti->setEditable(editable);
 
     this->ui->letteratura->setEditable(editable);
 
@@ -509,54 +505,6 @@ void MonetaForm::on_itemList_customContextMenuRequested(const QPoint &pos)
     }
 }
 
-
-void MonetaForm::on_documenti_customContextMenuRequested(QPoint pos)
-{
-    // for most widgets
-    QPoint globalPos = this->ui->documenti->mapToGlobal(pos);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem == NULL)
-        return;
-
-    if (selectedItem->text() == ACTION_ADD) {
-        AddDocumentDialog addDoc(this);
-        int ret = addDoc.exec();
-        if (ret == QDialog::Accepted) {
-            QStringList selection = addDoc.getFilenames();
-            foreach (QString file, selection) {
-                xml::Documento d(file, addDoc.getDescrizione());
-                this->item->addDocumento(d);
-            }
-            this->loadData();
-            //segnala la modifica
-            emit this->changesOccurred();
-
-        } else {
-        }
-
-    } else if (selectedItem->text() == ACTION_DEL) {
-        //ottiene l'indice selezionato
-        int index = this->ui->documenti->currentIndex().row();
-        //ottiene l'item
-        xml::Documento* a = (xml::Documento*) this->modelloDoc->getItem(index);
-        //cancella dalla lista
-        this->item->deleteDocumento(a);
-        //ricarica la vista
-        this->loadData();
-        //segnala la modifica
-        emit this->changesOccurred();
-
-    } else if (selectedItem->text() == ACTION_COPY_ID) {
-        qDebug() << "on_documenti_customContextMenuRequested " << ACTION_COPY_ID;
-    } else if (selectedItem->text() == ACTION_COPY) {
-        qDebug() << "on_documenti_customContextMenuRequested " << ACTION_COPY;
-    } else if (selectedItem->text() == ACTION_SHOW_QR) {
-        this->showQr();
-    }
-
-}
 
 
 void MonetaForm::idChanged(QString id)
@@ -720,38 +668,6 @@ void MonetaForm::on_led_clicked()
         emit this->changesOccurred();
 }
 
-void MonetaForm::on_documenti_doubleClicked(const QModelIndex &index)
-{
-    GenericModel* model = (GenericModel*)index.model();
-    xml::Documento* vecchio = (xml::Documento*) model->getItem(index);
-    if (this->editingEnabled)
-    {
-        AddDocumentDialog dialog(this);
-        dialog.setData(vecchio);
-        int ret = dialog.exec();
-        if (ret == QDialog::Accepted)
-        {
-            QString nuovoFilename = dialog.getFilenames().at(0);
-            QString nuovaDescrizione = dialog.getDescrizione();
-            xml::Documento nuovo(nuovoFilename, nuovaDescrizione);
-            /* modifica/aggiunge il nodo al dom */
-            this->item->setDocumento(*vecchio, nuovo);
-            this->loadData();
-            //segnala la modifica
-            emit this->changesOccurred();
-
-        }
-    } else {
-        QString file = CommonData::getInstance()->getDocDir()+"/"+vecchio->filename;
-        QUrl url = QUrl::fromLocalFile(file);
-        if (url.isValid() && QFile(file).exists()) {
-            QDesktopServices::openUrl(url);
-        } else {
-            QMessageBox::warning(this, CommonData::getInstance()->getAppName(), QString("Impossible aprire %1")
-                                 .arg(file));
-        }
-    }
-}
 
 void MonetaForm::on_ambiti_doubleClicked(const QModelIndex &index)
 {

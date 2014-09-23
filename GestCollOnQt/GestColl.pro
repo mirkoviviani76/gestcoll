@@ -139,7 +139,6 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/Models/generictabmodel.cpp \
                GUI/Moneta/Ambito/setambitodialog.cpp \
                GUI/Moneta/Descrizione/descrizionedialog.cpp \
-               GUI/Moneta/Documenti/adddocumentdialog.cpp \
                GUI/Moneta/Immagini/imgmoneta.cpp \
                GUI/Moneta/Immagini/setimmaginemonetadialog.cpp \
                GUI/Moneta/Utilita/visualizzaimmagine.cpp \
@@ -193,7 +192,13 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/Emissione/emissionemodel.cpp \
     GUI/Moneta/Letteratura/letteraturaform.cpp \
     GUI/Moneta/Letteratura/letteraturamodel.cpp \
-    GUI/Moneta/Letteratura/letteraturadelegate.cpp
+    GUI/Moneta/Letteratura/letteraturadelegate.cpp \
+    GUI/Biblioteca/bibliotecamodel.cpp \
+    GUI/Biblioteca/bibliotecadelegate.cpp \
+    GUI/Moneta/Documenti/itemaddizionaliwidget.cpp \
+    GUI/Moneta/Documenti/documentimodel.cpp \
+    GUI/Moneta/Documenti/documentidelegate.cpp \
+    GUI/Moneta/Documenti/adddocumentdialog.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -228,7 +233,6 @@ HEADERS  +=    Common/commondata.h \
                GUI/Models/generictabmodel.h \
                GUI/Moneta/Ambito/setambitodialog.h \
                GUI/Moneta/Descrizione/descrizionedialog.h \
-               GUI/Moneta/Documenti/adddocumentdialog.h \
                GUI/Moneta/Immagini/imgmoneta.h \
                GUI/Moneta/Immagini/setimmaginemonetadialog.h \
                GUI/Moneta/Utilita/visualizzaimmagine.h \
@@ -282,7 +286,13 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/Emissione/emissionemodel.h \
     GUI/Moneta/Letteratura/letteraturaform.h \
     GUI/Moneta/Letteratura/letteraturamodel.h \
-    GUI/Moneta/Letteratura/letteraturadelegate.h
+    GUI/Moneta/Letteratura/letteraturadelegate.h \
+    GUI/Biblioteca/bibliotecamodel.h \
+    GUI/Biblioteca/bibliotecadelegate.h \
+    GUI/Moneta/Documenti/itemaddizionaliwidget.h \
+    GUI/Moneta/Documenti/documentimodel.h \
+    GUI/Moneta/Documenti/documentidelegate.h \
+    GUI/Moneta/Documenti/adddocumentdialog.h
 
 
 
@@ -294,7 +304,6 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
             GUI/Links/linksform.ui \
                GUI/Moneta/Ambito\setambitodialog.ui \
                GUI/Moneta/Descrizione\descrizionedialog.ui \
-               GUI/Moneta/Documenti\adddocumentdialog.ui \
                GUI/Moneta/Immagini\setimmaginemonetadialog.ui \
                GUI/Moneta/Utilita\visualizzaimmagine.ui \
                GUI/Moneta/Descrizione\legendadialog.ui \
@@ -325,7 +334,9 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
     GUI/Moneta/Zecca/zeccawidget.ui \
     GUI/Moneta/Note/noteform.ui \
     GUI/Moneta/Emissione/emissioneform.ui \
-    GUI/Moneta/Letteratura/letteraturaform.ui
+    GUI/Moneta/Letteratura/letteraturaform.ui \
+    GUI/Moneta/Documenti/itemaddizionaliwidget.ui \
+    GUI/Moneta/Documenti/adddocumentdialog.ui
 
 
 RESOURCES += resources/resources.qrc

@@ -2,7 +2,6 @@
 #define MODELLOLEGENDA_H
 
 #include <QAbstractListModel>
-#include <genericitem.h>
 #include "scheda.hxx"
 
 #include <QList>

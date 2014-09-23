@@ -24,21 +24,6 @@ QString Libro::toString(int column)
 }
 
 
-Documento::Documento(QString _filename, QString _descrizione) {
-    filename = _filename;
-    descrizione = _descrizione;
-}
-QString Documento::toString(int column) {
-    Q_UNUSED(column);
-    return descrizione;
-}
-QString Documento::toTooltip() {
-    return QString("%1/%2")
-            .arg(CommonData::getInstance()->getDocDir())
-            .arg(filename);
-}
-
-
 
 Ambito::Ambito(QString _titolo, QString _icona) {
     titolo = _titolo;
