@@ -28,9 +28,9 @@ QString NewContattoDialog::getNote() {
     return c;
 }
 
-void NewContattoDialog::setData(const xml::Contatto &cont) {
-    this->ui->nomeLE->setText(cont.nome);
-    this->ui->emailLE->setText(cont.email);
-    this->ui->noteLE->setText(cont.note);
+void NewContattoDialog::setData(const gestColl::contatti::contatto &cont) {
+    this->ui->nomeLE->setText(QString::fromStdWString(cont.nome()));
+    this->ui->emailLE->setText(QString::fromStdWString(cont.email()));
+    this->ui->noteLE->setText(QString::fromStdWString(cont.note()));
 }
 

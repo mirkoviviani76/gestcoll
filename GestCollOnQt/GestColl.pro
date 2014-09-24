@@ -120,7 +120,6 @@ SOURCES  +=    Common/commondata.cpp \
                Data/Collezione/scheda.cxx \
                Data/Collezione/monetaxml.cpp \
                Data/Vassoi/vassoioxml.cpp \
-               Data/Contatti/contattixml.cpp \
                Data/Biblioteca/biblioteca.cxx \
                Data/Biblioteca/bibliotecaitem.cpp \
                Data/Biblioteca/bibliotecaxml.cpp \
@@ -191,7 +190,8 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Biblioteca/bibliotecadelegate.cpp \
     GUI/Moneta/Documenti/itemaddizionaliwidget.cpp \
     GUI/Moneta/Documenti/documentimodel.cpp \
-    GUI/Moneta/Documenti/adddocumentdialog.cpp
+    GUI/Moneta/Documenti/adddocumentdialog.cpp \
+    GUI/Contatti/contattomodel.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -207,7 +207,6 @@ HEADERS  +=    Common/commondata.h \
                Data/Collezione/scheda.hxx \
                Data/Collezione/monetaxml.h \
                Data/Vassoi/vassoioxml.h \
-               Data/Contatti/contattixml.h \
                Data/Biblioteca/biblioteca.hxx \
                Data/Biblioteca/bibliotecaitem.h \
                Data/Contatti/contatti.hxx \
@@ -278,7 +277,8 @@ HEADERS  +=    Common/commondata.h \
     GUI/Biblioteca/bibliotecadelegate.h \
     GUI/Moneta/Documenti/itemaddizionaliwidget.h \
     GUI/Moneta/Documenti/documentimodel.h \
-    GUI/Moneta/Documenti/adddocumentdialog.h
+    GUI/Moneta/Documenti/adddocumentdialog.h \
+    GUI/Contatti/contattomodel.h
 
 
 

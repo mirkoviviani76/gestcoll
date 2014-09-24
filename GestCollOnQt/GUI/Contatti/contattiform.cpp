@@ -1,77 +1,48 @@
 #include "contattiform.h"
 #include "ui_contattiform.h"
-#include "contattixml.h"
 #include "commondata.h"
 
-#include <QDebug>
 #include "newcontattodialog.h"
+#include "commondata.h"
+#include <iostream>
+#include "gestlog.h"
+#include <QDebug>
+#include <fstream>
+#include "contatti.hxx"
+#include "utils.h"
+#include <QUrl>
+#include <QDesktopServices>
 
 #define ACTION_CONTATTO_DELETE ("Cancella contatto")
 
+
 ContattiForm::ContattiForm(QWidget *parent) :
-    QWidget(parent),
+    QWidget(parent), editable(false),
     ui(new Ui::ContattiForm)
 {
     ui->setupUi(this);
-    this->contattoSelezionato = NULL;
-    this->contextMenu.addAction(ACTION_CONTATTO_DELETE);
-
-
-    this->ui->listView->setContextMenuPolicy(Qt::CustomContextMenu);
-    this->contattiModel = new GenericModel();
-    this->loadData();
-
+    this->enableEdit(this->editable);
+    this->contattiModel = new ContattoModel(this);
+    connect(this->contattiModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SIGNAL(changesOccurred()));
+    loadData();
 }
 
 void ContattiForm::loadData() {
+    this->readXml(CommonData::getInstance()->getContatti());
     this->contattiModel->clear();
-    /* riempie il modello */
-    foreach (xml::Contatto* cont, contattiXml.getContatti()) {
-        this->contattiModel->appendRow(cont);
-    }
-    this->ui->listView->setModel(this->contattiModel);
-
+    this->contattiModel->fillData(&(this->contattiData->contatto()));
+    this->ui->contattiView->setModel(this->contattiModel);
+    this->ui->contattiView->resizeColumnsToContents();
 }
 
 ContattiForm::~ContattiForm()
 {
     delete ui;
-    if (this->contattiModel != NULL) {
-        this->contattiModel->clear();
-        delete this->contattiModel;
-        this->contattiModel = NULL;
-    }
-
 }
 
-void ContattiForm::on_listView_customContextMenuRequested(const QPoint &pos)
-{
-    // for most widgets
-    QPoint globalPos = this->ui->listView->mapToGlobal(pos);
-    QAction* selectedItem = this->contextMenu.exec(globalPos);
-    if (selectedItem && (this->contattoSelezionato != NULL))
-    {
-        if (selectedItem->text() == ACTION_CONTATTO_DELETE) {
-            //ottiene l'indice selezionato
-            int index = this->ui->listView->currentIndex().row();
-            //ottiene l'item
-            xml::Contatto* l = (xml::Contatto*) this->contattiModel->getItem(index);
-            //cancella dalla lista
-            this->contattiXml.deleteContatto(l);
-            //ricarica la vista
-            this->loadData();
-        }
-    }
-
-}
-
-void ContattiForm::on_listView_activated(const QModelIndex &index)
-{
-    xml::Contatto* contatto = (xml::Contatto*) this->contattiModel->getItem(index);
-    this->contattoSelezionato = contatto;
-}
 
 void ContattiForm::addItem() {
+#if 0
     NewContattoDialog ncd(this);
     int ret = ncd.exec();
     if (ret == QDialog::Accepted) {
@@ -86,43 +57,94 @@ void ContattiForm::addItem() {
         emit this->changesOccurred();
 
     }
-
+#endif
 
 }
 
 
-/**
-  Salva il documento corrente
-  */
-void ContattiForm::salva()
-{
-    this->contattiXml.save();
-}
+bool ContattiForm::save() {
 
-
-
-void ContattiForm::on_listView_doubleClicked(const QModelIndex &index)
-{
-    GenericModel* model = (GenericModel*)index.model();
-    xml::Contatto* cont = (xml::Contatto*) model->getItem(index);
-    NewContattoDialog dialog(this);
-    dialog.setData(*cont);
-    int ret = dialog.exec();
-    if (ret == QDialog::Accepted)
+    bool ret = false;
+    /* scrive su file */
+    xml_schema::namespace_infomap xmlmap;
+    xmlmap[L""].name = L"http://gestColl/contatti";
+    xmlmap[L""].schema = L"contatti.xsd";
+    std::ofstream myfile;
+    myfile.open (CommonData::getInstance()->getContatti().toLatin1());
+    if (myfile.is_open())
     {
-        xml::Contatto nuovo(dialog.getNome(), dialog.getEmail(), dialog.getNote());
-        /* modifica/aggiunge il nodo al dom */
-        this->contattiXml.setContatto(*cont, nuovo);
-        /* aggiorna la vista */
-        cont->nome = nuovo.nome;
-        cont->email = nuovo.email;
-        cont->note = nuovo.note;
-        //segnala l'esistenza di modifiche non ancora salvate
-        emit this->changesOccurred();
+        ::gestColl::contatti::contatti_(myfile, *(this->contattiData), xmlmap);
+        myfile.close();
+        ret = true;
     }
+    else
+    {
+        ret = false;
+    }
+    return ret;
 }
 
-void ContattiForm::on_listView_clicked(const QModelIndex &index)
+void ContattiForm::enableEdit(bool editable)
 {
-    this->on_listView_activated(index);
+    if (editable) {
+        this->ui->contattiView->setEditTriggers(QAbstractItemView::DoubleClicked);
+        this->ui->contattiView->setSelectionBehavior(QAbstractItemView::SelectItems);
+        this->ui->contattiView->setSelectionMode(QAbstractItemView::SingleSelection);
+    } else {
+        this->ui->contattiView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        this->ui->contattiView->setSelectionBehavior(QAbstractItemView::SelectRows);
+        this->ui->contattiView->setSelectionMode(QAbstractItemView::SingleSelection);
+    }
+    //this->ui->addLetteratura->setVisible(editable);
+    //this->ui->removeLetteratura->setVisible(editable);
+    this->editable = editable;
+
+}
+
+void ContattiForm::readXml(const QFileInfo &file) {
+    QString filename = file.canonicalFilePath();
+    try {
+        this->contattiData = (::gestColl::contatti::contatti_(file.canonicalFilePath().toStdWString(), xml_schema::flags::dont_validate));
+    }
+    catch (const xml_schema::exception& e)
+    {
+        QString msg = QString("%1 - %2").arg(filename).arg(e.what());
+        std::wcerr << e;
+        Log::Logger::getInstance()->log(msg, Log::FATAL);
+        exit(-1);
+    }
+    catch (const xml_schema::properties::argument&)
+    {
+        QString msg = QString("%1 - %2").arg(filename).arg("invalid property argument (empty namespace or location)");
+        Log::Logger::getInstance()->log(msg, Log::FATAL);
+        exit(-1);
+    }
+    catch (const xsd::cxx::xml::invalid_utf16_string&)
+    {
+        QString msg = QString("%1 - %2").arg(filename).arg("invalid UTF-16 text in DOM model");
+        Log::Logger::getInstance()->log(msg, Log::FATAL);
+        exit(-1);
+    }
+    catch (const xsd::cxx::xml::invalid_utf8_string&)
+    {
+        QString msg = QString("%1 - %2").arg(filename).arg("invalid UTF-8 text in object model");
+        Log::Logger::getInstance()->log(msg, Log::FATAL);
+        exit(-1);
+    }
+    catch (...)
+    {
+        QString msg = QString("%1 - %2").arg(filename).arg("Unknown exception");
+        Log::Logger::getInstance()->log(msg, Log::FATAL);
+        exit(-1);
+    }
+
+}
+
+void ContattiForm::on_contattiView_doubleClicked(const QModelIndex &index)
+{
+    if (!this->editable) {
+        QUrl email = QUrl(QString("mailto:%1").arg(QString::fromStdWString(this->contattiModel->getItem(index).email())));
+        QDesktopServices::openUrl(email);
+    }
+
 }

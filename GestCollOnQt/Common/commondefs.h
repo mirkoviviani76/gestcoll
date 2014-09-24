@@ -75,21 +75,6 @@ class Libro : public GenericItem
         inline QColor getColor() { return QColor(QColor::Invalid);}
 };
 
-class Contatto : public GenericItem
-{
-    public:
-        QString nome;
-        QString email;
-        QString note;
-        virtual ~Contatto() {}
-        Contatto(QString _nome, QString _email, QString _note = "") {nome = _nome; email = _email; note = _note;}
-        inline QString toString(int column=-1) {Q_UNUSED(column); return QString("%1\t%2\t%3").arg(nome).arg(email).arg(note);}
-        inline QString toTooltip() {return QString("%1").arg(note);}
-        inline QImage toImg() { return QImage(); }
-        inline QColor getColor() { return QColor(QColor::Invalid);}
-};
-
-
 class Ambito  : public GenericItem {
 public:
     QString titolo;

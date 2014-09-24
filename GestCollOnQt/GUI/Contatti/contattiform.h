@@ -2,9 +2,9 @@
 #define CONTATTIFORM_H
 
 #include <QWidget>
-#include "genericmodel.h"
-#include "contattixml.h"
+#include "contattomodel.h"
 #include <QMenu>
+#include <QFileInfo>
 
 namespace Ui {
 class ContattiForm;
@@ -18,28 +18,23 @@ class ContattiForm : public QWidget
         explicit ContattiForm(QWidget *parent = 0);
         ~ContattiForm();
     void addItem();
-    void salva();
-
-
-    private slots:
-        void on_listView_customContextMenuRequested(const QPoint &pos);
-
-        void on_listView_activated(const QModelIndex &index);
-
-        void on_listView_doubleClicked(const QModelIndex &index);
-
-        void on_listView_clicked(const QModelIndex &index);
+    bool save();
+    void enableEdit(bool editable);
 
 private:
         QMenu contextMenu;
         Ui::ContattiForm *ui;
-        GenericModel* contattiModel; ///< modello contatti
-        ContattiXml contattiXml;
-        xml::Contatto* contattoSelezionato;
+        ContattoModel* contattiModel; ///< modello contatti
         void loadData();
 
+        ::std::auto_ptr< ::gestColl::contatti::contatti > contattiData;
+        bool editable;
+
+        void readXml(const QFileInfo& file);
 signals:
         void changesOccurred();
+private slots:
+        void on_contattiView_doubleClicked(const QModelIndex &index);
 };
 
 #endif // CONTATTIFORM_H

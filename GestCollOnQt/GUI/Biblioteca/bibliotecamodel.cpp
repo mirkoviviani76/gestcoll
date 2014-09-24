@@ -108,4 +108,5 @@ bool ModelloBiblioteca::setData(const QModelIndex &index, const QVariant &value,
     }
     return ok;
 }
+
 #endif
