@@ -136,6 +136,7 @@ void MonetaForm::setupTabVassoi(MonetaXml* moneta)
         qApp->processEvents();
         connect(currVassoio, SIGNAL(idChangeRequest(QString)), this, SLOT(idChanged(QString)));
         connect(currVassoio, SIGNAL(newIdAdded(MonetaXml*)), this, SLOT(addItem(MonetaXml*)));
+        QStringList idTabs;
 
         VassoioXml* v = this->vassoi->getVassoio(idTab);
         if (v == NULL) {
@@ -147,16 +148,18 @@ void MonetaForm::setupTabVassoi(MonetaXml* moneta)
                                  v->getRighe(),
                                  v->getColonne(),
                                  v->getDimensione());
+
+            idTabs << idTab;
             //aggiunge una tab per il nuovo vassoio
             int curr = this->ui->tabsVassoi->addTab(currVassoio, idTab);
             //salva l'id della tab
             this->tabVassoi.insert(idTab, curr);
         }
-
-
     }
+
     /* aggiunge l'id nella tab */
     VassoioForm* vf = (VassoioForm*)(this->ui->tabsVassoi->widget(this->tabVassoi[idTab]));
+
     vf->setModel();
     vf->setData(moneta->getRiga(),
                 moneta->getColonna(),
