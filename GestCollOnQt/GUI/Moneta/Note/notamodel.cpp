@@ -65,8 +65,3 @@ gestColl::coins::note::nota_type ModelloNota::getItem(const QModelIndex &index)
 {
     return this->items->nota().at(index.row());
 }
-
-gestColl::coins::note::nota_type ModelloNota::getItem(int index)
-{
-    return this->items->nota().at(index);
-}

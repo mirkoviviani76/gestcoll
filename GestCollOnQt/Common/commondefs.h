@@ -122,9 +122,9 @@ public:
 };
 
 
-Q_DECLARE_METATYPE(xml::Misura)
 
 }
 
+Q_DECLARE_METATYPE(xml::Misura)
 
 #endif // COMMONDEFS_H

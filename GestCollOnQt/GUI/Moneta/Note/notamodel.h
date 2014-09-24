@@ -15,7 +15,6 @@ public:
     QVariant data(const QModelIndex &index, int role) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     ::gestColl::coins::note::nota_type getItem(const QModelIndex &index);
-    ::gestColl::coins::note::nota_type getItem(int index);
     void clear();
     bool fillData(::gestColl::coins::note *_items);
 
