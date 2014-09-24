@@ -1,6 +1,5 @@
 #include "emissioneform.h"
 #include "ui_emissioneform.h"
-#include "emissionedelegate.h"
 #include "utils.h"
 #include <QUrl>
 #include <QDesktopServices>

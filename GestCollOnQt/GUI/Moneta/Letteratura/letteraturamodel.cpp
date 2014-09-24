@@ -1,5 +1,14 @@
 #include "letteraturamodel.h"
+#include <QLineEdit>
 
+namespace {
+  namespace LetteraturaRows {
+   enum LetteraturaRows {
+       LIBRO = 0,
+       SIGLA
+   };
+  }
+}
 
 
 LetteraturaModel::LetteraturaModel(QObject *parent) : QAbstractTableModel(parent)
@@ -24,9 +33,9 @@ QVariant LetteraturaModel::headerData(int section, Qt::Orientation orientation, 
 
     if ((orientation == Qt::Horizontal) && (role == Qt::DisplayRole)) {
         switch (section) {
-            case 0:
+            case LetteraturaRows::LIBRO :
                 return "Libro";
-            case 1:
+            case LetteraturaRows::SIGLA :
                 return "Sigla";
         }
     } else {
@@ -57,11 +66,11 @@ bool LetteraturaModel::setData(const QModelIndex &index, const QVariant &value, 
         int row = index.row();
         gestColl::coins::letteratura::libro_type* libro = this->letteratura.at(row);
         switch (index.column()) {
-        case 0:
+        case LetteraturaRows::LIBRO :
             libro->sigla(value.toString().toStdWString());
             emit dataChanged(index, index);
             break;
-        case 1:
+        case LetteraturaRows::SIGLA :
         {
             libro->numero(value.toString().toStdWString());
             emit dataChanged(index, index);
@@ -87,9 +96,9 @@ QVariant LetteraturaModel::data(const QModelIndex &index, int role) const
     if (role == Qt::DisplayRole)
     {
         switch (index.column()) {
-        case 0:
+        case LetteraturaRows::LIBRO :
             return QString::fromStdWString(this->letteratura.at(index.row())->sigla());
-        case 1:
+        case LetteraturaRows::SIGLA :
         {
             return QString::fromStdWString(this->letteratura.at(index.row())->numero());
         }
@@ -99,10 +108,10 @@ QVariant LetteraturaModel::data(const QModelIndex &index, int role) const
     if (role == Qt::EditRole) {
         QVariant ret;
         switch (index.column()) {
-        case 0:
+        case LetteraturaRows::LIBRO :
             ret.setValue(QString::fromStdWString(this->letteratura.at(index.row())->sigla()));
             break;
-        case 1:
+        case LetteraturaRows::SIGLA :
             ret.setValue(QString::fromStdWString(this->letteratura.at(index.row())->numero()));
             break;
         }
@@ -147,4 +156,54 @@ void LetteraturaModel::clear()
     this->letteratura.clear();
     this->endResetModel();
 
+}
+
+
+LetteraturaDelegate::LetteraturaDelegate(QObject* parent) : QStyledItemDelegate(parent)
+{
+}
+
+
+QWidget* LetteraturaDelegate::createEditor(QWidget *parent, const   QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(option);
+    // create widget for use
+    switch (index.column()) {
+    case LetteraturaRows::LIBRO :
+    case LetteraturaRows::SIGLA :
+        return new QLineEdit(parent);
+    }
+    return NULL;
+}
+
+void LetteraturaDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const {
+    // update model widget
+    switch (index.column()) {
+    case LetteraturaRows::LIBRO :
+    case LetteraturaRows::SIGLA :
+    {
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        QString text = index.model()->data(index, Qt::EditRole).toString();
+        editWidget->setText(text);
+    }
+        break;
+    }
+}
+
+void LetteraturaDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,   const QModelIndex &index) const {
+    // store edited model data to model
+    switch (index.column()) {
+    case LetteraturaRows::LIBRO :
+    case LetteraturaRows::SIGLA :
+    {
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        model->setData(index, editWidget->text(), Qt::EditRole);
+    }
+        break;
+    }
+
+}
+
+void LetteraturaDelegate::updateEditorGeometry(QWidget *editor, const     QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(index);
+    editor->setGeometry(option.rect);
 }

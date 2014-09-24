@@ -2,6 +2,8 @@
 #define MODELLOAUTORITA_H
 
 #include <QAbstractListModel>
+#include <QStyledItemDelegate>
+
 #include "scheda.hxx"
 
 #include <QList>
@@ -25,6 +27,21 @@ private:
     ::gestColl::coins::autorita* items;
 
 
+};
+
+class AutoritaDelegate : public QStyledItemDelegate
+{
+  Q_OBJECT
+public:
+    explicit AutoritaDelegate(QObject *parent = 0);
+
+
+    // QAbstractItemDelegate interface
+public:
+    QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    void setEditorData(QWidget *editor, const QModelIndex &index) const;
+    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
+    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 };
 
 

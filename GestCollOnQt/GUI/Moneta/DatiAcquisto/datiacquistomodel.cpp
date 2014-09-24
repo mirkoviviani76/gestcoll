@@ -8,6 +8,17 @@
 #include <QPainter>
 #include "commondefs.h"
 
+namespace {
+
+ namespace DatiAcquistoRows {
+  enum DatiAcquistoRows {
+      LUOGO = 0,
+      DATA,
+      PREZZO
+  };
+ }
+}
+
 
 DatiAcquistoModel::DatiAcquistoModel(QObject *parent) : QAbstractTableModel(parent), datiAcquisto(NULL)
 {
@@ -31,11 +42,11 @@ QVariant DatiAcquistoModel::headerData(int section, Qt::Orientation orientation,
 
     if ((orientation == Qt::Horizontal) && (role == Qt::DisplayRole)) {
         switch (section) {
-            case 0:
+            case DatiAcquistoRows::LUOGO :
                 return "Luogo";
-            case 1:
+            case DatiAcquistoRows::DATA :
                 return "Data";
-            case 2:
+            case DatiAcquistoRows::PREZZO :
                 return "Prezzo";
         }
     } else {
@@ -62,11 +73,11 @@ bool DatiAcquistoModel::setData(const QModelIndex &index, const QVariant &value,
     bool ok = true;
     if ((index.isValid()) && (role == Qt::EditRole)) {
         switch (index.column()) {
-        case 0:
+        case DatiAcquistoRows::LUOGO :
             this->datiAcquisto->luogo(value.toString().toStdWString());
             emit dataChanged(index, index);
             break;
-        case 1:
+        case DatiAcquistoRows::DATA :
         {
             QDate date = value.toDate();
             xml_schema::date xmlData(date.year(), date.month(), date.day());
@@ -74,7 +85,7 @@ bool DatiAcquistoModel::setData(const QModelIndex &index, const QVariant &value,
             emit dataChanged(index, index);
         }
             break;
-        case 2:
+        case DatiAcquistoRows::PREZZO :
             this->datiAcquisto->prezzo().valore(value.toDouble(&ok));
             emit dataChanged(index, index);
             ok = true;
@@ -99,16 +110,16 @@ QVariant DatiAcquistoModel::data(const QModelIndex &index, int role) const
     if (role == Qt::DisplayRole)
     {
         switch (index.column()) {
-        case 0:
+        case DatiAcquistoRows::LUOGO :
             return QString::fromStdWString(this->datiAcquisto->luogo());
-        case 1:
+        case DatiAcquistoRows::DATA :
         {
             QDate dataCorrente;
             dataCorrente.setDate(this->datiAcquisto->data().year(), this->datiAcquisto->data().month(), this->datiAcquisto->data().day());
             return dataCorrente.toString("dd/MM/yyyy");
         }
             break;
-        case 2:
+        case DatiAcquistoRows::PREZZO :
             return QString("%1 %2")
                     .arg(this->datiAcquisto->prezzo().valore())
                     .arg(QString::fromStdWString(this->datiAcquisto->prezzo().unita()));
@@ -117,17 +128,17 @@ QVariant DatiAcquistoModel::data(const QModelIndex &index, int role) const
     if (role == Qt::EditRole) {
         QVariant ret;
         switch (index.column()) {
-        case 0:
+        case DatiAcquistoRows::LUOGO :
             ret.setValue(QString::fromStdWString(this->datiAcquisto->luogo()));
             break;
-        case 1:
+        case DatiAcquistoRows::DATA :
         {
             QDate dataCorrente;
             dataCorrente.setDate(this->datiAcquisto->data().year(), this->datiAcquisto->data().month(), this->datiAcquisto->data().day());
             ret.setValue(dataCorrente);
         }
             break;
-        case 2:
+        case DatiAcquistoRows::PREZZO :
         {
             xml::Misura prezzo;
             prezzo.unita = QString::fromStdWString(this->datiAcquisto->prezzo().unita());
@@ -167,4 +178,94 @@ void DatiAcquistoModel::clear()
     this->datiAcquisto = NULL;
     this->endResetModel();
 
+}
+
+
+#include <QDoubleSpinBox>
+#include <QLineEdit>
+#include <QDateEdit>
+
+DatiAcquistoDelegate::DatiAcquistoDelegate(QObject* parent) : QStyledItemDelegate(parent)
+{
+}
+
+
+QWidget* DatiAcquistoDelegate::createEditor(QWidget *parent, const   QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(option);
+    // create widget for use
+    switch (index.column()) {
+    case DatiAcquistoRows::LUOGO :
+        return new QLineEdit(parent);
+    case DatiAcquistoRows::DATA :
+    {
+        QDateEdit* editor = new QDateEdit(parent);
+        editor->setCalendarPopup(true);
+        return editor;
+    }
+    case DatiAcquistoRows::PREZZO :
+        return new QDoubleSpinBox(parent);
+    }
+
+    return NULL;
+}
+
+void DatiAcquistoDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const {
+    // update model widget
+    switch (index.column()) {
+    case DatiAcquistoRows::LUOGO :
+    {
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        QString text = index.model()->data(index, Qt::EditRole).toString();
+        editWidget->setText(text);
+    }
+        break;
+    case DatiAcquistoRows::DATA :
+    {
+        QDateEdit* editWidget = static_cast<QDateEdit*>(editor);
+        QDate data = qvariant_cast<QDate>(index.model()->data(index, Qt::EditRole));
+        editWidget->setDate(data);
+    }
+        break;
+
+    case DatiAcquistoRows::PREZZO :
+    {
+        xml::Misura misura = qvariant_cast<xml::Misura>(index.model()->data(index, Qt::EditRole));
+        double value = misura.valore;
+        QDoubleSpinBox* editWidget = static_cast<QDoubleSpinBox*>(editor);
+        editWidget->setSuffix(QString(" %1").arg(misura.unita));
+        editWidget->setValue(value);
+    }
+        break;
+    }
+}
+
+void DatiAcquistoDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,   const QModelIndex &index) const {
+    // store edited model data to model
+    switch (index.column()) {
+    case DatiAcquistoRows::LUOGO :
+    {
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        model->setData(index, editWidget->text(), Qt::EditRole);
+    }
+        break;
+    case DatiAcquistoRows::DATA :
+    {
+        QDateEdit* editWidget = static_cast<QDateEdit*>(editor);
+        model->setData(index, editWidget->date(), Qt::EditRole);
+    }
+        break;
+
+    case DatiAcquistoRows::PREZZO :
+    {
+        QDoubleSpinBox* editWidget = static_cast<QDoubleSpinBox*>(editor);
+        model->setData(index, editWidget->value(), Qt::EditRole);
+    }
+        break;
+    }
+
+}
+
+void DatiAcquistoDelegate::updateEditorGeometry(QWidget *editor, const     QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(index);
+    editor->setGeometry(option.rect);
 }

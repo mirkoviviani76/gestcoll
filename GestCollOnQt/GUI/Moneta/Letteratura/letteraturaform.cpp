@@ -1,8 +1,6 @@
 #include "letteraturaform.h"
 #include "ui_letteraturaform.h"
 
-#include "letteraturadelegate.h"
-
 LetteraturaForm::LetteraturaForm(QWidget *parent) :
     QGroupBox(parent),
     ui(new Ui::LetteraturaForm), letteratura(NULL)

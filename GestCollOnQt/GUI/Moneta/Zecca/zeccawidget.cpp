@@ -1,6 +1,5 @@
 #include "zeccawidget.h"
 #include "ui_zeccawidget.h"
-#include "zecchieredelegate.h"
 
 ZeccaWidget::ZeccaWidget(QWidget *parent) :
     QGroupBox(parent),

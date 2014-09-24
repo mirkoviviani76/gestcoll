@@ -8,6 +8,16 @@
 #include <QPainter>
 #include "commondefs.h"
 
+namespace {
+  namespace ZecchiereRows {
+   enum ZecchiereRows {
+       NOME = 0,
+       SEGNO,
+       RUOLO
+   };
+  }
+}
+
 
 ZecchiereModel::ZecchiereModel(QObject *parent) : QAbstractTableModel(parent), items(NULL)
 {
@@ -48,11 +58,11 @@ QVariant ZecchiereModel::headerData(int section, Qt::Orientation orientation, in
 
     if ((orientation == Qt::Horizontal) && (role == Qt::DisplayRole)) {
         switch (section) {
-            case 0:
+            case ZecchiereRows::NOME :
                 return "Nome";
-            case 1:
+            case ZecchiereRows::SEGNO :
                 return "Segno";
-            case 2:
+            case ZecchiereRows::RUOLO :
                 return "Ruolo";
         }
     } else {
@@ -82,17 +92,17 @@ bool ZecchiereModel::setData(const QModelIndex &index, const QVariant &value, in
         int row = index.row();
 
         switch (index.column()) {
-        case 0:
+        case ZecchiereRows::NOME :
             this->items->zecchiere().at(row).nome(value.toString().toStdWString());
             emit dataChanged(index, index);
             ok = true;
             break;
-        case 1:
+        case ZecchiereRows::SEGNO :
             this->items->zecchiere().at(row).segno(value.toString().toStdWString());
             emit dataChanged(index, index);
             ok = true;
             break;
-        case 2:
+        case ZecchiereRows::RUOLO :
             this->items->zecchiere().at(row).ruolo(value.toString().toStdWString());
             emit dataChanged(index, index);
             ok = true;
@@ -123,7 +133,7 @@ QVariant ZecchiereModel::data(const QModelIndex &index, int role) const
     if (role == Qt::DisplayRole)
     {
         switch (index.column()) {
-        case 0:
+        case ZecchiereRows::NOME :
         {
             if (zecchiere.nome().present())
                 return QString::fromStdWString(zecchiere.nome().get());
@@ -131,12 +141,12 @@ QVariant ZecchiereModel::data(const QModelIndex &index, int role) const
                 return "";
         }
             break;
-        case 1:
+        case ZecchiereRows::SEGNO :
             if (zecchiere.segno().present())
                 return QString::fromStdWString(zecchiere.segno().get());
             else
                 return "";
-        case 2:
+        case ZecchiereRows::RUOLO :
             if (zecchiere.ruolo().present())
                 return QString::fromStdWString(zecchiere.ruolo().get());
             else
@@ -147,7 +157,7 @@ QVariant ZecchiereModel::data(const QModelIndex &index, int role) const
         QVariant ret;
 
         switch (index.column()) {
-        case 0:
+        case ZecchiereRows::NOME :
         {
             QString text = "";
             if (zecchiere.nome().present()) {
@@ -156,7 +166,7 @@ QVariant ZecchiereModel::data(const QModelIndex &index, int role) const
             ret.setValue(text);
             }
             break;
-        case 1:
+        case ZecchiereRows::SEGNO :
         {
             QString text = "";
             if (zecchiere.segno().present()) {
@@ -165,7 +175,7 @@ QVariant ZecchiereModel::data(const QModelIndex &index, int role) const
             ret.setValue(text);
             }
             break;
-        case 2:
+        case ZecchiereRows::RUOLO :
         {
             QString text = "";
             if (zecchiere.ruolo().present()) {
@@ -210,4 +220,86 @@ void ZecchiereModel::clear()
     this->items = NULL;
     this->endResetModel();
 
+}
+
+
+#include <QLineEdit>
+
+ZecchiereDelegate::ZecchiereDelegate(QObject* parent) : QStyledItemDelegate(parent)
+{
+}
+
+
+QWidget* ZecchiereDelegate::createEditor(QWidget *parent, const   QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(option);
+    // create widget for use
+    switch (index.column()) {
+    case ZecchiereRows::NOME :
+        return new QLineEdit(parent);
+    case ZecchiereRows::SEGNO :
+        return new QLineEdit(parent);
+    case ZecchiereRows::RUOLO :
+        return new QLineEdit(parent);
+    }
+
+    return NULL;
+}
+
+void ZecchiereDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const {
+    // update model widget
+    switch (index.column()) {
+    case ZecchiereRows::NOME :
+    {
+        QString value = index.model()->data(index, Qt::EditRole).toString();
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        editWidget->setText(value);
+    }
+        break;
+    case ZecchiereRows::SEGNO :
+    {
+        QString value = index.model()->data(index, Qt::EditRole).toString();
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        editWidget->setText(value);
+    }
+        break;
+    case ZecchiereRows::RUOLO :
+    {
+        QString value = index.model()->data(index, Qt::EditRole).toString();
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        editWidget->setText(value);
+    }
+        break;
+
+    }
+}
+
+void ZecchiereDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,   const QModelIndex &index) const {
+    // store edited model data to model
+    switch (index.column()) {
+    case ZecchiereRows::NOME :
+    {
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        model->setData(index, editWidget->text(), Qt::EditRole);
+    }
+        break;
+    case ZecchiereRows::SEGNO :
+    {
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        model->setData(index, editWidget->text(), Qt::EditRole);
+    }
+        break;
+    case ZecchiereRows::RUOLO :
+    {
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        model->setData(index, editWidget->text(), Qt::EditRole);
+    }
+        break;
+
+    }
+
+}
+
+void ZecchiereDelegate::updateEditorGeometry(QWidget *editor, const     QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(index);
+    editor->setGeometry(option.rect);
 }
