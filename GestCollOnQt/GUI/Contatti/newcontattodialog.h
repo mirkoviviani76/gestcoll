@@ -2,8 +2,8 @@
 #define NEWCONTATTODIALOG_H
 
 #include <QDialog>
-#include "contattixml.h"
 #include "commondefs.h"
+#include "contatti.hxx"
 
 namespace Ui {
 class NewContattoDialog;
@@ -19,7 +19,7 @@ public:
     QString getNome();
     QString getEmail();
     QString getNote();
-    void setData(const xml::Contatto& cont);
+    void setData(const ::gestColl::contatti::contatto& cont);
     
 private:
     Ui::NewContattoDialog *ui;

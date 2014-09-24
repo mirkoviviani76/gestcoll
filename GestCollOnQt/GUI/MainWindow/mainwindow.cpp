@@ -332,7 +332,7 @@ void MainWindow::on_actionSalva_triggered()
         }
 
         if (this->modifiche.hasModifiche(CONTATTI)) {
-            this->ui->widgetContatti->salva();
+            this->ui->widgetContatti->save();
             this->modifiche.resetModifica(CONTATTI);
         }
 
@@ -370,6 +370,8 @@ void MainWindow::on_actionEdit_toggled(bool val)
     this->ui->widgetCollezione->enableEdit(val);
 
     this->ui->widgetLinks->enableEdit(val);
+
+    this->ui->widgetContatti->enableEdit(val);
 
 }
 

@@ -6,6 +6,14 @@
 #include <QBrush>
 #include <QLineEdit>
 
+namespace {
+   namespace AutoritaRows {
+   enum AutoritaRows {
+       NOME = 0
+   };
+   }
+}
+
 ModelloAutorita::ModelloAutorita(QObject *parent) :
     QAbstractListModel(parent)
 {
@@ -89,7 +97,7 @@ bool ModelloAutorita::setData(const QModelIndex &index, const QVariant &value, i
     bool ok = true;
     if ((index.isValid()) && (role == Qt::EditRole)) {
         switch (index.column()) {
-        case 0:
+        case AutoritaRows::NOME :
             ::gestColl::coins::autorita::nome_type nuovoNome = value.toString().toStdWString();
             this->items->nome().at(index.row()) = nuovoNome;
             emit dataChanged(index, index);
@@ -111,7 +119,7 @@ QWidget* AutoritaDelegate::createEditor(QWidget *parent, const   QStyleOptionVie
     Q_UNUSED(option);
     // create widget for use
     switch (index.column()) {
-    case 0:
+    case AutoritaRows::NOME :
         return new QLineEdit(parent);
     }
 
@@ -121,7 +129,7 @@ QWidget* AutoritaDelegate::createEditor(QWidget *parent, const   QStyleOptionVie
 void AutoritaDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const {
     // update model widget
     switch (index.column()) {
-    case 0:
+    case AutoritaRows::NOME :
     {
         QString value = index.model()->data(index, Qt::EditRole).toString();
         QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
@@ -135,7 +143,7 @@ void AutoritaDelegate::setEditorData(QWidget *editor, const QModelIndex &index) 
 void AutoritaDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,   const QModelIndex &index) const {
     // store edited model data to model
     switch (index.column()) {
-    case 0:
+    case AutoritaRows::NOME :
     {
         QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
         model->setData(index, editWidget->text(), Qt::EditRole);
