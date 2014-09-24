@@ -1,6 +1,5 @@
 #include "datiacquistowidget.h"
 #include "ui_datiacquistowidget.h"
-#include "datiacquistodelegate.h"
 
 DatiAcquistoWidget::DatiAcquistoWidget(QWidget *parent) :
     QGroupBox(parent),

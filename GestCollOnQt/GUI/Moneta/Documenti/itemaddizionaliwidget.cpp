@@ -1,6 +1,5 @@
 #include "itemaddizionaliwidget.h"
 #include "ui_itemaddizionaliwidget.h"
-#include "documentidelegate.h"
 #include "commondata.h"
 #include <QUrl>
 #include <QDesktopServices>

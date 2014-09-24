@@ -1,7 +1,6 @@
 #include "autoritaform.h"
 #include "ui_autoritaform.h"
 #include "utils.h"
-#include "autoritadelegate.h"
 #include <QDesktopServices>
 #include <QUrl>
 

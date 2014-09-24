@@ -176,27 +176,21 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/Descrizione/modellolegenda.cpp \
     GUI/Moneta/Emissione/modelloautorita.cpp \
     GUI/Moneta/Emissione/autoritaform.cpp \
-    GUI/Moneta/Emissione/autoritadelegate.cpp \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.cpp \
     GUI/Moneta/DatiAcquisto/datiacquistomodel.cpp \
-    GUI/Moneta/DatiAcquisto/datiacquistodelegate.cpp \
     GUI/Moneta/DatiFisici/datifisiciwidget.cpp \
     GUI/Moneta/Zecca/zeccawidget.cpp \
     GUI/Moneta/Zecca/zecchieremodel.cpp \
-    GUI/Moneta/Zecca/zecchieredelegate.cpp \
     GUI/Moneta/Note/noteform.cpp \
     GUI/Moneta/Note/notamodel.cpp \
     GUI/Moneta/Emissione/emissioneform.cpp \
-    GUI/Moneta/Emissione/emissionedelegate.cpp \
     GUI/Moneta/Emissione/emissionemodel.cpp \
     GUI/Moneta/Letteratura/letteraturaform.cpp \
     GUI/Moneta/Letteratura/letteraturamodel.cpp \
-    GUI/Moneta/Letteratura/letteraturadelegate.cpp \
     GUI/Biblioteca/bibliotecamodel.cpp \
     GUI/Biblioteca/bibliotecadelegate.cpp \
     GUI/Moneta/Documenti/itemaddizionaliwidget.cpp \
     GUI/Moneta/Documenti/documentimodel.cpp \
-    GUI/Moneta/Documenti/documentidelegate.cpp \
     GUI/Moneta/Documenti/adddocumentdialog.cpp
 
 HEADERS  +=    Common/commondata.h \
@@ -269,27 +263,21 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/Descrizione/modellolegenda.h \
     GUI/Moneta/Emissione/modelloautorita.h \
     GUI/Moneta/Emissione/autoritaform.h \
-    GUI/Moneta/Emissione/autoritadelegate.h \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.h \
     GUI/Moneta/DatiAcquisto/datiacquistomodel.h \
-    GUI/Moneta/DatiAcquisto/datiacquistodelegate.h \
     GUI/Moneta/DatiFisici/datifisiciwidget.h \
     GUI/Moneta/Zecca/zeccawidget.h \
     GUI/Moneta/Zecca/zecchieremodel.h \
-    GUI/Moneta/Zecca/zecchieredelegate.h \
     GUI/Moneta/Note/noteform.h \
     GUI/Moneta/Note/notamodel.h \
     GUI/Moneta/Emissione/emissioneform.h \
-    GUI/Moneta/Emissione/emissionedelegate.h \
     GUI/Moneta/Emissione/emissionemodel.h \
     GUI/Moneta/Letteratura/letteraturaform.h \
     GUI/Moneta/Letteratura/letteraturamodel.h \
-    GUI/Moneta/Letteratura/letteraturadelegate.h \
     GUI/Biblioteca/bibliotecamodel.h \
     GUI/Biblioteca/bibliotecadelegate.h \
     GUI/Moneta/Documenti/itemaddizionaliwidget.h \
     GUI/Moneta/Documenti/documentimodel.h \
-    GUI/Moneta/Documenti/documentidelegate.h \
     GUI/Moneta/Documenti/adddocumentdialog.h
 
 
