@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <QDebug>
 #include <QBrush>
+#include <QFileInfo>
 #include "commondata.h"
 
 DocumentiModel::DocumentiModel(QObject *parent) :
@@ -43,15 +44,33 @@ QVariant DocumentiModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     ::gestColl::coins::moneta::itemAddizionali_type::documento_type item = this->items.at(index.row());
+    QString filename = QString("%1/%2")
+            .arg(CommonData::getInstance()->getBiblioDir())
+            .arg(QString::fromStdWString(item.filename()));
+    QFileInfo fi(filename);
 
-    if (role == Qt::ToolTipRole)
+    switch (role) {
+    case Qt::ToolTipRole :
     {
         QString tooltip = QString::fromStdWString(item.filename());
         return tooltip;
     }
-    if (role == Qt::DisplayRole)
+        break;
+    case Qt::DisplayRole :
     {
         return QString::fromStdWString(item.descrizione());
+    }
+        break;
+    case Qt::DecorationRole :
+    {
+        if (fi.exists())
+            return QImage(":/icons/BookIcon.ico");
+        else
+            return QVariant();
+    }
+        break;
+    default:
+        return QVariant();
     }
 
     return QVariant();
