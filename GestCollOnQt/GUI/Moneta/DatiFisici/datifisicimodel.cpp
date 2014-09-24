@@ -1,15 +1,24 @@
 #include "datifisicimodel.h"
 
-#include "DatiFisiciModel.h"
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <QDebug>
 #include <QBrush>
 #include <QListWidget>
-#include <QPainter>
+#include <QDoubleSpinBox>
+#include <QLineEdit>
+
 #include "commondefs.h"
 
+namespace {
+namespace DatiFisiciRows {
+enum DatiFisiciRows {
+    PESO = 0,
+    DIM,
+    FORMA,
+    METALLO
+};
+}
+}
 
 DatiFisiciModel::DatiFisiciModel(QObject *parent) : QAbstractTableModel(parent), datiFisici(NULL)
 {
@@ -34,13 +43,13 @@ QVariant DatiFisiciModel::headerData(int section, Qt::Orientation orientation, i
 
     if ((orientation == Qt::Horizontal) && (role == Qt::DisplayRole)) {
         switch (section) {
-            case 0:
+            case DatiFisiciRows::PESO:
                 return "Peso";
-            case 1:
+            case DatiFisiciRows::DIM:
                 return "Dim.";
-            case 2:
+            case DatiFisiciRows::FORMA:
                 return "Forma";
-            case 3:
+            case DatiFisiciRows::METALLO:
                 return "Metallo";
         }
     } else {
@@ -67,20 +76,20 @@ bool DatiFisiciModel::setData(const QModelIndex &index, const QVariant &value, i
     bool ok = true;
     if ((index.isValid()) && (role == Qt::EditRole)) {
         switch (index.column()) {
-        case 0:
+        case DatiFisiciRows::PESO:
             this->datiFisici->peso().valore(value.toDouble(&ok));
             emit dataChanged(index, index);
             break;
-        case 1:
+        case DatiFisiciRows::DIM:
             this->datiFisici->diametro().valore(value.toDouble(&ok));
             emit dataChanged(index, index);
             break;
-        case 2:
+        case DatiFisiciRows::FORMA:
             this->datiFisici->forma(value.toString().toStdWString());
             emit dataChanged(index, index);
             ok = true;
             break;
-        case 3:
+        case DatiFisiciRows::METALLO:
             this->datiFisici->metallo(value.toString().toStdWString());
             emit dataChanged(index, index);
             ok = true;
@@ -105,24 +114,24 @@ QVariant DatiFisiciModel::data(const QModelIndex &index, int role) const
     if (role == Qt::DisplayRole)
     {
         switch (index.column()) {
-            case 0:
+            case DatiFisiciRows::PESO:
                 return QString("%1 %2")
                         .arg(this->datiFisici->peso().valore())
                         .arg(QString::fromStdWString(this->datiFisici->peso().unita()));
-            case 1:
+            case DatiFisiciRows::DIM:
                 return QString("%1 %2")
                         .arg(this->datiFisici->diametro().valore())
                         .arg(QString::fromStdWString(this->datiFisici->diametro().unita()));
-            case 2:
+            case DatiFisiciRows::FORMA:
                 return QString::fromStdWString(this->datiFisici->forma());
-            case 3:
+            case DatiFisiciRows::METALLO:
                 return QString::fromStdWString(this->datiFisici->metallo());
         }
     }
     if (role == Qt::EditRole) {
         QVariant ret;
         switch (index.column()) {
-        case 0:
+        case DatiFisiciRows::PESO:
         {
             xml::Misura peso;
             peso.unita = QString::fromStdWString(this->datiFisici->peso().unita());
@@ -130,7 +139,7 @@ QVariant DatiFisiciModel::data(const QModelIndex &index, int role) const
             ret.setValue(peso);
         }
             break;
-        case 1:
+        case DatiFisiciRows::DIM:
         {
             xml::Misura diametro;
             diametro.unita = QString::fromStdWString(this->datiFisici->diametro().unita());
@@ -138,10 +147,10 @@ QVariant DatiFisiciModel::data(const QModelIndex &index, int role) const
             ret.setValue(diametro);
         }
             break;
-        case 2:
+        case DatiFisiciRows::FORMA:
             ret.setValue(QString::fromStdWString(this->datiFisici->forma()));
             break;
-        case 3:
+        case DatiFisiciRows::METALLO:
             ret.setValue(QString::fromStdWString(this->datiFisici->metallo()));
             break;
         }
@@ -193,4 +202,83 @@ void DatiFisiciModel::clear()
     this->endResetModel();
 
 }
+
+
+
+
+
+DatiFisiciDelegate::DatiFisiciDelegate(QObject* parent) : QStyledItemDelegate(parent)
+{
+}
+
+
+QWidget* DatiFisiciDelegate::createEditor(QWidget *parent, const   QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(option);
+    // create widget for use
+    switch (index.column()) {
+    case DatiFisiciRows::PESO:
+        return new QDoubleSpinBox(parent);
+    case DatiFisiciRows::DIM:
+        return new QDoubleSpinBox(parent);
+    case DatiFisiciRows::FORMA:
+        return new QLineEdit(parent);
+    case DatiFisiciRows::METALLO:
+        return new QLineEdit(parent);
+    }
+
+    return NULL;
+}
+
+void DatiFisiciDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const {
+    // update model widget
+    switch (index.column()) {
+    case DatiFisiciRows::PESO:
+    case DatiFisiciRows::DIM:
+    {
+        xml::Misura misura = qvariant_cast<xml::Misura>(index.model()->data(index, Qt::EditRole));
+        double value = misura.valore;
+        QDoubleSpinBox* editWidget = static_cast<QDoubleSpinBox*>(editor);
+        editWidget->setSuffix(QString(" %1").arg(misura.unita));
+        editWidget->setValue(value);
+    }
+        break;
+    case DatiFisiciRows::FORMA:
+    case DatiFisiciRows::METALLO:
+    {
+        QString value = index.model()->data(index, Qt::EditRole).toString();
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        editWidget->setText(value);
+    }
+        break;
+
+    }
+}
+
+void DatiFisiciDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,   const QModelIndex &index) const {
+    // store edited model data to model
+    switch (index.column()) {
+    case DatiFisiciRows::PESO:
+    case DatiFisiciRows::DIM:
+    {
+        QDoubleSpinBox* editWidget = static_cast<QDoubleSpinBox*>(editor);
+        model->setData(index, editWidget->value(), Qt::EditRole);
+    }
+        break;
+    case DatiFisiciRows::FORMA:
+    case DatiFisiciRows::METALLO:
+    {
+        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+        model->setData(index, editWidget->text(), Qt::EditRole);
+    }
+        break;
+
+    }
+
+}
+
+void DatiFisiciDelegate::updateEditorGeometry(QWidget *editor, const     QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(index);
+    editor->setGeometry(option.rect);
+}
+
 

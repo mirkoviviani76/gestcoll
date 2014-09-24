@@ -1,6 +1,5 @@
 #include "datifisiciwidget.h"
 #include "ui_datifisiciwidget.h"
-#include "datifisicidelegate.h"
 
 DatiFisiciWidget::DatiFisiciWidget(QWidget *parent) :
     QGroupBox(parent),
