@@ -1,5 +1,24 @@
 #include "contattomodel.h"
 #include <QUrl>
+#include <QLabel>
+#include <QPainter>
+#include <QTextBrowser>
+#include <QStyleOptionGraphicsItem>
+
+#include <QTextDocument>
+#include <QTextEdit>
+
+
+namespace {
+  namespace ContattoRows {
+    enum ContattoRows {
+        NOME = 0,
+        EMAIL,
+        NOTE,
+        LAST
+    };
+  }
+}
 
 ContattoModel::ContattoModel(QObject *parent) :
     QAbstractTableModel(parent), items(NULL)
@@ -31,7 +50,7 @@ Qt::ItemFlags ContattoModel::flags(const QModelIndex &index) const
 int ContattoModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return 3;
+    return ContattoRows::LAST;
 }
 
 bool ContattoModel::fillData(::gestColl::contatti::contatti::contatto_sequence* _item) {
@@ -59,21 +78,21 @@ QVariant ContattoModel::data(const QModelIndex &index, int role) const
 
     if (role == Qt::DisplayRole) {
         switch (index.column()) {
-        case 0:
+        case ContattoRows::NOME :
             return QString::fromStdWString(item.nome());
-        case 1:
+        case ContattoRows::EMAIL :
             return QString::fromStdWString(item.email());
-        case 2:
+        case ContattoRows::NOTE :
             return QString::fromStdWString(item.note());
         }
 
     } else if (role == Qt::EditRole) {
         switch (index.column()) {
-        case 0:
+        case ContattoRows::NOME :
             return QString::fromStdWString(item.nome());
-        case 1:
+        case ContattoRows::EMAIL :
             return QString::fromStdWString(item.email());
-        case 2:
+        case ContattoRows::NOTE :
             return QString::fromStdWString(item.note());
         }
     }
@@ -95,11 +114,11 @@ QVariant ContattoModel::headerData(int section, Qt::Orientation orientation, int
 {
     if ((orientation == Qt::Horizontal) && (role == Qt::DisplayRole)) {
         switch (section) {
-            case 0:
+            case ContattoRows::NOME :
                 return "Nome";
-            case 1:
+            case ContattoRows::EMAIL :
                 return "Email";
-            case 2:
+            case ContattoRows::NOTE :
                 return "Note";
         }
     } else {
@@ -121,19 +140,19 @@ bool ContattoModel::setData(const QModelIndex &index, const QVariant &value, int
     bool ok = true;
     if ((index.isValid()) && (role == Qt::EditRole)) {
         switch (index.column()) {
-        case 0: {
+        case ContattoRows::NOME : {
             ::gestColl::contatti::contatto::nome_type nuovoNome = value.toString().toStdWString();
             this->items->at(index.row()).nome(nuovoNome);
             emit dataChanged(index, index);
         }
         break;
-        case 1: {
+        case ContattoRows::EMAIL : {
             ::gestColl::contatti::contatto::email_type nuovoNome = value.toString().toStdWString();
             this->items->at(index.row()).email(nuovoNome);
             emit dataChanged(index, index);
         }
         break;
-        case 2: {
+        case ContattoRows::NOTE : {
             ::gestColl::contatti::contatto::note_type nuovoNome = value.toString().toStdWString();
             this->items->at(index.row()).note(nuovoNome);
             emit dataChanged(index, index);
@@ -144,3 +163,61 @@ bool ContattoModel::setData(const QModelIndex &index, const QVariant &value, int
     return ok;
 }
 
+
+
+
+
+
+
+EmailDelegate::EmailDelegate(QObject *parent)  : QItemDelegate(parent) { }
+
+EmailDelegate::~EmailDelegate() { }
+
+void EmailDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    if (index.column() != ContattoRows::EMAIL)
+        return;
+
+    drawBackground(painter, option, index);
+    QTextBrowser doc;
+    QString ref = QString("<a href=\"mailto:%1\">%1</a>").arg(index.data().toString());
+    doc.setOpenExternalLinks(true);
+    doc.setHtml(ref);
+    painter->save();
+    painter->translate(option.rect.topLeft());
+    QRect r(QPoint(0, 0), option.rect.size());
+    doc.drawContents(painter, r);
+    painter->restore();
+    drawFocus(painter, option, option.rect);
+}
+
+QSize EmailDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    QTextDocument doc;
+    doc.setHtml(index.data().toString());
+
+    return doc.size().toSize();
+}
+
+QWidget *EmailDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &/*option*/, const QModelIndex &/*index*/) const
+{
+    return new QTextEdit(parent);
+}
+
+void EmailDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
+{
+    QString value=index.data(Qt::DisplayRole).toString();
+    QTextEdit *te=static_cast<QTextEdit*>(editor);
+    te->setHtml(value);
+}
+
+void EmailDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
+{
+    QTextEdit *te=static_cast<QTextEdit*>(editor);
+    model->setData(index, te->toHtml());
+}
+
+void EmailDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &/*index*/) const
+{
+    editor->setGeometry(option.rect);
+}

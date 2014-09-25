@@ -25,6 +25,7 @@ ContattiForm::ContattiForm(QWidget *parent) :
     this->contattiModel = new ContattoModel(this);
     connect(this->contattiModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SIGNAL(changesOccurred()));
     loadData();
+    this->ui->contattiView->setItemDelegateForColumn(1, new EmailDelegate(this));
 }
 
 void ContattiForm::loadData() {
@@ -33,6 +34,7 @@ void ContattiForm::loadData() {
     this->contattiModel->fillData(&(this->contattiData->contatto()));
     this->ui->contattiView->setModel(this->contattiModel);
     this->ui->contattiView->resizeColumnsToContents();
+    this->ui->contattiView->resizeRowsToContents();
 }
 
 ContattiForm::~ContattiForm()
@@ -93,7 +95,8 @@ void ContattiForm::enableEdit(bool editable)
     } else {
         this->ui->contattiView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         this->ui->contattiView->setSelectionBehavior(QAbstractItemView::SelectRows);
-        this->ui->contattiView->setSelectionMode(QAbstractItemView::SingleSelection);
+        //this->ui->contattiView->setSelectionMode(QAbstractItemView::SingleSelection);
+        this->ui->contattiView->setSelectionMode(QAbstractItemView::NoSelection);
     }
     //this->ui->addLetteratura->setVisible(editable);
     //this->ui->removeLetteratura->setVisible(editable);
@@ -140,11 +143,4 @@ void ContattiForm::readXml(const QFileInfo &file) {
 
 }
 
-void ContattiForm::on_contattiView_doubleClicked(const QModelIndex &index)
-{
-    if (!this->editable) {
-        QUrl email = QUrl(QString("mailto:%1").arg(QString::fromStdWString(this->contattiModel->getItem(index).email())));
-        QDesktopServices::openUrl(email);
-    }
 
-}

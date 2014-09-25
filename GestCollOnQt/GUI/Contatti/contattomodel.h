@@ -3,6 +3,8 @@
 
 #include <QList>
 #include <QAbstractTableModel>
+#include <QStyledItemDelegate>
+#include <QItemDelegate>
 #include "contatti.hxx"
 
 class ContattoModel : public QAbstractTableModel
@@ -29,5 +31,22 @@ private:
 
 
 };
+
+
+
+class EmailDelegate : public QItemDelegate
+{
+  Q_OBJECT
+public:
+  EmailDelegate(QObject *parent = 0);
+  ~EmailDelegate();
+  void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+  QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+  QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+  void setEditorData(QWidget *editor, const QModelIndex &index) const;
+  void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
+  void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+};
+
 
 #endif // CONTATTOMODEL_H
