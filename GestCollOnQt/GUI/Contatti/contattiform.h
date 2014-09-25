@@ -5,6 +5,7 @@
 #include "contattomodel.h"
 #include <QMenu>
 #include <QFileInfo>
+#include <QItemDelegate>
 
 namespace Ui {
 class ContattiForm;
@@ -33,8 +34,8 @@ private:
         void readXml(const QFileInfo& file);
 signals:
         void changesOccurred();
-private slots:
-        void on_contattiView_doubleClicked(const QModelIndex &index);
+
 };
+
 
 #endif // CONTATTIFORM_H
