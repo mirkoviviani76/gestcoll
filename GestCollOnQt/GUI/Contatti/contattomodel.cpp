@@ -4,10 +4,10 @@
 #include <QPainter>
 #include <QTextBrowser>
 #include <QStyleOptionGraphicsItem>
-
+#include <QDebug>
 #include <QTextDocument>
 #include <QTextEdit>
-
+#include <QLineEdit>
 
 namespace {
   namespace ContattoRows {
@@ -44,7 +44,7 @@ Qt::ItemFlags ContattoModel::flags(const QModelIndex &index) const
     if (!index.isValid())
             return Qt::ItemIsEnabled;
 
-    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+    return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
 }
 
 int ContattoModel::columnCount(const QModelIndex &parent) const
@@ -166,58 +166,55 @@ bool ContattoModel::setData(const QModelIndex &index, const QVariant &value, int
 
 
 
-
-
-
-EmailDelegate::EmailDelegate(QObject *parent)  : QItemDelegate(parent) { }
-
-EmailDelegate::~EmailDelegate() { }
-
-void EmailDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+ContattiDelegate::ContattiDelegate(QTableView *_view, QObject *parent)
+    : QStyledItemDelegate(parent), view(_view)
 {
-    if (index.column() != ContattoRows::EMAIL)
+
+}
+
+ContattiDelegate::~ContattiDelegate() { }
+
+void ContattiDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+     if(view->indexWidget(index) != NULL)
         return;
+    if (index.column() == ContattoRows::EMAIL){
+        QLabel *label=new QLabel(view);
+        label->setTextFormat(Qt::RichText);
+        label->setTextInteractionFlags(Qt::TextBrowserInteraction);
+        label->setOpenExternalLinks(true);
+        QString url = QString("<a href=\"mailto:%1\">%1</a>").arg(index.data().toString());
+        label->setText(url);
+        view->setIndexWidget(index, label);
+    } else {
+        QStyledItemDelegate::paint(painter, option, index);
+    }
 
-    drawBackground(painter, option, index);
-    QTextBrowser doc;
-    QString ref = QString("<a href=\"mailto:%1\">%1</a>").arg(index.data().toString());
-    doc.setOpenExternalLinks(true);
-    doc.setHtml(ref);
-    painter->save();
-    painter->translate(option.rect.topLeft());
-    QRect r(QPoint(0, 0), option.rect.size());
-    doc.drawContents(painter, r);
-    painter->restore();
-    drawFocus(painter, option, option.rect);
+
 }
 
-QSize EmailDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+QWidget *ContattiDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    QTextDocument doc;
-    doc.setHtml(index.data().toString());
-
-    return doc.size().toSize();
+    qDebug() << "create editor for " << index.column();
+    return new QLineEdit(parent);
 }
 
-QWidget *EmailDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &/*option*/, const QModelIndex &/*index*/) const
-{
-    return new QTextEdit(parent);
-}
-
-void EmailDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
+void ContattiDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
     QString value=index.data(Qt::DisplayRole).toString();
-    QTextEdit *te=static_cast<QTextEdit*>(editor);
-    te->setHtml(value);
+    QLineEdit *te=static_cast<QLineEdit*>(editor);
+    te->setText(value);
 }
 
-void EmailDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
+void ContattiDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
 {
-    QTextEdit *te=static_cast<QTextEdit*>(editor);
-    model->setData(index, te->toHtml());
+    QLineEdit *te=static_cast<QLineEdit*>(editor);
+    model->setData(index, te->text());
 }
 
-void EmailDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &/*index*/) const
+void ContattiDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    Q_UNUSED(index);
     editor->setGeometry(option.rect);
 }
+

@@ -25,7 +25,9 @@ ContattiForm::ContattiForm(QWidget *parent) :
     this->contattiModel = new ContattoModel(this);
     connect(this->contattiModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SIGNAL(changesOccurred()));
     loadData();
-    this->ui->contattiView->setItemDelegateForColumn(1, new EmailDelegate(this));
+
+    this->ui->contattiView->setItemDelegate(new ContattiDelegate(this->ui->contattiView, this));
+
 }
 
 void ContattiForm::loadData() {
@@ -95,7 +97,6 @@ void ContattiForm::enableEdit(bool editable)
     } else {
         this->ui->contattiView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         this->ui->contattiView->setSelectionBehavior(QAbstractItemView::SelectRows);
-        //this->ui->contattiView->setSelectionMode(QAbstractItemView::SingleSelection);
         this->ui->contattiView->setSelectionMode(QAbstractItemView::NoSelection);
     }
     //this->ui->addLetteratura->setVisible(editable);
