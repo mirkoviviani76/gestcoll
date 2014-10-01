@@ -174,24 +174,6 @@ ContattiDelegate::ContattiDelegate(QTableView *_view, QObject *parent)
 
 ContattiDelegate::~ContattiDelegate() { }
 
-void ContattiDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
-{
-     if(view->indexWidget(index) != NULL)
-        return;
-    if (index.column() == ContattoRows::EMAIL){
-        QLabel *label=new QLabel(view);
-        label->setTextFormat(Qt::RichText);
-        label->setTextInteractionFlags(Qt::TextBrowserInteraction);
-        label->setOpenExternalLinks(true);
-        QString url = QString("<a href=\"mailto:%1\">%1</a>").arg(index.data().toString());
-        label->setText(url);
-        view->setIndexWidget(index, label);
-    } else {
-        QStyledItemDelegate::paint(painter, option, index);
-    }
-
-
-}
 
 QWidget *ContattiDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
