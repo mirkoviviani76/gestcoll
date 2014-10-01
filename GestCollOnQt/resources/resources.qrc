@@ -1,12 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>icons/filesave.ico</file>
-        <file>icons/signature.ico</file>
-        <file>icons/BookIcon.ico</file>
+        <file>icons/filesave.png</file>
+        <file>icons/signature.png</file>
+        <file>icons/BookIcon.png</file>
         <file>icons/CoinIcon.ico</file>
-        <file>icons/GreenTrashbinIcon.ico</file>
-        <file>icons/internet.ico</file>
-        <file>icons/Mail.ico</file>
+        <file>icons/internet.png</file>
+        <file>icons/Mail.png</file>
         <file>icons/splash.png</file>
         <file>Xml_transform/schedaTxt.xsl</file>
         <file>Xml_transform/schedaHtml.xsl</file>

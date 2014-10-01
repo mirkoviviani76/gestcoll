@@ -38,7 +38,6 @@ class ContattiDelegate : public QStyledItemDelegate
 public:
   ContattiDelegate(QTableView* _view, QObject *parent = 0);
   ~ContattiDelegate();
-  void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
   QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
   void setEditorData(QWidget *editor, const QModelIndex &index) const;

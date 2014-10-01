@@ -12,18 +12,6 @@
 
 using namespace gestColl::coins;
 
-namespace Moneta
-{
-
-enum Lato
-{
-    DRITTO,
-    ROVESCIO,
-    TAGLIO
-};
-
-} //namespace
-
 class MonetaXml: public GenericItem
 {
     Q_OBJECT

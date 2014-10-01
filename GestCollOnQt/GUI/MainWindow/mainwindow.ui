@@ -312,7 +312,7 @@
    </property>
    <property name="icon">
     <iconset resource="../../resources/resources.qrc">
-     <normaloff>:/icons/internet.ico</normaloff>:/icons/internet.ico</iconset>
+     <normaloff>:/icons/internet.png</normaloff>:/icons/internet.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Links</string>
@@ -327,7 +327,7 @@
    </property>
    <property name="icon">
     <iconset resource="../../resources/resources.qrc">
-     <normaloff>:/icons/Mail.ico</normaloff>:/icons/Mail.ico</iconset>
+     <normaloff>:/icons/Mail.png</normaloff>:/icons/Mail.png</iconset>
    </property>
    <property name="text">
     <string>Contatti</string>
@@ -342,7 +342,7 @@
    </property>
    <property name="icon">
     <iconset resource="../../resources/resources.qrc">
-     <normaloff>:/icons/BookIcon.ico</normaloff>:/icons/BookIcon.ico</iconset>
+     <normaloff>:/icons/BookIcon.png</normaloff>:/icons/BookIcon.png</iconset>
    </property>
    <property name="text">
     <string>Biblioteca</string>
@@ -387,7 +387,7 @@
    </property>
    <property name="icon">
     <iconset resource="../../resources/resources.qrc">
-     <normaloff>:/icons/signature.ico</normaloff>:/icons/signature.ico</iconset>
+     <normaloff>:/icons/signature.png</normaloff>:/icons/signature.png</iconset>
    </property>
    <property name="text">
     <string>Edit</string>
@@ -405,7 +405,7 @@
    </property>
    <property name="icon">
     <iconset resource="../../resources/resources.qrc">
-     <normaloff>:/icons/filesave.ico</normaloff>:/icons/filesave.ico</iconset>
+     <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
    </property>
    <property name="text">
     <string>Salva</string>
