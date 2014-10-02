@@ -33,6 +33,25 @@
 
 bool signalsAreBlocked = false;
 
+namespace {
+ int compareIdVassoio(const QString& a, const QString& b) {
+     QStringList datiA = a.split('-');
+     QStringList datiB = b.split('-');
+     int armadioA = datiA.at(0).toInt();
+     int armadioB = datiB.at(0).toInt();
+     int vassoioA = datiA.at(1).toInt();
+     int vassoioB = datiB.at(1).toInt();
+
+     if (armadioA == armadioB) {
+         return vassoioA < vassoioB;
+     } else {
+         return armadioA < armadioB;
+     }
+     return 0;
+
+ }
+}
+
 /**
  * @brief Costruttore
  *
@@ -151,10 +170,17 @@ VassoioForm* MonetaForm::createVassoioForm(const QString& idTab, const QString& 
 void MonetaForm::addTabVassoio(const QString& idTab, VassoioForm* vf) {
     assert(vf != NULL);
 
-    //aggiunge una tab per il nuovo vassoio
-    this->ui->tabsVassoi->addTab(vf, idTab);
     //salva l'id della tab
     this->tabVassoi.insert(idTab, vf);
+
+    /* ordina gli id dei tab */
+    QList<QString> tabs = this->tabVassoi.keys();
+    qSort(tabs.begin(), tabs.end(), compareIdVassoio);
+    /* trova dove deve andare la tab corrente */
+    int tabIndex = tabs.indexOf(idTab);
+
+    //aggiunge una tab per il nuovo vassoio
+    this->ui->tabsVassoi->insertTab(tabIndex, vf, idTab);
 }
 
 void MonetaForm::setupTabVassoi(MonetaXml* moneta)
