@@ -37,7 +37,7 @@ protected:
 private:
     void showQr();
     bool editingEnabled; ///< editing abilitato
-    QMap<QString, int> tabVassoi; ///< mappa fra id vassoio e id tab
+    QMap<QString, VassoioForm* > tabVassoi; ///< mappa fra id vassoio e widget
     Ui::MonetaForm *ui; ///< la form principale
     CollezioneSortFilterProxyModel* collezioneModel; ///< modello collezione
     GenericModel* modelloAmbiti; ///< modello ambiti
@@ -54,6 +54,8 @@ private:
     void setupAmbiti();
 
 
+    VassoioForm *createVassoioForm(const QString &idTab, const QString &monetaId);
+    void addTabVassoio(const QString &idTab, VassoioForm *vf);
 public slots:
     void enableEdit(bool editable);
     void addItem(MonetaXml* newMoneta);

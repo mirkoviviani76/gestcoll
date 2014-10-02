@@ -120,50 +120,63 @@ void MonetaForm::tabVassoiRemoveItem(MonetaXml* moneta)
 {
     QString idTab = moneta->getIdVassoio();
     /* rimuove la cella  */
-    VassoioForm* vf = (VassoioForm*)(this->ui->tabsVassoi->widget(this->tabVassoi[idTab]));
+    VassoioForm* vf = this->tabVassoi[idTab];
     vf->setData(moneta->getRiga(),
                 moneta->getColonna(),
                 NULL);
 }
 
+VassoioForm* MonetaForm::createVassoioForm(const QString& idTab, const QString& monetaId) {
+    //ottiene il numero di righe e di colonne per il vassoio corrente
+    VassoioForm* currVassoio = new VassoioForm(this->ui->tabsVassoi);
+    qApp->processEvents();
+    connect(currVassoio, SIGNAL(idChangeRequest(QString)), this, SLOT(idChanged(QString)));
+    connect(currVassoio, SIGNAL(newIdAdded(MonetaXml*)), this, SLOT(addItem(MonetaXml*)));
+
+    VassoioXml* v = this->vassoi->getVassoio(idTab);
+    if (v == NULL) {
+        QString messg = QString("ERRORE: vassoio e/o contenitore errati in %1").arg(monetaId);
+        Log::Logger::getInstance()->log(messg, Log::ERR);
+    } else {
+        currVassoio->setSize(v->getIdContenitore(),
+                             v->getIdVassoio(),
+                             v->getRighe(),
+                             v->getColonne(),
+                             v->getDimensione());
+
+    }
+    return currVassoio;
+}
+
+void MonetaForm::addTabVassoio(const QString& idTab, VassoioForm* vf) {
+    assert(vf != NULL);
+
+    //aggiunge una tab per il nuovo vassoio
+    this->ui->tabsVassoi->addTab(vf, idTab);
+    //salva l'id della tab
+    this->tabVassoi.insert(idTab, vf);
+}
+
 void MonetaForm::setupTabVassoi(MonetaXml* moneta)
 {
     QString idTab = moneta->getIdVassoio();
+    VassoioForm* vf = NULL;
     if (!tabVassoi.contains(idTab))
     {
-        //ottiene il numero di righe e di colonne per il vassoio corrente
-        VassoioForm* currVassoio = new VassoioForm(this->ui->tabsVassoi);
-        qApp->processEvents();
-        connect(currVassoio, SIGNAL(idChangeRequest(QString)), this, SLOT(idChanged(QString)));
-        connect(currVassoio, SIGNAL(newIdAdded(MonetaXml*)), this, SLOT(addItem(MonetaXml*)));
-        QStringList idTabs;
-
-        VassoioXml* v = this->vassoi->getVassoio(idTab);
-        if (v == NULL) {
-            QString messg = QString("ERRORE: vassoio e/o contenitore errati in %1").arg(moneta->getId());
-            Log::Logger::getInstance()->log(messg, Log::ERR);
-        } else {
-            currVassoio->setSize(v->getIdContenitore(),
-                                 v->getIdVassoio(),
-                                 v->getRighe(),
-                                 v->getColonne(),
-                                 v->getDimensione());
-
-            idTabs << idTab;
-            //aggiunge una tab per il nuovo vassoio
-            int curr = this->ui->tabsVassoi->addTab(currVassoio, idTab);
-            //salva l'id della tab
-            this->tabVassoi.insert(idTab, curr);
-        }
+        /* non e' stata ancora creata una tab per questo vassoio. Lo fa adesso. */
+        vf = createVassoioForm(idTab, moneta->getId());
+        addTabVassoio(idTab, vf);
+    } else {
+        /* la tab era gia' presente. La recupera. */
+        vf = this->tabVassoi[idTab];
     }
 
-    /* aggiunge l'id nella tab */
-    VassoioForm* vf = (VassoioForm*)(this->ui->tabsVassoi->widget(this->tabVassoi[idTab]));
-
-    vf->setModel();
-    vf->setData(moneta->getRiga(),
-                moneta->getColonna(),
-                moneta);
+    /* aggiunge la moneta al vassoio */
+    if (vf != NULL) {
+        vf->setModel();
+        vf->setData(moneta->getRiga(), moneta->getColonna(), moneta);
+        vf->resizeRows();
+    }
 }
 
 void MonetaForm::setupModelMonete()
@@ -175,16 +188,24 @@ void MonetaForm::setupModelMonete()
     this->ui->tabsVassoi->removeTab(1);
     this->ui->tabsVassoi->removeTab(0);
 
+
+    QStringList idVassoi;
+    foreach (QString id, CollezioneXml::getInstance()->getAllId()) {
+        MonetaXml* moneta = CollezioneXml::getInstance()->getMoneta(id);
+        QString idVassoio = moneta->getIdVassoio();
+        if (!(idVassoi.contains(idVassoio))) {
+            idVassoi << idVassoio;
+        }
+    }
+    qSort(idVassoi);
+
+
+
     foreach (QString id, CollezioneXml::getInstance()->getAllId())
     {
         MonetaXml* moneta = CollezioneXml::getInstance()->getMoneta(id);
         this->collezioneModel->appendRow(moneta);
         this->setupTabVassoi(moneta);
-    }
-
-    foreach (int id, this->tabVassoi.values()) {
-        VassoioForm* vf = (VassoioForm*)(this->ui->tabsVassoi->widget(id));
-        vf->resizeRows();
     }
 
     //ordina per id
@@ -306,9 +327,8 @@ void MonetaForm::on_itemList_activated(QModelIndex index)
     if (this->tabVassoi.contains(idTab))
     {
         /* setta il vassoio giusto */
-        int indexTab = this->tabVassoi[idTab];
-        this->ui->tabsVassoi->setCurrentIndex(indexTab);
-        VassoioForm* vf = (VassoioForm*)(this->ui->tabsVassoi->widget(indexTab));
+        VassoioForm* vf = this->tabVassoi[idTab];
+        this->ui->tabsVassoi->setCurrentWidget(vf);
         /* seleziona l'indice giusto nella tabella */
         int riga = this->item->getRiga();
         int colonna = this->item->getColonna();
