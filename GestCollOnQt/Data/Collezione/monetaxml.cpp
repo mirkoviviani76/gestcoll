@@ -21,7 +21,6 @@ extern QSplashScreen* splash;
 Posizione::Posizione(const moneta::posizione_type &pos)
     : moneta::posizione_type(pos)
 {
-
 }
 
 QString Posizione::getIdVassoio() const

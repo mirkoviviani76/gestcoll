@@ -37,7 +37,7 @@ bool signalsAreBlocked = false;
 namespace {
 /**
   * @brief compareIdVassoio funzione di ordinamento per gli id dei vassoi.
-  * Ordinamento crescente in base 1. all'armadio e 2. in base al numero di vassoio
+  * Ordinamento crescente in base 1. al contenitore e 2. in base al numero di vassoio
   * @param a primo id di vassoio
   * @param b secondo id di vassoio
   * @return 0 o 1
@@ -45,15 +45,15 @@ namespace {
  int compareIdVassoio(const QString& a, const QString& b) {
      QStringList datiA = a.split('-');
      QStringList datiB = b.split('-');
-     int armadioA = datiA.at(0).toInt();
-     int armadioB = datiB.at(0).toInt();
+     int contenitoreA = datiA.at(0).toInt();
+     int contenitoreB = datiB.at(0).toInt();
      int vassoioA = datiA.at(1).toInt();
      int vassoioB = datiB.at(1).toInt();
 
-     if (armadioA == armadioB) {
+     if (contenitoreA == contenitoreB) {
          return vassoioA < vassoioB;
      } else {
-         return armadioA < armadioB;
+         return contenitoreA < contenitoreB;
      }
      return 0;
 
