@@ -13,15 +13,25 @@
 
 using namespace gestColl::coins;
 
+class Casella {
+public:
+    Casella(int r, int c);
+    int getRiga() const;
+    int getColonna() const;
+    QString toString(const QString& separator);
+
+private:
+    int riga;
+    int colonna;
+};
 
 class Posizione : moneta::posizione_type {
 public:
     Posizione(const moneta::posizione_type& pos);
     QString getIdVassoio() const;
+    Casella getCasella() const;
     int getContenitore() const;
     int getVassoio() const;
-    int getRiga() const;
-    int getColonna() const;
     QString toString(const QString& separator);
 };
 

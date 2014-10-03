@@ -41,14 +41,30 @@ int Posizione::getVassoio() const
     return this->vassoio();
 }
 
-int Posizione::getRiga() const
-{
-    return this->riga();
+Casella Posizione::getCasella() const {
+    return Casella(this->riga(), this->colonna());
 }
 
-int Posizione::getColonna() const
+Casella::Casella(int r, int c) :
+    riga(r), colonna(c)
 {
-    return this->colonna();
+}
+
+QString Casella::toString(const QString& separator) {
+    return QString("%1%2%3")
+            .arg(this->getRiga())
+            .arg(separator)
+            .arg(this->getColonna());
+}
+
+int Casella::getRiga() const
+{
+    return this->riga;
+}
+
+int Casella::getColonna() const
+{
+    return this->colonna;
 }
 
 QString Posizione::toString(const QString &separator)
@@ -56,8 +72,7 @@ QString Posizione::toString(const QString &separator)
     QStringList s;
     s << QString::number(getContenitore())
       << QString::number(getVassoio())
-      << QString::number(getRiga())
-      << QString::number(getColonna());
+      << this->getCasella().toString(separator);
     return s.join(separator);
 
 }
