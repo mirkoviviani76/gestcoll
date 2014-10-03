@@ -5,7 +5,6 @@
 #include <QMenu>
 #include <link.h>
 #include <QStandardItemModel>
-#include <generictabmodel.h>
 #include "treeitem.h"
 #include "linksxml.h"
 

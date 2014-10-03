@@ -10,7 +10,7 @@ VassoioForm::VassoioForm(QWidget *parent) :
     ui(new Ui::VassoioForm)
 {
     ui->setupUi(this);
-    model = new GenericTabModel();
+    model = new VassoioModel();
 }
 
 void VassoioForm::setModel()
@@ -49,7 +49,7 @@ void VassoioForm::setSize(QString cont, QString vass, int righe, int colonne, QS
     this->model->setSize(righe, colonne);
 }
 
-void VassoioForm::setData(int riga, int colonna, GenericItem* data)
+void VassoioForm::setData(int riga, int colonna, MonetaXml* data)
 {
     const int numeroRighe = this->model->rowCount(QModelIndex());
     int rigaCorretta = numeroRighe - riga;
@@ -63,7 +63,7 @@ void VassoioForm::resizeRows() {
 
 
 void VassoioForm::addItem(MonetaXml *newId) {
-    this->setData(newId->getRiga(), newId->getColonna(), newId);
+    this->setData(newId->getPosizione().getRiga(), newId->getPosizione().getColonna(), newId);
 }
 
 void VassoioForm::setCurrentIndex(int riga, int colonna)
@@ -75,7 +75,7 @@ void VassoioForm::setCurrentIndex(int riga, int colonna)
     this->ui->tableView->setCurrentIndex(ind);
 }
 
-void VassoioForm::on_tableView_activated(QModelIndex index)
+void VassoioForm::on_tableView_doubleClicked(QModelIndex index)
 {
     MonetaXml* sel = (MonetaXml*)(this->model->getItem(index));
 

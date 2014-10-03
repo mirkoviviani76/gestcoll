@@ -18,6 +18,52 @@
 #include "collezionexml.h"
 extern QSplashScreen* splash;
 
+Posizione::Posizione(const moneta::posizione_type &pos)
+    : moneta::posizione_type(pos)
+{
+
+}
+
+QString Posizione::getIdVassoio() const
+{
+   return QString("%1-%2")
+           .arg(this->getContenitore())
+           .arg(this->getVassoio());
+}
+
+int Posizione::getContenitore()  const
+{
+    return this->contenitore();
+}
+
+int Posizione::getVassoio() const
+{
+    return this->vassoio();
+}
+
+int Posizione::getRiga() const
+{
+    return this->riga();
+}
+
+int Posizione::getColonna() const
+{
+    return this->colonna();
+}
+
+QString Posizione::toString(const QString &separator)
+{
+    QStringList s;
+    s << QString::number(getContenitore())
+      << QString::number(getVassoio())
+      << QString::number(getRiga())
+      << QString::number(getColonna());
+    return s.join(separator);
+
+}
+
+
+
 
 /**
  * @brief Costruttore.
@@ -25,7 +71,8 @@ extern QSplashScreen* splash;
  *
  * @param _file il file xml
 */
-MonetaXml::MonetaXml(const moneta& m)
+MonetaXml::MonetaXml(const moneta& m, QObject* parent) :
+    QObject(parent)
 {
     this->mon = new moneta(m);
     //this->setOrdering(Moneta::BY_ID);
@@ -33,8 +80,9 @@ MonetaXml::MonetaXml(const moneta& m)
     this->fillAmbiti();
 }
 
-MonetaXml::MonetaXml(moneta *m) {
-    this->mon = m;
+MonetaXml::MonetaXml(moneta *m, QObject *parent) :
+    QObject(parent), mon(m)
+{
     //this->setOrdering(Moneta::BY_ID);
     this->updateImage();
     this->fillAmbiti();
@@ -72,6 +120,16 @@ QList<xml::Ambito*> MonetaXml::getAmbiti() {
     return this->xmlAmbiti;
 }
 
+Posizione MonetaXml::getPosizione() const
+{
+    if (this->mon->posizione().present()) {
+        return Posizione(this->mon->posizione().get());
+    } else {
+        ::gestColl::coins::moneta::posizione_type t(0, 0, 0, 0);
+        return Posizione(t);
+    }
+}
+
 
 
 /**
@@ -85,69 +143,24 @@ void MonetaXml::clear()
 /**
   Restituisce l'id del vassoio, come stringa composta da "idcontenitore-idvassoio"
 */
-QString MonetaXml::getIdVassoio() const
-{
-   return QString("%1-%2")
-           .arg(this->getContenitore())
-           .arg(this->getVassoio());
-}
 
 /**
   Restituisce una stringa rappresentativa della moneta.
 */
-QString MonetaXml::toString(int column)
+QString MonetaXml::toString()
 {
-    switch (column) {
-    case 0:
-        {
-            return this->getId();
-        }
-        break;
-    case 1:
-        {
-            return QString::fromStdWString(this->getDom()->paese());
-        }
-        break;
-    case 2:
-        {
-            return QString("%1 %2").arg(QString::fromStdWString(this->getDom()->nominale().valore()))
-                    .arg(QString::fromStdWString(this->getDom()->nominale().valuta()));
-        }
-        break;
-    case 3:
-        {
-            return QString::fromStdWString(this->getDom()->anno());
-        }
-        break;
-    case 4:
-        {
-            QStringList myambiti;
-            foreach (xml::Ambito* a, this->getAmbiti()) {
-                myambiti << a->titolo;
-            }
-            return myambiti.join(" | ");
-        }
-        break;
-    default:
-    {
-        QString valore = QString::fromStdWString(this->getDom()->nominale().valore());
-        QString valuta = QString::fromStdWString(this->getDom()->nominale().valuta());
-        QString label = QString("%1 - %2 %3")
-                .arg(QString::fromStdWString(this->getDom()->paese()))
-                .arg(valore)
-                .arg(valuta);
+    QString valore = QString::fromStdWString(this->getDom()->nominale().valore());
+    QString valuta = QString::fromStdWString(this->getDom()->nominale().valuta());
+    QString label = QString("%1 - %2 %3")
+            .arg(QString::fromStdWString(this->getDom()->paese()))
+            .arg(valore)
+            .arg(valuta);
 
-        QString completeLabel = QString("%1: %2")
-                .arg(this->getId())
-                .arg(label);
+    QString completeLabel = QString("%1: %2")
+            .arg(this->getId())
+            .arg(label);
 
-        return completeLabel;
-    }
-        break;
-
-    }
-
-    return "";
+    return completeLabel;
 
 }
 
@@ -207,55 +220,6 @@ QString MonetaXml::getId() const
 }
 
 
-
-int MonetaXml::getContenitore()  const
-{
-    moneta::posizione_optional ppp = this->mon->posizione();
-    int val = -1;
-    if (ppp.present())
-    {
-        moneta::posizione_type posizione = ppp.get();
-        val = posizione.contenitore();
-    }
-    return val;
-}
-
-int MonetaXml::getVassoio() const
-{
-    moneta::posizione_optional ppp = this->mon->posizione();
-    int val = -1;
-    if (ppp.present())
-    {
-        moneta::posizione_type posizione = ppp.get();
-        val = posizione.vassoio();
-    }
-    return val;
-}
-
-int MonetaXml::getRiga() const
-{
-    moneta::posizione_optional ppp = this->mon->posizione();
-    int val = -1;
-    if (ppp.present())
-    {
-        moneta::posizione_type posizione = ppp.get();
-        val = posizione.riga();
-    }
-    return val;
-}
-
-int MonetaXml::getColonna() const
-{
-    moneta::posizione_optional ppp = this->mon->posizione();
-    int val = -1;
-    if (ppp.present())
-    {
-        moneta::posizione_type posizione = ppp.get();
-        val = posizione.colonna();
-    }
-    return val;
-
-}
 
 
 void MonetaXml::fillAmbiti()

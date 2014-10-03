@@ -9,29 +9,38 @@
 #include <QDate>
 #include <QFileInfo>
 #include <scheda.hxx>
+#include "vassoioxml.h"
 
 using namespace gestColl::coins;
 
-class MonetaXml: public GenericItem
-{
-    Q_OBJECT
+
+class Posizione : moneta::posizione_type {
 public:
-    MonetaXml(const moneta& m);
-    MonetaXml(moneta* m);
-    virtual ~MonetaXml();
-    inline QColor getColor() { return QColor::Invalid;}
+    Posizione(const moneta::posizione_type& pos);
     QString getIdVassoio() const;
     int getContenitore() const;
     int getVassoio() const;
     int getRiga() const;
     int getColonna() const;
+    QString toString(const QString& separator);
+};
 
-    QString toString(int column=-1);
+
+class MonetaXml: public QObject
+{
+    Q_OBJECT
+public:
+    MonetaXml(const moneta& m, QObject* parent = 0);
+    MonetaXml(moneta* m, QObject* parent = 0);
+    virtual ~MonetaXml();
+    inline QColor getColor() { return QColor::Invalid;}
+    QString toString();
     QString toTooltip();
     QImage toImg();
     QString getId() const;
     xml::Stato getStato();
     QList<xml::Ambito*> getAmbiti();
+    Posizione getPosizione() const;
 
     void updateRevision();
     bool updateAmbiti(const xml::Ambito& vecchio, const xml::Ambito& nuovo);
