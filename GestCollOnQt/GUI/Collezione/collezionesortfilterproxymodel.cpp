@@ -1,12 +1,12 @@
 #include "collezionesortfilterproxymodel.h"
-#include "genericmodel.h"
+#include "collezionemodel.h"
 #include <QFont>
 #include <QDebug>
 
 CollezioneSortFilterProxyModel::CollezioneSortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
-    GenericModel* model = new GenericModel(5);
+    CollezioneModel* model = new CollezioneModel(this);
     this->setSourceModel(model);
 }
 
@@ -32,7 +32,7 @@ QVariant CollezioneSortFilterProxyModel::headerData(int section, Qt::Orientation
 }
 
 bool CollezioneSortFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const {
-    GenericModel* model = (GenericModel*)this->sourceModel();
+    CollezioneModel* model = (CollezioneModel*)this->sourceModel();
 
     if (!left.isValid())
         return false;
@@ -84,10 +84,27 @@ bool CollezioneSortFilterProxyModel::lessThan(const QModelIndex &left, const QMo
         ret = (valuta1 < valuta2);
     }
         break;
-    default:
-        {
-            ret = (l->toString(left.column()) < r->toString(right.column()));
+    case 3:
+    {
+        QString anno1 = QString::fromStdWString(l->getDom()->anno());
+        QString anno2 = QString::fromStdWString(r->getDom()->anno());
+        ret = (anno1 < anno2);
+    }
+        break;
+    case 4:
+    {
+        QStringList a1;
+        QStringList a2;
+        foreach (xml::Ambito* a, l->getAmbiti()) {
+            a1 << a->titolo;
         }
+        foreach (xml::Ambito* a, r->getAmbiti()) {
+            a2 << a->titolo;
+        }
+
+        ret = (a1.join(' ') < a2.join(' '));
+    }
+        break;
     }
     return ret;
 
@@ -100,12 +117,12 @@ QVariant CollezioneSortFilterProxyModel::data(const QModelIndex &index, int role
 */
 
 void CollezioneSortFilterProxyModel::appendRow(MonetaXml *item) {
-    GenericModel* genericmodel = (GenericModel*) this->sourceModel();
+    CollezioneModel* genericmodel = (CollezioneModel*) this->sourceModel();
     genericmodel->appendRow(item);
 }
 
 MonetaXml* CollezioneSortFilterProxyModel::getItem(const QModelIndex &index) {
-    GenericModel* genericmodel = (GenericModel*) this->sourceModel();
+    CollezioneModel* genericmodel = (CollezioneModel*) this->sourceModel();
     MonetaXml* item = (MonetaXml*)genericmodel->getItem(this->mapToSource(index));
     return item;
 }

@@ -3,6 +3,7 @@
 
 #include <QString>
 
+
 class VassoioXml
 {
 private:

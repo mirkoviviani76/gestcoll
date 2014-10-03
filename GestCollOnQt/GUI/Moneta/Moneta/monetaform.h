@@ -21,7 +21,6 @@ public:
     explicit MonetaForm(QWidget *parent = 0);
     ~MonetaForm();
 
-    void setModel(GenericModel* model);
     void updateModel(QString newId);
     void reload();
     /**

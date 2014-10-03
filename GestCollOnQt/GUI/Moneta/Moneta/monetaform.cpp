@@ -26,6 +26,7 @@
 #include "elencomonetedelegate.h"
 #include "visualizzaimmagine.h"
 #include "commondefs.h"
+#include "collezionemodel.h"
 
 #define TAB_MONETA  (0) ///< id tab moneta
 #define TAB_VASSOI  (1) ///< id tab vassoi
@@ -34,6 +35,13 @@
 bool signalsAreBlocked = false;
 
 namespace {
+/**
+  * @brief compareIdVassoio funzione di ordinamento per gli id dei vassoi.
+  * Ordinamento crescente in base 1. all'armadio e 2. in base al numero di vassoio
+  * @param a primo id di vassoio
+  * @param b secondo id di vassoio
+  * @return 0 o 1
+  */
  int compareIdVassoio(const QString& a, const QString& b) {
      QStringList datiA = a.split('-');
      QStringList datiB = b.split('-');
@@ -137,11 +145,11 @@ void MonetaForm::addMoneta() {
 
 void MonetaForm::tabVassoiRemoveItem(MonetaXml* moneta)
 {
-    QString idTab = moneta->getIdVassoio();
+    QString idTab = moneta->getPosizione().getIdVassoio();
     /* rimuove la cella  */
     VassoioForm* vf = this->tabVassoi[idTab];
-    vf->setData(moneta->getRiga(),
-                moneta->getColonna(),
+    vf->setData(moneta->getPosizione().getRiga(),
+                moneta->getPosizione().getColonna(),
                 NULL);
 }
 
@@ -185,7 +193,7 @@ void MonetaForm::addTabVassoio(const QString& idTab, VassoioForm* vf) {
 
 void MonetaForm::setupTabVassoi(MonetaXml* moneta)
 {
-    QString idTab = moneta->getIdVassoio();
+    QString idTab = moneta->getPosizione().getIdVassoio();
     VassoioForm* vf = NULL;
     if (!tabVassoi.contains(idTab))
     {
@@ -200,7 +208,7 @@ void MonetaForm::setupTabVassoi(MonetaXml* moneta)
     /* aggiunge la moneta al vassoio */
     if (vf != NULL) {
         vf->setModel();
-        vf->setData(moneta->getRiga(), moneta->getColonna(), moneta);
+        vf->setData(moneta->getPosizione().getRiga(), moneta->getPosizione().getColonna(), moneta);
         vf->resizeRows();
     }
 }
@@ -218,7 +226,7 @@ void MonetaForm::setupModelMonete()
     QStringList idVassoi;
     foreach (QString id, CollezioneXml::getInstance()->getAllId()) {
         MonetaXml* moneta = CollezioneXml::getInstance()->getMoneta(id);
-        QString idVassoio = moneta->getIdVassoio();
+        QString idVassoio = moneta->getPosizione().getIdVassoio();
         if (!(idVassoi.contains(idVassoio))) {
             idVassoi << idVassoio;
         }
@@ -259,10 +267,6 @@ void MonetaForm::changeEvent(QEvent *e)
     }
 }
 
-void MonetaForm::setModel(GenericModel* model)
-{
-    this->ui->itemList->setModel(model);
-}
 
 
 void MonetaForm::loadData()
@@ -272,11 +276,7 @@ void MonetaForm::loadData()
     //inibisce la segnalazione delle modifiche
     this->ui->id->setText(item->getId());
 
-    this->ui->posizione->setText(QString("%1-%2-%3-%4")
-                               .arg(item->getContenitore())
-                               .arg(item->getVassoio())
-                               .arg(item->getRiga())
-                               .arg(item->getColonna()));
+    this->ui->posizione->setText(item->getPosizione().toString("-"));
 
     this->modelloAmbiti->clear();
 
@@ -349,15 +349,15 @@ void MonetaForm::on_itemList_activated(QModelIndex index)
     this->loadData();
 
     /* seleziona la casella nei vassoi */
-    QString idTab = this->item->getIdVassoio();
+    QString idTab = this->item->getPosizione().getIdVassoio();
     if (this->tabVassoi.contains(idTab))
     {
         /* setta il vassoio giusto */
         VassoioForm* vf = this->tabVassoi[idTab];
         this->ui->tabsVassoi->setCurrentWidget(vf);
         /* seleziona l'indice giusto nella tabella */
-        int riga = this->item->getRiga();
-        int colonna = this->item->getColonna();
+        int riga = this->item->getPosizione().getRiga();
+        int colonna = this->item->getPosizione().getColonna();
         vf->setCurrentIndex(riga, colonna);
     }
 
@@ -466,7 +466,7 @@ void MonetaForm::idChanged(QString id)
     for (int i = 0 ; i < this->collezioneModel->rowCount(); i++)
     {
         // ottiene l'elemento corrente
-        GenericModel* model = (GenericModel*)this->collezioneModel->sourceModel();
+        CollezioneModel* model = (CollezioneModel*)this->collezioneModel->sourceModel();
         MonetaXml* currIndex = (MonetaXml*)model->getItem(i);
         //confronta l'id
         if (currIndex->getId() == id)
@@ -488,7 +488,7 @@ void MonetaForm::idChanged(QString id)
 void MonetaForm::addItem(MonetaXml* newMoneta)
 {
     //aggiunge al modello lista
-    GenericModel* model = (GenericModel*)this->collezioneModel->sourceModel();
+    CollezioneModel* model = (CollezioneModel*)this->collezioneModel->sourceModel();
     model->appendRow(newMoneta);
     //model->sort(-1);
     this->collezioneModel->invalidate();
@@ -518,11 +518,7 @@ void MonetaForm::on_posizione_clicked()
             this->item->setPosizione(cont.toInt(), vass.toInt(), r.toInt(), c.toInt());
 
             //scrive il nuovo valore sul bottone
-            this->ui->posizione->setText(QString("%1-%2-%3-%4")
-                                       .arg(item->getContenitore())
-                                       .arg(item->getVassoio())
-                                       .arg(item->getRiga())
-                                       .arg(item->getColonna()));
+            this->ui->posizione->setText(item->getPosizione().toString("-"));
             //aggiunge la cella nel vassoio
             this->setupTabVassoi(this->item);
         }
