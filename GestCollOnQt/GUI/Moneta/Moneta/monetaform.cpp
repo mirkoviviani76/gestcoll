@@ -148,9 +148,7 @@ void MonetaForm::tabVassoiRemoveItem(MonetaXml* moneta)
     QString idTab = moneta->getPosizione().getIdVassoio();
     /* rimuove la cella  */
     VassoioForm* vf = this->tabVassoi[idTab];
-    vf->setData(moneta->getPosizione().getRiga(),
-                moneta->getPosizione().getColonna(),
-                NULL);
+    vf->setData(moneta->getPosizione().getCasella(), NULL);
 }
 
 VassoioForm* MonetaForm::createVassoioForm(const QString& idTab, const QString& monetaId) {
@@ -208,7 +206,7 @@ void MonetaForm::setupTabVassoi(MonetaXml* moneta)
     /* aggiunge la moneta al vassoio */
     if (vf != NULL) {
         vf->setModel();
-        vf->setData(moneta->getPosizione().getRiga(), moneta->getPosizione().getColonna(), moneta);
+        vf->setData(moneta->getPosizione().getCasella(), moneta);
         vf->resizeRows();
     }
 }
@@ -356,9 +354,7 @@ void MonetaForm::on_itemList_activated(QModelIndex index)
         VassoioForm* vf = this->tabVassoi[idTab];
         this->ui->tabsVassoi->setCurrentWidget(vf);
         /* seleziona l'indice giusto nella tabella */
-        int riga = this->item->getPosizione().getRiga();
-        int colonna = this->item->getPosizione().getColonna();
-        vf->setCurrentIndex(riga, colonna);
+        vf->setCurrentIndex(this->item->getPosizione().getCasella());
     }
 
 

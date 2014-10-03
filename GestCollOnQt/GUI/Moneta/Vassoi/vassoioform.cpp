@@ -49,11 +49,11 @@ void VassoioForm::setSize(QString cont, QString vass, int righe, int colonne, QS
     this->model->setSize(righe, colonne);
 }
 
-void VassoioForm::setData(int riga, int colonna, MonetaXml* data)
+void VassoioForm::setData(const Casella &c, MonetaXml* data)
 {
     const int numeroRighe = this->model->rowCount(QModelIndex());
-    int rigaCorretta = numeroRighe - riga;
-    int colonnaCorretta = colonna - 1;
+    int rigaCorretta = numeroRighe - c.getRiga();
+    int colonnaCorretta = c.getColonna() - 1;
     this->model->setData(rigaCorretta, colonnaCorretta, data);
 }
 
@@ -63,14 +63,14 @@ void VassoioForm::resizeRows() {
 
 
 void VassoioForm::addItem(MonetaXml *newId) {
-    this->setData(newId->getPosizione().getRiga(), newId->getPosizione().getColonna(), newId);
+    this->setData(newId->getPosizione().getCasella(), newId);
 }
 
-void VassoioForm::setCurrentIndex(int riga, int colonna)
+void VassoioForm::setCurrentIndex(const Casella &c)
 {
     const int numeroRighe = this->model->rowCount(QModelIndex());
-    int rigaCorretta = numeroRighe - riga;
-    int colonnaCorretta = colonna - 1;
+    int rigaCorretta = numeroRighe - c.getRiga();
+    int colonnaCorretta = c.getColonna() - 1;
     QModelIndex ind = this->model->getIndex(rigaCorretta, colonnaCorretta);
     this->ui->tableView->setCurrentIndex(ind);
 }
@@ -97,7 +97,7 @@ void VassoioForm::on_tableView_doubleClicked(QModelIndex index)
         {
             MonetaXml* added = nm.getNuovaMoneta();
             //ricarica i dati del modello tab
-            this->setData(riga, colonna, added);
+            this->setData(Casella(riga, colonna), added);
             //ricarica i dati del modello lista
             emit this->newIdAdded(added);
         }
