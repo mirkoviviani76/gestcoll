@@ -174,7 +174,6 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/Emissione/modelloautorita.cpp \
     GUI/Moneta/Emissione/autoritaform.cpp \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.cpp \
-    GUI/Moneta/DatiAcquisto/datiacquistomodel.cpp \
     GUI/Moneta/DatiFisici/datifisiciwidget.cpp \
     GUI/Moneta/Zecca/zeccawidget.cpp \
     GUI/Moneta/Zecca/zecchieremodel.cpp \
@@ -261,7 +260,6 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/Emissione/modelloautorita.h \
     GUI/Moneta/Emissione/autoritaform.h \
     GUI/Moneta/DatiAcquisto/datiacquistowidget.h \
-    GUI/Moneta/DatiAcquisto/datiacquistomodel.h \
     GUI/Moneta/DatiFisici/datifisiciwidget.h \
     GUI/Moneta/Zecca/zeccawidget.h \
     GUI/Moneta/Zecca/zecchieremodel.h \

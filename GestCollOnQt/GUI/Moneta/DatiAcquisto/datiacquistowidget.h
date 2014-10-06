@@ -2,7 +2,7 @@
 #define DATIACQUISTOWIDGET_H
 
 #include <QGroupBox>
-#include "datiacquistomodel.h"
+#include "scheda.hxx"
 
 namespace Ui {
 class DatiAcquistoWidget;
@@ -20,11 +20,14 @@ public:
 
 private:
     Ui::DatiAcquistoWidget *ui;
-    DatiAcquistoModel* modelloDatiAcquisto;
     gestColl::coins::datiAcquisto* datiAcquisto;
 
 signals:
     void changesOccurred();
+private slots:
+    void on_luogo_editingFinished();
+    void on_data_editingFinished();
+    void on_prezzo_editingFinished();
 };
 
 #endif // DATIACQUISTOWIDGET_H
