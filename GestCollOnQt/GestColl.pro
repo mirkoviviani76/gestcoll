@@ -169,7 +169,6 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Collezione/elencomonetedelegate.cpp \
     GUI/Collezione/collezionesortfilterproxymodel.cpp \
     GUI/Biblioteca/bibliotecasortfilterproxymodel.cpp \
-    GUI/Moneta/DatiFisici/datifisicimodel.cpp \
     GUI/Moneta/Descrizione/descrizioneform.cpp \
     GUI/Moneta/Descrizione/modellolegenda.cpp \
     GUI/Moneta/Emissione/modelloautorita.cpp \
@@ -257,7 +256,6 @@ HEADERS  +=    Common/commondata.h \
     GUI/Collezione/elencomonetedelegate.h \
     GUI/Collezione/collezionesortfilterproxymodel.h \
     GUI/Biblioteca/bibliotecasortfilterproxymodel.h \
-    GUI/Moneta/DatiFisici/datifisicimodel.h \
     GUI/Moneta/Descrizione/descrizioneform.h \
     GUI/Moneta/Descrizione/modellolegenda.h \
     GUI/Moneta/Emissione/modelloautorita.h \
