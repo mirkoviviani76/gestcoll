@@ -7,11 +7,6 @@ DatiFisiciWidget::DatiFisiciWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->modelloDatiFisici = new DatiFisiciModel(this);
-    this->ui->datiFisiciTable->setModel(this->modelloDatiFisici);
-    connect(this->modelloDatiFisici, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SIGNAL(changesOccurred()));
-    this->ui->datiFisiciTable->setItemDelegate(new DatiFisiciDelegate(this));
-
 }
 
 DatiFisiciWidget::~DatiFisiciWidget()
@@ -21,24 +16,63 @@ DatiFisiciWidget::~DatiFisiciWidget()
 
 void DatiFisiciWidget::setData(gestColl::coins::datiFisici* datiFisici)
 {
-    this->modelloDatiFisici->clear();
     this->datiFisici = datiFisici;
-    this->modelloDatiFisici->appendRow(datiFisici);
 
-    this->ui->datiFisiciTable->resizeColumnsToContents();
+    this->ui->dimensione->setValue(datiFisici->diametro().valore());
+    this->ui->dimensione->setSuffix(" "+QString::fromStdWString(datiFisici->diametro().unita()));
+    this->ui->peso->setValue(datiFisici->peso().valore());
+    this->ui->peso->setSuffix(" "+QString::fromStdWString(datiFisici->peso().unita()));
+    this->ui->forma->setText(QString::fromStdWString(datiFisici->forma()));
+    this->ui->metallo->setText(QString::fromStdWString(datiFisici->metallo()));
+
 }
 
 void DatiFisiciWidget::setEditable(bool editable)
 {
 
     if (editable) {
-        this->ui->datiFisiciTable->setEditTriggers(QAbstractItemView::DoubleClicked);
-        this->ui->datiFisiciTable->setSelectionBehavior(QAbstractItemView::SelectItems);
-        this->ui->datiFisiciTable->setSelectionMode(QAbstractItemView::SingleSelection);
+        this->ui->dimensione->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
+        this->ui->peso->setButtonSymbols(QAbstractSpinBox::UpDownArrows);
     } else {
-        this->ui->datiFisiciTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        this->ui->datiFisiciTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-        this->ui->datiFisiciTable->setSelectionMode(QAbstractItemView::SingleSelection);
+        this->ui->dimensione->setButtonSymbols(QAbstractSpinBox::NoButtons);
+        this->ui->peso->setButtonSymbols(QAbstractSpinBox::NoButtons);
+
     }
 
+    this->ui->dimensione->setReadOnly(!editable);
+    this->ui->peso->setReadOnly(!editable);
+    this->ui->forma->setReadOnly(!editable);
+    this->ui->metallo->setReadOnly(!editable);
+
+    this->ui->dimensione->setFrame(editable);
+    this->ui->peso->setFrame(editable);
+    this->ui->forma->setFrame(editable);
+    this->ui->metallo->setFrame(editable);
+
+
+
+}
+
+void DatiFisiciWidget::on_peso_editingFinished()
+{
+    this->datiFisici->peso().valore(this->ui->peso->value());
+    emit this->changesOccurred();
+}
+
+void DatiFisiciWidget::on_dimensione_editingFinished()
+{
+    this->datiFisici->diametro().valore(this->ui->dimensione->value());
+    emit this->changesOccurred();
+}
+
+void DatiFisiciWidget::on_forma_editingFinished()
+{
+    this->datiFisici->forma(this->ui->forma->text().toStdWString());
+    emit this->changesOccurred();
+}
+
+void DatiFisiciWidget::on_metallo_editingFinished()
+{
+    this->datiFisici->metallo(this->ui->metallo->text().toStdWString());
+    emit this->changesOccurred();
 }

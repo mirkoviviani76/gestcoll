@@ -76,7 +76,7 @@ void BibliotecaForm::fillData()
     }
     this->ui->listView->setModel(model);
     this->model->sort(0);
-    this->ui->listView->resizeColumnsToContents();
+    //this->ui->listView->resizeColumnsToContents();
     this->ui->listView->resizeRowsToContents();
     this->ui->listView->reset();
 }

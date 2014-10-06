@@ -2,7 +2,7 @@
 #define DATIFISICIWIDGET_H
 
 #include <QGroupBox>
-#include "datifisicimodel.h"
+#include "scheda.hxx"
 
 namespace Ui {
 class DatiFisiciWidget;
@@ -20,11 +20,15 @@ public:
 
 private:
     Ui::DatiFisiciWidget *ui;
-    DatiFisiciModel* modelloDatiFisici; ///< modello dati fisici
     gestColl::coins::datiFisici* datiFisici;
 
 signals:
     void changesOccurred();
+private slots:
+    void on_peso_editingFinished();
+    void on_dimensione_editingFinished();
+    void on_forma_editingFinished();
+    void on_metallo_editingFinished();
 };
 
 #endif // DATIFISICIWIDGET_H
