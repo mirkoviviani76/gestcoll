@@ -18,6 +18,10 @@ void PaeseWidget::setEditingEnabled(bool enabled)
     this->editingEnabled = enabled;
     this->setReadOnly(!enabled);
     this->setText(this->simpleText);
+    if (enabled == false)
+        this->setFrameShape(QFrame::NoFrame);
+    else
+        this->setFrameShape(QFrame::StyledPanel);
 }
 
 void PaeseWidget::setText(const QString &text)
