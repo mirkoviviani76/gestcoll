@@ -188,7 +188,7 @@ QTabBar::tab:selected {
        <attribute name="title">
         <string>Moneta</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,1">
+       <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,2">
         <property name="spacing">
          <number>2</number>
         </property>
