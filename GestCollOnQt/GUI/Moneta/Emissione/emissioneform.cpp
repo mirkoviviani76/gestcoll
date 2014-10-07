@@ -10,12 +10,8 @@ EmissioneForm::EmissioneForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->modelloEmissione = new EmissioneModel(this);
-    this->ui->emissioneView->setModel(this->modelloEmissione);
-    this->ui->emissioneView->setItemDelegate(new EmissioneDelegate(this));
-
-    connect(this->modelloEmissione, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SIGNAL(changesOccurred()));
     connect(this->ui->autorita, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
+    connect(this->ui->paese, SIGNAL(contentsChanged()), this, SLOT(paeseChanged()));
 
 }
 
@@ -24,47 +20,64 @@ EmissioneForm::~EmissioneForm()
     delete ui;
 }
 
-void EmissioneForm::setData(xml::Emissione emissione)
+void EmissioneForm::setData(xml::Emissione _emissione)
 {
-    this->modelloEmissione->clear();
-    //this->datiFisici = emissione;
-    this->modelloEmissione->appendRow(emissione);
-
-    this->ui->autorita->setData(emissione.autorita, QString::fromStdWString(*(emissione.paese)));
-    this->ui->emissioneView->resizeColumnsToContents();
+    this->emissione = _emissione;
+    this->ui->anno->setText(QString::fromStdWString(*this->emissione.anno));
+    this->ui->valore->setText(QString::fromStdWString(this->emissione.nominale->valore()));
+    this->ui->valuta->setText(QString::fromStdWString(this->emissione.nominale->valuta()));
+    this->ui->paese->setText(QString::fromStdWString(*this->emissione.paese));
+    this->ui->autorita->setData(_emissione.autorita, QString::fromStdWString(*(_emissione.paese)));
 }
 
 void EmissioneForm::clear() {
-    this->modelloEmissione->clear();
-    this->ui->emissioneView->reset();
     this->ui->autorita->clear();
 }
 
 
 void EmissioneForm::setEditable(bool editable)
 {
-
-    if (editable) {
-        this->ui->emissioneView->setEditTriggers(QAbstractItemView::DoubleClicked);
-        this->ui->emissioneView->setSelectionBehavior(QAbstractItemView::SelectItems);
-        this->ui->emissioneView->setSelectionMode(QAbstractItemView::SingleSelection);
-    } else {
-        this->ui->emissioneView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        this->ui->emissioneView->setSelectionBehavior(QAbstractItemView::SelectRows);
-        this->ui->emissioneView->setSelectionMode(QAbstractItemView::SingleSelection);
-    }
     this->ui->autorita->setEditable(editable);
+    this->ui->paese->setEditingEnabled(editable);
+
+    this->ui->valore->setReadOnly(!editable);
+    this->ui->valuta->setReadOnly(!editable);
+    this->ui->anno->setReadOnly(!editable);
+    this->ui->valore->setFrame(editable);
+    this->ui->valuta->setFrame(editable);
+    this->ui->anno->setFrame(editable);
 
     editingEnabled = editable;
 
 }
 
-void EmissioneForm::on_emissioneView_doubleClicked(const QModelIndex &index)
-{
-    if ((this->editingEnabled == false) && (index.column() == 0)) {
 
-        QString paese = QString::fromStdWString((*this->modelloEmissione->getItem().paese));
-        QDesktopServices::openUrl(Utils::getSearchUrl(paese));
-    }
+void EmissioneForm::on_valore_editingFinished()
+{
+    this->emissione.nominale->valore(this->ui->valore->text().toStdWString());
+    emit changesOccurred();
+}
+
+void EmissioneForm::on_valuta_editingFinished()
+{
+    this->emissione.nominale->valuta(this->ui->valuta->text().toStdWString());
+    emit changesOccurred();
+}
+
+void EmissioneForm::on_anno_editingFinished()
+{
+    *(this->emissione.anno) = (this->ui->anno->text().toStdWString());
+    emit changesOccurred();
+}
+
+void EmissioneForm::paeseChanged()
+{
+    if (this->editingEnabled == false)
+        return;
+
+    QString newPaese = this->ui->paese->getPaese();
+    *(this->emissione.paese) = (newPaese.toStdWString());
+    emit changesOccurred();
 
 }
+

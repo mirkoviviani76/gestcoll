@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>181</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,16 +16,97 @@
   <property name="title">
    <string>Emissione</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="QTableView" name="emissioneView">
-     <attribute name="verticalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
+  <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,1" columnstretch="1,0,0,0">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Paese</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </item>
-   <item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="label_2">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Valore</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLabel" name="label_3">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Valuta</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QLabel" name="label_4">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Anno</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="valore">
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QLineEdit" name="valuta">
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QLineEdit" name="anno">
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="4">
     <widget class="AutoritaForm" name="autorita" native="true"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="PaeseWidget" name="paese"/>
    </item>
   </layout>
  </widget>
@@ -35,6 +116,11 @@
    <extends>QWidget</extends>
    <header>autoritaform.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PaeseWidget</class>
+   <extends>QTextBrowser</extends>
+   <header>paesewidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

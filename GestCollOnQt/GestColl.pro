@@ -180,7 +180,6 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/Note/noteform.cpp \
     GUI/Moneta/Note/notamodel.cpp \
     GUI/Moneta/Emissione/emissioneform.cpp \
-    GUI/Moneta/Emissione/emissionemodel.cpp \
     GUI/Moneta/Letteratura/letteraturaform.cpp \
     GUI/Moneta/Letteratura/letteraturamodel.cpp \
     GUI/Biblioteca/bibliotecamodel.cpp \
@@ -190,7 +189,8 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/Documenti/adddocumentdialog.cpp \
     GUI/Contatti/contattomodel.cpp \
     GUI/Moneta/Vassoi/vassoiomodel.cpp \
-    GUI/Collezione/collezionemodel.cpp
+    GUI/Collezione/collezionemodel.cpp \
+    GUI/Moneta/Emissione/paesewidget.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -266,7 +266,6 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/Note/noteform.h \
     GUI/Moneta/Note/notamodel.h \
     GUI/Moneta/Emissione/emissioneform.h \
-    GUI/Moneta/Emissione/emissionemodel.h \
     GUI/Moneta/Letteratura/letteraturaform.h \
     GUI/Moneta/Letteratura/letteraturamodel.h \
     GUI/Biblioteca/bibliotecamodel.h \
@@ -276,7 +275,8 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/Documenti/adddocumentdialog.h \
     GUI/Contatti/contattomodel.h \
     GUI/Moneta/Vassoi/vassoiomodel.h \
-    GUI/Collezione/collezionemodel.h
+    GUI/Collezione/collezionemodel.h \
+    GUI/Moneta/Emissione/paesewidget.h
 
 
 
