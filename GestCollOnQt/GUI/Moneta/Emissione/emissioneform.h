@@ -2,8 +2,8 @@
 #define EMISSIONEFORM_H
 
 #include <QGroupBox>
-#include "emissionemodel.h"
 #include "commondefs.h"
+#include "scheda.hxx"
 
 namespace Ui {
 class EmissioneForm;
@@ -16,20 +16,22 @@ class EmissioneForm : public QGroupBox
 public:
     explicit EmissioneForm(QWidget *parent = 0);
     ~EmissioneForm();
-    void setData(xml::Emissione emissione);
+    void setData(xml::Emissione _emissione);
     void setEditable(bool editable);
 
     void clear();
 private:
     Ui::EmissioneForm *ui;
-    EmissioneModel* modelloEmissione; ///< modello
-    //gestColl::coins::datiFisici* datiFisici;
 
+    xml::Emissione emissione;
     bool editingEnabled;
 signals:
     void changesOccurred();
 private slots:
-    void on_emissioneView_doubleClicked(const QModelIndex &index);
+    void on_valore_editingFinished();
+    void on_valuta_editingFinished();
+    void on_anno_editingFinished();
+    void paeseChanged();
 };
 
 
