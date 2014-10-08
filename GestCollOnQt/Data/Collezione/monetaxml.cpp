@@ -86,9 +86,9 @@ QString Posizione::toString(const QString &separator)
  * @param _file il file xml
 */
 MonetaXml::MonetaXml(const moneta& m, QObject* parent) :
-    QObject(parent)
+    QObject(parent), image(NULL)
 {
-    this->mon = new moneta(m);
+    this->mon = QSharedPointer<moneta>(new moneta(m));
     //this->setOrdering(Moneta::BY_ID);
     this->updateImage();
     this->fillAmbiti();
@@ -109,7 +109,6 @@ MonetaXml::MonetaXml(moneta *m, QObject *parent) :
 */
 MonetaXml::~MonetaXml()
 {
-    this->clear();
     if (this->image != NULL) {
         delete this->image;
         this->image = NULL;
@@ -147,39 +146,6 @@ Posizione MonetaXml::getPosizione() const
 
 
 /**
- * @brief non fa niente...
- *
-*/
-void MonetaXml::clear()
-{
-}
-
-/**
-  Restituisce l'id del vassoio, come stringa composta da "idcontenitore-idvassoio"
-*/
-
-/**
-  Restituisce una stringa rappresentativa della moneta.
-*/
-QString MonetaXml::toString()
-{
-    QString valore = QString::fromStdWString(this->getDom()->nominale().valore());
-    QString valuta = QString::fromStdWString(this->getDom()->nominale().valuta());
-    QString label = QString("%1 - %2 %3")
-            .arg(QString::fromStdWString(this->getDom()->paese()))
-            .arg(valore)
-            .arg(valuta);
-
-    QString completeLabel = QString("%1: %2")
-            .arg(this->getId())
-            .arg(label);
-
-    return completeLabel;
-
-}
-
-
-/**
   Restituisce un tooltip per la moneta
   */
 QString MonetaXml::toTooltip()
@@ -214,7 +180,9 @@ QImage MonetaXml::toImg() {
 }
 
 void MonetaXml::updateImage() {
-    image = new QImage(16,16, QImage::Format_ARGB32);
+    if (this->image != NULL)
+        delete this->image;
+    this->image = new QImage(16,16, QImage::Format_ARGB32);
     QPainter painter(image);
     QPen drawPen(Qt::black, 1);
     xml::Stato stato = this->getStato();

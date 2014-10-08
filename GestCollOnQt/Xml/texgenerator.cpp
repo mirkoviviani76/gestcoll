@@ -79,7 +79,7 @@ bool TexGenerator::convert()
             /* ottiene la dimensione della casella */
             QString dimensione = this->getDim(*mng);
             /* ottiene l'etichetta singola */
-            QString etichetta = this->getEtichetta(mng->getDom(), dimensione);
+            QString etichetta = this->getEtichetta(mng->getDom().data(), dimensione);
             /* aggiorna l'elenco globale di etichette e codici qr */
             if (dimensione == "A") {
                 etichetteA = etichetteA + etichetta + "\n";

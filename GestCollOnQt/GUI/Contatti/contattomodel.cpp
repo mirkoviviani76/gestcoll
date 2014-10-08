@@ -177,7 +177,8 @@ ContattiDelegate::~ContattiDelegate() { }
 
 QWidget *ContattiDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    qDebug() << "create editor for " << index.column();
+    Q_UNUSED(option);
+    Q_UNUSED(index);
     return new QLineEdit(parent);
 }
 
