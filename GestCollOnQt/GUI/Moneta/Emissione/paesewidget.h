@@ -1,14 +1,16 @@
 #ifndef PAESEWIDGET_H
 #define PAESEWIDGET_H
 
-#include <QTextBrowser>
+#include <QLineEdit>
+#include <QLabel>
+#include <QStackedWidget>
 
-class PaeseWidget : public QTextBrowser
+class PaeseWidget : public QStackedWidget
 {
     Q_OBJECT
 public:
     explicit PaeseWidget(QWidget *parent = 0);
-    QString getPaese() const;
+    QString getText() const;
     void setEditingEnabled(bool enabled);
     void setText(const QString &text);
 
@@ -18,10 +20,13 @@ signals:
 public slots:
 
 private slots:
-    void changed();
+    void changed(const QString& newText);
 private:
-    QString simpleText;
+    QLineEdit* textEditor;
+    QLabel* textViewer;
     bool editingEnabled;
+
+    QString internalText;
 
 };
 

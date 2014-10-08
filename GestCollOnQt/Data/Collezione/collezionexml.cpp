@@ -78,6 +78,7 @@ void CollezioneXml::readData(QString xmlFile) {
 
 
 MonetaXml* CollezioneXml::getMoneta(QString id) {
+    assert (this->moneteInCollezione.contains(id));
     return this->moneteInCollezione[id];
 }
 
