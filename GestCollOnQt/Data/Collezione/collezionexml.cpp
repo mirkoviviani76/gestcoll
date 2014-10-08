@@ -207,9 +207,8 @@ bool CollezioneXml::save()
 
     /* cicla su tutte le monete */
     foreach (QString id, this->moneteInCollezione.keys()) {
-        moneta* mon = this->getMoneta(id)->getDom();
         /* inserisce la moneta nella sequenza */
-        seq.push_back(*mon);
+        seq.push_back(*(this->getMoneta(id)->getDom()));
     }
     /* modifica la collezione */
     this->collezione.get()->moneta(seq);

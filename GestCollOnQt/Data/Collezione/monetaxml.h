@@ -9,6 +9,7 @@
 #include <QDate>
 #include <QFileInfo>
 #include <scheda.hxx>
+#include <QSharedPointer>
 #include "vassoioxml.h"
 
 using namespace gestColl::coins;
@@ -44,7 +45,6 @@ public:
     MonetaXml(moneta* m, QObject* parent = 0);
     virtual ~MonetaXml();
     inline QColor getColor() { return QColor::Invalid;}
-    QString toString();
     QString toTooltip();
     QImage toImg();
     QString getId() const;
@@ -59,13 +59,11 @@ public:
     void setPosizione(int cont, int vass, int r, int c);
     void setAmbiti(QList<xml::Ambito*> ambiti);
 
-    moneta* getDom() {return this->mon;}
-
-    void clear();
+    QSharedPointer<moneta> getDom() {return this->mon;}
 
 private:
     //Moneta::MonetaOrdering sortingType;
-    moneta* mon;
+    QSharedPointer<moneta> mon;
     QImage* image;
     void updateImage();
     QList<xml::Ambito*> xmlAmbiti;
