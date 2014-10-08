@@ -40,11 +40,11 @@ void PaeseWidget::setText(const QString &text)
 {
     this->internalText = text;
     if (this->editingEnabled == false) {
-        if (this->internalText.isEmpty()) {
-            return;
+        QUrl url = Utils::getSearchUrl(internalText).toString();
+        if (url.isValid()) {
+            QString link = QString("<a href=\"%1\">%2</a>").arg(url.toString()).arg(internalText);
+            this->textViewer->setText(link);
         }
-        QString link = QString("<a href=\"%1\">%2</a>").arg(Utils::getSearchUrl(internalText).toString()).arg(internalText);
-        this->textViewer->setText(link);
     }
     this->textEditor->setText(this->internalText);
 
