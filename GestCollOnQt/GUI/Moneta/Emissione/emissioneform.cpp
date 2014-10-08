@@ -75,7 +75,7 @@ void EmissioneForm::paeseChanged()
     if (this->editingEnabled == false)
         return;
 
-    QString newPaese = this->ui->paese->getPaese();
+    QString newPaese = this->ui->paese->getText();
     *(this->emissione.paese) = (newPaese.toStdWString());
     emit changesOccurred();
 

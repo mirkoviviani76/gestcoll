@@ -1,46 +1,59 @@
 #include "paesewidget.h"
 #include "utils.h"
 #include <QDebug>
+#include <QLayout>
+#include <QAbstractTextDocumentLayout>
+#include <QScrollBar>
 
 PaeseWidget::PaeseWidget(QWidget *parent) :
-    QTextBrowser(parent), editingEnabled(false), simpleText("")
+    QStackedWidget(parent), editingEnabled(false), internalText("")
 {
-    this->setOpenExternalLinks(true);
-    connect(this->document(), SIGNAL(contentsChanged()), this, SLOT(changed()));
+    this->textViewer = new QLabel(this);
+    this->textEditor = new QLineEdit(this);
+    this->textViewer->setOpenExternalLinks(true);
+    this->textViewer->setWordWrap(true);
+
+    this->addWidget(this->textViewer);
+    this->addWidget(this->textEditor);
+
+    connect(this->textEditor, SIGNAL(textChanged(QString)), this, SLOT(changed(QString)));
 }
 
-QString PaeseWidget::getPaese() const {
-    return this->simpleText;
+QString PaeseWidget::getText() const {
+    return this->internalText;
 }
 
 void PaeseWidget::setEditingEnabled(bool enabled)
 {
     this->editingEnabled = enabled;
-    this->setReadOnly(!enabled);
-    this->setText(this->simpleText);
-    if (enabled == false)
-        this->setFrameShape(QFrame::NoFrame);
-    else
-        this->setFrameShape(QFrame::StyledPanel);
+
+    if (this->editingEnabled) {
+        this->setCurrentWidget(this->textEditor);
+    } else {
+        this->setCurrentWidget(this->textViewer);
+    }
+
+    this->setText(this->internalText);
 }
 
 void PaeseWidget::setText(const QString &text)
 {
-    this->simpleText = text;
+    this->internalText = text;
     if (this->editingEnabled == false) {
-        if (text.isEmpty()) {
+        if (this->internalText.isEmpty()) {
             return;
         }
-        QString link = QString("<a href=\"%1\">%2</a>").arg(Utils::getSearchUrl(text).toString()).arg(text);
-        QTextEdit::setText(link);
-    } else {
-        this->setPlainText(text);
+        QString link = QString("<a href=\"%1\">%2</a>").arg(Utils::getSearchUrl(internalText).toString()).arg(internalText);
+        this->textViewer->setText(link);
     }
+    this->textEditor->setText(this->internalText);
+
 }
 
-void PaeseWidget::changed() {
-    if (this->simpleText != this->toPlainText()) {
-        this->simpleText = this->toPlainText();
+void PaeseWidget::changed(const QString &newText) {
+    if (this->internalText != newText) {
+        this->setText(newText);
         emit contentsChanged();
     }
 }
+
