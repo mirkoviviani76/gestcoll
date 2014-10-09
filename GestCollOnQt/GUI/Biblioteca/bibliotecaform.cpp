@@ -29,7 +29,6 @@ BibliotecaForm::BibliotecaForm(QWidget *parent) :
     //this->ui->listView->setItemDelegate(new BibliotecaDelegate(this));
     this->ui->listView->verticalHeader()->setVisible(false);
     this->ui->listView->setSortingEnabled(true);
-
 }
 
 BibliotecaForm::~BibliotecaForm()
@@ -102,3 +101,14 @@ void BibliotecaForm::on_textBrowser_anchorClicked(const QUrl &arg1)
 }
 
 
+
+void BibliotecaForm::on_filter_editingFinished()
+{
+    QString filterText = this->ui->filter->text();
+    if (!filterText.isEmpty()) {
+        QRegExp regexp(QString("^.*%1.*$").arg(filterText));
+        this->model->setFilterRegExp(regexp);
+    } else {
+        this->model->setFilterRegExp(QRegExp());
+    }
+}
