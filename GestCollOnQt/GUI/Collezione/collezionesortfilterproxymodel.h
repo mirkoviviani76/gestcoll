@@ -15,6 +15,8 @@ public:
     void appendRow(MonetaXml* item);
     MonetaXml* getItem(const QModelIndex& index);
 
+protected:
+    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const;
 };
 
 #endif // COLLEZIONESORTFILTERPROXYMODEL_H

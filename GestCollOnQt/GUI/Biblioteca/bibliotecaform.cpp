@@ -105,10 +105,11 @@ void BibliotecaForm::on_textBrowser_anchorClicked(const QUrl &arg1)
 void BibliotecaForm::on_filter_editingFinished()
 {
     QString filterText = this->ui->filter->text();
+    QRegExp regexp;
     if (!filterText.isEmpty()) {
-        QRegExp regexp(QString("^.*%1.*$").arg(filterText));
-        this->model->setFilterRegExp(regexp);
-    } else {
-        this->model->setFilterRegExp(QRegExp());
+        regexp = QRegExp(QString("^.*%1.*$").arg(filterText), Qt::CaseInsensitive);
+
     }
+    this->model->setFilterRegExp(regexp);
+
 }

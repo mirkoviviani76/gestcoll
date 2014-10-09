@@ -629,3 +629,14 @@ void MonetaForm::on_setupCollezione_clicked()
     }
 }
 
+
+void MonetaForm::on_filter_editingFinished()
+{
+    QString filterText = this->ui->filter->text();
+    QRegExp regexp;
+    if (!filterText.isEmpty()) {
+        regexp = QRegExp(QString("^.*%1.*$").arg(filterText), Qt::CaseInsensitive);
+    }
+    this->collezioneModel->setFilterRegExp(regexp);
+
+}

@@ -70,6 +70,8 @@ private slots:
 
     void on_setupCollezione_clicked();
 
+    void on_filter_editingFinished();
+
 signals:
     void changesOccurred();
     void newIdAdded(MonetaXml* newId);
