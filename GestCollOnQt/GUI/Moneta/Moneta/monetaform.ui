@@ -49,7 +49,7 @@ font-weight: bold;
       <property name="minimumSize">
        <size>
         <width>450</width>
-        <height>117</height>
+        <height>137</height>
        </size>
       </property>
       <property name="floating">
@@ -97,6 +97,9 @@ font-weight: bold;
            <bool>false</bool>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="filter"/>
         </item>
         <item>
          <widget class="QTableView" name="itemList">
