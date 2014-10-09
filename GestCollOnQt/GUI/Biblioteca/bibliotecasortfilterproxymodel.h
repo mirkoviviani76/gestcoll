@@ -12,6 +12,11 @@ public:
     void appendRow(BibliotecaItem* item);
     BibliotecaItem* getItem(const QModelIndex& index);
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
+
+
+    // QSortFilterProxyModel interface
+protected:
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
 };
 
 
