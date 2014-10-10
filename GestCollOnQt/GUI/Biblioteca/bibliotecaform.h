@@ -33,7 +33,7 @@ private:
 private slots:
     void on_listView_activated(QModelIndex index);
     void on_textBrowser_anchorClicked(const QUrl &arg1);
-    void on_filter_editingFinished();
+    void on_filter_textChanged(const QString &filterText);
 };
 
 #endif // BIBLIOTECAFORM_H
