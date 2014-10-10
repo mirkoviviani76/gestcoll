@@ -70,7 +70,7 @@ private slots:
 
     void on_setupCollezione_clicked();
 
-    void on_filter_editingFinished();
+    void on_filter_textChanged(const QString &filterText);
 
 signals:
     void changesOccurred();
