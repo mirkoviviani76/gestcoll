@@ -4,7 +4,7 @@
 
 using namespace xml;
 
-
+/*
 QString Libro::toString(int column)
 {
     QString ret;
@@ -43,7 +43,7 @@ bool Libro::lessThan(Libro *due)
     else
         return this->sigla < due->sigla;
 }
-
+*/
 
 
 Ambito::Ambito(QString _titolo, QString _icona)
