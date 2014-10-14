@@ -7,7 +7,8 @@ namespace {
      enum BibliotecaColumns {
          ID = 0,
          AUTORI,
-         TITOLO
+         TITOLO,
+         LAST
      };
    }
 }
@@ -42,7 +43,7 @@ Qt::ItemFlags ModelloBiblioteca::flags(const QModelIndex &index) const
 int ModelloBiblioteca::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return 3;
+    return BibliotecaColumns::LAST;
 }
 
 bool ModelloBiblioteca::appendRow(BibliotecaItem *_item) {
@@ -82,12 +83,13 @@ QVariant ModelloBiblioteca::data(const QModelIndex &index, int role) const
 int ModelloBiblioteca::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return (int) this->items.count();
+    return this->items.count();
 }
 
 
 BibliotecaItem* ModelloBiblioteca::getItem(const QModelIndex &index)
 {
+    assert (this->items.count() >= index.row());
     return this->items.at(index.row());
 }
 
