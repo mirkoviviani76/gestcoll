@@ -1,5 +1,17 @@
 #include "bibliotecamodel.h"
 
+
+
+namespace {
+   namespace BibliotecaColumns {
+     enum BibliotecaColumns {
+         ID = 0,
+         AUTORI,
+         TITOLO
+     };
+   }
+}
+
 ModelloBiblioteca::ModelloBiblioteca(QObject *parent) :
     QAbstractListModel(parent)
 {
@@ -23,7 +35,8 @@ Qt::ItemFlags ModelloBiblioteca::flags(const QModelIndex &index) const
     if (!index.isValid())
             return Qt::ItemIsEnabled;
 
-    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+    //return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+    return QAbstractItemModel::flags(index);
 }
 
 int ModelloBiblioteca::columnCount(const QModelIndex &parent) const
@@ -52,23 +65,14 @@ QVariant ModelloBiblioteca::data(const QModelIndex &index, int role) const
 
     if (role == Qt::DisplayRole) {
         switch (index.column()) {
-        case 0:
-            return item->toString(index.column());
-        case 1:
-            return item->toString(index.column());
-        case 2:
-            return item->toString(index.column());
+        case BibliotecaColumns::ID:
+            return item->getId();
+        case BibliotecaColumns::AUTORI:
+            return item->getAutori().join("; ");
+        case BibliotecaColumns::TITOLO:
+            return item->getTitolo();
         }
 
-    } else if (role == Qt::EditRole) {
-        switch (index.column()) {
-        case 0:
-            return item->toString(index.column());
-        case 1:
-            return item->toString(index.column());
-        case 2:
-            return item->toString(index.column());
-        }
     }
 
     return QVariant();
