@@ -18,7 +18,11 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QTableView" name="letteraturaView"/>
+    <widget class="QTableView" name="letteraturaView">
+     <property name="showGrid">
+      <bool>false</bool>
+     </property>
+    </widget>
    </item>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">

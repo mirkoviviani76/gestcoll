@@ -134,7 +134,6 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/MainWindow/main.cpp \
                GUI/MainWindow/mainwindow.cpp \
                GUI/MainWindow/viewlog.cpp \
-               GUI/Models/genericmodel.cpp \
                GUI/Moneta/Ambito/setambitodialog.cpp \
                GUI/Moneta/Descrizione/descrizionedialog.cpp \
                GUI/Moneta/Immagini/imgmoneta.cpp \
@@ -190,7 +189,8 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Contatti/contattomodel.cpp \
     GUI/Moneta/Vassoi/vassoiomodel.cpp \
     GUI/Collezione/collezionemodel.cpp \
-    GUI/Moneta/Emissione/paesewidget.cpp
+    GUI/Moneta/Emissione/paesewidget.cpp \
+    GUI/Collezione/ambitimodel.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -220,7 +220,6 @@ HEADERS  +=    Common/commondata.h \
                GUI/MainWindow/aboutdialog.h \
                GUI/MainWindow/mainwindow.h \
                GUI/MainWindow/viewlog.h \
-               GUI/Models/genericmodel.h \
                GUI/Moneta/Ambito/setambitodialog.h \
                GUI/Moneta/Descrizione/descrizionedialog.h \
                GUI/Moneta/Immagini/imgmoneta.h \
@@ -276,7 +275,8 @@ HEADERS  +=    Common/commondata.h \
     GUI/Contatti/contattomodel.h \
     GUI/Moneta/Vassoi/vassoiomodel.h \
     GUI/Collezione/collezionemodel.h \
-    GUI/Moneta/Emissione/paesewidget.h
+    GUI/Moneta/Emissione/paesewidget.h \
+    GUI/Collezione/ambitimodel.h
 
 
 

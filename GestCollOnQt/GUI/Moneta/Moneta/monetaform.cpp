@@ -249,7 +249,7 @@ void MonetaForm::setupModelMonete()
 
 void MonetaForm::setupModels()
 {
-    modelloAmbiti = new GenericModel(2);
+    modelloAmbiti = new AmbitiModel(this);
     this->setupModelMonete();
 }
 

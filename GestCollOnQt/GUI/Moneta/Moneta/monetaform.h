@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QLabel>
-#include <genericmodel.h>
+#include "ambitimodel.h"
 #include <monetaxml.h>
 #include "collezionesortfilterproxymodel.h"
 #include "posizioni.h"
@@ -39,7 +39,7 @@ private:
     QMap<QString, VassoioForm* > tabVassoi; ///< mappa fra id vassoio e widget
     Ui::MonetaForm *ui; ///< la form principale
     CollezioneSortFilterProxyModel* collezioneModel; ///< modello collezione
-    GenericModel* modelloAmbiti; ///< modello ambiti
+    AmbitiModel* modelloAmbiti; ///< modello ambiti
     MonetaXml* item; ///< la moneta correntemente visualizzata
     Posizioni* vassoi; ///< i vassoi
     void setupModels();

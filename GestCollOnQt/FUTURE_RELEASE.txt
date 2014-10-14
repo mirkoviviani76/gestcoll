@@ -1,5 +1,5 @@
 BUGFIXING
-- extra qt: sistemare la biblioteca (mancano riferimenti a tanti libri presenti in formato digitale)
+- extra progetto: sistemare la biblioteca (mancano riferimenti a tanti libri presenti in formato digitale)
 
 FUTURE
 - migliorare gestione biblioteca (aggiunta/modifica)
@@ -16,5 +16,7 @@ IPOTESI
 - possibilita'  di caricare xml diversi per collezioni diverse (i vassoi andrebbero messi nell'xml della collezione)
 - includere i documenti addizionali nel tex
 - scegliere se, ad esempio, salvare solo le modifiche alla collezione e scartare le modifiche ai link)
-
+- immagine delle sigle di zecchieri
+- immagine delle sigle di zecca
+- aggiunta possiblita' di inserire foto di "particolari"
 
