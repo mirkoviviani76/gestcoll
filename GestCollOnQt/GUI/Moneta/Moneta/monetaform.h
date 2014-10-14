@@ -75,6 +75,7 @@ private slots:
 signals:
     void changesOccurred();
     void newIdAdded(MonetaXml* newId);
+    void selectedBibliotecaItem(const BibliotecaItem* item);
 };
 
 #endif // MONETAFORM_H

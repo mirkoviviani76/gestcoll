@@ -47,6 +47,13 @@ bool BibliotecaSortFilterProxyModel::lessThan(const QModelIndex &left, const QMo
 
 }
 
+QModelIndex BibliotecaSortFilterProxyModel::getIndex(const BibliotecaItem *item) const
+{
+    ModelloBiblioteca* model = (ModelloBiblioteca*)this->sourceModel();
+    QModelIndex sourceIndex = model->getIndex(item);
+    return this->mapFromSource(sourceIndex);
+}
+
 
 
 void BibliotecaSortFilterProxyModel::appendRow(BibliotecaItem *item) {

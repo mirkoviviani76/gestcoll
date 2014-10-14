@@ -83,6 +83,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->ui->widgetBiblioteca->fillData();
 
+    connect(this->ui->widgetCollezione, SIGNAL(selectedBibliotecaItem(const BibliotecaItem*)), this, SLOT(selectBibliotecaItem(const BibliotecaItem*)));
+
+
 }
 
 
@@ -469,8 +472,7 @@ void MainWindow::toolsMenu_triggered(QAction* action)
   Qualcuno ha selezionato un id di moneta (da statistiche). Mostra la moneta.
   */
 void MainWindow::onItemSelected(QString id) {
-    this->ui->actionCollezione->setChecked(true);
-    this->ui->stackedWidget->setCurrentIndex(Gui::Stacked_Collezione);
+    this->ui->actionCollezione->activate(QAction::Trigger);
     this->ui->widgetCollezione->idChanged(id);
 }
 
@@ -602,4 +604,12 @@ void MainWindow::on_actionVedi_Etichette_pdf_triggered()
 void MainWindow::on_actionAbout_Qt_triggered()
 {
     QMessageBox::aboutQt(this);
+}
+
+void MainWindow::selectBibliotecaItem(const BibliotecaItem *item)
+{
+    bool ret = this->ui->widgetBiblioteca->selectItem(item);
+    if (ret == true) {
+        this->ui->actionBiblioteca->activate(QAction::Trigger);
+    }
 }

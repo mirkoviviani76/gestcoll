@@ -78,34 +78,3 @@ QString BibliotecaItem::toTooltip()
           .arg(this->id);
     return ret;
 }
-
-QString BibliotecaItem::toHtml()
-{
-    QString autori = "";
-    QString supporti = "";
-    QString argomenti = "";
-    foreach (QString a, listaAutori) {
-        autori.append(QString("<li>%1").arg(a));
-    }
-    foreach (QString a, listaArgomenti) {
-        argomenti.append(QString("<li>%1").arg(a));
-    }
-    foreach (QString s, listaSupporti) {
-        supporti.append(s);
-    }
-
-    if (filename != "")
-        filename = CommonData::getInstance()->getBiblioDir()+"/"+filename;
-
-    QString ret = QString("<h2>%1 [%2]</h2><h3>Autori</h3><ul>%3</ul><h3>Supporti</h3>%4<br /><a href=\"%5\">%5</a><h4>Argomenti</h4>%6")
-            .arg(this->titolo)
-            .arg(this->id)
-            .arg(autori)
-            .arg(supporti)
-            .arg(filename)
-            .arg(argomenti)
-            ;
-
-    return ret;
-}
-

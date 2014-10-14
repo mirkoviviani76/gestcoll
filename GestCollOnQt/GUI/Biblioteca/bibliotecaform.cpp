@@ -84,7 +84,37 @@ void BibliotecaForm::fillData()
 void BibliotecaForm::on_listView_activated(QModelIndex index)
 {
     BibliotecaItem* item = this->model->getItem(index);
-    this->ui->textBrowser->setText(item->toHtml());
+    assert (item != NULL);
+
+    QString autori = "";
+    QString supporti = "";
+    QString argomenti = "";
+    QString filename = "";
+    foreach (QString a, item->getAutori()) {
+        autori.append(QString("<li>%1").arg(a));
+    }
+    foreach (QString a, item->getArgomenti()) {
+        argomenti.append(QString("<li>%1").arg(a));
+    }
+    foreach (QString s, item->getSupporti()) {
+        supporti.append(s);
+    }
+
+    if (item->getFilename() != "")
+        filename = QString("%1/%2")
+                .arg(CommonData::getInstance()->getBiblioDir())
+                .arg(item->getFilename());
+
+    QString html = QString("<h2>%1 [%2]</h2><h3>Autori</h3><ul>%3</ul><h3>Supporti</h3>%4<br /><a href=\"%5\">%5</a><h4>Argomenti</h4>%6")
+            .arg(item->getTitolo())
+            .arg(item->getId())
+            .arg(autori)
+            .arg(supporti)
+            .arg(filename)
+            .arg(argomenti)
+            ;
+
+    this->ui->textBrowser->setHtml(html);
 }
 
 
@@ -99,6 +129,20 @@ void BibliotecaForm::on_textBrowser_anchorClicked(const QUrl &arg1)
     }
 }
 
+bool BibliotecaForm::selectItem(const BibliotecaItem *item) {
+    if (this->editable == true)
+        return false;
+    QModelIndex ret = this->model->getIndex(item);
+    if (ret.isValid()) {
+        //attiva l'item
+        this->on_listView_activated(ret);
+        //seleziona la riga corrispondente
+        this->ui->listView->selectRow(ret.row());
+        return true;
+    }
+    return false;
+
+}
 
 
 void BibliotecaForm::on_filter_textChanged(const QString &filterText)

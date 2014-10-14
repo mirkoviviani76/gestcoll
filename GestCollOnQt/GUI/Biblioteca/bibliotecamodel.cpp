@@ -98,6 +98,16 @@ BibliotecaItem* ModelloBiblioteca::getItem(int index)
     return this->items.at(index);
 }
 
+QModelIndex ModelloBiblioteca::getIndex(const BibliotecaItem *item)
+{
+    for (int i = 0; i < this->rowCount(); i++) {
+        QModelIndex curr = this->index(i);
+        if (this->getItem(curr) == item)
+            return curr;
+    }
+    return QModelIndex();
+}
+
 #if 0
 bool ModelloBiblioteca::setData(const QModelIndex &index, const QVariant &value, int role)
 {
