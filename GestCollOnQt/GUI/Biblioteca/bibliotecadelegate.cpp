@@ -9,16 +9,6 @@
 #include <QPainter>
 
 
-namespace {
-   namespace BibliotecaColumns {
-     enum BibliotecaColumns {
-         ID = 0,
-         AUTORI,
-         TITOLO
-     };
-   }
-}
-
 
 MyListView::MyListView(QWidget* parent)
     : QListWidget(parent)
@@ -39,47 +29,23 @@ BibliotecaDelegate::BibliotecaDelegate(QObject* parent) : QStyledItemDelegate(pa
 
 
 QWidget* BibliotecaDelegate::createEditor(QWidget *parent, const   QStyleOptionViewItem &option, const QModelIndex &index) const {
+    Q_UNUSED(index);
     Q_UNUSED(option);
     // create widget for use
-    switch (index.column()) {
-    case BibliotecaColumns::ID:
-    case BibliotecaColumns::AUTORI:
-    case BibliotecaColumns::TITOLO:
-        return new QLineEdit(parent);
-    }
-
-    return NULL;
+    return new QLineEdit(parent);
 }
 
 void BibliotecaDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const {
     // update model widget
-    switch (index.column()) {
-    case BibliotecaColumns::ID:
-    case BibliotecaColumns::AUTORI:
-    case BibliotecaColumns::TITOLO:
-    {
-        QString value = index.model()->data(index, Qt::EditRole).toString();
-        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
-        editWidget->setText(value);
-    }
-        break;
-
-    }
+    QString value = index.model()->data(index, Qt::EditRole).toString();
+    QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+    editWidget->setText(value);
 }
 
 void BibliotecaDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,   const QModelIndex &index) const {
     // store edited model data to model
-    switch (index.column()) {
-    case BibliotecaColumns::ID:
-    case BibliotecaColumns::AUTORI:
-    case BibliotecaColumns::TITOLO:
-    {
-        QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
-        model->setData(index, editWidget->text(), Qt::EditRole);
-    }
-        break;
-
-    }
+    QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
+    model->setData(index, editWidget->text(), Qt::EditRole);
 
 }
 
@@ -87,7 +53,7 @@ void BibliotecaDelegate::updateEditorGeometry(QWidget *editor, const     QStyleO
     Q_UNUSED(index);
     editor->setGeometry(option.rect);
 }
-
+/*
 void BibliotecaDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     QTableView* view = (QTableView*) this->parent();
@@ -103,7 +69,7 @@ void BibliotecaDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     case BibliotecaColumns::ID:
     {
         QLabel id(view);
-        id.setText(item->toString(0));
+        id.setText(item->getId());
         id.resize(option.rect.size());
         id.render(painter);
     }
@@ -119,7 +85,7 @@ void BibliotecaDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     case BibliotecaColumns::TITOLO:
     {
         QLabel titolo(view);
-        titolo.setText(item->toString(2));
+        titolo.setText(item->getTitolo());
         titolo.resize(option.rect.size());
         titolo.render(painter);
     }
@@ -128,10 +94,11 @@ void BibliotecaDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
     painter->restore();
 }
+*/
 
 QSize BibliotecaDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    if (index.column() == BibliotecaColumns::AUTORI)
+    if (index.column() == 1)
         return QSize(100,100);
     else
         return QStyledItemDelegate::sizeHint(option, index);

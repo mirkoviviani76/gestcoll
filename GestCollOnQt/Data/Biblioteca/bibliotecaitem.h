@@ -11,6 +11,9 @@ class BibliotecaItem
 public:
     BibliotecaItem(QString _id, QString _titolo, QString _filename, QStringList _listaAutori, QStringList _listaSupporti, QStringList _listaArgomenti);
     QString toString(int column=-1);
+    QString getId() const {return id;}
+    QString getTitolo() const {return titolo;}
+
     QString toTooltip();
     QString toHtml();
     bool hasElectronicForm();
