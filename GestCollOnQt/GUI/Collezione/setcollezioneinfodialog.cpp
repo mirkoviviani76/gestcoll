@@ -12,7 +12,7 @@ SetCollezioneInfoDialog::SetCollezioneInfoDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->ambitiModel = new GenericModel(2);
+    this->ambitiModel = new AmbitiModel(this);
     info = CollezioneXml::getInstance()->getInfo();
 
     this->ui->titolo->setText(info->titolo);
@@ -53,8 +53,7 @@ void SetCollezioneInfoDialog::on_buttonBox_accepted()
 
 void SetCollezioneInfoDialog::on_ambiti_doubleClicked(const QModelIndex &index)
 {
-    GenericModel* model = (GenericModel*) index.model();
-    xml::Ambito* a = (xml::Ambito*) model->getItem(index);
+    xml::Ambito* a = this->ambitiModel->getItem(index);
     xml::Ambito vecchio(a->titolo, a->icona);
     ModifyAmbitoDialog modifyAmbito(a, this);
     int ret = modifyAmbito.exec();

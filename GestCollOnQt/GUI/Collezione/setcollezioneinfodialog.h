@@ -2,7 +2,7 @@
 #define SETCOLLEZIONEINFODIALOG_H
 
 #include <QDialog>
-#include "genericmodel.h"
+#include "ambitimodel.h"
 #include "commondefs.h"
 #include <QMenu>
 
@@ -27,7 +27,7 @@ private slots:
 
 private:
     Ui::SetCollezioneInfoDialog *ui;
-    GenericModel* ambitiModel;
+    AmbitiModel* ambitiModel;
     xml::Info* info;
     QMenu contextMenu;
 
