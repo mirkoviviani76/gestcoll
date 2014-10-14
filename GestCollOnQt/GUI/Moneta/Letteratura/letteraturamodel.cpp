@@ -1,5 +1,6 @@
 #include "letteraturamodel.h"
 #include <QLineEdit>
+#include <bibliotecaxml.h>
 
 namespace {
   namespace LetteraturaRows {
@@ -93,29 +94,38 @@ QVariant LetteraturaModel::data(const QModelIndex &index, int role) const
     if (this->letteratura.count() == 0)
         return QVariant();
 
+    gestColl::coins::letteratura::libro_type* libro = this->letteratura.at(index.row());
+
     if (role == Qt::DisplayRole)
     {
         switch (index.column()) {
         case LetteraturaRows::LIBRO :
-            return QString::fromStdWString(this->letteratura.at(index.row())->sigla());
+            return QString::fromStdWString(libro->sigla());
         case LetteraturaRows::SIGLA :
         {
-            return QString::fromStdWString(this->letteratura.at(index.row())->numero());
+            return QString::fromStdWString(libro->numero());
         }
             break;
         }
-    }
-    if (role == Qt::EditRole) {
+    } else if (role == Qt::EditRole) {
         QVariant ret;
         switch (index.column()) {
         case LetteraturaRows::LIBRO :
-            ret.setValue(QString::fromStdWString(this->letteratura.at(index.row())->sigla()));
+            ret.setValue(QString::fromStdWString(libro->sigla()));
             break;
         case LetteraturaRows::SIGLA :
-            ret.setValue(QString::fromStdWString(this->letteratura.at(index.row())->numero()));
+            ret.setValue(QString::fromStdWString(libro->numero()));
             break;
         }
         return ret;
+    } else if (role == Qt::ToolTipRole) {
+        QString sigla = QString::fromStdWString(libro->sigla());
+        BibliotecaItem* item = BibliotecaXml::getInstance()->getItem(sigla);
+        if (item != NULL) {
+            return item->toTooltip();
+        } else {
+            return "";
+        }
     }
 
     return QVariant();
