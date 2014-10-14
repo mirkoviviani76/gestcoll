@@ -15,12 +15,9 @@ BibliotecaItem::BibliotecaItem(QString id, QString titolo, QString filename, QSt
 /**
   Funzione di ordinamento. Ordina in base al titolo
   */
-bool BibliotecaItem::lessThan(GenericItem* d)
+bool BibliotecaItem::lessThan(BibliotecaItem* d)
 {
-    QString titolo1 = this->titolo;
-    BibliotecaItem* due = (BibliotecaItem*)(d);
-    QString titolo2 = due->titolo;
-    return titolo1 < titolo2;
+    return this->titolo < d->titolo;
 }
 
 QColor BibliotecaItem::getColor() {

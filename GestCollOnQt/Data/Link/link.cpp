@@ -9,13 +9,3 @@ Link::Link(QString nome, QUrl url, QString note)
     this->note = note;
 }
 
-QString Link::toString(int column)
-{
-    Q_UNUSED(column);
-    return nome;
-}
-
-QString Link::toTooltip()
-{
-    return this->url.toString();
-}

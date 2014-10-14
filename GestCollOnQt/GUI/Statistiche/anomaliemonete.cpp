@@ -66,7 +66,7 @@ void AnomalieMonete::checkLetteratura() {
               it != m->getDom()->letteratura().libro().end(); ++it) {
             QString sigla = QString::fromStdWString((*it).sigla());
             QString numero = QString::fromStdWString((*it).numero());
-            xml::Libro libro(sigla, numero);
+            Libro libro(sigla, numero);
             if (libro.toTooltip() == "") {
                 libri = libri + " | " + libro.sigla;
                 insert = true;

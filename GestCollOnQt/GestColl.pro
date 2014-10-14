@@ -213,7 +213,6 @@ HEADERS  +=    Common/commondata.h \
                Data/Link/links.hxx \
                Data/Vassoi/contenitori.hxx \
                Data/Vassoi/posizioni.h \
-               Data/genericitem.h \
                Data/Biblioteca/bibliotecaxml.h \
                GUI/Biblioteca/bibliotecaform.h \
                GUI/Links/linksform.h \

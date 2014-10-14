@@ -2,7 +2,6 @@
 #define MONETAXML_H
 
 #include <commondefs.h>
-#include <genericitem.h>
 #include <QString>
 #include <QFile>
 #include <QList>
@@ -10,6 +9,7 @@
 #include <QFileInfo>
 #include <scheda.hxx>
 #include <QSharedPointer>
+#include <QColor>
 #include "vassoioxml.h"
 
 using namespace gestColl::coins;

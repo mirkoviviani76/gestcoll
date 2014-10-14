@@ -2,9 +2,8 @@
 #define COMMONDEFS_H
 
 #include <QString>
-#include <genericitem.h>
-#include "bibliotecaxml.h"
 #include "commondata.h"
+#include "bibliotecaxml.h"
 #include <QDate>
 #include <QDebug>
 #include "scheda.hxx"
@@ -21,8 +20,6 @@ struct Asta
         int indexXml;
 };
 #endif
-
-
 
 namespace xml
 {
@@ -54,37 +51,15 @@ class Stato
         Stato(QString t="", QString val="") {this->colore = t; this->motivo = val;}
 };
 
-class Libro : public GenericItem
-{
-    public:
-        QString sigla;
-        QString numero;
-        virtual ~Libro() {}
-        Libro(QString a = "", QString b = "") {sigla = a; numero = b;}
-        QString toString(int column=-1);
-        inline QString toTooltip() {
-            BibliotecaItem* item = BibliotecaXml::getInstance()->getItem(sigla);
-            if (item != NULL) {
-                return item->toTooltip();
-            }
-            else {
-                return "";
-            }
-        }
-        inline QImage toImg() { return QImage(); }
-        inline QColor getColor() { return QColor(QColor::Invalid);}
-};
 
-class Ambito  : public GenericItem {
+
+class Ambito {
 public:
     QString titolo;
     QString icona;
     virtual ~Ambito() {}
     Ambito(QString _titolo, QString _icona);
-    QString toString(int column=-1);
     inline QString toTooltip() {return QString("%1").arg(titolo);}
-    inline QImage toImg() { return QImage(); }
-    inline QColor getColor() { return QColor(QColor::Invalid);}
 };
 
 class Info {
@@ -106,7 +81,23 @@ public:
     }
 };
 
-}
+} //namespace
+
+class Libro
+{
+    public:
+        QString sigla;
+        QString numero;
+        virtual ~Libro() {}
+        Libro(QString a = "", QString b = "") {sigla = a; numero = b;}
+        QString toString(int column=-1);
+        QString toTooltip();
+        //inline QColor getColor() { return QColor(QColor::Invalid);}
+
+        // Pubblicazione interface
+public:
+        bool lessThan(Libro *due);
+};
 
 
 Q_DECLARE_METATYPE(xml::Misura)

@@ -5,7 +5,6 @@
 #include <QSplashScreen>
 #include <QDesktopServices>
 #include <QMessageBox>
-#include <genericmodel.h>
 #include <commondata.h>
 #include <QFileInfo>
 #include <QDebug>

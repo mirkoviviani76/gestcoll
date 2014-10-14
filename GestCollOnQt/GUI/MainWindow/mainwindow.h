@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 
-#include <genericmodel.h>
 #include <bibliotecaitem.h>
 #include <aboutdialog.h>
 #include <texgenerator.h>

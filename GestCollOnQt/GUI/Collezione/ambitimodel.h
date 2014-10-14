@@ -15,8 +15,7 @@ public:
 
     QVariant data(const QModelIndex &index, int role) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    xml::Ambito* getItem(const QModelIndex &index);
-    xml::Ambito* getItem(int index);
+    xml::Ambito* getItem(const QModelIndex &index) const;
     void clear();
     bool appendRow(xml::Ambito* _item);
 
