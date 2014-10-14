@@ -9,6 +9,17 @@
 #include <QPainter>
 
 
+namespace {
+   namespace BibliotecaColumns {
+     enum BibliotecaColumns {
+         ID = 0,
+         AUTORI,
+         TITOLO
+     };
+   }
+}
+
+
 MyListView::MyListView(QWidget* parent)
     : QListWidget(parent)
 {
@@ -31,11 +42,9 @@ QWidget* BibliotecaDelegate::createEditor(QWidget *parent, const   QStyleOptionV
     Q_UNUSED(option);
     // create widget for use
     switch (index.column()) {
-    case 0:
-        return new QLineEdit(parent);
-    case 1:
-        return new QLineEdit(parent);
-    case 2:
+    case BibliotecaColumns::ID:
+    case BibliotecaColumns::AUTORI:
+    case BibliotecaColumns::TITOLO:
         return new QLineEdit(parent);
     }
 
@@ -45,9 +54,9 @@ QWidget* BibliotecaDelegate::createEditor(QWidget *parent, const   QStyleOptionV
 void BibliotecaDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const {
     // update model widget
     switch (index.column()) {
-    case 0:
-    case 1:
-    case 2:
+    case BibliotecaColumns::ID:
+    case BibliotecaColumns::AUTORI:
+    case BibliotecaColumns::TITOLO:
     {
         QString value = index.model()->data(index, Qt::EditRole).toString();
         QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
@@ -61,9 +70,9 @@ void BibliotecaDelegate::setEditorData(QWidget *editor, const QModelIndex &index
 void BibliotecaDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,   const QModelIndex &index) const {
     // store edited model data to model
     switch (index.column()) {
-    case 0:
-    case 1:
-    case 2:
+    case BibliotecaColumns::ID:
+    case BibliotecaColumns::AUTORI:
+    case BibliotecaColumns::TITOLO:
     {
         QLineEdit* editWidget = static_cast<QLineEdit*>(editor);
         model->setData(index, editWidget->text(), Qt::EditRole);
@@ -91,7 +100,7 @@ void BibliotecaDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     painter->translate(option.rect.topLeft());
 
     switch (index.column()) {
-    case 0:
+    case BibliotecaColumns::ID:
     {
         QLabel id(view);
         id.setText(item->toString(0));
@@ -99,7 +108,7 @@ void BibliotecaDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         id.render(painter);
     }
         break;
-    case 1:
+    case BibliotecaColumns::AUTORI:
     {
         MyListView autori(view);
         autori.addItems(item->getAutori());
@@ -107,7 +116,7 @@ void BibliotecaDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         autori.render(painter);
     }
         break;
-    case 2:
+    case BibliotecaColumns::TITOLO:
     {
         QLabel titolo(view);
         titolo.setText(item->toString(2));
@@ -122,14 +131,8 @@ void BibliotecaDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
 QSize BibliotecaDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    switch (index.column()) {
-    case 0:
-        return QStyledItemDelegate::sizeHint(option, index);
-    case 1:
+    if (index.column() == BibliotecaColumns::AUTORI)
         return QSize(100,100);
-    case 2:
+    else
         return QStyledItemDelegate::sizeHint(option, index);
-    }
-
-    return QStyledItemDelegate::sizeHint(option, index);
 }

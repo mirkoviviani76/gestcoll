@@ -2,14 +2,11 @@
 #include "commondata.h"
 #include <QDebug>
 
-BibliotecaItem::BibliotecaItem(QString id, QString titolo, QString filename, QStringList listaAutori, QStringList listaSupporti, QStringList listaArgomenti)
+BibliotecaItem::BibliotecaItem(QString _id, QString _titolo, QString _filename,
+                               QStringList _listaAutori, QStringList _listaSupporti, QStringList _listaArgomenti)
+ : id(_id), titolo(_titolo), filename(_filename), listaAutori(_listaAutori),
+   listaSupporti(_listaSupporti), listaArgomenti(_listaArgomenti)
 {
-    this->id = id;
-    this->titolo = titolo;
-    this->filename = filename;
-    this->listaAutori = listaAutori;
-    this->listaSupporti = listaSupporti;
-    this->listaArgomenti = listaArgomenti;
 }
 
 /**
