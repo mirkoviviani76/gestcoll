@@ -149,6 +149,8 @@ private slots:
     void on_actionVedi_Etichette_pdf_triggered();
     void on_actionAbout_Qt_triggered();
 
+    void selectBibliotecaItem(const BibliotecaItem* item);
+
 signals:
     void updateRange(int min, int max);
     void updateValue(int val);

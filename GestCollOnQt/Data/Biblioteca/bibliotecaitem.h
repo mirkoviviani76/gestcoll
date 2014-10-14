@@ -13,14 +13,17 @@ public:
     QString toString(int column=-1);
     QString getId() const {return id;}
     QString getTitolo() const {return titolo;}
+    QString getFilename() const {return filename;}
+    QStringList getAutori() {return this->listaAutori;}
+    QStringList getSupporti() const {return listaSupporti;}
+    QStringList getArgomenti() const {return listaArgomenti;}
 
     QString toTooltip();
-    QString toHtml();
     bool hasElectronicForm();
     virtual bool lessThan(BibliotecaItem* due);
     virtual bool operator<(BibliotecaItem* due) {return this->lessThan(due);}
     QColor getColor();
-    QStringList getAutori() {return this->listaAutori;}
+
 
 private:
     QString id;

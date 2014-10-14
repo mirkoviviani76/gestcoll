@@ -99,6 +99,7 @@ MonetaForm::MonetaForm(QWidget *parent) :
     connect(this->ui->note, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->letteratura, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
     connect(this->ui->documenti, SIGNAL(changesOccurred()), this, SIGNAL(changesOccurred()));
+    connect(this->ui->letteratura, SIGNAL(selectedBibliotecaItem(const BibliotecaItem*)), this, SIGNAL(selectedBibliotecaItem(const BibliotecaItem*)));
 }
 
 /**

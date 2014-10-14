@@ -1,5 +1,6 @@
 #include "letteraturaform.h"
 #include "ui_letteraturaform.h"
+#include "bibliotecaxml.h"
 
 LetteraturaForm::LetteraturaForm(QWidget *parent) :
     QGroupBox(parent),
@@ -88,4 +89,11 @@ void LetteraturaForm::on_removeLetteratura_clicked()
     //segnala la modifica
     emit this->changesOccurred();
 
+}
+
+void LetteraturaForm::on_letteraturaView_doubleClicked(const QModelIndex &index)
+{
+    gestColl::coins::letteratura::libro_type* libro = this->modelloLetteratura->getItem(index.row());
+    BibliotecaItem* currItem = BibliotecaXml::getInstance()->getItem(QString::fromStdWString(libro->sigla()));
+    emit selectedBibliotecaItem(currItem);
 }

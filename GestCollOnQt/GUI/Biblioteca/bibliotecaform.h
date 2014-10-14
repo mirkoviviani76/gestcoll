@@ -34,6 +34,9 @@ private slots:
     void on_listView_activated(QModelIndex index);
     void on_textBrowser_anchorClicked(const QUrl &arg1);
     void on_filter_textChanged(const QString &filterText);
+
+public slots:
+    bool selectItem(const BibliotecaItem* item);
 };
 
 #endif // BIBLIOTECAFORM_H

@@ -3,6 +3,7 @@
 
 #include <QGroupBox>
 #include "letteraturamodel.h"
+#include "bibliotecaitem.h"
 
 namespace Ui {
 class LetteraturaForm;
@@ -27,10 +28,13 @@ private:
 
 signals:
     void changesOccurred();
+    void selectedBibliotecaItem(const BibliotecaItem* item);
 
 private slots:
     void on_addLetteratura_clicked();
     void on_removeLetteratura_clicked();
+    void on_letteraturaView_doubleClicked(const QModelIndex &index);
+
 };
 
 #endif // LETTERATURAFORM_H

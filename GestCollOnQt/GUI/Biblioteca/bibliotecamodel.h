@@ -17,6 +17,7 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     BibliotecaItem* getItem(const QModelIndex &index);
     BibliotecaItem* getItem(int index);
+    QModelIndex getIndex(const BibliotecaItem* item);
     void clear();
     bool appendRow(BibliotecaItem* _item);
 
