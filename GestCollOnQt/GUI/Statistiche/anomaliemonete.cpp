@@ -65,10 +65,9 @@ void AnomalieMonete::checkLetteratura() {
         for ( ::gestColl::coins::letteratura::libro_iterator it = m->getDom()->letteratura().libro().begin();
               it != m->getDom()->letteratura().libro().end(); ++it) {
             QString sigla = QString::fromStdWString((*it).sigla());
-            QString numero = QString::fromStdWString((*it).numero());
-            Libro libro(sigla, numero);
-            if (libro.toTooltip() == "") {
-                libri = libri + " | " + libro.sigla;
+            BibliotecaItem* item = BibliotecaXml::getInstance()->getItem(sigla);
+            if (item == NULL) {
+                libri = libri + " | " + sigla;
                 insert = true;
             }
         }

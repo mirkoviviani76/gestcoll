@@ -83,6 +83,7 @@ public:
 
 } //namespace
 
+/*
 class Libro
 {
     public:
@@ -98,7 +99,7 @@ class Libro
 public:
         bool lessThan(Libro *due);
 };
-
+*/
 
 Q_DECLARE_METATYPE(xml::Misura)
 
