@@ -10,6 +10,7 @@
 
 extern QSplashScreen* splash;
 
+
 BibliotecaXml* BibliotecaXml::instance_ptr = NULL;
 
 

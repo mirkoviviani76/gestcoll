@@ -19,4 +19,4 @@ IPOTESI
 - immagine delle sigle di zecchieri
 - immagine delle sigle di zecca
 - aggiunta possiblita' di inserire foto di "particolari"
-
+- tirare dentro le legende del rentzmann

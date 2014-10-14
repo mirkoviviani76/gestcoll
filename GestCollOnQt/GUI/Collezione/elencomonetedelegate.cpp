@@ -1,6 +1,5 @@
 #include "elencomonetedelegate.h"
 
-#include "genericmodel.h"
 #include "monetaxml.h"
 
 

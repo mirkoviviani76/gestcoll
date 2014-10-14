@@ -1,13 +1,13 @@
 #ifndef BIBLIOTECAITEM_H
 #define BIBLIOTECAITEM_H
 
-#include <genericitem.h>
 #include <QString>
 #include <QStringList>
+#include <QImage>
+#include <QColor>
 
-class BibliotecaItem: public GenericItem
+class BibliotecaItem
 {
-    Q_OBJECT
 public:
     BibliotecaItem(QString id, QString titolo, QString filename, QStringList listaAutori, QStringList listaSupporti, QStringList listaArgomenti);
     QString toString(int column=-1);
@@ -15,8 +15,8 @@ public:
     QString toHtml();
     bool hasElectronicForm();
     inline QImage toImg() { return QImage(); }
-    virtual bool lessThan(GenericItem* due);
-    virtual bool operator<(GenericItem* due) {return this->lessThan(due);}
+    virtual bool lessThan(BibliotecaItem* due);
+    virtual bool operator<(BibliotecaItem* due) {return this->lessThan(due);}
     QColor getColor();
     QStringList getAutori() {return this->listaAutori;}
 

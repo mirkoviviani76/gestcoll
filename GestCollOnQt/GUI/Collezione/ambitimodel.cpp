@@ -23,7 +23,7 @@ void AmbitiModel::clear()
 int AmbitiModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return 3;
+    return 2;
 }
 
 bool AmbitiModel::appendRow(xml::Ambito *_item) {
@@ -42,10 +42,17 @@ QVariant AmbitiModel::data(const QModelIndex &index, int role) const
     if (index.row() >= this->rowCount() || index.row() < 0)
         return QVariant();
 
-    xml::Ambito* item = this->items.at(index.row());
+    xml::Ambito* item = this->getItem(index);
 
     if (role == Qt::DisplayRole) {
-        return item->toString(index.column());
+        switch (index.column()) {
+        case 0:
+            return item->titolo;
+        case 1:
+            return item->icona;
+        default:
+            return "UNKNOWN COLUMN NR";
+        }
     }
 
     return QVariant();
@@ -59,12 +66,8 @@ int AmbitiModel::rowCount(const QModelIndex &parent) const
 }
 
 
-xml::Ambito* AmbitiModel::getItem(const QModelIndex &index)
+xml::Ambito* AmbitiModel::getItem(const QModelIndex &index) const
 {
+    assert (this->items.count() >= index.row());
     return this->items.at(index.row());
-}
-
-xml::Ambito* AmbitiModel::getItem(int index)
-{
-    return this->items.at(index);
 }

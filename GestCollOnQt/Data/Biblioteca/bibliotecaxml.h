@@ -2,9 +2,11 @@
 #define BIBLIOTECA_H
 
 #include <biblioteca.hxx>
-#include "bibliotecaitem.h"
 
 #include <QMap>
+
+#include "bibliotecaitem.h"
+
 
 /**
  * @brief classe per gestire il file contenente la biblioteca
