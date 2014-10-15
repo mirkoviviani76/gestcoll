@@ -23,7 +23,7 @@ BibliotecaForm::BibliotecaForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->model = new BibliotecaSortFilterProxyModel();
+    this->model = new BibliotecaSortFilterProxyModel(this);
     this->setEditable(false);
     //this->ui->listView->setItemDelegate(new BibliotecaDelegate(this));
     this->ui->listView->verticalHeader()->setVisible(false);
@@ -33,13 +33,6 @@ BibliotecaForm::BibliotecaForm(QWidget *parent) :
 BibliotecaForm::~BibliotecaForm()
 {
     delete ui;
-
-    if (this->model != NULL) {
-        this->model->clear();
-        delete this->model;
-        this->model = NULL;
-    }
-
 }
 
 void BibliotecaForm::setEditable(bool editable)
@@ -87,32 +80,36 @@ void BibliotecaForm::on_listView_activated(QModelIndex index)
     assert (item != NULL);
 
     QString autori = "";
-    QString supporti = "";
-    QString argomenti = "";
-    QString filename = "";
     foreach (QString a, item->getAutori()) {
-        autori.append(QString("<li>%1").arg(a));
+        autori.append(QString("<li>%1</li>").arg(a));
     }
+    QString argomenti = "";
     foreach (QString a, item->getArgomenti()) {
-        argomenti.append(QString("<li>%1").arg(a));
-    }
-    foreach (QString s, item->getSupporti()) {
-        supporti.append(s);
+        argomenti.append(QString("<li>%1</li>").arg(a));
     }
 
+    QString filename = "";
     if (item->getFilename() != "")
         filename = QString("%1/%2")
                 .arg(CommonData::getInstance()->getBiblioDir())
                 .arg(item->getFilename());
 
-    QString html = QString("<h2>%1 [%2]</h2><h3>Autori</h3><ul>%3</ul><h3>Supporti</h3>%4<br /><a href=\"%5\">%5</a><h4>Argomenti</h4>%6")
+    QString supporti = item->getSupporti().join("");
+
+    QString html = QString("<h2>%1 [%2]</h2> \
+                           <h3>Autori</h3> \
+                           <ul>%3</ul> \
+                           <h3>Supporti</h3> \
+                           %4<br /> \
+                           <a href=\"%5\">%5</a> \
+                           <h4>Argomenti</h4> \
+                           %6")
             .arg(item->getTitolo())
             .arg(item->getId())
             .arg(autori)
             .arg(supporti)
             .arg(filename)
-            .arg(argomenti)
-            ;
+            .arg(argomenti);
 
     this->ui->textBrowser->setHtml(html);
 }

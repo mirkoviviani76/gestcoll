@@ -251,6 +251,36 @@ namespace gestColl
       this->filename_.set (x);
     }
 
+    const librotype::argomenti_optional& librotype::
+    argomenti () const
+    {
+      return this->argomenti_;
+    }
+
+    librotype::argomenti_optional& librotype::
+    argomenti ()
+    {
+      return this->argomenti_;
+    }
+
+    void librotype::
+    argomenti (const argomenti_type& x)
+    {
+      this->argomenti_.set (x);
+    }
+
+    void librotype::
+    argomenti (const argomenti_optional& x)
+    {
+      this->argomenti_ = x;
+    }
+
+    void librotype::
+    argomenti (::std::auto_ptr< argomenti_type > x)
+    {
+      this->argomenti_.set (x);
+    }
+
 
     // libri
     // 
@@ -748,7 +778,8 @@ namespace gestColl
       autori_ (::xml_schema::flags (), this),
       titolo_ (titolo, ::xml_schema::flags (), this),
       supporti_ (::xml_schema::flags (), this),
-      filename_ (::xml_schema::flags (), this)
+      filename_ (::xml_schema::flags (), this),
+      argomenti_ (::xml_schema::flags (), this)
     {
     }
 
@@ -761,7 +792,8 @@ namespace gestColl
       autori_ (x.autori_, f, this),
       titolo_ (x.titolo_, f, this),
       supporti_ (x.supporti_, f, this),
-      filename_ (x.filename_, f, this)
+      filename_ (x.filename_, f, this),
+      argomenti_ (x.argomenti_, f, this)
     {
     }
 
@@ -774,7 +806,8 @@ namespace gestColl
       autori_ (f, this),
       titolo_ (f, this),
       supporti_ (f, this),
-      filename_ (f, this)
+      filename_ (f, this),
+      argomenti_ (f, this)
     {
       if ((f & ::xml_schema::flags::base) == 0)
       {
@@ -859,6 +892,20 @@ namespace gestColl
           if (!this->filename_)
           {
             this->filename_.set (r);
+            continue;
+          }
+        }
+
+        // argomenti
+        //
+        if (n.name () == L"argomenti" && n.namespace_ () == L"http://gestColl/biblioteca")
+        {
+          ::std::auto_ptr< argomenti_type > r (
+            argomenti_traits::create (i, f, this));
+
+          if (!this->argomenti_)
+          {
+            this->argomenti_.set (r);
             continue;
           }
         }
@@ -1762,6 +1809,19 @@ namespace gestColl
             e));
 
         s << *i.filename ();
+      }
+
+      // argomenti
+      //
+      if (i.argomenti ())
+      {
+        ::xercesc::DOMElement& s (
+          ::xsd::cxx::xml::dom::create_element (
+            L"argomenti",
+            L"http://gestColl/biblioteca",
+            e));
+
+        s << *i.argomenti ();
       }
     }
 

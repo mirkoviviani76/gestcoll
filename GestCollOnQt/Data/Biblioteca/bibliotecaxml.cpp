@@ -137,9 +137,19 @@ void BibliotecaXml::readData()
         if (it->filename().present())
             filename = QString::fromStdWString(it->filename().get());
 
+        /* estrae gli argomenti */
+        QStringList listaArgomenti;
+        if (it->argomenti().present())
+        {
+            foreach (::gestColl::biblioteca::argomenti::argomento_type arg, it->argomenti().get().argomento()) {
+                listaArgomenti << QString::fromStdWString(arg);
+            }
+
+        }
+
 
         /* aggiorna la vista */
-        BibliotecaItem* item = new BibliotecaItem(id, titolo, filename, listaAutori, listaSupporti, QStringList());
+        BibliotecaItem* item = new BibliotecaItem(id, titolo, filename, listaAutori, listaSupporti, listaArgomenti);
         QString arguedId = this->getArguedId(id);
         if (this->items.contains(arguedId)) {
             Log::Logger::getInstance()->log(QString("Trovato id duplicato: %1").arg(id), Log::ERR);
