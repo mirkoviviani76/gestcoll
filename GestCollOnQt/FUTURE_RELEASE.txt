@@ -3,7 +3,6 @@ BUGFIXING
 
 FUTURE
 - migliorare gestione biblioteca (aggiunta/modifica)
-- schema biblioteca: per ogni libro aggiungere gli ambiti
 - visualizzare gli ambiti nell'elenco libri
 - gestione vassoi (aggiunta/modifica/cancellazione)
 - gestione icone per gli ambiti della collezione

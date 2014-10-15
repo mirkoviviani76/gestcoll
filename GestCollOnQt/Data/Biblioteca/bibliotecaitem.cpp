@@ -17,14 +17,6 @@ bool BibliotecaItem::lessThan(BibliotecaItem* d)
     return this->titolo < d->titolo;
 }
 
-QColor BibliotecaItem::getColor() {
-    if (hasElectronicForm())
-        return Qt::green;
-    else
-        return Qt::white;
-}
-
-
 bool BibliotecaItem::hasElectronicForm() {
     return this->listaSupporti.contains("E", Qt::CaseInsensitive);
 }

@@ -1436,6 +1436,82 @@ namespace gestColl
       //@}
 
       /**
+       * @name argomenti
+       *
+       * @brief Accessor and modifier functions for the %argomenti
+       * optional element.
+       */
+      //@{
+
+      /**
+       * @brief Element type.
+       */
+      typedef ::gestColl::biblioteca::argomenti argomenti_type;
+
+      /**
+       * @brief Element optional container type.
+       */
+      typedef ::xsd::cxx::tree::optional< argomenti_type > argomenti_optional;
+
+      /**
+       * @brief Element traits type.
+       */
+      typedef ::xsd::cxx::tree::traits< argomenti_type, wchar_t > argomenti_traits;
+
+      /**
+       * @brief Return a read-only (constant) reference to the element
+       * container.
+       *
+       * @return A constant reference to the optional container.
+       */
+      const argomenti_optional&
+      argomenti () const;
+
+      /**
+       * @brief Return a read-write reference to the element container.
+       *
+       * @return A reference to the optional container.
+       */
+      argomenti_optional&
+      argomenti ();
+
+      /**
+       * @brief Set the element value.
+       *
+       * @param x A new value to set.
+       *
+       * This function makes a copy of its argument and sets it as
+       * the new value of the element.
+       */
+      void
+      argomenti (const argomenti_type& x);
+
+      /**
+       * @brief Set the element value.
+       *
+       * @param x An optional container with the new value to set.
+       *
+       * If the value is present in @a x then this function makes a copy 
+       * of this value and sets it as the new value of the element.
+       * Otherwise the element container is set the 'not present' state.
+       */
+      void
+      argomenti (const argomenti_optional& x);
+
+      /**
+       * @brief Set the element value without copying.
+       *
+       * @param p A new value to use.
+       *
+       * This function will try to use the passed value directly instead
+       * of making a copy.
+       */
+      void
+      argomenti (::std::auto_ptr< argomenti_type > p);
+
+      //@}
+
+      /**
        * @name Constructors
        */
       //@{
@@ -1511,6 +1587,7 @@ namespace gestColl
       ::xsd::cxx::tree::one< titolo_type > titolo_;
       supporti_optional supporti_;
       filename_optional filename_;
+      argomenti_optional argomenti_;
 
       //@endcond
     };

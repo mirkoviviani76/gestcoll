@@ -27,6 +27,7 @@ ModelloBiblioteca::~ModelloBiblioteca()
 void ModelloBiblioteca::clear()
 {
     this->beginResetModel();
+    items.clear();
     this->endResetModel();
 }
 
@@ -73,7 +74,9 @@ QVariant ModelloBiblioteca::data(const QModelIndex &index, int role) const
         case BibliotecaColumns::TITOLO:
             return item->getTitolo();
         }
-
+    } else if (role == Qt::BackgroundColorRole) {
+        if (item->hasElectronicForm())
+            return QColor(Qt::green);
     }
 
     return QVariant();

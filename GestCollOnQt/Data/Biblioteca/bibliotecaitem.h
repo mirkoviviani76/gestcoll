@@ -22,7 +22,6 @@ public:
     bool hasElectronicForm();
     virtual bool lessThan(BibliotecaItem* due);
     virtual bool operator<(BibliotecaItem* due) {return this->lessThan(due);}
-    QColor getColor();
 
 
 private:
