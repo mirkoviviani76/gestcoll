@@ -39,7 +39,7 @@ private:
      */
     QMap<QString, MonetaXml*> moneteInCollezione;
 
-    xml::Info* info;
+    xml::InfoCollezione* infoCollezione;
 
 
 public:
@@ -98,7 +98,7 @@ public:
      *
      * @return xml::Info le info
      */
-    xml::Info *getInfo();
+    xml::InfoCollezione *getInfo();
 
 
     /**
@@ -106,7 +106,7 @@ public:
      *
      * @param info le info
      */
-    void setInfo(xml::Info *info);
+    void setInfo(xml::InfoCollezione *infoCollezione);
 
     void addAmbito(xml::Ambito* a);
 

@@ -55,20 +55,25 @@ class Stato
 
 class Ambito {
 public:
+    Ambito(QString _titolo, QString _icona);
+    virtual ~Ambito() {}
+    inline QString getTitolo() const {return titolo;}
+    inline QString getIcona() const {return icona;}
+    inline void setTitolo(const QString& _t) {titolo = _t;}
+    inline void setIcona(const QString& _i) {icona = _i;}
+private:
     QString titolo;
     QString icona;
-    virtual ~Ambito() {}
-    Ambito(QString _titolo, QString _icona);
-    inline QString toTooltip() {return QString("%1").arg(titolo);}
+
 };
 
-class Info {
+class InfoCollezione {
 public:
     QString titolo;
     QString proprietario;
     QDate inizio;
     QList<Ambito*> ambiti;
-    virtual ~Info() {
+    virtual ~InfoCollezione() {
         foreach(Ambito* a, ambiti) {
             if (a != NULL) {
                 delete a;

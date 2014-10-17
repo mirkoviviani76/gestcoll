@@ -53,10 +53,10 @@ QVariant VassoioModel::data(const QModelIndex &index, int role) const
 
         return completeLabel;
     }
+#if 0
     //FIXME funziona, ma troppo lento
-#ifdef SHOW_LITTLE_COINS
     else if (role == Qt::DecorationRole) {
-        return item->toImg().scaledToHeight(50, Qt::SmoothTransformation);
+        return item->getImmagineComposita().scaledToHeight(50, Qt::FastTransformation);
     }
 #endif
     else if (role == Qt::ToolTipRole) {

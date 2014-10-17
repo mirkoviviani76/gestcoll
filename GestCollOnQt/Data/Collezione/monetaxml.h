@@ -46,7 +46,6 @@ public:
     virtual ~MonetaXml();
     inline QColor getColor() { return QColor::Invalid;}
     QString toTooltip();
-    QImage toImg();
     QString getId() const;
     xml::Stato getStato();
     QList<xml::Ambito*> getAmbiti();
@@ -59,13 +58,18 @@ public:
     void setPosizione(int cont, int vass, int r, int c);
     void setAmbiti(QList<xml::Ambito*> ambiti);
 
+    QImage* getIcona() {return icona;}
+#if 0
+    QImage getImmagineComposita();
+#endif
+
     QSharedPointer<moneta> getDom() {return this->mon;}
 
 private:
     //Moneta::MonetaOrdering sortingType;
     QSharedPointer<moneta> mon;
-    QImage* image;
-    void updateImage();
+    QImage* icona;
+    void aggiornaIcona();
     QList<xml::Ambito*> xmlAmbiti;
 
     void deleteAmbitiList();

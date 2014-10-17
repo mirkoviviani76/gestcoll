@@ -96,10 +96,10 @@ bool CollezioneSortFilterProxyModel::lessThan(const QModelIndex &left, const QMo
         QStringList a1;
         QStringList a2;
         foreach (xml::Ambito* a, l->getAmbiti()) {
-            a1 << a->titolo;
+            a1 << a->getTitolo();
         }
         foreach (xml::Ambito* a, r->getAmbiti()) {
-            a2 << a->titolo;
+            a2 << a->getTitolo();
         }
 
         ret = (a1.join(' ') < a2.join(' '));

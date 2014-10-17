@@ -12,9 +12,7 @@ IPOTESI
 - gestione aste
 - migliore libreria per la generazione dei grafici
 - galleria di tutte le foto
-- possibilita'  di caricare xml diversi per collezioni diverse (i vassoi andrebbero messi nell'xml della collezione)
 - includere i documenti addizionali nel tex
-- scegliere se, ad esempio, salvare solo le modifiche alla collezione e scartare le modifiche ai link)
 - immagine delle sigle di zecchieri
 - immagine delle sigle di zecca
 - aggiunta possiblita' di inserire foto di "particolari"

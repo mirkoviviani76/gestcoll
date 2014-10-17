@@ -54,7 +54,7 @@ void SetCollezioneInfoDialog::on_buttonBox_accepted()
 void SetCollezioneInfoDialog::on_ambiti_doubleClicked(const QModelIndex &index)
 {
     xml::Ambito* a = this->ambitiModel->getItem(index);
-    xml::Ambito vecchio(a->titolo, a->icona);
+    xml::Ambito vecchio(a->getTitolo(), a->getIcona());
     ModifyAmbitoDialog modifyAmbito(a, this);
     int ret = modifyAmbito.exec();
     if (ret == QDialog::Accepted) {
@@ -62,8 +62,8 @@ void SetCollezioneInfoDialog::on_ambiti_doubleClicked(const QModelIndex &index)
         //modifica l'ambito nelle monete
         CollezioneXml::getInstance()->updateAmbitiInCoins(vecchio, *a);
     } else {
-        a->titolo = vecchio.titolo;
-        a->icona = vecchio.icona;
+        a->getTitolo() = vecchio.getTitolo();
+        a->getIcona() = vecchio.getIcona();
     }
 }
 

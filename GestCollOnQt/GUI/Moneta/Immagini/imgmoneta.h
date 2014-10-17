@@ -14,7 +14,7 @@ public:
     void setupImg(const QString& file);
     void mouseDoubleClickEvent (QMouseEvent * event);
     virtual ~ImgMoneta();
-    QString getFilename();
+    QString getFilename() const;
 private:
     QString fileImg;
 signals:
