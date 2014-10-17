@@ -8,12 +8,12 @@ SetAmbitoDialog::SetAmbitoDialog(QList<xml::Ambito*> ambiti, QList<xml::Ambito*>
     ui->setupUi(this);
 
     foreach(xml::Ambito* a, ambiti) {
-        QCheckBox* cb = new QCheckBox(a->titolo, this->ui->ambitiContainer);
+        QCheckBox* cb = new QCheckBox(a->getTitolo(), this->ui->ambitiContainer);
         this->ui->ambitiContainer->layout()->addWidget(cb);
         this->mappa[cb] = a;
         /* setta se presente */
         foreach(xml::Ambito* b, ambitiPresenti) {
-            if (b->titolo == a->titolo) {
+            if (b->getTitolo() == a->getTitolo()) {
                 cb->setChecked(true);
                 this->mappa[cb] = b;
                 break;

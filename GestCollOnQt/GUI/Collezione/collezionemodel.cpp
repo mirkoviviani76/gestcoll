@@ -49,7 +49,7 @@ QVariant CollezioneModel::data(const QModelIndex &index, int role) const
     }
     if (role == Qt::DecorationRole && index.column() == 0)
     {
-        return item->toImg();
+        return *(item->getIcona());
     }
     if (role == Qt::DisplayRole)
     {
@@ -79,7 +79,7 @@ QVariant CollezioneModel::data(const QModelIndex &index, int role) const
         {
             QStringList myambiti;
             foreach (xml::Ambito* a, item->getAmbiti()) {
-                myambiti << a->titolo;
+                myambiti << a->getTitolo();
             }
             return myambiti.join(" | ");
         }

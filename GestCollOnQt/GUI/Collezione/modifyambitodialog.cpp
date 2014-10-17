@@ -7,8 +7,8 @@ ModifyAmbitoDialog::ModifyAmbitoDialog(xml::Ambito* a, QWidget *parent) :
     ui(new Ui::ModifyAmbitoDialog)
 {
     ui->setupUi(this);
-    this->ui->titolo->setText(a->titolo);
-    this->ui->icona->setText(a->icona);
+    this->ui->titolo->setText(a->getTitolo());
+    this->ui->icona->setText(a->getIcona());
     this->ambito = a;
 }
 
@@ -27,8 +27,8 @@ ModifyAmbitoDialog::~ModifyAmbitoDialog()
 }
 
 xml::Ambito* ModifyAmbitoDialog::getData() {
-    this->ambito->titolo = this->ui->titolo->text();
-    this->ambito->icona = this->ui->icona->text();
+    this->ambito->setTitolo(this->ui->titolo->text());
+    this->ambito->setIcona(this->ui->icona->text());
     return this->ambito;
 }
 

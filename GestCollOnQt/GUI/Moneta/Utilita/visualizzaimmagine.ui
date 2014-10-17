@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>409</width>
-    <height>300</height>
+    <width>593</width>
+    <height>199</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,11 +16,111 @@
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <property name="margin">
-    <number>0</number>
-   </property>
-   <item row="1" column="0" colspan="8">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="antiorario45">
+       <property name="whatsThis">
+        <string>ruota di 45 gradi a sinistra</string>
+       </property>
+       <property name="text">
+        <string>-45°</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="antiorario5">
+       <property name="whatsThis">
+        <string>ruota di 5 gradi a sinistra</string>
+       </property>
+       <property name="text">
+        <string>-5°</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ripristina">
+       <property name="text">
+        <string>Ripristina</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="orario5">
+       <property name="whatsThis">
+        <string>ruota di 5 gradi a destra</string>
+       </property>
+       <property name="text">
+        <string>+5°</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="orario45">
+       <property name="whatsThis">
+        <string>ruota di 45 gradi a destra</string>
+       </property>
+       <property name="text">
+        <string>+45°</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="zoompiu">
+       <property name="toolTip">
+        <string>zoom-in</string>
+       </property>
+       <property name="whatsThis">
+        <string>ingrandisci</string>
+       </property>
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="zoommeno">
+       <property name="toolTip">
+        <string>zoom-out</string>
+       </property>
+       <property name="whatsThis">
+        <string>riduci</string>
+       </property>
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QGraphicsView" name="graphicsView">
      <property name="dragMode">
       <enum>QGraphicsView::ScrollHandDrag</enum>
@@ -29,92 +129,6 @@
       <enum>QGraphicsView::NoAnchor</enum>
      </property>
     </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QPushButton" name="antiorario5">
-     <property name="whatsThis">
-      <string>ruota di 5 gradi a sinistra</string>
-     </property>
-     <property name="text">
-      <string>-5</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="3">
-    <widget class="QPushButton" name="orario5">
-     <property name="whatsThis">
-      <string>ruota di 5 gradi a destra</string>
-     </property>
-     <property name="text">
-      <string>+5</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QPushButton" name="ripristina">
-     <property name="text">
-      <string>Ripristina</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QPushButton" name="antiorario45">
-     <property name="whatsThis">
-      <string>ruota di 45 gradi a sinistra</string>
-     </property>
-     <property name="text">
-      <string>-45</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="4">
-    <widget class="QPushButton" name="orario45">
-     <property name="whatsThis">
-      <string>ruota di 45 gradi a destra</string>
-     </property>
-     <property name="text">
-      <string>+45</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="6">
-    <widget class="QPushButton" name="zoompiu">
-     <property name="toolTip">
-      <string>zoom-in</string>
-     </property>
-     <property name="whatsThis">
-      <string>ingrandisci</string>
-     </property>
-     <property name="text">
-      <string>+</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="7">
-    <widget class="QPushButton" name="zoommeno">
-     <property name="toolTip">
-      <string>zoom-out</string>
-     </property>
-     <property name="whatsThis">
-      <string>riduci</string>
-     </property>
-     <property name="text">
-      <string>-</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="5">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>

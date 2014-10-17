@@ -32,9 +32,9 @@ CollezioneXml::~CollezioneXml() {
     }
 
     this->moneteInCollezione.clear();
-    if (this->info != NULL) {
-        delete this->info;
-        this->info = NULL;
+    if (this->infoCollezione != NULL) {
+        delete this->infoCollezione;
+        this->infoCollezione = NULL;
     }
 
 }
@@ -52,16 +52,16 @@ void CollezioneXml::readData(QString xmlFile) {
         }
 
         /* carica i dati delle info */
-        this->info = new xml::Info;
+        this->infoCollezione = new xml::InfoCollezione;
         QString proprietario = QString::fromStdWString(this->collezione->info().proprietario());
-        this->info->proprietario = proprietario;
+        this->infoCollezione->proprietario = proprietario;
 
         QString titolo = QString::fromStdWString(this->collezione->info().titolo());
-        this->info->titolo = titolo;
+        this->infoCollezione->titolo = titolo;
 
         ::info::inizio_type inizioXml = this->collezione->info().inizio();
         QDate inizio(inizioXml.year(), inizioXml.month(), inizioXml.day());
-        this->info->inizio = inizio;
+        this->infoCollezione->inizio = inizio;
 
         foreach (gestColl::coins::ambito a, this->collezione->info().ambiti().ambito()) {
             QString titolo = QString::fromStdWString(a.titolo());
@@ -71,7 +71,7 @@ void CollezioneXml::readData(QString xmlFile) {
             }
 
             xml::Ambito* ambito = new xml::Ambito(titolo, icon);
-            this->info->add(ambito);
+            this->infoCollezione->add(ambito);
         }
     }
 }
@@ -237,23 +237,23 @@ bool CollezioneXml::save()
 }
 
 
-xml::Info* CollezioneXml::getInfo() {
-    return this->info;
+xml::InfoCollezione* CollezioneXml::getInfo() {
+    return this->infoCollezione;
 }
 
-void CollezioneXml::setInfo(xml::Info* _info) {
-    this->info = _info;
+void CollezioneXml::setInfo(xml::InfoCollezione* _info) {
+    this->infoCollezione = _info;
 
     /* salva i dati delle info nel dom */
-    this->collezione->info().proprietario(this->info->proprietario.toStdWString());
-    this->collezione->info().titolo(this->info->titolo.toStdWString());
-    gestColl::coins::info::inizio_type xmlInizio(this->info->inizio.year(), this->info->inizio.month(), this->info->inizio.day());
+    this->collezione->info().proprietario(this->infoCollezione->proprietario.toStdWString());
+    this->collezione->info().titolo(this->infoCollezione->titolo.toStdWString());
+    gestColl::coins::info::inizio_type xmlInizio(this->infoCollezione->inizio.year(), this->infoCollezione->inizio.month(), this->infoCollezione->inizio.day());
     this->collezione->info().inizio(xmlInizio);
 
     gestColl::coins::ambiti::ambito_sequence let;
-    foreach (xml::Ambito* a, this->info->ambiti) {
-        gestColl::coins::ambito curAmbito(a->titolo.toStdWString());
-        curAmbito.icon(a->icona.toStdWString());
+    foreach (xml::Ambito* a, this->infoCollezione->ambiti) {
+        gestColl::coins::ambito curAmbito(a->getTitolo().toStdWString());
+        curAmbito.icon(a->getIcona().toStdWString());
         let.push_back(curAmbito);
     }
     this->collezione->info().ambiti().ambito(let);
@@ -261,7 +261,7 @@ void CollezioneXml::setInfo(xml::Info* _info) {
 
 
 void CollezioneXml::addAmbito(xml::Ambito *a) {
-    this->info->ambiti.append(a);
+    this->infoCollezione->ambiti.append(a);
 }
 
 void CollezioneXml::updateAmbitiInCoins(const xml::Ambito& vecchio, const xml::Ambito& nuovo) {

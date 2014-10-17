@@ -86,11 +86,11 @@ QString Posizione::toString(const QString &separator)
  * @param _file il file xml
 */
 MonetaXml::MonetaXml(const moneta& m, QObject* parent) :
-    QObject(parent), image(NULL)
+    QObject(parent), icona(NULL)
 {
     this->mon = QSharedPointer<moneta>(new moneta(m));
     //this->setOrdering(Moneta::BY_ID);
-    this->updateImage();
+    this->aggiornaIcona();
     this->fillAmbiti();
 }
 
@@ -98,7 +98,7 @@ MonetaXml::MonetaXml(moneta *m, QObject *parent) :
     QObject(parent), mon(m)
 {
     //this->setOrdering(Moneta::BY_ID);
-    this->updateImage();
+    this->aggiornaIcona();
     this->fillAmbiti();
 }
 
@@ -109,9 +109,9 @@ MonetaXml::MonetaXml(moneta *m, QObject *parent) :
 */
 MonetaXml::~MonetaXml()
 {
-    if (this->image != NULL) {
-        delete this->image;
-        this->image = NULL;
+    if (this->icona != NULL) {
+        delete this->icona;
+        this->icona = NULL;
     }
     deleteAmbitiList();
 
@@ -152,7 +152,7 @@ QString MonetaXml::toTooltip()
 {
     QStringList ambitiAsStrings;
     foreach(xml::Ambito* a, this->getAmbiti()) {
-        ambitiAsStrings << a->titolo;
+        ambitiAsStrings << a->getTitolo();
     }
     ambitiAsStrings.sort();
     QString ambiti = "";
@@ -172,18 +172,12 @@ QString MonetaXml::toTooltip()
     return data;
 }
 
-/**
-  Ottiene l'icona della moneta
-  */
-QImage MonetaXml::toImg() {
-    return *(this->image);
-}
 
-void MonetaXml::updateImage() {
-    if (this->image != NULL)
-        delete this->image;
-    this->image = new QImage(16,16, QImage::Format_ARGB32);
-    QPainter painter(image);
+void MonetaXml::aggiornaIcona() {
+    if (this->icona != NULL)
+        delete this->icona;
+    this->icona = new QImage(16,16, QImage::Format_ARGB32);
+    QPainter painter(icona);
     QPen drawPen(Qt::black, 1);
     xml::Stato stato = this->getStato();
     QString color = stato.colore;
@@ -240,7 +234,7 @@ xml::Stato MonetaXml::getStato() {
 void MonetaXml::setStato(xml::Stato& nuovo) {
     gestColl::coins::stato s(nuovo.colore.toStdWString(), nuovo.motivo.toStdWString());
     this->mon->stato(s);
-    this->updateImage();
+    this->aggiornaIcona();
 }
 
 
@@ -275,13 +269,28 @@ void MonetaXml::setPosizione(int cont, int vass, int r, int c)
 void MonetaXml::setAmbiti(QList<xml::Ambito*> ambiti) {
     gestColl::coins::moneta::ambiti_type let;
     foreach(xml::Ambito* a, ambiti) {
-        ::gestColl::coins::ambito curAmbito(a->titolo.toStdWString());
+        ::gestColl::coins::ambito curAmbito(a->getTitolo().toStdWString());
         //TODO verificare se va messa anche l'icona, forse no.
         let.ambito().push_back(curAmbito);
     }
     this->mon->ambiti(let);
     this->fillAmbiti();
 }
+
+#if 0
+QImage MonetaXml::getImmagineComposita()
+{
+    QString imgDritto;
+    QString imgRovescio;
+    if (this->getDom()->datiArtistici().dritto().fileImmagine().present()) {
+        imgDritto = QString("%1/%2")
+                .arg(CommonData::getInstance()->getImgDir())
+                .arg(QString::fromStdWString(this->getDom()->datiArtistici().dritto().fileImmagine().get()));
+    }
+    return QImage(imgDritto);
+
+}
+#endif
 
 
 bool MonetaXml::updateAmbiti(const xml::Ambito& vecchio, const xml::Ambito& nuovo) {
@@ -291,8 +300,9 @@ bool MonetaXml::updateAmbiti(const xml::Ambito& vecchio, const xml::Ambito& nuov
     foreach(xml::Ambito* a, this->getAmbiti()) {
         //viene controllato solo il titolo.
         //TODO verifica
-        if ((a->titolo == vecchio.titolo)) {
-            a->titolo = nuovo.titolo;
+        if (a->getTitolo() == vecchio.getTitolo()) {
+            QString t = nuovo.getTitolo();
+            a->setTitolo(t);
             correnti.append(a);
             ret = true;
         }

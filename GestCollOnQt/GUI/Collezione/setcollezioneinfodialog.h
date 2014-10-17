@@ -28,7 +28,7 @@ private slots:
 private:
     Ui::SetCollezioneInfoDialog *ui;
     AmbitiModel* ambitiModel;
-    xml::Info* info;
+    xml::InfoCollezione* info;
     QMenu contextMenu;
 
 

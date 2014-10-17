@@ -47,9 +47,9 @@ QVariant AmbitiModel::data(const QModelIndex &index, int role) const
     if (role == Qt::DisplayRole) {
         switch (index.column()) {
         case 0:
-            return item->titolo;
+            return item->getTitolo();
         case 1:
-            return item->icona;
+            return item->getIcona();
         default:
             return "UNKNOWN COLUMN NR";
         }
