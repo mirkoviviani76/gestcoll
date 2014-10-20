@@ -31,7 +31,8 @@ private slots:
     void on_addZecchiere_clicked();
     void on_deleteZecchiere_clicked();
 
-    void changeZecca(const QString& nome, const QString& segno);
+    void on_nomeZecca_textChanged(QString text);
+    void on_segnoZecca_textChanged(QString text);
 };
 
 #endif // ZECCAWIDGET_H

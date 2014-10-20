@@ -12,8 +12,6 @@ ZeccaWidget::ZeccaWidget(QWidget *parent) :
     this->ui->zecchieri->setModel(this->modelloZecchiere);
     this->ui->zecchieri->setItemDelegate(new ZecchiereDelegate(this));
     connect(this->modelloZecchiere, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SIGNAL(changesOccurred()));
-    connect(this->ui->zecca, SIGNAL(textChanged(QString,QString)), this, SLOT(changeZecca(QString, QString)));
-
 }
 
 ZeccaWidget::~ZeccaWidget()
@@ -32,7 +30,9 @@ void ZeccaWidget::setData(gestColl::coins::moneta::zecca_type *_zecca, gestColl:
     if (this->zecca->segno().present()) {
         segno = QString::fromStdWString(this->zecca->segno().get());
     }
-    this->ui->zecca->setData(nome, segno);
+
+    this->ui->nomeZecca->setText(nome);
+    this->ui->segnoZecca->setText(segno);
 
     this->modelloZecchiere->clear();
     this->modelloZecchiere->setData(_zecchieri);
@@ -53,7 +53,12 @@ void ZeccaWidget::setEditable(bool editable)
     }
     this->ui->addZecchiere->setVisible(editable);
     this->ui->deleteZecchiere->setVisible(editable);
-    this->ui->zecca->enableEdit(editable);
+
+    this->ui->nomeZecca->setReadOnly(!editable);
+    this->ui->nomeZecca->setFrame(editable);
+    this->ui->segnoZecca->setReadOnly(!editable);
+    this->ui->segnoZecca->setFrame(editable);
+
 
 }
 
@@ -87,10 +92,14 @@ void ZeccaWidget::on_deleteZecchiere_clicked()
     emit this->changesOccurred();
 }
 
-void ZeccaWidget::changeZecca(const QString &nome, const QString &segno)
+void ZeccaWidget::on_nomeZecca_textChanged(QString text)
 {
-    this->zecca->nome().set(nome.toStdWString());
-    this->zecca->segno().set(segno.toStdWString());
+    this->zecca->nome(text.toStdWString());
+    emit changesOccurred();
+}
 
+void ZeccaWidget::on_segnoZecca_textChanged(QString text)
+{
+    this->zecca->segno(text.toStdWString());
     emit changesOccurred();
 }

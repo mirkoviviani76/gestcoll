@@ -145,7 +145,6 @@ SOURCES  +=    Common/commondata.cpp \
                GUI/Moneta/Note/notadialog.cpp \
                GUI/Moneta/Posizione/posizionedialog.cpp \
                GUI/Moneta/Utilita/charselector.cpp \
-               GUI/Moneta/Utilita/misuraform.cpp \
                GUI/Moneta/Vassoi/vassoioform.cpp \
                GUI/Statistiche/statisticheform.cpp \
                GUI/Statistiche/nightcharts.cpp \
@@ -230,7 +229,6 @@ HEADERS  +=    Common/commondata.h \
                GUI/Moneta/Note/notadialog.h \
                GUI/Moneta/Posizione/posizionedialog.h \
                GUI/Moneta/Utilita/charselector.h \
-               GUI/Moneta/Utilita/misuraform.h \
                GUI/Moneta/Vassoi/vassoioform.h \
                GUI/Statistiche/statisticheform.h \
                GUI/Statistiche/nightcharts.h \
@@ -295,7 +293,6 @@ FORMS    += GUI/MainWindow/mainwindow.ui \
                GUI/Moneta/Note\notadialog.ui \
                GUI/Moneta/Posizione\posizionedialog.ui \
                GUI/Moneta/Utilita\charselector.ui \
-               GUI/Moneta/Utilita\misuraform.ui \
                GUI/Moneta/Vassoi\vassoioform.ui \
             GUI/Statistiche/statisticheform.ui \
             GUI/Statistiche/statisticamoneteperanno.ui \
