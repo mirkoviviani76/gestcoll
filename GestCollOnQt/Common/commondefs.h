@@ -33,14 +33,6 @@ struct Emissione {
 
 };
 
-class Misura
-{
-    public:
-        QString unita;
-        qreal valore;
-        virtual ~Misura() {}
-        Misura(QString t="", qreal val=0) {this->unita = t; this->valore = val;}
-};
 
 class Stato
 {
@@ -88,7 +80,5 @@ public:
 
 } //namespace
 
-
-Q_DECLARE_METATYPE(xml::Misura)
 
 #endif // COMMONDEFS_H
