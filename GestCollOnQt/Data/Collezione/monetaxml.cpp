@@ -180,7 +180,7 @@ void MonetaXml::aggiornaIcona() {
     QPainter painter(icona);
     QPen drawPen(Qt::black, 1);
     xml::Stato stato = this->getStato();
-    QString color = stato.colore;
+    QString color = stato.getColore();
     painter.setPen(drawPen);
     painter.setBrush(QColor(color));
     painter.drawEllipse(QPoint(8,8), 6,6);
@@ -232,7 +232,7 @@ xml::Stato MonetaXml::getStato() {
 }
 
 void MonetaXml::setStato(xml::Stato& nuovo) {
-    gestColl::coins::stato s(nuovo.colore.toStdWString(), nuovo.motivo.toStdWString());
+    gestColl::coins::stato s(nuovo.getColore().toStdWString(), nuovo.getSpiegazione().toStdWString());
     this->mon->stato(s);
     this->aggiornaIcona();
 }

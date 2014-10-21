@@ -20,6 +20,7 @@
 bool XsltConverter::convert(const QString& xml, const QString& xslt, QString* out,
                             const QMap<QString, QString>& conversion,
                             const QString& imgDir,
+                            const QString& docsDir,
                             const QString& id)
 {
     bool ret = false;
@@ -32,6 +33,7 @@ bool XsltConverter::convert(const QString& xml, const QString& xslt, QString* ou
         }
 
         query.bindVariable("dirImg", QVariant(imgDir));
+        query.bindVariable("dirDocs", QVariant(docsDir));
         QUrl url(xslt);
         query.setQuery(url);
         ret = query.evaluateTo(out);
@@ -55,11 +57,12 @@ bool XsltConverter::convert(const QString& xml,
                             const QString& xslt, QFile* out,
                             const QMap<QString, QString>& conversion,
                             const QString& imgDir,
+                            const QString& docsDir,
                             const QString& id)
 {
     bool ret = false;
     QString tempOut;
-    ret = XsltConverter::convert(xml, xslt, &tempOut, conversion, imgDir, id);
+    ret = XsltConverter::convert(xml, xslt, &tempOut, conversion, imgDir, docsDir, id);
     if (ret)
     {
         //apre il file

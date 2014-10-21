@@ -8,6 +8,7 @@ xmlns:cc="http://gestColl/coins">
 
 <xsl:output method="text" indent="yes" />
 <xsl:param name="dirImg"></xsl:param>
+<xsl:param name="dirDocs"></xsl:param>
 <xsl:param name="hyperref"></xsl:param>
 
 <xsl:template match="/cc:monete" xmlns:cc="http://gestColl/coins">
@@ -241,6 +242,14 @@ xmlns:cc="http://gestColl/coins">
 	\includegraphics[width=10cm,keepaspectratio=true]{<xsl:value-of select="$dirImg" />/<xsl:value-of select="$imgTaglio"/>}
 \end{figure}
 </xsl:if>
+
+
+<xsl:for-each select='cc:itemAddizionali/cc:documento/cc:filename'>
+<xsl:if test='matches(.,".*.tex")'>
+\input{<xsl:value-of select="$dirDocs" />/<xsl:value-of select='.'/>}
+</xsl:if>
+</xsl:for-each>
+
 
 \cleardoublepage
 </xsl:template>

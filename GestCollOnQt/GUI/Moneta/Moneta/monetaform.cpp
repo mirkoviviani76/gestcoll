@@ -321,11 +321,11 @@ void MonetaForm::loadData()
 
     /* prepara il led di stato */
     xml::Stato stato = this->item->getStato();
-    this->ui->led->setOffColor1(QColor(stato.colore));
-    this->ui->led->setOffColor2(QColor(stato.colore));
-    this->ui->led->setOnColor1(QColor(stato.colore));
-    this->ui->led->setOnColor2(QColor(stato.colore));
-    this->ui->led->setToolTip(stato.motivo);
+    this->ui->led->setOffColor1(QColor(stato.getColore()));
+    this->ui->led->setOffColor2(QColor(stato.getColore()));
+    this->ui->led->setOnColor1(QColor(stato.getColore()));
+    this->ui->led->setOnColor2(QColor(stato.getColore()));
+    this->ui->led->setToolTip(stato.getSpiegazione());
     this->ui->led->setChecked(true);
 
     //riabilita la segnalazione delle modifiche
@@ -570,8 +570,8 @@ void MonetaForm::on_led_clicked()
 
     bool motivoOk;
     xml::Stato vecchioStato = this->item->getStato();
-    QString vecchioMotivo = vecchioStato.motivo;
-    QColor vecchioColore = QColor(vecchioStato.colore);
+    QString vecchioMotivo = vecchioStato.getSpiegazione();
+    QColor vecchioColore = QColor(vecchioStato.getColore());
 
     QColorDialog colorDial(this);
     QColor color = colorDial.getColor(vecchioColore);
