@@ -221,6 +221,7 @@
     <addaction name="actionTex_Qr_Pdf"/>
     <addaction name="actionVedi_Collezione_pdf"/>
     <addaction name="actionVedi_Etichette_pdf"/>
+    <addaction name="actionWikiMainPage"/>
     <addaction name="separator"/>
     <addaction name="actionOpzioni"/>
    </widget>
@@ -487,6 +488,11 @@
   <action name="actionAbout_Qt">
    <property name="text">
     <string>About Qt</string>
+   </property>
+  </action>
+  <action name="actionWikiMainPage">
+   <property name="text">
+    <string>WikiMainPage</string>
    </property>
   </action>
  </widget>

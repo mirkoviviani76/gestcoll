@@ -36,11 +36,16 @@ struct Emissione {
 
 class Stato
 {
-    public:
-        QString colore;
-        QString motivo;
-        virtual ~Stato() {}
-        Stato(QString t="", QString val="") {this->colore = t; this->motivo = val;}
+public:
+    virtual ~Stato() {}
+    Stato(QString t="", QString val="") {this->colore = t; this->spiegazione = val;}
+    QString getColore() const;
+    void setColore(const QString &value);
+    QString getSpiegazione() const;
+    void setSpiegazione(const QString &value);
+private:
+    QString colore;
+    QString spiegazione;
 };
 
 

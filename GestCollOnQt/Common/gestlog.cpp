@@ -30,7 +30,7 @@ Logger::Logger():
 {
     this->stopThread = false;
     //crea il mutex
-    this->mutex = new QMutex(QMutex::Recursive);
+    this->mutex = new QMutex();
     //mette un default al log level
     this->curLogLevel = Log::DEBUG;
 
@@ -121,7 +121,8 @@ void Logger::log(QString msg, LogLevel loglevel)
     if (this->curLogLevel <= loglevel)
     {
         //ottiene il lock
-        this->mutex->lock();
+        QMutexLocker lock(this->mutex);
+
         QString ts = QDateTime::currentDateTime().toString("dd-MM-yy HH:mm:ss");
         QString toLog = QString("%2    [%1]:  %3\n")
                 .arg(this->getLivelloLogAsString(loglevel))
@@ -129,8 +130,6 @@ void Logger::log(QString msg, LogLevel loglevel)
                 .arg(msg);
         //mette il messaggio in coda
         this->codaMsg.enqueue(toLog);
-        //sblocca il lock
-        this->mutex->unlock();
     }
 }
 
@@ -192,8 +191,7 @@ void Logger::run()
   */
 void Logger::setupMsg()
 {
-    //ottiene il lock
-    mutex->lock();
+    QMutexLocker locker(this->mutex);
 
     //ottiene il messaggio
     QString msg = this->codaMsg.dequeue();
@@ -212,8 +210,5 @@ void Logger::setupMsg()
     //forza la scrittura
     this->logFile.flush();
 
-
-    //sblocca il lock
-    mutex->unlock();
 }
 

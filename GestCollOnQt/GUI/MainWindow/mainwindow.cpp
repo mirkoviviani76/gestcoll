@@ -19,6 +19,7 @@
 #include "opzionidialog.h"
 
 #include "collezionexml.h"
+#include "wikigenerator.h"
 
 const QString indicazione = " (non salvato)";
 
@@ -612,4 +613,10 @@ void MainWindow::selectBibliotecaItem(const BibliotecaItem *item)
     if (ret == true) {
         this->ui->actionBiblioteca->activate(QAction::Trigger);
     }
+}
+
+void MainWindow::on_actionWikiMainPage_triggered()
+{
+    WikiGenerator wg;
+    wg.convert();
 }
