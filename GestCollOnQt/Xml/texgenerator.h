@@ -12,9 +12,7 @@ public:
     TexGenerator();
     virtual ~TexGenerator();
     bool convert();
-    bool toPosizioni(const QString& inDir, const QString& outDir, const QString& posizioniTemplate, const QMap<QString, QString>& conversion);
 private:
-    Posizioni* posizioni;
     QString getDim(const MonetaXml& item);
     QString getEtichetta(moneta *xml, QString dimensione);
 };

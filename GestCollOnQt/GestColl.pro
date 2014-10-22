@@ -189,8 +189,7 @@ SOURCES  +=    Common/commondata.cpp \
     GUI/Moneta/Vassoi/vassoiomodel.cpp \
     GUI/Collezione/collezionemodel.cpp \
     GUI/Moneta/Emissione/paesewidget.cpp \
-    GUI/Collezione/ambitimodel.cpp \
-    Xml/wikigenerator.cpp
+    GUI/Collezione/ambitimodel.cpp
 
 HEADERS  +=    Common/commondata.h \
                Common/commondefs.h \
@@ -274,8 +273,7 @@ HEADERS  +=    Common/commondata.h \
     GUI/Moneta/Vassoi/vassoiomodel.h \
     GUI/Collezione/collezionemodel.h \
     GUI/Moneta/Emissione/paesewidget.h \
-    GUI/Collezione/ambitimodel.h \
-    Xml/wikigenerator.h
+    GUI/Collezione/ambitimodel.h
 
 
 

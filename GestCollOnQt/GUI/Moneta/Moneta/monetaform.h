@@ -29,6 +29,7 @@ public:
     void addMoneta();
 
     void setupModelMonete();
+    void gestClipboardCopy();
 
 protected:
     void changeEvent(QEvent *e);

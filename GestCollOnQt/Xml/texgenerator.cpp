@@ -9,14 +9,9 @@
 
 TexGenerator::TexGenerator()
 {
-    posizioni = new Posizioni();
 }
 
 TexGenerator::~TexGenerator() {
-    if (this->posizioni != NULL) {
-        delete this->posizioni;
-        this->posizioni = NULL;
-    }
 }
 
 bool TexGenerator::convert()
@@ -142,8 +137,9 @@ bool TexGenerator::convert()
 
 QString TexGenerator::getDim(const MonetaXml& item)
 {
+    Posizioni posizioni;
     //ottiene il vassoio in cui si trova la moneta
-    VassoioXml* vassoio = this->posizioni->getVassoio("SRI", QString("%1").arg(item.getPosizione().getContenitore()),
+    VassoioXml* vassoio = posizioni.getVassoio("SRI", QString("%1").arg(item.getPosizione().getContenitore()),
                  QString("%1").arg(item.getPosizione().getContenitore())
                  );
     //ritorna la dimensione

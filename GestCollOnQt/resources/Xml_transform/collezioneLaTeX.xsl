@@ -58,16 +58,17 @@ xmlns:cc="http://gestColl/coins">
 \newcommand{\legenda}[2]{#1  \ifthenelse{\equal{#2}{}}{}{\footnote{#2}}}
 \newcommand{\zecca}[2]{#1 \ding{239} #2} %#1=nome #3=simbolo/sigle
 
-\newcommand{\zecchiere}[3]{#1 \ding{239} #2 #3} %#1=nome #2=simbolo/sigle #3 ruolo
+\newcommand{\zecchiere}[3]{\hyperref[#1]{#1} \ding{239} #2 #3} %#1=nome #2=simbolo/sigle #3 ruolo
 %\renewcommand{\mtctitle}{Contenuto}
 %\renewcommand{\mlftitle}{Figure}
 \renewcommand{\dot}{$\,\cdot\,$\linebreak[2]}
-\newcommand{\parte}[1]{\part*{#1}\setcounter{chapter}{0}}
-\newcommand{\moneta}[2]{\chapter*{#1\\#2} \addcontentsline{toc}{chapter}{#1 -- #2}\vspace{-20mm}}
+\newcommand{\moneta}[2]{\chapter*{\hyperref[#1]{#1}\\#2} \addcontentsline{toc}{chapter}{#1 -- #2}\vspace{-20mm}}
 \newcommand{\sezione}[1]{\section*{\Fontlukas \underline{#1}}}
 \newcommand{\subsezione}[1]{\subsection*{\Fontlukas #1}}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \newcommand{\posizioni}{\chapter*{Posizioni} \addcontentsline{toc}{chapter}{Posizioni}}
+\newcommand{\persona}[1]{\chapter*{#1} \addcontentsline{toc}{chapter}{#1}\vspace{-20mm} \label{#1}}
+\newcommand{\paese}[1]{\chapter*{#1} \addcontentsline{toc}{chapter}{#1}\vspace{-20mm} \label{#1}}
 
 \makeatletter
 \@addtoreset{footnote}{section}
@@ -104,10 +105,13 @@ xmlns:cc="http://gestColl/coins">
 <!-- <xsl:if test="$hyperref = 'TRUE'">
 \tableofcontents
 </xsl:if> -->
-
+\part{Collezione}
 <xsl:call-template name="posizioni" />
 <xsl:call-template name="monete" />
-
+\part{Paesi}
+<!-- <xsl:call-template name="paesi" /> -->
+\part{Persone}
+<!-- <xsl:call-template name="persone" /> -->
 \end{document}
 
 </xsl:template>
@@ -159,8 +163,8 @@ xmlns:cc="http://gestColl/coins">
 \thispagestyle{empty}
 \sezione{Descrizione}
 \begin{description}
-	\item[ID:]<xsl:value-of select="@id"/>
-	\item[Autorita:] <xsl:for-each select="cc:autorita/cc:nome"><xsl:value-of select="."></xsl:value-of><xsl:if test="not(position() = last())">; </xsl:if> </xsl:for-each>
+        \item[ID:]<xsl:value-of select="@id"/> \label{<xsl:value-of select="@id"/>}
+        \item[Autorita:] <xsl:for-each select="cc:autorita/cc:nome">\hyperref[<xsl:value-of select="." /> (<xsl:value-of select="../../cc:paese"/>)]{<xsl:value-of select="." />}<xsl:if test="not(position() = last())">; </xsl:if> </xsl:for-each>
 	<xsl:for-each select="cc:zecca">
 	\item[Zecca:] \zecca{<xsl:value-of select="cc:nome"/>}{<xsl:value-of select="cc:segno"/>}
 	</xsl:for-each>

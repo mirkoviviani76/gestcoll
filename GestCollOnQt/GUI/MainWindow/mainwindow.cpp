@@ -19,7 +19,6 @@
 #include "opzionidialog.h"
 
 #include "collezionexml.h"
-#include "wikigenerator.h"
 
 const QString indicazione = " (non salvato)";
 
@@ -615,8 +614,7 @@ void MainWindow::selectBibliotecaItem(const BibliotecaItem *item)
     }
 }
 
-void MainWindow::on_actionWikiMainPage_triggered()
+void MainWindow::on_actionCopy_triggered()
 {
-    WikiGenerator wg;
-    wg.convert();
+    this->ui->widgetCollezione->gestClipboardCopy();
 }
