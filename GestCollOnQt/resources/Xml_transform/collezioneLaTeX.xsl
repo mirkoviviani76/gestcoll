@@ -129,7 +129,7 @@ xmlns:cc="http://gestColl/coins">
 <xsl:call-template name="posizioni" />
 <xsl:call-template name="monete" />
 \part{Paesi}
-<!-- <xsl:call-template name="paesi" /> -->
+__LISTA_PAESI__
 \part{Persone}
 <!-- <xsl:call-template name="persone" /> -->
 \end{document}
@@ -267,17 +267,8 @@ xmlns:cc="http://gestColl/coins">
 \end{figure}
 </xsl:if>
 
-
-<xsl:for-each select='cc:itemAddizionali/cc:documento/cc:filename'>
-<xsl:if test='matches(.,".*.tex")'>
-\input{<xsl:value-of select="$dirDocs" />/<xsl:value-of select='.'/>}
-</xsl:if>
-</xsl:for-each>
-
-
 \cleardoublepage
 </xsl:template>
-
 
 
 </xsl:stylesheet>
