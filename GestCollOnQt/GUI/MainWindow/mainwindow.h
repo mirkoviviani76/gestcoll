@@ -151,7 +151,7 @@ private slots:
 
     void selectBibliotecaItem(const BibliotecaItem* item);
 
-    void on_actionWikiMainPage_triggered();
+    void on_actionCopy_triggered();
 
 signals:
     void updateRange(int min, int max);

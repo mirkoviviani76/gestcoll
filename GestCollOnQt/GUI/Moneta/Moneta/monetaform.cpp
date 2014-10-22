@@ -67,6 +67,8 @@ namespace {
 */
 MonetaForm::MonetaForm(QWidget *parent) :
     QWidget(parent),
+    item(NULL),
+    collezioneModel(NULL),
     ui(new Ui::MonetaForm)
 {
     ui->setupUi(this);
@@ -74,8 +76,6 @@ MonetaForm::MonetaForm(QWidget *parent) :
     this->ui->splitter->setStretchFactor(0, 0);
     this->ui->splitter->setStretchFactor(1, 1);
 
-    this->collezioneModel = NULL;
-    this->item = NULL;
     //legge i dati dei vassoi
     this->vassoi = new Posizioni();
     //carica i modelli per le monete e i vassoi
@@ -564,6 +564,18 @@ void MonetaForm::gestClipboardCopy(const QString& id) {
     clipboard->setText(text);
 }
 
+
+/**
+  Gestisce la copia negli appunti della descrizione della moneta corrente
+  facendo riferimento all'xsl del qr
+  */
+void MonetaForm::gestClipboardCopy() {
+    if (item == NULL)
+        return;
+
+    this->item->getId();
+    this->gestClipboardCopy(this->item->getId());
+}
 
 void MonetaForm::on_led_clicked()
 {
