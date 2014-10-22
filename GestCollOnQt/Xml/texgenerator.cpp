@@ -7,6 +7,20 @@
 #include "posizioni.h"
 #include "gestlog.h"
 
+namespace {
+  bool comparePaese(const QString& p1, const QString& p2) {
+      bool ret;
+      int v = QString::localeAwareCompare(p1, p2);
+      if (v == 0)
+          ret = false;
+      else if (v > 0)
+          ret = false;
+      else if (v < 0)
+         ret = true;
+      return ret;
+  }
+}
+
 TexGenerator::TexGenerator()
 {
 }
@@ -21,10 +35,37 @@ bool TexGenerator::convert()
     QString outDir = CommonData::getInstance()->getTexDir();
     QString xslt = CommonData::getInstance()->getXml2TexXslt();
 
+    /* ottiene una mappa fra nome del paese e id monete associate */
+    QMap<QString, QList<QString> > paesiAndId;
+    foreach (QString id, CollezioneXml::getInstance()->getAllId()) {
+        MonetaXml* moneta = CollezioneXml::getInstance()->getMoneta(id);
+        QString paese = QString::fromStdWString(moneta->getDom()->paese());
+        paesiAndId[paese].append(id);
+    }
+
+    /* per ogni paese costruisce il "capitolo" giusto */
+    QString capitoliPaesi;
+    QList<QString> paesiOrdinati = paesiAndId.keys();
+    //ordina i paesi
+    qSort(paesiOrdinati.begin(), paesiOrdinati.end(), comparePaese);
+    foreach (QString paese, paesiOrdinati) {
+        QString listaId;
+        foreach (QString id, paesiAndId.value(paese)) {
+            listaId += QString("\\hyperref[%1]{%1}\n").arg(id);
+        }
+
+        capitoliPaesi += QString("\\paese{%1}\n \
+                                 \\thispagestyle{empty}\n \
+                                 \\sezione{Monete associate}\n \
+                                 %2\n\n \
+                                 ").arg(paese).arg(listaId);
+    }
+
     /* converte i singoli tex */
     QMap<QString, QString> conversion;
     conversion["&amp;"] = "\\&";
     conversion["$AMPERSAND$"] = "&";
+    conversion["__LISTA_PAESI__"] = capitoliPaesi;
 
 
     int curIndex = 0;
@@ -49,8 +90,7 @@ bool TexGenerator::convert()
                                      xslt,
                                      &out,
                                      conversion,
-                                     CommonData::getInstance()->getImgDir(),
-                                     CommonData::getInstance()->getDocDir());
+                                     CommonData::getInstance()->getImgDir());
     }
 
     if (!ret) {
