@@ -74,6 +74,26 @@ xmlns:cc="http://gestColl/coins">
 \@addtoreset{footnote}{section}
 \makeatother
 
+
+% rimuove il numero di pagina dalla part
+\makeatletter
+\renewcommand\part{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \thispagestyle{empty}%
+  \if@twocolumn
+    \onecolumn
+    \@tempswatrue
+  \else
+    \@tempswafalse
+  \fi
+  \null\vfil
+  \secdef\@part\@spart}
+\makeatother
+
 \titlespacing{\chapter}{0pt}{-0.5in}{1in}
 \titleformat{\chapter}[hang]{\normalfont\Large\filcenter\Fontlukas\bfseries}
 {\LARGE \thechapter.}{1pc}{ \vspace{1pc} \Huge}
