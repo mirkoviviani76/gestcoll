@@ -66,7 +66,9 @@ xmlns:cc="http://gestColl/coins">
 \newcommand{\sezione}[1]{\section*{\Fontlukas \underline{#1}}}
 \newcommand{\subsezione}[1]{\subsection*{\Fontlukas #1}}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-\newcommand{\posizioni}{\chapter*{Posizioni} \addcontentsline{toc}{chapter}{Posizioni}}
+\newcommand{\tabelle}{\chapter*{Tabelle} \addcontentsline{toc}{chapter}{Tabelle}}
+\newcommand{\posizioni}{\section*{Posizioni}}
+\newcommand{\paesiEId}{\section*{Paesi e Monete}}
 \newcommand{\persona}[1]{\chapter*{#1} \addcontentsline{toc}{chapter}{#1}\vspace{-20mm} \label{#1}}
 \newcommand{\paese}[1]{\chapter*{#1} \addcontentsline{toc}{chapter}{#1}\vspace{-20mm} \label{#1}}
 
@@ -126,7 +128,9 @@ xmlns:cc="http://gestColl/coins">
 \tableofcontents
 </xsl:if> -->
 \part{Collezione}
+\tabelle
 <xsl:call-template name="posizioni" />
+__TABELLA_PAESI__
 <xsl:call-template name="monete" />
 \part{Paesi}
 __LISTA_PAESI__
@@ -161,7 +165,6 @@ __LISTA_PAESI__
 \caption{Posizioni} \\
 \end{longtable}
 
-\cleardoublepage
 </xsl:template>
 
 

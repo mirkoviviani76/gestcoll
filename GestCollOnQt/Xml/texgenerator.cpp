@@ -61,11 +61,38 @@ bool TexGenerator::convert()
                                  ").arg(paese).arg(listaId);
     }
 
+    QString tabellaPaesi;
+    QString inizio("\\paesiEId \n \
+                   \\begin{longtable}{| r || l | }\n \
+                   \\hline \n \
+                   \\textbf{Paese} & \\textbf{IDs}\\\\ \n \
+                   \\hline \n \
+                   \\hline \n \
+                   \\endhead \n");
+    tabellaPaesi += inizio;
+    foreach (QString paese, paesiOrdinati) {
+         QString ids;
+         foreach (QString id, paesiAndId.value(paese)) {
+             ids += QString("\\hyperref[%1]{%1}; ").arg(id);
+         }
+
+         tabellaPaesi +=  QString("%1 \\dotfill & %2 \\\\ \n").arg(paese).arg(ids);
+    }
+
+    QString fine("\\hline \n \
+                 \\caption{Paesi e Monete} \\\\ \n \
+                 \\end{longtable} \n \
+                 \\cleardoublepage \n ");
+
+    tabellaPaesi += fine;
+
+
     /* converte i singoli tex */
     QMap<QString, QString> conversion;
     conversion["&amp;"] = "\\&";
     conversion["$AMPERSAND$"] = "&";
     conversion["__LISTA_PAESI__"] = capitoliPaesi;
+    conversion["__TABELLA_PAESI__"] = tabellaPaesi;
 
 
     int curIndex = 0;
