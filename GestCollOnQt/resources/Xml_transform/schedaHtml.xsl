@@ -9,10 +9,37 @@ xmlns:cc="http://gestColl/coins">
 <xsl:param name="dirImg"></xsl:param>
 
 <xsl:template match="/cc:monete/cc:info" />
-<xsl:template match="cc:monete/cc:moneta">
-<xsl:if test="@id = $monetaId">
+<xsl:template match="/cc:monete">
+    <xsl:for-each select="./cc:moneta[@id = $monetaId]">
 	<xsl:call-template name="templateMoneta" />
-</xsl:if>
+    </xsl:for-each>
+    <xsl:if test="$monetaId = 'GENERATE_INDEX'">
+        <xsl:call-template name="generateIndex" />
+    </xsl:if>
+</xsl:template>
+
+<xsl:template name="generateIndex" xmlns:cc="http://gestColl/coins">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Collezione</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="report.css" />
+    </head>
+    <body>
+        <table>
+        <xsl:for-each select="./cc:moneta">
+        <xsl:variable name="currentId" select="./@id"/>
+            <tr>
+                <td><a href="{$currentId}.html"><xsl:value-of select="$currentId"/></a></td>
+                <td><xsl:value-of select="cc:paese" /></td>
+                <td><xsl:value-of select="cc:nominale/cc:valore" /></td>
+                <td><xsl:value-of select="cc:nominale/cc:valuta" /></td>
+                <td><xsl:value-of select="cc:anno" /></td>
+            </tr>
+        </xsl:for-each>
+        </table>
+     </body>
+</html>
 </xsl:template>
 
 <xsl:template name="templateMoneta" xmlns:cc="http://gestColl/coins">
@@ -39,6 +66,8 @@ xmlns:cc="http://gestColl/coins">
 		<xsl:value-of select="cc:paese"/><xsl:text> </xsl:text><xsl:value-of select="cc:nominale/cc:valore"/><xsl:text> </xsl:text><xsl:value-of select="cc:nominale/cc:valuta"/> (<xsl:value-of select="cc:anno"/>)<br/>
 		<xsl:value-of select="@id"/></h1>
 	</div> <!-- fine collezione_header -->
+
+        <center><a href="index.html">Torna all'indice</a></center>
  
 	<div id='collezione_content' class='collezione_content'> 
 		<h2><a name="datiMonetali">Dati monetali</a></h2>

@@ -242,15 +242,24 @@ void MainWindow::on_actionXml_Html_triggered()
 
     bool ret = true;
     int curIndex = 0;
-    foreach (QString id, CollezioneXml::getInstance()->getAllId()) {
-        curIndex++;
-        QString outfile = CommonData::getInstance()->getHtmlDir()+"/"+id+".html";
-        QFile out(outfile);
-        ret = converter.convert(CommonData::getInstance()->getCollezione(), xslt, &out, conversion, "./img", id);
-        //segnala il nuovo indice
-        emit updateValue(curIndex);
-        if (!ret)
-            break;
+
+    {
+        QString outfile = CommonData::getInstance()->getHtmlDir()+"/index.html";
+        QFile index(outfile);
+        ret = converter.convert(CommonData::getInstance()->getCollezione(), xslt, &index, conversion, "./img", "GENERATE_INDEX");
+    }
+
+    if (ret) {
+        foreach (QString id, CollezioneXml::getInstance()->getAllId()) {
+            curIndex++;
+            QString outfile = CommonData::getInstance()->getHtmlDir()+"/"+id+".html";
+            QFile out(outfile);
+            ret = converter.convert(CommonData::getInstance()->getCollezione(), xslt, &out, conversion, "./img", id);
+            //segnala il nuovo indice
+            emit updateValue(curIndex);
+            if (!ret)
+                break;
+        }
     }
 
     this->progress->close();
@@ -281,7 +290,6 @@ void MainWindow::on_actionXml_Html_triggered()
     {
         status = "Xml2Html: FALLITO";
     }
-    //TODO generare index.html e moneta.html
 
     //this->progress->setVisible(false);
     this->statusBar()->showMessage(status, 5000);

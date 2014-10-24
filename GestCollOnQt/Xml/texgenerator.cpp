@@ -43,6 +43,8 @@ bool TexGenerator::convert()
         paesiAndId[paese].append(id);
     }
 
+
+
     /* per ogni paese costruisce il "capitolo" giusto */
     QString capitoliPaesi;
     QList<QString> paesiOrdinati = paesiAndId.keys();
