@@ -9,7 +9,7 @@ namespace xml {
 class Link
 {
 public:
-    Link(QString nome, QUrl url, QString note);
+    Link(const QString& _nome, const QUrl& _url, const QString& _note);
     virtual ~Link() {}
     inline QString getNome() const {return this->nome;}
     inline QUrl getUrl() const {return this->url;}
