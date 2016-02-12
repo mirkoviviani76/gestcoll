@@ -40,7 +40,7 @@ LIBS +=   -Lother_libs/$${OS} -lxerces-c \
 }
 
 win32 {
-LIBS +=   -Lother_libs/$${OS} -lxerces-c_3 \
+LIBS +=   -Lother_libs/$${OS}/xerces-c-3.1.2/lib -lxerces-c_3 \
           -Lother_libs/$${OS} -llibbz2 \
           -Lother_libs/$${OS} -llibqrencode
 }
@@ -104,8 +104,8 @@ INCLUDEPATH += /dati/develop/Qt/xerces-c-3.1.1/src \
                /dati/develop/Qt/xsd-3.3.0-i686-linux-gnu/libxsd
 }
 win32 {
-INCLUDEPATH += "other_libs/win/xercesc/src" \
-               "other_libs/win"
+INCLUDEPATH += "other_libs/win/xerces-c-3.1.2/include" \
+               "other_libs/win/xsd-4.0.0-i686-windows/libxsd"
 }
 
 SOURCES  +=    Common/commondata.cpp \
